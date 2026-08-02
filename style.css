@@ -1,92 +1,223 @@
-html, body {
+* {
     margin: 0;
     padding: 0;
-    width: 100%;
-    min-height: 100%;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
-    font-family: Arial, sans-serif;
-
-    background-image: url("kertas.png");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-
-    min-height: 100vh;
+    background-color: #f4f6f9;
+    color: #333;
 }
 
-
-.dashboard {
-    position: relative;
-    width: 100%;
-    min-height: 100vh;
+.app-container {
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
 }
 
+/* Sidebar Styling */
+.sidebar {
+    width: 260px;
+    background-color: #ffffff;
+    border-right: 1px solid #eaeaea;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
 
-/* Tombol */
-.nav-btn {
-    position: absolute;
-    z-index: 9999;
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 40px;
+    padding-left: 10px;
+}
 
+.logo-img {
+    width: 45px;
+    height: 45px;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+.logo-area h2 {
+    font-size: 16px;
+    line-height: 1.2;
+    color: #2c3e50;
+}
+
+.logo-area h2 span {
+    color: #d39e69;
+}
+
+.nav-menu {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.nav-menu li a {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 12px 15px;
     text-decoration: none;
-    color: #a8201a;
-    background: white;
+    color: #666;
+    font-weight: 500;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
 
-    border: 2px solid #a8201a;
-    border-radius: 20px;
+.nav-menu li.active a, 
+.nav-menu li a:hover {
+    background-color: #fdf5ef;
+    color: #b87333;
+}
 
-    padding: 10px 25px;
-    font-weight: bold;
+/* Main Content Styling */
+.main-content {
+    flex: 1;
+    padding: 40px;
+    overflow-y: auto;
+}
+
+.top-header {
+    background: #ffffff;
+    padding: 25px 30px;
+    border-radius: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+    margin-bottom: 30px;
+}
+
+.welcome-text h1 {
+    font-size: 24px;
+    color: #2c3e50;
+    margin-bottom: 5px;
+}
+
+.welcome-text p {
     font-size: 14px;
+    color: #777;
+    margin-bottom: 12px;
 }
 
-
-/* Tampilan laptop */
-.home {
-    top: 40px;
-    left: 10%;
+.progress-bar-bg {
+    width: 250px;
+    height: 8px;
+    background-color: #eee;
+    border-radius: 4px;
+    overflow: hidden;
 }
 
-.study {
-    top: 40px;
-    left: 45%;
+.progress-bar-bg.small {
+    width: 100%;
+    margin-bottom: 15px;
 }
 
-.about {
-    top: 40px;
-    left: 75%;
+.progress-bar-fill {
+    height: 100%;
+    background-color: #d39e69;
+    border-radius: 4px;
 }
 
-
-.nav-btn:hover {
-    background: #a8201a;
-    color: white;
+.user-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
 }
 
+.support-btn {
+    background: #fdf5ef;
+    border: none;
+    color: #b87333;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
 
-/* Tampilan HP */
-@media (max-width: 600px) {
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    background: #eee;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #555;
+}
 
-    .nav-btn {
-        padding: 8px 15px;
-        font-size: 12px;
-    }
+/* Courses Cards Section */
+.section-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
 
+.card {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+    display: flex;
+    flex-direction: column;
+}
 
-    .home {
-        top: 30px;
-        left: 5%;
-    }
+.card-img-placeholder {
+    width: 100%;
+    height: 120px;
+    background: #fdf5ef;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    color: #d39e69;
+    margin-bottom: 15px;
+}
 
-    .study {
-        top: 30px;
-        left: 38%;
-    }
+.card h3 {
+    font-size: 16px;
+    color: #2c3e50;
+    margin-bottom: 8px;
+}
 
-    .about {
-        top: 30px;
-        left: 70%;
-    }
+.card p {
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 20px;
+    flex: 1;
+}
 
+.card-progress {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: #777;
+    margin-bottom: 5px;
+}
+
+.btn-resume {
+    width: 100%;
+    padding: 10px;
+    background: #ffffff;
+    border: 1px solid #d39e69;
+    color: #d39e69;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-resume:hover {
+    background: #d39e69;
+    color: #ffffff;
 }
