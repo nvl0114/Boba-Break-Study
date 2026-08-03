@@ -1,55 +1,273 @@
 <!DOCTYPE html>
-<html lang="id">
-
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Hanzi Stroke Order</title>
-
-<script src="https://cdn.jsdelivr.net/npm/hanzi-writer@2.1.0/dist/hanzi-writer-lib.min.js"></script>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boba Break Study - Stroke Order</title>
+    <!-- Include Hanzi Writer Library from CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/hanzi-writer@3.5/dist/hanzi-writer.min.js"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            background-color: #f8f9fa;
+            display: flex;
+            min-height: 100vh;
+        }
+        .sidebar {
+            width: 240px;
+            background-color: #ffffff;
+            padding: 20px;
+            border-right: 1px solid #eaeaea;
+        }
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+        .brand h2 {
+            font-size: 16px;
+            color: #333;
+        }
+        .brand span {
+            font-size: 12px;
+            color: #b5835a;
+            display: block;
+        }
+        .tagline {
+            font-size: 11px;
+            color: #888;
+            font-style: italic;
+            margin-bottom: 30px;
+        }
+        .nav-links {
+            list-style: none;
+        }
+        .nav-links li {
+            padding: 10px 12px;
+            margin-bottom: 5px;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #555;
+            cursor: pointer;
+        }
+        .nav-links li.active {
+            background-color: #fdf3eb;
+            color: #b5835a;
+            font-weight: bold;
+        }
+        .main-content {
+            flex: 1;
+            padding: 20px;
+            max-width: 800px;
+        }
+        .card {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+            border: 1px solid #eaeaea;
+        }
+        .card h2 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: #111;
+        }
+        .search-box {
+            display: flex;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            overflow: hidden;
+            margin-bottom: 8px;
+        }
+        .search-box input {
+            flex: 1;
+            padding: 10px 14px;
+            border: none;
+            outline: none;
+            font-size: 14px;
+        }
+        .search-box button {
+            background-color: #b5835a;
+            color: white;
+            border: none;
+            padding: 0 20px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .search-hint {
+            font-size: 12px;
+            color: #666;
+        }
+        .stroke-display {
+            text-align: center;
+            border: 1px solid #eaeaea;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+            background: #fff;
+            display: flex;
+            justify-content: center;
+        }
+        /* Target container for Hanzi Writer SVG animation */
+        #character-target {
+            width: 200px;
+            height: 200px;
+        }
+        .character-info p {
+            font-size: 14px;
+            color: #333;
+            margin-bottom: 6px;
+        }
+        .backup-grid {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+            overflow-x: auto;
+        }
+        .backup-item {
+            width: 65px;
+            height: 65px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: #aaa;
+            background: #fafafa;
+            flex-shrink: 0;
+        }
+    </style>
 </head>
-
 <body>
 
-<h1>Hanzi Stroke Order</h1>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="brand">
+            <div>
+                <h2>Boba Break</h2>
+                <span>Study</span>
+            </div>
+        </div>
+        <p class="tagline">Sip, Study, and Master your Mandarin Journey</p>
+        
+        <ul class="nav-links">
+            <li>Dashboard</li>
+            <li>Courses</li>
+            <li>Mock Test</li>
+            <li class="active">Stroke Order</li>
+            <li>About</li>
+        </ul>
+    </div>
 
-<input id="hanziInput" type="text" placeholder="Masukkan Hanzi">
+    <!-- Main Content Area -->
+    <div class="main-content">
+        
+        <!-- Search Card -->
+        <div class="card">
+            <h2>Hanzi Stroke Order Finder</h2>
+            <div class="search-box">
+                <input type="text" id="char-input" placeholder="Enter a traditional Hanzi character (e.g. 學)">
+                <button id="search-btn">Search</button>
+            </div>
+            <p class="search-hint">Enter a traditional Hanzi character.</p>
+        </div>
 
-<button onclick="searchHanzi()">Cari</button>
+        <!-- Result Card -->
+        <div class="card">
+            <div class="stroke-display">
+                <!-- Hanzi Writer will render the interactive character animation here -->
+                <div id="character-target"></div>
+            </div>
+            <div class="character-info" id="char-info">
+                <p><strong>Hanzi:</strong> 學</p>
+                <p><strong>Pinyin:</strong> xué</p>
+                <p><strong>Definition:</strong> To learn; to study (Traditional)</p>
+            </div>
+        </div>
 
-<div id="character-target"></div>
+        <!-- Custom Data / Backup Card -->
+        <div class="card">
+            <h2>Custom Data / Backup</h2>
+            <div class="backup-grid">
+                <div class="backup-item" style="color: #333; font-weight: bold;">學</div>
+                <div class="backup-item">GIF</div>
+                <div class="backup-item">GIF</div>
+                <div class="backup-item">GIF</div>
+                <div class="backup-item">GIF</div>
+            </div>
+            <p class="search-hint" style="margin-top: 12px;">If a character is not found, your custom-made data will be displayed here.</p>
+        </div>
 
+    </div>
 
-<script>
+    <!-- JavaScript to Handle Open-Source Database & Animation -->
+    <script>
+        // Initialize default character on load (e.g., Traditional "學")
+        let writer = HanziWriter.create('character-target', '學', {
+            width: 200,
+            height: 200,
+            padding: 5,
+            showOutline: true,
+            strokeAnimationSpeed: 1,
+            delayBetweenStrokes: 300,
+            strokeColor: '#333333'
+        });
 
-alert("Hanzi Writer aktif");
-
-const writer = HanziWriter.create(
-    'character-target',
-    '你',
-    {
-        width: 300,
-        height: 300,
-        showOutline: true
-    }
-);
-
-writer.animateCharacter();
-
-
-function searchHanzi(){
-
-    let hanzi = document.getElementById("hanziInput").value;
-
-    if(hanzi){
-        writer.setCharacter(hanzi);
+        // Automatically animate on load
         writer.animateCharacter();
-    }
 
-}
+        const inputField = document.getElementById('char-input');
+        const searchButton = document.getElementById('search-btn');
+        const infoBox = document.getElementById('char-info');
 
-</script>
+        function handleSearch() {
+            const val = inputField.value.trim();
+            if (val.length > 0) {
+                const targetChar = val[0]; // Take the first character if multiple typed
+                
+                // Clear previous target content and render new character using open-source database
+                document.getElementById('character-target').innerHTML = '';
+                
+                try {
+                    writer = HanziWriter.create('character-target', targetChar, {
+                        width: 200,
+                        height: 200,
+                        padding: 5,
+                        showOutline: true,
+                        strokeAnimationSpeed: 1,
+                        strokeColor: '#333333',
+                        onLoadCharDataError: function(err) {
+                            document.getElementById('character-target').innerHTML = '<p style="color:red; font-size:12px; margin-top:80px;">Character not found in database.</p>';
+                        }
+                    });
+                    writer.animateCharacter();
+
+                    // Update description info dynamically
+                    infoBox.innerHTML = `
+                        <p><strong>Hanzi:</strong> ${targetChar}</p>
+                        <p><strong>Pinyin:</strong> (Fetched via open-source dataset)</p>
+                        <p><strong>Definition:</strong> Traditional Chinese Character</p>
+                    `;
+                } catch (e) {
+                    console.error(e);
+                }
+            }
+        }
+
+        searchButton.addEventListener('click', handleSearch);
+        inputField.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                handleSearch();
+            }
+        });
+    </script>
 </body>
 </html>
