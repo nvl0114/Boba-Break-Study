@@ -340,13 +340,34 @@
         });
 
         // Fungsi helper untuk menerjemahkan teks Pinyin ke Zhuyin secara akurat
-        function 
-        convertPinyinToZhuyin(pinyinStr) {
+        function convertPinyinToZhuyin(pinyinStr) {
 
-            const initials = {
-                'zh':'ㄓ', 'ch':'ㄔ', 
-        'sh':'ㄕ',
-                'b':'ㄅ', 'p':'ㄆ', 'm':'ㄇ', 'f':'ㄈ',
+    // ubah pinyin bertanda nada menjadi angka
+    const toneMap = {
+        'ā':'a1','á':'a2','ǎ':'a3','à':'a4',
+        'ē':'e1','é':'e2','ě':'e3','è':'e4',
+        'ī':'i1','í':'i2','ǐ':'i3','ì':'i4',
+        'ō':'o1','ó':'o2','ǒ':'o3','ò':'o4',
+        'ū':'u1','ú':'u2','ǔ':'u3','ù':'u4',
+        'ǖ':'ü1','ǘ':'ü2','ǚ':'ü3','ǜ':'ü4'
+    };
+
+    let tone = '';
+
+    // cek pinyin yang pakai simbol nada (ā á ǎ à)
+    for (let char of pinyinStr) {
+        if (toneMap[char]) {
+            let converted = toneMap[char];
+            pinyinStr = pinyinStr.replace(char, converted[0]);
+            tone = converted[1];
+            break;
+        }
+    }
+
+
+    const initials = {
+        'zh':'ㄓ', 'ch':'ㄔ', 'sh':'ㄕ',
+        'b':'ㄅ', 'p':'ㄆ', 'm':'ㄇ', 'f':'ㄈ',
         'd':'ㄉ', 't':'ㄊ', 'n':'ㄋ', 'l':'ㄌ',
         'g':'ㄍ', 'k':'ㄎ', 'h':'ㄏ',
         'j':'ㄐ', 'q':'ㄑ', 'x':'ㄒ',
@@ -371,18 +392,19 @@
         'ü':'ㄩ'
     };
 
-    let tone = '';
 
-    // ambil nada
+    // kalau masih ada angka nada (lai2)
     if (/[1-5]$/.test(pinyinStr)) {
         let num = pinyinStr.slice(-1);
         pinyinStr = pinyinStr.slice(0,-1);
 
         if(num === '2') tone = 'ˊ';
-        if(num === '3') tone = 'ˇ';
-        if(num === '4') tone = 'ˋ';
-        if(num === '5') tone = '˙';
+        else if(num === '3') tone = 'ˇ';
+        else if(num === '4') tone = 'ˋ';
+        else if(num === '5') tone = '˙';
+        else tone = '';
     }
+
 
     let result = '';
 
@@ -399,6 +421,7 @@
         result += initials[initial];
         pinyinStr = pinyinStr.slice(initial.length);
     }
+
 
     // final
     if(finals[pinyinStr]){
