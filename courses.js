@@ -3,13 +3,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const cards = document.querySelectorAll(".card");
 
     searchInput.addEventListener("input", () => {
-        const keyword = searchInput.value.trim().toLowerCase();
+        const keyword = searchInput.value.toLowerCase();
 
         cards.forEach(card => {
             const title = card.querySelector("h3").textContent.toLowerCase();
 
             if (title.includes(keyword)) {
-                card.style.display = "";
+                card.style.display = "flex";
             } else {
                 card.style.display = "none";
             }
