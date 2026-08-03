@@ -10,6 +10,9 @@
     <script src="https://cdn.jsdelivr.net/npm/hanzi-writer@3.5/dist/hanzi-writer.min.js"></script>
     <!-- Include pinyin-pro Library for automatic pinyin generation -->
     <script src="https://cdn.jsdelivr.net/npm/pinyin-pro@3.16.0/dist/index.js"></script>
+    <!-- Include Pinyin to Zhuyin converter library -->
+    <script src="https://cdn.jsdelivr.net/npm/pinyin-to-bopomofo@latest/dist/index.umd.js"></script>
+
     <style>
         * {
             box-sizing: border-box;
@@ -225,7 +228,7 @@
             <div class="character-info" id="char-info">
     <p><strong>Hanzi:</strong> 學</p>
     <p><strong>Pinyin:</strong> xué</p>
-    
+    <p><strong>Zhuyin:</strong> ㄒㄩㄝˊ</p>
 </div>
         <!-- Custom Data / Backup Card -->
         
@@ -281,11 +284,18 @@
                     writer.animateCharacter();
 
                     let pinyinResult = "-";
+                    let zhuyinResult = "-";
                     try {
                         pinyinResult = pinyinPro.pinyin(
                             targetChar,
                             { toneType: 'symbol' }
                         );
+
+                        zhuyinResult = pinyinPro.pinyin(
+                          targetChar,
+                          { type: 'bopomofo' }
+                      );
+                        
                     } catch(error) {
                         pinyinResult = "-";
                     }
@@ -293,6 +303,7 @@
                     infoBox.innerHTML = `
                         <p><strong>Hanzi:</strong> ${targetChar}</p>
                         <p><strong>Pinyin:</strong> ${pinyinResult}</p>
+                        <p><strong>Zhuyin:</strong> ${zhuyinResult}</p>
                     `;
 
                 } catch(error) {
