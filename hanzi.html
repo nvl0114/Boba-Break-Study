@@ -273,108 +273,127 @@
     <!-- JavaScript Implementation -->
     <script>
         // Initialize default character on load ("學")
-        let writer = HanziWriter.create('character-target', '學', {
-            width: 200,
-            height: 200,
-            padding: 5,
-            showOutline: true,
-            strokeAnimationSpeed: 1,
-            strokeColor: '#333333'
-        });
-        writer.animateCharacter();
+        <script>
 
-        const inputField = document.getElementById('char-input');
-        const searchButton = document.getElementById('search-btn');
-        const infoBox = document.getElementById('char-info');
+let writer = HanziWriter.create('character-target', '學', {
+    width: 200,
+    height: 200,
+    padding: 5,
+    showOutline: true,
+    strokeAnimationSpeed: 1,
+    strokeColor: '#333333'
+});
 
-        async function handleSearch() {
-            const val = inputField.value.trim();
-            if (val.length > 0) {
-                const targetChar = val[0]; 
-                
-                // Clear previous animation board
-                document.getElementById('character-target').innerHTML = '';
-                
-                try {
-                    // 1. Render stroke order animation dynamically
-                    writer = HanziWriter.create('character-target', targetChar, {
-                        width: 200,
-                        height: 200,
-                        padding: 5,
-                        showOutline: true,
-                        strokeAnimationSpeed: 1,
-                        strokeColor: '#333333',
-                        onLoadCharDataError: function(err) {
-                            document.getElementById('character-target').innerHTML = '<p style="color:red; font-size:12px; margin-top:80px;">Character not found in database.</p>';
-                        }
-                    });
-                    writer.animateCharacter();
+writer.animateCharacter();
 
-                    // 2. Generate Pinyin automatically using pinyin-pro library
-                    let pinyinResult = "-";
-                    try {
-                        pinyinResult = pinyinPro.pinyin(targetChar, { toneType: 'symbol' });
-                    } catch (err) {
-                        pinyinResult = "-";
-                    }
 
-                    // 3. Fetch definition automatically from public open-source dictionary API
-                    
-                    // 4. Update info display card with automated data
-                    infoBox.innerHTML = `
-                        <p><strong>Hanzi:</strong> ${targetChar}</p>
-                        <p><strong>Pinyin:</strong> ${pinyinResult}</p>
-                        
-                    `;
+const inputField = document.getElementById('char-input');
+const searchButton = document.getElementById('search-btn');
+const infoBox = document.getElementById('char-info');
 
-                } catch (e) {
-                    console.error(e);
-                    infoBox.innerHTML = `
-<p><strong>Hanzi:</strong> ${targetChar}</p>
-<p><strong>Pinyin:</strong> ${pinyinResult}</p>
-<button onclick="speakHanzi('${targetChar}')">
-🔊 Listen
-</button>
-`;/p>
-                    `;
-                }
-            }
-        }
 
-        searchButton.addEventListener('click', handleSearch);
-        inputField.addEventListener('keypress', function (e) {
-            if (e.key === 'Enter') {
-                handleSearch();
-            }
-        });
-        const audioButton = document.getElementById('play-audio');
+function speakHanzi(char){
 
-function speakHanzi(text){
-    const speech = new SpeechSynthesisUtterance(text);
+    const speech = new SpeechSynthesisUtterance(char);
 
-    // Bahasa Mandarin Taiwan
+    // Mandarin Taiwan
     speech.lang = "zh-TW";
 
-    speech.rate = 0.8; // kecepatan baca
+    speech.rate = 0.8;
     speech.pitch = 1;
 
     window.speechSynthesis.speak(speech);
 }
 
-audioButton.addEventListener('click', function(){
-    const hanzi = document.querySelector("#char-info p:first-child")
-        .textContent
-        .replace("Hanzi:", "")
-        .trim();
 
-    speakHanzi(hanzi);
-});
-function speakHanzi(char){
-    const utter = new SpeechSynthesisUtterance(char);
-    utter.lang = "zh-TW";
-    utter.rate = 0.8;
-    window.speechSynthesis.speak(utter);
+async function handleSearch(){
+
+    const val = inputField.value.trim();
+
+    if(val.length > 0){
+
+        const targetChar = val[0];
+
+        document.getElementById('character-target').innerHTML = '';
+
+        try{
+
+            writer = HanziWriter.create(
+                'character-target',
+                targetChar,
+                {
+                    width:200,
+                    height:200,
+                    padding:5,
+                    showOutline:true,
+                    strokeAnimationSpeed:1,
+                    strokeColor:'#333333'
+                }
+            );
+
+            writer.animateCharacter();
+
+
+            let pinyinResult = "-";
+
+            try{
+                pinyinResult = pinyinPro.pinyin(
+                    targetChar,
+                    {toneType:'symbol'}
+                );
+            }
+            catch(err){
+                pinyinResult = "-";
+            }
+
+
+            infoBox.innerHTML = `
+                <p><strong>Hanzi:</strong> ${targetChar}</p>
+                <p><strong>Pinyin:</strong> ${pinyinResult}</p>
+                <button onclick="speakHanzi('${targetChar}')">
+                    🔊 Listen
+                </button>
+            `;
+
+
+        }catch(e){
+
+            console.error(e);
+
+            infoBox.innerHTML = `
+                <p><strong>Hanzi:</strong> ${targetChar}</p>
+                <p><strong>Pinyin:</strong> -</p>
+                <button onclick="speakHanzi('${targetChar}')">
+                    🔊 Listen
+                </button>
+            `;
+
+        }
+
+    }
+
 }
+
+
+searchButton.addEventListener(
+    'click',
+    handleSearch
+);
+
+
+inputField.addEventListener(
+    'keypress',
+    function(e){
+
+        if(e.key === "Enter"){
+            handleSearch();
+        }
+
+    }
+);
+
+
+</script>
 
     </script>
             
