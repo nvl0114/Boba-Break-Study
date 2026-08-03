@@ -234,6 +234,8 @@
         
     <!-- JavaScript Implementation -->
         <script>
+    
+    <script>
         // 1. Deteksi ukuran layar otomatis saat pertama kali halaman dibuka
         let initialWidth = window.innerWidth <= 768 ? 300 : 600;
 
@@ -285,22 +287,23 @@
 
                     let pinyinResult = "-";
                     let zhuyinResult = "-";
+                    
                     try {
                         pinyinResult = pinyinPro.pinyin(
                             targetChar,
                             { toneType: 'symbol' }
                         );
  
-                    let numPinyin = pinyinPro.pinyin(
+                        let numPinyin = pinyinPro.pinyin(
                             targetChar,
                             { toneType: 'number' }
                         );
                         
                         zhuyinResult = convertPinyinToZhuyin(numPinyin);
-                      );
                         
                     } catch(error) {
                         pinyinResult = "-";
+                        zhuyinResult = "-";
                     }
 
                     infoBox.innerHTML = `
@@ -314,6 +317,7 @@
                     infoBox.innerHTML = `
                         <p><strong>Hanzi:</strong> ${targetChar}</p>
                         <p><strong>Pinyin:</strong> -</p>
+                        <p><strong>Zhuyin:</strong> -</p>
                     `;
                 }
             }
@@ -327,7 +331,7 @@
             }
         });
 
-                    // Fungsi helper untuk menerjemahkan teks Pinyin ke Zhuyin secara akurat
+        // Fungsi helper untuk menerjemahkan teks Pinyin ke Zhuyin secara akurat
         function convertPinyinToZhuyin(pinyinStr) {
             const map = {
                 'a':'ㄚ', 'o':'ㄛ', 'e':'ㄜ', 'ai':'ㄞ', 'ei':'ㄟ', 'ao':'ㄠ', 'ou':'ㄡ',
@@ -338,7 +342,6 @@
                 'c':'ㄘ', 's':'ㄙ'
             };
 
-            // Pisahkan nada angka (1-5) jika ada
             let tone = '';
             if (/[1-5]$/.test(pinyinStr)) {
                 let lastChar = pinyinStr.slice(-1);
@@ -349,7 +352,6 @@
                 pinyinStr = pinyinStr.slice(0, -1);
             }
 
-            // Ubah komponen pinyin ke simbol bopomofo
             let result = '';
             let i = 0;
             while (i < pinyinStr.length) {
@@ -366,12 +368,12 @@
                 }
             }
 
-            // Aturan posisi titik nada netral (˙) di depan jika nada 5
             if (tone === '˙') {
                 return '˙' + result;
             }
             return result + tone;
         }
+    </script>
 
     </script>
 
