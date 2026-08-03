@@ -299,10 +299,16 @@
                             targetChar,
                             { toneType: 'number' }
                         );
-                        
+
+                        // sementara hanya ambil pinyin pertama jika ada beberapa
+                        if (numPinyin.includes("/")) {
+                            numPinyin = numPinyin.split("/")[0];
+                         }
+
                         zhuyinResult = convertPinyinToZhuyin(numPinyin);
                         
                     } catch(error) {
+                        console.log("Pinyin error:", error);
                         pinyinResult = "-";
                         zhuyinResult = "-";
                     }
