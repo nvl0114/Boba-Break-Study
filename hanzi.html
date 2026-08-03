@@ -30,8 +30,8 @@
         }
         .card {
             .card {
-    width: 100%;
-}background: #ffffff;
+            width: 100%;
+            background: #ffffff;
             border-radius: 12px;
             padding: 20px;
             margin-bottom: 20px;
@@ -85,7 +85,6 @@
             justify-content: center;
         }
         #character-target {
-            width: 100%;
             width: 600px;
             height: 300px;
         }
@@ -231,121 +230,90 @@
         <!-- Custom Data / Backup Card -->
         
     <!-- JavaScript Implementation -->
-    <script>
+        <script>
+        // 1. Deteksi ukuran layar otomatis saat pertama kali halaman dibuka
+        let initialWidth = window.innerWidth <= 768 ? 300 : 600;
 
-let writer = HanziWriter.create('character-target', '學', {
-    width: 300,
-    height: 300,
-    padding: 5,
-    showOutline: true,
-    strokeAnimationSpeed: 1,
-    strokeColor: '#333333'
-});
+        let writer = HanziWriter.create('character-target', '學', {
+            width: initialWidth,
+            height: 300,
+            padding: 5,
+            showOutline: true,
+            strokeAnimationSpeed: 1,
+            strokeColor: '#333333'
+        });
 
-writer.animateCharacter();
+        writer.animateCharacter();
 
+        const inputField = document.getElementById('char-input');
+        const searchButton = document.getElementById('search-btn');
+        const infoBox = document.getElementById('char-info');
 
-const inputField = document.getElementById('char-input');
-const searchButton = document.getElementById('search-btn');
-const infoBox = document.getElementById('char-info');
+        function handleSearch() {
+            const val = inputField.value.trim();
 
+            if (val.length > 0) {
+                const targetChar = val[0];
+                document.getElementById('character-target').innerHTML = "";
 
-function handleSearch() {
+                // 2. Deteksi ukuran layar otomatis saat tombol search diklik
+                let renderWidth = window.innerWidth <= 768 ? 300 : 600;
 
-    const val = inputField.value.trim();
+                try {
+                    writer = HanziWriter.create(
+                        'character-target',
+                        targetChar,
+                        {
+                            width: renderWidth,
+                            height: 300,
+                            padding: 5,
+                            showOutline: true,
+                            strokeAnimationSpeed: 1,
+                            strokeColor: '#333333',
 
-    if (val.length > 0) {
+                            onLoadCharDataError: function() {
+                                document.getElementById('character-target').innerHTML =
+                                '<p style="color:red;font-size:12px;margin-top:80px;">Character not found.</p>';
+                            }
+                        }
+                    );
 
-        const targetChar = val[0];
+                    writer.animateCharacter();
 
-        document.getElementById('character-target').innerHTML = "";
-
-
-        try {
-
-            writer = HanziWriter.create(
-                'character-target',
-                targetChar,
-                {
-                    width: 300,
-                    height: 300,
-                    padding: 5,
-                    showOutline: true,
-                    strokeAnimationSpeed: 1,
-                    strokeColor: '#333333',
-
-                    onLoadCharDataError: function() {
-                        document.getElementById('character-target').innerHTML =
-                        '<p style="color:red;font-size:12px;margin-top:80px;">Character not found.</p>';
+                    let pinyinResult = "-";
+                    try {
+                        pinyinResult = pinyinPro.pinyin(
+                            targetChar,
+                            { toneType: 'symbol' }
+                        );
+                    } catch(error) {
+                        pinyinResult = "-";
                     }
+
+                    infoBox.innerHTML = `
+                        <p><strong>Hanzi:</strong> ${targetChar}</p>
+                        <p><strong>Pinyin:</strong> ${pinyinResult}</p>
+                    `;
+
+                } catch(error) {
+                    console.log(error);
+                    infoBox.innerHTML = `
+                        <p><strong>Hanzi:</strong> ${targetChar}</p>
+                        <p><strong>Pinyin:</strong> -</p>
+                    `;
                 }
-            );
-
-
-            writer.animateCharacter();
-
-
-            let pinyinResult = "-";
-
-
-            try {
-
-                pinyinResult = pinyinPro.pinyin(
-                    targetChar,
-                    {
-                        toneType: 'symbol'
-                    }
-                );
-
-            } catch(error) {
-
-                pinyinResult = "-";
-
             }
-
-
-            infoBox.innerHTML = `
-                <p><strong>Hanzi:</strong> ${targetChar}</p>
-                <p><strong>Pinyin:</strong> ${pinyinResult}</p>
-            `;
-
-
-        } catch(error) {
-
-            console.log(error);
-
-            infoBox.innerHTML = `
-                <p><strong>Hanzi:</strong> ${targetChar}</p>
-                <p><strong>Pinyin:</strong> -</p>
-            `;
-
         }
 
-    }
+        searchButton.addEventListener('click', handleSearch);
 
-}
-
-
-searchButton.addEventListener(
-    'click',
-    handleSearch
-);
-
-
-inputField.addEventListener(
-    'keypress',
-    function(e) {
-
-        if (e.key === "Enter") {
-            handleSearch();
-        }
-
-    }
-);
-
-</script>
-
+        inputField.addEventListener('keypress', function(e) {
+            if (e.key === "Enter") {
+                handleSearch();
+            }
+        });
     </script>
+
   </div>          
     </body>
 </html>
