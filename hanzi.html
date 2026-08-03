@@ -297,18 +297,19 @@
  
                         let numPinyin = pinyinPro.pinyin(
                             targetChar,
-                            { toneType: 'number' }
+                            { 
+                                toneType: 'number',
+                                type: 'array'
+                            }
+                                
                         );
 
-                        // sementara hanya ambil pinyin pertama jika ada beberapa
-                        if (numPinyin.includes("/")) {
-                            numPinyin = numPinyin.split("/")[0];
-                         }
+                        numPinyin = numPinyin[0];
 
                         zhuyinResult = convertPinyinToZhuyin(numPinyin);
                         
                     } catch(error) {
-                        console.log("Pinyin error:", error);
+                        console.log(error);
                         pinyinResult = "-";
                         zhuyinResult = "-";
                     }
