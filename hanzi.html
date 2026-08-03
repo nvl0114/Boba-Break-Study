@@ -290,10 +290,13 @@
                             targetChar,
                             { toneType: 'symbol' }
                         );
-
-                        zhuyinResult = pinyinPro.pinyin(
-                          targetChar,
-                          { type: 'bopomofo' }
+ 
+                    let numPinyin = pinyinPro.pinyin(
+                            targetChar,
+                            { toneType: 'number' }
+                        );
+                        
+                        zhuyinResult = convertPinyinToZhuyin(numPinyin);
                       );
                         
                     } catch(error) {
@@ -323,6 +326,53 @@
                 handleSearch();
             }
         });
+
+                    // Fungsi helper untuk menerjemahkan teks Pinyin ke Zhuyin secara akurat
+        function convertPinyinToZhuyin(pinyinStr) {
+            const map = {
+                'a':'ㄚ', 'o':'ㄛ', 'e':'ㄜ', 'ai':'ㄞ', 'ei':'ㄟ', 'ao':'ㄠ', 'ou':'ㄡ',
+                'an':'ㄢ', 'en':'ㄣ', 'ang':'ㄤ', 'eng':'ㄥ', 'er':'ㄦ', 'i':'ㄧ', 'u':'ㄨ',
+                'ü':'ㄩ', 'v':'ㄩ', 'b':'ㄅ', 'p':'ㄆ', 'm':'ㄇ', 'f':'ㄈ', 'd':'ㄉ',
+                't':'ㄊ', 'n':'ㄋ', 'l':'ㄌ', 'g':'ㄍ', 'k':'ㄎ', 'h':'ㄏ', 'j':'ㄐ',
+                'q':'ㄑ', 'x':'ㄒ', 'zh':'ㄓ', 'ch':'ㄔ', 'sh':'ㄕ', 'r':'ㄖ', 'z':'ㄗ',
+                'c':'ㄘ', 's':'ㄙ'
+            };
+
+            // Pisahkan nada angka (1-5) jika ada
+            let tone = '';
+            if (/[1-5]$/.test(pinyinStr)) {
+                let lastChar = pinyinStr.slice(-1);
+                if (lastChar === '2') tone = 'ˊ';
+                else if (lastChar === '3') tone = 'ˇ';
+                else if (lastChar === '4') tone = 'ˋ';
+                else if (lastChar === '5') tone = '˙';
+                pinyinStr = pinyinStr.slice(0, -1);
+            }
+
+            // Ubah komponen pinyin ke simbol bopomofo
+            let result = '';
+            let i = 0;
+            while (i < pinyinStr.length) {
+                let twoChar = pinyinStr.substr(i, 2);
+                if (map[twoChar]) {
+                    result += map[twoChar];
+                    i += 2;
+                } else if (map[pinyinStr[i]]) {
+                    result += map[pinyinStr[i]];
+                    i += 1;
+                } else {
+                    result += pinyinStr[i];
+                    i += 1;
+                }
+            }
+
+            // Aturan posisi titik nada netral (˙) di depan jika nada 5
+            if (tone === '˙') {
+                return '˙' + result;
+            }
+            return result + tone;
+        }
+
     </script>
 
   </div>          
