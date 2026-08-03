@@ -275,7 +275,9 @@
 
                     let definitionResult = "Traditional Chinese character";
                     try {
-                        const response = await fetch(`https://hanzi.fun/api/v1/characters/${targetChar}`);
+                        const response = await fetch(
+    `https://www.mdbg.net/chinese/dictionary?page=worddict&wdrst=0&wdqb=${targetChar}`
+);
                         if (response.ok) {
                             const data = await response.json();
                             if (data && data.definition) {
