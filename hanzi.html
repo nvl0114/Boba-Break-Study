@@ -366,47 +366,21 @@
     let toneNum = '1';
 
     // Check if input ends with a tone number (e.g., lai2)
-    if (/[1-5]$/.test(pinyinStr) && tone === '') {
-    let num = pinyinStr.slice(-1);
-    pinyinStr = pinyinStr.slice(0, -1);
-
-    if (num === '1') tone = '';
-    else if (num === '2') tone = 'ˊ';
-    else if (num === '3') tone = 'ˇ';
-    else if (num === '4') tone = 'ˋ';
-    else if (num === '5') tone = '˙';
-}
+    if (/[1-5]$/.test(pinyinStr)) {
+        toneNum = pinyinStr.slice(-1);
+        pinyinStr = pinyinStr.slice(0, -1);
+    } 
     // Otherwise, check for tone symbols on vowels (e.g., lái)
     else {
         for (let char of pinyinStr) {
-    if (toneMap[char]) {
-        let converted = toneMap[char];
-        pinyinStr = pinyinStr.replace(char, converted[0]);
-
-        switch (converted[1]) {
-            case '1':
-        tone = '';   // tone 1 tidak ada simbol
-        break;
-            case '2':
-        tone = 'ˊ';
-        break;
-             case '3':
-        tone = 'ˇ';
-        break;
-             case '4':
-        tone = 'ˋ';
-        break;
-              case '5':
-        tone = '˙';
-        break;
-    default:
-        tone = '';
-}
+            if (toneMap[char]) {
+                let converted = toneMap[char];
+                pinyinStr = pinyinStr.replace(char, converted[0]);
+                toneNum = converted[1];
+                break;
+            }
         }
-
-        break;
     }
-}
 
     // Get the correct Zhuyin tone symbol
     let toneSymbol = zhuyinTones[toneNum] || '';
@@ -454,9 +428,6 @@
     return result + toneSymbol;
 }
 
-        result += finals[pinyinStr];
-    } e;
-}
     </script>
   </div>          
     </body>
