@@ -264,10 +264,10 @@
                 <div id="character-target"></div>
             </div>
             <div class="character-info" id="char-info">
-                <p><strong>Hanzi:</strong> 學</p>
-                <p><strong>Pinyin:</strong> xué</p>
-                </div>
-
+    <p><strong>Hanzi:</strong> 學</p>
+    <p><strong>Pinyin:</strong> xué</p>
+    <button id="play-audio">🔊 Listen</button>
+</div>
         <!-- Custom Data / Backup Card -->
         
     <!-- JavaScript Implementation -->
@@ -330,9 +330,12 @@
                 } catch (e) {
                     console.error(e);
                     infoBox.innerHTML = `
-                        <p><strong>Hanzi:</strong> ${targetChar}</p>
-                        <p><strong>Pinyin:</strong> -</p>
-                        <p><strong>Definition:</strong> Traditional Chinese character</p>
+<p><strong>Hanzi:</strong> ${targetChar}</p>
+<p><strong>Pinyin:</strong> ${pinyinResult}</p>
+<button onclick="speakHanzi('${targetChar}')">
+🔊 Listen
+</button>
+`;/p>
                     `;
                 }
             }
@@ -344,6 +347,36 @@
                 handleSearch();
             }
         });
+        const audioButton = document.getElementById('play-audio');
+
+function speakHanzi(text){
+    const speech = new SpeechSynthesisUtterance(text);
+
+    // Bahasa Mandarin Taiwan
+    speech.lang = "zh-TW";
+
+    speech.rate = 0.8; // kecepatan baca
+    speech.pitch = 1;
+
+    window.speechSynthesis.speak(speech);
+}
+
+audioButton.addEventListener('click', function(){
+    const hanzi = document.querySelector("#char-info p:first-child")
+        .textContent
+        .replace("Hanzi:", "")
+        .trim();
+
+    speakHanzi(hanzi);
+});
+function speakHanzi(char){
+    const utter = new SpeechSynthesisUtterance(char);
+    utter.lang = "zh-TW";
+    utter.rate = 0.8;
+    window.speechSynthesis.speak(utter);
+}
+
     </script>
+            
 </body>
 </html>
