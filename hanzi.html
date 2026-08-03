@@ -341,8 +341,10 @@
 
         // Fungsi helper untuk menerjemahkan teks Pinyin ke Zhuyin secara akurat
         function convertPinyinToZhuyin(pinyinStr) {
+    if (!pinyinStr) return '';
+    pinyinStr = pinyinStr.toLowerCase().trim();
 
-    // ubah pinyin bertanda nada menjadi angka
+    // Map accented pinyin vowels to base vowel + tone number
     const toneMap = {
         'ā':'a1','á':'a2','ǎ':'a3','à':'a4',
         'ē':'e1','é':'e2','ě':'e3','è':'e4',
@@ -352,18 +354,36 @@
         'ǖ':'ü1','ǘ':'ü2','ǚ':'ü3','ǜ':'ü4'
     };
 
-    let tone = '';
+    // Map tone numbers to Zhuyin tone symbols
+    const zhuyinTones = {
+        '1': '',   
+        '2': 'ˊ',  
+        '3': 'ˇ',  
+        '4': 'ˋ',  
+        '5': '˙'   
+    };
 
-    // cek pinyin yang pakai simbol nada (ā á ǎ à)
-    for (let char of pinyinStr) {
-        if (toneMap[char]) {
-            let converted = toneMap[char];
-            pinyinStr = pinyinStr.replace(char, converted[0]);
-            tone = converted[1];
-            break;
+    let toneNum = '1';
+
+    // Check if input ends with a tone number (e.g., lai2)
+    if (/[1-5]$/.test(pinyinStr)) {
+        toneNum = pinyinStr.slice(-1);
+        pinyinStr = pinyinStr.slice(0, -1);
+    } 
+    // Otherwise, check for tone symbols on vowels (e.g., lái)
+    else {
+        for (let char of pinyinStr) {
+            if (toneMap[char]) {
+                let converted = toneMap[char];
+                pinyinStr = pinyinStr.replace(char, converted[0]);
+                toneNum = converted[1];
+                break;
+            }
         }
     }
 
+    // Get the correct Zhuyin tone symbol
+    let toneSymbol = zhuyinTones[toneNum] || '';
 
     const initials = {
         'zh':'ㄓ', 'ch':'ㄔ', 'sh':'ㄕ',
@@ -375,40 +395,15 @@
     };
 
     const finals = {
-        'a':'ㄚ',
-        'o':'ㄛ',
-        'e':'ㄜ',
-        'ai':'ㄞ',
-        'ei':'ㄟ',
-        'ao':'ㄠ',
-        'ou':'ㄡ',
-        'an':'ㄢ',
-        'en':'ㄣ',
-        'ang':'ㄤ',
-        'eng':'ㄥ',
-        'er':'ㄦ',
-        'i':'ㄧ',
-        'u':'ㄨ',
-        'ü':'ㄩ'
+        'a':'ㄚ', 'o':'ㄛ', 'e':'ㄜ', 'er':'ㄦ',
+        'ai':'ㄞ', 'ei':'ㄟ', 'ao':'ㄠ', 'ou':'ㄡ',
+        'an':'ㄢ', 'en':'ㄣ', 'ang':'ㄤ', 'eng':'ㄥ',
+        'i':'ㄧ', 'u':'ㄨ', 'ü':'ㄩ'
     };
-
-
-    // kalau masih ada angka nada (lai2)
-    if (/[1-5]$/.test(pinyinStr)) {
-        let num = pinyinStr.slice(-1);
-        pinyinStr = pinyinStr.slice(0,-1);
-
-        if(num === '2') tone = 'ˊ';
-        else if(num === '3') tone = 'ˇ';
-        else if(num === '4') tone = 'ˋ';
-        else if(num === '5') tone = '˙';
-        else tone = '';
-    }
-
 
     let result = '';
 
-    // cek initial
+    // Check initial consonant
     let initial = '';
     for (let key of Object.keys(initials)) {
         if (pinyinStr.startsWith(key)) {
@@ -417,20 +412,24 @@
         }
     }
 
-    if(initial){
+    if (initial) {
         result += initials[initial];
         pinyinStr = pinyinStr.slice(initial.length);
     }
 
-
-    // final
-    if(finals[pinyinStr]){
+    // Check final vowel
+    if (finals[pinyinStr]) {
         result += finals[pinyinStr];
     } else {
         result += pinyinStr;
     }
 
-    return result + tone;
+    // Return combined result with the correct Zhuyin tone symbol
+    return result + toneSymbol;
+}
+
+        result += finals[pinyinStr];
+    } e;
 }
     </script>
   </div>          
