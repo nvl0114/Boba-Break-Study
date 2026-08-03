@@ -272,8 +272,6 @@
         
     <!-- JavaScript Implementation -->
     <script>
-        // Initialize default character on load ("學")
-        <script>
 
 let writer = HanziWriter.create('character-target', '學', {
     width: 200,
@@ -292,80 +290,73 @@ const searchButton = document.getElementById('search-btn');
 const infoBox = document.getElementById('char-info');
 
 
-function speakHanzi(char){
-
-    const speech = new SpeechSynthesisUtterance(char);
-
-    // Mandarin Taiwan
-    speech.lang = "zh-TW";
-
-    speech.rate = 0.8;
-    speech.pitch = 1;
-
-    window.speechSynthesis.speak(speech);
-}
-
-
-async function handleSearch(){
+function handleSearch() {
 
     const val = inputField.value.trim();
 
-    if(val.length > 0){
+    if (val.length > 0) {
 
         const targetChar = val[0];
 
-        document.getElementById('character-target').innerHTML = '';
+        document.getElementById('character-target').innerHTML = "";
 
-        try{
+
+        try {
 
             writer = HanziWriter.create(
                 'character-target',
                 targetChar,
                 {
-                    width:200,
-                    height:200,
-                    padding:5,
-                    showOutline:true,
-                    strokeAnimationSpeed:1,
-                    strokeColor:'#333333'
+                    width: 200,
+                    height: 200,
+                    padding: 5,
+                    showOutline: true,
+                    strokeAnimationSpeed: 1,
+                    strokeColor: '#333333',
+
+                    onLoadCharDataError: function() {
+                        document.getElementById('character-target').innerHTML =
+                        '<p style="color:red;font-size:12px;margin-top:80px;">Character not found.</p>';
+                    }
                 }
             );
+
 
             writer.animateCharacter();
 
 
             let pinyinResult = "-";
 
-            try{
+
+            try {
+
                 pinyinResult = pinyinPro.pinyin(
                     targetChar,
-                    {toneType:'symbol'}
+                    {
+                        toneType: 'symbol'
+                    }
                 );
-            }
-            catch(err){
+
+            } catch(error) {
+
                 pinyinResult = "-";
+
             }
 
 
             infoBox.innerHTML = `
                 <p><strong>Hanzi:</strong> ${targetChar}</p>
                 <p><strong>Pinyin:</strong> ${pinyinResult}</p>
-                <button onclick="speakHanzi('${targetChar}')">
-                    🔊 Listen
-                </button>
             `;
 
 
-        }catch(e){
+        } catch(error) {
 
-            console.error(e);
+            console.log(error);
 
             infoBox.innerHTML = `
                 <p><strong>Hanzi:</strong> ${targetChar}</p>
                 <p><strong>Pinyin:</strong> -</p>
-                <button onclick="speakHanzi('${targetChar}')">
-                    🔊 Listen
-                </button>
             `;
 
         }
@@ -383,15 +374,14 @@ searchButton.addEventListener(
 
 inputField.addEventListener(
     'keypress',
-    function(e){
+    function(e) {
 
-        if(e.key === "Enter"){
+        if (e.key === "Enter") {
             handleSearch();
         }
 
     }
 );
-
 
 </script>
 
