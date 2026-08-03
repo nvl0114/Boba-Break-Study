@@ -2,24 +2,24 @@
 <html lang="id">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Hanzi Stroke Order</title>
+<title>Hanzi Stroke Order</title>
 
-    <script src="https://cdn.jsdelivr.net/npm/hanzi-writer@2.1.0/dist/hanzi-writer-lib.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/hanzi-writer@2.1.0/dist/hanzi-writer-lib.min.js"></script>
 
 </head>
 
 <body>
 
-    <h1>Hanzi Stroke Order</h1>
+<h1>Hanzi Stroke Order</h1>
 
-    <input id="hanziInput" type="text" placeholder="Masukkan Hanzi">
+<input id="hanziInput" type="text" placeholder="Masukkan Hanzi">
 
-    <button onclick="searchHanzi()">Cari</button>
+<button onclick="searchHanzi()">Cari</button>
 
-    <div id="character-target"></div>
+<div id="character-target"></div>
 
 
 <script>
@@ -30,24 +30,26 @@ const writer = HanziWriter.create(
     {
         width: 300,
         height: 300,
-        showOutline: true
+        showOutline: true,
+        strokeAnimationSpeed: 1
     }
 );
+
+writer.animateCharacter();
 
 
 function searchHanzi(){
 
     let hanzi = document.getElementById("hanziInput").value;
 
-    writer.setCharacter(hanzi);
-
-    writer.animateCharacter();
+    if(hanzi){
+        writer.setCharacter(hanzi);
+        writer.animateCharacter();
+    }
 
 }
 
 </script>
 
-
 </body>
-
 </html>
