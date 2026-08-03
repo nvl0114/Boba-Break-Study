@@ -340,46 +340,72 @@
 
         // Fungsi helper untuk menerjemahkan teks Pinyin ke Zhuyin secara akurat
         function convertPinyinToZhuyin(pinyinStr) {
-            const map = {
-                'a':'ㄚ', 'o':'ㄛ', 'e':'ㄜ', 'ai':'ㄞ', 'ei':'ㄟ', 'ao':'ㄠ', 'ou':'ㄡ',
-                'an':'ㄢ', 'en':'ㄣ', 'ang':'ㄤ', 'eng':'ㄥ', 'er':'ㄦ', 'i':'ㄧ', 'u':'ㄨ',
-                'ü':'ㄩ', 'v':'ㄩ', 'b':'ㄅ', 'p':'ㄆ', 'm':'ㄇ', 'f':'ㄈ', 'd':'ㄉ',
-                't':'ㄊ', 'n':'ㄋ', 'l':'ㄌ', 'g':'ㄍ', 'k':'ㄎ', 'h':'ㄏ', 'j':'ㄐ',
-                'q':'ㄑ', 'x':'ㄒ', 'zh':'ㄓ', 'ch':'ㄔ', 'sh':'ㄕ', 'r':'ㄖ', 'z':'ㄗ',
-                'c':'ㄘ', 's':'ㄙ'
-            };
 
-            let tone = '';
-            if (/[1-5]$/.test(pinyinStr)) {
-                let lastChar = pinyinStr.slice(-1);
-                if (lastChar === '2') tone = 'ˊ';
-                else if (lastChar === '3') tone = 'ˇ';
-                else if (lastChar === '4') tone = 'ˋ';
-                else if (lastChar === '5') tone = '˙';
-                pinyinStr = pinyinStr.slice(0, -1);
-            }
+    const initials = {
+        'zh':'ㄓ', 'ch':'ㄔ', 'sh':'ㄕ',
+        'b':'ㄅ', 'p':'ㄆ', 'm':'ㄇ', 'f':'ㄈ',
+        'd':'ㄉ', 't':'ㄊ', 'n':'ㄋ', 'l':'ㄌ',
+        'g':'ㄍ', 'k':'ㄎ', 'h':'ㄏ',
+        'j':'ㄐ', 'q':'ㄑ', 'x':'ㄒ',
+        'r':'ㄖ', 'z':'ㄗ', 'c':'ㄘ', 's':'ㄙ'
+    };
 
-            let result = '';
-            let i = 0;
-            while (i < pinyinStr.length) {
-                let twoChar = pinyinStr.substr(i, 2);
-                if (map[twoChar]) {
-                    result += map[twoChar];
-                    i += 2;
-                } else if (map[pinyinStr[i]]) {
-                    result += map[pinyinStr[i]];
-                    i += 1;
-                } else {
-                    result += pinyinStr[i];
-                    i += 1;
-                }
-            }
+    const finals = {
+        'a':'ㄚ',
+        'o':'ㄛ',
+        'e':'ㄜ',
+        'ai':'ㄞ',
+        'ei':'ㄟ',
+        'ao':'ㄠ',
+        'ou':'ㄡ',
+        'an':'ㄢ',
+        'en':'ㄣ',
+        'ang':'ㄤ',
+        'eng':'ㄥ',
+        'er':'ㄦ',
+        'i':'ㄧ',
+        'u':'ㄨ',
+        'ü':'ㄩ'
+    };
 
-            if (tone === '˙') {
-                return '˙' + result;
-            }
-            return result + tone;
+    let tone = '';
+
+    // ambil nada
+    if (/[1-5]$/.test(pinyinStr)) {
+        let num = pinyinStr.slice(-1);
+        pinyinStr = pinyinStr.slice(0,-1);
+
+        if(num === '2') tone = 'ˊ';
+        if(num === '3') tone = 'ˇ';
+        if(num === '4') tone = 'ˋ';
+        if(num === '5') tone = '˙';
+    }
+
+    let result = '';
+
+    // cek initial
+    let initial = '';
+    for (let key of Object.keys(initials)) {
+        if (pinyinStr.startsWith(key)) {
+            initial = key;
+            break;
         }
+    }
+
+    if(initial){
+        result += initials[initial];
+        pinyinStr = pinyinStr.slice(initial.length);
+    }
+
+    // final
+    if(finals[pinyinStr]){
+        result += finals[pinyinStr];
+    } else {
+        result += pinyinStr;
+    }
+
+    return result + tone;
+}
     </script>
   </div>          
     </body>
