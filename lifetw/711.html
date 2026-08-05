@@ -383,7 +383,10 @@ onclick="playAudio('audio1')">
 </button>
 
 
-<audio id="audio1" src="audio/001.mp3"></audio>
+<button class="play-btn" 
+onclick="speak('王小文的爸爸做什麼工作？')">
+🔊
+</button>
 
 
 </div>
@@ -423,7 +426,10 @@ onclick="playAudio('audio2')">
 </button>
 
 
-<audio id="audio2" src="audio/002.mp3"></audio>
+<button class="play-btn" 
+onclick="speak('她的爸爸是醫生。')">
+🔊
+</button>
 
 
 </div>
@@ -442,61 +448,52 @@ onclick="playAudio('audio2')">
 <script>
 
 
-function playAudio(id){
+function speak(text){
 
-let audio=document.getElementById(id);
+    let speech = new SpeechSynthesisUtterance(text);
 
+    speech.lang = "zh-TW"; // Mandarin Taiwan
+    speech.rate = 0.8; // kecepatan suara
 
-document.querySelectorAll("audio").forEach(a=>{
-
-if(a!==audio){
-
-a.pause();
-
-a.currentTime=0;
-
-}
-
-});
-
-
-audio.play();
+    speechSynthesis.cancel(); 
+    speechSynthesis.speak(speech);
 
 }
 
 
+function playAll(){
+
+    let sentences = [
+        "王小文的爸爸做什麼工作？",
+        "她的爸爸是醫生。"
+    ];
+
+    let i = 0;
 
 
-async function playAll(){
+    function next(){
 
-let audios=document.querySelectorAll("audio");
+        if(i < sentences.length){
 
+            let speech = new SpeechSynthesisUtterance(sentences[i]);
 
-for(let audio of audios){
+            speech.lang="zh-TW";
+            speech.rate=0.8;
 
-audio.currentTime=0;
+            speech.onend = next;
 
+            speechSynthesis.speak(speech);
 
-await new Promise(resolve=>{
+            i++;
 
+        }
 
-audio.play();
-
-
-audio.onended=resolve;
-
-
-});
+    }
 
 
-}
+    next();
 
-
-}
-
-
-</script>
-
+} </script>
 
 </body>
 </html>
