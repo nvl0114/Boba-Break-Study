@@ -55,9 +55,9 @@ meaning:"To investigate / to explore / to discuss"
 },
 
 {
-hanzi:"潛移默化",
-pinyin:"qián yí mò huà",
-meaning:"To imperceptibly influence / subtle influence"
+hanzi:"牽涉",
+pinyin:"qiān shè",
+meaning:"to involve / to concern / to be related to"
 }
 
 ];
