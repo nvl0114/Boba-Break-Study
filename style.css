@@ -459,39 +459,145 @@ body {
     font-size:14px;
 
 }
-/* ================= Responsive ================= */
+
+/* =========================
+   RESPONSIVE MOBILE
+========================= */
 
 @media (max-width: 768px) {
 
+    /* Layout utama */
     .app-container {
         flex-direction: column;
     }
 
+
+    /* Sidebar */
     .sidebar {
         width: 100%;
         border-right: none;
         border-bottom: 1px solid #eaeaea;
     }
 
+
+    /* Header */
     .top-header {
         flex-direction: column;
         align-items: flex-start;
+        gap: 10px;
     }
 
+
+    /* Konten utama */
     .main-content {
         padding: 20px;
+        width: 100%;
     }
 
+
+    /* Grid card */
+    .section-container {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+
+    /* Course 3 / video card */
+    .section-container > .card:first-child {
+        grid-column: auto;
+    }
+
+
+    /* Semua card */
+    .card {
+        width: 100%;
+    }
+
+
+    /* Video responsive */
+    .video-card iframe,
+    .video-card video {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 16 / 9;
+    }
+
+
+    /* Flashcard */
+    .flashcard {
+        width: 100%;
+        max-width: 320px;
+        margin: auto;
+    }
+
+
+    /* Progress bar */
     .progress-bar-bg {
         width: 100%;
     }
 
-    .section-container {
-    grid-template-columns: 1fr;
-    gap: 25px;
-}
+
+    /* Font lebih nyaman di HP */
+    h1 {
+        font-size: 24px;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    h3 {
+        font-size: 18px;
+    }
+
 }
 
+
+/* =========================
+   TABLET
+========================= */
+
+@media (min-width: 769px) and (max-width: 1024px) {
+
+    .main-content {
+        padding: 30px;
+    }
+
+
+    .section-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+}
+
+
+/* =========================
+   HP KECIL
+========================= */
+
+@media (max-width: 480px) {
+
+    .main-content {
+        padding: 15px;
+    }
+
+
+    .card {
+        border-radius: 15px;
+    }
+
+
+    h1 {
+        font-size: 22px;
+    }
+
+
+    .flashcard {
+        max-width: 280px;
+    }
+
+}
 /* ================= About Accordion ================= */
 
 .about-card{
