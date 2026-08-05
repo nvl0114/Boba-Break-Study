@@ -187,13 +187,18 @@ body {
 }
 
 .section-container {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Membagi halaman menjadi 2 kolom */
     gap: 20px;
-    width: 100%; /* Agar kontainer kartu ikut melebar penuh */
+    width: 100%;
 }
 
+/* Membuat kartu video musik (elemen pertama) melebar penuh di atas */
+.section-container > .card:first-child {
+    grid-column: 1 / -1; /* Mengambil seluruh kolom yang tersedia (full width) */
 }
+
+
 
 .card {
     background: white;
