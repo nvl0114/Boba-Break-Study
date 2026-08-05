@@ -1,353 +1,502 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Boba Break Study - Mandarin Conversation</title>
+
+<title>Boba Break Study - Mandarin Tone</title>
+
 <link rel="stylesheet" href="../style.css">
-<!-- Font Awesome -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+
 <style>
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+
+.section-header h1{
+    font-size:36px;
+    color:#b8865c;
 }
 
-body {
-    font-family: "Segoe UI", sans-serif;
-    background: #fdfbf7;
-    color: #2c221e;
-    display: flex;
-    min-height: 100vh;
+.section-header p{
+    color:#6e5c52;
+    font-size:17px;
+    margin-bottom:25px;
 }
 
-/* Sidebar Styling (Langsung Kelihatan) */
-.sidebar {
-    width: 260px;
-    background: #ffffff;
-    border-right: 1px solid #e6d8c4;
-    display: flex;
-    flex-direction: column;
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 100;
-    padding: 24px 16px;
+
+/* Video */
+
+.video-grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:30px;
 }
 
-.logo-area {
-    margin-bottom: 30px;
-    text-align: center;
+
+.video-card{
+    background:white;
+    padding:25px;
+    border-radius:20px;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
 }
 
-.logo-top {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 8px;
+
+.video-wrapper{
+    width:100%;
+    aspect-ratio:16/9;
 }
 
-.logo-img {
-    width: 40px;
-    height: 40px;
-    object-fit: contain;
+
+.video-wrapper iframe{
+    width:100%;
+    height:100%;
+    border:0;
 }
 
-.logo-top h2 {
-    font-size: 18px;
-    line-height: 1.2;
-    color: #4a3b32;
-    text-align: left;
+
+/* Audio Lesson */
+
+
+.title{
+    color:#b8865c;
+    margin:30px 0 20px;
 }
 
-.logo-top h2 span {
-    color: #b8865c;
+
+.play-all{
+    padding:12px 25px;
+    border:none;
+    border-radius:10px;
+    background:#ff9800;
+    color:white;
+    font-size:17px;
+    cursor:pointer;
 }
 
-.sidebar-jargon {
-    font-size: 12px;
-    color: #8d7a6c;
+
+.audio-card{
+
+    margin-top:20px;
+    background:#fff;
+    padding:20px;
+
+    border-radius:18px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+
 }
 
-.nav-menu {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
+
+.hanzi{
+    font-size:28px;
+    font-weight:bold;
 }
 
-.nav-menu li a {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 12px 16px;
-    color: #5c4a40;
-    text-decoration: none;
-    border-radius: 10px;
-    font-weight: 600;
-    font-size: 14px;
-    transition: all 0.2s ease;
+
+.pinyin{
+    color:#777;
+    margin-top:8px;
 }
 
-.nav-menu li a:hover, .nav-menu li.active a {
-    background: #f4ebdf;
-    color: #b8865c;
+
+.translation{
+    color:#444;
+    margin-top:8px;
 }
 
-.nav-menu li a i {
-    width: 20px;
-    text-align: center;
+
+.play-btn{
+
+width:55px;
+height:55px;
+
+border:none;
+border-radius:50%;
+
+background:#5a4fcf;
+color:white;
+
+font-size:25px;
+
+cursor:pointer;
+
 }
 
-/* Main Content Area (Menyesuaikan Sidebar) */
-.main-content {
-    margin-left: 260px;
-    flex: 1;
-    padding: 40px;
-    max-width: 1100px;
+
+@media(max-width:700px){
+
+.audio-card{
+
+flex-direction:column;
+align-items:flex-start;
+
 }
 
-.container {
-    max-width: 850px;
-    margin: auto;
+
+.play-btn{
+
+margin-top:15px;
+
 }
 
-.title {
-    text-align: left;
-    font-size: 36px;
-    color: #b8865c;
-    font-weight: 700;
-    margin-bottom: 8px;
 }
 
-.subtitle {
-    font-size: 17px;
-    color: #6e5c52;
-    margin-bottom: 30px;
-}
-
-.card {
-    background: #fff;
-    border-radius: 16px;
-    padding: 24px;
-    margin-bottom: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    box-shadow: 0 5px 15px rgba(0,0,0,.05);
-    border: 1px solid #e6d8c4;
-}
-
-.text {
-    flex: 1;
-    padding-right: 15px;
-}
-
-.hanzi {
-    font-size: 32px;
-    font-weight: bold;
-    margin-bottom: 10px;
-    color: #2c221e;
-}
-
-.pinyin {
-    color: #8d7a6c;
-    font-size: 16px;
-    font-style: italic;
-    margin-bottom: 8px;
-}
-
-.translation {
-    color: #5c4a40;
-    font-size: 16px;
-}
-
-.play-btn {
-    width: 50px;
-    height: 50px;
-    border: none;
-    border-radius: 50%;
-    background: #b8865c;
-    color: white;
-    font-size: 22px;
-    cursor: pointer;
-    transition: .3s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.play-btn:hover {
-    transform: scale(1.08);
-    background: #a3734e;
-}
-
-.play-all {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 30px;
-    padding: 12px 24px;
-    background: #b8865c;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.2s;
-}
-
-.play-all:hover {
-    background: #a3734e;
-}
-
-@media(max-width: 900px) {
-    .sidebar {
-        width: 70px;
-        padding: 20px 10px;
-    }
-    .logo-area, .sidebar-jargon, .nav-menu span {
-        display: none;
-    }
-    .main-content {
-        margin-left: 70px;
-        padding: 20px;
-    }
-    .card {
-        flex-direction: column;
-    }
-    .play-btn {
-        margin-top: 15px;
-        align-self: flex-end;
-    }
-}
 </style>
+
+
 </head>
+
 
 <body>
 
-<!-- Sidebar Langsung Kelihatan -->
+
+<div class="app-container">
+
+
+<!-- Sidebar -->
+
 <aside class="sidebar">
-    <div class="logo-area">
-        <div class="logo-top">
-            <img src="../logo.png" alt="Boba Break Study Logo" class="logo-img" loading="lazy">
-            <h2>Boba Break<br><span>Study</span></h2>
-        </div>
-        <p class="sidebar-jargon">Sip, Study, and Sweeten Your Mandarin Journey</p>
-    </div>
-    <nav aria-label="Main Navigation">
-        <ul class="nav-menu">
-            <li>
-                <a href="../index.html">
-                    <i class="fa-solid fa-chart-pie"></i> <span>Dashboard</span>
-                </a>
-            </li>
-            <li class="course-menu">
-                <a href="../courses.html">
-                    <i class="fa-solid fa-book-open"></i> <span>Courses</span>
-                </a>
-            </li>
-            <li>
-                <a href="../hanzi.html">
-                    <i class="fa-solid fa-pen"></i> <span>Hanzi Stroke Order</span>
-                </a>
-            </li>
-            <li>
-                <a href="https://cbt.sc-top.org.tw/sctopj/" target="_blank">
-                    <i class="fa-solid fa-clipboard-check"></i> <span>Mock Test</span>
-                </a>
-            </li>
-            <li class="active">
-                <a href="mandarin-conversation.html">
-                    <i class="fa-solid fa-comments"></i> <span>Conversation</span>
-                </a>
-            </li>
-            <li>
-                <a href="../about.html">
-                    <i class="fa-solid fa-circle-info"></i> <span>About</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
+
+<div class="logo-area">
+
+<div class="logo-top">
+
+<img src="../logo.png"
+class="logo-img"
+loading="lazy">
+
+<h2>
+Boba Break<br>
+<span>Study</span>
+</h2>
+
+</div>
+
+
+<p class="sidebar-jargon">
+Sip, Study, and Sweeten Your Mandarin Journey
+</p>
+
+
+</div>
+
+
+
+<nav>
+
+<ul class="nav-menu">
+
+
+<li>
+<a href="../index.html">
+<i class="fa-solid fa-chart-pie"></i>
+Dashboard
+</a>
+</li>
+
+
+<li class="course-menu">
+
+<a href="#" id="coursesToggle">
+
+<i class="fa-solid fa-book-open"></i>
+Courses
+
+<i class="fa-solid fa-chevron-down"></i>
+
+</a>
+
+
+<ul class="submenu" id="courseSubmenu">
+
+<li>
+<a href="../courses.html">
+🇬🇧 English
+</a>
+</li>
+
+
+<li>
+<a href="../courses-id.html">
+🇮🇩 Bahasa Indonesia
+</a>
+</li>
+
+
+</ul>
+
+
+</li>
+
+
+
+<li>
+<a href="../hanzi.html">
+
+<i class="fa-solid fa-pen"></i>
+
+Hanzi Stroke Order
+
+</a>
+</li>
+
+
+<li>
+
+<a href="https://cbt.sc-top.org.tw/sctopj/">
+
+<i class="fa-solid fa-clipboard-check"></i>
+
+Mock Test
+
+</a>
+
+</li>
+
+
+
+<li>
+
+<a href="../about.html">
+
+<i class="fa-solid fa-circle-info"></i>
+
+About
+
+</a>
+
+</li>
+
+
+</ul>
+
+</nav>
+
+
 </aside>
 
-<!-- Main Content -->
+
+
+
+<!-- MAIN -->
+
 <main class="main-content">
-    <div class="container">
 
-        <h1 class="title">Family Conversation</h1>
-        <p class="subtitle">Latih kemampuan mendengar dan pelafalan percakapan bahasa Mandarin sehari-hari.</p>
 
-        <button class="play-all" onclick="playAll()">
-            <i class="fa-solid fa-play"></i> Play All
-        </button>
+<section class="video-grid">
 
-        <div class="card">
-            <div class="text">
-                <div class="hanzi">
-                    王小文的爸爸做什麼工作？
-                </div>
-                <div class="pinyin">
-                    Wáng Xiǎowén de bàba zuò shénme gōngzuò?
-                </div>
-                <div class="translation">
-                    Apa pekerjaan ayah Wang Xiaowen?
-                </div>
-            </div>
-            <button class="play-btn" onclick="playAudio('audio1')">
-                <i class="fa-solid fa-volume-high"></i>
-            </button>
-            <audio id="audio1" src="audio/001.mp3"></audio>
-        </div>
 
-        <div class="card">
-            <div class="text">
-                <div class="hanzi">
-                    她的爸爸是醫生。
-                </div>
-                <div class="pinyin">
-                    Tā de bàba shì yīshēng.
-                </div>
-                <div class="translation">
-                    Ayahnya adalah dokter.
-                </div>
-            </div>
-            <button class="play-btn" onclick="playAudio('audio2')">
-                <i class="fa-solid fa-volume-high"></i>
-            </button>
-            <audio id="audio2" src="audio/002.mp3"></audio>
-        </div>
+<article class="video-card">
 
-    </div>
+
+<div class="section-header">
+
+<h1>
+Nada dalam Bahasa Mandarin
+</h1>
+
+
+<p>
+Pada bagian ini kita akan membahas empat nada dasar dalam bahasa Mandarin.
+</p>
+
+
+</div>
+
+
+
+<div class="video-wrapper">
+
+<iframe
+
+src="https://www.youtube.com/embed/i9WcY0BSACM"
+
+title="Mandarin Tone Basics"
+
+allowfullscreen>
+
+</iframe>
+
+</div>
+
+
+</article>
+
+
+</section>
+
+
+
+
+<!-- AUDIO -->
+
+
+<h1 class="title">
+Family Conversation
+</h1>
+
+
+<button class="play-all"
+onclick="playAll()">
+
+▶ Play All
+
+</button>
+
+
+
+<div class="audio-card">
+
+
+<div>
+
+<div class="hanzi">
+王小文的爸爸做什麼工作？
+</div>
+
+
+<div class="pinyin">
+Wáng Xiǎowén de bàba zuò shénme gōngzuò?
+</div>
+
+
+<div class="translation">
+Apa pekerjaan ayah Wang Xiaowen?
+</div>
+
+
+</div>
+
+
+<button class="play-btn"
+onclick="playAudio('audio1')">
+
+🔊
+
+</button>
+
+
+<audio id="audio1" src="audio/001.mp3"></audio>
+
+
+</div>
+
+
+
+
+
+<div class="audio-card">
+
+
+<div>
+
+<div class="hanzi">
+她的爸爸是醫生。
+</div>
+
+
+<div class="pinyin">
+Tā de bàba shì yīshēng.
+</div>
+
+
+<div class="translation">
+Ayahnya adalah dokter.
+</div>
+
+
+</div>
+
+
+<button class="play-btn"
+onclick="playAudio('audio2')">
+
+🔊
+
+</button>
+
+
+<audio id="audio2" src="audio/002.mp3"></audio>
+
+
+</div>
+
+
+
+
 </main>
 
+</div>
+
+
+
+
+
 <script>
+
+
 function playAudio(id){
-    let aud = document.getElementById(id);
-    document.querySelectorAll("audio").forEach(a => {
-        if(a !== aud){
-            a.pause();
-            a.currentTime = 0;
-        }
-    });
-    aud.play();
+
+let audio=document.getElementById(id);
+
+
+document.querySelectorAll("audio").forEach(a=>{
+
+if(a!==audio){
+
+a.pause();
+
+a.currentTime=0;
+
 }
 
-async function playAll(){
-    const list = document.querySelectorAll("audio");
-    for(let a of list){
-        a.currentTime = 0;
-        await new Promise(resolve => {
-            a.play();
-            a.onended = resolve;
-        });
-    }
+});
+
+
+audio.play();
+
 }
+
+
+
+
+async function playAll(){
+
+let audios=document.querySelectorAll("audio");
+
+
+for(let audio of audios){
+
+audio.currentTime=0;
+
+
+await new Promise(resolve=>{
+
+
+audio.play();
+
+
+audio.onended=resolve;
+
+
+});
+
+
+}
+
+
+}
+
+
 </script>
+
 
 </body>
 </html>
