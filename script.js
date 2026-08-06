@@ -1,31 +1,42 @@
-fetch("sidebar.html") // Jika di halaman utama (root)
-.then(response => {
-    // Jika fetch gagal (karena kita di dalam folder content), coba naik satu tingkat
-    if (!response.ok) {
-        return fetch("../sidebar.html");
-    }
-    return response;
-})
-.then(response => response.text())
-.then(data => {
-    document.getElementById("sidebar-container").innerHTML = data;
+document.addEventListener("DOMContentLoaded", () => {
+    fetch("sidebar.html")
+    .then(response => {
+        if (!response.ok) {
+            return fetch("../sidebar.html");
+        }
+        return response;
+    })
+    .then(response => response.text())
+    .then(data => {
+        document.getElementById("sidebar-container").innerHTML = data;
 
-    // Cek apakah kita sedang berada di dalam folder "content"
-    const isInContentFolder = window.location.pathname.includes('/content/');
+        // 1. Penyesuaian path logo & link jika berada di dalam folder "content"
+        const isInContentFolder = window.location.pathname.includes('/content/');
 
-    if (isInContentFolder) {
-        // 1. Perbaiki path logo agar naik satu tingkat
-        const logoImg = document.querySelector("#sidebar-container .logo-img");
-        if (logoImg) logoImg.src = "../logo.png";
+        if (isInContentFolder) {
+            const logoImg = document.querySelector("#sidebar-container .logo-img");
+            if (logoImg) logoImg.src = "../logo.png";
 
-        // 2. Perbaiki link menu di sidebar agar mengarah keluar folder content
-        const sidebarLinks = document.querySelectorAll("#sidebar-container a");
-        sidebarLinks.forEach(link => {
-            const href = link.getAttribute("href");
-            // Jika link bukan URL eksternal (http) dan bukan '#'
-            if (href && !href.startsWith("http") && href !== "#") {
-                link.setAttribute("href", "../" + href);
+            const sidebarLinks = document.querySelectorAll("#sidebar-container a");
+            sidebarLinks.forEach(link => {
+                const href = link.getAttribute("href");
+                if (href && !href.startsWith("http") && href !== "#") {
+                    link.setAttribute("href", "../" + href);
+                }
+            });
+        }
+    });
+
+    // 2. Dropdown Courses Sidebar (Menggunakan Event Delegation agar aman untuk sidebar dinamis)
+    document.addEventListener("click", (e) => {
+        const coursesToggle = e.target.closest("#coursesToggle");
+        
+        if (coursesToggle) {
+            e.preventDefault();
+            const courseSubmenu = document.getElementById("courseSubmenu");
+            if (courseSubmenu) {
+                courseSubmenu.classList.toggle("show");
             }
-        });
-    }
+        }
+    });
 });
