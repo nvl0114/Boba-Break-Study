@@ -77,8 +77,15 @@
         .then(response => response.text())
         .then(data => {
             document.getElementById("sidebar-container").innerHTML = data;
+            
+            // Menyesuaikan path logo karena halaman ini ada di dalam folder content/
+            const logoImg = document.querySelector("#sidebar-container .logo-img");
+            if (logoImg) {
+                logoImg.src = "../logo.png";
+            }
         });
 </script>
+
 
 
 
