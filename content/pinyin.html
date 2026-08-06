@@ -71,8 +71,15 @@
 
 
 
-<!-- Script untuk load sidebar -->
-<script src="../script.js"></script>
+<!-- Script untuk load sidebar khusus untuk halaman di dalam content/ -->
+<script>
+    fetch("../sidebar.html")
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById("sidebar-container").innerHTML = data;
+        });
+</script>
+
 
 
 </body>
