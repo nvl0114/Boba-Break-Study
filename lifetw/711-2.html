@@ -71,89 +71,6 @@
             margin-top: 12px;
         }
 
-        .lesson-header {
-            background: white;
-            padding: 25px;
-            margin-top: 30px;
-            border-radius: 20px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, .08);
-        }
-
-        .lesson-header h2 {
-            color: #b8865c;
-            font-size: 28px;
-            margin-bottom: 10px;
-        }
-
-        .lesson-header p {
-            color: #555;
-            font-size: 16px;
-            margin-bottom: 20px;
-        }
-
-        .section-header h1 {
-            font-size: 36px;
-            color: #b8865c;
-        }
-
-        .section-header p {
-            color: #6e5c52;
-            font-size: 17px;
-            margin-bottom: 25px;
-        }
-
-        /* Video */
-        .video-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 30px;
-        }
-
-        .video-card {
-            background: white;
-            padding: 25px;
-            border-radius: 20px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, .08);
-        }
-
-        .video-wrapper {
-            width: 100%;
-            aspect-ratio: 16/9;
-        }
-
-        .video-wrapper iframe {
-            width: 100%;
-            height: 100%;
-            border: 0;
-        }
-
-        /* Audio Lesson */
-        .title {
-            color: #b8865c;
-            margin: 30px 0 20px;
-        }
-
-        .play-all {
-            padding: 12px 25px;
-            border: none;
-            border-radius: 10px;
-            background: #ff9800;
-            color: white;
-            font-size: 17px;
-            cursor: pointer;
-        }
-
-        .audio-card {
-            margin-top: 20px;
-            background: #fff;
-            padding: 20px;
-            border-radius: 18px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, .08);
-        }
-
         /* Avatar Space */
         .avatar-space {
             width: 50px;
@@ -218,11 +135,6 @@
             box-shadow: 0 8px 20px rgba(184, 134, 92, 0.35);
         }
 
-        .prev-btn:active,
-        .next-btn:active {
-            transform: scale(0.97);
-        }
-
         /* MOBILE */
         @media (max-width: 700px) {
             .chat {
@@ -243,13 +155,6 @@
             .translation {
                 font-size: 14px;
             }
-            .play-btn {
-                width: 30px;
-                height: 30px;
-            }
-            .section-header h1 {
-                font-size: 28px;
-            }
         }
     </style>
 </head>
@@ -261,6 +166,7 @@
         <!-- Sidebar otomatis masuk di sini -->
         <div id="sidebar-container"></div>
 
+        <main class="main-content">
             <!-- Chat Container -->
             <div class="chat-container">
 
@@ -376,7 +282,7 @@
                             <button class="play-btn" onclick="speak('有會員載具嗎?')">🔊</button>
                         </div>
                         <div class="pinyin">yǒu huì yuán zài jù ma?</div>
-                        <div class="translation">Do you have membership carrier / Member e-invoice carrier? (In Taiwan, this refers to a membership account and digital carrier used to store e-invoices and collect rewards points...)</div>
+                        <div class="translation">Do you have membership carrier / Member e-invoice carrier?</div>
                     </div>
                 </div>
 
@@ -407,12 +313,13 @@
                 </div>
 
             </div>
-        <!-- Navigasi Lesson -->
-<div class="lesson-nav">
-    <a href="#" class="prev-btn">🧋 Previous</a>
-    <a href="711-3.html" class="next-btn">Next 🍡</a>
-</div>
             <!-- End of Chat Container -->
+
+            <!-- Navigasi Lesson (Dipindah ke bawah agar posisinya benar) -->
+            <div class="lesson-nav">
+                <a href="#" class="prev-btn">🧋 Previous</a>
+                <a href="711-3.html" class="next-btn">Next 🍡</a>
+            </div>
 
         </main>
 
@@ -428,25 +335,6 @@
             speechSynthesis.cancel(); 
             speechSynthesis.speak(speech);
         }
-
-        function playAll() {
-            let sentences = [
-                "王小文的爸爸做什麼工作？",
-                "她的爸爸是醫生。"
-            ];
-            let i = 0;
-            function next() {
-                if (i < sentences.length) {
-                    let speech = new SpeechSynthesisUtterance(sentences[i]);
-                    speech.lang = "zh-TW";
-                    speech.rate = 0.8;
-                    speech.onend = next;
-                    speechSynthesis.speak(speech);
-                    i++;
-                }
-            }
-            next();
-        } 
     </script>
 
 </body>
