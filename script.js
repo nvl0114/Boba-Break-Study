@@ -10,16 +10,10 @@ document.addEventListener("DOMContentLoaded", () => {
     .then(data => {
         document.getElementById("sidebar-container").innerHTML = data;
 
-        // Cek apakah halaman berada di dalam subfolder (folder apa pun selain root)
-        const pathSegments = window.location.split
-        const pathArray = window.location.pathname.split("/").filter(Boolean);
-        
-        // Asumsi: Jika struktur URL GitHub Pages kamu adalah username.github.io/Boba-Break-Study/lifetw/file.html
-        // Maka file di root panjang array-nya 1 (hanya nama repo). 
-        // Jika ada di dalam subfolder seperti 'lifetw' atau 'content', panjangnya akan >= 2.
-        const isSubfolder = pathArray.length > 1 && !window.location.pathname.endsWith("index.html");
+        // 1. Penyesuaian path logo & link jika berada di dalam folder "content" atau "lifetw"
+        const isInSubfolder = window.location.pathname.includes('/content/') || window.location.pathname.includes('/lifetw/');
 
-        if (isSubfolder) {
+        if (isInSubfolder) {
             const logoImg = document.querySelector("#sidebar-container .logo-img");
             if (logoImg) logoImg.src = "../logo.png";
 
@@ -33,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Dropdown Courses Sidebar
+    // 2. Dropdown Courses Sidebar (Menggunakan Event Delegation agar aman untuk sidebar dinamis)
     document.addEventListener("click", (e) => {
         const coursesToggle = e.target.closest("#coursesToggle");
         
