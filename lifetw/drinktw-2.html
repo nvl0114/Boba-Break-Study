@@ -10,14 +10,11 @@
     <!-- CSS Utama -->
     <link rel="stylesheet" href="../style.css">
 
-    
-<!-- Font Awesome -->
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
 
     <!-- CSS Halaman Ini -->
     <style>
-
         /* Lesson Card */
         .lesson-card {
             background: white;
@@ -28,19 +25,16 @@
             max-width: 800px;
         }
 
-
         .lesson-card h2 {
             color: #b8865c;
             font-size: 28px;
             margin-bottom: 10px;
         }
 
-
         .lesson-card p {
             color: #666;
             line-height: 1.6;
         }
-
 
         /* Vocabulary Container */
         .vocab-container {
@@ -50,62 +44,52 @@
             margin-top: 25px;
         }
 
-
         /* Vocabulary Sticker */
         .vocab-sticker {
-    position: relative;
-    background: #fff8ef;
-    border-radius: 35px 15px 35px 15px;
-    padding: 25px 15px;
-    width: 160px;
-    text-align: center;
+            position: relative;
+            background: #fff8ef;
+            border-radius: 35px 15px 35px 15px;
+            padding: 25px 15px;
+            width: 160px;
+            text-align: center;
+            border: 3px dashed #d7b89c;
+            box-shadow: 0 8px 15px rgba(184,134,92,0.15);
+            transition: 0.3s;
+        }
 
-    border: 3px dashed #d7b89c;
+        /* Sticker miring seperti ditempel */
+        .vocab-sticker:nth-child(odd) {
+            transform: rotate(-4deg);
+        }
 
-    box-shadow: 0 8px 15px rgba(184,134,92,0.15);
+        .vocab-sticker:nth-child(even) {
+            transform: rotate(4deg);
+        }
 
-    transition: 0.3s;
-}
+        .vocab-sticker:hover {
+            transform: translateY(-8px) rotate(0deg);
+        }
 
+        /* Icon boba pojok */
+        .vocab-sticker::before {
+            content: "🧋";
+            position: absolute;
+            top: -20px;
+            right: -10px;
+            font-size: 35px;
+        }
 
-/* Sticker miring seperti ditempel */
-.vocab-sticker:nth-child(odd) {
-    transform: rotate(-4deg);
-}
-
-.vocab-sticker:nth-child(even) {
-    transform: rotate(4deg);
-}
-
-
-.vocab-sticker:hover {
-    transform: translateY(-8px) rotate(0deg);
-}
-
-
-/* Icon boba pojok */
-.vocab-sticker::before {
-    content: "🧋";
-    position: absolute;
-    top: -20px;
-    right: -10px;
-    font-size: 35px;
-}
-
-
-/* Bubble pearls bawah */
-.vocab-sticker::after {
-    content: "● ● ●";
-    position: absolute;
-    bottom: 8px;
-    left: 0;
-    right: 0;
-
-    font-size: 10px;
-    letter-spacing: 5px;
-    color: #b8865c;
-}
-
+        /* Bubble pearls bawah */
+        .vocab-sticker::after {
+            content: "● ● ●";
+            position: absolute;
+            bottom: 8px;
+            left: 0;
+            right: 0;
+            font-size: 10px;
+            letter-spacing: 5px;
+            color: #b8865c;
+        }
 
         .hanzi {
             font-size: 40px;
@@ -113,20 +97,17 @@
             color: #b8865c;
         }
 
-
         .pinyin {
             font-size: 18px;
             margin-top: 10px;
             color: #555;
         }
 
-
         .meaning {
             margin-top: 8px;
             font-size: 16px;
             color: #333;
         }
-
 
         /* Lesson Navigation */
         .lesson-nav {
@@ -136,7 +117,6 @@
             margin: 40px auto;
             max-width: 800px;
         }
-
 
         .prev-btn,
         .next-btn {
@@ -152,149 +132,115 @@
             transition: 0.25s;
         }
 
-
         .prev-btn:hover,
         .next-btn:hover {
             transform: translateY(-3px);
         }
 
-
         /* Mobile */
         @media (max-width:700px) {
-
             .lesson-card {
                 padding: 20px;
                 margin: 20px;
             }
 
-
             .vocab-container {
                 justify-content: center;
             }
-
 
             .vocab-sticker {
                 width: 140px;
             }
 
-
             .hanzi {
                 font-size: 34px;
             }
-
         }
-
     </style>
-
 </head>
-
 
 <body>
 
-
 <div class="app-container">
-
 
     <!-- Sidebar tetap -->
     <div id="sidebar-container"></div>
 
-
-
     <main class="main-content">
 
-
+        <!-- Lesson Card 1: Keywords & Vocab -->
         <div class="lesson-card">
-
-
             <h2>Keywords</h2>
-
-
             <p>
                 You have completed this lesson on how to order drinks in Taiwan.<br><br>
-Congratulations on finishing this lesson! Now you are one step closer to communicating more naturally in Mandarin. Ordering a drink may seem like a small daily activity, but it is a great opportunity to practice listening, speaking, and interacting with local people.
-           <br> </p>
-
-
-
-            <div class="vocab-container">
-
-<div class="vocab-sticker">
-    <div class="hanzi">點</div>
-    <div class="pinyin">diǎn</div>
-    <div class="meaning">to order (food or drinks)</div>
-</div>
-
-<div class="vocab-sticker">
-    <div class="hanzi">杯</div>
-    <div class="pinyin">bēi</div>
-    <div class="meaning">A cup/glass; a measure word for drinks.</div>
-</div>
-
-<div class="vocab-sticker">
-    <div class="hanzi">甜度</div>
-    <div class="pinyin">tián dù</div>
-    <div class="meaning">Sweetness level.</div>
-</div>
-
-<div class="vocab-sticker">
-    <div class="hanzi">冰塊</div>
-    <div class="pinyin">bīng kuài</div>
-    <div class="meaning">Ice cubes; ice level.</div>
-</div>
-
-<div class="vocab-sticker">
-    <div class="hanzi">配料</div>
-    <div class="pinyin">pèi liào</div>
-    <div class="meaning">Toppings.</div>
-</div>
-
-<div class="lesson-card">
-
-
-            <p>
-Remember the basic formula:<br><br>
-<strong>Drink + Size + Sweetness Level + Ice Level + Topping<br><br></strong>
-                <!-- Tambahkan gambar di sini -->
-<div style="text-align: center; margin: 20px 0;">
-    <img src="drinktw.png" alt="Drink Taiwan" style="max-width: 100%; height: auto; border-radius: 15px;">
-</div>
-                
-By following this simple pattern, you can easily order your favorite drink at tea shops in Taiwan.
-Don’t be afraid to practice using Mandarin in real situations. Every time you order a drink, you are taking one more step toward improving your Mandarin skills.<br><br>
-Keep practicing and enjoy your Mandarin learning journey! 🧋✨
-            
+                Congratulations on finishing this lesson! Now you are one step closer to communicating more naturally in Mandarin. Ordering a drink may seem like a small daily activity, but it is a great opportunity to practice listening, speaking, and interacting with local people.
             </p>
 
+            <div class="vocab-container">
+                <div class="vocab-sticker">
+                    <div class="hanzi">點</div>
+                    <div class="pinyin">diǎn</div>
+                    <div class="meaning">to order (food or drinks)</div>
+                </div>
 
+                <div class="vocab-sticker">
+                    <div class="hanzi">杯</div>
+                    <div class="pinyin">bēi</div>
+                    <div class="meaning">A cup/glass; a measure word for drinks.</div>
+                </div>
+
+                <div class="vocab-sticker">
+                    <div class="hanzi">甜度</div>
+                    <div class="pinyin">tián dù</div>
+                    <div class="meaning">Sweetness level.</div>
+                </div>
+
+                <div class="vocab-sticker">
+                    <div class="hanzi">冰塊</div>
+                    <div class="pinyin">bīng kuài</div>
+                    <div class="meaning">Ice cubes; ice level.</div>
+                </div>
+
+                <div class="vocab-sticker">
+                    <div class="hanzi">配料</div>
+                    <div class="pinyin">pèi liào</div>
+                    <div class="meaning">Toppings.</div>
+                </div>
+            </div>
         </div>
 
-
-
-
+        <!-- Lesson Card 2: Formula & Image -->
+        <div class="lesson-card">
+            <p>
+                Remember the basic formula:<br><br>
+                <strong>Drink + Size + Sweetness Level + Ice Level + Topping</strong>
+            </p>
+                
+            <!-- Tambahkan gambar di sini -->
+            <div style="text-align: center; margin: 20px 0;">
+                <img src="drinktw.png" alt="Drink Taiwan" style="max-width: 100%; height: auto; border-radius: 15px;">
+            </div>
+                
+            <p>
+                By following this simple pattern, you can easily order your favorite drink at tea shops in Taiwan.
+                Don’t be afraid to practice using Mandarin in real situations. Every time you order a drink, you are taking one more step toward improving your Mandarin skills.<br><br>
+                Keep practicing and enjoy your Mandarin learning journey! 🧋✨
+            </p>
+        </div>
 
         <!-- Lesson Navigation -->
-
         <div class="lesson-nav">
-
             <a href="drinktw.html" class="prev-btn">
                 🧋 Previous
             </a>
-
-
         </div>
-
-
 
     </main>
 
-
 </div>
-
-
 
 <!-- Script Sidebar -->
 <script src="../script.js"></script>
-
 
 </body>
 
