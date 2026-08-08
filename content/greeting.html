@@ -501,6 +501,174 @@
             .chat-details .hanzi-text {
                 font-size: 15px;
             }
+            /* =========================
+   QUIZ MODAL
+========================= */
+
+.quiz-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(4px);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    z-index: 11000;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition: 0.3s ease;
+}
+
+.quiz-modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.quiz-modal-card {
+    background: #fdfbf7;
+    width: 90%;
+    max-width: 420px;
+
+    padding: 25px 20px;
+
+    border-radius: 22px;
+    border: 2px solid #d7b89c;
+
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+
+    position: relative;
+
+    transform: scale(0.8);
+    transition: 0.3s ease;
+}
+
+.quiz-modal-overlay.active .quiz-modal-card {
+    transform: scale(1);
+}
+
+.close-quiz-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+
+    background: none;
+    border: none;
+
+    font-size: 24px;
+    color: #a0724f;
+
+    cursor: pointer;
+}
+
+.quiz-header {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.quiz-header span {
+    background: #fff8ef;
+    color: #b8865c;
+
+    border: 1px solid #d7b89c;
+
+    padding: 5px 12px;
+    border-radius: 20px;
+
+    font-size: 12px;
+    font-weight: bold;
+}
+
+#quizQuestion {
+    text-align: center;
+
+    color: #5c4033;
+
+    font-size: 18px;
+    line-height: 1.5;
+
+    margin: 20px 0;
+}
+
+.quiz-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.quiz-answer {
+    background: white;
+
+    border: 1.5px solid #d7b89c;
+    border-radius: 12px;
+
+    padding: 12px;
+
+    font-size: 14px;
+    color: #5c4033;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.quiz-answer:hover {
+    background: #fff8ef;
+    transform: translateY(-2px);
+}
+
+.quiz-answer.correct {
+    background: #d8f3dc;
+    border-color: #52b788;
+    color: #2d6a4f;
+}
+
+.quiz-answer.wrong {
+    background: #ffe5e5;
+    border-color: #e5989b;
+    color: #9b2226;
+}
+
+.quiz-feedback {
+    text-align: center;
+
+    min-height: 25px;
+
+    margin-top: 12px;
+
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.next-question-btn {
+    width: 100%;
+
+    margin-top: 15px;
+    padding: 11px;
+
+    border: none;
+    border-radius: 12px;
+
+    background: #b8865c;
+    color: white;
+
+    font-size: 14px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    display: none;
+}
+
+.next-question-btn:hover {
+    background: #a0724f;
+}
         }
     </style>
 </head>
@@ -875,13 +1043,40 @@
             <a href="https://drive.google.com/file/d/1xIv_aIg0nbPxt47kkHjCBzTZcrSqW92D/view?usp=drivesdk" download class="modal-option-btn hanzi-option">
                 <span>📝</span> Writing Hanzi
             </a>
-            <a href="quiz-lesson1.html" class="modal-option-btn quiz-option">
-                <span>🧠</span> Quiz
-            </a>
+            <button class="modal-option-btn quiz-option" id="openQuiz">
+    <span>🧠</span> Quiz
+</button>
         </div>
     </div>
 </div>
 
+<!-- Quiz Modal -->
+<div class="quiz-modal-overlay" id="quizModal">
+
+    <div class="quiz-modal-card">
+
+        <button class="close-quiz-btn" id="closeQuiz">&times;</button>
+
+        <div class="quiz-header">
+            <span id="quizNumber">Question 1 / 5</span>
+        </div>
+
+        <h3 id="quizQuestion">
+            What does 「你好」 mean?
+        </h3>
+
+        <div class="quiz-options" id="quizOptions"></div>
+
+        <div id="quizFeedback" class="quiz-feedback"></div>
+
+        <button class="next-question-btn" id="nextQuestion">
+            Next →
+        </button>
+
+    </div>
+
+</div>
+    
 <!-- Script untuk Text-to-Speech & Interaksi Pop-up Boba -->
 <script>
     function playAudio(text) {
@@ -915,6 +1110,255 @@
             bobaModal.classList.remove('active');
         }
     });
+    const quizModal = document.getElementById('quizModal');
+const openQuiz = document.getElementById('openQuiz');
+const closeQuiz = document.getElementById('closeQuiz');
+
+const quizQuestion = document.getElementById('quizQuestion');
+const quizOptions = document.getElementById('quizOptions');
+const quizNumber = document.getElementById('quizNumber');
+const quizFeedback = document.getElementById('quizFeedback');
+const nextQuestion = document.getElementById('nextQuestion');
+
+let currentQuestion = 0;
+let score = 0;
+
+const quizData = [
+
+    {
+        question: "What does 「你好」 mean?",
+        options: [
+            "Thank you",
+            "Hello",
+            "Goodbye",
+            "You're welcome"
+        ],
+        answer: 1
+    },
+
+    {
+        question: "What does 「我叫麗麗」 mean?",
+        options: [
+            "You are Lili.",
+            "I know Lili.",
+            "My name is Lili.",
+            "Lili is happy."
+        ],
+        answer: 2
+    },
+
+    {
+        question: "Which sentence means “What’s your name?”?",
+        options: [
+            "你呢？",
+            "你叫什麼名字？",
+            "我叫什麼名字？",
+            "很高興認識你。"
+        ],
+        answer: 1
+    },
+
+    {
+        question: "What does 「你呢？」 mean?",
+        options: [
+            "What is your name?",
+            "Nice to meet you.",
+            "How about you?",
+            "Thank you."
+        ],
+        answer: 2
+    },
+
+    {
+        question: "Which sentence means “Nice to meet you too”?",
+        options: [
+            "我叫麗麗。",
+            "我也很高興認識你。",
+            "你叫什麼名字？",
+            "不客氣！"
+        ],
+        answer: 1
+    }
+
+];
+
+
+/* Open Quiz */
+
+openQuiz.addEventListener('click', () => {
+
+    bobaModal.classList.remove('active');
+
+    currentQuestion = 0;
+    score = 0;
+
+    quizModal.classList.add('active');
+
+    loadQuestion();
+
+});
+
+
+/* Close Quiz */
+
+closeQuiz.addEventListener('click', () => {
+
+    quizModal.classList.remove('active');
+
+});
+
+
+/* Close jika klik area luar */
+
+quizModal.addEventListener('click', (e) => {
+
+    if (e.target === quizModal) {
+        quizModal.classList.remove('active');
+    }
+
+});
+
+
+/* Load Question */
+
+function loadQuestion() {
+
+    const question = quizData[currentQuestion];
+
+    quizNumber.textContent =
+        `Question ${currentQuestion + 1} / ${quizData.length}`;
+
+    quizQuestion.textContent = question.question;
+
+    quizOptions.innerHTML = "";
+
+    quizFeedback.textContent = "";
+
+    nextQuestion.style.display = "none";
+
+
+    question.options.forEach((option, index) => {
+
+        const button = document.createElement("button");
+
+        button.className = "quiz-answer";
+
+        button.textContent = option;
+
+        button.addEventListener("click", () => {
+
+            checkAnswer(button, index);
+
+        });
+
+        quizOptions.appendChild(button);
+
+    });
+
+}
+
+
+/* Check Answer */
+
+function checkAnswer(selectedButton, selectedIndex) {
+
+    const question = quizData[currentQuestion];
+
+    const allButtons =
+        document.querySelectorAll(".quiz-answer");
+
+
+    // Matikan semua tombol setelah memilih
+    allButtons.forEach(button => {
+        button.disabled = true;
+    });
+
+
+    if (selectedIndex === question.answer) {
+
+        selectedButton.classList.add("correct");
+
+        quizFeedback.textContent = "🎉 Correct!";
+
+        quizFeedback.style.color = "#2d6a4f";
+
+        score++;
+
+    } else {
+
+        selectedButton.classList.add("wrong");
+
+        quizFeedback.textContent =
+            "❌ Not quite!";
+
+        quizFeedback.style.color = "#9b2226";
+
+
+        // Tampilkan jawaban yang benar
+        allButtons[question.answer]
+            .classList.add("correct");
+
+    }
+
+
+    nextQuestion.style.display = "block";
+
+}
+
+
+/* Next Question */
+
+nextQuestion.addEventListener('click', () => {
+
+    currentQuestion++;
+
+    if (currentQuestion < quizData.length) {
+
+        loadQuestion();
+
+    } else {
+
+        showQuizResult();
+
+    }
+
+});
+
+
+/* Quiz Result */
+
+function showQuizResult() {
+
+    quizNumber.textContent = "Quiz Complete! 🎉";
+
+    quizQuestion.innerHTML =
+        `You got <strong>${score}</strong> out of <strong>${quizData.length}</strong> correct!`;
+
+    quizOptions.innerHTML = "";
+
+    quizFeedback.textContent =
+        score === quizData.length
+            ? "🌟 Perfect! Great job!"
+            : "💪 Keep practicing!";
+
+    nextQuestion.textContent = "Try Again";
+
+    nextQuestion.style.display = "block";
+
+
+    nextQuestion.onclick = () => {
+
+        currentQuestion = 0;
+
+        score = 0;
+
+        nextQuestion.textContent = "Next →";
+
+        loadQuestion();
+
+    };
+
+}
 </script>
 
 <!-- Script Sidebar -->
