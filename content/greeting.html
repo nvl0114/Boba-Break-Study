@@ -501,6 +501,43 @@
             .chat-details .hanzi-text {
                 font-size: 15px;
             }
+
+                    /* --- Quiz Modal Styles --- */
+        .quiz-modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 10000;
+            align-items: center; justify-content: center;
+        }
+
+        .quiz-content {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            width: 90%; max-width: 500px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .option-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            border: 1.5px solid #d7b89c;
+            border-radius: 12px;
+            background: #fff8ef;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.2s;
+            text-align: left;
+            color: #444;
+        }
+
+        .option-btn:hover { background: #faedcd; }
+
         }
     </style>
 </head>
@@ -862,32 +899,33 @@
 <div class="floating-boba-container" id="floatingBoba">
     <div class="boba-bubble">🧋</div>
 </div>
-
-<!-- Modal / Pop-up Kotak Dialog -->
-<div class="boba-modal-overlay" id="bobaModal">
-    <div class="boba-modal-card">
-        <button class="close-modal-btn" id="closeModal">&times;</button>
-        <div class="modal-icon">🧋✨</div>
-        <h3>Do you want to play?</h3>
-        <p>Choose a fun activity to practice today:</p>
-        
-        <div class="modal-options">
-            <a href="https://drive.google.com/file/d/1xIv_aIg0nbPxt47kkHjCBzTZcrSqW92D/view?usp=drivesdk" download class="modal-option-btn hanzi-option">
-                <span>📝</span> Writing Hanzi
-            </a>
-            <a href="quiz-lesson1.html" class="modal-option-btn quiz-option">
-                <span>🧠</span> Quiz
-            </a>
-        </div>
+<!-- Floating
+    Boba Menu di Pojok Kanan Bawah -->
+<div class="floating-boba-container">
+    <button class="boba-btn" onclick="toggleBobaMenu()" style="background: #fff8ef; border: 2px dashed #d7b89c; width: 60px; height: 60px; border-radius: 50%; font-size: 28px; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 15px rgba(184, 134, 92, 0.25);">🧋</button>
+    <div id="bobaMenu" style="display: none; position: absolute; bottom: 75px; right: 0; background: white; padding: 10px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.15); width: 170px; flex-direction: column; gap: 8px; border: 1.5px solid #d7b89c;">
+        <!-- Tombol ke Writing Hanzi -->
+        <a href="https://drive.google.com/file/d/1xIv_aIg0nbPxt47kkHjCBzTZcrSqW92D/view?usp=drivesdk" target="_blank" style="background: #fff8ef; color: #b8865c; border: 1px solid #d7b89c; padding: 10px; border-radius: 10px; text-align: left; font-weight: bold; font-size: 13px; text-decoration: none; display: block;">✍️ Writing Hanzi</a>
+        <!-- Tombol untuk membuka Quiz Interaktif -->
+        <button onclick="openQuiz(); toggleBobaMenu();" style="background: #fff8ef; color: #b8865c; border: 1px solid #d7b89c; padding: 10px; border-radius: 10px; text-align: left; font-weight: bold; font-size: 13px; cursor: pointer; width: 100%;">🧠 Quiz</button>
     </div>
 </div>
 
+<!-- Modal Kuis Pop-up (Pertanyaan Satu per Satu) -->
+<div id="quizModal" class="quiz-modal">
+    <div class="quiz-content" id="quizBox">
+        <h3 id="questionText" style="color: #b8865c; margin-bottom: 15px;">Loading...</h3>
+        <div id="optionsContainer"></div>
+    </div>
+</div>
+
+
 <!-- Script untuk Text-to-Speech & Interaksi Pop-up Boba -->
 <script>
+    <script>
     function playAudio(text) {
         if ('speechSynthesis' in window) {
             window.speechSynthesis.cancel();
-            
             let utterance = new SpeechSynthesisUtterance(text);
             utterance.lang = 'zh-CN'; 
             utterance.rate = 0.85;    
@@ -897,24 +935,69 @@
         }
     }
 
-    // Script Pop-up Boba
-    const floatingBoba = document.getElementById('floatingBoba');
-    const bobaModal = document.getElementById('bobaModal');
-    const closeModal = document.getElementById('closeModal');
+    // Toggle Menu Floating Boba
+    function toggleBobaMenu() {
+        let menu = document.getElementById('bobaMenu');
+        menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
+    }
 
-    floatingBoba.addEventListener('click', () => {
-        bobaModal.classList.add('active');
-    });
-
-    closeModal.addEventListener('click', () => {
-        bobaModal.classList.remove('active');
-    });
-
-    bobaModal.addEventListener('click', (e) => {
-        if (e.target === bobaModal) {
-            bobaModal.classList.remove('active');
+    // Tutup menu jika mengklik di luar area boba
+    window.onclick = function(event) {
+        if (!event.target.closest('.floating-boba-container')) {
+            let menu = document.getElementById('bobaMenu');
+            if (menu) menu.style.display = 'none';
         }
-    });
+    }
+
+    // Data Kuis Interaktif
+    const quizData = [
+        { q: "1. What is the meaning of the Mandarin phrase '你好' (nǐ hǎo)?", a: ["Good morning", "Hello / How are you", "Thank you", "Goodbye"], correct: 1 },
+        { q: "2. If someone asks you: '你叫什麼名字？' (Nǐ jiào shénme míngzi?), what are they asking about?", a: ["Where are you from?", "How are you?", "What is your name?", "How old are you?"], correct: 2 },
+        { q: "3. The particle '呢' (ne) in conversations like '你呢？' (Nǐ ne?) is typically used for what purpose?", a: ["To say thank you", "To politely decline", "To bounce back the same question to the other person ('And you?')", "To express disagreement"], correct: 2 },
+        { q: "4. The basic sentence pattern in Mandarin (such as Wǒ jiào Lìlì) is very similar to Indonesian and English, which is:", a: ["Object + Verb + Subject", "Subject + Verb + Object", "Verb + Subject + Object", "Object + Subject + Verb"], correct: 1 },
+        { q: "5. How do you say 'Nice to meet you' in Mandarin?", a: ["不客氣 (Bú kèqi)", "謝謝你 (Xièxie nǐ)", "很高興認識你 (Hěn gāoxìng rènshi nǐ)", "再見 (Zàijiàn)"], correct: 2 }
+    ];
+
+    let currentQ = 0;
+    let score = 0;
+
+    function openQuiz() {
+        document.getElementById('quizModal').style.display = 'flex';
+        currentQ = 0; 
+        score = 0;
+        showQuestion();
+    }
+
+    function showQuestion() {
+        if(currentQ < quizData.length) {
+            let q = quizData[currentQ];
+            document.getElementById('questionText').innerText = q.q;
+            let optDiv = document.getElementById('optionsContainer');
+            optDiv.innerHTML = '';
+            q.a.forEach((opt, index) => {
+                optDiv.innerHTML += `<button class="option-btn" onclick="checkAnswer(${index})">${opt}</button>`;
+            });
+        } else {
+            document.getElementById('quizBox').innerHTML = `
+                <h3 style="color: #b8865c; margin-bottom: 10px;">Quiz Finished! 🎉</h3>
+                <p style="font-size: 16px; margin-bottom: 20px; color: #555;">Your Score: <strong>${score}/${quizData.length}</strong></p>
+                <button onclick="document.getElementById('quizModal').style.display='none'" class="option-btn" style="text-align: center; background: #b8865c; color: white;">Close Quiz</button>
+            `;
+        }
+    }
+
+    function checkAnswer(idx) {
+        if(idx === quizData[currentQ].correct) {
+            score++;
+        }
+        currentQ++;
+        showQuestion();
+    }
+</script>
+
+<!-- Script Sidebar -->
+<script src="../script.js"></script>
+
 </script>
 
 <!-- Script Sidebar -->
