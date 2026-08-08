@@ -4,15 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Introducing Other People</title>
+    <title>Lesson 2 — Introducing Other People | Boba Break Study</title>
 
     <!-- CSS Utama -->
     <link rel="stylesheet" href="../style.css">
 
     <!-- Font Awesome -->
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
     <!-- CSS Halaman Ini -->
     <style>
@@ -328,10 +326,187 @@
         }
 
         /* =========================
+           FLOATING BOBA MASCOT & MODAL
+        ========================= */
+        .floating-boba {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 75px;
+            height: 75px;
+            background: #faedcd;
+            border: 3px solid #b8865c;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(184,134,92,0.3);
+            z-index: 1000;
+            transition: transform 0.3s ease;
+            animation: floatBoba 3s ease-in-out infinite;
+        }
+
+        .floating-boba:hover {
+            transform: scale(1.1);
+        }
+
+        .floating-boba img {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+        }
+
+        @keyframes floatBoba {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        /* Modal Popup */
+        .boba-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1001;
+            backdrop-filter: blur(4px);
+        }
+
+        .boba-modal-content {
+            background: #fff;
+            padding: 30px;
+            border-radius: 24px;
+            width: 90%;
+            max-width: 420px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            border: 2px solid #d7b89c;
+            position: relative;
+            animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .boba-modal-content h3 {
+            color: #b8865c;
+            font-size: 20px;
+            margin-bottom: 10px;
+            font-family: inherit;
+        }
+
+        .boba-modal-content p {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .boba-btn-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .boba-option-btn {
+            background: #fff8ef;
+            border: 1.5px solid #d7b89c;
+            color: #b8865c;
+            padding: 12px 16px;
+            border-radius: 14px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .boba-option-btn:hover {
+            background: #faedcd;
+            transform: translateY(-2px);
+        }
+
+        .close-modal-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 18px;
+            color: #999;
+            cursor: pointer;
+        }
+
+        /* Quiz Popout Styles */
+        .quiz-container {
+            text-align: left;
+        }
+
+        .quiz-question {
+            font-weight: bold;
+            color: #333;
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .quiz-option {
+            background: #fff8ef;
+            border: 1px solid #d7b89c;
+            padding: 8px 12px;
+            border-radius: 10px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .quiz-option:hover {
+            background: #faedcd;
+        }
+
+        .quiz-option.correct {
+            background: #d8f3dc !important;
+            border-color: #52b788 !important;
+            color: #1b4332;
+        }
+
+        .quiz-option.wrong {
+            background: #f8d7da !important;
+            border-color: #f5c6cb !important;
+            color: #721c24;
+        }
+
+        .quiz-nav-btn {
+            background: #b8865c;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        /* =========================
            MOBILE
         ========================= */
         @media (max-width:700px) {
-
             .lesson-card,
             .conversation-card,
             .grammar-card {
@@ -691,6 +866,24 @@
                     </div>
                 </div>
 
+                <!-- Added Vocabulary: 王 -->
+                <div class="vocab-pill" onclick="playAudio('王')">
+                    <div class="hanzi">王</div>
+                    <div class="pinyin">(Wáng)</div>
+                    <div class="meaning" title="Wang (surname)">
+                        Wang (surname)
+                    </div>
+                </div>
+
+                <!-- Added Vocabulary: 林 -->
+                <div class="vocab-pill" onclick="playAudio('林')">
+                    <div class="hanzi">林</div>
+                    <div class="pinyin">(Lín)</div>
+                    <div class="meaning" title="Lin (surname)">
+                        Lin (surname)
+                    </div>
+                </div>
+
                 <div class="vocab-pill" onclick="playAudio('請問')">
                     <div class="hanzi">請問</div>
                     <div class="pinyin">(qǐngwèn)</div>
@@ -933,7 +1126,7 @@
 
                 </div>
 
-                <!-- 2 -->
+                <!-- 2. 的 — Possession (Updated with Pinyin) -->
                 <div class="grammar-item">
 
                     <h4>
@@ -946,13 +1139,13 @@
 
                     <div class="sub-example">
                         <strong>A + 的 + B</strong><br>
-                        我的朋友 = my friend<br>
-                        她的朋友 = her friend
+                        我的朋友 (Wǒ de péngyǒu) = my friend<br>
+                        她的朋友 (Tā de péngyǒu) = her friend
                     </div>
 
                 </div>
 
-                <!-- 3 -->
+                <!-- 3. 嗎 — Yes / No Questions (Updated with Pinyin) -->
                 <div class="grammar-item">
 
                     <h4>
@@ -965,9 +1158,11 @@
 
                     <div class="sub-example">
                         她是你的朋友。<br>
+                        (Tā shì nǐ de péngyǒu.)<br>
                         She is your friend.
                         <br><br>
                         她是你的朋友嗎？<br>
+                        (Tā shì nǐ de péngyǒu ma?)<br>
                         Is she your friend?
                     </div>
 
@@ -1013,7 +1208,7 @@
 
                 </div>
 
-                <!-- 6 -->
+                <!-- 6. Polite Expressions (Updated with Pinyin & 對不起) -->
                 <div class="grammar-item">
 
                     <h4>
@@ -1025,9 +1220,9 @@
                     </p>
 
                     <div class="sub-example">
-                        <strong>請問</strong> — Excuse me; may I ask...?<br>
-                        <strong>不好意思</strong> — Excuse me; sorry<br>
-                        <strong>對不起</strong> — I'm sorry
+                        <strong>請問 (qǐngwèn)</strong> — Excuse me; may I ask...<br>
+                        <strong>不好意思 (bù hǎoyìsi)</strong> — Excuse me; sorry<br>
+                        <strong>對不起 (duìbuqǐ)</strong> — I'm sorry
                     </div>
 
                 </div>
@@ -1118,39 +1313,206 @@
 
 </div>
 
+<!-- =========================
+     FLOATING BOBA MASCOT & POPUP
+========================= -->
+<div class="floating-boba" onclick="openBobaModal()" title="Play Games & Quiz!">
+    <img src="https://img.icons8.com/?size=100&id=114035&format=png&color=000000" alt="Boba Mascot">
+</div>
+
+<!-- Modal Container -->
+<div class="boba-modal-overlay" id="bobaModal">
+    <div class="boba-modal-content" id="modalBody">
+        <button class="close-modal-btn" onclick="closeBobaModal()"><i class="fas fa-times"></i></button>
+        <h3>🧋 Boba Time!</h3>
+        <p>Do you wanna play some games?</p>
+        <div class="boba-btn-group">
+            <a href="writing_hanzi.pdf" target="_blank" class="boba-option-btn">
+                <i class="fas fa-pen-nib"></i> Writing Hanzi (PDF)
+            </a>
+            <button class="boba-option-btn" onclick="startQuiz()">
+                <i class="fas fa-question-circle"></i> Quiz (5 Questions)
+            </button>
+        </div>
+    </div>
+</div>
+
 
 <!-- =========================
      TEXT-TO-SPEECH
 ========================= -->
 <script>
-
     function playAudio(text) {
-
         if ('speechSynthesis' in window) {
-
             window.speechSynthesis.cancel();
-
-            let utterance =
-                new SpeechSynthesisUtterance(text);
-
+            let utterance = new SpeechSynthesisUtterance(text);
             utterance.lang = 'zh-CN';
-
             utterance.rate = 0.85;
-
             window.speechSynthesis.speak(utterance);
-
         } else {
-
-            console.log(
-                "Browser Anda tidak mendukung Web Speech API."
-            );
-
+            console.log("Browser Anda tidak mendukung Web Speech API.");
         }
-
     }
 
-</script>
+    // Modal Control Functions
+    function openBobaModal() {
+        document.getElementById('bobaModal').style.display = 'flex';
+    }
 
+    function closeBobaModal() {
+        document.getElementById('bobaModal').style.display = 'none';
+        resetQuizView();
+    }
+
+    // Quiz Data (5 Questions based on Lesson 2 in English)
+    const quizData = [
+        {
+            question: "1. What does '你姓什麼？' (Nǐ xìng shénme?) mean?",
+            options: [
+                "What is your name?",
+                "What is your family name?",
+                "Where are you from?",
+                "Are you a student?"
+            ],
+            answer: 1
+        },
+        {
+            question: "2. Which particle is added to the end of a statement to form a Yes/No question?",
+            options: [
+                "的 (de)",
+                "也 (yě)",
+                "嗎 (ma)",
+                "呢 (ne)"
+            ],
+            answer: 2
+        },
+        {
+            question: "3. How do you say 'She is my friend' in Chinese?",
+            options: [
+                "他是我的朋友。",
+                "她是你的朋友。",
+                "她是我的朋友。",
+                "我是她的朋友。"
+            ],
+            answer: 2
+        },
+        {
+            question: "4. What does the word '也' (yě) mean?",
+            options: [
+                "No / Incorrect",
+                "Also / Too",
+                "Excuse me",
+                "Goodbye"
+            ],
+            answer: 1
+        },
+        {
+            question: "5. What is the polite expression for 'Excuse me; sorry' or 'I am sorry'?",
+            options: [
+                "再見 (zàijiàn)",
+                "沒問題 (méi wèntí)",
+                "不好意思 (bù hǎoyìsi) / 對不起 (duìbuqǐ)",
+                "請問 (qǐngwèn)"
+            ],
+            answer: 2
+        }
+    ];
+
+    let currentQuestionIndex = 0;
+    let score = 0;
+
+    function startQuiz() {
+        currentQuestionIndex = 0;
+        score = 0;
+        renderQuestion();
+    }
+
+    function renderQuestion() {
+        const q = quizData[currentQuestionIndex];
+        let modalBody = document.getElementById('modalBody');
+        
+        let optionsHtml = '';
+        q.options.forEach((opt, idx) => {
+            optionsHtml += `<div class="quiz-option" onclick="checkAnswer(${idx}, ${q.answer})">${opt}</div>`;
+        });
+
+        modalBody.innerHTML = `
+            <button class="close-modal-btn" onclick="closeBobaModal()"><i class="fas fa-times"></i></button>
+            <div class="quiz-container">
+                <div style="font-size: 12px; color: #b8865c; font-weight: bold; margin-bottom: 5px;">Question ${currentQuestionIndex + 1} of 5</div>
+                <div class="quiz-question">${q.question}</div>
+                <div class="quiz-options">${optionsHtml}</div>
+            </div>
+        `;
+    }
+
+    function checkAnswer(selectedIndex, correctIndex) {
+        const options = document.querySelectorAll('.quiz-option');
+        options.forEach((opt, idx) => {
+            opt.style.pointerEvents = 'none'; // disable further clicks
+            if (idx === correctIndex) {
+                opt.classList.add('correct');
+            } else if (idx === selectedIndex) {
+                opt.classList.add('wrong');
+            }
+        });
+
+        if (selectedIndex === correctIndex) {
+            score++;
+        }
+
+        // Add next button
+        setTimeout(() => {
+            let modalBody = document.getElementById('modalBody');
+            let btnText = currentQuestionIndex < quizData.length - 1 ? "Next Question ➡️" : "See Results 🏆";
+            modalBody.innerHTML += `
+                <button class="quiz-nav-btn" onclick="nextQuestion()">${btnText}</button>
+            `;
+        }, 400);
+    }
+
+    function nextQuestion() {
+        currentQuestionIndex++;
+        if (currentQuestionIndex < quizData.length) {
+            renderQuestion();
+        } else {
+            showQuizResult();
+        }
+    }
+
+    function showQuizResult() {
+        let modalBody = document.getElementById('modalBody');
+        modalBody.innerHTML = `
+            <button class="close-modal-btn" onclick="closeBobaModal()"><i class="fas fa-times"></i></button>
+            <div style="text-align: center; padding: 10px;">
+                <div style="font-size: 45px; margin-bottom: 10px;">🎉</div>
+                <h3 style="color: #b8865c; font-size: 22px;">Quiz Completed!</h3>
+                <p style="font-size: 16px; color: #444; margin: 15px 0;">You scored <strong>${score}</strong> out of <strong>5</strong>!</p>
+                <button class="quiz-nav-btn" onclick="startQuiz()" style="margin-top: 10px;">Play Again 🔄</button>
+            </div>
+        `;
+    }
+
+    function resetQuizView() {
+        // Reset modal back to original menu if closed
+        setTimeout(() => {
+            let modalBody = document.getElementById('modalBody');
+            modalBody.innerHTML = `
+                <button class="close-modal-btn" onclick="closeBobaModal()"><i class="fas fa-times"></i></button>
+                <h3>🧋 Boba Time!</h3>
+                <p>Do you wanna play some games?</p>
+                <div class="boba-btn-group">
+                    <a href="writing_hanzi.pdf" target="_blank" class="boba-option-btn">
+                        <i class="fas fa-pen-nib"></i> Writing Hanzi (PDF)
+                    </a>
+                    <button class="boba-option-btn" onclick="startQuiz()">
+                        <i class="fas fa-question-circle"></i> Quiz (5 Questions)
+                    </button>
+                </div>
+            `;
+        }, 300);
+    }
+</script>
 
 <!-- Sidebar Script -->
 <script src="../script.js"></script>
