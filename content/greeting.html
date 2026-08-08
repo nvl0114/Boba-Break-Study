@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Convenience Store 3 & Conversation</title>
+
+    <!-- CSS Utama -->
+    <link rel="stylesheet" href="../style.css">
+
+    <!-- Font Awesome untuk Ikon Speaker & Lainnya -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- CSS Halaman Ini -->
+    <style>
+        /* Lesson Card Umum */
+        .lesson-card {
+            background: white;
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            margin: 30px auto;
+            max-width: 800px;
+        }
+
+        .lesson-card h2 {
+            color: #b8865c;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .lesson-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Vocabulary Container & Sticker */
+        .vocab-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 25px;
+            justify-content: center;
+        }
+
+        .vocab-sticker {
+            position: relative;
+            background: #fff8ef;
+            border-radius: 35px 15px 35px 15px;
+            padding: 25px 15px;
+            width: 160px;
+            text-align: center;
+            border: 3px dashed #d7b89c;
+            box-shadow: 0 8px 15px rgba(184,134,92,0.15);
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .vocab-sticker:active {
+            transform: scale(0.95);
+        }
+
+        .vocab-sticker:nth-child(odd) {
+            transform: rotate(-4deg);
+        }
+
+        .vocab-sticker:nth-child(even) {
+            transform: rotate(4deg);
+        }
+
+        .vocab-sticker:hover {
+            transform: translateY(-8px) rotate(0deg);
+        }
+
+        .vocab-sticker::before {
+            content: "🧋";
+            position: absolute;
+            top: -20px;
+            right: -10px;
+            font-size: 35px;
+        }
+
+        .vocab-sticker::after {
+            content: "● ● ●";
+            position: absolute;
+            bottom: 8px;
+            left: 0;
+            right: 0;
+            font-size: 10px;
+            letter-spacing: 5px;
+            color: #b8865c;
+        }
+
+        .hanzi {
+            font-size: 40px;
+            font-weight: bold;
+            color: #b8865c;
+        }
+
+        .pinyin {
+            font-size: 18px;
+            margin-top: 10px;
+            color: #555;
+        }
+
+        .meaning {
+            margin-top: 8px;
+            font-size: 16px;
+            color: #333;
+        }
+
+        /* Conversation Card Styles */
+        .conversation-card {
+            background: white;
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            margin: 30px auto;
+            max-width: 800px;
+        }
+
+        .conversation-card h2 {
+            color: #b8865c;
+            font-size: 26px;
+            margin-bottom: 20px;
+        }
+
+        .chat-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 20px;
+            background: #fff8ef;
+            padding: 15px 20px;
+            border-radius: 20px;
+            border: 2px dashed #d7b89c;
+        }
+
+        .chat-avatar {
+            font-size: 32px;
+            background: #faedcd;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .chat-content {
+            flex-grow: 1;
+        }
+
+        .chat-speaker {
+            font-weight: bold;
+            color: #b8865c;
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .chat-text-group {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .chat-details .hanzi-text {
+            font-size: 22px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .chat-details .pinyin-text {
+            font-size: 15px;
+            color: #666;
+            margin-top: 2px;
+        }
+
+        .chat-details .meaning-text {
+            font-size: 14px;
+            color: #888;
+            margin-top: 2px;
+            font-style: italic;
+        }
+
+        /* Tombol Sound Speaker */
+        .sound-btn {
+            background: #b8865c;
+            color: white;
+            border: none;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: 0.2s;
+            flex-shrink: 0;
+            box-shadow: 0 4px 10px rgba(184, 134, 92, 0.3);
+        }
+
+        .sound-btn:hover {
+            transform: scale(1.1);
+            background: #a0724f;
+        }
+
+        /* Lesson Navigation */
+        .lesson-nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 40px auto;
+            max-width: 800px;
+        }
+
+        .prev-btn,
+        .next-btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 12px 22px;
+            background: linear-gradient(135deg, #d7b89c, #b8865c);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(184,134,92,0.25);
+            transition: 0.25s;
+        }
+
+        .prev-btn:hover,
+        .next-btn:hover {
+            transform: translateY(-3px);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width:700px) {
+            .lesson-card, .conversation-card {
+                padding: 20px;
+                margin: 20px;
+            }
+
+            .vocab-sticker {
+                width: 140px;
+            }
+
+            .hanzi {
+                font-size: 34px;
+            }
+
+            .chat-row {
+                padding: 12px;
+            }
+
+            .chat-details .hanzi-text {
+                font-size: 19px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="app-container">
+
+    <!-- Sidebar tetap -->
+    <div id="sidebar-container"></div>
+
+    <main class="main-content">
+
+        <!-- Bagian 1: Conversation Card -->
+        <div class="conversation-card">
+            <h2>Lesson 1 — Greetings & Self Introduction</h2>
+            
+            <!-- Percakapan 1 -->
+            <div class="chat-row">
+                <div class="chat-avatar">👧</div>
+                <div class="chat-content">
+                    <div class="chat-speaker">A:</div>
+                    <div class="chat-text-group">
+                        <div class="chat-details">
+                            <div class="hanzi-text">你好！</div>
+                            <div class="pinyin-text">Nǐ hǎo!</div>
+                            <div class="meaning-text">Hello!</div>
+                        </div>
+                        <button class="sound-btn" onclick="playAudio('你好')">
+                            <i class="fas fa-volume-up"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Percakapan 2 -->
+            <div class="chat-row">
+                <div class="chat-avatar">👦</div>
+                <div class="chat-content">
+                    <div class="chat-speaker">B:</div>
+                    <div class="chat-text-group">
+                        <div class="chat-details">
+                            <div class="hanzi-text">你好！你叫什麼名字？</div>
+                            <div class="pinyin-text">Nǐ hǎo! Nǐ jiào shénme míngzi?</div>
+                            <div class="meaning-text">Hello! What's your name?</div>
+                        </div>
+                        <button class="sound-btn" onclick="playAudio('你好！你叫什麼名字？')">
+                            <i class="fas fa-volume-up"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Percakapan 3 -->
+            <div class="chat-row">
+                <div class="chat-avatar">👧</div>
+                <div class="chat-content">
+                    <div class="chat-speaker">A:</div>
+                    <div class="chat-text-group">
+                        <div class="chat-details">
+                            <div class="hanzi-text">我叫麗麗。你呢？</div>
+                            <div class="pinyin-text">Wǒ jiào Lìlì. Nǐ ne?</div>
+                            <div class="meaning-text">My name is Lili. How about you?</div>
+                        </div>
+                        <button class="sound-btn" onclick="playAudio('我叫麗麗。你呢？')">
+                            <i class="fas fa-volume-up"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bagian 2: Keywords & Vocab (Sticker Boba) -->
+        <div class="lesson-card">
+            <h2>Keywords</h2>
+            <p>
+                You have completed this lesson on how to order drinks in Taiwan.<br><br>
+                Congratulations on finishing this lesson! Click any vocab sticker below to listen to the pronunciation.
+            </p>
+
+            <div class="vocab-container">
+                <!-- Vocab 1 -->
+                <div class="vocab-sticker" onclick="playAudio('點')">
+                    <div class="hanzi">點</div>
+                    <div class="pinyin">diǎn</div>
+                    <div class="meaning">to order</div>
+                </div>
+
+                <!-- Vocab 2 -->
+                <div class="vocab-sticker" onclick="playAudio('杯')">
+                    <div class="hanzi">杯</div>
+                    <div class="pinyin">bēi</div>
+                    <div class="meaning">A cup/glass</div>
+                </div>
+
+                <!-- Vocab 3 -->
+                <div class="vocab-sticker" onclick="playAudio('甜度')">
+                    <div class="hanzi">甜度</div>
+                    <div class="pinyin">tián dù</div>
+                    <div class="meaning">Sweetness level</div>
+                </div>
+
+                <!-- Vocab 4 -->
+                <div class="vocab-sticker" onclick="playAudio('冰塊')">
+                    <div class="hanzi">冰塊</div>
+                    <div class="pinyin">bīng kuài</div>
+                    <div class="meaning">Ice cubes</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lesson Navigation -->
+        <div class="lesson-nav">
+            <a href="drinktw.html" class="prev-btn">
+                🧋 Previous
+            </a>
+        </div>
+
+    </main>
+
+</div>
+
+<!-- Script untuk Text-to-Speech (Audio Mandarin) -->
+<script>
+    function playAudio(text) {
+        if ('speechSynthesis' in window) {
+            // Hentikan suara yang sedang berjalan sebelumnya
+            window.speechSynthesis.cancel();
+            
+            let utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'zh-CN'; // Mengatur bahasa ke Mandarin
+            utterance.rate = 0.85;    // Kecepatan dibikin pas untuk belajar
+            window.speechSynthesis.speak(utterance);
+        } else {
+            console.log("Browser Anda tidak mendukung Web Speech API.");
+        }
+    }
+</script>
+
+<!-- Script Sidebar -->
+<script src="../script.js"></script>
+
+</body>
+
+</html>
