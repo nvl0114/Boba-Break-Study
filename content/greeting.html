@@ -1,2019 +1,2770 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
+<!DOCTYPE html><html lang="en"><head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Greetings & Self Introduction</title>
 
-    <title>Greetings & Self Introduction</title>
+<!-- Main CSS -->
+<link rel="stylesheet" href="../style.css">
 
-    <link rel="stylesheet" href="../style.css">
+<!-- Font Awesome -->
+<link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
 
-    <style>
+    /* =====================================================
+       LESSON CARD
+    ===================================================== */
 
-        /* =========================
-           LESSON CARD
-        ========================= */
+    .lesson-card,
+    .conversation-card,
+    .grammar-card {
 
-        .lesson-card {
-            background: white;
-            padding: 25px;
-            border-radius: 20px;
-            box-shadow: 0 6px 15px rgba(0,0,0,0.06);
-            margin: 25px auto;
-            max-width: 750px;
-        }
+        background: white;
+        padding: 25px;
+        border-radius: 20px;
 
-        .lesson-card h2 {
-            color: #b8865c;
-            font-size: 24px;
-            margin-bottom: 8px;
-        }
+        box-shadow:
+            0 6px 15px rgba(0, 0, 0, 0.06);
 
-        .lesson-card p {
-            color: #666;
-            font-size: 14px;
-            line-height: 1.5;
-        }
-
-
-        /* =========================
-           VOCABULARY
-        ========================= */
-
-        .vocab-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 15px;
-            justify-content: center;
-        }
-
-        .vocab-pill {
-            position: relative;
-            background: #fff8ef;
-            border-radius: 14px;
-            padding: 8px 12px;
-            width: 105px;
-            text-align: center;
-            border: 1.5px solid #d7b89c;
-            box-shadow: 0 2px 5px rgba(184,134,92,0.08);
-            transition: 0.2s;
-            cursor: pointer;
-        }
-
-        .vocab-pill:active {
-            transform: scale(0.95);
-        }
-
-        .vocab-pill:hover {
-            transform: translateY(-2px);
-            background: #faedcd;
-            border-color: #b8865c;
-        }
-
-        .vocab-pill .hanzi {
-            font-size: 19px;
-            font-weight: bold;
-            color: #b8865c;
-            line-height: 1.2;
-        }
-
-        .vocab-pill .pinyin {
-            font-size: 11px;
-            margin-top: 2px;
-            color: #555;
-        }
-
-        .vocab-pill .meaning {
-            margin-top: 2px;
-            font-size: 10px;
-            color: #777;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-
-        /* =========================
-           CONVERSATION
-        ========================= */
-
-        .conversation-card {
-            background: white;
-            padding: 25px;
-            border-radius: 20px;
-            box-shadow: 0 6px 15px rgba(0,0,0,0.06);
-            margin: 25px auto;
-            max-width: 750px;
-        }
-
-        .conversation-card h2 {
-            color: #b8865c;
-            font-size: 24px;
-            margin-bottom: 15px;
-        }
-
-        .chat-row {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 12px;
-            background: #fff8ef;
-            padding: 10px 14px;
-            border-radius: 15px;
-            border: 1.5px dashed #d7b89c;
-        }
-
-        .chat-avatar-img {
-            width: 38px;
-            height: 38px;
-            border-radius: 50%;
-            object-fit: cover;
-            background: #faedcd;
-            padding: 2px;
-            flex-shrink: 0;
-            border: 1px solid #d7b89c;
-        }
-
-        .chat-content {
-            flex-grow: 1;
-        }
-
-        .chat-speaker {
-            font-weight: bold;
-            color: #b8865c;
-            font-size: 12px;
-            margin-bottom: 2px;
-        }
-
-        .chat-text-group {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 8px;
-        }
-
-        .chat-details .hanzi-text {
-            font-size: 17px;
-            font-weight: bold;
-            color: #333;
-        }
-
-        .chat-details .pinyin-text {
-            font-size: 13px;
-            color: #555;
-        }
-
-        .chat-details .meaning-text {
-            font-size: 12px;
-            color: #777;
-            font-style: italic;
-        }
-
-
-        /* =========================
-           SOUND BUTTON
-        ========================= */
-
-        .sound-btn {
-            background: #b8865c;
-            color: white;
-            border: none;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: 0.2s;
-            flex-shrink: 0;
-            font-size: 12px;
-            box-shadow: 0 3px 8px rgba(184, 134, 92, 0.25);
-        }
-
-        .sound-btn:hover {
-            transform: scale(1.1);
-            background: #a0724f;
-        }
-
-
-        /* =========================
-           SENTENCE PATTERN
-        ========================= */
-
-        .pattern-box {
-            background: #f0f7f4;
-            border: 1.5px dashed #b7e4c7;
-            border-radius: 15px;
-            padding: 15px;
-            margin-top: 20px;
-        }
-
-        .pattern-title {
-            text-align: center;
-            font-weight: bold;
-            color: #2d6a4f;
-            font-size: 16px;
-            margin-bottom: 10px;
-        }
-
-        .formula-badge {
-            display: inline-block;
-            background: #52b788;
-            color: white;
-            padding: 4px 12px;
-            border-radius: 50px;
-            font-weight: bold;
-            font-size: 12px;
-            margin-bottom: 10px;
-        }
-
-        .pattern-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-        }
-
-        .pattern-card {
-            background: white;
-            padding: 10px 12px;
-            border-radius: 12px;
-            border: 1px solid #d8f3dc;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
-            text-align: center;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-
-        .pattern-card:hover {
-            transform: translateY(-2px);
-            background: #f4fff6;
-        }
-
-        .pattern-card .hanzi-line {
-            font-size: 15px;
-            font-weight: bold;
-            color: #1b4332;
-            margin-bottom: 2px;
-        }
-
-        .pattern-card .pinyin-line {
-            font-size: 12px;
-            color: #40916c;
-            margin-bottom: 2px;
-        }
-
-        .pattern-card .trans-line {
-            font-size: 11px;
-            color: #6c757d;
-        }
-
-        .pattern-footer {
-            margin-top: 12px;
-            font-size: 12px;
-            color: #4f772d;
-            text-align: center;
-            line-height: 1.3;
-        }
-
-
-        /* =========================
-           GRAMMAR
-        ========================= */
-
-        .grammar-card {
-            background: white;
-            padding: 25px;
-            border-radius: 20px;
-            box-shadow: 0 6px 15px rgba(0,0,0,0.06);
-            margin: 25px auto;
-            max-width: 750px;
-        }
-
-        .grammar-card h2 {
-            color: #b8865c;
-            font-size: 24px;
-            margin-bottom: 15px;
-        }
-
-        .grammar-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-bottom: 15px;
-        }
-
-        .grammar-item {
-            background: #fff8ef;
-            border: 1.5px solid #d7b89c;
-            border-radius: 14px;
-            padding: 12px 14px;
-        }
-
-        .grammar-item h4 {
-            color: #b8865c;
-            font-size: 14px;
-            margin-bottom: 5px;
-        }
-
-        .grammar-item p {
-            font-size: 12px;
-            color: #555;
-            margin-bottom: 4px;
-            line-height: 1.4;
-        }
-
-        .grammar-item .sub-example {
-            font-size: 11px;
-            color: #777;
-            background: rgba(255,255,255,0.7);
-            padding: 4px 8px;
-            border-radius: 8px;
-            margin-top: 6px;
-        }
-
-        .grammar-star-box {
-            background: #fdf6ec;
-            border: 1.5px dashed #d7b89c;
-            border-radius: 14px;
-            padding: 14px;
-            text-align: center;
-        }
-
-        .grammar-star-box h4 {
-            color: #b8865c;
-            font-size: 14px;
-            margin-bottom: 8px;
-        }
-
-        .grammar-star-list {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-            font-size: 12px;
-            color: #555;
-        }
-
-
-        /* =========================
-           FLOATING BOBA
-        ========================= */
-
-        .floating-boba-container {
-            position: fixed;
-            bottom: 25px;
-            right: 25px;
-            z-index: 9999;
-            cursor: pointer;
-            animation: floatingBoba 3s ease-in-out infinite;
-        }
-
-        .boba-bubble {
-            font-size: 40px;
-            background: #fff8ef;
-            width: 60px;
-            height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            border: 2px dashed #d7b89c;
-            box-shadow: 0 6px 15px rgba(184, 134, 92, 0.25);
-        }
-
-        @keyframes floatingBoba {
-
-            0%,100% {
-                transform: translateY(0);
-            }
-
-            50% {
-                transform: translateY(-8px);
-            }
-
-        }
-
-
-        /* =========================
-           BOBA MODAL
-        ========================= */
-
-        .boba-modal-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.4);
-            backdrop-filter: blur(3px);
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            z-index: 10000;
-
-            opacity: 0;
-            visibility: hidden;
-
-            transition: 0.3s ease;
-        }
-
-        .boba-modal-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .boba-modal-card {
-            background: #fdfbf7;
-            width: 90%;
-            max-width: 320px;
-
-            padding: 25px 20px;
-
-            border-radius: 20px;
-            border: 2px solid #d7b89c;
-
-            text-align: center;
-
-            position: relative;
-
-            transform: scale(0.8);
-            transition: 0.3s ease;
-        }
-
-        .boba-modal-overlay.active .boba-modal-card {
-            transform: scale(1);
-        }
-
-        .close-modal-btn,
-        .close-quiz-btn {
-            position: absolute;
-            top: 10px;
-            right: 15px;
-
-            background: none;
-            border: none;
-
-            font-size: 24px;
-            color: #a0724f;
-
-            cursor: pointer;
-        }
-
-        .modal-icon {
-            font-size: 30px;
-            margin-bottom: 5px;
-        }
-
-        .boba-modal-card h3 {
-            color: #5c4033;
-            font-size: 18px;
-        }
-
-        .boba-modal-card p {
-            color: #8c7355;
-            font-size: 13px;
-            margin-bottom: 20px;
-        }
-
-        .modal-options {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .modal-option-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-
-            padding: 10px;
-
-            border-radius: 12px;
-
-            text-decoration: none;
-
-            font-weight: bold;
-            font-size: 14px;
-
-            cursor: pointer;
-        }
-
-        .hanzi-option {
-            background: #fff8ef;
-            color: #8c7355;
-            border: 1.5px solid #d7b89c;
-        }
-
-        .quiz-option {
-            background: #f0f7f4;
-            color: #2d6a4f;
-            border: 1.5px solid #b7e4c7;
-        }
-
-
-        /* =========================
-           QUIZ MODAL
-        ========================= */
-
-        .quiz-modal-overlay {
-            position: fixed;
-            inset: 0;
-
-            background: rgba(0,0,0,0.45);
-            backdrop-filter: blur(4px);
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            z-index: 11000;
-
-            opacity: 0;
-            visibility: hidden;
-
-            transition: 0.3s ease;
-        }
-
-        .quiz-modal-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .quiz-modal-card {
-            background: #fdfbf7;
-
-            width: 90%;
-            max-width: 420px;
-
-            padding: 25px 20px;
-
-            border-radius: 22px;
-
-            border: 2px solid #d7b89c;
-
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-
-            position: relative;
-
-            transform: scale(0.8);
-
-            transition: 0.3s ease;
-        }
-
-        .quiz-modal-overlay.active .quiz-modal-card {
-            transform: scale(1);
-        }
-
-        .quiz-header {
-            text-align: center;
-            margin-bottom: 15px;
-        }
-
-        .quiz-header span {
-            background: #fff8ef;
-            color: #b8865c;
-
-            border: 1px solid #d7b89c;
-
-            padding: 5px 12px;
-
-            border-radius: 20px;
-
-            font-size: 12px;
-            font-weight: bold;
-        }
-
-        #quizQuestion {
-            text-align: center;
-
-            color: #5c4033;
-
-            font-size: 18px;
-
-            line-height: 1.5;
-
-            margin: 20px 0;
-        }
-
-        .quiz-options {
-            display: flex;
-            flex-direction: column;
-
-            gap: 10px;
-        }
-
-        .quiz-answer {
-            width: 100%;
-
-            background: white;
-
-            border: 1.5px solid #d7b89c;
-
-            border-radius: 12px;
-
-            padding: 12px;
-
-            font-size: 14px;
-
-            color: #5c4033;
-
-            cursor: pointer;
-
-            transition: 0.2s;
-        }
-
-        .quiz-answer:hover:not(:disabled) {
-            background: #fff8ef;
-            transform: translateY(-2px);
-        }
-
-        .quiz-answer.correct {
-            background: #d8f3dc;
-            border-color: #52b788;
-            color: #2d6a4f;
-        }
-
-        .quiz-answer.wrong {
-            background: #ffe5e5;
-            border-color: #e5989b;
-            color: #9b2226;
-        }
-
-        .quiz-feedback {
-            text-align: center;
-
-            min-height: 25px;
-
-            margin-top: 12px;
-
-            font-size: 13px;
-
-            font-weight: bold;
-        }
-
-        .next-question-btn {
-            width: 100%;
-
-            margin-top: 15px;
-
-            padding: 11px;
-
-            border: none;
-
-            border-radius: 12px;
-
-            background: #b8865c;
-
-            color: white;
-
-            font-size: 14px;
-
-            font-weight: bold;
-
-            cursor: pointer;
-
-            display: none;
-        }
-
-        .next-question-btn:hover {
-            background: #a0724f;
-        }
-
-
-        /* =========================
-           MOBILE
-        ========================= */
-
-        @media (max-width:700px) {
-
-            .lesson-card,
-            .conversation-card,
-            .grammar-card {
-                padding: 15px;
-                margin: 15px;
-            }
-
-            .vocab-pill {
-                width: 95px;
-            }
-
-            .pattern-grid,
-            .grammar-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .chat-row {
-                padding: 8px 10px;
-            }
-
-            .chat-details .hanzi-text {
-                font-size: 15px;
-            }
-
-            .quiz-modal-card {
-                width: 92%;
-                padding: 22px 16px;
-            }
-
-        }
-
-    </style>
-</head>
-
-
-<body>
-
-<div class="app-container">
-
-    <div id="sidebar-container"></div>
-
-    <main class="main-content">
-
-
-        <!-- =========================
-             CONVERSATION
-        ========================= -->
-
-        <div class="conversation-card">
-
-            <h2>Lesson 1 — Greetings</h2>
-
-            <div class="chat-row">
-
-                <img src="https://img.icons8.com/?size=100&id=8jefsgDkH9FD&format=png&color=000000"
-                    class="chat-avatar-img">
-
-                <div class="chat-content">
-
-                    <div class="chat-speaker">
-                        麗麗 (Lili):
-                    </div>
-
-                    <div class="chat-text-group">
-
-                        <div class="chat-details">
-
-                            <span class="hanzi-text">
-                                你好！
-                            </span>
-
-                            <span class="pinyin-text">
-                                (Nǐ hǎo!)
-                            </span>
-
-                            <span class="meaning-text">
-                                Hello!
-                            </span>
-
-                        </div>
-
-                        <button class="sound-btn"
-                            onclick="playAudio('你好')">
-
-                            <i class="fas fa-volume-up"></i>
-
-                        </button>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="chat-row">
-
-                <img src="https://img.icons8.com/?size=100&id=myZVMpNFn0BD&format=png&color=000000"
-                    class="chat-avatar-img">
-
-                <div class="chat-content">
-
-                    <div class="chat-speaker">
-                        小明 (Xiaoming):
-                    </div>
-
-                    <div class="chat-text-group">
-
-                        <div class="chat-details">
-
-                            <span class="hanzi-text">
-                                妳好！妳叫什麼名字？
-                            </span>
-
-                            <span class="pinyin-text">
-                                (Nǐ hǎo! Nǐ jiào shénme míngzi?)
-                            </span>
-
-                            <span class="meaning-text">
-                                Hello! What's your name?
-                            </span>
-
-                        </div>
-
-                        <button class="sound-btn"
-                            onclick="playAudio('妳好！妳叫什麼名字？')">
-
-                            <i class="fas fa-volume-up"></i>
-
-                        </button>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="chat-row">
-
-                <img src="https://img.icons8.com/?size=100&id=8jefsgDkH9FD&format=png&color=000000"
-                    class="chat-avatar-img">
-
-                <div class="chat-content">
-
-                    <div class="chat-speaker">
-                        麗麗 (Lili):
-                    </div>
-
-                    <div class="chat-text-group">
-
-                        <div class="chat-details">
-
-                            <span class="hanzi-text">
-                                我叫麗麗。你呢？
-                            </span>
-
-                            <span class="pinyin-text">
-                                (Wǒ jiào Lìlì. Nǐ ne?)
-                            </span>
-
-                            <span class="meaning-text">
-                                My name is Lili. How about you?
-                            </span>
-
-                        </div>
-
-                        <button class="sound-btn"
-                            onclick="playAudio('我叫麗麗。你呢？')">
-
-                            <i class="fas fa-volume-up"></i>
-
-                        </button>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="chat-row">
-
-                <img src="https://img.icons8.com/?size=100&id=myZVMpNFn0BD&format=png&color=000000"
-                    class="chat-avatar-img">
-
-                <div class="chat-content">
-
-                    <div class="chat-speaker">
-                        小明 (Xiaoming):
-                    </div>
-
-                    <div class="chat-text-group">
-
-                        <div class="chat-details">
-
-                            <span class="hanzi-text">
-                                我叫小明。很高興認識妳。
-                            </span>
-
-                            <span class="pinyin-text">
-                                (Wǒ jiào Xiǎomíng. Hěn gāoxìng rènshi nǐ.)
-                            </span>
-
-                            <span class="meaning-text">
-                                My name is Xiaoming. Nice to meet you.
-                            </span>
-
-                        </div>
-
-                        <button class="sound-btn"
-                            onclick="playAudio('我叫小明。很高興認識妳。')">
-
-                            <i class="fas fa-volume-up"></i>
-
-                        </button>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="chat-row">
-
-                <img src="https://img.icons8.com/?size=100&id=8jefsgDkH9FD&format=png&color=000000"
-                    class="chat-avatar-img">
-
-                <div class="chat-content">
-
-                    <div class="chat-speaker">
-                        麗麗 (Lili):
-                    </div>
-
-                    <div class="chat-text-group">
-
-                        <div class="chat-details">
-
-                            <span class="hanzi-text">
-                                我也很高興認識你。
-                            </span>
-
-                            <span class="pinyin-text">
-                                (Wǒ yě hěn gāoxìng rènshi nǐ.)
-                            </span>
-
-                            <span class="meaning-text">
-                                Nice to meet you too.
-                            </span>
-
-                        </div>
-
-                        <button class="sound-btn"
-                            onclick="playAudio('我也很高興認識你。')">
-
-                            <i class="fas fa-volume-up"></i>
-
-                        </button>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="chat-row">
-
-                <img src="https://img.icons8.com/?size=100&id=myZVMpNFn0BD&format=png&color=000000"
-                    class="chat-avatar-img">
-
-                <div class="chat-content">
-
-                    <div class="chat-speaker">
-                        小明 (Xiaoming):
-                    </div>
-
-                    <div class="chat-text-group">
-
-                        <div class="chat-details">
-
-                            <span class="hanzi-text">
-                                謝謝！
-                            </span>
-
-                            <span class="pinyin-text">
-                                (Xièxie!)
-                            </span>
-
-                            <span class="meaning-text">
-                                Thank you!
-                            </span>
-
-                        </div>
-
-                        <button class="sound-btn"
-                            onclick="playAudio('謝謝！')">
-
-                            <i class="fas fa-volume-up"></i>
-
-                        </button>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="chat-row">
-
-                <img src="https://img.icons8.com/?size=100&id=8jefsgDkH9FD&format=png&color=000000"
-                    class="chat-avatar-img">
-
-                <div class="chat-content">
-
-                    <div class="chat-speaker">
-                        麗麗 (Lili):
-                    </div>
-
-                    <div class="chat-text-group">
-
-                        <div class="chat-details">
-
-                            <span class="hanzi-text">
-                                不客氣！
-                            </span>
-
-                            <span class="pinyin-text">
-                                (Bú kèqi!)
-                            </span>
-
-                            <span class="meaning-text">
-                                You're welcome!
-                            </span>
-
-                        </div>
-
-                        <button class="sound-btn"
-                            onclick="playAudio('不客氣！')">
-
-                            <i class="fas fa-volume-up"></i>
-
-                        </button>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- =========================
-             VOCABULARY
-        ========================= -->
-
-        <div class="lesson-card">
-
-            <h2>Vocabulary</h2>
-
-            <p>
-                Click any mini card below to listen to the pronunciation! 🌸
-            </p>
-
-            <div class="vocab-container">
-
-                <div class="vocab-pill" onclick="playAudio('我')">
-                    <div class="hanzi">我</div>
-                    <div class="pinyin">(wǒ)</div>
-                    <div class="meaning">I / me</div>
-                </div>
-
-                <div class="vocab-pill" onclick="playAudio('你')">
-                    <div class="hanzi">你</div>
-                    <div class="pinyin">(nǐ)</div>
-                    <div class="meaning">you</div>
-                </div>
-
-                <div class="vocab-pill" onclick="playAudio('妳')">
-                    <div class="hanzi">妳</div>
-                    <div class="pinyin">(nǐ)</div>
-                    <div class="meaning">you (female)</div>
-                </div>
-
-                <div class="vocab-pill" onclick="playAudio('叫')">
-                    <div class="hanzi">叫</div>
-                    <div class="pinyin">(jiào)</div>
-                    <div class="meaning">to be called</div>
-                </div>
-
-                <div class="vocab-pill" onclick="playAudio('什麼')">
-                    <div class="hanzi">什麼</div>
-                    <div class="pinyin">(shénme)</div>
-                    <div class="meaning">what</div>
-                </div>
-
-                <div class="vocab-pill" onclick="playAudio('名字')">
-                    <div class="hanzi">名字</div>
-                    <div class="pinyin">(míngzi)</div>
-                    <div class="meaning">name</div>
-                </div>
-
-                <div class="vocab-pill" onclick="playAudio('麗麗')">
-                    <div class="hanzi">麗麗</div>
-                    <div class="pinyin">(Lìlì)</div>
-                    <div class="meaning">Lili</div>
-                </div>
-
-                <div class="vocab-pill" onclick="playAudio('小明')">
-                    <div class="hanzi">小明</div>
-                    <div class="pinyin">(Xiǎomíng)</div>
-                    <div class="meaning">Xiaoming</div>
-                </div>
-
-                <div class="vocab-pill" onclick="playAudio('也')">
-                    <div class="hanzi">也</div>
-                    <div class="pinyin">(yě)</div>
-                    <div class="meaning">also / too</div>
-                </div>
-
-                <div class="vocab-pill" onclick="playAudio('很')">
-                    <div class="hanzi">很</div>
-                    <div class="pinyin">(hěn)</div>
-                    <div class="meaning">very</div>
-                </div>
-
-                <div class="vocab-pill" onclick="playAudio('高興')">
-                    <div class="hanzi">高興</div>
-                    <div class="pinyin">(gāoxìng)</div>
-                    <div class="meaning">happy / glad</div>
-                </div>
-
-                <div class="vocab-pill" onclick="playAudio('認識')">
-                    <div class="hanzi">認識</div>
-                    <div class="pinyin">(rènshi)</div>
-                    <div class="meaning">to know / meet</div>
-                </div>
-
-                <div class="vocab-pill" onclick="playAudio('你好')">
-                    <div class="hanzi">你好</div>
-                    <div class="pinyin">(nǐ hǎo)</div>
-                    <div class="meaning">hello</div>
-                </div>
-
-                <div class="vocab-pill" onclick="playAudio('你呢')">
-                    <div class="hanzi">你呢</div>
-                    <div class="pinyin">(nǐ ne)</div>
-                    <div class="meaning">how about you?</div>
-                </div>
-
-                <div class="vocab-pill" onclick="playAudio('謝謝')">
-                    <div class="hanzi">謝謝</div>
-                    <div class="pinyin">(xièxie)</div>
-                    <div class="meaning">thank you</div>
-                </div>
-
-                <div class="vocab-pill" onclick="playAudio('不客氣')">
-                    <div class="hanzi">不客氣</div>
-                    <div class="pinyin">(bú kèqi)</div>
-                    <div class="meaning">you're welcome</div>
-                </div>
-
-            </div>
-
-
-            <!-- SENTENCE PATTERN -->
-
-            <div class="pattern-box">
-
-                <div class="pattern-title">
-                    Sentence Pattern
-                </div>
-
-                <div style="text-align:center">
-
-                    <span class="formula-badge">
-                        Subject → Verb → Object
-                    </span>
-
-                </div>
-
-                <div class="pattern-grid">
-
-                    <div class="pattern-card"
-                        onclick="playAudio('我叫麗麗')">
-
-                        <div class="hanzi-line">
-                            我叫麗麗。
-                        </div>
-
-                        <div class="pinyin-line">
-                            Wǒ → jiào → Lìlì
-                        </div>
-
-                        <div class="trans-line">
-                            I → am called → Lili
-                        </div>
-
-                    </div>
-
-
-                    <div class="pattern-card"
-                        onclick="playAudio('你叫什麼名字')">
-
-                        <div class="hanzi-line">
-                            你叫什麼名字？
-                        </div>
-
-                        <div class="pinyin-line">
-                            Nǐ → jiào → shénme míngzi
-                        </div>
-
-                        <div class="trans-line">
-                            You → are called → what name
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div class="pattern-footer">
-
-                    Mandarin commonly uses a
-                    <strong>Subject + Verb + Object</strong>
-                    word order, similar to English.
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- =========================
-             GRAMMAR
-        ========================= -->
-
-        <div class="grammar-card">
-
-            <h2>Grammar & Notes</h2>
-
-            <div class="grammar-grid">
-
-                <div class="grammar-item">
-
-                    <h4>
-                        1. 叫 (jiào) — To Be Called
-                    </h4>
-
-                    <p>
-                        Formula:
-                        <strong>Subject + 叫 + Name</strong>
-                    </p>
-
-                    <div class="sub-example">
-                        Wǒ jiào Lìlì.
-                        (My name is Lili)
-                    </div>
-
-                </div>
-
-
-                <div class="grammar-item">
-
-                    <h4>
-                        2. 什麼 (shénme) — What
-                    </h4>
-
-                    <p>
-                        Placed where unknown information appears.
-                    </p>
-
-                    <div class="sub-example">
-                        Nǐ jiào shénme míngzi?
-                        (What's your name?)
-                    </div>
-
-                </div>
-
-
-                <div class="grammar-item">
-
-                    <h4>
-                        3. 呢 (ne) — How About You?
-                    </h4>
-
-                    <p>
-                        Used at the end of questions.
-                    </p>
-
-                    <div class="sub-example">
-                        Wǒ jiào Lìlì. Nǐ ne?
-                    </div>
-
-                </div>
-
-
-                <div class="grammar-item">
-
-                    <h4>
-                        4. 也 (yě) — Also / Too
-                    </h4>
-
-                    <p>
-                        Placed before the verb/adjective.
-                    </p>
-
-                    <div class="sub-example">
-                        Wǒ yě hěn gāoxìng.
-                    </div>
-
-                </div>
-
-
-                <div class="grammar-item">
-
-                    <h4>
-                        5. 很 (hěn) + Adjective
-                    </h4>
-
-                    <p>
-                        Often used before adjectives.
-                    </p>
-
-                    <div class="sub-example">
-                        Hěn gāoxìng.
-                    </div>
-
-                </div>
-
-
-                <div class="grammar-item">
-
-                    <h4>
-                        6. 認識 (rènshi) — To Know
-                    </h4>
-
-                    <p>
-                        To know or become acquainted with someone.
-                    </p>
-
-                    <div class="sub-example">
-                        Rènshi nǐ.
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="grammar-star-box">
-
-                <h4>
-                    ⭐ Key Patterns to Remember
-                </h4>
-
-                <div class="grammar-star-list">
-
-                    <span>
-                        📌 <strong>我叫 + Name</strong>
-                        → My name is...
-                    </span>
-
-                    <span>
-                        📌 <strong>你叫什麼名字？</strong>
-                        → What's your name?
-                    </span>
-
-                    <span>
-                        📌 <strong>你呢？</strong>
-                        → How about you?
-                    </span>
-
-                    <span>
-                        📌 <strong>我也 + Verb/Adjective</strong>
-                        → I also...
-                    </span>
-
-                    <span>
-                        📌 <strong>很高興認識你。</strong>
-                        → Nice to meet you.
-                    </span>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </main>
-
-</div>
-
-
-<!-- =========================
-     FLOATING BOBA
-========================= -->
-
-<div class="floating-boba-container"
-     id="floatingBoba">
-
-    <div class="boba-bubble">
-        🧋
-    </div>
-
-</div>
-
-
-<!-- =========================
-     BOBA MODAL
-========================= -->
-
-<div class="boba-modal-overlay"
-     id="bobaModal">
-
-    <div class="boba-modal-card">
-
-        <button class="close-modal-btn"
-                id="closeModal">
-
-            &times;
-
-        </button>
-
-        <div class="modal-icon">
-            🧋✨
-        </div>
-
-        <h3>
-            Do you want to play?
-        </h3>
-
-        <p>
-            Choose a fun activity to practice today:
-        </p>
-
-        <div class="modal-options">
-
-            <a href="https://drive.google.com/file/d/1xIv_aIg0nbPxt47kkHjCBzTZcrSqW92D/view?usp=drivesdk"
-               class="modal-option-btn hanzi-option">
-
-                📝 Writing Hanzi
-
-            </a>
-
-
-            <button class="modal-option-btn quiz-option"
-                    id="openQuiz">
-
-                🧠 Quiz
-
-            </button>
-
-        </div>
-
-    </div>
-
-</div>
-
-
-<!-- =========================
-     QUIZ MODAL
-========================= -->
-
-<div class="quiz-modal-overlay"
-     id="quizModal">
-
-    <div class="quiz-modal-card">
-
-        <button class="close-quiz-btn"
-                id="closeQuiz">
-
-            &times;
-
-        </button>
-
-
-        <div class="quiz-header">
-
-            <span id="quizNumber">
-                Question 1 / 5
-            </span>
-
-        </div>
-
-
-        <h3 id="quizQuestion">
-            What does 「你好」 mean?
-        </h3>
-
-
-        <div class="quiz-options"
-             id="quizOptions">
-
-        </div>
-
-
-        <div id="quizFeedback"
-             class="quiz-feedback">
-
-        </div>
-
-
-        <button class="next-question-btn"
-                id="nextQuestion">
-
-            Next →
-
-        </button>
-
-    </div>
-
-</div>
-
-
-<!-- =========================
-     JAVASCRIPT
-========================= -->
-
-<script>
-
-    /* =========================
-       TEXT TO SPEECH
-    ========================= */
-
-    function playAudio(text) {
-
-        if ('speechSynthesis' in window) {
-
-            window.speechSynthesis.cancel();
-
-            const utterance =
-                new SpeechSynthesisUtterance(text);
-
-            utterance.lang = 'zh-TW';
-
-            utterance.rate = 0.85;
-
-            window.speechSynthesis.speak(utterance);
-
-        }
-
+        margin: 25px auto;
+        max-width: 750px;
     }
 
 
-    /* =========================
+    .lesson-card h2,
+    .conversation-card h2,
+    .grammar-card h2 {
+
+        color: #b8865c;
+        font-size: 24px;
+        margin-bottom: 15px;
+    }
+
+
+    .lesson-card p {
+
+        color: #666;
+        font-size: 14px;
+        line-height: 1.5;
+    }
+
+
+    /* =====================================================
+       VOCABULARY
+    ===================================================== */
+
+    .vocab-container {
+
+        display: flex;
+        flex-wrap: wrap;
+
+        gap: 10px;
+
+        margin-top: 15px;
+
+        justify-content: center;
+    }
+
+
+    .vocab-pill {
+
+        position: relative;
+
+        background: #fff8ef;
+
+        border-radius: 14px;
+
+        padding: 8px 12px;
+
+        width: 105px;
+
+        text-align: center;
+
+        border: 1.5px solid #d7b89c;
+
+        box-shadow:
+            0 2px 5px rgba(184, 134, 92, 0.08);
+
+        transition: 0.2s;
+
+        cursor: pointer;
+    }
+
+
+    .vocab-pill:hover {
+
+        transform: translateY(-2px);
+
+        background: #faedcd;
+
+        border-color: #b8865c;
+    }
+
+
+    .vocab-pill:active {
+
+        transform: scale(0.95);
+    }
+
+
+    .vocab-pill .hanzi {
+
+        font-size: 19px;
+
+        font-weight: bold;
+
+        color: #b8865c;
+
+        line-height: 1.2;
+    }
+
+
+    .vocab-pill .pinyin {
+
+        font-size: 11px;
+
+        margin-top: 2px;
+
+        color: #555;
+    }
+
+
+    .vocab-pill .meaning {
+
+        margin-top: 2px;
+
+        font-size: 10px;
+
+        color: #777;
+
+        white-space: nowrap;
+
+        overflow: hidden;
+
+        text-overflow: ellipsis;
+    }
+
+
+    /* =====================================================
+       CONVERSATION
+    ===================================================== */
+
+    .chat-row {
+
+        display: flex;
+
+        align-items: center;
+
+        gap: 10px;
+
+        margin-bottom: 12px;
+
+        background: #fff8ef;
+
+        padding: 10px 14px;
+
+        border-radius: 15px;
+
+        border: 1.5px dashed #d7b89c;
+    }
+
+
+    .chat-avatar-img {
+
+        width: 38px;
+        height: 38px;
+
+        border-radius: 50%;
+
+        object-fit: cover;
+
+        background: #faedcd;
+
+        padding: 2px;
+
+        flex-shrink: 0;
+
+        border: 1px solid #d7b89c;
+    }
+
+
+    .chat-content {
+
+        flex-grow: 1;
+
+        min-width: 0;
+    }
+
+
+    .chat-speaker {
+
+        font-weight: bold;
+
+        color: #b8865c;
+
+        font-size: 12px;
+
+        margin-bottom: 2px;
+    }
+
+
+    .chat-text-group {
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: space-between;
+
+        gap: 8px;
+    }
+
+
+    .chat-details {
+
+        min-width: 0;
+    }
+
+
+    .chat-details .hanzi-text {
+
+        font-size: 17px;
+
+        font-weight: bold;
+
+        color: #333;
+
+        display: inline;
+    }
+
+
+    .chat-details .pinyin-text {
+
+        font-size: 13px;
+
+        color: #555;
+
+        display: inline;
+    }
+
+
+    .chat-details .meaning-text {
+
+        display: block;
+
+        font-size: 12px;
+
+        color: #777;
+
+        font-style: italic;
+
+        margin-top: 2px;
+    }
+
+
+    /* =====================================================
+       SOUND BUTTON
+    ===================================================== */
+
+    .sound-btn {
+
+        background: #b8865c;
+
+        color: white;
+
+        border: none;
+
+        width: 30px;
+        height: 30px;
+
+        border-radius: 50%;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        cursor: pointer;
+
+        transition: 0.2s;
+
+        flex-shrink: 0;
+
+        font-size: 12px;
+
+        box-shadow:
+            0 3px 8px rgba(184, 134, 92, 0.25);
+    }
+
+
+    .sound-btn:hover {
+
+        transform: scale(1.1);
+
+        background: #a0724f;
+    }
+
+
+    /* =====================================================
+       SENTENCE PATTERN
+    ===================================================== */
+
+    .pattern-box {
+
+        background: #f0f7f4;
+
+        border: 1.5px dashed #b7e4c7;
+
+        border-radius: 15px;
+
+        padding: 15px;
+
+        margin-top: 20px;
+    }
+
+
+    .pattern-title {
+
+        text-align: center;
+
+        font-weight: bold;
+
+        color: #2d6a4f;
+
+        font-size: 16px;
+
+        margin-bottom: 10px;
+    }
+
+
+    .formula-badge {
+
+        display: inline-block;
+
+        background: #52b788;
+
+        color: white;
+
+        padding: 4px 12px;
+
+        border-radius: 50px;
+
+        font-weight: bold;
+
+        font-size: 12px;
+
+        margin-bottom: 10px;
+
+        box-shadow:
+            0 3px 8px rgba(82, 183, 136, 0.2);
+    }
+
+
+    .pattern-grid {
+
+        display: grid;
+
+        grid-template-columns: 1fr 1fr;
+
+        gap: 10px;
+    }
+
+
+    .pattern-card {
+
+        background: white;
+
+        padding: 10px 12px;
+
+        border-radius: 12px;
+
+        border: 1px solid #d8f3dc;
+
+        box-shadow:
+            0 2px 5px rgba(0, 0, 0, 0.02);
+
+        text-align: center;
+
+        cursor: pointer;
+
+        transition: 0.2s;
+    }
+
+
+    .pattern-card:hover {
+
+        transform: translateY(-2px);
+
+        background: #f4fff6;
+    }
+
+
+    .pattern-card .hanzi-line {
+
+        font-size: 15px;
+
+        font-weight: bold;
+
+        color: #1b4332;
+
+        margin-bottom: 2px;
+    }
+
+
+    .pattern-card .pinyin-line {
+
+        font-size: 12px;
+
+        color: #40916c;
+
+        margin-bottom: 2px;
+    }
+
+
+    .pattern-card .trans-line {
+
+        font-size: 11px;
+
+        color: #6c757d;
+    }
+
+
+    .pattern-footer {
+
+        margin-top: 12px;
+
+        font-size: 12px;
+
+        color: #4f772d;
+
+        text-align: center;
+
+        line-height: 1.3;
+    }
+
+
+    /* =====================================================
+       GRAMMAR
+    ===================================================== */
+
+    .grammar-grid {
+
+        display: grid;
+
+        grid-template-columns: 1fr 1fr;
+
+        gap: 12px;
+
+        margin-bottom: 15px;
+    }
+
+
+    .grammar-item {
+
+        background: #fff8ef;
+
+        border: 1.5px solid #d7b89c;
+
+        border-radius: 14px;
+
+        padding: 12px 14px;
+    }
+
+
+    .grammar-item h4 {
+
+        color: #b8865c;
+
+        font-size: 14px;
+
+        margin-bottom: 5px;
+    }
+
+
+    .grammar-item p {
+
+        font-size: 12px;
+
+        color: #555;
+
+        margin-bottom: 4px;
+
+        line-height: 1.4;
+    }
+
+
+    .grammar-item .sub-example {
+
+        font-size: 11px;
+
+        color: #777;
+
+        background: rgba(255, 255, 255, 0.7);
+
+        padding: 4px 8px;
+
+        border-radius: 8px;
+
+        margin-top: 6px;
+    }
+
+
+    .grammar-star-box {
+
+        background: #fdf6ec;
+
+        border: 1.5px dashed #d7b89c;
+
+        border-radius: 14px;
+
+        padding: 14px;
+
+        text-align: center;
+    }
+
+
+    .grammar-star-box h4 {
+
+        color: #b8865c;
+
+        font-size: 14px;
+
+        margin-bottom: 8px;
+    }
+
+
+    .grammar-star-list {
+
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 6px;
+
+        font-size: 12px;
+
+        color: #555;
+    }
+
+
+    /* =====================================================
+       FLOATING BOBA
+    ===================================================== */
+
+    .floating-boba-container {
+
+        position: fixed;
+
+        bottom: 25px;
+
+        right: 25px;
+
+        z-index: 9999;
+
+        cursor: pointer;
+
+        animation:
+            floatingBoba 3s ease-in-out infinite;
+    }
+
+
+    .boba-bubble {
+
+        font-size: 40px;
+
+        background: #fff8ef;
+
+        width: 60px;
+        height: 60px;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        border-radius: 50%;
+
+        border: 2px dashed #d7b89c;
+
+        box-shadow:
+            0 6px 15px rgba(184, 134, 92, 0.25);
+
+        transition: transform 0.2s;
+    }
+
+
+    .floating-boba-container:hover .boba-bubble {
+
+        transform: scale(1.1);
+    }
+
+
+    @keyframes floatingBoba {
+
+        0%, 100% {
+            transform: translateY(0);
+        }
+
+        50% {
+            transform: translateY(-8px);
+        }
+    }
+
+
+    /* =====================================================
        BOBA MODAL
-    ========================= */
+    ===================================================== */
 
-    const floatingBoba =
-        document.getElementById('floatingBoba');
+    .boba-modal-overlay {
 
-    const bobaModal =
-        document.getElementById('bobaModal');
+        position: fixed;
 
-    const closeModal =
-        document.getElementById('closeModal');
+        inset: 0;
+
+        background: rgba(0, 0, 0, 0.4);
+
+        backdrop-filter: blur(3px);
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        z-index: 10000;
+
+        opacity: 0;
+
+        visibility: hidden;
+
+        transition: 0.3s ease;
+    }
 
 
-    floatingBoba.addEventListener('click', function() {
+    .boba-modal-overlay.active {
+
+        opacity: 1;
+
+        visibility: visible;
+    }
+
+
+    .boba-modal-card {
+
+        background: #fdfbf7;
+
+        width: 90%;
+
+        max-width: 320px;
+
+        padding: 25px 20px;
+
+        border-radius: 20px;
+
+        border: 2px solid #d7b89c;
+
+        box-shadow:
+            0 10px 25px rgba(0, 0, 0, 0.1);
+
+        text-align: center;
+
+        position: relative;
+
+        transform: scale(0.8);
+
+        transition: transform 0.3s ease;
+    }
+
+
+    .boba-modal-overlay.active .boba-modal-card {
+
+        transform: scale(1);
+    }
+
+
+    .close-modal-btn,
+    .close-quiz-btn {
+
+        position: absolute;
+
+        top: 10px;
+
+        right: 15px;
+
+        background: none;
+
+        border: none;
+
+        font-size: 24px;
+
+        color: #a0724f;
+
+        cursor: pointer;
+    }
+
+
+    .modal-icon {
+
+        font-size: 30px;
+
+        margin-bottom: 5px;
+    }
+
+
+    .boba-modal-card h3 {
+
+        color: #5c4033;
+
+        font-size: 18px;
+
+        margin-bottom: 8px;
+    }
+
+
+    .boba-modal-card p {
+
+        color: #8c7355;
+
+        font-size: 13px;
+
+        margin-bottom: 20px;
+    }
+
+
+    .modal-options {
+
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 10px;
+    }
+
+
+    .modal-option-btn {
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        gap: 8px;
+
+        padding: 10px;
+
+        border-radius: 12px;
+
+        text-decoration: none;
+
+        font-weight: bold;
+
+        font-size: 14px;
+
+        transition: 0.2s;
+
+        cursor: pointer;
+
+        width: 100%;
+    }
+
+
+    .hanzi-option {
+
+        background: #fff8ef;
+
+        color: #8c7355;
+
+        border: 1.5px solid #d7b89c;
+    }
+
+
+    .hanzi-option:hover {
+
+        background: #faedcd;
+    }
+
+
+    .quiz-option {
+
+        background: #f0f7f4;
+
+        color: #2d6a4f;
+
+        border: 1.5px solid #b7e4c7;
+    }
+
+
+    .quiz-option:hover {
+
+        background: #d8f3dc;
+    }
+
+
+    /* =====================================================
+       QUIZ MODAL
+    ===================================================== */
+
+    .quiz-modal-overlay {
+
+        position: fixed;
+
+        inset: 0;
+
+        background: rgba(0, 0, 0, 0.45);
+
+        backdrop-filter: blur(4px);
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        z-index: 11000;
+
+        opacity: 0;
+
+        visibility: hidden;
+
+        transition: 0.3s ease;
+    }
+
+
+    .quiz-modal-overlay.active {
+
+        opacity: 1;
+
+        visibility: visible;
+    }
+
+
+    .quiz-modal-card {
+
+        background: #fdfbf7;
+
+        width: 90%;
+
+        max-width: 420px;
+
+        padding: 25px 20px;
+
+        border-radius: 22px;
+
+        border: 2px solid #d7b89c;
+
+        box-shadow:
+            0 10px 30px rgba(0, 0, 0, 0.15);
+
+        position: relative;
+
+        transform: scale(0.8);
+
+        transition: 0.3s ease;
+    }
+
+
+    .quiz-modal-overlay.active .quiz-modal-card {
+
+        transform: scale(1);
+    }
+
+
+    .quiz-header {
+
+        text-align: center;
+
+        margin-bottom: 15px;
+    }
+
+
+    .quiz-header span {
+
+        background: #fff8ef;
+
+        color: #b8865c;
+
+        border: 1px solid #d7b89c;
+
+        padding: 5px 12px;
+
+        border-radius: 20px;
+
+        font-size: 12px;
+
+        font-weight: bold;
+    }
+
+
+    #quizQuestion {
+
+        text-align: center;
+
+        color: #5c4033;
+
+        font-size: 18px;
+
+        line-height: 1.5;
+
+        margin: 20px 0;
+    }
+
+
+    .quiz-options {
+
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 10px;
+    }
+
+
+    .quiz-answer {
+
+        background: white;
+
+        border: 1.5px solid #d7b89c;
+
+        border-radius: 12px;
+
+        padding: 12px;
+
+        font-size: 14px;
+
+        color: #5c4033;
+
+        cursor: pointer;
+
+        transition: 0.2s;
+
+        width: 100%;
+    }
+
+
+    .quiz-answer:hover:not(:disabled) {
+
+        background: #fff8ef;
+
+        transform: translateY(-2px);
+    }
+
+
+    .quiz-answer:disabled {
+
+        cursor: default;
+    }
+
+
+    .quiz-answer.correct {
+
+        background: #d8f3dc;
+
+        border-color: #52b788;
+
+        color: #2d6a4f;
+    }
+
+
+    .quiz-answer.wrong {
+
+        background: #ffe5e5;
+
+        border-color: #e5989b;
+
+        color: #9b2226;
+    }
+
+
+    /* =====================================================
+       QUIZ FEEDBACK
+    ===================================================== */
+
+    .quiz-feedback {
+
+        text-align: center;
+
+        min-height: 35px;
+
+        margin-top: 14px;
+
+        font-size: 16px;
+
+        font-weight: bold;
+    }
+
+
+    .quiz-feedback.good-job {
+
+        color: #2d6a4f;
+
+        animation:
+            goodJobPop 0.5s ease;
+    }
+
+
+    .quiz-feedback.try-again {
+
+        color: #9b2226;
+
+        animation:
+            shake 0.4s ease;
+    }
+
+
+    @keyframes goodJobPop {
+
+        0% {
+            transform: scale(0.5);
+            opacity: 0;
+        }
+
+        60% {
+            transform: scale(1.2);
+            opacity: 1;
+        }
+
+        100% {
+            transform: scale(1);
+        }
+    }
+
+
+    @keyframes shake {
+
+        0%, 100% {
+            transform: translateX(0);
+        }
+
+        25% {
+            transform: translateX(-5px);
+        }
+
+        50% {
+            transform: translateX(5px);
+        }
+
+        75% {
+            transform: translateX(-5px);
+        }
+    }
+
+
+    /* =====================================================
+       NEXT BUTTON
+    ===================================================== */
+
+    .next-question-btn {
+
+        width: 100%;
+
+        margin-top: 15px;
+
+        padding: 11px;
+
+        border: none;
+
+        border-radius: 12px;
+
+        background: #b8865c;
+
+        color: white;
+
+        font-size: 14px;
+
+        font-weight: bold;
+
+        cursor: pointer;
+
+        display: none;
+
+        transition: 0.2s;
+    }
+
+
+    .next-question-btn:hover {
+
+        background: #a0724f;
+    }
+
+
+    /* =====================================================
+       CONFETTI
+    ===================================================== */
+
+    .confetti {
+
+        position: fixed;
+
+        top: -10px;
+
+        width: 8px;
+
+        height: 8px;
+
+        z-index: 12000;
+
+        pointer-events: none;
+
+        animation:
+            confettiFall 1.5s ease-out forwards;
+    }
+
+
+    @keyframes confettiFall {
+
+        0% {
+
+            transform:
+                translateY(0)
+                rotate(0deg);
+
+            opacity: 1;
+        }
+
+        100% {
+
+            transform:
+                translateY(100vh)
+                rotate(720deg);
+
+            opacity: 0;
+        }
+    }
+
+
+    /* =====================================================
+       MOBILE
+    ===================================================== */
+
+    @media (max-width: 700px) {
+
+        .lesson-card,
+        .conversation-card,
+        .grammar-card {
+
+            padding: 15px;
+
+            margin: 15px;
+        }
+
+
+        .vocab-pill {
+
+            width: 95px;
+        }
+
+
+        .pattern-grid,
+        .grammar-grid {
+
+            grid-template-columns: 1fr;
+        }
+
+
+        .chat-row {
+
+            padding: 8px 10px;
+        }
+
+
+        .chat-details .hanzi-text {
+
+            font-size: 15px;
+        }
+
+
+        .chat-details .pinyin-text {
+
+            font-size: 11px;
+        }
+
+
+        .floating-boba-container {
+
+            right: 15px;
+
+            bottom: 15px;
+        }
+
+
+        .boba-bubble {
+
+            width: 55px;
+
+            height: 55px;
+
+            font-size: 35px;
+        }
+
+
+        .quiz-modal-card {
+
+            max-height: 90vh;
+
+            overflow-y: auto;
+
+            padding: 25px 15px;
+        }
+    }
+
+</style>
+
+</head><body><div class="app-container"><!-- =====================================================
+     SIDEBAR
+===================================================== -->
+
+<div id="sidebar-container"></div>
+
+
+<main class="main-content">
+
+
+    <!-- =================================================
+         CONVERSATION
+    ================================================= -->
+
+    <div class="conversation-card">
+
+        <h2>Lesson 1 — Greetings</h2>
+
+
+        <!-- LILI -->
+
+        <div class="chat-row">
+
+            <img
+                src="https://img.icons8.com/?size=100&id=8jefsgDkH9FD&format=png&color=000000"
+                alt="Lili"
+                class="chat-avatar-img">
+
+            <div class="chat-content">
+
+                <div class="chat-speaker">
+                    麗麗 (Lili):
+                </div>
+
+                <div class="chat-text-group">
+
+                    <div class="chat-details">
+
+                        <span class="hanzi-text">
+                            你好！
+                        </span>
+
+                        <span class="pinyin-text">
+                            (Nǐ hǎo!)
+                        </span>
+
+                        <span class="meaning-text">
+                            Hello!
+                        </span>
+
+                    </div>
+
+                    <button
+                        class="sound-btn"
+                        onclick="playAudio('你好')">
+
+                        <i class="fas fa-volume-up"></i>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- XIAOMING -->
+
+        <div class="chat-row">
+
+            <img
+                src="https://img.icons8.com/?size=100&id=myZVMpNFn0BD&format=png&color=000000"
+                alt="Xiaoming"
+                class="chat-avatar-img">
+
+            <div class="chat-content">
+
+                <div class="chat-speaker">
+                    小明 (Xiaoming):
+                </div>
+
+                <div class="chat-text-group">
+
+                    <div class="chat-details">
+
+                        <span class="hanzi-text">
+                            你好！你叫什麼名字？
+                        </span>
+
+                        <span class="pinyin-text">
+                            (Nǐ hǎo! Nǐ jiào shénme míngzi?)
+                        </span>
+
+                        <span class="meaning-text">
+                            Hello! What's your name?
+                        </span>
+
+                    </div>
+
+                    <button
+                        class="sound-btn"
+                        onclick="playAudio('你好！你叫什麼名字？')">
+
+                        <i class="fas fa-volume-up"></i>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- LILI -->
+
+        <div class="chat-row">
+
+            <img
+                src="https://img.icons8.com/?size=100&id=8jefsgDkH9FD&format=png&color=000000"
+                alt="Lili"
+                class="chat-avatar-img">
+
+            <div class="chat-content">
+
+                <div class="chat-speaker">
+                    麗麗 (Lili):
+                </div>
+
+                <div class="chat-text-group">
+
+                    <div class="chat-details">
+
+                        <span class="hanzi-text">
+                            我叫麗麗。你呢？
+                        </span>
+
+                        <span class="pinyin-text">
+                            (Wǒ jiào Lìlì. Nǐ ne?)
+                        </span>
+
+                        <span class="meaning-text">
+                            My name is Lili. How about you?
+                        </span>
+
+                    </div>
+
+                    <button
+                        class="sound-btn"
+                        onclick="playAudio('我叫麗麗。你呢？')">
+
+                        <i class="fas fa-volume-up"></i>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- XIAOMING -->
+
+        <div class="chat-row">
+
+            <img
+                src="https://img.icons8.com/?size=100&id=myZVMpNFn0BD&format=png&color=000000"
+                alt="Xiaoming"
+                class="chat-avatar-img">
+
+            <div class="chat-content">
+
+                <div class="chat-speaker">
+                    小明 (Xiaoming):
+                </div>
+
+                <div class="chat-text-group">
+
+                    <div class="chat-details">
+
+                        <span class="hanzi-text">
+                            我叫小明。很高興認識你。
+                        </span>
+
+                        <span class="pinyin-text">
+                            (Wǒ jiào Xiǎomíng. Hěn gāoxìng rènshi nǐ.)
+                        </span>
+
+                        <span class="meaning-text">
+                            My name is Xiaoming. Nice to meet you.
+                        </span>
+
+                    </div>
+
+                    <button
+                        class="sound-btn"
+                        onclick="playAudio('我叫小明。很高興認識你。')">
+
+                        <i class="fas fa-volume-up"></i>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- LILI -->
+
+        <div class="chat-row">
+
+            <img
+                src="https://img.icons8.com/?size=100&id=8jefsgDkH9FD&format=png&color=000000"
+                alt="Lili"
+                class="chat-avatar-img">
+
+            <div class="chat-content">
+
+                <div class="chat-speaker">
+                    麗麗 (Lili):
+                </div>
+
+                <div class="chat-text-group">
+
+                    <div class="chat-details">
+
+                        <span class="hanzi-text">
+                            我也很高興認識你。
+                        </span>
+
+                        <span class="pinyin-text">
+                            (Wǒ yě hěn gāoxìng rènshi nǐ.)
+                        </span>
+
+                        <span class="meaning-text">
+                            Nice to meet you too.
+                        </span>
+
+                    </div>
+
+                    <button
+                        class="sound-btn"
+                        onclick="playAudio('我也很高興認識你。')">
+
+                        <i class="fas fa-volume-up"></i>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- XIAOMING -->
+
+        <div class="chat-row">
+
+            <img
+                src="https://img.icons8.com/?size=100&id=myZVMpNFn0BD&format=png&color=000000"
+                alt="Xiaoming"
+                class="chat-avatar-img">
+
+            <div class="chat-content">
+
+                <div class="chat-speaker">
+                    小明 (Xiaoming):
+                </div>
+
+                <div class="chat-text-group">
+
+                    <div class="chat-details">
+
+                        <span class="hanzi-text">
+                            謝謝！
+                        </span>
+
+                        <span class="pinyin-text">
+                            (Xièxie!)
+                        </span>
+
+                        <span class="meaning-text">
+                            Thank you!
+                        </span>
+
+                    </div>
+
+                    <button
+                        class="sound-btn"
+                        onclick="playAudio('謝謝！')">
+
+                        <i class="fas fa-volume-up"></i>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- LILI -->
+
+        <div class="chat-row">
+
+            <img
+                src="https://img.icons8.com/?size=100&id=8jefsgDkH9FD&format=png&color=000000"
+                alt="Lili"
+                class="chat-avatar-img">
+
+            <div class="chat-content">
+
+                <div class="chat-speaker">
+                    麗麗 (Lili):
+                </div>
+
+                <div class="chat-text-group">
+
+                    <div class="chat-details">
+
+                        <span class="hanzi-text">
+                            不客氣！
+                        </span>
+
+                        <span class="pinyin-text">
+                            (Bú kèqi!)
+                        </span>
+
+                        <span class="meaning-text">
+                            You're welcome!
+                        </span>
+
+                    </div>
+
+                    <button
+                        class="sound-btn"
+                        onclick="playAudio('不客氣！')">
+
+                        <i class="fas fa-volume-up"></i>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         VOCABULARY
+    ================================================= -->
+
+    <div class="lesson-card">
+
+        <h2>Vocabulary</h2>
+
+        <p>
+            Click any mini card below to listen to the pronunciation! 🌸
+        </p>
+
+
+        <div class="vocab-container">
+
+
+            <div class="vocab-pill"
+                onclick="playAudio('我')">
+
+                <div class="hanzi">我</div>
+                <div class="pinyin">(wǒ)</div>
+                <div class="meaning">I / me</div>
+
+            </div>
+
+
+            <div class="vocab-pill"
+                onclick="playAudio('你')">
+
+                <div class="hanzi">你</div>
+                <div class="pinyin">(nǐ)</div>
+                <div class="meaning">you</div>
+
+            </div>
+
+
+            <div class="vocab-pill"
+                onclick="playAudio('妳')">
+
+                <div class="hanzi">妳</div>
+                <div class="pinyin">(nǐ)</div>
+                <div class="meaning">you (female)</div>
+
+            </div>
+
+
+            <div class="vocab-pill"
+                onclick="playAudio('叫')">
+
+                <div class="hanzi">叫</div>
+                <div class="pinyin">(jiào)</div>
+                <div class="meaning">to be called</div>
+
+            </div>
+
+
+            <div class="vocab-pill"
+                onclick="playAudio('什麼')">
+
+                <div class="hanzi">什麼</div>
+                <div class="pinyin">(shénme)</div>
+                <div class="meaning">what</div>
+
+            </div>
+
+
+            <div class="vocab-pill"
+                onclick="playAudio('名字')">
+
+                <div class="hanzi">名字</div>
+                <div class="pinyin">(míngzi)</div>
+                <div class="meaning">name</div>
+
+            </div>
+
+
+            <div class="vocab-pill"
+                onclick="playAudio('麗麗')">
+
+                <div class="hanzi">麗麗</div>
+                <div class="pinyin">(Lìlì)</div>
+                <div class="meaning">Lili</div>
+
+            </div>
+
+
+            <div class="vocab-pill"
+                onclick="playAudio('小明')">
+
+                <div class="hanzi">小明</div>
+                <div class="pinyin">(Xiǎomíng)</div>
+                <div class="meaning">Xiaoming</div>
+
+            </div>
+
+
+            <div class="vocab-pill"
+                onclick="playAudio('也')">
+
+                <div class="hanzi">也</div>
+                <div class="pinyin">(yě)</div>
+                <div class="meaning">also / too</div>
+
+            </div>
+
+
+            <div class="vocab-pill"
+                onclick="playAudio('很')">
+
+                <div class="hanzi">很</div>
+                <div class="pinyin">(hěn)</div>
+                <div class="meaning">very</div>
+
+            </div>
+
+
+            <div class="vocab-pill"
+                onclick="playAudio('高興')">
+
+                <div class="hanzi">高興</div>
+                <div class="pinyin">(gāoxìng)</div>
+                <div class="meaning">happy / glad</div>
+
+            </div>
+
+
+            <div class="vocab-pill"
+                onclick="playAudio('認識')">
+
+                <div class="hanzi">認識</div>
+                <div class="pinyin">(rènshi)</div>
+                <div class="meaning">to know / meet</div>
+
+            </div>
+
+
+            <div class="vocab-pill"
+                onclick="playAudio('你好')">
+
+                <div class="hanzi">你好</div>
+                <div class="pinyin">(nǐ hǎo)</div>
+                <div class="meaning">hello</div>
+
+            </div>
+
+
+            <div class="vocab-pill"
+                onclick="playAudio('你呢')">
+
+                <div class="hanzi">你呢</div>
+                <div class="pinyin">(nǐ ne)</div>
+                <div class="meaning">how about you?</div>
+
+            </div>
+
+
+            <div class="vocab-pill"
+                onclick="playAudio('謝謝')">
+
+                <div class="hanzi">謝謝</div>
+                <div class="pinyin">(xièxie)</div>
+                <div class="meaning">thank you</div>
+
+            </div>
+
+
+            <div class="vocab-pill"
+                onclick="playAudio('不客氣')">
+
+                <div class="hanzi">不客氣</div>
+                <div class="pinyin">(bú kèqi)</div>
+                <div class="meaning">you're welcome</div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             SENTENCE PATTERN
+        ================================================= -->
+
+        <div class="pattern-box">
+
+            <div class="pattern-title">
+                Sentence Pattern
+            </div>
+
+
+            <div style="text-align:center;">
+
+                <span class="formula-badge">
+                    Subject → Verb → Object
+                </span>
+
+            </div>
+
+
+            <div class="pattern-grid">
+
+
+                <div
+                    class="pattern-card"
+                    onclick="playAudio('我叫麗麗')">
+
+                    <div class="hanzi-line">
+                        我叫麗麗。
+                    </div>
+
+                    <div class="pinyin-line">
+                        Wǒ → jiào → Lìlì
+                    </div>
+
+                    <div class="trans-line">
+                        I → am called → Lili
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="pattern-card"
+                    onclick="playAudio('你叫什麼名字')">
+
+                    <div class="hanzi-line">
+                        你叫什麼名字？
+                    </div>
+
+                    <div class="pinyin-line">
+                        Nǐ → jiào → shénme míngzi
+                    </div>
+
+                    <div class="trans-line">
+                        You → are called → what name
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="pattern-footer">
+
+                Mandarin commonly uses a
+                <strong>Subject + Verb + Object</strong>
+                word order, similar to English.
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         GRAMMAR
+    ================================================= -->
+
+    <div class="grammar-card">
+
+        <h2>Grammar & Notes</h2>
+
+
+        <div class="grammar-grid">
+
+
+            <div class="grammar-item">
+
+                <h4>
+                    1. 叫 (jiào) — To Be Called
+                </h4>
+
+                <p>
+                    Formula:
+                    <strong>Subject + 叫 + Name</strong>
+                </p>
+
+                <div class="sub-example">
+                    Wǒ jiào Lìlì.
+                    (My name is Lili)
+                </div>
+
+            </div>
+
+
+            <div class="grammar-item">
+
+                <h4>
+                    2. 什麼 (shénme) — What
+                </h4>
+
+                <p>
+                    Placed where unknown information appears.
+                </p>
+
+                <div class="sub-example">
+                    Nǐ jiào shénme míngzi?
+                    (What's your name?)
+                </div>
+
+            </div>
+
+
+            <div class="grammar-item">
+
+                <h4>
+                    3. 呢 (ne) — How About You?
+                </h4>
+
+                <p>
+                    Used at the end of questions to bounce back.
+                </p>
+
+                <div class="sub-example">
+                    Wǒ jiào Lìlì. Nǐ ne?
+                </div>
+
+            </div>
+
+
+            <div class="grammar-item">
+
+                <h4>
+                    4. 也 (yě) — Also / Too
+                </h4>
+
+                <p>
+                    Placed before the verb or adjective.
+                </p>
+
+                <div class="sub-example">
+                    Wǒ yě hěn gāoxìng.
+                    (I'm also glad)
+                </div>
+
+            </div>
+
+
+            <div class="grammar-item">
+
+                <h4>
+                    5. 很 (hěn) + Adjective
+                </h4>
+
+                <p>
+                    Often used before adjectives in simple sentences.
+                </p>
+
+                <div class="sub-example">
+                    Hěn gāoxìng.
+                    (Very glad)
+                </div>
+
+            </div>
+
+
+            <div class="grammar-item">
+
+                <h4>
+                    6. 認識 (rènshi) — To Know
+                </h4>
+
+                <p>
+                    To know or become acquainted with someone.
+                </p>
+
+                <div class="sub-example">
+                    Rènshi nǐ.
+                    (To meet/know you)
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="grammar-star-box">
+
+            <h4>
+                ⭐ Key Patterns to Remember
+            </h4>
+
+
+            <div class="grammar-star-list">
+
+                <span>
+                    📌 <strong>我叫 + Name</strong>
+                    → My name is...
+                </span>
+
+                <span>
+                    📌 <strong>你叫什麼名字？</strong>
+                    → What's your name?
+                </span>
+
+                <span>
+                    📌 <strong>你呢？</strong>
+                    → How about you?
+                </span>
+
+                <span>
+                    📌 <strong>我也 + Verb/Adjective</strong>
+                    → I also...
+                </span>
+
+                <span>
+                    📌 <strong>很高興認識你。</strong>
+                    → Nice to meet you.
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</main>
+
+</div><!-- =====================================================
+     FLOATING BOBA BUTTON
+===================================================== --><div
+    class="floating-boba-container"
+    id="floatingBoba"><div class="boba-bubble">
+    🧋
+</div>
+
+</div><!-- =====================================================
+     BOBA ACTIVITY MODAL
+===================================================== --><div
+    class="boba-modal-overlay"
+    id="bobaModal"><div class="boba-modal-card">
+
+    <button
+        class="close-modal-btn"
+        id="closeModal">
+
+        &times;
+
+    </button>
+
+
+    <div class="modal-icon">
+        🧋✨
+    </div>
+
+
+    <h3>
+        Do you want to play?
+    </h3>
+
+
+    <p>
+        Choose a fun activity to practice today:
+    </p>
+
+
+    <div class="modal-options">
+
+
+        <a
+            href="https://drive.google.com/file/d/1xIv_aIg0nbPxt47kkHjCBzTZcrSqW92D/view?usp=drivesdk"
+            class="modal-option-btn hanzi-option"
+            target="_blank">
+
+            <span>📝</span>
+
+            Writing Hanzi
+
+        </a>
+
+
+        <button
+            class="modal-option-btn quiz-option"
+            id="openQuiz">
+
+            <span>🧠</span>
+
+            Quiz
+
+        </button>
+
+
+    </div>
+
+</div>
+
+</div><!-- =====================================================
+     QUIZ MODAL
+===================================================== --><div
+    class="quiz-modal-overlay"
+    id="quizModal"><div class="quiz-modal-card">
+
+
+    <button
+        class="close-quiz-btn"
+        id="closeQuiz">
+
+        &times;
+
+    </button>
+
+
+    <div class="quiz-header">
+
+        <span id="quizNumber">
+            Question 1 / 5
+        </span>
+
+    </div>
+
+
+    <h3 id="quizQuestion">
+        What does 「你好」 mean?
+    </h3>
+
+
+    <div
+        class="quiz-options"
+        id="quizOptions">
+    </div>
+
+
+    <div
+        id="quizFeedback"
+        class="quiz-feedback">
+    </div>
+
+
+    <button
+        class="next-question-btn"
+        id="nextQuestion">
+
+        Next →
+
+    </button>
+
+</div>
+
+</div><!-- =====================================================
+     JAVASCRIPT
+===================================================== --><script>
+
+/* =====================================================
+   TEXT TO SPEECH
+===================================================== */
+
+function playAudio(text) {
+
+    if ('speechSynthesis' in window) {
+
+        window.speechSynthesis.cancel();
+
+        const utterance =
+            new SpeechSynthesisUtterance(text);
+
+        /*
+         * zh-TW is used because this website teaches
+         * Traditional Chinese / Taiwan Mandarin.
+         */
+
+        utterance.lang = 'zh-TW';
+
+        utterance.rate = 0.85;
+
+        window.speechSynthesis.speak(utterance);
+
+    } else {
+
+        console.log(
+            "Browser does not support Web Speech API."
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   BOBA MODAL
+===================================================== */
+
+const floatingBoba =
+    document.getElementById('floatingBoba');
+
+const bobaModal =
+    document.getElementById('bobaModal');
+
+const closeModal =
+    document.getElementById('closeModal');
+
+
+floatingBoba.addEventListener(
+    'click',
+    function () {
 
         bobaModal.classList.add('active');
 
-    });
+    }
+);
 
 
-    closeModal.addEventListener('click', function() {
+closeModal.addEventListener(
+    'click',
+    function () {
 
         bobaModal.classList.remove('active');
 
-    });
+    }
+);
 
 
-    bobaModal.addEventListener('click', function(e) {
+bobaModal.addEventListener(
+    'click',
+    function (event) {
 
-        if (e.target === bobaModal) {
+        if (event.target === bobaModal) {
 
             bobaModal.classList.remove('active');
 
         }
 
-    });
+    }
+);
 
 
-    /* =========================
-       QUIZ ELEMENTS
-    ========================= */
+/* =====================================================
+   QUIZ ELEMENTS
+===================================================== */
 
-    const quizModal =
-        document.getElementById('quizModal');
+const quizModal =
+    document.getElementById('quizModal');
 
-    const openQuiz =
-        document.getElementById('openQuiz');
+const openQuiz =
+    document.getElementById('openQuiz');
 
-    const closeQuiz =
-        document.getElementById('closeQuiz');
+const closeQuiz =
+    document.getElementById('closeQuiz');
 
-    const quizQuestion =
-        document.getElementById('quizQuestion');
+const quizQuestion =
+    document.getElementById('quizQuestion');
 
-    const quizOptions =
-        document.getElementById('quizOptions');
+const quizOptions =
+    document.getElementById('quizOptions');
 
-    const quizNumber =
-        document.getElementById('quizNumber');
+const quizNumber =
+    document.getElementById('quizNumber');
 
-    const quizFeedback =
-        document.getElementById('quizFeedback');
+const quizFeedback =
+    document.getElementById('quizFeedback');
 
-    const nextQuestion =
-        document.getElementById('nextQuestion');
-
-
-    /* =========================
-       QUIZ DATA
-    ========================= */
-
-    const quizData = [
-
-        {
-            question: 'What does 「你好」 mean?',
-
-            options: [
-                'Thank you',
-                'Hello',
-                'Goodbye',
-                "You're welcome"
-            ],
-
-            answer: 1
-        },
+const nextQuestion =
+    document.getElementById('nextQuestion');
 
 
-        {
-            question: 'What does 「我叫麗麗」 mean?',
+/* =====================================================
+   QUIZ VARIABLES
+===================================================== */
 
-            options: [
-                'You are Lili.',
-                'I know Lili.',
-                'My name is Lili.',
-                'Lili is happy.'
-            ],
+let currentQuestion = 0;
 
-            answer: 2
-        },
+let score = 0;
 
 
-        {
-            question: 'Which sentence means “What’s your name?”?',
+/* =====================================================
+   QUIZ DATA
+===================================================== */
 
-            options: [
-                '你呢？',
-                '你叫什麼名字？',
-                '我叫什麼名字？',
-                '很高興認識你。'
-            ],
+const quizData = [
 
-            answer: 1
-        },
+    {
+        question:
+            "What does 「你好」 mean?",
 
+        options: [
+            "Thank you",
+            "Hello",
+            "Goodbye",
+            "You're welcome"
+        ],
 
-        {
-            question: 'What does 「你呢？」 mean?',
-
-            options: [
-                'What is your name?',
-                'Nice to meet you.',
-                'How about you?',
-                'Thank you.'
-            ],
-
-            answer: 2
-        },
+        answer: 1
+    },
 
 
-        {
-            question: 'Which sentence means “Nice to meet you too”?',
+    {
+        question:
+            "What does 「我叫麗麗」 mean?",
 
-            options: [
-                '我叫麗麗。',
-                '我也很高興認識你。',
-                '你叫什麼名字？',
-                '不客氣！'
-            ],
+        options: [
+            "You are Lili.",
+            "I know Lili.",
+            "My name is Lili.",
+            "Lili is happy."
+        ],
 
-            answer: 1
-        }
-
-    ];
-
-
-    /* =========================
-       QUIZ STATE
-    ========================= */
-
-    let currentQuestion = 0;
-
-    let score = 0;
-
-    let answered = false;
+        answer: 2
+    },
 
 
-    /* =========================
-       OPEN QUIZ
-    ========================= */
+    {
+        question:
+            "Which sentence means “What's your name?”",
 
-    openQuiz.addEventListener('click', function() {
+        options: [
+            "你呢？",
+            "你叫什麼名字？",
+            "我叫什麼名字？",
+            "很高興認識你。"
+        ],
+
+        answer: 1
+    },
+
+
+    {
+        question:
+            "What does 「你呢？」 mean?",
+
+        options: [
+            "What is your name?",
+            "Nice to meet you.",
+            "How about you?",
+            "Thank you."
+        ],
+
+        answer: 2
+    },
+
+
+    {
+        question:
+            "Which sentence means “Nice to meet you too”?",
+
+        options: [
+            "我叫麗麗。",
+            "我也很高興認識你。",
+            "你叫什麼名字？",
+            "不客氣！"
+        ],
+
+        answer: 1
+    }
+
+];
+
+
+/* =====================================================
+   OPEN QUIZ
+===================================================== */
+
+openQuiz.addEventListener(
+    'click',
+    function () {
 
         bobaModal.classList.remove('active');
-
-        quizModal.classList.add('active');
 
         currentQuestion = 0;
 
         score = 0;
 
+        nextQuestion.textContent =
+            "Next →";
+
+        quizModal.classList.add('active');
+
         loadQuestion();
 
-    });
+    }
+);
 
 
-    /* =========================
-       CLOSE QUIZ
-    ========================= */
+/* =====================================================
+   CLOSE QUIZ
+===================================================== */
 
-    closeQuiz.addEventListener('click', function() {
+closeQuiz.addEventListener(
+    'click',
+    function () {
 
         quizModal.classList.remove('active');
 
-    });
+    }
+);
 
 
-    quizModal.addEventListener('click', function(e) {
+/* =====================================================
+   CLOSE QUIZ BY CLICKING OUTSIDE
+===================================================== */
 
-        if (e.target === quizModal) {
+quizModal.addEventListener(
+    'click',
+    function (event) {
+
+        if (event.target === quizModal) {
 
             quizModal.classList.remove('active');
 
         }
 
-    });
-
-
-    /* =========================
-       LOAD QUESTION
-    ========================= */
-
-    function loadQuestion() {
-
-        answered = false;
-
-        const question =
-            quizData[currentQuestion];
-
-
-        quizNumber.textContent =
-            'Question ' +
-            (currentQuestion + 1) +
-            ' / ' +
-            quizData.length;
-
-
-        quizQuestion.textContent =
-            question.question;
-
-
-        quizOptions.innerHTML = '';
-
-
-        quizFeedback.textContent = '';
-
-
-        nextQuestion.style.display = 'none';
-
-
-        nextQuestion.textContent =
-            'Next →';
-
-
-        question.options.forEach(
-            function(option, index) {
-
-                const button =
-                    document.createElement('button');
-
-
-                button.type = 'button';
-
-
-                button.className =
-                    'quiz-answer';
-
-
-                button.textContent =
-                    option;
-
-
-                button.addEventListener(
-                    'click',
-                    function() {
-
-                        checkAnswer(
-                            button,
-                            index
-                        );
-
-                    }
-                );
-
-
-                quizOptions.appendChild(button);
-
-            }
-        );
-
     }
+);
 
 
-    /* =========================
-       CHECK ANSWER
-    ========================= */
+/* =====================================================
+   LOAD QUESTION
+===================================================== */
 
-    function checkAnswer(
-        selectedButton,
-        selectedIndex
-    ) {
+function loadQuestion() {
 
-        if (answered) {
-            return;
-        }
+    const question =
+        quizData[currentQuestion];
 
 
-        answered = true;
+    /* Question number */
+
+    quizNumber.textContent =
+        `Question ${currentQuestion + 1} / ${quizData.length}`;
 
 
-        const question =
-            quizData[currentQuestion];
+    /* Question */
+
+    quizQuestion.textContent =
+        question.question;
 
 
-        const allButtons =
-            quizOptions.querySelectorAll(
-                '.quiz-answer'
+    /* Clear old options */
+
+    quizOptions.innerHTML = "";
+
+
+    /* Clear feedback */
+
+    quizFeedback.textContent = "";
+
+    quizFeedback.classList.remove(
+        "good-job",
+        "try-again"
+    );
+
+
+    /* Hide next button */
+
+    nextQuestion.style.display =
+        "none";
+
+
+    /* Create answer buttons */
+
+    question.options.forEach(
+        function (option, index) {
+
+            const button =
+                document.createElement("button");
+
+
+            button.type =
+                "button";
+
+
+            button.className =
+                "quiz-answer";
+
+
+            button.textContent =
+                option;
+
+
+            button.addEventListener(
+                "click",
+                function () {
+
+                    checkAnswer(
+                        button,
+                        index
+                    );
+
+                }
             );
 
 
-        allButtons.forEach(
-            function(button) {
+            quizOptions.appendChild(button);
 
-                button.disabled = true;
+        }
+    );
 
-            }
+}
+
+
+/* =====================================================
+   CHECK ANSWER
+===================================================== */
+
+function checkAnswer(
+    selectedButton,
+    selectedIndex
+) {
+
+    const question =
+        quizData[currentQuestion];
+
+
+    const allButtons =
+        quizOptions.querySelectorAll(
+            ".quiz-answer"
         );
 
 
-        if (
-            selectedIndex ===
-            question.answer
-        ) {
+    /* Disable all answers */
 
-            selectedButton.classList.add(
-                'correct'
-            );
+    allButtons.forEach(
+        function (button) {
 
-
-            quizFeedback.textContent =
-                '🎉 Correct!';
-
-
-            quizFeedback.style.color =
-                '#2d6a4f';
-
-
-            score++;
-
-
-        } else {
-
-            selectedButton.classList.add(
-                'wrong'
-            );
-
-
-            quizFeedback.textContent =
-                '❌ Not quite!';
-
-
-            quizFeedback.style.color =
-                '#9b2226';
-
-
-            allButtons[
-                question.answer
-            ].classList.add(
-                'correct'
-            );
-
-        }
-
-
-        nextQuestion.style.display =
-            'block';
-
-    }
-
-
-    /* =========================
-       NEXT QUESTION
-    ========================= */
-
-    nextQuestion.addEventListener(
-        'click',
-        function() {
-
-            currentQuestion++;
-
-
-            if (
-                currentQuestion <
-                quizData.length
-            ) {
-
-                loadQuestion();
-
-            } else {
-
-                showQuizResult();
-
-            }
+            button.disabled = true;
 
         }
     );
 
 
-    /* =========================
-       QUIZ RESULT
-    ========================= */
+    /* Remove previous animation */
 
-    function showQuizResult() {
-
-        quizNumber.textContent =
-            'Quiz Complete! 🎉';
+    quizFeedback.classList.remove(
+        "good-job",
+        "try-again"
+    );
 
 
-        quizQuestion.innerHTML =
-            'You got <strong>' +
-            score +
-            '</strong> out of <strong>' +
-            quizData.length +
-            '</strong> correct!';
+    /* =================================================
+       CORRECT
+    ================================================= */
+
+    if (
+        selectedIndex ===
+        question.answer
+    ) {
+
+        selectedButton.classList.add(
+            "correct"
+        );
 
 
-        quizOptions.innerHTML = '';
+        quizFeedback.innerHTML =
+            "🎉 Good job! Correct!";
+
+
+        quizFeedback.classList.add(
+            "good-job"
+        );
+
+
+        score++;
+
+
+        createConfetti();
+
+    }
+
+
+    /* =================================================
+       WRONG
+    ================================================= */
+
+    else {
+
+        selectedButton.classList.add(
+            "wrong"
+        );
+
+
+        quizFeedback.innerHTML =
+            "❌ Not quite!";
+
+
+        quizFeedback.classList.add(
+            "try-again"
+        );
+
+
+        /*
+         * Show the correct answer
+         */
+
+        allButtons[
+            question.answer
+        ].classList.add(
+            "correct"
+        );
+
+    }
+
+
+    /* Show next button */
+
+    nextQuestion.style.display =
+        "block";
+
+}
+
+
+/* =====================================================
+   NEXT QUESTION
+===================================================== */
+
+nextQuestion.addEventListener(
+    'click',
+    function () {
+
+        currentQuestion++;
 
 
         if (
-            score ===
+            currentQuestion <
             quizData.length
         ) {
 
-            quizFeedback.textContent =
-                '🌟 Perfect! Great job!';
-
-        } else if (
-            score >= 3
-        ) {
-
-            quizFeedback.textContent =
-                '👏 Good job! Keep practicing!';
-
-        } else {
-
-            quizFeedback.textContent =
-                '💪 Keep practicing!';
+            loadQuestion();
 
         }
 
+        else {
 
-        quizFeedback.style.color =
-            '#b8865c';
+            showQuizResult();
+
+        }
+
+    }
+);
 
 
-        nextQuestion.textContent =
-            'Try Again';
+/* =====================================================
+   QUIZ RESULT
+===================================================== */
+
+function showQuizResult() {
+
+    quizNumber.textContent =
+        "Quiz Complete! 🎉";
 
 
-        nextQuestion.style.display =
-            'block';
+    quizQuestion.innerHTML =
+        `
+        You got
+        <strong>${score}</strong>
+        out of
+        <strong>${quizData.length}</strong>
+        correct!
+        `;
+
+
+    quizOptions.innerHTML =
+        "";
+
+
+    quizFeedback.classList.remove(
+        "try-again"
+    );
+
+
+    quizFeedback.classList.add(
+        "good-job"
+    );
+
+
+    if (
+        score === quizData.length
+    ) {
+
+        quizFeedback.innerHTML =
+            "🌟 Perfect! Great job!";
+
+        createConfetti();
+
+    }
+
+    else if (score >= 3) {
+
+        quizFeedback.innerHTML =
+            "🎉 Good job! Keep practicing!";
+
+    }
+
+    else {
+
+        quizFeedback.innerHTML =
+            "💪 Keep practicing! You can do it!";
 
     }
 
 
-    /* =========================
-       TRY AGAIN
-    ========================= */
+    nextQuestion.textContent =
+        "Try Again";
 
-    nextQuestion.addEventListener(
-        'click',
-        function() {
 
-            if (
-                currentQuestion >=
-                quizData.length
-            ) {
+    nextQuestion.style.display =
+        "block";
 
-                currentQuestion = 0;
 
-                score = 0;
+    /*
+     * Replace the click action
+     * for the Try Again button.
+     */
 
-                loadQuestion();
+    nextQuestion.onclick =
+        function () {
 
-            }
+            currentQuestion = 0;
 
-        }
-    );
+            score = 0;
+
+            nextQuestion.textContent =
+                "Next →";
+
+            nextQuestion.onclick =
+                null;
+
+            loadQuestion();
+
+        };
+
+}
+
+
+/* =====================================================
+   CONFETTI
+===================================================== */
+
+function createConfetti() {
+
+    const confettiColors = [
+        "#b8865c",
+        "#52b788",
+        "#faedcd",
+        "#d7b89c",
+        "#ffb4a2"
+    ];
+
+
+    for (
+        let i = 0;
+        i < 30;
+        i++
+    ) {
+
+        const confetti =
+            document.createElement("div");
+
+
+        confetti.className =
+            "confetti";
+
+
+        confetti.style.left =
+            Math.random() * 100 + "vw";
+
+
+        confetti.style.background =
+            confettiColors[
+                Math.floor(
+                    Math.random() *
+                    confettiColors.length
+                )
+            ];
+
+
+        confetti.style.animationDelay =
+            Math.random() * 0.3 + "s";
+
+
+        confetti.style.width =
+            Math.random() * 6 + 5 + "px";
+
+
+        confetti.style.height =
+            Math.random() * 6 + 5 + "px";
+
+
+        document.body.appendChild(
+            confetti
+        );
+
+
+        setTimeout(
+            function () {
+
+                confetti.remove();
+
+            },
+            1800
+        );
+
+    }
+
+}
 
 </script>
-
-
-<script src="../script.js"></script>
-
-</body>
-
-</html>
+    <!-- =====================================================
+     SIDEBAR SCRIPT
+===================================================== -->
+    <script src="../script.js"></script>
+</body>.</html>
