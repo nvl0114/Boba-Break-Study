@@ -1,120 +1,644 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Boba Break Study - Ordering Drink</title>
-    <link rel="stylesheet" href="../style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <style>
-        :root {
-            --boba-brown: #b8865c;
-            --boba-light: #fff8ef;
-            --accent-gold: #ff9800;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Boba Break Study - Ordering Drink (Complete Guide)</title>
+
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+    .chat-container{
+        margin-top:30px;
+    }
+
+    .chat{
+        display:flex;
+        align-items:flex-start;
+        gap:15px;
+        margin-bottom:25px;
+    }
+
+    .chat.right{
+        flex-direction:row-reverse;
+    }
+
+    .avatar{
+        width:50px;
+        height:50px;
+        border-radius:50%;
+        object-fit:cover;
+    }
+
+    .bubble{
+        max-width:70%;
+        background:white;
+        padding:18px;
+        border-radius:20px;
+        box-shadow:0 5px 15px rgba(0,0,0,.08);
+    }
+
+    .chat-content{
+        flex:1;
+    }
+        
+    .right .bubble{
+        background:#fff2d8;
+    }
+
+    .hanzi{
+        font-size:24px;
+        font-weight:bold;
+    }
+
+    .pinyin{
+        color:#777;
+        margin-top:8px;
+    }
+
+    .translation{
+        margin-top:8px;
+        color:#555;
+    }
+
+    .bubble .play-btn{
+        margin-top:12px;
+    }
+
+    .section-header h1{
+        font-size:36px;
+        color:#b8865c;
+    }
+
+    .section-header p{
+        color:#6e5c52;
+        font-size:17px;
+        margin-bottom:25px;
+    }
+
+    /* Video & Lesson Card */
+    .video-grid{
+        display:grid;
+        grid-template-columns:1fr;
+        gap:30px;
+    }
+
+    .video-card, .lesson-card{
+        background:white;
+        padding:25px;
+        border-radius:20px;
+        box-shadow:0 8px 20px rgba(0,0,0,.08);
+        margin-top: 30px;
+    }
+
+    .lesson-card h2 {
+        color: #b8865c;
+        font-size: 28px;
+        margin-bottom: 10px;
+    }
+
+    .lesson-card p {
+        color: #666;
+        line-height: 1.6;
+    }
+
+    /* Avatar Space */
+    .avatar-space{
+        width:50px;
+        height:50px;
+        flex-shrink:0;
+    }
+
+    /* Hanzi + Audio Button */
+    .hanzi-row{
+        display:flex;
+        align-items:center;
+        gap:10px;
+    }
+
+    /* Audio Button */
+    .play-btn{
+        width:32px;
+        height:32px;
+        border:none;
+        border-radius:50%;
+        background:#b8865c;
+        color:white;
+        font-size:14px;
+        cursor:pointer;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        flex-shrink:0;
+    }
+
+    .play-btn:hover{
+        transform:scale(1.1);
+    }
+
+    /* Vocabulary Container & Stickers (Ukuran dikecilkan, model tetap) */
+    .vocab-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        margin-top: 25px;
+        justify-content: center;
+    }
+
+    .vocab-sticker {
+        position: relative;
+        background: #fff8ef;
+        border-radius: 25px 10px 25px 10px;
+        padding: 15px 10px;
+        width: 125px;
+        text-align: center;
+        border: 2px dashed #d7b89c;
+        box-shadow: 0 5px 10px rgba(184,134,92,0.12);
+        transition: 0.3s;
+    }
+
+    .vocab-sticker:nth-child(odd) {
+        transform: rotate(-3deg);
+    }
+
+    .vocab-sticker:nth-child(even) {
+        transform: rotate(3deg);
+    }
+
+    .vocab-sticker:hover {
+        transform: translateY(-5px) rotate(0deg);
+    }
+
+    .vocab-sticker::before {
+        content: "🧋";
+        position: absolute;
+        top: -15px;
+        right: -5px;
+        font-size: 26px;
+    }
+
+    .vocab-sticker::after {
+        content: "● ● ●";
+        position: absolute;
+        bottom: 6px;
+        left: 0;
+        right: 0;
+        font-size: 8px;
+        letter-spacing: 3px;
+        color: #b8865c;
+    }
+
+    .vocab-sticker .hanzi {
+        font-size: 30px;
+        font-weight: bold;
+        color: #b8865c;
+    }
+
+    .vocab-sticker .pinyin {
+        font-size: 14px;
+        margin-top: 6px;
+        color: #555;
+    }
+
+    .vocab-sticker .meaning {
+        margin-top: 6px;
+        font-size: 13px;
+        color: #333;
+    }
+
+    /* MOBILE */
+    @media(max-width:700px){
+        .chat{
+            gap:10px;
         }
-
-        body { font-family: 'Segoe UI', sans-serif; background-color: #fdfbf7; }
-
-        /* General Layout */
-        .app-container { max-width: 900px; margin: 0 auto; padding: 20px; }
-        
-        /* Chat Styling */
-        .chat-container { margin-top: 30px; }
-        .chat { display: flex; align-items: flex-start; gap: 15px; margin-bottom: 20px; }
-        .chat.right { flex-direction: row-reverse; }
-        .avatar { width: 45px; height: 45px; border-radius: 50%; object-fit: cover; }
-        .bubble { max-width: 70%; background: white; padding: 18px; border-radius: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-        .right .bubble { background: #fff2d8; }
-        
-        /* Vocab Stickers */
-        .vocab-container { display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; margin-top: 25px; }
+        .avatar{
+            width:40px;
+            height:40px;
+        }
+        .bubble{
+            max-width:80%;
+            padding:15px;
+        }
+        .hanzi{
+            font-size:20px;
+        }
+        .pinyin,
+        .translation{
+            font-size:14px;
+        }
+        .play-btn{
+            width:30px;
+            height:30px;
+        }
+        .section-header h1{
+            font-size:28px;
+        }
         .vocab-sticker {
-            position: relative;
-            background: var(--boba-light);
-            border-radius: 20px;
-            padding: 20px 10px;
-            width: 140px;
-            text-align: center;
-            border: 2px dashed var(--boba-brown);
-            transition: 0.3s;
+            width: 110px;
         }
-        .vocab-sticker:hover { transform: translateY(-5px); }
-        .vocab-sticker::before { content: "🧋"; position: absolute; top: -15px; right: 5px; font-size: 20px; }
-        
-        /* Buttons & Utility */
-        .play-btn { width: 30px; height: 30px; border-radius: 50%; background: var(--boba-brown); color: white; border: none; cursor: pointer; }
-        .lesson-card { background: white; padding: 30px; border-radius: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); margin-bottom: 30px; }
-        .hanzi-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 5px; }
-        .hanzi { font-size: 22px; font-weight: bold; color: var(--boba-brown); }
-        .pinyin { color: #777; font-size: 14px; }
-        .translation { color: #555; font-size: 14px; margin-top: 5px; }
-
-        .nav-btn {
-            display: inline-flex; align-items: center; gap: 10px;
-            padding: 12px 25px; background: var(--boba-brown); color: white;
-            border-radius: 50px; text-decoration: none; font-weight: bold;
+        .vocab-sticker .hanzi {
+            font-size: 26px;
         }
-    </style>
+    }
+</style>
 </head>
+
 <body>
 
 <div class="app-container">
-    
-    <!-- Header Section -->
-    <section class="lesson-card">
-        <h1>Ordering Drink in Taiwan</h1>
-        <p>Learn how to customize your drink order like a local: sugar, ice, size, and toppings.</p>
-    </section>
 
-    <!-- Chat Interaction -->
-    <div class="chat-container">
-        <!-- Example Chat Row -->
-        <div class="chat left">
-            <img src="https://img.icons8.com/?size=100&id=FDEQEnTnBVu2&format=png&color=000000" class="avatar">
-            <div class="bubble">
-                <div class="hanzi-row">
-                    <div class="hanzi">你好！歡迎光臨！</div>
-                    <button class="play-btn" onclick="speak('你好！歡迎光臨！')">🔊</button>
-                </div>
-                <div class="pinyin">Nǐ hǎo! Huānyíng guānglín!</div>
-                <div class="translation">Hello! Welcome!</div>
+<!-- Sidebar -->
+<aside class="sidebar">
+<div class="logo-area">
+<div class="logo-top">
+<img src="../logo.png" class="logo-img" loading="lazy">
+<h2>
+Boba Break<br>
+<span>Study</span>
+</h2>
+</div>
+<p class="sidebar-jargon">
+Sip, Study, and Sweeten Your Mandarin Journey
+</p>
+</div>
+
+<nav>
+<ul class="nav-menu">
+<li>
+<a href="../index.html">
+<i class="fa-solid fa-chart-pie"></i>
+Dashboard
+</a>
+</li>
+<li class="course-menu">
+<a href="#" id="coursesToggle">
+<i class="fa-solid fa-book-open"></i>
+Courses
+<i class="fa-solid fa-chevron-down"></i>
+</a>
+<ul class="submenu" id="courseSubmenu">
+<li>
+<a href="../courses.html">🇬🇧 English</a>
+</li>
+<li>
+<a href="../courses-id.html">🇮🇩 Bahasa Indonesia</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="../hanzi.html">
+<i class="fa-solid fa-pen"></i>
+Hanzi Stroke Order
+</a>
+</li>
+<li>
+<a href="https://cbt.sc-top.org.tw/sctopj/">
+<i class="fa-solid fa-clipboard-check"></i>
+Mock Test
+</a>
+</li>
+<li>
+<a href="../about.html">
+<i class="fa-solid fa-circle-info"></i>
+About
+</a>
+</li>
+</ul>
+</nav>
+</aside>
+
+<!-- MAIN -->
+<main class="main-content">
+
+<!-- Bagian 1: Pengantar Video/Guide -->
+<section class="video-grid">
+<article class="video-card">
+<div class="section-header">
+<h1>
+Ordering Drink in Taiwan: A Practical Guide
+</h1>
+<p><br>
+Ordering drinks in Taiwan is a bit different from many other countries. When you buy a drink, you usually don’t just choose the drink name, you also need to customize your order.<br><br>
+
+The staff will often ask about your preferred sugar level, ice level, drink size, and toppings. Knowing these options will make your ordering experience easier and help you communicate like a local.<br><br>
+
+In the following section, I will provide some common drink shop conversations in Taiwan to help you practice real-life situations.
+</p>
+</div>
+</article>
+</section>
+
+<!-- Bagian 2: Audio / Chat Lesson -->
+<div class="chat-container">
+
+    <!-- A1 -->
+    <div class="chat left">
+        <img src="https://img.icons8.com/?size=100&id=FDEQEnTnBVu2&format=png&color=000000" class="avatar">
+        <div class="bubble">
+            <div class="hanzi-row">
+                <div class="hanzi">你好！歡迎光臨！</div>
+                <button class="play-btn" onclick="speak('你好！歡迎光臨！')">🔊</button>
             </div>
+            <div class="pinyin">Nǐ hǎo! Huānyíng guānglín!</div>
+            <div class="translation">Hello! Welcome!</div>
         </div>
-        <!-- (Add other chat bubbles here following the same structure) -->
     </div>
 
-    <!-- Vocabulary Section -->
-    <div class="lesson-card">
-        <h2>Vocabulary List</h2>
-        <div class="vocab-container">
-            <div class="vocab-sticker">
-                <div class="hanzi">點</div>
-                <div class="pinyin">diǎn</div>
-                <div class="translation">to order</div>
+    <!-- A2 -->
+    <div class="chat left no-avatar">
+        <div class="avatar-space"></div>
+        <div class="bubble">
+            <div class="hanzi-row">
+                <div class="hanzi">想要點什麼？</div>
+                <button class="play-btn" onclick="speak('想要點什麼？')">🔊</button>
             </div>
-            <div class="vocab-sticker">
-                <div class="hanzi">甜度</div>
-                <div class="pinyin">tián dù</div>
-                <div class="translation">sweetness</div>
-            </div>
-            <!-- Add remaining vocab -->
+            <div class="pinyin">Xiǎng yào diǎn shénme?</div>
+            <div class="translation">What would you like to order?</div>
         </div>
     </div>
 
-    <!-- Navigation -->
-    <div style="text-align: center; margin: 40px 0;">
-        <a href="#" class="nav-btn">Finish Lesson ✨</a>
+    <!-- B1 -->
+    <div class="chat right">
+        <img src="https://img.icons8.com/?size=100&id=119019&format=png&color=000000" class="avatar">
+        <div class="bubble">
+            <div class="hanzi-row">
+                <div class="hanzi">我想要一杯(綠茶)</div>
+                <button class="play-btn" onclick="speak('我想要一杯綠茶')">🔊</button>
+            </div>
+            <div class="pinyin">Wǒ xiǎng yào yì bēi (lǜchá.)</div>
+            <div class="translation">I would like a cup of (green tea)</div>
+        </div>
+    </div>
+
+    <!-- A1 -->
+    <div class="chat left">
+        <img src="https://img.icons8.com/?size=100&id=FDEQEnTnBVu2&format=png&color=000000" class="avatar">
+        <div class="bubble">
+            <div class="hanzi-row">
+                <div class="hanzi">你要大杯還是中杯？</div>
+                <button class="play-btn" onclick="speak('你要大杯還是中杯？')">🔊</button>
+            </div>
+            <div class="pinyin">Nǐ yào dà bēi háishì zhōng bēi?</div>
+            <div class="translation">Would you like a large or medium size?</div>
+        </div>
+    </div>
+
+    <!-- B1 -->
+    <div class="chat right">
+        <img src="https://img.icons8.com/?size=100&id=119019&format=png&color=000000" class="avatar">
+        <div class="bubble">
+            <div class="hanzi-row">
+                <div class="hanzi">大杯。</div>
+                <button class="play-btn" onclick="speak('大杯。')">🔊</button>
+            </div>
+            <div class="pinyin">Dà bēi.</div>
+            <div class="translation">Large size.</div>
+        </div>
+    </div>
+
+    <!-- A1 -->
+    <div class="chat left">
+        <img src="https://img.icons8.com/?size=100&id=FDEQEnTnBVu2&format=png&color=000000" class="avatar">
+        <div class="bubble">
+            <div class="hanzi-row">
+                <div class="hanzi">甜度、冰塊呢？</div>
+                <button class="play-btn" onclick="speak('甜度、冰塊呢？')">🔊</button>
+            </div>
+            <div class="pinyin">Tiándù, bīngkuài ne?</div>
+            <div class="translation">What sweetness level and ice level would you like?</div>
+        </div>
+    </div>
+
+    <!-- B1 -->
+    <div class="chat right">
+        <img src="https://img.icons8.com/?size=100&id=119019&format=png&color=000000" class="avatar">
+        <div class="bubble">
+            <div class="hanzi-row">
+                <div class="hanzi">半糖，少冰。</div>
+                <button class="play-btn" onclick="speak('半糖，少冰。')">🔊</button>
+            </div>
+            <div class="pinyin">Bàn táng, shǎo bīng.</div>
+            <div class="translation">Half sugar, less ice.</div>
+        </div>
+    </div>
+
+    <!-- A1 -->
+    <div class="chat left">
+        <img src="https://img.icons8.com/?size=100&id=FDEQEnTnBVu2&format=png&color=000000" class="avatar">
+        <div class="bubble">
+            <div class="hanzi-row">
+                <div class="hanzi">要加配料嗎？</div>
+                <button class="play-btn" onclick="speak('要加配料嗎？')">🔊</button>
+            </div>
+            <div class="pinyin">Yào jiā (pèiliào) ma?</div>
+            <div class="translation">Would you like to add any (toppings?)</div>
+        </div>
+    </div>
+
+    <!-- B1 -->
+    <div class="chat right">
+        <img src="https://img.icons8.com/?size=100&id=119019&format=png&color=000000" class="avatar">
+        <div class="bubble">
+            <div class="hanzi-row">
+                <div class="hanzi">好的，我要加(愛玉)</div>
+                <button class="play-btn" onclick="speak('好的，我要加愛玉')">🔊</button>
+            </div>
+            <div class="pinyin">Hǎo de, wǒ yào jiā (àiyù.)</div>
+            <div class="translation">Okay, I would like to add (aiyu jelly)</div>
+        </div>
+    </div>
+
+    <!-- A1 -->
+    <div class="chat left">
+        <img src="https://img.icons8.com/?size=100&id=FDEQEnTnBVu2&format=png&color=000000" class="avatar">
+        <div class="bubble">
+            <div class="hanzi-row">
+                <div class="hanzi">要袋子嗎</div>
+                <button class="play-btn" onclick="speak('要袋子嗎')">🔊</button>
+            </div>
+            <div class="pinyin">yào dài zi ma?</div>
+            <div class="translation">Would you like a (plastic) bag?</div>
+        </div>
+    </div>
+
+    <!-- B1 -->
+    <div class="chat right">
+        <img src="https://img.icons8.com/?size=100&id=119019&format=png&color=000000" class="avatar">
+        <div class="bubble">
+            <div class="hanzi-row">
+                <div class="hanzi">要</div>
+                <button class="play-btn" onclick="speak('要')">🔊</button>
+            </div>
+            <div class="pinyin">yào</div>
+            <div class="translation">Want (You can either reply no (不用 bú yòng) or yes (要 yào) and pay an extra TWD 1 for it.)</div>
+        </div>
+    </div>
+
+    <!-- A1 -->
+    <div class="chat left">
+        <img src="https://img.icons8.com/?size=100&id=FDEQEnTnBVu2&format=png&color=000000" class="avatar">
+        <div class="bubble">
+            <div class="hanzi-row">
+                <div class="hanzi">這樣是85元</div>
+                <button class="play-btn" onclick="speak('這樣是85元')">🔊</button>
+            </div>
+            <div class="pinyin">Zhè yàng shì bā shí wǔ yuán</div>
+            <div class="translation">Its 85 ntd</div>
+        </div>
+    </div>
+
+    <!-- A2 -->
+    <div class="chat left no-avatar">
+        <div class="avatar-space"></div>
+        <div class="bubble">
+            <div class="hanzi-row">
+                <div class="hanzi">要怎麼付款？</div>
+                <button class="play-btn" onclick="speak('要怎麼付款？')">🔊</button>
+            </div>
+            <div class="pinyin">Yào zěn me fù kuǎn?</div>
+            <div class="translation">How would you like to pay?</div>
+        </div>
+    </div>
+
+    <!-- B1 -->
+    <div class="chat right">
+        <img src="https://img.icons8.com/?size=100&id=119019&format=png&color=000000" class="avatar">
+        <div class="bubble">
+            <div class="hanzi-row">
+                <div class="hanzi">現金</div>
+                <button class="play-btn" onclick="speak('現金')">🔊</button>
+            </div>
+            <div class="pinyin">xiàn jīn</div>
+            <div class="translation">Cash (If you pay by cash)</div>
+        </div>
+    </div>
+
+    <!-- B2 -->
+    <div class="chat right no-avatar">
+        <div class="avatar-space"></div>
+        <div class="bubble">
+            <div class="hanzi-row">
+                <div class="hanzi">悠遊卡</div>
+                <button class="play-btn" onclick="speak('悠遊卡')">🔊</button>
+            </div>
+            <div class="pinyin">yōu yóu kǎ</div>
+            <div class="translation">Easycard (If you pay with easycard/local transport card)</div>
+        </div>
     </div>
 </div>
 
+<!-- Bagian 3: Keywords & Vocab Stickers -->
+<div class="lesson-card">
+    <h2>Keywords</h2>
+    <p>
+        You have completed this lesson on how to order drinks in Taiwan.<br><br>
+        Congratulations on finishing this lesson! Now you are one step closer to communicating more naturally in Mandarin. Ordering a drink may seem like a small daily activity, but it is a great opportunity to practice listening, speaking, and interacting with local people.
+    </p>
+
+    <div class="vocab-container">
+        <!-- Vocab 1 -->
+        <div class="vocab-sticker">
+            <div class="hanzi">點</div>
+            <div class="pinyin">diǎn</div>
+            <div class="meaning">to order (food/drinks)</div>
+        </div>
+        <!-- Vocab 2 -->
+        <div class="vocab-sticker">
+            <div class="hanzi">杯</div>
+            <div class="pinyin">bēi</div>
+            <div class="meaning">A cup/glass (measure word)</div>
+        </div>
+        <!-- Vocab 3 -->
+        <div class="vocab-sticker">
+            <div class="hanzi">甜度</div>
+            <div class="pinyin">tián dù</div>
+            <div class="meaning">Sweetness level</div>
+        </div>
+        <!-- Vocab 4 -->
+        <div class="vocab-sticker">
+            <div class="hanzi">冰塊</div>
+            <div class="pinyin">bīng kuài</div>
+            <div class="meaning">Ice cubes / level</div>
+        </div>
+        <!-- Vocab 5 -->
+        <div class="vocab-sticker">
+            <div class="hanzi">配料</div>
+            <div class="pinyin">pèi liào</div>
+            <div class="meaning">Toppings</div>
+        </div>
+        <!-- Vocab 6 -->
+        <div class="vocab-sticker">
+            <div class="hanzi">袋子</div>
+            <div class="pinyin">dài zi</div>
+            <div class="meaning">Plastic bag</div>
+        </div>
+        <!-- Vocab 7 -->
+        <div class="vocab-sticker">
+            <div class="hanzi">要</div>
+            <div class="pinyin">yào</div>
+            <div class="meaning">To want / Yes</div>
+        </div>
+        <!-- Vocab 8 -->
+        <div class="vocab-sticker">
+            <div class="hanzi">不用</div>
+            <div class="pinyin">bú yòng</div>
+            <div class="meaning">No need / No</div>
+        </div>
+        <!-- Vocab 9 -->
+        <div class="vocab-sticker">
+            <div class="hanzi">付款</div>
+            <div class="pinyin">fù kuǎn</div>
+            <div class="meaning">To make payment</div>
+        </div>
+        <!-- Vocab 10 -->
+        <div class="vocab-sticker">
+            <div class="hanzi">現金</div>
+            <div class="pinyin">xiàn jīn</div>
+            <div class="meaning">Cash</div>
+        </div>
+        <!-- Vocab 11 -->
+        <div class="vocab-sticker">
+            <div class="hanzi">悠遊卡</div>
+            <div class="pinyin">yōu yóu kǎ</div>
+            <div class="meaning">EasyCard</div>
+        </div>
+    </div>
+</div>
+
+<!-- Bagian 4: Formula & Closing Summary -->
+<div class="lesson-card">
+    <p>
+        Remember the basic formula:<br><br>
+        <strong>Drink + Size + Sweetness Level + Ice Level + Topping</strong>
+    </p>
+        
+    <div style="text-align: center; margin: 20px 0;">
+        <img src="drinktw.png" alt="Drink Taiwan" style="max-width: 100%; height: auto; border-radius: 15px;">
+    </div>
+        
+    <p>
+        By following this simple pattern, you can easily order your favorite drink at tea shops in Taiwan.
+        Don’t be afraid to practice using Mandarin in real situations. Every time you order a drink, you are taking one more step toward improving your Mandarin skills.<br><br>
+        Keep practicing and enjoy your Mandarin learning journey! 🧋✨
+    </p>
+</div>
+
+</main>
+</div>
+
+<script src="../script.js"></script>
 <script>
-    function speak(text){
-        let speech = new SpeechSynthesisUtterance(text);
-        speech.lang = "zh-TW";
-        speech.rate = 0.8;
-        speechSynthesis.cancel(); 
-        speechSynthesis.speak(speech);
-    }
+function speak(text){
+    let speech = new SpeechSynthesisUtterance(text);
+    speech.lang = "zh-TW"; // Mandarin Taiwan
+    speech.rate = 0.8; // kecepatan suara
+    speechSynthesis.cancel(); 
+    speechSynthesis.speak(speech);
+}
 </script>
+
 </body>
 </html>
