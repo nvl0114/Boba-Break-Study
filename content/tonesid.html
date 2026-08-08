@@ -1,358 +1,84 @@
-<!DOCTYPE html>
-<html lang="en">
+<style>
+    /* Tambahkan style ini di dalam tag <style> yang sudah ada */
+    
+    /* Kartu Video dengan aksen lucu */
+    .video-card {
+        background: #fffbf5; /* Warna boba milk tea tone */
+        border-radius: 30px;
+        padding: 30px;
+        box-shadow: 0 10px 30px rgba(184, 134, 92, 0.15);
+        border: 2px dashed #b8865c; /* Garis putus-putus biar lucu */
+    }
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    .youtube-frame {
+        border-radius: 20px;
+        overflow: hidden;
+        margin: 20px 0;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        border: 4px solid #fff;
+    }
 
-    <title>Boba Break Study - Mandarin Tone</title>
+    /* Styling teks agar lebih 'playful' */
+    .fun-text {
+        font-family: 'Segoe UI', cursive;
+        color: #5d4f47;
+        line-height: 1.8;
+        background: white;
+        padding: 20px;
+        border-radius: 20px;
+        margin: 15px 0;
+    }
 
-    <link rel="stylesheet" href="../style.css">
+    .emoji-header { font-size: 2em; display: block; margin-bottom: 10px; }
+    
+    .highlight-box {
+        background: #fcece0;
+        padding: 15px;
+        border-radius: 15px;
+        border-left: 5px solid #b8865c;
+    }
+</style>
 
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<!-- Update bagian main-content menjadi seperti ini: -->
+<main class="main-content">
+    <div class="video-grid">
+        <article class="card video-card">
+            
+            <h1 class="section-header" style="text-align: center;">
+                <span class="emoji-header">🎵</span>
+                Nada dalam Bahasa Mandarin
+            </h1>
+            <p style="text-align: center; font-style: italic;">"Satu nada salah, arti bisa berubah! Yuk kita taklukkan nada-nada lucu ini."</p>
 
-
-    <style>
-        .section-header h1 {
-            font-size: 36px;
-            color: #b8865c;
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
-
-
-        .section-header p {
-            font-size: 17px;
-            color: #6e5c52;
-            margin-bottom: 30px;
-        }
-
-
-        /* Layout Grid untuk Video */
-        .video-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 30px;
-    margin-top: 20px;
-}
-
-
-        /* Kartu Video & Credit */
-        .video-card {
-            background: #fff;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 8px 20px rgba(0,0,0,.08);
-            border: 1px solid #e6d8c4;
-            display: flex;
-            flex-direction: column;
-            padding: 30px; /* Ditambahkan agar isi dalam kartu lebih rapi dan bernafas */
-        }
-
-
-        /* Container Iframe YouTube (Responsif 16:9 atau Vertikal untuk Shorts) */
-        .video-wrapper {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    overflow: hidden;
-    background: #000;
-}
-
-.video-wrapper iframe {
-    width: 100%;
-    height: 100%;
-    border: 0;
-}
-
-        /* Penyesuaian khusus untuk .youtube-frame agar tampil rapi dan konsisten */
-        .youtube-frame {
-            position: relative;
-            width: 100%;
-            aspect-ratio: 16 / 9;
-            overflow: hidden;
-            background: #000;
-            border-radius: 12px;
-            margin: 15px 0 20px 0;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-        }
-
-        .youtube-frame iframe {
-            width: 100%;
-            height: 100%;
-            border: 0;
-        }
-
-
-        /* Bagian Credit Youtuber */
-        .video-credit-section {
-            padding: 16px;
-            background-color: #f4ebdf;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-            justify-content: space-between;
-        }
-
-        .credit-label {
-            font-size: 11px;
-            color: #8d7a6c;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 2px;
-            display: block;
-            font-weight: 600;
-        }
-
-        .channel-name {
-            font-weight: 700;
-            font-size: 15px;
-            color: #2c221e;
-            margin-bottom: 12px;
-            display: block;
-        }
-
-        /* Tombol Link YouTube */
-        .youtube-link-button {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 8px 14px;
-            background-color: #cc181e;
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            font-size: 13px;
-            font-weight: 600;
-            transition: background-color 0.2s;
-            margin-top: 8px;
-            width: fit-content;
-        }
-
-        .youtube-link-button:hover {
-            background-color: #e62127;
-        }
-
-        .youtube-link-button i {
-            margin-right: 6px;
-        }
-
-        .tone-title {
-    text-align: left;
-    color: #2c3e50;
-    font-size: 24px;
-    font-weight: 700;
-    font-family: "Segoe UI", sans-serif;
-    margin-bottom: 20px;
-}
-
-        /* Styling Tambahan agar Caption Lucu dan Estetik ala Boba Cafe */
-        .boba-caption-box {
-            background-color: #fcf8f2;
-            border-left: 4px solid #b8865c;
-            padding: 15px 20px;
-            border-radius: 0 12px 12px 0;
-            margin: 10px 0 20px 0;
-            color: #5c4a3f;
-            font-size: 15px;
-            line-height: 1.6;
-        }
-
-        .boba-caption-box strong {
-            color: #8c5830;
-        }
-    </style>
-
-</head>
-
-
-<body>
-
-
-<div class="app-container">
-
-
-    <aside class="sidebar">
-
-
-        <div class="logo-area">
-
-            <div class="logo-top">
-
-                <img src="../logo.png"
-                     alt="Boba Break Study Logo"
-                     class="logo-img"
-                     loading="lazy">
-
-
-                <h2>
-                    Boba Break<br>
-                    <span>Study</span>
-                </h2>
-
+            <div class="youtube-frame">
+                <iframe src="https://www.youtube.com/embed/i9WcY0BSACM" title="Mandarin Tone Basics" allowfullscreen></iframe>
             </div>
 
+            <div class="youtube-frame">
+                <iframe src="https://www.youtube.com/embed/al2FQOhUvdE" title="Mandarin Tone Practice" allowfullscreen></iframe>
+            </div>
 
-            <p class="sidebar-jargon">
-                Sip, Study, and Sweeten Your Mandarin Journey
+            <div class="fun-text highlight-box">
+                <p><strong>💡 Tahukah kamu?</strong><br>
+                Ada aturan "Tone Sandhi" yang bikin bahasa Mandarin kayak lagi nyanyi! Nada bisa berubah kalau ketemu temennya. 👯‍♀️<br><br>
+                Contoh: <strong>你好 (nǐ hǎo)</strong> berubah jadi <strong>(ní hǎo)</strong>. Nada ketiganya "sungkan" jadi berubah ke nada kedua supaya enak didengar!
+                </p>
+            </div>
+
+            <p class="fun-text">
+                <strong>Contoh lainnya:</strong><br>
+                ❌ 不去 (bù qù) → ✅ (bú qù)<br>
+                ❌ 一個 (yī gè) → ✅ (yí gè)<br>
             </p>
 
+            <div class="youtube-frame">
+                <iframe src="https://www.youtube.com/embed/wuyT4gpKW9E" title="Mandarin Tone Practice" allowfullscreen></iframe>
+            </div>
 
-        </div>
-
-
-
-        <nav aria-label="Main Navigation">
-
-            <ul class="nav-menu">
-
-
-                <li>
-                    <a href="../index.html">
-                        <i class="fa-solid fa-chart-pie"></i>
-                        Dashboard
-                    </a>
-                </li>
-
-
-                <li class="course-menu">
-
-    <a href="#" id="coursesToggle">
-        <i class="fa-solid fa-book-open"></i>
-        Courses
-        <i class="fa-solid fa-chevron-down"></i>
-    </a>
-
-    <ul class="submenu" id="courseSubmenu">
-
-        <li>
-            <a href="../courses.html">
-                🇬🇧 English
-            </a>
-        </li>
-
-        <li>
-            <a href="../courses-id.html">
-                🇮🇩 Bahasa Indonesia
-            </a>
-        </li>
-
-    </ul>
-
-</li>
-
-
-                <li>
-                    <a href="../hanzi.html">
-                        <i class="fa-solid fa-pen"></i>
-                        Hanzi Stroke Order
-                    </a>
-                </li>
-
-
-                <li>
-                    <a href="https://cbt.sc-top.org.tw/sctopj/">
-                        <i class="fa-solid fa-clipboard-check"></i>
-                        Mock Test
-                    </a>
-                </li>
-
-
-                <li>
-                    <a href="../about.html">
-                        <i class="fa-solid fa-circle-info"></i>
-                        About
-                    </a>
-                </li>
-
-
-            </ul>
-
-        </nav>
-
-
-    </aside>
-
-
-
-
-    <main class="main-content">
-
-
-        <div class="courses-section">
-
-
-
-
-<div class="video-grid">
-
-    <article class="card video-card">
-
-    <h1 class="section-header">
-        🧋 Mandarin Tone Practice & Chill
-    </h1>
-        
-<div class="boba-caption-box">
-    Yuk, sedot boba dulu sambil pelan-pelan kuasai 4 nada ajaib di Mandarin! Let's listen carefully, ya! 🎧✨
-</div>
-
-
-    <div class="youtube-frame">
-        <iframe 
-            src="https://www.youtube.com/embed/JWM-yTU4rJc"
-            title="Mandarin Tone Basics"
-            allowfullscreen>
-        </iframe>
+            <p class="fun-text" style="background: #e8f5e9; border: 1px solid #c8e6c9;">
+                Aturan tone sandhi memang bikin pusing di awal, tapi tenang aja, kamu nggak perlu hafal semuanya sekaligus! 🍵<br><br>
+                Semakin sering dengerin, lama-lama bakal hafal sendiri kok. Ingat ya, <strong>慢慢來 (màn man lái)</strong> — pelan-pelan asal kelakon. Nikmati prosesnya, santai aja kayak lagi minum boba! 🌱
+            </p>
+        </article>
     </div>
-
-    <p>
-        
-    </p>
-
-
-    <div class="youtube-frame">
-        <iframe 
-            src="https://www.youtube.com/embed/qgL7NrduGJc"
-            title="Mandarin Tone Practice"
-            allowfullscreen>
-        </iframe>
-    </div>
-
-    <div class="boba-caption-box">
-        💡 <strong>Tahukah Kamu?</strong> Mandarin punya aturan sulap nada bernama <strong>Tone Sandhi!</strong><br><br>
-        Contohnya kata <strong>你好 (nǐ hǎo)</strong> yang ditulis dengan dua nada ketiga, tapi saat diomongin secara santai berubah jadi <strong>(ní hǎo)</strong> biar lidah nggak keseleo! 🤭<br><br>
-        Bonus contoh seru lainnya:<br>
-        ✨ 不去 (bù qù) → diucapin (bú qù) = Gak jadi pergi<br>
-        ✨ 一個 (yī gè) → diucapin (yí gè) = Satu biji (sesuatu)<br><br>
-        Yuk, kita bedah rahasianya di video ini! 🚀
-    </div>
-<div class="youtube-frame">
-        <iframe 
-            src="https://www.youtube.com/embed/vl0eHgPP8Ms"
-            title="Mandarin Tone Practice"
-            allowfullscreen>
-        </iframe>
-    </div>
-        <div class="boba-caption-box">
-            Aturan tone sandhi memang kadang bikin kepala pusing kayak muterin sedotan boba, tapi santai saja! Kamu nggak harus hafal semuanya dalam semalam kok. 🥤💖<br><br>
-            Nikmati prosesnya, sering-sering dengerin, dan biar telinga kamu terbiasa sendiri secara alami. <strong>慢慢來 (Màn màn lái)</strong> — dinikmati pelan-pelan seperti menyeruput boba kesukaanmu! 🌱✨
-        </div>
-        
-    </article>
-
-</div>
-
-</div>
-
-    </main>
-
-
-
-</div>
-
-<script src="../courses.js"></script>
-
-</body>
-
-</html>
+</main>
