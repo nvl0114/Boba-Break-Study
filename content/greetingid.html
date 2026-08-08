@@ -13,7 +13,7 @@
     <!-- Font Awesome untuk Ikon Speaker & Lainnya -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-    <!-- CSS Halaman Ini + CSS Floating Boba -->
+    <!-- CSS Halaman Ini -->
     <style>
         /* Lesson Card Umum */
         .lesson-card {
@@ -338,145 +338,40 @@
             color: #555;
         }
 
-        /* --- Floating Boba Styles --- */
-        .floating-boba {
+        /* --- Quiz Modal Styles --- */
+        .quiz-modal {
+            display: none;
             position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: #fff8ef;
-            border: 2px solid #b8865c;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 28px;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(184, 134, 92, 0.3);
-            transition: 0.3s;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5);
             z-index: 1000;
-            animation: bounceBoba 2s infinite;
+            align-items: center; justify-content: center;
         }
 
-        .floating-boba:hover {
-            transform: scale(1.1);
-            background: #faedcd;
-        }
-
-        @keyframes bounceBoba {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
-        }
-
-        /* --- Modal Popup Styles --- */
-        .boba-modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.4);
-            backdrop-filter: blur(3px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1100;
-            opacity: 0;
-            visibility: hidden;
-            transition: 0.3s ease;
-        }
-
-        .boba-modal-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .boba-modal-card {
-            background: #fff8ef;
-            border: 2px solid #d7b89c;
-            border-radius: 20px;
-            width: 90%;
-            max-width: 360px;
-            padding: 25px 20px;
-            text-align: center;
-            box-shadow: 0 10px 25px rgba(184, 134, 92, 0.2);
-            position: relative;
-            transform: scale(0.8);
-            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .boba-modal-overlay.active .boba-modal-card {
-            transform: scale(1);
-        }
-
-        .close-modal-btn {
-            position: absolute;
-            top: 12px;
-            right: 15px;
-            background: none;
-            border: none;
-            font-size: 20px;
-            color: #b8865c;
-            cursor: pointer;
-        }
-
-        .modal-icon {
-            font-size: 40px;
-            margin-bottom: 10px;
-        }
-
-        .boba-modal-card h3 {
-            color: #b8865c;
-            font-size: 18px;
-            margin-bottom: 6px;
-        }
-
-        .boba-modal-card p {
-            color: #666;
-            font-size: 13px;
-            margin-bottom: 20px;
-        }
-
-        .modal-options {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .modal-option-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            padding: 12px;
-            border-radius: 12px;
-            font-weight: bold;
-            font-size: 14px;
-            text-decoration: none;
-            transition: 0.2s;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.03);
-        }
-
-        .hanzi-option {
+        .quiz-content {
             background: white;
-            color: #b8865c;
+            padding: 30px;
+            border-radius: 20px;
+            width: 90%; max-width: 500px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .option-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
             border: 1.5px solid #d7b89c;
+            border-radius: 12px;
+            background: #fff8ef;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.2s;
+            text-align: left;
         }
 
-        .hanzi-option:hover {
-            background: #faedcd;
-        }
-
-        .quiz-option {
-            background: #b8865c;
-            color: white;
-            border: 1.5px solid #a0724f;
-        }
-
-        .quiz-option:hover {
-            background: #a0724f;
-        }
+        .option-btn:hover { background: #faedcd; }
 
         /* Mobile Responsive */
         @media (max-width:700px) {
@@ -512,6 +407,11 @@
     <div id="sidebar-container"></div>
 
     <main class="main-content">
+
+        <!-- Tombol Start Quiz -->
+        <button onclick="openQuiz()" style="background:#b8865c; color:white; padding:12px 25px; border-radius:50px; border:none; cursor:pointer; font-weight:bold; display:block; margin: 20px auto; box-shadow: 0 4px 10px rgba(184,134,92,0.3);">
+            Start Lesson Quiz 📝
+        </button>
 
         <!-- Bagian 1: Conversation Card -->
         <div class="conversation-card">
@@ -833,35 +733,15 @@
 
 </div>
 
-<!-- Floating Boba Button -->
-<div class="floating-boba" id="bobaBtn" title="Boba Break Menu">
-    🧋
-</div>
-
-<!-- Modal / Pop-up Kotak Dialog (Bahasa Inggris) -->
-<div class="boba-modal-overlay" id="bobaModal">
-    <div class="boba-modal-card">
-        <button class="close-modal-btn" id="closeModal">&times;</button>
-        <div class="modal-icon">🧋✨</div>
-        
-        <h3>Apakah kamu mau bermain?</h3>
-        <p>Pilih aktivitas seru hari ini:</p>
-        
-        <div class="modal-options">
-            <!-- Tombol Writing Hanzi dengan Link Google Drive -->
-            <a href="https://drive.google.com/file/d/1xIv_aIg0nbPxt47kkHjCBzTZcrSqW92D/view?usp=drivesdk" target="_blank" class="modal-option-btn hanzi-option">
-                <span>📝</span> Tulis Hanzi
-            </a>
-            
-            <!-- Tombol Quiz dengan Path Folder -->
-            <a href="quiz/quizgreeting.html" class="modal-option-btn quiz-option">
-                <span>🧠</span> Quiz
-            </a>
-        </div>
+<!-- Modal Kuis Pop-up -->
+<div id="quizModal" class="quiz-modal">
+    <div class="quiz-content" id="quizBox">
+        <h3 id="questionText" style="color: #b8865c; margin-bottom: 15px;">Loading...</h3>
+        <div id="optionsContainer"></div>
     </div>
 </div>
 
-<!-- Script untuk Text-to-Speech & Floating Boba Modal -->
+<!-- Script untuk Text-to-Speech & Kuis Interaktif -->
 <script>
     function playAudio(text) {
         if ('speechSynthesis' in window) {
@@ -876,24 +756,50 @@
         }
     }
 
-    // Logika Floating Boba Modal
-    const bobaBtn = document.getElementById('bobaBtn');
-    const bobaModal = document.getElementById('bobaModal');
-    const closeModal = document.getElementById('closeModal');
+    // Data Kuis Bahasa Inggris
+    const quizData = [
+        { q: "1. What is the meaning of the Mandarin phrase '你好' (nǐ hǎo)?", a: ["Good morning", "Hello / How are you", "Thank you", "Goodbye"], correct: 1 },
+        { q: "2. If someone asks you: '你叫什麼名字？' (Nǐ jiào shénme míngzi?), what are they asking about?", a: ["Where are you from?", "How are you?", "What is your name?", "How old are you?"], correct: 2 },
+        { q: "3. The particle '呢' (ne) in conversations like '你呢？' (Nǐ ne?) is typically used for what purpose?", a: ["To say thank you", "To politely decline", "To bounce back the same question to the other person ('And you?')", "To express disagreement"], correct: 2 },
+        { q: "4. The basic sentence pattern in Mandarin (such as Wǒ jiào Lìlì) is very similar to Indonesian and English, which is:", a: ["Object + Verb + Subject", "Subject + Verb + Object", "Verb + Subject + Object", "Object + Subject + Verb"], correct: 1 },
+        { q: "5. How do you say 'Nice to meet you' in Mandarin?", a: ["不客氣 (Bú kèqi)", "謝謝你 (Xièxie nǐ)", "很高興認識你 (Hěn gāoxìng rènshi nǐ)", "再見 (Zàijiàn)"], correct: 2 }
+    ];
 
-    bobaBtn.addEventListener('click', () => {
-        bobaModal.classList.add('active');
-    });
+    let currentQ = 0;
+    let score = 0;
 
-    closeModal.addEventListener('click', () => {
-        bobaModal.classList.remove('active');
-    });
+    function openQuiz() {
+        document.getElementById('quizModal').style.display = 'flex';
+        currentQ = 0; 
+        score = 0;
+        showQuestion();
+    }
 
-    bobaModal.addEventListener('click', (e) => {
-        if (e.target === bobaModal) {
-            bobaModal.classList.remove('active');
+    function showQuestion() {
+        if(currentQ < quizData.length) {
+            let q = quizData[currentQ];
+            document.getElementById('questionText').innerText = q.q;
+            let optDiv = document.getElementById('optionsContainer');
+            optDiv.innerHTML = '';
+            q.a.forEach((opt, index) => {
+                optDiv.innerHTML += `<button class="option-btn" onclick="checkAnswer(${index})">${opt}</button>`;
+            });
+        } else {
+            document.getElementById('quizBox').innerHTML = `
+                <h3 style="color: #b8865c; margin-bottom: 10px;">Quiz Finished! 🎉</h3>
+                <p style="font-size: 16px; margin-bottom: 20px; color: #555;">Your Score: <strong>${score}/${quizData.length}</strong></p>
+                <button onclick="location.reload()" class="option-btn" style="text-align: center; background: #b8865c; color: white;">Close & Refresh</button>
+            `;
         }
-    });
+    }
+
+    function checkAnswer(idx) {
+        if(idx === quizData[currentQ].correct) {
+            score++;
+        }
+        currentQ++;
+        showQuestion();
+    }
 </script>
 
 <!-- Script Sidebar -->
