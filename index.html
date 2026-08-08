@@ -15,7 +15,7 @@
             --boba-cream: #fdf6ec;
             --milk-tea: #d4a373;
             --boba-dark: #6f4e37;
-            --soft-pink: #f8e1e7;
+            --card-bg: #fffbf5; /* Warna cream susu yang bersih dan lembut */
         }
 
         body { font-family: 'Poppins', sans-serif; background-color: var(--boba-cream); }
@@ -25,15 +25,58 @@
         .welcome-text h1 { font-family: 'Quicksand', sans-serif; color: var(--boba-dark); }
         
         .section-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-        .card { background: white; padding: 20px; border-radius: 25px; border: 2px solid var(--soft-pink); transition: 0.3s; }
+        .card { background: white; padding: 20px; border-radius: 25px; border: 2px solid #f0e6d6; transition: 0.3s; }
         .card:hover { border-color: var(--milk-tea); }
 
         /* --- VIDEO CARD --- */
         .youtube-frame { border-radius: 20px; overflow: hidden; border: 3px solid var(--boba-dark); }
 
-        /* --- HANZI CARD --- */
-        .lesson-card { text-align: center; background: var(--soft-pink); }
-        .flashcard { background: white; width: 120px; height: 120px; margin: 15px auto; border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 40px; color: var(--boba-dark); border: 2px dashed var(--milk-tea); cursor: pointer; }
+        /* --- HANZI CARD (Bukan Pink Lagi) --- */
+        .lesson-card { text-align: center; background: var(--card-bg); border: 2px solid var(--milk-tea); }
+        
+        .card-container {
+            width: 150px;
+            height: 150px;
+            margin: 15px auto;
+            perspective: 1000px;
+            cursor: pointer;
+        }
+
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+
+        .card-flipped {
+            transform: rotateY(180deg);
+        }
+
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 3px solid var(--boba-dark);
+            box-shadow: 0 4px 8px rgba(111, 78, 55, 0.1);
+        }
+
+        .card-front { background: white; font-size: 50px; color: var(--boba-dark); }
+        .card-back { transform: rotateY(180deg); background: #fff3e0; font-size: 16px; color: var(--boba-dark); padding: 10px; }
+
+        .instruction {
+            font-size: 12px;
+            color: var(--boba-dark);
+            font-weight: bold;
+        }
 
         /* --- SLIDESHOW --- */
         .course3-slideshow { width: 100%; height: 180px; overflow: hidden; border-radius: 20px; position: relative; margin-bottom: 15px; border: 3px solid #fff; }
@@ -101,15 +144,22 @@
                 <p>Enjoy Mandarin music while improving your listening skills and learning new vocabulary.</p>
             </article>
 
-            <!-- Hanzi -->
+            <!-- Hanzi (Background Cream/Milk Tea, Tidak Pink, Bisa Diklik) -->
             <div class="card lesson-card">
                 <h2>🧋 Hanzi of The Day</h2>
-                <div class="flashcard" id="card">
+                <div class="card-container" onclick="this.querySelector('.card-inner').classList.toggle('card-flipped')">
                     <div class="card-inner">
-                        <div class="card-front"><span id="hanzi">?</span></div>
+                        <div class="card-front"><span id="hanzi">茶</span></div>
+                        <div class="card-back">
+                            <span id="pinyin">chá</span>
+                            <span id="meaning" style="display:block; margin-top:5px; font-weight:bold;">Teh</span>
+                        </div>
                     </div>
                 </div>
-                <p class="instruction">👆 Tap the card to flip<br>👈 Swipe for new Hanzi</p>
+                <p class="instruction">
+                    👆 Klik kartu untuk membalik!<br>
+                    👈 Swipe for new Hanzi
+                </p>
             </div>
 
             <!-- Phrasebook -->
