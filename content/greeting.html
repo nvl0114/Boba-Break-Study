@@ -37,7 +37,7 @@
             line-height: 1.5;
         }
 
-        /* Vocabulary Container & Mini Pill (Diperbesar sedikit agar teks tidak kepotong) */
+        /* Vocabulary Container & Mini Pill */
         .vocab-container {
             display: flex;
             flex-wrap: wrap;
@@ -51,7 +51,7 @@
             background: #fff8ef;
             border-radius: 14px;
             padding: 8px 12px;
-            width: 105px; /* Lebar ditambah agar kata panjang muat */
+            width: 105px;
             text-align: center;
             border: 1.5px solid #d7b89c;
             box-shadow: 0 2px 5px rgba(184,134,92,0.08);
@@ -91,7 +91,7 @@
             text-overflow: ellipsis;
         }
 
-        /* --- Conversation Card (Kompak & Kecil dengan Gambar Ikon) --- */
+        /* --- Conversation Card --- */
         .conversation-card {
             background: white;
             padding: 25px;
@@ -187,7 +187,7 @@
             background: #a0724f;
         }
 
-        /* --- Sentence Pattern (Kompak & Lucu) --- */
+        /* --- Sentence Pattern --- */
         .pattern-box {
             background: #f0f7f4;
             border: 1.5px dashed #b7e4c7;
@@ -264,7 +264,7 @@
             line-height: 1.3;
         }
 
-        /* --- Grammar Card (Kompak, Rapi, & Grid) --- */
+        /* --- Grammar Card --- */
         .grammar-card {
             background: white;
             padding: 25px;
@@ -338,171 +338,7 @@
             color: #555;
         }
 
-        /* --- Floating Boba Button --- */
-        .floating-boba-container {
-            position: fixed;
-            bottom: 25px;
-            right: 25px;
-            z-index: 9999;
-            cursor: pointer;
-            animation: floatingBoba 3s ease-in-out infinite;
-        }
-
-        .boba-bubble {
-            font-size: 40px;
-            background: #fff8ef;
-            width: 60px;
-            height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            border: 2px dashed #d7b89c;
-            box-shadow: 0 6px 15px rgba(184, 134, 92, 0.25);
-            transition: transform 0.2s;
-        }
-
-        .floating-boba-container:hover .boba-bubble {
-            transform: scale(1.1);
-        }
-
-        @keyframes floatingBoba {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-8px); }
-        }
-
-        /* --- Pop-up Modal Overlay --- */
-        .boba-modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.4);
-            backdrop-filter: blur(3px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 10000;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .boba-modal-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .boba-modal-card {
-            background: #fdfbf7;
-            width: 90%;
-            max-width: 320px;
-            padding: 25px 20px;
-            border-radius: 20px;
-            border: 2px solid #d7b89c;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            text-align: center;
-            position: relative;
-            transform: scale(0.8);
-            transition: transform 0.3s ease;
-        }
-
-        .boba-modal-overlay.active .boba-modal-card {
-            transform: scale(1);
-        }
-
-        .close-modal-btn {
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            background: none;
-            border: none;
-            font-size: 22px;
-            color: #a0724f;
-            cursor: pointer;
-        }
-
-        .modal-icon {
-            font-size: 30px;
-            margin-bottom: 5px;
-        }
-
-        .boba-modal-card h3 {
-            color: #5c4033;
-            font-size: 18px;
-            margin-bottom: 8px;
-        }
-
-        .boba-modal-card p {
-            color: #8c7355;
-            font-size: 13px;
-            margin-bottom: 20px;
-        }
-
-        .modal-options {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .modal-option-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            padding: 10px;
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 14px;
-            transition: 0.2s;
-        }
-
-        .hanzi-option {
-            background: #fff8ef;
-            color: #8c7355;
-            border: 1.5px solid #d7b89c;
-        }
-
-        .hanzi-option:hover {
-            background: #faedcd;
-        }
-
-        .quiz-option {
-            background: #f0f7f4;
-            color: #2d6a4f;
-            border: 1.5px solid #b7e4c7;
-        }
-
-        .quiz-option:hover {
-            background: #d8f3dc;
-        }
-
-        /* Mobile Responsive */
-        @media (max-width:700px) {
-            .lesson-card, .conversation-card, .grammar-card {
-                padding: 15px;
-                margin: 15px;
-            }
-
-            .vocab-pill {
-                width: 95px;
-            }
-
-            .pattern-grid, .grammar-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .chat-row {
-                padding: 8px 10px;
-            }
-
-            .chat-details .hanzi-text {
-                font-size: 15px;
-            }
-
-                    /* --- Quiz Modal Styles --- */
+        /* --- Quiz Modal Styles --- */
         .quiz-modal {
             display: none;
             position: fixed;
@@ -538,6 +374,28 @@
 
         .option-btn:hover { background: #faedcd; }
 
+        /* Mobile Responsive */
+        @media (max-width:700px) {
+            .lesson-card, .conversation-card, .grammar-card {
+                padding: 15px;
+                margin: 15px;
+            }
+
+            .vocab-pill {
+                width: 95px;
+            }
+
+            .pattern-grid, .grammar-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .chat-row {
+                padding: 8px 10px;
+            }
+
+            .chat-details .hanzi-text {
+                font-size: 15px;
+            }
         }
     </style>
 </head>
@@ -551,11 +409,10 @@
 
     <main class="main-content">
 
-        <!-- Bagian 1: Conversation Card (Pinyin dengan Kurung) -->
+        <!-- Bagian 1: Conversation Card -->
         <div class="conversation-card">
             <h2>Lesson 1 — Greetings</h2>
             
-            <!-- Percakapan 1 (A: 麗麗) -->
             <div class="chat-row">
                 <img src="https://img.icons8.com/?size=100&id=8jefsgDkH9FD&format=png&color=000000" alt="Lili" class="chat-avatar-img">
                 <div class="chat-content">
@@ -573,7 +430,6 @@
                 </div>
             </div>
 
-            <!-- Percakapan 2 (B: 小明) -->
             <div class="chat-row">
                 <img src="https://img.icons8.com/?size=100&id=myZVMpNFn0BD&format=png&color=000000" alt="Xiaoming" class="chat-avatar-img">
                 <div class="chat-content">
@@ -591,7 +447,6 @@
                 </div>
             </div>
 
-            <!-- Percakapan 3 (A: 麗麗) -->
             <div class="chat-row">
                 <img src="https://img.icons8.com/?size=100&id=8jefsgDkH9FD&format=png&color=000000" alt="Lili" class="chat-avatar-img">
                 <div class="chat-content">
@@ -609,7 +464,6 @@
                 </div>
             </div>
 
-            <!-- Percakapan 4 (B: 小明) -->
             <div class="chat-row">
                 <img src="https://img.icons8.com/?size=100&id=myZVMpNFn0BD&format=png&color=000000" alt="Xiaoming" class="chat-avatar-img">
                 <div class="chat-content">
@@ -627,7 +481,6 @@
                 </div>
             </div>
 
-            <!-- Percakapan 5 (A: 麗麗) -->
             <div class="chat-row">
                 <img src="https://img.icons8.com/?size=100&id=8jefsgDkH9FD&format=png&color=000000" alt="Lili" class="chat-avatar-img">
                 <div class="chat-content">
@@ -645,7 +498,6 @@
                 </div>
             </div>
 
-            <!-- Percakapan 6 (B: 小明) -->
             <div class="chat-row">
                 <img src="https://img.icons8.com/?size=100&id=myZVMpNFn0BD&format=png&color=000000" alt="Xiaoming" class="chat-avatar-img">
                 <div class="chat-content">
@@ -663,7 +515,6 @@
                 </div>
             </div>
 
-            <!-- Percakapan 7 (A: 麗麗) -->
             <div class="chat-row">
                 <img src="https://img.icons8.com/?size=100&id=8jefsgDkH9FD&format=png&color=000000" alt="Lili" class="chat-avatar-img">
                 <div class="chat-content">
@@ -682,126 +533,31 @@
             </div>
         </div>
 
-        <!-- Bagian 2: Vocabulary (Stiker Diperbesar Sedikit, Pinyin dengan Kurung) -->
+        <!-- Bagian 2: Vocabulary -->
         <div class="lesson-card">
             <h2>Vocabulary</h2>
             <p>Click any mini card below to listen to the pronunciation! 🌸</p>
 
             <div class="vocab-container">
-                <!-- Vocab 1 -->
-                <div class="vocab-pill" onclick="playAudio('我')">
-                    <div class="hanzi">我</div>
-                    <div class="pinyin">(wǒ)</div>
-                    <div class="meaning" title="I / me">I / me</div>
-                </div>
-
-                <!-- Vocab 2 -->
-                <div class="vocab-pill" onclick="playAudio('你')">
-                    <div class="hanzi">你</div>
-                    <div class="pinyin">(nǐ)</div>
-                    <div class="meaning" title="you">you</div>
-                </div>
-
-                <!-- Vocab 妳 -->
-                <div class="vocab-pill" onclick="playAudio('妳')">
-                    <div class="hanzi">妳</div>
-                    <div class="pinyin">(nǐ)</div>
-                    <div class="meaning" title="you (female)">you (female)</div>
-                </div>
-
-                <!-- Vocab 3 -->
-                <div class="vocab-pill" onclick="playAudio('叫')">
-                    <div class="hanzi">叫</div>
-                    <div class="pinyin">(jiào)</div>
-                    <div class="meaning" title="to be called">to be called</div>
-                </div>
-
-                <!-- Vocab 4 -->
-                <div class="vocab-pill" onclick="playAudio('什麼')">
-                    <div class="hanzi">什麼</div>
-                    <div class="pinyin">(shénme)</div>
-                    <div class="meaning" title="what">what</div>
-                </div>
-
-                <!-- Vocab 5 -->
-                <div class="vocab-pill" onclick="playAudio('名字')">
-                    <div class="hanzi">名字</div>
-                    <div class="pinyin">(míngzi)</div>
-                    <div class="meaning" title="name">name</div>
-                </div>
-
-                <!-- Vocab 6 -->
-                <div class="vocab-pill" onclick="playAudio('麗麗')">
-                    <div class="hanzi">麗麗</div>
-                    <div class="pinyin">(Lìlì)</div>
-                    <div class="meaning" title="Lili">Lili</div>
-                </div>
-
-                <!-- Vocab 7 -->
-                <div class="vocab-pill" onclick="playAudio('小明')">
-                    <div class="hanzi">小明</div>
-                    <div class="pinyin">(Xiǎomíng)</div>
-                    <div class="meaning" title="Xiaoming">Xiaoming</div>
-                </div>
-
-                <!-- Vocab 8 -->
-                <div class="vocab-pill" onclick="playAudio('也')">
-                    <div class="hanzi">也</div>
-                    <div class="pinyin">(yě)</div>
-                    <div class="meaning" title="also / too">also / too</div>
-                </div>
-
-                <!-- Vocab 9 -->
-                <div class="vocab-pill" onclick="playAudio('很')">
-                    <div class="hanzi">很</div>
-                    <div class="pinyin">(hěn)</div>
-                    <div class="meaning" title="very">very</div>
-                </div>
-
-                <!-- Vocab 10 -->
-                <div class="vocab-pill" onclick="playAudio('高興')">
-                    <div class="hanzi">高興</div>
-                    <div class="pinyin">(gāoxìng)</div>
-                    <div class="meaning" title="happy / glad">happy / glad</div>
-                </div>
-
-                <!-- Vocab 11 -->
-                <div class="vocab-pill" onclick="playAudio('認識')">
-                    <div class="hanzi">認識</div>
-                    <div class="pinyin">(rènshi)</div>
-                    <div class="meaning" title="to know / meet">to know / meet</div>
-                </div>
-
-                <!-- Vocab 12 -->
-                <div class="vocab-pill" onclick="playAudio('你好')">
-                    <div class="hanzi">你好</div>
-                    <div class="pinyin">(nǐ hǎo)</div>
-                    <div class="meaning" title="hello">hello</div>
-                </div>
-
-                <!-- Vocab 13 -->
-                <div class="vocab-pill" onclick="playAudio('你呢')">
-                    <div class="hanzi">你呢</div>
-                    <div class="pinyin">(nǐ ne)</div>
-                    <div class="meaning" title="how about you?">how about you?</div>
-                </div>
-
-                <!-- Vocab 14 -->
-                <div class="vocab-pill" onclick="playAudio('謝謝')">
-                    <div class="hanzi">謝謝</div>
-                    <div class="pinyin">(xièxie)</div>
-                    <div class="meaning" title="thank you">thank you</div>
-                </div>
-
-                <!-- Vocab 15 -->
-                <div class="vocab-pill" onclick="playAudio('不客氣')">
-                    <div class="hanzi">不客氣</div>
-                    <div class="pinyin">(bú kèqi)</div>
-                    <div class="meaning" title="you’re welcome">you’re welcome</div>
-                </div>
+                <div class="vocab-pill" onclick="playAudio('我')"><div class="hanzi">我</div><div class="pinyin">(wǒ)</div><div class="meaning">I / me</div></div>
+                <div class="vocab-pill" onclick="playAudio('你')"><div class="hanzi">你</div><div class="pinyin">(nǐ)</div><div class="meaning">you</div></div>
+                <div class="vocab-pill" onclick="playAudio('妳')"><div class="hanzi">妳</div><div class="pinyin">(nǐ)</div><div class="meaning">you (female)</div></div>
+                <div class="vocab-pill" onclick="playAudio('叫')"><div class="hanzi">叫</div><div class="pinyin">(jiào)</div><div class="meaning">to be called</div></div>
+                <div class="vocab-pill" onclick="playAudio('什麼')"><div class="hanzi">什麼</div><div class="pinyin">(shénme)</div><div class="meaning">what</div></div>
+                <div class="vocab-pill" onclick="playAudio('名字')"><div class="hanzi">名字</div><div class="pinyin">(míngzi)</div><div class="meaning">name</div></div>
+                <div class="vocab-pill" onclick="playAudio('麗麗')"><div class="hanzi">麗麗</div><div class="pinyin">(Lìlì)</div><div class="meaning">Lili</div></div>
+                <div class="vocab-pill" onclick="playAudio('小明')"><div class="hanzi">小明</div><div class="pinyin">(Xiǎomíng)</div><div class="meaning">Xiaoming</div></div>
+                <div class="vocab-pill" onclick="playAudio('也')"><div class="hanzi">也</div><div class="pinyin">(yě)</div><div class="meaning">also / too</div></div>
+                <div class="vocab-pill" onclick="playAudio('很')"><div class="hanzi">很</div><div class="pinyin">(hěn)</div><div class="meaning">very</div></div>
+                <div class="vocab-pill" onclick="playAudio('高興')"><div class="hanzi">高興</div><div class="pinyin">(gāoxìng)</div><div class="meaning">happy / glad</div></div>
+                <div class="vocab-pill" onclick="playAudio('認識')"><div class="hanzi">認識</div><div class="pinyin">(rènshi)</div><div class="meaning">to know / meet</div></div>
+                <div class="vocab-pill" onclick="playAudio('你好')"><div class="hanzi">你好</div><div class="pinyin">(nǐ hǎo)</div><div class="meaning">hello</div></div>
+                <div class="vocab-pill" onclick="playAudio('你呢')"><div class="hanzi">你呢</div><div class="pinyin">(nǐ ne)</div><div class="meaning">how about you?</div></div>
+                <div class="vocab-pill" onclick="playAudio('謝謝')"><div class="hanzi">謝謝</div><div class="pinyin">(xièxie)</div><div class="meaning">thank you</div></div>
+                <div class="vocab-pill" onclick="playAudio('不客氣')"><div class="hanzi">不客氣</div><div class="pinyin">(bú kèqi)</div><div class="meaning">you’re welcome</div></div>
             </div>
 
-            <!-- --- Sentence Pattern (Kompak & Lucu) --- -->
+            <!-- Sentence Pattern -->
             <div class="pattern-box">
                 <div class="pattern-title">Sentence Pattern</div>
                 <div style="text-align: center;">
@@ -809,14 +565,12 @@
                 </div>
 
                 <div class="pattern-grid">
-                    <!-- Contoh 1 -->
                     <div class="pattern-card" onclick="playAudio('我叫麗麗')">
                         <div class="hanzi-line">我叫麗麗。</div>
                         <div class="pinyin-line">Wǒ → jiào → Lìlì</div>
                         <div class="trans-line">I → am called → Lili</div>
                     </div>
 
-                    <!-- Contoh 2 -->
                     <div class="pattern-card" onclick="playAudio('你叫什麼名字')">
                         <div class="hanzi-line">你叫什麼名字？</div>
                         <div class="pinyin-line">Nǐ → jiào → shénme míngzi</div>
@@ -830,46 +584,35 @@
             </div>
         </div>
 
-        <!-- --- Bagian 3: Grammar & Notes --- -->
+        <!-- Bagian 3: Grammar & Notes -->
         <div class="grammar-card">
             <h2>Grammar & Notes</h2>
             <div class="grammar-grid">
-                <!-- Poin 1 -->
                 <div class="grammar-item">
                     <h4>1. 叫 (jiào) — To Be Called</h4>
                     <p>Formula: <strong>Subject + 叫 + Name</strong></p>
                     <div class="sub-example">Wǒ jiào Lìlì. (My name is Lili)</div>
                 </div>
-
-                <!-- Poin 2 -->
                 <div class="grammar-item">
                     <h4>2. 什麼 (shénme) — What</h4>
                     <p>Placed where unknown info appears.</p>
                     <div class="sub-example">Nǐ jiào shénme míngzi? (What's your name?)</div>
                 </div>
-
-                <!-- Poin 3 -->
                 <div class="grammar-item">
                     <h4>3. 呢 (ne) — How About You?</h4>
                     <p>Used at the end of questions to bounce back.</p>
                     <div class="sub-example">Wǒ jiào Lìlì. Nǐ ne? (My name is Lili. You?)</div>
                 </div>
-
-                <!-- Poin 4 -->
                 <div class="grammar-item">
                     <h4>4. 也 (yě) — Also / Too</h4>
                     <p>Placed before the verb/adjective.</p>
                     <div class="sub-example">Wǒ yě hěn gāoxìng. (I'm also glad)</div>
                 </div>
-
-                <!-- Poin 5 -->
                 <div class="grammar-item">
                     <h4>5. 很 (hěn) + Adjective</h4>
                     <p>Often used before adjectives in simple sentences.</p>
                     <div class="sub-example">Hěn gāoxìng (Very glad / Nice to meet you)</div>
                 </div>
-
-                <!-- Poin 6 -->
                 <div class="grammar-item">
                     <h4>6. 認識 (rènshi) — To Know</h4>
                     <p>To know or become acquainted with someone.</p>
@@ -877,7 +620,6 @@
                 </div>
             </div>
 
-            <!-- Ringkasan Key Patterns -->
             <div class="grammar-star-box">
                 <h4>⭐ Key Patterns to Remember</h4>
                 <div class="grammar-star-list">
@@ -889,21 +631,15 @@
                 </div>
             </div>
         </div>
-        <!-- --- End of Grammar Card --- -->
 
     </main>
 
 </div>
 
-<!-- Tombol Boba Melayang -->
-<div class="floating-boba-container" id="floatingBoba">
-    <div class="boba-bubble">🧋</div>
-</div>
-<!-- Floating
-    Boba Menu di Pojok Kanan Bawah -->
+<!-- Floating Boba Menu di Pojok Kanan Bawah -->
 <div class="floating-boba-container">
     <button class="boba-btn" onclick="toggleBobaMenu()" style="background: #fff8ef; border: 2px dashed #d7b89c; width: 60px; height: 60px; border-radius: 50%; font-size: 28px; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 15px rgba(184, 134, 92, 0.25);">🧋</button>
-    <div id="bobaMenu" style="display: none; position: absolute; bottom: 75px; right: 0; background: white; padding: 10px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.15); width: 170px; flex-direction: column; gap: 8px; border: 1.5px solid #d7b89c;">
+    <div id="bobaMenu" style="display: none; position: absolute; bottom: 75px; right: 0; background: white; padding: 10px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.15); width: 170px; flex-direction: column; gap: 8px; border: 1.5px solid #d7b89c; z-index: 10001;">
         <!-- Tombol ke Writing Hanzi -->
         <a href="https://drive.google.com/file/d/1xIv_aIg0nbPxt47kkHjCBzTZcrSqW92D/view?usp=drivesdk" target="_blank" style="background: #fff8ef; color: #b8865c; border: 1px solid #d7b89c; padding: 10px; border-radius: 10px; text-align: left; font-weight: bold; font-size: 13px; text-decoration: none; display: block;">✍️ Writing Hanzi</a>
         <!-- Tombol untuk membuka Quiz Interaktif -->
@@ -919,10 +655,8 @@
     </div>
 </div>
 
-
 <!-- Script untuk Text-to-Speech & Interaksi Pop-up Boba -->
 <script>
-    <script>
     function playAudio(text) {
         if ('speechSynthesis' in window) {
             window.speechSynthesis.cancel();
@@ -993,11 +727,6 @@
         currentQ++;
         showQuestion();
     }
-</script>
-
-<!-- Script Sidebar -->
-<script src="../script.js"></script>
-
 </script>
 
 <!-- Script Sidebar -->
