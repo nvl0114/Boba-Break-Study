@@ -338,31 +338,145 @@
             color: #555;
         }
 
-        /* Lesson Navigation */
-        .lesson-nav {
+        /* --- Floating Boba Button --- */
+        .floating-boba-container {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            z-index: 9999;
+            cursor: pointer;
+            animation: floatingBoba 3s ease-in-out infinite;
+        }
+
+        .boba-bubble {
+            font-size: 40px;
+            background: #fff8ef;
+            width: 60px;
+            height: 60px;
             display: flex;
+            align-items: center;
             justify-content: center;
-            align-items: center;
-            margin: 30px auto;
-            max-width: 750px;
+            border-radius: 50%;
+            border: 2px dashed #d7b89c;
+            box-shadow: 0 6px 15px rgba(184, 134, 92, 0.25);
+            transition: transform 0.2s;
         }
 
-        .prev-btn {
-            display: inline-flex;
+        .floating-boba-container:hover .boba-bubble {
+            transform: scale(1.1);
+        }
+
+        @keyframes floatingBoba {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+
+        /* --- Pop-up Modal Overlay --- */
+        .boba-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(3px);
+            display: flex;
             align-items: center;
-            padding: 10px 20px;
-            background: linear-gradient(135deg, #d7b89c, #b8865c);
-            color: white;
+            justify-content: center;
+            z-index: 10000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .boba-modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .boba-modal-card {
+            background: #fdfbf7;
+            width: 90%;
+            max-width: 320px;
+            padding: 25px 20px;
+            border-radius: 20px;
+            border: 2px solid #d7b89c;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            text-align: center;
+            position: relative;
+            transform: scale(0.8);
+            transition: transform 0.3s ease;
+        }
+
+        .boba-modal-overlay.active .boba-modal-card {
+            transform: scale(1);
+        }
+
+        .close-modal-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 22px;
+            color: #a0724f;
+            cursor: pointer;
+        }
+
+        .modal-icon {
+            font-size: 30px;
+            margin-bottom: 5px;
+        }
+
+        .boba-modal-card h3 {
+            color: #5c4033;
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+
+        .boba-modal-card p {
+            color: #8c7355;
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+
+        .modal-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .modal-option-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 10px;
+            border-radius: 12px;
             text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
+            font-weight: bold;
             font-size: 14px;
-            box-shadow: 0 4px 12px rgba(184,134,92,0.25);
-            transition: 0.25s;
+            transition: 0.2s;
         }
 
-        .prev-btn:hover {
-            transform: translateY(-3px);
+        .hanzi-option {
+            background: #fff8ef;
+            color: #8c7355;
+            border: 1.5px solid #d7b89c;
+        }
+
+        .hanzi-option:hover {
+            background: #faedcd;
+        }
+
+        .quiz-option {
+            background: #f0f7f4;
+            color: #2d6a4f;
+            border: 1.5px solid #b7e4c7;
+        }
+
+        .quiz-option:hover {
+            background: #d8f3dc;
         }
 
         /* Mobile Responsive */
@@ -744,7 +858,31 @@
 
 </div>
 
-<!-- Script untuk Text-to-Speech (Audio Mandarin) -->
+<!-- Tombol Boba Melayang -->
+<div class="floating-boba-container" id="floatingBoba">
+    <div class="boba-bubble">🧋</div>
+</div>
+
+<!-- Modal / Pop-up Kotak Dialog -->
+<div class="boba-modal-overlay" id="bobaModal">
+    <div class="boba-modal-card">
+        <button class="close-modal-btn" id="closeModal">&times;</button>
+        <div class="modal-icon">🧋✨</div>
+        <h3>Do you want to play?</h3>
+        <p>Choose a fun activity to practice today:</p>
+        
+        <div class="modal-options">
+            <a href="https://drive.google.com/file/d/1xIv_aIg0nbPxt47kkHjCBzTZcrSqW92D/view?usp=drivesdk" download class="modal-option-btn hanzi-option">
+                <span>📝</span> Writing Hanzi
+            </a>
+            <a href="quiz-lesson1.html" class="modal-option-btn quiz-option">
+                <span>🧠</span> Quiz
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Script untuk Text-to-Speech & Interaksi Pop-up Boba -->
 <script>
     function playAudio(text) {
         if ('speechSynthesis' in window) {
@@ -758,6 +896,25 @@
             console.log("Browser Anda tidak mendukung Web Speech API.");
         }
     }
+
+    // Script Pop-up Boba
+    const floatingBoba = document.getElementById('floatingBoba');
+    const bobaModal = document.getElementById('bobaModal');
+    const closeModal = document.getElementById('closeModal');
+
+    floatingBoba.addEventListener('click', () => {
+        bobaModal.classList.add('active');
+    });
+
+    closeModal.addEventListener('click', () => {
+        bobaModal.classList.remove('active');
+    });
+
+    bobaModal.addEventListener('click', (e) => {
+        if (e.target === bobaModal) {
+            bobaModal.classList.remove('active');
+        }
+    });
 </script>
 
 <!-- Script Sidebar -->
