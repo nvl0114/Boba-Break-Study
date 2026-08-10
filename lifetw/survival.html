@@ -5,898 +5,2239 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Taiwan Tourist Survival Phrases - Boba Break Study</title>
 
-<!-- Main CSS -->
-<link rel="stylesheet" href="../style.css">
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../style.css">
 
-<!-- Font Awesome -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
-    /* =====================================================
-       LESSON CARD
-    ===================================================== */
+
+/* =====================================================
+   LESSON CARD
+===================================================== */
+
+.lesson-card,
+.conversation-card,
+.grammar-card {
+    background: #fffdf9;
+    padding: 30px;
+    border-radius: 28px;
+    box-shadow:
+        0 12px 30px rgba(111, 78, 55, 0.12),
+        0 3px 8px rgba(255, 183, 178, 0.12);
+    margin: 25px auto;
+    max-width: 780px;
+    border: 2px dashed #d9b79c;
+}
+
+.lesson-card h2,
+.conversation-card h2,
+.grammar-card h2 {
+    color: #8b5e3c;
+    font-size: 24px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.lesson-card p {
+    color: #8a7968;
+    font-size: 14px;
+    line-height: 1.5;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+
+/* =====================================================
+   CUTE BOBA STICKER CARDS
+===================================================== */
+
+.vocab-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 17px;
+    margin-top: 15px;
+    justify-content: center;
+}
+
+.vocab-pill {
+    position: relative;
+
+    background:
+        linear-gradient(
+            145deg,
+            #fffaf4 0%,
+            #fff3e5 55%,
+            #ffe9df 100%
+        );
+
+    border-radius: 23px;
+
+    padding: 34px 12px 27px;
+
+    width: 160px;
+
+    text-align: center;
+
+    border: 3px solid #e5c3a8;
+
+    box-shadow:
+        0 7px 0 #d4ad8e,
+        0 10px 20px rgba(91, 62, 43, 0.13);
+
+    transition:
+        transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+        box-shadow 0.3s ease,
+        background 0.3s ease;
+
+    cursor: pointer;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    overflow: hidden;
+}
+
+
+/* Cute boba cup sticker */
+
+.vocab-pill::before {
+    content: "🧋";
+
+    position: absolute;
+
+    top: 7px;
+    left: 9px;
+
+    font-size: 22px;
+
+    filter:
+        drop-shadow(0 2px 1px rgba(77, 48, 31, 0.15));
+
+    transform: rotate(-8deg);
+
+    transition: 0.3s ease;
+
+    z-index: 2;
+}
+
+
+/* Tapioca pearls */
+
+.vocab-pill::after {
+    content: "";
+
+    position: absolute;
+
+    bottom: 7px;
+    right: 9px;
+
+    width: 7px;
+    height: 7px;
+
+    background: #563727;
+
+    border-radius: 50%;
+
+    box-shadow:
+        -10px 2px 0 #6b4430,
+        -20px -1px 0 #4b3023,
+        -30px 3px 0 #704a32,
+        -5px -7px 0 #4f3023;
+
+    opacity: 0.9;
+
+    transition: 0.3s ease;
+}
+
+
+/* Little glossy sticker shine */
+
+.vocab-pill .hanzi::before {
+    content: "✦";
+
+    position: absolute;
+
+    top: 9px;
+    right: 10px;
+
+    font-size: 10px;
+
+    color: #ffffff;
+
+    opacity: 0.8;
+}
+
+
+/* Hover */
+
+.vocab-pill:hover {
+    transform:
+        translateY(-7px)
+        rotate(1.5deg)
+        scale(1.035);
+
+    background:
+        linear-gradient(
+            145deg,
+            #fffdf8 0%,
+            #ffe9dc 50%,
+            #f8ddcb 100%
+        );
+
+    border-color: #c89570;
+
+    box-shadow:
+        0 9px 0 #b98763,
+        0 16px 25px rgba(91, 62, 43, 0.2);
+}
+
+.vocab-pill:hover::before {
+    transform:
+        rotate(8deg)
+        scale(1.18);
+
+}
+
+.vocab-pill:hover::after {
+    transform: scale(1.15);
+}
+
+.vocab-pill:active {
+    transform: scale(0.96);
+    box-shadow:
+        0 3px 0 #b98763,
+        0 6px 10px rgba(91, 62, 43, 0.15);
+}
+
+
+/* Hanzi */
+
+.vocab-pill .hanzi {
+    font-size: 18px;
+    font-weight: bold;
+
+    color: #70452f;
+
+    line-height: 1.2;
+
+    margin-top: 2px;
+}
+
+
+/* Pinyin */
+
+.vocab-pill .pinyin {
+    font-size: 11px;
+
+    margin-top: 5px;
+
+    color: #a66b47;
+
+    font-weight: 600;
+}
+
+
+/* Meaning */
+
+.vocab-pill .meaning {
+    margin-top: 4px;
+
+    font-size: 10px;
+
+    color: #8c7355;
+
+    line-height: 1.2;
+}
+
+
+/* =====================================================
+   FLOATING BOBA BUTTON
+===================================================== */
+
+.floating-boba-container {
+    position: fixed;
+
+    bottom: 25px;
+    right: 25px;
+
+    z-index: 9999;
+
+    cursor: pointer;
+
+    animation:
+        floatingBoba 3s ease-in-out infinite;
+}
+
+
+/* Boba cup */
+
+.boba-bubble {
+    position: relative;
+
+    width: 65px;
+    height: 72px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 37px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #fff8ef 0%,
+            #f2d2b7 100%
+        );
+
+    border-radius:
+        13px 13px 22px 22px;
+
+    border: 3px solid #8a5a3c;
+
+    box-shadow:
+        0 7px 0 #67432f,
+        0 12px 20px rgba(75, 47, 31, 0.25);
+
+    transition: transform 0.2s;
+}
+
+
+/* Straw */
+
+.boba-bubble::before {
+    content: "";
+
+    position: absolute;
+
+    width: 6px;
+    height: 25px;
+
+    background: #8a5a3c;
+
+    top: -19px;
+    left: 39px;
+
+    border-radius: 8px;
+
+    transform: rotate(9deg);
+}
+
+
+/* Tapioca pearls in floating cup */
+
+.boba-bubble::after {
+    content: "● ● ●";
+
+    position: absolute;
+
+    bottom: 5px;
+
+    left: 0;
+    right: 0;
+
+    text-align: center;
+
+    color: #4b2d20;
+
+    font-size: 10px;
+
+    letter-spacing: 3px;
+}
+
+.floating-boba-container:hover .boba-bubble {
+    transform:
+        scale(1.15)
+        rotate(8deg);
+}
+
+@keyframes floatingBoba {
+
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+
+}
+
+
+/* =====================================================
+   BOBA MODAL
+===================================================== */
+
+.boba-modal-overlay {
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(65, 43, 31, 0.45);
+
+    backdrop-filter: blur(4px);
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    z-index: 10000;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transition: 0.3s ease;
+}
+
+.boba-modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+.boba-modal-card {
+    position: relative;
+
+    background:
+        linear-gradient(
+            145deg,
+            #fffaf4,
+            #fff0e5
+        );
+
+    width: 90%;
+
+    max-width: 320px;
+
+    padding: 25px 20px;
+
+    border-radius: 28px;
+
+    border: 3px solid #d7ad8d;
+
+    box-shadow:
+        0 12px 30px rgba(74, 45, 29, 0.25);
+
+    text-align: center;
+
+    transform: scale(0.8);
+
+    transition: transform 0.3s ease;
+}
+
+.boba-modal-overlay.active .boba-modal-card {
+    transform: scale(1);
+}
+
+
+/* Modal decoration */
+
+.boba-modal-card::before {
+    content: "● ● ●";
+
+    position: absolute;
+
+    top: 10px;
+    left: 15px;
+
+    color: #553326;
+
+    font-size: 9px;
+
+    letter-spacing: 3px;
+}
+
+
+.close-modal-btn,
+.close-quiz-btn {
+    position: absolute;
+
+    top: 10px;
+    right: 15px;
+
+    background: none;
+
+    border: none;
+
+    font-size: 24px;
+
+    color: #8b5e3c;
+
+    cursor: pointer;
+}
+
+.modal-icon {
+    font-size: 38px;
+    margin-bottom: 5px;
+}
+
+.boba-modal-card h3 {
+    color: #70452f;
+
+    font-size: 18px;
+
+    margin-bottom: 8px;
+}
+
+.boba-modal-card p {
+    color: #8a7968;
+
+    font-size: 13px;
+
+    margin-bottom: 20px;
+}
+
+
+/* Modal buttons */
+
+.modal-options {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+.modal-option-btn {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    padding: 10px;
+
+    border-radius: 15px;
+
+    text-decoration: none;
+
+    font-weight: bold;
+
+    font-size: 14px;
+
+    transition: 0.2s;
+
+    cursor: pointer;
+
+    width: 100%;
+}
+
+
+/* Hanzi button */
+
+.hanzi-option {
+    background: #fffaf5;
+
+    color: #8b5e3c;
+
+    border: 2px solid #dcbda5;
+}
+
+.hanzi-option:hover {
+    background: #f9e7d8;
+
+    transform: translateY(-2px);
+}
+
+
+/* Quiz button */
+
+.quiz-option {
+    background: #ead8c8;
+
+    color: #5c3928;
+
+    border: 2px solid #c9a487;
+}
+
+.quiz-option:hover {
+    background: #dfc5af;
+
+    transform: translateY(-2px);
+}
+
+
+/* =====================================================
+   QUIZ MODAL
+===================================================== */
+
+.quiz-modal-overlay {
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(65, 43, 31, 0.5);
+
+    backdrop-filter: blur(4px);
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    z-index: 11000;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transition: 0.3s ease;
+}
+
+.quiz-modal-overlay.active {
+    opacity: 1;
+
+    visibility: visible;
+}
+
+.quiz-modal-card {
+    background:
+        linear-gradient(
+            145deg,
+            #fffaf4,
+            #fff0e5
+        );
+
+    width: 90%;
+
+    max-width: 420px;
+
+    padding: 25px 20px;
+
+    border-radius: 28px;
+
+    border: 3px solid #d7ad8d;
+
+    box-shadow:
+        0 12px 30px rgba(74, 45, 29, 0.25);
+
+    position: relative;
+
+    transform: scale(0.8);
+
+    transition: 0.3s ease;
+}
+
+.quiz-modal-overlay.active .quiz-modal-card {
+    transform: scale(1);
+}
+
+
+/* Quiz header */
+
+.quiz-header {
+    text-align: center;
+
+    margin-bottom: 15px;
+}
+
+.quiz-header span {
+    background: #fffaf5;
+
+    color: #8b5e3c;
+
+    border: 2px solid #dcbda5;
+
+    padding: 5px 14px;
+
+    border-radius: 20px;
+
+    font-size: 12px;
+
+    font-weight: bold;
+}
+
+#quizQuestion {
+    text-align: center;
+
+    color: #70452f;
+
+    font-size: 18px;
+
+    line-height: 1.5;
+
+    margin: 20px 0;
+}
+
+
+/* Quiz answers */
+
+.quiz-options {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+.quiz-answer {
+    background: #fffdf9;
+
+    border: 2px solid #dec4ad;
+
+    border-radius: 15px;
+
+    padding: 12px;
+
+    font-size: 14px;
+
+    color: #5c4033;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+
+    width: 100%;
+}
+
+.quiz-answer:hover:not(:disabled) {
+    background: #f9e7d8;
+
+    transform: translateY(-2px);
+}
+
+.quiz-answer:disabled {
+    cursor: default;
+}
+
+.quiz-answer.correct {
+    background: #dcebdc;
+
+    border-color: #79a879;
+
+    color: #35633b;
+}
+
+.quiz-answer.wrong {
+    background: #ffe5e5;
+
+    border-color: #d98c8c;
+
+    color: #9b3d3d;
+}
+
+
+/* Feedback */
+
+.quiz-feedback {
+    text-align: center;
+
+    min-height: 35px;
+
+    margin-top: 14px;
+
+    font-size: 16px;
+
+    font-weight: bold;
+}
+
+.quiz-feedback.good-job {
+    color: #4f7653;
+
+    animation: goodJobPop 0.5s ease;
+}
+
+.quiz-feedback.try-again {
+    color: #a04444;
+
+    animation: shake 0.4s ease;
+}
+
+
+@keyframes goodJobPop {
+
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+
+    60% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1);
+    }
+
+}
+
+@keyframes shake {
+
+    0%, 100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-5px);
+    }
+
+    50% {
+        transform: translateX(5px);
+    }
+
+    75% {
+        transform: translateX(-5px);
+    }
+
+}
+
+
+/* =====================================================
+   NEXT QUESTION BUTTON
+===================================================== */
+
+.next-question-btn {
+    width: 100%;
+
+    margin-top: 15px;
+
+    padding: 12px;
+
+    border: none;
+
+    border-radius: 15px;
+
+    background: #8b5e3c;
+
+    color: white;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    display: none;
+
+    transition: 0.2s;
+
+    box-shadow:
+        0 5px 0 #65432f,
+        0 7px 12px rgba(91, 62, 43, 0.2);
+}
+
+.next-question-btn:hover {
+    background: #70482f;
+
+    transform: translateY(-2px);
+}
+
+
+/* =====================================================
+   CONFETTI
+===================================================== */
+
+.confetti {
+    position: fixed;
+
+    top: -10px;
+
+    width: 8px;
+    height: 8px;
+
+    z-index: 12000;
+
+    pointer-events: none;
+
+    animation:
+        confettiFall 1.5s ease-out forwards;
+}
+
+@keyframes confettiFall {
+
+    0% {
+        transform:
+            translateY(0)
+            rotate(0deg);
+
+        opacity: 1;
+    }
+
+    100% {
+        transform:
+            translateY(100vh)
+            rotate(720deg);
+
+        opacity: 0;
+    }
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 700px) {
+
     .lesson-card,
     .conversation-card,
     .grammar-card {
-        background: #ffffff;
-        padding: 30px;
-        border-radius: 24px;
-        box-shadow: 0 10px 25px rgba(255, 183, 178, 0.15);
-        margin: 25px auto;
-        max-width: 780px;
-        border: 2px dashed #ffb7b2;
-    }
+        padding: 15px;
 
-    .lesson-card h2,
-    .conversation-card h2,
-    .grammar-card h2 {
-        color: #ff6f59;
-        font-size: 24px;
-        margin-bottom: 10px;
-        text-align: center;
-    }
-
-    .lesson-card p {
-        color: #8a7968;
-        font-size: 14px;
-        line-height: 1.5;
-        text-align: center;
-        margin-bottom: 25px;
-    }
-
-    /* =====================================================
-       CUTE STICKER CARDS GRID
-    ===================================================== */
-    .vocab-container {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 16px;
-        margin-top: 15px;
-        justify-content: center;
+        margin: 15px;
     }
 
     .vocab-pill {
-        position: relative;
-        background: linear-gradient(135deg, #fff5f5 0%, #fff9e6 100%);
-        border-radius: 20px;
-        padding: 14px 12px;
-        width: 160px;
-        text-align: center;
-        border: 2px solid #ffcad4;
-        box-shadow: 0 6px 12px rgba(255, 182, 193, 0.2);
-        transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-        cursor: pointer;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        overflow: hidden;
+        width: 140px;
     }
 
-    /* Efek kilau lucu di pojok stiker */
-    .vocab-pill::before {
-        content: "✨";
-        position: absolute;
-        top: 6px;
-        right: 8px;
-        font-size: 12px;
-        opacity: 0.7;
-        transition: 0.3s;
-    }
+}
 
-    .vocab-pill:hover {
-        transform: translateY(-5px) rotate(1.5deg) scale(1.03);
-        background: linear-gradient(135deg, #ffe5ec 0%, #fff0b3 100%);
-        border-color: #ff8fab;
-        box-shadow: 0 10px 20px rgba(255, 143, 171, 0.3);
-    }
-
-    .vocab-pill:hover::before {
-        transform: scale(1.3) rotate(20deg);
-        opacity: 1;
-    }
-
-    .vocab-pill:active {
-        transform: scale(0.95);
-    }
-
-    .vocab-pill .hanzi {
-        font-size: 18px;
-        font-weight: bold;
-        color: #d8576b;
-        line-height: 1.2;
-        margin-top: 2px;
-    }
-
-    .vocab-pill .pinyin {
-        font-size: 11px;
-        margin-top: 5px;
-        color: #7b68ee;
-        font-weight: 600;
-    }
-
-    .vocab-pill .meaning {
-        margin-top: 4px;
-        font-size: 10px;
-        color: #8c7355;
-        line-height: 1.2;
-    }
-
-    /* =====================================================
-       FLOATING BOBA
-    ===================================================== */
-    .floating-boba-container {
-        position: fixed;
-        bottom: 25px;
-        right: 25px;
-        z-index: 9999;
-        cursor: pointer;
-        animation: floatingBoba 3s ease-in-out infinite;
-    }
-
-    .boba-bubble {
-        font-size: 40px;
-        background: #fff0f3;
-        width: 65px;
-        height: 65px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 50%;
-        border: 3px solid #ff8fab;
-        box-shadow: 0 8px 20px rgba(255, 143, 171, 0.35);
-        transition: transform 0.2s;
-    }
-
-    .floating-boba-container:hover .boba-bubble {
-        transform: scale(1.15) rotate(10deg);
-    }
-
-    @keyframes floatingBoba {
-        0%, 100% { transform: translateY(0); }
-        50% { transform: translateY(-8px); }
-    }
-
-    /* =====================================================
-       BOBA MODAL
-    ===================================================== */
-    .boba-modal-overlay {
-        position: fixed;
-        inset: 0;
-        background: rgba(0, 0, 0, 0.4);
-        backdrop-filter: blur(3px);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 10000;
-        opacity: 0;
-        visibility: hidden;
-        transition: 0.3s ease;
-    }
-
-    .boba-modal-overlay.active {
-        opacity: 1;
-        visibility: visible;
-    }
-
-    .boba-modal-card {
-        background: #fff5f7;
-        width: 90%;
-        max-width: 320px;
-        padding: 25px 20px;
-        border-radius: 24px;
-        border: 3px solid #ffb7b2;
-        box-shadow: 0 10px 25px rgba(255, 183, 178, 0.3);
-        text-align: center;
-        position: relative;
-        transform: scale(0.8);
-        transition: transform 0.3s ease;
-    }
-
-    .boba-modal-overlay.active .boba-modal-card {
-        transform: scale(1);
-    }
-
-    .close-modal-btn,
-    .close-quiz-btn {
-        position: absolute;
-        top: 10px;
-        right: 15px;
-        background: none;
-        border: none;
-        font-size: 24px;
-        color: #ff6f59;
-        cursor: pointer;
-    }
-
-    .modal-icon {
-        font-size: 32px;
-        margin-bottom: 5px;
-    }
-
-    .boba-modal-card h3 {
-        color: #d8576b;
-        font-size: 18px;
-        margin-bottom: 8px;
-    }
-
-    .boba-modal-card p {
-        color: #8a7968;
-        font-size: 13px;
-        margin-bottom: 20px;
-    }
-
-    .modal-options {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .modal-option-btn {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        padding: 10px;
-        border-radius: 14px;
-        text-decoration: none;
-        font-weight: bold;
-        font-size: 14px;
-        transition: 0.2s;
-        cursor: pointer;
-        width: 100%;
-    }
-
-    .hanzi-option {
-        background: #fff;
-        color: #ff6f59;
-        border: 2px solid #ffcad4;
-    }
-
-    .hanzi-option:hover {
-        background: #ffe5ec;
-    }
-
-    .quiz-option {
-        background: #e2f0cb;
-        color: #386641;
-        border: 2px solid #b7e4c7;
-    }
-
-    .quiz-option:hover {
-        background: #d8f3dc;
-    }
-
-    /* =====================================================
-       QUIZ MODAL
-    ===================================================== */
-    .quiz-modal-overlay {
-        position: fixed;
-        inset: 0;
-        background: rgba(0, 0, 0, 0.45);
-        backdrop-filter: blur(4px);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 11000;
-        opacity: 0;
-        visibility: hidden;
-        transition: 0.3s ease;
-    }
-
-    .quiz-modal-overlay.active {
-        opacity: 1;
-        visibility: visible;
-    }
-
-    .quiz-modal-card {
-        background: #fff5f7;
-        width: 90%;
-        max-width: 420px;
-        padding: 25px 20px;
-        border-radius: 24px;
-        border: 3px solid #ffb7b2;
-        box-shadow: 0 10px 30px rgba(255, 183, 178, 0.3);
-        position: relative;
-        transform: scale(0.8);
-        transition: 0.3s ease;
-    }
-
-    .quiz-modal-overlay.active .quiz-modal-card {
-        transform: scale(1);
-    }
-
-    .quiz-header {
-        text-align: center;
-        margin-bottom: 15px;
-    }
-
-    .quiz-header span {
-        background: #fff;
-        color: #ff6f59;
-        border: 2px solid #ffcad4;
-        padding: 5px 14px;
-        border-radius: 20px;
-        font-size: 12px;
-        font-weight: bold;
-    }
-
-    #quizQuestion {
-        text-align: center;
-        color: #d8576b;
-        font-size: 18px;
-        line-height: 1.5;
-        margin: 20px 0;
-    }
-
-    .quiz-options {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .quiz-answer {
-        background: white;
-        border: 2px solid #ffcad4;
-        border-radius: 14px;
-        padding: 12px;
-        font-size: 14px;
-        color: #5c4033;
-        cursor: pointer;
-        transition: 0.2s;
-        width: 100%;
-    }
-
-    .quiz-answer:hover:not(:disabled) {
-        background: #ffe5ec;
-        transform: translateY(-2px);
-    }
-
-    .quiz-answer:disabled {
-        cursor: default;
-    }
-
-    .quiz-answer.correct {
-        background: #d8f3dc;
-        border-color: #52b788;
-        color: #2d6a4f;
-    }
-
-    .quiz-answer.wrong {
-        background: #ffe5e5;
-        border-color: #e5989b;
-        color: #9b2226;
-    }
-
-    .quiz-feedback {
-        text-align: center;
-        min-height: 35px;
-        margin-top: 14px;
-        font-size: 16px;
-        font-weight: bold;
-    }
-
-    .quiz-feedback.good-job {
-        color: #2d6a4f;
-        animation: goodJobPop 0.5s ease;
-    }
-
-    .quiz-feedback.try-again {
-        color: #9b2226;
-        animation: shake 0.4s ease;
-    }
-
-    @keyframes goodJobPop {
-        0% { transform: scale(0.5); opacity: 0; }
-        60% { transform: scale(1.2); opacity: 1; }
-        100% { transform: scale(1); }
-    }
-
-    @keyframes shake {
-        0%, 100% { transform: translateX(0); }
-        25% { transform: translateX(-5px); }
-        50% { transform: translateX(5px); }
-        75% { transform: translateX(-5px); }
-    }
-
-    .next-question-btn {
-        width: 100%;
-        margin-top: 15px;
-        padding: 12px;
-        border: none;
-        border-radius: 14px;
-        background: #ff6f59;
-        color: white;
-        font-size: 14px;
-        font-weight: bold;
-        cursor: pointer;
-        display: none;
-        transition: 0.2s;
-        box-shadow: 0 4px 12px rgba(255, 111, 89, 0.3);
-    }
-
-    .next-question-btn:hover {
-        background: #e85d44;
-    }
-
-    .confetti {
-        position: fixed;
-        top: -10px;
-        width: 8px;
-        height: 8px;
-        z-index: 12000;
-        pointer-events: none;
-        animation: confettiFall 1.5s ease-out forwards;
-    }
-
-    @keyframes confettiFall {
-        0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-        100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
-    }
-
-    @media (max-width: 700px) {
-        .lesson-card, .conversation-card, .grammar-card { padding: 15px; margin: 15px; }
-        .vocab-pill { width: 140px; }
-    }
 </style>
 </head>
+
 <body>
+
 <div class="app-container">
 
 <!-- SIDEBAR CONTAINER -->
+
 <div id="sidebar-container"></div>
+
 
 <main class="main-content">
 
-    <!-- =================================================
-         TAIWAN TOURIST SURVIVAL PHRASES
-    ================================================= -->
-    <div class="lesson-card">
-        <h2>💖 Taiwan Tourist Survival Phrases 💖</h2>
-        <p>Klik stiker cantiknya untuk mendengarkan pelafalan Mandarin beserta efek suara seru! ✨</p>
-        
-        <div class="vocab-container">
-            <!-- 1 -->
-            <div class="vocab-pill" onclick="playAudioWithEffect('不好意思', 'excuse-me')">
-                <div class="hanzi">不好意思</div>
-                <div class="pinyin">(bù hǎoyìsi)</div>
-                <div class="meaning">Excuse me / Sorry</div>
+<!-- =================================================
+     TAIWAN TOURIST SURVIVAL PHRASES
+================================================= -->
+
+<div class="lesson-card">
+
+    <h2>🧋 Taiwan Tourist Survival Phrases 🧋</h2>
+
+    <p>
+        Tap a cute boba sticker to hear the Mandarin pronunciation
+        with a fun sound effect! ✨
+    </p>
+
+
+    <div class="vocab-container">
+
+        <!-- 1 -->
+        <div class="vocab-pill"
+             onclick="playAudioWithEffect('不好意思', 'excuse-me')">
+
+            <div class="hanzi">不好意思</div>
+
+            <div class="pinyin">
+                (bù hǎoyìsi)
             </div>
-            <!-- 2 -->
-            <div class="vocab-pill" onclick="playAudioWithEffect('我不會中文', 'robot')">
-                <div class="hanzi">我不會中文</div>
-                <div class="pinyin">(wǒ bú huì zhōngwén)</div>
-                <div class="meaning">I don't speak Chinese</div>
+
+            <div class="meaning">
+                Excuse me / Sorry
             </div>
-            <!-- 3 -->
-            <div class="vocab-pill" onclick="playAudioWithEffect('聽不懂', 'wind')">
-                <div class="hanzi">聽不懂</div>
-                <div class="pinyin">(tīng bù dǒng)</div>
-                <div class="meaning">Don't understand (listen)</div>
-            </div>
-            <!-- 4 -->
-            <div class="vocab-pill" onclick="playAudioWithEffect('看不懂', 'drop')">
-                <div class="hanzi">看不懂</div>
-                <div class="pinyin">(kàn bù dǒng)</div>
-                <div class="meaning">Don't understand (read)</div>
-            </div>
-            <!-- 5 -->
-            <div class="vocab-pill" onclick="playAudioWithEffect('會講英文嗎', 'whistle')">
-                <div class="hanzi">會講英文嗎</div>
-                <div class="pinyin">(huì jiǎng yīngwén ma)</div>
-                <div class="meaning">Do you speak English?</div>
-            </div>
-            <!-- 6 -->
-            <div class="vocab-pill" onclick="playAudioWithEffect('可以說慢一點嗎', 'slow')">
-                <div class="hanzi">可以說慢一點嗎</div>
-                <div class="pinyin">(kěyǐ shuō màn yīdiǎn ma)</div>
-                <div class="meaning">Speak slower please</div>
-            </div>
-            <!-- 7 -->
-            <div class="vocab-pill" onclick="playAudioWithEffect('我不知道', 'cricket')">
-                <div class="hanzi">我不知道</div>
-                <div class="pinyin">(wǒ bù zhīdào)</div>
-                <div class="meaning">I have no idea</div>
-            </div>
-            <!-- 8 -->
-            <div class="vocab-pill" onclick="playAudioWithEffect('請等一下', 'clock')">
-                <div class="hanzi">請等一下</div>
-                <div class="pinyin">(qǐng děng yīxià)</div>
-                <div class="meaning">Please wait a moment</div>
-            </div>
-            <!-- 9 -->
-            <div class="vocab-pill" onclick="playAudioWithEffect('我要', 'kaching')">
-                <div class="hanzi">我要</div>
-                <div class="pinyin">(wǒ yào)</div>
-                <div class="meaning">I want...</div>
-            </div>
-            <!-- 10 -->
-            <div class="vocab-pill" onclick="playAudioWithEffect('這個', 'pop')">
-                <div class="hanzi">這個</div>
-                <div class="pinyin">(zhège)</div>
-                <div class="meaning">This one</div>
-            </div>
-            <!-- 11 -->
-            <div class="vocab-pill" onclick="playAudioWithEffect('那個', 'pop')">
-                <div class="hanzi">那個</div>
-                <div class="pinyin">(nàge)</div>
-                <div class="meaning">That one</div>
-            </div>
-            <!-- 12 -->
-            <div class="vocab-pill" onclick="playAudioWithEffect('這裡', 'beep')">
-                <div class="hanzi">這裡</div>
-                <div class="pinyin">(zhèlǐ)</div>
-                <div class="meaning">Here</div>
-            </div>
-            <!-- 13 -->
-            <div class="vocab-pill" onclick="playAudioWithEffect('那邊', 'whoosh')">
-                <div class="hanzi">那邊</div>
-                <div class="pinyin">(nàbiān)</div>
-                <div class="meaning">Over there</div>
-            </div>
-            <!-- 14 -->
-            <div class="vocab-pill" onclick="playAudioWithEffect('哪裡', 'coin')">
-                <div class="hanzi">哪裡</div>
-                <div class="pinyin">(nǎlǐ)</div>
-                <div class="meaning">Where?</div>
-            </div>
-            <!-- 15 -->
-            <div class="vocab-pill" onclick="playAudioWithEffect('左邊', 'turn')">
-                <div class="hanzi">左邊</div>
-                <div class="pinyin">(zuǒbiān)</div>
-                <div class="meaning">Left</div>
-            </div>
-            <!-- 16 -->
-            <div class="vocab-pill" onclick="playAudioWithEffect('右邊', 'turn')">
-                <div class="hanzi">右邊</div>
-                <div class="pinyin">(yòubiān)</div>
-                <div class="meaning">Right</div>
-            </div>
-            <!-- 17 -->
-            <div class="vocab-pill" onclick="playAudioWithEffect('多少錢', 'kaching')">
-                <div class="hanzi">多少錢</div>
-                <div class="pinyin">(duōshǎo qián)</div>
-                <div class="meaning">How much is this?</div>
-            </div>
-            <!-- 18 -->
-            <div class="vocab-pill" onclick="playAudioWithEffect('廁所在哪裡', 'water')">
-                <div class="hanzi">廁所在哪裡</div>
-                <div class="pinyin">(cèsuǒ zài nǎlǐ)</div>
-                <div class="meaning">Where is the restroom?</div>
-            </div>
-            <!-- 19 -->
-            <div class="vocab-pill" onclick="playAudioWithEffect('Wifi密碼是多少', 'signal')">
-                <div class="hanzi">Wifi密碼是多少</div>
-                <div class="pinyin">(Wifi mìmǎ shì duōshǎo)</div>
-                <div class="meaning">What's the Wifi password?</div>
-            </div>
-            <!-- 20 -->
-            <div class="vocab-pill" onclick="playAudioWithEffect('我迷路了', 'drama')">
-                <div class="hanzi">我迷路了</div>
-                <div class="pinyin">(wǒ mílù le)</div>
-                <div class="meaning">I am lost!</div>
-            </div>
-            <!-- 21 -->
-            <div class="vocab-pill" onclick="playAudioWithEffect('你好', 'bell')">
-                <div class="hanzi">你好</div>
-                <div class="pinyin">(nǐ hǎo)</div>
-                <div class="meaning">Hello</div>
-            </div>
-            <!-- 22 -->
-            <div class="vocab-pill" onclick="playAudioWithEffect('謝謝', 'cheer')">
-                <div class="hanzi">謝謝</div>
-                <div class="pinyin">(xièxiè)</div>
-                <div class="meaning">Thank you</div>
-            </div>
-            <!-- 23 -->
-            <div class="vocab-pill" onclick="playAudioWithEffect('怎麼走', 'gps')">
-                <div class="hanzi">怎麼走</div>
-                <div class="pinyin">(zěnme zǒu)</div>
-                <div class="meaning">How do I get there?</div>
-            </div>
+
         </div>
+
+
+        <!-- 2 -->
+        <div class="vocab-pill"
+             onclick="playAudioWithEffect('我不會中文', 'robot')">
+
+            <div class="hanzi">我不會中文</div>
+
+            <div class="pinyin">
+                (wǒ bú huì zhōngwén)
+            </div>
+
+            <div class="meaning">
+                I don't speak Chinese
+            </div>
+
+        </div>
+
+
+        <!-- 3 -->
+        <div class="vocab-pill"
+             onclick="playAudioWithEffect('聽不懂', 'wind')">
+
+            <div class="hanzi">聽不懂</div>
+
+            <div class="pinyin">
+                (tīng bù dǒng)
+            </div>
+
+            <div class="meaning">
+                I don't understand
+            </div>
+
+        </div>
+
+
+        <!-- 4 -->
+        <div class="vocab-pill"
+             onclick="playAudioWithEffect('看不懂', 'drop')">
+
+            <div class="hanzi">看不懂</div>
+
+            <div class="pinyin">
+                (kàn bù dǒng)
+            </div>
+
+            <div class="meaning">
+                I don't understand what I'm reading
+            </div>
+
+        </div>
+
+
+        <!-- 5 -->
+        <div class="vocab-pill"
+             onclick="playAudioWithEffect('會講英文嗎', 'whistle')">
+
+            <div class="hanzi">會講英文嗎</div>
+
+            <div class="pinyin">
+                (huì jiǎng yīngwén ma)
+            </div>
+
+            <div class="meaning">
+                Do you speak English?
+            </div>
+
+        </div>
+
+
+        <!-- 6 -->
+        <div class="vocab-pill"
+             onclick="playAudioWithEffect('可以說慢一點嗎', 'slow')">
+
+            <div class="hanzi">可以說慢一點嗎</div>
+
+            <div class="pinyin">
+                (kěyǐ shuō màn yīdiǎn ma)
+            </div>
+
+            <div class="meaning">
+                Could you speak more slowly?
+            </div>
+
+        </div>
+
+
+        <!-- 7 -->
+        <div class="vocab-pill"
+             onclick="playAudioWithEffect('我不知道', 'cricket')">
+
+            <div class="hanzi">我不知道</div>
+
+            <div class="pinyin">
+                (wǒ bù zhīdào)
+            </div>
+
+            <div class="meaning">
+                I don't know
+            </div>
+
+        </div>
+
+
+        <!-- 8 -->
+        <div class="vocab-pill"
+             onclick="playAudioWithEffect('請等一下', 'clock')">
+
+            <div class="hanzi">請等一下</div>
+
+            <div class="pinyin">
+                (qǐng děng yīxià)
+            </div>
+
+            <div class="meaning">
+                Please wait a moment
+            </div>
+
+        </div>
+
+
+        <!-- 9 -->
+        <div class="vocab-pill"
+             onclick="playAudioWithEffect('我要', 'kaching')">
+
+            <div class="hanzi">我要</div>
+
+            <div class="pinyin">
+                (wǒ yào)
+            </div>
+
+            <div class="meaning">
+                I want...
+            </div>
+
+        </div>
+
+
+        <!-- 10 -->
+        <div class="vocab-pill"
+             onclick="playAudioWithEffect('這個', 'pop')">
+
+            <div class="hanzi">這個</div>
+
+            <div class="pinyin">
+                (zhège)
+            </div>
+
+            <div class="meaning">
+                This one
+            </div>
+
+        </div>
+
+
+        <!-- 11 -->
+        <div class="vocab-pill"
+             onclick="playAudioWithEffect('那個', 'pop')">
+
+            <div class="hanzi">那個</div>
+
+            <div class="pinyin">
+                (nàge)
+            </div>
+
+            <div class="meaning">
+                That one
+            </div>
+
+        </div>
+
+
+        <!-- 12 -->
+        <div class="vocab-pill"
+             onclick="playAudioWithEffect('這裡', 'beep')">
+
+            <div class="hanzi">這裡</div>
+
+            <div class="pinyin">
+                (zhèlǐ)
+            </div>
+
+            <div class="meaning">
+                Here
+            </div>
+
+        </div>
+
+
+        <!-- 13 -->
+        <div class="vocab-pill"
+             onclick="playAudioWithEffect('那邊', 'whoosh')">
+
+            <div class="hanzi">那邊</div>
+
+            <div class="pinyin">
+                (nàbiān)
+            </div>
+
+            <div class="meaning">
+                Over there
+            </div>
+
+        </div>
+
+
+        <!-- 14 -->
+        <div class="vocab-pill"
+             onclick="playAudioWithEffect('哪裡', 'coin')">
+
+            <div class="hanzi">哪裡</div>
+
+            <div class="pinyin">
+                (nǎlǐ)
+            </div>
+
+            <div class="meaning">
+                Where?
+            </div>
+
+        </div>
+
+
+        <!-- 15 -->
+        <div class="vocab-pill"
+             onclick="playAudioWithEffect('左邊', 'turn')">
+
+            <div class="hanzi">左邊</div>
+
+            <div class="pinyin">
+                (zuǒbiān)
+            </div>
+
+            <div class="meaning">
+                Left
+            </div>
+
+        </div>
+
+
+        <!-- 16 -->
+        <div class="vocab-pill"
+             onclick="playAudioWithEffect('右邊', 'turn')">
+
+            <div class="hanzi">右邊</div>
+
+            <div class="pinyin">
+                (yòubiān)
+            </div>
+
+            <div class="meaning">
+                Right
+            </div>
+
+        </div>
+
+
+        <!-- 17 -->
+        <div class="vocab-pill"
+             onclick="playAudioWithEffect('多少錢', 'kaching')">
+
+            <div class="hanzi">多少錢</div>
+
+            <div class="pinyin">
+                (duōshǎo qián)
+            </div>
+
+            <div class="meaning">
+                How much is this?
+            </div>
+
+        </div>
+
+
+        <!-- 18 -->
+        <div class="vocab-pill"
+             onclick="playAudioWithEffect('廁所在哪裡', 'water')">
+
+            <div class="hanzi">廁所在哪裡</div>
+
+            <div class="pinyin">
+                (cèsuǒ zài nǎlǐ)
+            </div>
+
+            <div class="meaning">
+                Where is the restroom?
+            </div>
+
+        </div>
+
+
+        <!-- 19 -->
+        <div class="vocab-pill"
+             onclick="playAudioWithEffect('Wifi密碼是多少', 'signal')">
+
+            <div class="hanzi">Wifi密碼是多少</div>
+
+            <div class="pinyin">
+                (Wifi mìmǎ shì duōshǎo)
+            </div>
+
+            <div class="meaning">
+                What's the Wi-Fi password?
+            </div>
+
+        </div>
+
+
+        <!-- 20 -->
+        <div class="vocab-pill"
+             onclick="playAudioWithEffect('我迷路了', 'drama')">
+
+            <div class="hanzi">我迷路了</div>
+
+            <div class="pinyin">
+                (wǒ mílù le)
+            </div>
+
+            <div class="meaning">
+                I'm lost!
+            </div>
+
+        </div>
+
+
+        <!-- 21 -->
+        <div class="vocab-pill"
+             onclick="playAudioWithEffect('你好', 'bell')">
+
+            <div class="hanzi">你好</div>
+
+            <div class="pinyin">
+                (nǐ hǎo)
+            </div>
+
+            <div class="meaning">
+                Hello
+            </div>
+
+        </div>
+
+
+        <!-- 22 -->
+        <div class="vocab-pill"
+             onclick="playAudioWithEffect('謝謝', 'cheer')">
+
+            <div class="hanzi">謝謝</div>
+
+            <div class="pinyin">
+                (xièxiè)
+            </div>
+
+            <div class="meaning">
+                Thank you
+            </div>
+
+        </div>
+
+
+        <!-- 23 -->
+        <div class="vocab-pill"
+             onclick="playAudioWithEffect('怎麼走', 'gps')">
+
+            <div class="hanzi">怎麼走</div>
+
+            <div class="pinyin">
+                (zěnme zǒu)
+            </div>
+
+            <div class="meaning">
+                How do I get there?
+            </div>
+
+        </div>
+
     </div>
+
+</div>
 
 </main>
 </div>
 
+
 <!-- =====================================================
      FLOATING BOBA BUTTON
 ===================================================== -->
+
 <div class="floating-boba-container" id="floatingBoba">
-    <div class="boba-bubble">🧋</div>
+
+    <div class="boba-bubble"></div>
+
 </div>
+
 
 <!-- =====================================================
      BOBA ACTIVITY MODAL
 ===================================================== -->
+
 <div class="boba-modal-overlay" id="bobaModal">
+
     <div class="boba-modal-card">
-        <button class="close-modal-btn" id="closeModal">&times;</button>
-        <div class="modal-icon">🧋✨</div>
-        <h3>Do you want to practice?</h3>
-        <p>Choose an activity to explore your survival phrases:</p>
-        <div class="modal-options">
-            <a href="https://drive.google.com/file/d/1M64qDU5ASkhzyvvEVQj1vLgPZkQ6mITg/view?usp=drivesdk" class="modal-option-btn hanzi-option" target="_blank">
-                <span>📝</span> Writing Hanzi
-            </a>
-            <button class="modal-option-btn quiz-option" id="openQuiz">
-                <span>🧠</span> Survival Quiz
-            </button>
+
+        <button
+            class="close-modal-btn"
+            id="closeModal">
+            &times;
+        </button>
+
+        <div class="modal-icon">
+            🧋✨
         </div>
+
+        <h3>
+            Ready for a boba break?
+        </h3>
+
+        <p>
+            Choose an activity and practice your Taiwan survival phrases!
+        </p>
+
+        <div class="modal-options">
+
+            <a
+                href="https://drive.google.com/file/d/1M64qDU5ASkhzyvvEVQj1vLgPZkQ6mITg/view?usp=drivesdk"
+                class="modal-option-btn hanzi-option"
+                target="_blank">
+
+                <span>📝</span>
+                Writing Hanzi
+
+            </a>
+
+            <button
+                class="modal-option-btn quiz-option"
+                id="openQuiz">
+
+                <span>🧠</span>
+                Survival Quiz
+
+            </button>
+
+        </div>
+
     </div>
+
 </div>
 
+
 <!-- =====================================================
-     QUIZ MODAL (10 QUESTIONS)
+     QUIZ MODAL
 ===================================================== -->
+
 <div class="quiz-modal-overlay" id="quizModal">
+
     <div class="quiz-modal-card">
-        <button class="close-quiz-btn" id="closeQuiz">&times;</button>
+
+        <button
+            class="close-quiz-btn"
+            id="closeQuiz">
+
+            &times;
+
+        </button>
+
         <div class="quiz-header">
-            <span id="quizNumber">Question 1 / 10</span>
+
+            <span id="quizNumber">
+                Question 1 / 10
+            </span>
+
         </div>
-        <h3 id="quizQuestion">Loading...</h3>
-        <div class="quiz-options" id="quizOptions"></div>
-        <div id="quizFeedback" class="quiz-feedback"></div>
-        <button class="next-question-btn" id="nextQuestion">Next →</button>
+
+        <h3 id="quizQuestion">
+            Loading...
+        </h3>
+
+        <div
+            class="quiz-options"
+            id="quizOptions">
+        </div>
+
+        <div
+            id="quizFeedback"
+            class="quiz-feedback">
+        </div>
+
+        <button
+            class="next-question-btn"
+            id="nextQuestion">
+
+            Next →
+
+        </button>
+
     </div>
+
 </div>
+
 
 <!-- =====================================================
      JAVASCRIPT
 ===================================================== -->
+
 <script>
+
 function playAudioWithEffect(text, soundType) {
-    // 1. Text-to-Speech Pronunciation
+
+    /* Text-to-speech pronunciation */
+
     if ('speechSynthesis' in window) {
+
         window.speechSynthesis.cancel();
-        const utterance = new SpeechSynthesisUtterance(text);
+
+        const utterance =
+            new SpeechSynthesisUtterance(text);
+
         utterance.lang = 'zh-TW';
+
         utterance.rate = 0.85;
+
         window.speechSynthesis.speak(utterance);
     }
 
-    // 2. Sound Effect using Web Audio API
+
+    /* Sound effect */
+
     try {
-        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        const osc = audioCtx.createOscillator();
-        const gainNode = audioCtx.createGain();
-        
+
+        const audioCtx =
+            new (
+                window.AudioContext ||
+                window.webkitAudioContext
+            )();
+
+        const osc =
+            audioCtx.createOscillator();
+
+        const gainNode =
+            audioCtx.createGain();
+
         osc.connect(gainNode);
+
         gainNode.connect(audioCtx.destination);
 
         let now = audioCtx.currentTime;
 
+
         if (soundType === 'excuse-me') {
+
             osc.type = 'sine';
-            osc.frequency.setValueAtTime(300, now);
-            osc.frequency.exponentialRampToValueAtTime(150, now + 0.3);
-            gainNode.gain.setValueAtTime(0.3, now);
-            gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
+
+            osc.frequency.setValueAtTime(
+                300,
+                now
+            );
+
+            osc.frequency.exponentialRampToValueAtTime(
+                150,
+                now + 0.3
+            );
+
+            gainNode.gain.setValueAtTime(
+                0.3,
+                now
+            );
+
+            gainNode.gain.exponentialRampToValueAtTime(
+                0.01,
+                now + 0.3
+            );
+
             osc.start(now);
+
             osc.stop(now + 0.3);
-        } else if (soundType === 'robot' || soundType === 'wind') {
+
+        }
+
+
+        else if (
+            soundType === 'robot' ||
+            soundType === 'wind'
+        ) {
+
             osc.type = 'sawtooth';
-            osc.frequency.setValueAtTime(120, now);
-            osc.frequency.setValueAtTime(80, now + 0.15);
-            gainNode.gain.setValueAtTime(0.2, now);
-            gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
+
+            osc.frequency.setValueAtTime(
+                120,
+                now
+            );
+
+            osc.frequency.setValueAtTime(
+                80,
+                now + 0.15
+            );
+
+            gainNode.gain.setValueAtTime(
+                0.2,
+                now
+            );
+
+            gainNode.gain.exponentialRampToValueAtTime(
+                0.01,
+                now + 0.3
+            );
+
             osc.start(now);
+
             osc.stop(now + 0.3);
-        } else if (soundType === 'drop' || soundType === 'drama') {
+
+        }
+
+
+        else if (
+            soundType === 'drop' ||
+            soundType === 'drama'
+        ) {
+
             osc.type = 'triangle';
-            osc.frequency.setValueAtTime(400, now);
-            osc.frequency.exponentialRampToValueAtTime(80, now + 0.4);
-            gainNode.gain.setValueAtTime(0.4, now);
-            gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.4);
+
+            osc.frequency.setValueAtTime(
+                400,
+                now
+            );
+
+            osc.frequency.exponentialRampToValueAtTime(
+                80,
+                now + 0.4
+            );
+
+            gainNode.gain.setValueAtTime(
+                0.4,
+                now
+            );
+
+            gainNode.gain.exponentialRampToValueAtTime(
+                0.01,
+                now + 0.4
+            );
+
             osc.start(now);
+
             osc.stop(now + 0.4);
-        } else if (soundType === 'kaching' || soundType === 'coin') {
+
+        }
+
+
+        else if (
+            soundType === 'kaching' ||
+            soundType === 'coin'
+        ) {
+
             osc.type = 'sine';
-            osc.frequency.setValueAtTime(587.33, now); 
-            osc.frequency.setValueAtTime(880, now + 0.1); 
-            gainNode.gain.setValueAtTime(0.3, now);
-            gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.35);
+
+            osc.frequency.setValueAtTime(
+                587.33,
+                now
+            );
+
+            osc.frequency.setValueAtTime(
+                880,
+                now + 0.1
+            );
+
+            gainNode.gain.setValueAtTime(
+                0.3,
+                now
+            );
+
+            gainNode.gain.exponentialRampToValueAtTime(
+                0.01,
+                now + 0.35
+            );
+
             osc.start(now);
+
             osc.stop(now + 0.35);
-        } else if (soundType === 'bell' || soundType === 'cheer') {
+
+        }
+
+
+        else if (
+            soundType === 'bell' ||
+            soundType === 'cheer'
+        ) {
+
             osc.type = 'sine';
-            osc.frequency.setValueAtTime(523.25, now); 
-            osc.frequency.setValueAtTime(659.25, now + 0.15); 
-            gainNode.gain.setValueAtTime(0.3, now);
-            gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.35);
+
+            osc.frequency.setValueAtTime(
+                523.25,
+                now
+            );
+
+            osc.frequency.setValueAtTime(
+                659.25,
+                now + 0.15
+            );
+
+            gainNode.gain.setValueAtTime(
+                0.3,
+                now
+            );
+
+            gainNode.gain.exponentialRampToValueAtTime(
+                0.01,
+                now + 0.35
+            );
+
             osc.start(now);
+
             osc.stop(now + 0.35);
-        } else {
+
+        }
+
+
+        else {
+
             osc.type = 'sine';
-            osc.frequency.setValueAtTime(440, now);
-            osc.frequency.exponentialRampToValueAtTime(220, now + 0.2);
-            gainNode.gain.setValueAtTime(0.3, now);
-            gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.2);
+
+            osc.frequency.setValueAtTime(
+                440,
+                now
+            );
+
+            osc.frequency.exponentialRampToValueAtTime(
+                220,
+                now + 0.2
+            );
+
+            gainNode.gain.setValueAtTime(
+                0.3,
+                now
+            );
+
+            gainNode.gain.exponentialRampToValueAtTime(
+                0.01,
+                now + 0.2
+            );
+
             osc.start(now);
+
             osc.stop(now + 0.2);
         }
+
     } catch (e) {
-        // Fallback if audio context isn't allowed yet
+
+        /* Audio fallback */
     }
 }
 
-const floatingBoba = document.getElementById('floatingBoba');
-const bobaModal = document.getElementById('bobaModal');
-const closeModal = document.getElementById('closeModal');
 
-floatingBoba.addEventListener('click', () => bobaModal.classList.add('active'));
-closeModal.addEventListener('click', () => bobaModal.classList.remove('active'));
-bobaModal.addEventListener('click', (e) => { if (e.target === bobaModal) bobaModal.classList.remove('active'); });
+/* =====================================================
+   BOBA MODAL
+===================================================== */
 
-const quizModal = document.getElementById('quizModal');
-const openQuiz = document.getElementById('openQuiz');
-const closeQuiz = document.getElementById('closeQuiz');
-const quizQuestion = document.getElementById('quizQuestion');
-const quizOptions = document.getElementById('quizOptions');
-const quizNumber = document.getElementById('quizNumber');
-const quizFeedback = document.getElementById('quizFeedback');
-const nextQuestion = document.getElementById('nextQuestion');
+const floatingBoba =
+    document.getElementById('floatingBoba');
+
+const bobaModal =
+    document.getElementById('bobaModal');
+
+const closeModal =
+    document.getElementById('closeModal');
+
+
+floatingBoba.addEventListener(
+    'click',
+    () => bobaModal.classList.add('active')
+);
+
+closeModal.addEventListener(
+    'click',
+    () => bobaModal.classList.remove('active')
+);
+
+bobaModal.addEventListener(
+    'click',
+    (e) => {
+
+        if (e.target === bobaModal) {
+            bobaModal.classList.remove('active');
+        }
+
+    }
+);
+
+
+/* =====================================================
+   QUIZ
+===================================================== */
+
+const quizModal =
+    document.getElementById('quizModal');
+
+const openQuiz =
+    document.getElementById('openQuiz');
+
+const closeQuiz =
+    document.getElementById('closeQuiz');
+
+const quizQuestion =
+    document.getElementById('quizQuestion');
+
+const quizOptions =
+    document.getElementById('quizOptions');
+
+const quizNumber =
+    document.getElementById('quizNumber');
+
+const quizFeedback =
+    document.getElementById('quizFeedback');
+
+const nextQuestion =
+    document.getElementById('nextQuestion');
+
 
 let currentQuestion = 0;
+
 let score = 0;
 
+
 const quizData = [
+
     {
-        question: "What does 「不好意思」 (bù hǎoyìsi) mean?",
-        options: ["Thank you", "Excuse me / Sorry", "Goodbye", "Hello"],
+        question:
+            "What does 「不好意思」 (bù hǎoyìsi) mean?",
+
+        options: [
+            "Thank you",
+            "Excuse me / Sorry",
+            "Goodbye",
+            "Hello"
+        ],
+
         answer: 1
     },
+
+
     {
-        question: "How do you say “I am lost!” in Chinese?",
-        options: ["我迷路了", "廁所在哪裡", "我不知道", "聽不懂"],
+        question:
+            "How do you say “I'm lost!” in Chinese?",
+
+        options: [
+            "我迷路了",
+            "廁所在哪裡",
+            "我不知道",
+            "聽不懂"
+        ],
+
         answer: 0
     },
+
+
     {
-        question: "What does 「多少錢」 (duōshǎo qián) mean?",
-        options: ["Where is the restroom?", "What is the Wifi password?", "How much is this?", "Do you speak English?"],
+        question:
+            "What does 「多少錢」 (duōshǎo qián) mean?",
+
+        options: [
+            "Where is the restroom?",
+            "What's the Wi-Fi password?",
+            "How much is this?",
+            "Do you speak English?"
+        ],
+
         answer: 2
     },
+
+
     {
-        question: "What does 「廁所在哪裡」 (cèsuǒ zài nǎlǐ) mean?",
-        options: ["Where is the restroom?", "How do I get there?", "Over there", "Excuse me"],
+        question:
+            "What does 「廁所在哪裡」 (cèsuǒ zài nǎlǐ) mean?",
+
+        options: [
+            "Where is the restroom?",
+            "How do I get there?",
+            "Over there",
+            "Excuse me"
+        ],
+
         answer: 0
     },
+
+
     {
-        question: "Which phrase means “I don't speak Chinese”?",
-        options: ["我不知道", "聽不懂", "我不會中文", "看不懂"],
+        question:
+            "Which phrase means “I don't speak Chinese”?",
+
+        options: [
+            "我不知道",
+            "聽不懂",
+            "我不會中文",
+            "看不懂"
+        ],
+
         answer: 2
     },
+
+
     {
-        question: "What does 「請等一下」 (qǐng děng yīxià) mean?",
-        options: ["Please wait a moment", "Thank you", "I want this", "Speak slower"],
+        question:
+            "What does 「請等一下」 (qǐng děng yīxià) mean?",
+
+        options: [
+            "Please wait a moment",
+            "Thank you",
+            "I want this",
+            "Speak slower"
+        ],
+
         answer: 0
     },
+
+
     {
-        question: "What does 「這個」 (zhège) mean?",
-        options: ["That one", "Here", "This one", "Where"],
+        question:
+            "What does 「這個」 (zhège) mean?",
+
+        options: [
+            "That one",
+            "Here",
+            "This one",
+            "Where"
+        ],
+
         answer: 2
     },
+
+
     {
-        question: "How do you ask “What is the Wifi password?”",
-        options: ["會講英文嗎", "Wifi密碼是多少", "怎麼走", "哪裡"],
+        question:
+            "How do you ask “What's the Wi-Fi password?”?",
+
+        options: [
+            "會講英文嗎",
+            "Wifi密碼是多少",
+            "怎麼走",
+            "哪裡"
+        ],
+
         answer: 1
     },
+
+
     {
-        question: "What does 「謝謝」 (xièxiè) mean?",
-        options: ["Hello", "Sorry", "Thank you", "Goodbye"],
+        question:
+            "What does 「謝謝」 (xièxiè) mean?",
+
+        options: [
+            "Hello",
+            "Sorry",
+            "Thank you",
+            "Goodbye"
+        ],
+
         answer: 2
     },
+
+
     {
-        question: "What does 「我不知道」 (wǒ bù zhīdào) mean?",
-        options: ["I have no idea", "I am lost", "I want it", "Excuse me"],
+        question:
+            "What does 「我不知道」 (wǒ bù zhīdào) mean?",
+
+        options: [
+            "I don't know",
+            "I'm lost",
+            "I want it",
+            "Excuse me"
+        ],
+
         answer: 0
     }
+
 ];
 
-openQuiz.addEventListener('click', () => {
-    bobaModal.classList.remove('active');
-    currentQuestion = 0;
-    score = 0;
-    nextQuestion.textContent = "Next →";
-    quizModal.classList.add('active');
-    loadQuestion();
-});
 
-closeQuiz.addEventListener('click', () => quizModal.classList.remove('active'));
-quizModal.addEventListener('click', (e) => { if (e.target === quizModal) quizModal.classList.remove('active'); });
+openQuiz.addEventListener(
+    'click',
+    () => {
+
+        bobaModal.classList.remove('active');
+
+        currentQuestion = 0;
+
+        score = 0;
+
+        nextQuestion.textContent = "Next →";
+
+        quizModal.classList.add('active');
+
+        loadQuestion();
+
+    }
+);
+
+
+closeQuiz.addEventListener(
+    'click',
+    () => quizModal.classList.remove('active')
+);
+
+
+quizModal.addEventListener(
+    'click',
+    (e) => {
+
+        if (e.target === quizModal) {
+            quizModal.classList.remove('active');
+        }
+
+    }
+);
+
+
+/* =====================================================
+   LOAD QUESTION
+===================================================== */
 
 function loadQuestion() {
-    const question = quizData[currentQuestion];
-    quizNumber.textContent = `Question ${currentQuestion + 1} / ${quizData.length}`;
-    quizQuestion.textContent = question.question;
+
+    const question =
+        quizData[currentQuestion];
+
+    quizNumber.textContent =
+        `Question ${currentQuestion + 1} / ${quizData.length}`;
+
+    quizQuestion.textContent =
+        question.question;
+
     quizOptions.innerHTML = "";
+
     quizFeedback.textContent = "";
-    quizFeedback.classList.remove("good-job", "try-again");
+
+    quizFeedback.classList.remove(
+        "good-job",
+        "try-again"
+    );
+
     nextQuestion.style.display = "none";
 
-    question.options.forEach((option, index) => {
-        const button = document.createElement("button");
-        button.type = "button";
-        button.className = "quiz-answer";
-        button.textContent = option;
-        button.addEventListener("click", () => checkAnswer(button, index));
-        quizOptions.appendChild(button);
-    });
+
+    question.options.forEach(
+        (option, index) => {
+
+            const button =
+                document.createElement("button");
+
+            button.type = "button";
+
+            button.className =
+                "quiz-answer";
+
+            button.textContent =
+                option;
+
+            button.addEventListener(
+                "click",
+                () => checkAnswer(button, index)
+            );
+
+            quizOptions.appendChild(button);
+
+        }
+    );
 }
 
-function checkAnswer(selectedButton, selectedIndex) {
-    const question = quizData[currentQuestion];
-    const allButtons = quizOptions.querySelectorAll(".quiz-answer");
-    allButtons.forEach(button => button.disabled = true);
-    quizFeedback.classList.remove("good-job", "try-again");
 
-    if (selectedIndex === question.answer) {
-        selectedButton.classList.add("correct");
-        quizFeedback.innerHTML = "🎉 Good job! Correct!";
-        quizFeedback.classList.add("good-job");
+/* =====================================================
+   CHECK ANSWER
+===================================================== */
+
+function checkAnswer(
+    selectedButton,
+    selectedIndex
+) {
+
+    const question =
+        quizData[currentQuestion];
+
+    const allButtons =
+        quizOptions.querySelectorAll(
+            ".quiz-answer"
+        );
+
+    allButtons.forEach(
+        button => button.disabled = true
+    );
+
+    quizFeedback.classList.remove(
+        "good-job",
+        "try-again"
+    );
+
+
+    if (
+        selectedIndex === question.answer
+    ) {
+
+        selectedButton.classList.add(
+            "correct"
+        );
+
+        quizFeedback.innerHTML =
+            "🎉 Good job! Correct!";
+
+        quizFeedback.classList.add(
+            "good-job"
+        );
+
         score++;
+
         createConfetti();
+
     } else {
-        selectedButton.classList.add("wrong");
-        quizFeedback.innerHTML = "❌ Not quite!";
-        quizFeedback.classList.add("try-again");
-        allButtons[question.answer].classList.add("correct");
+
+        selectedButton.classList.add(
+            "wrong"
+        );
+
+        quizFeedback.innerHTML =
+            "❌ Not quite!";
+
+        quizFeedback.classList.add(
+            "try-again"
+        );
+
+        allButtons[
+            question.answer
+        ].classList.add("correct");
+
     }
-    nextQuestion.style.display = "block";
+
+    nextQuestion.style.display =
+        "block";
 }
 
-nextQuestion.addEventListener('click', () => {
-    currentQuestion++;
-    if (currentQuestion < quizData.length) {
-        loadQuestion();
-    } else {
-        showQuizResult();
+
+/* =====================================================
+   NEXT QUESTION
+===================================================== */
+
+nextQuestion.addEventListener(
+    'click',
+    () => {
+
+        currentQuestion++;
+
+        if (
+            currentQuestion <
+            quizData.length
+        ) {
+
+            loadQuestion();
+
+        } else {
+
+            showQuizResult();
+
+        }
+
     }
-});
+);
+
+
+/* =====================================================
+   QUIZ RESULT
+===================================================== */
 
 function showQuizResult() {
-    quizNumber.textContent = "Quiz Complete! 🎉";
-    quizQuestion.innerHTML = `You got <strong>${score}</strong> out of <strong>${quizData.length}</strong> correct!`;
-    quizOptions.innerHTML = "";
-    quizFeedback.classList.remove("try-again");
-    quizFeedback.classList.add("good-job");
 
-    if (score === quizData.length) {
-        quizFeedback.innerHTML = "🌟 Perfect! You're ready for Taiwan!";
+    quizNumber.textContent =
+        "Quiz Complete! 🎉";
+
+    quizQuestion.innerHTML =
+        `You got <strong>${score}</strong> out of <strong>${quizData.length}</strong> correct!`;
+
+    quizOptions.innerHTML = "";
+
+    quizFeedback.classList.remove(
+        "try-again"
+    );
+
+    quizFeedback.classList.add(
+        "good-job"
+    );
+
+
+    if (
+        score === quizData.length
+    ) {
+
+        quizFeedback.innerHTML =
+            "🌟 Perfect! You're ready for Taiwan!";
+
         createConfetti();
-    } else if (score >= 7) {
-        quizFeedback.innerHTML = "🎉 Good job! You'll survive Taiwan easily!";
-    } else {
-        quizFeedback.innerHTML = "💪 Keep practicing your survival phrases!";
+
     }
 
-    nextQuestion.textContent = "Try Again";
-    nextQuestion.style.display = "block";
-    nextQuestion.onclick = () => {
-        currentQuestion = 0;
-        score = 0;
-        nextQuestion.textContent = "Next →";
-        nextQuestion.onclick = null;
-        loadQuestion();
-    };
+    else if (score >= 7) {
+
+        quizFeedback.innerHTML =
+            "🎉 Great job! You'll survive Taiwan easily!";
+
+    }
+
+    else {
+
+        quizFeedback.innerHTML =
+            "💪 Keep practicing your survival phrases!";
+
+    }
+
+
+    nextQuestion.textContent =
+        "Try Again";
+
+    nextQuestion.style.display =
+        "block";
+
+
+    nextQuestion.onclick =
+        () => {
+
+            currentQuestion = 0;
+
+            score = 0;
+
+            nextQuestion.textContent =
+                "Next →";
+
+            nextQuestion.onclick = null;
+
+            loadQuestion();
+
+        };
 }
+
+
+/* =====================================================
+   CONFETTI
+===================================================== */
 
 function createConfetti() {
-    const confettiColors = ["#ff6f59", "#ffb7b2", "#ffcad4", "#e2f0cb", "#7b68ee"];
-    for (let i = 0; i < 30; i++) {
-        const confetti = document.createElement("div");
-        confetti.className = "confetti";
-        confetti.style.left = Math.random() * 100 + "vw";
-        confetti.style.background = confettiColors[Math.floor(Math.random() * confettiColors.length)];
-        confetti.style.animationDelay = Math.random() * 0.3 + "s";
-        confetti.style.width = Math.random() * 6 + 5 + "px";
-        confetti.style.height = Math.random() * 6 + 5 + "px";
-        document.body.appendChild(confetti);
-        setTimeout(() => confetti.remove(), 1800);
+
+    const confettiColors = [
+
+        "#8b5e3c",
+        "#c89570",
+        "#e5c3a8",
+        "#f4d7c5",
+        "#70452f"
+
+    ];
+
+
+    for (
+        let i = 0;
+        i < 30;
+        i++
+    ) {
+
+        const confetti =
+            document.createElement("div");
+
+        confetti.className =
+            "confetti";
+
+        confetti.style.left =
+            Math.random() * 100 + "vw";
+
+        confetti.style.background =
+            confettiColors[
+                Math.floor(
+                    Math.random() *
+                    confettiColors.length
+                )
+            ];
+
+        confetti.style.animationDelay =
+            Math.random() * 0.3 + "s";
+
+        confetti.style.width =
+            Math.random() * 6 + 5 + "px";
+
+        confetti.style.height =
+            Math.random() * 6 + 5 + "px";
+
+        document.body.appendChild(
+            confetti
+        );
+
+        setTimeout(
+            () => confetti.remove(),
+            1800
+        );
+
     }
 }
+
 </script>
+
 <script src="../script.js"></script>
+
 </body>
 </html>
