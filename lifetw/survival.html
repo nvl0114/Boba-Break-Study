@@ -18,59 +18,81 @@
     .lesson-card,
     .conversation-card,
     .grammar-card {
-        background: white;
-        padding: 25px;
-        border-radius: 20px;
-        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.06);
+        background: #ffffff;
+        padding: 30px;
+        border-radius: 24px;
+        box-shadow: 0 10px 25px rgba(255, 183, 178, 0.15);
         margin: 25px auto;
-        max-width: 750px;
+        max-width: 780px;
+        border: 2px dashed #ffb7b2;
     }
 
     .lesson-card h2,
     .conversation-card h2,
     .grammar-card h2 {
-        color: #b8865c;
+        color: #ff6f59;
         font-size: 24px;
-        margin-bottom: 15px;
+        margin-bottom: 10px;
+        text-align: center;
     }
 
     .lesson-card p {
-        color: #666;
+        color: #8a7968;
         font-size: 14px;
         line-height: 1.5;
+        text-align: center;
+        margin-bottom: 25px;
     }
 
     /* =====================================================
-       VOCABULARY & SURVIVAL PHRASES GRID
+       CUTE STICKER CARDS GRID
     ===================================================== */
     .vocab-container {
         display: flex;
         flex-wrap: wrap;
-        gap: 12px;
+        gap: 16px;
         margin-top: 15px;
         justify-content: center;
     }
 
     .vocab-pill {
         position: relative;
-        background: #fff8ef;
-        border-radius: 14px;
-        padding: 12px 14px;
-        width: 155px;
+        background: linear-gradient(135deg, #fff5f5 0%, #fff9e6 100%);
+        border-radius: 20px;
+        padding: 14px 12px;
+        width: 160px;
         text-align: center;
-        border: 1.5px solid #d7b89c;
-        box-shadow: 0 2px 5px rgba(184, 134, 92, 0.08);
-        transition: 0.2s;
+        border: 2px solid #ffcad4;
+        box-shadow: 0 6px 12px rgba(255, 182, 193, 0.2);
+        transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
         cursor: pointer;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        overflow: hidden;
+    }
+
+    /* Efek kilau lucu di pojok stiker */
+    .vocab-pill::before {
+        content: "✨";
+        position: absolute;
+        top: 6px;
+        right: 8px;
+        font-size: 12px;
+        opacity: 0.7;
+        transition: 0.3s;
     }
 
     .vocab-pill:hover {
-        transform: translateY(-2px);
-        background: #faedcd;
-        border-color: #b8865c;
+        transform: translateY(-5px) rotate(1.5deg) scale(1.03);
+        background: linear-gradient(135deg, #ffe5ec 0%, #fff0b3 100%);
+        border-color: #ff8fab;
+        box-shadow: 0 10px 20px rgba(255, 143, 171, 0.3);
+    }
+
+    .vocab-pill:hover::before {
+        transform: scale(1.3) rotate(20deg);
+        opacity: 1;
     }
 
     .vocab-pill:active {
@@ -80,46 +102,23 @@
     .vocab-pill .hanzi {
         font-size: 18px;
         font-weight: bold;
-        color: #b8865c;
+        color: #d8576b;
         line-height: 1.2;
+        margin-top: 2px;
     }
 
     .vocab-pill .pinyin {
         font-size: 11px;
-        margin-top: 4px;
-        color: #555;
+        margin-top: 5px;
+        color: #7b68ee;
+        font-weight: 600;
     }
 
     .vocab-pill .meaning {
         margin-top: 4px;
         font-size: 10px;
-        color: #777;
+        color: #8c7355;
         line-height: 1.2;
-    }
-
-    /* =====================================================
-       SOUND BUTTON
-    ===================================================== */
-    .sound-btn {
-        background: #b8865c;
-        color: white;
-        border: none;
-        width: 30px;
-        height: 30px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        transition: 0.2s;
-        flex-shrink: 0;
-        font-size: 12px;
-        box-shadow: 0 3px 8px rgba(184, 134, 92, 0.25);
-    }
-
-    .sound-btn:hover {
-        transform: scale(1.1);
-        background: #a0724f;
     }
 
     /* =====================================================
@@ -136,20 +135,20 @@
 
     .boba-bubble {
         font-size: 40px;
-        background: #fff8ef;
-        width: 60px;
-        height: 60px;
+        background: #fff0f3;
+        width: 65px;
+        height: 65px;
         display: flex;
         align-items: center;
         justify-content: center;
         border-radius: 50%;
-        border: 2px dashed #d7b89c;
-        box-shadow: 0 6px 15px rgba(184, 134, 92, 0.25);
+        border: 3px solid #ff8fab;
+        box-shadow: 0 8px 20px rgba(255, 143, 171, 0.35);
         transition: transform 0.2s;
     }
 
     .floating-boba-container:hover .boba-bubble {
-        transform: scale(1.1);
+        transform: scale(1.15) rotate(10deg);
     }
 
     @keyframes floatingBoba {
@@ -180,13 +179,13 @@
     }
 
     .boba-modal-card {
-        background: #fdfbf7;
+        background: #fff5f7;
         width: 90%;
         max-width: 320px;
         padding: 25px 20px;
-        border-radius: 20px;
-        border: 2px solid #d7b89c;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        border-radius: 24px;
+        border: 3px solid #ffb7b2;
+        box-shadow: 0 10px 25px rgba(255, 183, 178, 0.3);
         text-align: center;
         position: relative;
         transform: scale(0.8);
@@ -205,23 +204,23 @@
         background: none;
         border: none;
         font-size: 24px;
-        color: #a0724f;
+        color: #ff6f59;
         cursor: pointer;
     }
 
     .modal-icon {
-        font-size: 30px;
+        font-size: 32px;
         margin-bottom: 5px;
     }
 
     .boba-modal-card h3 {
-        color: #5c4033;
+        color: #d8576b;
         font-size: 18px;
         margin-bottom: 8px;
     }
 
     .boba-modal-card p {
-        color: #8c7355;
+        color: #8a7968;
         font-size: 13px;
         margin-bottom: 20px;
     }
@@ -238,7 +237,7 @@
         justify-content: center;
         gap: 8px;
         padding: 10px;
-        border-radius: 12px;
+        border-radius: 14px;
         text-decoration: none;
         font-weight: bold;
         font-size: 14px;
@@ -248,19 +247,19 @@
     }
 
     .hanzi-option {
-        background: #fff8ef;
-        color: #8c7355;
-        border: 1.5px solid #d7b89c;
+        background: #fff;
+        color: #ff6f59;
+        border: 2px solid #ffcad4;
     }
 
     .hanzi-option:hover {
-        background: #faedcd;
+        background: #ffe5ec;
     }
 
     .quiz-option {
-        background: #f0f7f4;
-        color: #2d6a4f;
-        border: 1.5px solid #b7e4c7;
+        background: #e2f0cb;
+        color: #386641;
+        border: 2px solid #b7e4c7;
     }
 
     .quiz-option:hover {
@@ -290,13 +289,13 @@
     }
 
     .quiz-modal-card {
-        background: #fdfbf7;
+        background: #fff5f7;
         width: 90%;
         max-width: 420px;
         padding: 25px 20px;
-        border-radius: 22px;
-        border: 2px solid #d7b89c;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        border-radius: 24px;
+        border: 3px solid #ffb7b2;
+        box-shadow: 0 10px 30px rgba(255, 183, 178, 0.3);
         position: relative;
         transform: scale(0.8);
         transition: 0.3s ease;
@@ -312,10 +311,10 @@
     }
 
     .quiz-header span {
-        background: #fff8ef;
-        color: #b8865c;
-        border: 1px solid #d7b89c;
-        padding: 5px 12px;
+        background: #fff;
+        color: #ff6f59;
+        border: 2px solid #ffcad4;
+        padding: 5px 14px;
         border-radius: 20px;
         font-size: 12px;
         font-weight: bold;
@@ -323,7 +322,7 @@
 
     #quizQuestion {
         text-align: center;
-        color: #5c4033;
+        color: #d8576b;
         font-size: 18px;
         line-height: 1.5;
         margin: 20px 0;
@@ -337,8 +336,8 @@
 
     .quiz-answer {
         background: white;
-        border: 1.5px solid #d7b89c;
-        border-radius: 12px;
+        border: 2px solid #ffcad4;
+        border-radius: 14px;
         padding: 12px;
         font-size: 14px;
         color: #5c4033;
@@ -348,7 +347,7 @@
     }
 
     .quiz-answer:hover:not(:disabled) {
-        background: #fff8ef;
+        background: #ffe5ec;
         transform: translateY(-2px);
     }
 
@@ -402,20 +401,21 @@
     .next-question-btn {
         width: 100%;
         margin-top: 15px;
-        padding: 11px;
+        padding: 12px;
         border: none;
-        border-radius: 12px;
-        background: #b8865c;
+        border-radius: 14px;
+        background: #ff6f59;
         color: white;
         font-size: 14px;
         font-weight: bold;
         cursor: pointer;
         display: none;
         transition: 0.2s;
+        box-shadow: 0 4px 12px rgba(255, 111, 89, 0.3);
     }
 
     .next-question-btn:hover {
-        background: #a0724f;
+        background: #e85d44;
     }
 
     .confetti {
@@ -435,7 +435,7 @@
 
     @media (max-width: 700px) {
         .lesson-card, .conversation-card, .grammar-card { padding: 15px; margin: 15px; }
-        .vocab-pill { width: 135px; }
+        .vocab-pill { width: 140px; }
     }
 </style>
 </head>
@@ -451,8 +451,8 @@
          TAIWAN TOURIST SURVIVAL PHRASES
     ================================================= -->
     <div class="lesson-card">
-        <h2>🇹🇼 Taiwan Tourist Survival Phrases</h2>
-        <p>Essential expressions for navigating your way through Taiwan with confidence and a touch of humor!</p>
+        <h2>💖 Taiwan Tourist Survival Phrases 💖</h2>
+        <p>Klik stiker cantiknya untuk mendengarkan pelafalan Mandarin beserta efek suara seru! ✨</p>
         
         <div class="vocab-container">
             <!-- 1 -->
@@ -883,7 +883,7 @@ function showQuizResult() {
 }
 
 function createConfetti() {
-    const confettiColors = ["#b8865c", "#52b788", "#faedcd", "#d7b89c", "#ffb4a2"];
+    const confettiColors = ["#ff6f59", "#ffb7b2", "#ffcad4", "#e2f0cb", "#7b68ee"];
     for (let i = 0; i < 30; i++) {
         const confetti = document.createElement("div");
         confetti.className = "confetti";
