@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meals (食物）</title>
+
+<!-- Main CSS -->
+<link rel="stylesheet" href="../style.css">
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+    /* =====================================================
+       LESSON CARD
+    ===================================================== */
+    .lesson-card,
+    .conversation-card,
+    .grammar-card {
+        background: white;
+        padding: 25px;
+        border-radius: 20px;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.06);
+        margin: 25px auto;
+        max-width: 750px;
+    }
+
+    .lesson-card h2,
+    .conversation-card h2,
+    .grammar-card h2 {
+        color: #b8865c;
+        font-size: 24px;
+        margin-bottom: 15px;
+    }
+
+    .lesson-card p {
+        color: #666;
+        font-size: 14px;
+        line-height: 1.5;
+    }
+
+    /* =====================================================
+       VOCABULARY
+    ===================================================== */
+    .vocab-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 15px;
+        justify-content: center;
+    }
+
+    .vocab-pill {
+        position: relative;
+        background: #fff8ef;
+        border-radius: 14px;
+        padding: 8px 12px;
+        width: 130px;
+        text-align: center;
+        border: 1.5px solid #d7b89c;
+        box-shadow: 0 2px 5px rgba(184, 134, 92, 0.08);
+        transition: 0.2s;
+        cursor: pointer;
+    }
+
+    .vocab-pill:hover {
+        transform: translateY(-2px);
+        background: #faedcd;
+        border-color: #b8865c;
+    }
+
+    .vocab-pill:active {
+        transform: scale(0.95);
+    }
+
+    .vocab-pill .hanzi {
+        font-size: 19px;
+        font-weight: bold;
+        color: #b8865c;
+        line-height: 1.2;
+    }
+
+    .vocab-pill .pinyin {
+        font-size: 11px;
+        margin-top: 2px;
+        color: #555;
+    }
+
+    .vocab-pill .meaning {
+        margin-top: 2px;
+        font-size: 10px;
+        color: #777;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    /* =====================================================
+       CONVERSATION
+    ===================================================== */
+    .chat-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 12px;
+        background: #fff8ef;
+        padding: 10px 14px;
+        border-radius: 15px;
+        border: 1.5px dashed #d7b89c;
+    }
+
+    .chat-avatar-img {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        object-fit: cover;
+        background: #faedcd;
+        padding: 2px;
+        flex-shrink: 0;
+        border: 1px solid #d7b89c;
+    }
+
+    .chat-content {
+        flex-grow: 1;
+        min-width: 0;
+    }
+
+    .chat-speaker {
+        font-weight: bold;
+        color: #b8865c;
+        font-size: 12px;
+        margin-bottom: 2px;
+    }
+
+    .chat-text-group {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+    }
+
+    .chat-details {
+        min-width: 0;
+    }
+
+    .chat-details .hanzi-text {
+        font-size: 17px;
+        font-weight: bold;
+        color: #333;
+        display: inline;
+    }
+
+    .chat-details .pinyin-text {
+        font-size: 13px;
+        color: #555;
+        display: inline;
+    }
+
+    .chat-details .meaning-text {
+        display: block;
+        font-size: 12px;
+        color: #777;
+        font-style: italic;
+        margin-top: 2px;
+    }
+
+    /* =====================================================
+       SOUND BUTTON
+    ===================================================== */
+    .sound-btn {
+        background: #b8865c;
+        color: white;
+        border: none;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: 0.2s;
+        flex-shrink: 0;
+        font-size: 12px;
+        box-shadow: 0 3px 8px rgba(184, 134, 92, 0.25);
+    }
+
+    .sound-btn:hover {
+        transform: scale(1.1);
+        background: #a0724f;
+    }
+
+    /* =====================================================
+       GRAMMAR
+    ===================================================== */
+    .grammar-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 15px;
+        margin-bottom: 15px;
+    }
+
+    .grammar-item {
+        background: #fff8ef;
+        border: 1.5px solid #d7b89c;
+        border-radius: 14px;
+        padding: 15px;
+    }
+
+    .grammar-item h4 {
+        color: #b8865c;
+        font-size: 15px;
+        margin-bottom: 8px;
+    }
+
+    .grammar-item p {
+        font-size: 13px;
+        color: #555;
+        margin-bottom: 8px;
+        line-height: 1.5;
+    }
+
+    .grammar-item .sub-example {
+        font-size: 12px;
+        color: #555;
+        background: rgba(255, 255, 255, 0.8);
+        padding: 8px 12px;
+        border-radius: 8px;
+        margin-top: 8px;
+        line-height: 1.4;
+        border: 1px solid #faedcd;
+    }
+
+    /* =====================================================
+       FLOATING BOBA
+    ===================================================== */
+    .floating-boba-container {
+        position: fixed;
+        bottom: 25px;
+        right: 25px;
+        z-index: 9999;
+        cursor: pointer;
+        animation: floatingBoba 3s ease-in-out infinite;
+    }
+
+    .boba-bubble {
+        font-size: 40px;
+        background: #fff8ef;
+        width: 60px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        border: 2px dashed #d7b89c;
+        box-shadow: 0 6px 15px rgba(184, 134, 92, 0.25);
+        transition: transform 0.2s;
+    }
+
+    .floating-boba-container:hover .boba-bubble {
+        transform: scale(1.1);
+    }
+
+    @keyframes floatingBoba {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-8px); }
+    }
+
+    /* =====================================================
+       BOBA MODAL
+    ===================================================== */
+    .boba-modal-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.4);
+        backdrop-filter: blur(3px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10000;
+        opacity: 0;
+        visibility: hidden;
+        transition: 0.3s ease;
+    }
+
+    .boba-modal-overlay.active {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .boba-modal-card {
+        background: #fdfbf7;
+        width: 90%;
+        max-width: 320px;
+        padding: 25px 20px;
+        border-radius: 20px;
+        border: 2px solid #d7b89c;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        position: relative;
+        transform: scale(0.8);
+        transition: transform 0.3s ease;
+    }
+
+    .boba-modal-overlay.active .boba-modal-card {
+        transform: scale(1);
+    }
+
+    .close-modal-btn,
+    .close-quiz-btn {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        background: none;
+        border: none;
+        font-size: 24px;
+        color: #a0724f;
+        cursor: pointer;
+    }
+
+    .modal-icon {
+        font-size: 30px;
+        margin-bottom: 5px;
+    }
+
+    .boba-modal-card h3 {
+        color: #5c4033;
+        font-size: 18px;
+        margin-bottom: 8px;
+    }
+
+    .boba-modal-card p {
+        color: #8c7355;
+        font-size: 13px;
+        margin-bottom: 20px;
+    }
+
+    .modal-options {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .modal-option-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 10px;
+        border-radius: 12px;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 14px;
+        transition: 0.2s;
+        cursor: pointer;
+        width: 100%;
+    }
+
+    .hanzi-option {
+        background: #fff8ef;
+        color: #8c7355;
+        border: 1.5px solid #d7b89c;
+    }
+
+    .hanzi-option:hover {
+        background: #faedcd;
+    }
+
+    .quiz-option {
+        background: #f0f7f4;
+        color: #2d6a4f;
+        border: 1.5px solid #b7e4c7;
+    }
+
+    .quiz-option:hover {
+        background: #d8f3dc;
+    }
+
+    /* =====================================================
+       QUIZ MODAL
+    ===================================================== */
+    .quiz-modal-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.45);
+        backdrop-filter: blur(4px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 11000;
+        opacity: 0;
+        visibility: hidden;
+        transition: 0.3s ease;
+    }
+
+    .quiz-modal-overlay.active {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .quiz-modal-card {
+        background: #fdfbf7;
+        width: 90%;
+        max-width: 420px;
+        padding: 25px 20px;
+        border-radius: 22px;
+        border: 2px solid #d7b89c;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        position: relative;
+        transform: scale(0.8);
+        transition: 0.3s ease;
+    }
+
+    .quiz-modal-overlay.active .quiz-modal-card {
+        transform: scale(1);
+    }
+
+    .quiz-header {
+        text-align: center;
+        margin-bottom: 15px;
+    }
+
+    .quiz-header span {
+        background: #fff8ef;
+        color: #b8865c;
+        border: 1px solid #d7b89c;
+        padding: 5px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: bold;
+    }
+
+    #quizQuestion {
+        text-align: center;
+        color: #5c4033;
+        font-size: 17px;
+        line-height: 1.5;
+        margin: 20px 0;
+    }
+
+    .quiz-options {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .quiz-answer {
+        background: white;
+        border: 1.5px solid #d7b89c;
+        border-radius: 12px;
+        padding: 12px;
+        font-size: 13px;
+        color: #5c4033;
+        cursor: pointer;
+        transition: 0.2s;
+        width: 100%;
+        text-align: left;
+    }
+
+    .quiz-answer:hover:not(:disabled) {
+        background: #fff8ef;
+        transform: translateY(-2px);
+    }
+
+    .quiz-answer:disabled {
+        cursor: default;
+    }
+
+    .quiz-answer.correct {
+        background: #d8f3dc;
+        border-color: #52b788;
+        color: #2d6a4f;
+    }
+
+    .quiz-answer.wrong {
+        background: #ffe5e5;
+        border-color: #e5989b;
+        color: #9b2226;
+    }
+
+    /* =====================================================
+       QUIZ FEEDBACK
+    ===================================================== */
+    .quiz-feedback {
+        text-align: center;
+        min-height: 35px;
+        margin-top: 14px;
+        font-size: 15px;
+        font-weight: bold;
+    }
+
+    .quiz-feedback.good-job {
+        color: #2d6a4f;
+        animation: goodJobPop 0.5s ease;
+    }
+
+    .quiz-feedback.try-again {
+        color: #9b2226;
+        animation: shake 0.4s ease;
+    }
+
+    @keyframes goodJobPop {
+        0% { transform: scale(0.5); opacity: 0; }
+        60% { transform: scale(1.2); opacity: 1; }
+        100% { transform: scale(1); }
+    }
+
+    @keyframes shake {
+        0%, 100% { transform: translateX(0); }
+        25% { transform: translateX(-5px); }
+        50% { transform: translateX(5px); }
+        75% { transform: translateX(-5px); }
+    }
+
+    /* =====================================================
+       NEXT BUTTON
+    ===================================================== */
+    .next-question-btn {
+        width: 100%;
+        margin-top: 15px;
+        padding: 11px;
+        border: none;
+        border-radius: 12px;
+        background: #b8865c;
+        color: white;
+        font-size: 14px;
+        font-weight: bold;
+        cursor: pointer;
+        display: none;
+        transition: 0.2s;
+    }
+
+    .next-question-btn:hover {
+        background: #a0724f;
+    }
+
+    /* =====================================================
+       CONFETTI
+    ===================================================== */
+    .confetti {
+        position: fixed;
+        top: -10px;
+        width: 8px;
+        height: 8px;
+        z-index: 12000;
+        pointer-events: none;
+        animation: confettiFall 1.5s ease-out forwards;
+    }
+
+    @keyframes confettiFall {
+        0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+        100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+    }
+
+    @media (max-width: 700px) {
+        .lesson-card, .conversation-card, .grammar-card { padding: 15px; margin: 15px; }
+        .vocab-pill { width: 110px; }
+    }
+</style>
+</head>
+<body>
+<div class="app-container">
+
+<!-- SIDEBAR CONTAINER -->
+<div id="sidebar-container"></div>
+
+<main class="main-content">
+
+    <!-- =================================================
+         CONVERSATION (雅婷 & 昱廷)
+    ================================================= -->
+    <div class="conversation-card">
+        <h2>Meals (食物）</h2>
+
+        <!-- 雅婷 -->
+        <div class="chat-row">
+            <img src="https://img.icons8.com/?size=100&id=15mghtBrytQs&format=png&color=000000" alt="雅婷" class="chat-avatar-img">
+            <div class="chat-content">
+                <div class="chat-speaker"> 雅婷:</div>
+                <div class="chat-text-group">
+                    <div class="chat-details">
+                        <span class="hanzi-text">早安！來吃早飯吧！</span>
+                        <span class="pinyin-text">(Zǎo ān! Lái chī zǎofàn ba!)</span>
+                        <span class="meaning-text">Good morning! Come have breakfast!</span>
+                    </div>
+                    <button class="sound-btn" onclick="playAudio('早安！來吃早飯吧！')"><i class="fas fa-volume-up"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 昱廷 -->
+        <div class="chat-row">
+            <img src="https://img.icons8.com/?size=100&id=BhOHhC3nqC2z&format=png&color=000000" alt="昱廷" class="chat-avatar-img">
+            <div class="chat-content">
+                <div class="chat-speaker"> 昱廷:</div>
+                <div class="chat-text-group">
+                    <div class="chat-details">
+                        <span class="hanzi-text">好啊！早飯吃什麼？</span>
+                        <span class="pinyin-text">(Hǎo a! Zǎofàn chī shénme?)</span>
+                        <span class="meaning-text">Sure! What are we having for breakfast?</span>
+                    </div>
+                    <button class="sound-btn" onclick="playAudio('好啊！早飯吃什麼？')"><i class="fas fa-volume-up"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 雅婷 -->
+        <div class="chat-row">
+            <img src="https://img.icons8.com/?size=100&id=15mghtBrytQs&format=png&color=000000" alt="雅婷" class="chat-avatar-img">
+            <div class="chat-content">
+                <div class="chat-speaker"> 雅婷:</div>
+                <div class="chat-text-group">
+                    <div class="chat-details">
+                        <span class="hanzi-text">有牛奶、麵包和水果。</span>
+                        <span class="pinyin-text">(Yǒu niúnǎi, miànbāo hé shuǐguǒ.)</span>
+                        <span class="meaning-text">There is milk, bread, and fruit.</span>
+                    </div>
+                    <button class="sound-btn" onclick="playAudio('有牛奶、麵包和水果。')"><i class="fas fa-volume-up"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 昱廷 -->
+        <div class="chat-row">
+            <img src="https://img.icons8.com/?size=100&id=BhOHhC3nqC2z&format=png&color=000000" alt="昱廷" class="chat-avatar-img">
+            <div class="chat-content">
+                <div class="chat-speaker"> 昱廷:</div>
+                <div class="chat-text-group">
+                    <div class="chat-details">
+                        <span class="hanzi-text">我想喝牛奶，還要吃一個麵包。</span>
+                        <span class="pinyin-text">(Wǒ xiǎng hē niúnǎi, hái yào chī yí ge miànbāo.)</span>
+                        <span class="meaning-text">I want to drink milk, and I also want to eat a piece of bread.</span>
+                    </div>
+                    <button class="sound-btn" onclick="playAudio('我想喝牛奶，還要吃一個麵包。')"><i class="fas fa-volume-up"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 雅婷 -->
+        <div class="chat-row">
+            <img src="https://img.icons8.com/?size=100&id=15mghtBrytQs&format=png&color=000000" alt="雅婷" class="chat-avatar-img">
+            <div class="chat-content">
+                <div class="chat-speaker"> 雅婷:</div>
+                <div class="chat-text-group">
+                    <div class="chat-details">
+                        <span class="hanzi-text">還有香蕉和蘋果，你要吃嗎？</span>
+                        <span class="pinyin-text">(Hái yǒu xiāngjiāo hé píngguǒ, nǐ yào chī ma?)</span>
+                        <span class="meaning-text">There are also bananas and apples. Do you want some?</span>
+                    </div>
+                    <button class="sound-btn" onclick="playAudio('還有香蕉和蘋果，你要吃嗎？')"><i class="fas fa-volume-up"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 昱廷 -->
+        <div class="chat-row">
+            <img src="https://img.icons8.com/?size=100&id=BhOHhC3nqC2z&format=png&color=000000" alt="昱廷" class="chat-avatar-img">
+            <div class="chat-content">
+                <div class="chat-speaker"> 昱廷:</div>
+                <div class="chat-text-group">
+                    <div class="chat-details">
+                        <span class="hanzi-text">要，我要一根香蕉，還要一個蘋果。</span>
+                        <span class="pinyin-text">(Yào, wǒ yào yì gēn xiāngjiāo, hái yào yí ge píngguǒ.)</span>
+                        <span class="meaning-text">Yes, I want a banana and also an apple.</span>
+                    </div>
+                    <button class="sound-btn" onclick="playAudio('要，我要一根香蕉，還要一個蘋果。')"><i class="fas fa-volume-up"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 雅婷 -->
+        <div class="chat-row">
+            <img src="https://img.icons8.com/?size=100&id=15mghtBrytQs&format=png&color=000000" alt="雅婷" class="chat-avatar-img">
+            <div class="chat-content">
+                <div class="chat-speaker"> 雅婷:</div>
+                <div class="chat-text-group">
+                    <div class="chat-details">
+                        <span class="hanzi-text">你要喝果汁嗎？</span>
+                        <span class="pinyin-text">(Nǐ yào hē guǒzhī ma?)</span>
+                        <span class="meaning-text">Do you want to drink juice?</span>
+                    </div>
+                    <button class="sound-btn" onclick="playAudio('你要喝果汁嗎？')"><i class="fas fa-volume-up"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 昱廷 -->
+        <div class="chat-row">
+            <img src="https://img.icons8.com/?size=100&id=BhOHhC3nqC2z&format=png&color=000000" alt="昱廷" class="chat-avatar-img">
+            <div class="chat-content">
+                <div class="chat-speaker"> 昱廷:</div>
+                <div class="chat-text-group">
+                    <div class="chat-details">
+                        <span class="hanzi-text">不用了，謝謝。我喝牛奶就好。</span>
+                        <span class="pinyin-text">(Bú yòng le, xièxie. Wǒ hē niúnǎi jiù hǎo.)</span>
+                        <span class="meaning-text">No, thank you. Milk is enough for me.</span>
+                    </div>
+                    <button class="sound-btn" onclick="playAudio('不用了，謝謝。我喝牛奶就好。')"><i class="fas fa-volume-up"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 雅婷 -->
+        <div class="chat-row">
+            <img src="https://img.icons8.com/?size=100&id=15mghtBrytQs&format=png&color=000000" alt="雅婷" class="chat-avatar-img">
+            <div class="chat-content">
+                <div class="chat-speaker"> 雅婷:</div>
+                <div class="chat-text-group">
+                    <div class="chat-details">
+                        <span class="hanzi-text">好。中午我們吃午餐，晚上吃晚餐。</span>
+                        <span class="pinyin-text">(Hǎo. Zhōngwǔ wǒmen chī wǔcān, wǎnshàng chī wǎncān.)</span>
+                        <span class="meaning-text">Okay. At noon we'll have lunch, and in the evening we'll have dinner.</span>
+                    </div>
+                    <button class="sound-btn" onclick="playAudio('好。中午我們吃午餐，晚上吃晚餐。')"><i class="fas fa-volume-up"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 昱廷 -->
+        <div class="chat-row">
+            <img src="https://img.icons8.com/?size=100&id=BhOHhC3nqC2z&format=png&color=000000" alt="昱廷" class="chat-avatar-img">
+            <div class="chat-content">
+                <div class="chat-speaker"> 昱廷:</div>
+                <div class="chat-text-group">
+                    <div class="chat-details">
+                        <span class="hanzi-text">好啊！</span>
+                        <span class="pinyin-text">(Hǎo a!)</span>
+                        <span class="meaning-text">Sounds good!</span>
+                    </div>
+                    <button class="sound-btn" onclick="playAudio('好啊！')"><i class="fas fa-volume-up"></i></button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- =================================================
+         VOCABULARY
+    ================================================= -->
+    <div class="lesson-card">
+        <h2>Vocabulary</h2>
+        <div class="vocab-container">
+            <div class="vocab-pill" onclick="playAudio('早安')"><div class="hanzi">早安</div><div class="pinyin">(zǎo ān)</div><div class="meaning">good morning</div></div>
+            <div class="vocab-pill" onclick="playAudio('吧')"><div class="hanzi">吧</div><div class="pinyin">(ba)</div><div class="meaning">suggestion particle</div></div>
+            <div class="vocab-pill" onclick="playAudio('想')"><div class="hanzi">想</div><div class="pinyin">(xiǎng)</div><div class="meaning">want / would like</div></div>
+            <div class="vocab-pill" onclick="playAudio('吃')"><div class="hanzi">吃</div><div class="pinyin">(chī)</div><div class="meaning">eat</div></div>
+            <div class="vocab-pill" onclick="playAudio('早飯')"><div class="hanzi">早飯</div><div class="pinyin">(zǎofàn)</div><div class="meaning">breakfast</div></div>
+            <div class="vocab-pill" onclick="playAudio('牛奶')"><div class="hanzi">牛奶</div><div class="pinyin">(niúnǎi)</div><div class="meaning">milk</div></div>
+            <div class="vocab-pill" onclick="playAudio('麵包')"><div class="hanzi">麵包</div><div class="pinyin">(miànbāo)</div><div class="meaning">bread</div></div>
+            <div class="vocab-pill" onclick="playAudio('水果')"><div class="hanzi">水果</div><div class="pinyin">(shuǐguǒ)</div><div class="meaning">fruit</div></div>
+            <div class="vocab-pill" onclick="playAudio('喝')"><div class="hanzi">喝</div><div class="pinyin">(hē)</div><div class="meaning">drink</div></div>
+            <div class="vocab-pill" onclick="playAudio('果汁')"><div class="hanzi">果汁</div><div class="pinyin">(guǒzhī)</div><div class="meaning">fruit juice</div></div>
+            <div class="vocab-pill" onclick="playAudio('還要')"><div class="hanzi">還要</div><div class="pinyin">(hái yào)</div><div class="meaning">also want</div></div>
+            <div class="vocab-pill" onclick="playAudio('還')"><div class="hanzi">還</div><div class="pinyin">(hái)</div><div class="meaning">still / also</div></div>
+            <div class="vocab-pill" onclick="playAudio('還有')"><div class="hanzi">還有</div><div class="pinyin">(hái yǒu)</div><div class="meaning">there is also</div></div>
+            <div class="vocab-pill" onclick="playAudio('要')"><div class="hanzi">要</div><div class="pinyin">(yào)</div><div class="meaning">want</div></div>
+            <div class="vocab-pill" onclick="playAudio('午餐')"><div class="hanzi">午餐</div><div class="pinyin">(wǔcān)</div><div class="meaning">lunch</div></div>
+            <div class="vocab-pill" onclick="playAudio('用')"><div class="hanzi">用</div><div class="pinyin">(yòng)</div><div class="meaning">use / need</div></div>
+            <div class="vocab-pill" onclick="playAudio('不用')"><div class="hanzi">不用</div><div class="pinyin">(bú yòng)</div><div class="meaning">no need</div></div>
+            <div class="vocab-pill" onclick="playAudio('中午')"><div class="hanzi">中午</div><div class="pinyin">(zhōngwǔ)</div><div class="meaning">noon</div></div>
+            <div class="vocab-pill" onclick="playAudio('晚上')"><div class="hanzi">晚上</div><div class="pinyin">(wǎnshàng)</div><div class="meaning">evening</div></div>
+            <div class="vocab-pill" onclick="playAudio('晚餐')"><div class="hanzi">晚餐</div><div class="pinyin">(wǎncān)</div><div class="meaning">dinner</div></div>
+            <div class="vocab-pill" onclick="playAudio('香蕉')"><div class="hanzi">香蕉</div><div class="pinyin">(xiāngjiāo)</div><div class="meaning">banana</div></div>
+            <div class="vocab-pill" onclick="playAudio('蘋果')"><div class="hanzi">蘋果</div><div class="pinyin">(píngguǒ)</div><div class="meaning">apple</div></div>
+            <div class="vocab-pill" onclick="playAudio('根')"><div class="hanzi">根</div><div class="pinyin">(gēn)</div><div class="meaning">measure word</div></div>
+            <div class="vocab-pill" onclick="playAudio('就')"><div class="hanzi">就</div><div class="pinyin">(jiù)</div><div class="meaning">then / just</div></div>
+        </div>
+    </div>
+
+
+    <!-- =================================================
+         GRAMMAR
+    ================================================= -->
+    <div class="grammar-card">
+        <h2>Grammar & Notes</h2>
+        <div class="grammar-grid">
+
+            <!-- 1. 根 -->
+            <div class="grammar-item">
+                <h4>1. 根 (gēn) — Measure Word</h4>
+                <p>根 is a measure word used for long, thin objects, such as bananas, carrots, sausages, pencils, and sticks.</p>
+                <p><strong>Pattern:</strong> Number + 根 + Noun</p>
+                <div class="sub-example">
+                    一根香蕉 — yì gēn xiāngjiāo — one banana<br>
+                    兩根香蕉 — liǎng gēn xiāngjiāo — two bananas<br>
+                    一根胡蘿蔔 — yì gēn húluóbo — one carrot<br>
+                    一根鉛筆 — yì gēn qiānbǐ — one pencil
+                </div>
+            </div>
+
+            <!-- 2. 有…還有… -->
+            <div class="grammar-item">
+                <h4>2. 有…還有… — There is/are… and also…</h4>
+                <p>有 (yǒu) means “there is / there are / have.” 還有 (hái yǒu) means “there is/are also” or “and also.”</p>
+                <p><strong>Pattern:</strong> 有 + A + 還有 + B</p>
+                <div class="sub-example">
+                    桌上有牛奶，還有麵包。<br>Zhuō shàng yǒu niúnǎi, hái yǒu miànbāo.<br>&rarr; There is milk on the table, and there is also bread.<br><br>
+                    早餐有香蕉，還有蘋果。<br>Zǎocān yǒu xiāngjiāo, hái yǒu píngguǒ.<br>&rarr; There are bananas and also apples for breakfast.
+                </div>
+            </div>
+
+            <!-- 3. 要…還要… -->
+            <div class="grammar-item">
+                <h4>3. 要…還要… — Want… and also want…</h4>
+                <p>要 (yào) means “want” or “would like.” 還要 (hái yào) means “also want” or “want more.”</p>
+                <p><strong>Pattern:</strong> 要 + A + 還要 + B</p>
+                <div class="sub-example">
+                    我要牛奶，還要麵包。<br>Wǒ yào niúnǎi, hái yào miànbāo.<br>&rarr; I want milk, and I also want bread.<br><br>
+                    我要一根香蕉，還要一個蘋果。<br>Wǒ yào yì gēn xiāngjiāo, hái yào yí ge píngguǒ.<br>&rarr; I want one banana, and I also want an apple.
+                </div>
+            </div>
+
+            <!-- 4. 就 (jiù) -->
+            <div class="grammar-item">
+                <h4>4. 就 (jiù) — then / just / simply</h4>
+                <p>就 has several meanings depending on the context. At a beginner level, learn it as “then” or “just / simply.”</p>
+                <p><strong>Pattern & Examples:</strong></p>
+                <div class="sub-example">
+                    你要喝牛奶，就喝牛奶。<br>Nǐ yào hē niúnǎi, jiù hē niúnǎi.<br>&rarr; If you want milk, then drink milk.<br><br>
+                    我喝牛奶就好。<br>Wǒ hē niúnǎi jiù hǎo.<br>&rarr; Milk is enough for me. / I'll just have milk. (就好 means “that's enough / that's fine”)
+                </div>
+            </div>
+
+            <!-- 5. 用 / 不用 -->
+            <div class="grammar-item">
+                <h4>5. 用 / 不用 — Need / Don’t need</h4>
+                <p>用 (yòng) means “to use.” 不用 (bú yòng) means “don’t need to” or “no need.”</p>
+                <div class="sub-example">
+                    <strong>不用 + Verb:</strong><br>
+                    不用喝果汁。 (You don't need to drink juice.)<br>
+                    不用了，謝謝。 (No, thank you. / I'm good.)<br><br>
+                    <strong>用 + Noun + Verb:</strong><br>
+                    我用杯子喝牛奶。<br>Wǒ yòng bēizi hē niúnǎi.<br>&rarr; I drink milk using a cup.
+                </div>
+            </div>
+
+            <!-- 6. 吧 -->
+            <div class="grammar-item">
+                <h4>6. 吧 (ba) — Suggestion Particle</h4>
+                <p>吧 is a sentence-final modal particle used to soften a tone, make a suggestion, or invite someone to do something together.</p>
+                <p><strong>Pattern:</strong> Action/Suggestion + 吧！</p>
+                <div class="sub-example">
+                    來吃早飯吧！<br>Lái chī zǎofàn ba!<br>&rarr; Come have breakfast!<br><br>
+                    我們走吧！<br>Wǒmen zǒu ba!<br>&rarr; Let's go!<br><br>
+                    喝茶吧！<br>Hē chá ba!<br>&rarr; Have some tea!
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</main>
+</div>
+
+<!-- =====================================================
+     FLOATING BOBA BUTTON
+===================================================== -->
+<div class="floating-boba-container" id="floatingBoba">
+    <div class="boba-bubble">🧋</div>
+</div>
+
+<!-- =====================================================
+     BOBA ACTIVITY MODAL
+===================================================== -->
+<div class="boba-modal-overlay" id="bobaModal">
+    <div class="boba-modal-card">
+        <button class="close-modal-btn" id="closeModal">&times;</button>
+        <div class="modal-icon">🧋✨</div>
+        <h3>Do you wanna play the game</h3>
+        <p>Choose a fun activity to practice today:</p>
+        <div class="modal-options">
+            <a href="https://drive.google.com/file/d/17mmCW3R192-zi_BAIVTFTvg4biwOoz_d/view?usp=drivesdk" class="modal-option-btn hanzi-option" target="_blank">
+                <span>📝</span> Writing Hanzi
+            </a>
+            <button class="modal-option-btn quiz-option" id="openQuiz">
+                <span>🧠</span> Quiz
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- =====================================================
+     QUIZ MODAL (10 QUESTIONS)
+===================================================== -->
+<div class="quiz-modal-overlay" id="quizModal">
+    <div class="quiz-modal-card">
+        <button class="close-quiz-btn" id="closeQuiz">&times;</button>
+        <div class="quiz-header">
+            <span id="quizNumber">Question 1 / 10</span>
+        </div>
+        <h3 id="quizQuestion">Loading...</h3>
+        <div class="quiz-options" id="quizOptions"></div>
+        <div id="quizFeedback" class="quiz-feedback"></div>
+        <button class="next-question-btn" id="nextQuestion">Next →</button>
+    </div>
+</div>
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+<script>
+function playAudio(text) {
+    if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'zh-TW';
+        utterance.rate = 0.85;
+        window.speechSynthesis.speak(utterance);
+    }
+}
+
+const floatingBoba = document.getElementById('floatingBoba');
+const bobaModal = document.getElementById('bobaModal');
+const closeModal = document.getElementById('closeModal');
+
+floatingBoba.addEventListener('click', () => bobaModal.classList.add('active'));
+closeModal.addEventListener('click', () => bobaModal.classList.remove('active'));
+bobaModal.addEventListener('click', (e) => { if (e.target === bobaModal) bobaModal.classList.remove('active'); });
+
+const quizModal = document.getElementById('quizModal');
+const openQuiz = document.getElementById('openQuiz');
+const closeQuiz = document.getElementById('closeQuiz');
+const quizQuestion = document.getElementById('quizQuestion');
+const quizOptions = document.getElementById('quizOptions');
+const quizNumber = document.getElementById('quizNumber');
+const quizFeedback = document.getElementById('quizFeedback');
+const nextQuestion = document.getElementById('nextQuestion');
+
+let currentQuestion = 0;
+let score = 0;
+
+const quizData = [
+    {
+        question: "What is the correct measure word (根) used for in Mandarin?",
+        options: [
+            "For flat, thin objects like paper",
+            "For long, thin objects like bananas and pencils",
+            "For round objects like apples",
+            "For people and friends"
+        ],
+        answer: 1
+    },
+    {
+        question: "How do you say \"one banana\" in Chinese using the correct measure word?",
+        options: [
+            "一個香蕉",
+            "一根香蕉",
+            "一本香蕉",
+            "一條香蕉"
+        ],
+        answer: 1
+    },
+    {
+        question: "What does the pattern 「有…還有…」 mean in English?",
+        options: [
+            "Want... and also want...",
+            "There is/are... and also...",
+            "Don't need to...",
+            "Eat... and drink..."
+        ],
+        answer: 1
+    },
+    {
+        question: "In the sentence 「我要牛奶，還要麵包」, what does 「還要」 mean?",
+        options: [
+            "Also want / want more",
+            "Don't want",
+            "Finished eating",
+            "Already drank"
+        ],
+        answer: 0
+    },
+    {
+        question: "How do you translate \"I'll just have milk / Milk is enough for me\" into Chinese?",
+        options: [
+            "我不喝牛奶。",
+            "我要喝果汁。",
+            "我喝牛奶就好。",
+            "牛奶很好吃。"
+        ],
+        answer: 2
+    },
+    {
+        question: "What does 「不用」 (bú yòng) mean in English?",
+        options: [
+            "To use",
+            "Don't need to / no need",
+            "Very good",
+            "Always want"
+        ],
+        answer: 1
+    },
+    {
+        question: "What is the function of the final particle 「吧」 (ba) in sentences like 「來吃早飯吧！」?",
+        options: [
+            "To ask a strict question",
+            "To express past tense",
+            "To soften a tone and make a suggestion",
+            "To show anger"
+        ],
+        answer: 2
+    },
+    {
+        question: "What is the English meaning of 「早飯」 (zǎofàn)?",
+        options: [
+            "Lunch",
+            "Dinner",
+            "Breakfast",
+            "Fruit juice"
+        ],
+        answer: 2
+    },
+    {
+        question: "Which vocabulary word means \"apple\" in Chinese?",
+        options: [
+            "香蕉 (xiāngjiāo)",
+            "蘋果 (píngguǒ)",
+            "麵包 (miànbāo)",
+            "牛奶 (niúnǎi)"
+        ],
+        answer: 1
+    },
+    {
+        question: "How do you say \"lunch\" in Mandarin Chinese?",
+        options: [
+            "早飯 (zǎofàn)",
+            "晚餐 (wǎncān)",
+            "午餐 (wǔcān)",
+            "水果 (shuǐguǒ)"
+        ],
+        answer: 2
+    }
+];
+
+openQuiz.addEventListener('click', () => {
+    bobaModal.classList.remove('active');
+    currentQuestion = 0;
+    score = 0;
+    nextQuestion.textContent = "Next →";
+    quizModal.classList.add('active');
+    loadQuestion();
+});
+
+closeQuiz.addEventListener('click', () => quizModal.classList.remove('active'));
+quizModal.addEventListener('click', (e) => { if (e.target === quizModal) quizModal.classList.remove('active'); });
+
+function loadQuestion() {
+    const question = quizData[currentQuestion];
+    quizNumber.textContent = `Question ${currentQuestion + 1} / ${quizData.length}`;
+    quizQuestion.textContent = question.question;
+    quizOptions.innerHTML = "";
+    quizFeedback.textContent = "";
+    quizFeedback.classList.remove("good-job", "try-again");
+    nextQuestion.style.display = "none";
+
+    question.options.forEach((option, index) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "quiz-answer";
+        button.textContent = option;
+        button.addEventListener("click", () => checkAnswer(button, index));
+        quizOptions.appendChild(button);
+    });
+}
+
+function checkAnswer(selectedButton, selectedIndex) {
+    const question = quizData[currentQuestion];
+    const allButtons = quizOptions.querySelectorAll(".quiz-answer");
+    allButtons.forEach(button => button.disabled = true);
+    quizFeedback.classList.remove("good-job", "try-again");
+
+    if (selectedIndex === question.answer) {
+        selectedButton.classList.add("correct");
+        quizFeedback.innerHTML = "🎉 Good job! Correct!";
+        quizFeedback.classList.add("good-job");
+        score++;
+        createConfetti();
+    } else {
+        selectedButton.classList.add("wrong");
+        quizFeedback.innerHTML = "❌ Not quite!";
+        quizFeedback.classList.add("try-again");
+        allButtons[question.answer].classList.add("correct");
+    }
+    nextQuestion.style.display = "block";
+}
+
+nextQuestion.addEventListener('click', () => {
+    currentQuestion++;
+    if (currentQuestion < quizData.length) {
+        loadQuestion();
+    } else {
+        showQuizResult();
+    }
+});
+
+function showQuizResult() {
+    quizNumber.textContent = "Quiz Complete! 🎉";
+    quizQuestion.innerHTML = `You got <strong>${score}</strong> out of <strong>${quizData.length}</strong> correct!`;
+    quizOptions.innerHTML = "";
+    quizFeedback.classList.remove("try-again");
+    quizFeedback.classList.add("good-job");
+
+    if (score === quizData.length) {
+        quizFeedback.innerHTML = "🌟 Perfect! Great job!";
+        createConfetti();
+    } else if (score >= 7) {
+        quizFeedback.innerHTML = "🎉 Good job! Keep practicing!";
+    } else {
+        quizFeedback.innerHTML = "💪 Keep practicing! You can do it!";
+    }
+
+    nextQuestion.textContent = "Try Again";
+    nextQuestion.style.display = "block";
+    nextQuestion.onclick = () => {
+        currentQuestion = 0;
+        score = 0;
+        nextQuestion.textContent = "Next →";
+        nextQuestion.onclick = null;
+        loadQuestion();
+    };
+}
+
+function createConfetti() {
+    const confettiColors = ["#b8865c", "#52b788", "#faedcd", "#d7b89c", "#ffb4a2"];
+    for (let i = 0; i < 30; i++) {
+        const confetti = document.createElement("div");
+        confetti.className = "confetti";
+        confetti.style.left = Math.random() * 100 + "vw";
+        confetti.style.background = confettiColors[Math.floor(Math.random() * confettiColors.length)];
+        confetti.style.animationDelay = Math.random() * 0.3 + "s";
+        confetti.style.width = Math.random() * 6 + 5 + "px";
+        confetti.style.height = Math.random() * 6 + 5 + "px";
+        document.body.appendChild(confetti);
+        setTimeout(() => confetti.remove(), 1800);
+    }
+}
+</script>
+<script src="../script.js"></script>
+</body>
+</html>
