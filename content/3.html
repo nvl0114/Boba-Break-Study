@@ -1449,7 +1449,7 @@ p {
     class="reset-btn"
     id="finalResetBtn"
     onclick="resetFinal()"
-    style="width:100%; margin-top:8px; display:none;">
+    style="width:100%; margin-top:8px;">
 
     ↻ Reset Answer
 
@@ -1565,7 +1565,7 @@ function currentSlide(n) {
 
 
 /* =====================================================
-   GAME DATA (UPDATED: REMOVED 這 & 那, NEW QUESTIONS ADDED)
+   GAME DATA
 ===================================================== */
 
 const games = {
@@ -1770,7 +1770,7 @@ function listenCurrent(gameNumber){
 
 
 /* =====================================================
-   SENTENCE WRITING (UPDATED WITHOUT 這/那)
+   SENTENCE WRITING
 ===================================================== */
 
 const sentenceQuestions = [
@@ -1818,7 +1818,7 @@ function nextSentenceWriting(){
 
 
 /* =====================================================
-   WRITING PRACTICE (UPDATED: REMOVED 這 & 那)
+   WRITING PRACTICE (HANZI WRITER)
 ===================================================== */
 
 const writingCharacters = [
@@ -1928,7 +1928,7 @@ function playCurrentWriting(){
 
 
 /* =====================================================
-   FINAL CHALLENGE (UPDATED WITHOUT 這)
+   FINAL CHALLENGE (GRAMMAR MASTER)
 ===================================================== */
 
 const finalQuestions = [
@@ -1967,6 +1967,8 @@ function loadFinal(){
         };
         bank.appendChild(button);
     });
+    
+    document.getElementById("finalFeedback").textContent = "";
 }
 
 function renderFinal(){
@@ -1982,6 +1984,10 @@ function renderFinal(){
         };
         area.appendChild(span);
     });
+}
+
+function resetFinal(){
+    loadFinal();
 }
 
 function checkFinal(){
