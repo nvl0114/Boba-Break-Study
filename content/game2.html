@@ -1257,6 +1257,56 @@
 <script>
 
 /* =========================================================
+   AUDIO SOUND EFFECTS (WEB AUDIO API)
+========================================================= */
+
+const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+function playSound(type) {
+    if (!audioCtx) return;
+    if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+    }
+
+    const osc = audioCtx.createOscillator();
+    const gainNode = audioCtx.createGain();
+    osc.connect(gainNode);
+    gainNode.connect(audioCtx.destination);
+
+    const now = audioCtx.currentTime;
+
+    if (type === 'correct') {
+        // Happy ascending chime (C5 -> G5)
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(523.25, now);
+        osc.frequency.setValueAtTime(783.99, now + 0.1);
+        gainNode.gain.setValueAtTime(0.15, now);
+        gainNode.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
+        osc.start(now);
+        osc.stop(now + 0.3);
+    } else if (type === 'incorrect') {
+        // Low descending thud (D4 -> A3)
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(293.66, now);
+        osc.frequency.setValueAtTime(220.00, now + 0.12);
+        gainNode.gain.setValueAtTime(0.12, now);
+        gainNode.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
+        osc.start(now);
+        osc.stop(now + 0.25);
+    } else if (type === 'pop') {
+        // Quick short click/pop for word buttons
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(400, now);
+        osc.frequency.exponentialRampToValueAtTime(800, now + 0.04);
+        gainNode.gain.setValueAtTime(0.08, now);
+        gainNode.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
+        osc.start(now);
+        osc.stop(now + 0.05);
+    }
+}
+
+
+/* =========================================================
    SPEECH
 ========================================================= */
 
@@ -1359,6 +1409,7 @@ vocabulary.forEach(function(item) {
     card.addEventListener(
         "click",
         function() {
+            playSound('pop');
             speak(item[0]);
         }
     );
@@ -1410,7 +1461,7 @@ function showSlide(index) {
 
 
 function changeSlide(direction) {
-
+    playSound('pop');
     showSlide(
         currentSlide + direction
     );
@@ -1554,7 +1605,7 @@ function renderBuildBank() {
         button.addEventListener(
             "click",
             function() {
-
+                playSound('pop');
                 buildAnswer.push(char);
 
                 button.remove();
@@ -1593,7 +1644,7 @@ function renderBuildAnswer() {
             chip.addEventListener(
                 "click",
                 function() {
-
+                    playSound('pop');
                     buildAnswer.splice(
                         index,
                         1
@@ -1628,7 +1679,7 @@ function checkBuild() {
         );
 
     if (user === correct) {
-
+        playSound('correct');
         feedback.textContent =
             "✓ Correct!";
 
@@ -1638,7 +1689,7 @@ function checkBuild() {
         addXP(5);
 
     } else {
-
+        playSound('incorrect');
         feedback.textContent =
             "✗ Not quite. Try again.";
 
@@ -1651,14 +1702,14 @@ function checkBuild() {
 
 
 function resetBuild() {
-
+    playSound('pop');
     loadBuildGame();
 
 }
 
 
 function speakBuild() {
-
+    playSound('pop');
     speak(
         buildGames[buildIndex].answer
     );
@@ -1667,7 +1718,7 @@ function speakBuild() {
 
 
 function nextBuild() {
-
+    playSound('pop');
     buildIndex++;
 
     if (
@@ -1795,7 +1846,7 @@ function checkTranslation() {
     if (
         input === answer
     ) {
-
+        playSound('correct');
         feedback.textContent =
             "✓ Correct!";
 
@@ -1805,7 +1856,7 @@ function checkTranslation() {
         addXP(5);
 
     } else {
-
+        playSound('incorrect');
         feedback.textContent =
             "✗ Not quite. Try again.";
 
@@ -1818,7 +1869,7 @@ function checkTranslation() {
 
 
 function speakTranslation() {
-
+    playSound('pop');
     speak(
         translationGames[
             translationIndex
@@ -1829,7 +1880,7 @@ function speakTranslation() {
 
 
 function nextTranslation() {
-
+    playSound('pop');
     translationIndex++;
 
     if (
@@ -1954,7 +2005,7 @@ function renderEnglishBank() {
         button.addEventListener(
             "click",
             function() {
-
+                playSound('pop');
                 englishAnswer.push(
                     char
                 );
@@ -2018,7 +2069,7 @@ function checkEnglishGame() {
         );
 
     if (user === correct) {
-
+        playSound('correct');
         feedback.textContent =
             "✓ Correct!";
 
@@ -2028,7 +2079,7 @@ function checkEnglishGame() {
         addXP(5);
 
     } else {
-
+        playSound('incorrect');
         feedback.textContent =
             "✗ Incorrect. Check the word order.";
 
@@ -2041,14 +2092,14 @@ function checkEnglishGame() {
 
 
 function resetEnglishGame() {
-
+    playSound('pop');
     loadEnglishGame();
 
 }
 
 
 function nextEnglishGame() {
-
+    playSound('pop');
     englishIndex++;
 
     if (
@@ -2143,14 +2194,17 @@ function startQuiz() {
 
     writer.quiz({
         onMistake: function(strokeData) {
+            playSound('incorrect');
             feedback.textContent = "❌ Incorrect stroke order! Try again.";
             feedback.className = "feedback incorrect";
         },
         onCorrectStroke: function(strokeData) {
+            playSound('pop');
             feedback.textContent = "✨ Great! Continue with the next stroke.";
             feedback.className = "feedback correct";
         },
         onComplete: function(summaryData) {
+            playSound('correct');
             feedback.textContent = "🎉 Perfect! Correct stroke order.";
             feedback.className = "feedback correct";
             addXP(3);
@@ -2159,6 +2213,7 @@ function startQuiz() {
 }
 
 function setWritingMode(mode, button){
+    playSound('pop');
     writingMode = mode;
 
     document
@@ -2173,10 +2228,12 @@ function setWritingMode(mode, button){
 }
 
 function resetWritingQuiz() {
+    playSound('pop');
     initWriter();
 }
 
 function nextWritingCharacter(){
+    playSound('pop');
     writingIndex++;
     if(writingIndex >= writingCharacters.length){
         writingIndex = 0;
@@ -2185,6 +2242,7 @@ function nextWritingCharacter(){
 }
 
 function playCurrentWriting(){
+    playSound('pop');
     speak(writingCharacters[writingIndex].hanzi);
 }
 
@@ -2284,7 +2342,7 @@ function loadFinalQuiz() {
             button.dataset.option = optionIndex;
 
             button.addEventListener("click", function() {
-
+                playSound('pop');
                 const allOptions = document.querySelectorAll('[data-question="' + qIndex + '"]');
                 allOptions.forEach(function(btn) {
                     btn.classList.remove("selected");
@@ -2307,6 +2365,7 @@ function loadFinalQuiz() {
 }
 
 function changeQuizSlide(direction) {
+    playSound('pop');
     const slides = document.querySelectorAll(".final-question");
 
     currentQuizIndex += direction;
@@ -2383,22 +2442,22 @@ function submitFinal() {
     let message = "";
 
     if (score === finalQuestions.length) {
-
+        playSound('correct');
         message =
             "Perfect! You mastered 的 and the previous grammar! 🎉";
 
     } else if (score >= 10) {
-
+        playSound('correct');
         message =
             "Excellent! Your Mandarin grammar is getting stronger! 🌟";
 
     } else if (score >= 7) {
-
+        playSound('correct');
         message =
             "Good job! Review the grammar and try again.";
 
     } else {
-
+        playSound('incorrect');
         message =
             "Keep practicing! You can do it. 💪";
 
