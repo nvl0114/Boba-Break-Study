@@ -362,36 +362,78 @@
         }
 
         /* =========================
-           HANZI
+           HANZI WRITER STYLES
         ========================= */
 
-        .hanzi-practice {
-            text-align: center;
+        .writing-card {
             background: var(--cream);
-            padding: 20px;
             border-radius: 18px;
+            padding: 20px;
+            text-align: center;
         }
 
-        #hanziCharacter {
-            font-size: 2.5rem;
+        .writing-mode-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .mode-btn {
+            border: 2px solid var(--border);
+            background: white;
+            color: var(--brown);
+            padding: 6px 14px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .mode-btn.active {
+            background: var(--brown);
+            color: white;
+            border-color: var(--brown);
+        }
+
+        .writing-info {
             font-weight: 700;
             color: var(--brown);
+            margin-bottom: 10px;
         }
 
-        #hanziWriter {
+        .canvas-wrapper {
             width: 260px;
             height: 260px;
             margin: 15px auto;
             background: white;
             border-radius: 15px;
             box-shadow: 0 4px 12px rgba(92,64,51,0.08);
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        .hanzi-buttons {
+        .writing-buttons {
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
             gap: 8px;
+            margin-top: 15px;
+        }
+
+        .write-btn {
+            border: none;
+            background: var(--brown);
+            color: white;
+            padding: 10px 17px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 700;
+        }
+
+        .write-btn:hover {
+            opacity: .88;
         }
 
         /* =========================
@@ -476,7 +518,7 @@
                 grid-template-columns: 1fr;
             }
 
-            #hanziWriter {
+            .canvas-wrapper {
                 width: 230px;
                 height: 230px;
             }
@@ -1101,7 +1143,7 @@
 
 
 <!-- =====================================================
-     GAME 4
+     GAME 4 (HANZI WRITING PRACTICE)
 ===================================================== -->
 
 <section class="section-card">
@@ -1112,62 +1154,43 @@
 </h2>
 
 <p>
-    Practice writing characters from today's vocabulary.
+    Practice correct Hanzi stroke orders by hand using Hanzi Writer.
 </p>
 
-<div class="hanzi-practice">
+<div class="writing-card">
 
-    <div id="hanziCharacter">
-        你
+    <div class="writing-mode-buttons">
+        <button class="mode-btn active" onclick="setWritingMode('quiz',this)">
+            ✍️ Quiz (Stroke Order)
+        </button>
+        <button class="mode-btn" onclick="setWritingMode('animate',this)">
+            👀 Animate
+        </button>
     </div>
 
-    <div id="hanziPinyin">
-        nǐ
+    <div class="writing-info" id="writingInfo">
+        Write the character following correct stroke order!
     </div>
 
-    <div id="hanziMeaning">
-        you
+    <div class="canvas-wrapper">
+        <div id="target-div"></div>
     </div>
 
-    <div id="hanziWriter"></div>
+    <div class="feedback" id="writingFeedback"></div>
 
-    <div class="hanzi-buttons">
-
-        <button
-            class="main-btn"
-            onclick="animateHanzi()">
-            Animate
+    <div class="writing-buttons">
+        <button class="write-btn clear-btn" onclick="resetWritingQuiz()">
+            ↻ Retry
         </button>
-
-        <button
-            class="main-btn"
-            onclick="startHanziQuiz()">
-            Write
-        </button>
-
-        <button
-            class="main-btn"
-            onclick="resetHanzi()">
-            Retry
-        </button>
-
-        <button
-            class="main-btn"
-            onclick="speakHanzi()">
+        <button class="write-btn"
+                style="background:#f0f7f4;color:#2d6a4f;"
+                onclick="playCurrentWriting()">
             🔊 Listen
         </button>
-
-        <button
-            class="main-btn"
-            onclick="nextHanzi()">
-            Next
+        <button class="write-btn next-write-btn"
+                onclick="nextWritingCharacter()">
+            Next →
         </button>
-
-    </div>
-
-    <div
-        class="feedback"
-        id="hanziFeedback">
     </div>
 
 </div>
@@ -2041,180 +2064,127 @@ function nextEnglishGame() {
 
 
 /* =========================================================
-   HANZI WRITER
+   GAME 4 — HANZI WRITER (STROKE ORDER PRACTICE)
 ========================================================= */
 
-const hanziList = [
-
-    ["你", "nǐ", "you"],
-    ["妳", "nǐ", "you (female)"],
-    ["他", "tā", "he / him"],
-    ["她", "tā", "she / her"],
-    ["我", "wǒ", "I / me"],
-
-    ["朋友", "péngyǒu", "friend"],
-    ["手機", "shǒujī", "mobile phone"],
-    ["電腦", "diànnǎo", "computer"],
-    ["電視", "diànshì", "television"],
-    ["車", "chē", "car"],
-
-    ["報紙", "bàozhǐ", "newspaper"],
-    ["照片", "zhàopiàn", "photo"],
-    ["媽媽", "māma", "mom"],
-    ["爸爸", "bàba", "dad"],
-    ["老師", "lǎoshī", "teacher"],
-
-    ["眼鏡", "yǎnjìng", "glasses"],
-    ["巧克力", "qiǎokèlì", "chocolate"],
-    ["禮物", "lǐwù", "gift"],
-    ["東西", "dōngxi", "thing"],
-    ["信", "xìn", "letter"]
-
+const writingCharacters = [
+    { hanzi: "你", pinyin: "nǐ", meaning: "you" },
+    { hanzi: "妳", pinyin: "nǐ", meaning: "you (female)" },
+    { hanzi: "他", pinyin: "tā", meaning: "he / him" },
+    { hanzi: "她", pinyin: "tā", meaning: "she / her" },
+    { hanzi: "我", pinyin: "wǒ", meaning: "I / me" },
+    { hanzi: "們", pinyin: "men", meaning: "plural suffix" },
+    { hanzi: "朋", pinyin: "péng", meaning: "friend (part 1)" },
+    { hanzi: "友", pinyin: "yǒu", meaning: "friend (part 2)" },
+    { hanzi: "手", pinyin: "shǒu", meaning: "hand" },
+    { hanzi: "機", pinyin: "jī", meaning: "machine" },
+    { hanzi: "電", pinyin: "diàn", meaning: "electricity" },
+    { hanzi: "腦", pinyin: "nǎo", meaning: "brain" },
+    { hanzi: "視", pinyin: "shì", meaning: "vision" },
+    { hanzi: "車", pinyin: "chē", meaning: "car" },
+    { hanzi: "報", pinyin: "bào", meaning: "report" },
+    { hanzi: "紙", pinyin: "zhǐ", meaning: "paper" },
+    { hanzi: "照", pinyin: "zhào", meaning: "photo / shine" },
+    { hanzi: "片", pinyin: "piàn", meaning: "slice / card" },
+    { hanzi: "媽", pinyin: "mā", meaning: "mom" },
+    { hanzi: "爸", pinyin: "bà", meaning: "dad" },
+    { hanzi: "老", pinyin: "lǎo", meaning: "old" },
+    { hanzi: "師", pinyin: "shī", meaning: "teacher" },
+    { hanzi: "眼", pinyin: "yǎn", meaning: "eye" },
+    { hanzi: "鏡", pinyin: "jìng", meaning: "glasses / mirror" },
+    { hanzi: "巧", pinyin: "qiǎo", meaning: "clever" },
+    { hanzi: "克", pinyin: "kè", meaning: "gram / overcome" },
+    { hanzi: "力", pinyin: "lì", meaning: "strength" },
+    { hanzi: "禮", pinyin: "lǐ", meaning: "gift / ceremony" },
+    { hanzi: "物", pinyin: "wù", meaning: "thing / object" },
+    { hanzi: "東", pinyin: "dōng", meaning: "east" },
+    { hanzi: "西", pinyin: "xī", meaning: "west" },
+    { hanzi: "信", pinyin: "xìn", meaning: "letter / trust" }
 ];
 
+let writingIndex = 0;
+let writingMode = "quiz";
+let writer = null;
 
-let hanziIndex = 0;
-let hanziWriter = null;
-
-
-function loadHanzi() {
-
-    const item =
-        hanziList[hanziIndex];
-
-    document.getElementById(
-        "hanziCharacter"
-    ).textContent =
-        item[0];
-
-    document.getElementById(
-        "hanziPinyin"
-    ).textContent =
-        item[1];
-
-    document.getElementById(
-        "hanziMeaning"
-    ).textContent =
-        item[2];
-
-    const container =
-        document.getElementById(
-            "hanziWriter"
-        );
-
+function initWriter() {
+    const item = writingCharacters[writingIndex];
+    const container = document.getElementById("target-div");
     container.innerHTML = "";
 
-    if (
-        typeof HanziWriter ===
-        "undefined"
-    ) {
-
-        document.getElementById(
-            "hanziFeedback"
-        ).textContent =
-            "Hanzi Writer could not load.";
-
-        return;
-
+    const info = document.getElementById("writingInfo");
+    if(writingMode === 'quiz') {
+        info.innerHTML = `Write <strong>${item.hanzi}</strong> (${item.pinyin} - ${item.meaning}) following correct stroke order! (${writingIndex + 1}/${writingCharacters.length})`;
+    } else {
+        info.innerHTML = `Watch animated stroke order for <strong>${item.hanzi}</strong> (${item.pinyin} - ${item.meaning}). (${writingIndex + 1}/${writingCharacters.length})`;
     }
 
-    hanziWriter =
-        HanziWriter.create(
-            "hanziWriter",
-            item[0],
-            {
-                width: 260,
-                height: 260,
-                padding: 20,
-                showOutline: true,
-                showCharacter: false,
-                strokeAnimationSpeed: 1,
-                delayBetweenStrokes: 200
-            }
-        );
-
-}
-
-
-function animateHanzi() {
-
-    if (hanziWriter) {
-
-        hanziWriter.animateCharacter();
-
-    }
-
-}
-
-
-function startHanziQuiz() {
-
-    if (!hanziWriter) return;
-
-    document.getElementById("hanziFeedback").textContent = "Write the character...";
-    document.getElementById("hanziFeedback").className = "feedback";
-
-    hanziWriter.quiz({
-
-        showHintAfterMisses: 2,
-
-        highlightOnComplete: true,
-
-        onComplete: function() {
-
-            const feedback =
-                document.getElementById(
-                    "hanziFeedback"
-                );
-
-            feedback.textContent =
-                "✓ Excellent writing!";
-
-            feedback.className =
-                "feedback correct";
-
-            addXP(3);
-
-        }
-
+    writer = HanziWriter.create('target-div', item.hanzi, {
+        width: 220,
+        height: 220,
+        padding: 10,
+        showOutline: true,
+        strokeAnimationSpeed: 1,
+        drawingColor: '#5c4033',
+        strokeHighlightColor: '#b8865c',
+        showCharacter: writingMode === 'animate'
     });
 
-}
-
-
-function resetHanzi() {
-
-    loadHanzi();
-    document.getElementById("hanziFeedback").textContent = "";
-
-}
-
-
-function speakHanzi() {
-
-    speak(
-        hanziList[
-            hanziIndex
-        ][0]
-    );
-
-}
-
-
-function nextHanzi() {
-
-    hanziIndex++;
-
-    if (
-        hanziIndex >=
-        hanziList.length
-    ) {
-        hanziIndex = 0;
+    if(writingMode === 'quiz') {
+        startQuiz();
+    } else {
+        writer.animateCharacter();
     }
+}
 
-    loadHanzi();
-    document.getElementById("hanziFeedback").textContent = "";
+function startQuiz() {
+    const feedback = document.getElementById("writingFeedback");
+    feedback.textContent = "";
 
+    writer.quiz({
+        onMistake: function(strokeData) {
+            feedback.textContent = "❌ Incorrect stroke order! Try again.";
+            feedback.className = "feedback incorrect";
+        },
+        onCorrectStroke: function(strokeData) {
+            feedback.textContent = "✨ Great! Continue with the next stroke.";
+            feedback.className = "feedback correct";
+        },
+        onComplete: function(summaryData) {
+            feedback.textContent = "🎉 Perfect! Correct stroke order.";
+            feedback.className = "feedback correct";
+            addXP(3);
+        }
+    });
+}
+
+function setWritingMode(mode, button){
+    writingMode = mode;
+
+    document
+        .querySelectorAll(".writing-card .mode-btn")
+        .forEach(btn =>
+            btn.classList.remove("active")
+        );
+
+    button.classList.add("active");
+
+    initWriter();
+}
+
+function resetWritingQuiz() {
+    initWriter();
+}
+
+function nextWritingCharacter(){
+    writingIndex++;
+    if(writingIndex >= writingCharacters.length){
+        writingIndex = 0;
+    }
+    initWriter();
+}
+
+function playCurrentWriting(){
+    speak(writingCharacters[writingIndex].hanzi);
 }
 
 
@@ -2337,12 +2307,10 @@ function loadFinalQuiz() {
 
 function changeQuizSlide(direction) {
     const slides = document.querySelectorAll(".final-question");
-    
-    // Check if user answered current before going next (optional, lets just move)
+
     currentQuizIndex += direction;
 
     if (currentQuizIndex >= slides.length) {
-        // Submit quiz automatically when reaching the end
         submitFinal();
         return;
     }
@@ -2363,7 +2331,7 @@ function updateQuizNavButtons() {
     const nextBtn = document.getElementById("nextQuizBtn");
 
     prevBtn.style.display = currentQuizIndex > 0 ? "inline-block" : "none";
-    
+
     if (currentQuizIndex === finalQuestions.length - 1) {
         nextBtn.textContent = "Submit Quiz ✓";
     } else {
@@ -2468,7 +2436,7 @@ document.addEventListener("DOMContentLoaded", function() {
     loadBuildGame();
     loadTranslation();
     loadEnglishGame();
-    loadHanzi();
+    initWriter();
     loadFinalQuiz();
 });
 
