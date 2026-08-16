@@ -35,12 +35,22 @@
 
         body {
             margin: 0;
+            display: flex;
+            min-height: 100vh;
+            background-color: #fcf9f5;
+        }
+
+        /* Layout Sidebar & Main Content */
+        #sidebar-container {
+            width: 260px;
+            flex-shrink: 0;
         }
 
         .lesson-page {
-            max-width: 1000px;
+            flex-grow: 1;
+            max-width: 900px;
             margin: auto;
-            padding: 25px 18px 60px;
+            padding: 30px 20px 60px;
         }
 
         /* =========================
@@ -374,6 +384,7 @@
             margin: 15px auto;
             background: white;
             border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(92,64,51,0.08);
         }
 
         .hanzi-buttons {
@@ -392,6 +403,12 @@
             border-radius: 15px;
             padding: 17px;
             margin: 15px 0;
+            display: none;
+        }
+
+        .final-question.active {
+            display: block;
+            animation: fadeIn .3s ease;
         }
 
         .quiz-option {
@@ -411,6 +428,12 @@
             border-color: var(--brown-light);
         }
 
+        .quiz-nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+        }
+
         .result-box {
             margin-top: 20px;
             padding: 20px;
@@ -424,7 +447,14 @@
            MOBILE
         ========================= */
 
-        @media (max-width: 700px) {
+        @media (max-width: 900px) {
+            body {
+                flex-direction: column;
+            }
+
+            #sidebar-container {
+                width: 100%;
+            }
 
             .lesson-page {
                 padding: 18px 12px 50px;
@@ -449,10 +479,6 @@
             #hanziWriter {
                 width: 230px;
                 height: 230px;
-            }
-
-            .hanzi-example {
-                font-size: 1.45rem;
             }
         }
 
@@ -1179,13 +1205,12 @@
 
 </div>
 
-<div id="finalQuiz"></div>
+<div id="finalQuizContainer"></div>
 
-<button
-    class="main-btn"
-    onclick="submitFinal()">
-    Submit Quiz
-</button>
+<div class="quiz-nav-buttons">
+    <button class="main-btn" id="prevQuizBtn" onclick="changeQuizSlide(-1)" style="display:none;">← Previous</button>
+    <button class="main-btn" id="nextQuizBtn" onclick="changeQuizSlide(1)">Next →</button>
+</div>
 
 <div
     class="result-box"
@@ -2021,11 +2046,11 @@ function nextEnglishGame() {
 
 const hanziList = [
 
-    ["你們", "nǐmen", "you (plural)"],
-    ["妳們", "nǐmen", "you (plural, female)"],
-    ["他們", "tāmen", "they"],
-    ["她們", "tāmen", "they (female)"],
-    ["我們", "wǒmen", "we"],
+    ["你", "nǐ", "you"],
+    ["妳", "nǐ", "you (female)"],
+    ["他", "tā", "he / him"],
+    ["她", "tā", "she / her"],
+    ["我", "wǒ", "I / me"],
 
     ["朋友", "péngyǒu", "friend"],
     ["手機", "shǒujī", "mobile phone"],
@@ -2126,6 +2151,9 @@ function startHanziQuiz() {
 
     if (!hanziWriter) return;
 
+    document.getElementById("hanziFeedback").textContent = "Write the character...";
+    document.getElementById("hanziFeedback").className = "feedback";
+
     hanziWriter.quiz({
 
         showHintAfterMisses: 2,
@@ -2157,6 +2185,7 @@ function startHanziQuiz() {
 function resetHanzi() {
 
     loadHanzi();
+    document.getElementById("hanziFeedback").textContent = "";
 
 }
 
@@ -2184,295 +2213,162 @@ function nextHanzi() {
     }
 
     loadHanzi();
+    document.getElementById("hanziFeedback").textContent = "";
 
 }
 
 
 /* =========================================================
-   FINAL QUIZ
+   FINAL QUIZ (ONE BY ONE)
 ========================================================= */
 
 const finalQuestions = [
 
     {
-        question:
-            "Which means “my phone”?",
-
-        options: [
-            "我的手機",
-            "我的電腦",
-            "我的電視",
-            "我的車"
-        ],
-
+        question: "Which means “my phone”?",
+        options: ["我的手機", "我的電腦", "我的電視", "我的車"],
         answer: 0
     },
-
-
     {
-        question:
-            "Which means “our friend”?",
-
-        options: [
-            "我們朋友",
-            "我們的朋友",
-            "朋友我們",
-            "我們不朋友"
-        ],
-
+        question: "Which means “our friend”?",
+        options: ["我們朋友", "我們的朋友", "朋友我們", "我們不朋友"],
         answer: 1
     },
-
-
     {
-        question:
-            "What does 的 do in 「媽媽的車」?",
-
-        options: [
-            "Makes a question",
-            "Shows possession / relationship",
-            "Means not",
-            "Means or not"
-        ],
-
+        question: "What does 的 do in 「媽媽的車」?",
+        options: ["Makes a question", "Shows possession / relationship", "Means not", "Means or not"],
         answer: 1
     },
-
-
     {
-        question:
-            "Which means “I eat bread”?",
-
-        options: [
-            "我不吃麵包",
-            "我吃麵包",
-            "我吃麵包嗎",
-            "我吃不吃"
-        ],
-
+        question: "Which means “I eat bread”?",
+        options: ["我不吃麵包", "我吃麵包", "我吃麵包嗎", "我吃不吃"],
         answer: 1
     },
-
-
     {
-        question:
-            "Which means “I don't drink coffee”?",
-
-        options: [
-            "我喝咖啡",
-            "我喝咖啡嗎",
-            "我不喝咖啡",
-            "我喝不喝"
-        ],
-
+        question: "Which means “I don't drink coffee”?",
+        options: ["我喝咖啡", "我喝咖啡嗎", "我不喝咖啡", "我喝不喝"],
         answer: 2
     },
-
-
     {
-        question:
-            "Which means “Do you drink water?”?",
-
-        options: [
-            "你喝水",
-            "你不喝水",
-            "你喝水嗎",
-            "你喝不喝"
-        ],
-
+        question: "Which means “Do you drink water?”?",
+        options: ["你喝水", "你不喝水", "你喝水嗎", "你喝不喝"],
         answer: 2
     },
-
-
     {
-        question:
-            "Which is an A-not-A question?",
-
-        options: [
-            "你吃飯嗎？",
-            "你不吃飯。",
-            "你吃不吃？",
-            "你吃飯。"
-        ],
-
+        question: "Which is an A-not-A question?",
+        options: ["你吃飯嗎？", "你不吃飯。", "你吃不吃？", "你吃飯。"],
         answer: 2
     },
-
-
     {
-        question:
-            "Which means “their computer”?",
-
-        options: [
-            "他們電腦",
-            "他們的電腦",
-            "他們不電腦",
-            "電腦的他們"
-        ],
-
+        question: "Which means “their computer”?",
+        options: ["他們電腦", "他們的電腦", "他們不電腦", "電腦的他們"],
         answer: 1
     },
-
-
     {
-        question:
-            "Complete: 爸爸 ___ 禮物。",
-
-        options: [
-            "買",
-            "不買",
-            "嗎",
-            "買不買"
-        ],
-
+        question: "Complete: 爸爸 ___ 禮物。",
+        options: ["買", "不買", "嗎", "買不買"],
         answer: 0
     },
-
-
     {
-        question:
-            "Which means “Do you buy chocolate or not?”",
-
-        options: [
-            "你買巧克力嗎？",
-            "你不買巧克力。",
-            "你買不買巧克力？",
-            "你買巧克力。"
-        ],
-
+        question: "Which means “Do you buy chocolate or not?”",
+        options: ["你買巧克力嗎？", "你不買巧克力。", "你買不買巧克力？", "你買巧克力。"],
         answer: 2
     },
-
-
     {
-        question:
-            "Which means “her photo”?",
-
-        options: [
-            "她照片",
-            "她的照片",
-            "她不照片",
-            "她照片嗎"
-        ],
-
+        question: "Which means “her photo”?",
+        options: ["她照片", "她的照片", "她不照片", "她照片嗎"],
         answer: 1
     },
-
-
     {
-        question:
-            "Which sentence is correct?",
-
-        options: [
-            "我的手機",
-            "我手機的",
-            "的我的手機",
-            "我不的手機"
-        ],
-
+        question: "Which sentence is correct?",
+        options: ["我的手機", "我手機的", "的我的手機", "我不的手機"],
         answer: 0
     }
 
 ];
 
+let currentQuizIndex = 0;
 
 function loadFinalQuiz() {
 
-    const container =
-        document.getElementById(
-            "finalQuiz"
-        );
-
+    const container = document.getElementById("finalQuizContainer");
     container.innerHTML = "";
 
-    finalQuestions.forEach(
-        function(question, qIndex) {
+    finalQuestions.forEach(function(question, qIndex) {
 
-            const questionBox =
-                document.createElement(
-                    "div"
-                );
+        const questionBox = document.createElement("div");
+        questionBox.className = "final-question" + (qIndex === 0 ? " active" : "");
+        questionBox.dataset.index = qIndex;
 
-            questionBox.className =
-                "final-question";
+        const title = document.createElement("strong");
+        title.textContent = `Question ${qIndex + 1} of ${finalQuestions.length}: ${question.question}`;
+        questionBox.appendChild(title);
 
-            const title =
-                document.createElement(
-                    "strong"
-                );
+        question.options.forEach(function(option, optionIndex) {
 
-            title.textContent =
-                (qIndex + 1) +
-                ". " +
-                question.question;
+            const button = document.createElement("button");
+            button.className = "quiz-option";
+            button.textContent = option;
+            button.dataset.question = qIndex;
+            button.dataset.option = optionIndex;
 
-            questionBox.appendChild(
-                title
-            );
+            button.addEventListener("click", function() {
 
+                const allOptions = document.querySelectorAll('[data-question="' + qIndex + '"]');
+                allOptions.forEach(function(btn) {
+                    btn.classList.remove("selected");
+                });
 
-            question.options.forEach(
-                function(option, optionIndex) {
+                button.classList.add("selected");
 
-                    const button =
-                        document.createElement(
-                            "button"
-                        );
+            });
 
-                    button.className =
-                        "quiz-option";
+            questionBox.appendChild(button);
 
-                    button.textContent =
-                        option;
+        });
 
-                    button.dataset.question =
-                        qIndex;
+        container.appendChild(questionBox);
 
-                    button.dataset.option =
-                        optionIndex;
+    });
 
-                    button.addEventListener(
-                        "click",
-                        function() {
+    updateQuizNavButtons();
 
-                            const allOptions =
-                                document.querySelectorAll(
-                                    '[data-question="' +
-                                    qIndex +
-                                    '"]'
-                                );
+}
 
-                            allOptions.forEach(
-                                function(btn) {
+function changeQuizSlide(direction) {
+    const slides = document.querySelectorAll(".final-question");
+    
+    // Check if user answered current before going next (optional, lets just move)
+    currentQuizIndex += direction;
 
-                                    btn.classList.remove(
-                                        "selected"
-                                    );
+    if (currentQuizIndex >= slides.length) {
+        // Submit quiz automatically when reaching the end
+        submitFinal();
+        return;
+    }
 
-                                }
-                            );
+    if (currentQuizIndex < 0) {
+        currentQuizIndex = 0;
+    }
 
-                            button.classList.add(
-                                "selected"
-                            );
+    slides.forEach(function(slide, idx) {
+        slide.classList.toggle("active", idx === currentQuizIndex);
+    });
 
-                        }
-                    );
+    updateQuizNavButtons();
+}
 
-                    questionBox.appendChild(
-                        button
-                    );
+function updateQuizNavButtons() {
+    const prevBtn = document.getElementById("prevQuizBtn");
+    const nextBtn = document.getElementById("nextQuizBtn");
 
-                }
-            );
-
-            container.appendChild(
-                questionBox
-            );
-
-        }
-    );
-
+    prevBtn.style.display = currentQuizIndex > 0 ? "inline-block" : "none";
+    
+    if (currentQuizIndex === finalQuestions.length - 1) {
+        nextBtn.textContent = "Submit Quiz ✓";
+    } else {
+        nextBtn.textContent = "Next →";
+    }
 }
 
 
@@ -2511,6 +2407,8 @@ function submitFinal() {
         );
 
     result.style.display = "block";
+    document.getElementById("finalQuizContainer").style.display = "none";
+    document.querySelector(".quiz-nav-buttons").style.display = "none";
 
 
     let message = "";
