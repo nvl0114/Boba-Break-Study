@@ -120,8 +120,20 @@ p {
 
 
 /* =====================================================
-   GRAMMAR EXPLANATION
+   GRAMMAR CAROUSEL EXPLANATION
 ===================================================== */
+
+.grammar-slider-container {
+    position: relative;
+}
+
+.grammar-slide {
+    display: none;
+}
+
+.grammar-slide.active-slide {
+    display: block;
+}
 
 .pattern-display {
     display: flex;
@@ -173,6 +185,45 @@ p {
     font-weight: bold;
     color: #5c4033;
     margin-bottom: 5px;
+}
+
+.slider-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.slider-btn {
+    background: #fff8ef;
+    border: 1.5px solid #d7b89c;
+    color: #8c7355;
+    padding: 8px 16px;
+    border-radius: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.slider-btn:hover {
+    background: #faedcd;
+}
+
+.slider-indicators {
+    display: flex;
+    gap: 6px;
+}
+
+.indicator {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #f0e4d5;
+    cursor: pointer;
+}
+
+.indicator.active {
+    background: #b8865c;
 }
 
 
@@ -700,7 +751,7 @@ p {
         GRAMMAR 1 • BEGINNER
     </span>
 
-    <h1>S + V + O</h1>
+    <h1>S + V + O & Questions</h1>
 
     <p>
         Build simple Mandarin sentences step by step.
@@ -730,82 +781,150 @@ p {
 
 
 <!-- =====================================================
-     GRAMMAR EXPLANATION
+     GRAMMAR CAROUSEL EXPLANATION
 ===================================================== -->
 
 <div class="grammar-card">
 
-    <h2>🧠 Grammar: S + V + O</h2>
+    <h2>🧠 Grammar Patterns</h2>
 
-    <p>
-        Mandarin basic sentences can follow the pattern:
-        <strong>Subject + Verb + Object</strong>.
-    </p>
+    <div class="grammar-slider-container">
 
-    <div class="pattern-display">
+        <!-- SLIDE 1: S + V + O -->
+        <div class="grammar-slide active-slide" id="slide-1">
+            <h3>1. Basic Sentence: S + V + O</h3>
+            <p>Mandarin basic sentences follow the Subject + Verb + Object structure.</p>
 
-        <div class="pattern-box">
-            S<br>
-            <small>Subject</small>
+            <div class="pattern-display">
+                <div class="pattern-box">S<br><small>Subject</small></div>
+                <div class="pattern-symbol">+</div>
+                <div class="pattern-box">V<br><small>Verb</small></div>
+                <div class="pattern-symbol">+</div>
+                <div class="pattern-box">O<br><small>Object</small></div>
+            </div>
+
+            <div class="grammar-explanation">
+                <p><strong>S = Subject</strong><br>Who is performing the action?</p>
+                <p><strong>V = Verb</strong><br>What action is being done?</p>
+                <p><strong>O = Object</strong><br>What receives the action?</p>
+            </div>
+
+            <div class="example-sentence">
+                <div class="example-hanzi">
+                    <span onclick="playAudio('我')">我</span>
+                    <span onclick="playAudio('吃')">吃</span>
+                    <span onclick="playAudio('飯')">飯</span>
+                </div>
+                <div>Wǒ chī fàn.</div>
+                <div>I eat a meal.</div>
+                <button class="sound-btn" onclick="playAudio('我吃飯')">🔊</button>
+            </div>
         </div>
 
-        <div class="pattern-symbol">+</div>
+        <!-- SLIDE 2: S + 不 + V + O -->
+        <div class="grammar-slide" id="slide-2">
+            <h3>2. Negative Sentence: S + 不 + V + O</h3>
+            <p>To make a sentence negative, insert <strong>不 (bù)</strong> right before the verb.</p>
 
-        <div class="pattern-box">
-            V<br>
-            <small>Verb</small>
+            <div class="pattern-display">
+                <div class="pattern-box">S<br><small>Subject</small></div>
+                <div class="pattern-symbol">+</div>
+                <div class="pattern-box" style="background:#faedcd; color:#8c5d35;">不<br><small>not</small></div>
+                <div class="pattern-symbol">+</div>
+                <div class="pattern-box">V<br><small>Verb</small></div>
+                <div class="pattern-symbol">+</div>
+                <div class="pattern-box">O<br><small>Object</small></div>
+            </div>
+
+            <div class="grammar-explanation">
+                <p><strong>不 (bù)</strong> is placed directly before the verb to turn the action into a negative statement (meaning "not" or "do not").</p>
+            </div>
+
+            <div class="example-sentence">
+                <div class="example-hanzi">
+                    <span onclick="playAudio('我')">我</span>
+                    <span onclick="playAudio('不')">不</span>
+                    <span onclick="playAudio('吃')">吃</span>
+                    <span onclick="playAudio('飯')">飯</span>
+                </div>
+                <div>Wǒ bù chī fàn.</div>
+                <div>I don't eat a meal.</div>
+                <button class="sound-btn" onclick="playAudio('我不吃飯')">🔊</button>
+            </div>
         </div>
 
-        <div class="pattern-symbol">+</div>
+        <!-- SLIDE 3: S + V + O + 嗎 -->
+        <div class="grammar-slide" id="slide-3">
+            <h3>3. Question Particle: S + V + O + 嗎</h3>
+            <p>Turn any statement into a "Yes/No" question by adding the question particle <strong>嗎 (ma)</strong> at the very end.</p>
 
-        <div class="pattern-box">
-            O<br>
-            <small>Object</small>
+            <div class="pattern-display">
+                <div class="pattern-box">Statement<br><small>S + V + O</small></div>
+                <div class="pattern-symbol">+</div>
+                <div class="pattern-box" style="background:#faedcd; color:#8c5d35;">嗎<br><small>ma?</small></div>
+            </div>
+
+            <div class="grammar-explanation">
+                <p>The word order of the statement does not change. Simply add <strong>嗎 (ma)</strong> to the end of the sentence to form a question.</p>
+            </div>
+
+            <div class="example-sentence">
+                <div class="example-hanzi">
+                    <span onclick="playAudio('你')">你</span>
+                    <span onclick="playAudio('吃')">吃</span>
+                    <span onclick="playAudio('飯')">飯</span>
+                    <span onclick="playAudio('嗎')">嗎</span>
+                </div>
+                <div>Nǐ chī fàn ma?</div>
+                <div>Do you eat a meal?</div>
+                <button class="sound-btn" onclick="playAudio('你吃飯嗎')">🔊</button>
+            </div>
+        </div>
+
+        <!-- SLIDE 4: S + V + 不 + V -->
+        <div class="grammar-slide" id="slide-4">
+            <h3>4. Alternative Question: S + V + 不 + V</h3>
+            <p>Ask a direct choice question using the <strong>Verb + 不 + Verb</strong> (A-not-A) pattern.</p>
+
+            <div class="pattern-display">
+                <div class="pattern-box">S<br><small>Subject</small></div>
+                <div class="pattern-symbol">+</div>
+                <div class="pattern-box">V<br><small>Verb</small></div>
+                <div class="pattern-symbol">+</div>
+                <div class="pattern-box" style="background:#faedcd; color:#8c5d35;">不<br><small>not</small></div>
+                <div class="pattern-symbol">+</div>
+                <div class="pattern-box">V<br><small>Verb</small></div>
+            </div>
+
+            <div class="grammar-explanation">
+                <p>This asks whether someone does or does not do an action (e.g., "eat or not eat"). Note that the object usually comes after this structure if needed.</p>
+            </div>
+
+            <div class="example-sentence">
+                <div class="example-hanzi">
+                    <span onclick="playAudio('你')">你</span>
+                    <span onclick="playAudio('吃')">吃</span>
+                    <span onclick="playAudio('不')">不</span>
+                    <span onclick="playAudio('吃')">吃</span>
+                </div>
+                <div>Nǐ chī bu chī?</div>
+                <div>Do you eat or not?</div>
+                <button class="sound-btn" onclick="playAudio('你吃不吃')">🔊</button>
+            </div>
         </div>
 
     </div>
 
-    <div class="grammar-explanation">
-
-        <p>
-            <strong>S = Subject</strong><br>
-            Siapa yang melakukan?
-        </p>
-
-        <p>
-            <strong>V = Verb</strong><br>
-            Melakukan apa?
-        </p>
-
-        <p>
-            <strong>O = Object</strong><br>
-            Apa yang dikenai tindakan?
-        </p>
-
-    </div>
-
-    <div class="example-sentence">
-
-        <div class="example-hanzi">
-            <span onclick="playAudio('我')">我</span>
-            <span onclick="playAudio('吃')">吃</span>
-            <span onclick="playAudio('飯')">飯</span>
+    <!-- Slider Navigation Controls -->
+    <div class="slider-nav">
+        <button class="slider-btn" onclick="prevSlide()">← Prev</button>
+        <div class="slider-indicators" id="sliderIndicators">
+            <span class="indicator active" onclick="currentSlide(1)"></span>
+            <span class="indicator" onclick="currentSlide(2)"></span>
+            <span class="indicator" onclick="currentSlide(3)"></span>
+            <span class="indicator" onclick="currentSlide(4)"></span>
         </div>
-
-        <div>
-            Wǒ chī fàn.
-        </div>
-
-        <div>
-            I eat a meal.
-        </div>
-
-        <button
-            class="sound-btn"
-            onclick="playAudio('我吃飯')">
-            🔊
-        </button>
-
+        <button class="slider-btn" onclick="nextSlide()">Next →</button>
     </div>
 
 </div>
@@ -961,7 +1080,7 @@ p {
 <h2>🧩 Build S + V + O</h2>
 
 <p class="game-description">
-    Susun kata menjadi kalimat yang benar.
+    Arrange the words to form the correct sentence.
 </p>
 
 <div class="game-progress">
@@ -1017,7 +1136,7 @@ p {
 <h2>🚫 Build Negative Sentences</h2>
 
 <p class="game-description">
-    Gunakan pola <strong>S + 不 + V + O</strong>.
+    Practice using the <strong>S + 不 + V + O</strong> pattern.
 </p>
 
 <div class="game-progress">
@@ -1073,8 +1192,7 @@ p {
 <h2>❓ Build 嗎 Questions</h2>
 
 <p class="game-description">
-    Ubah kalimat menjadi pertanyaan menggunakan
-    <strong>嗎</strong>.
+    Convert statements into questions using <strong>嗎</strong>.
 </p>
 
 <div class="game-progress">
@@ -1130,7 +1248,7 @@ p {
 <h2>🔄 Build A-not-A Questions</h2>
 
 <p class="game-description">
-    Gunakan pola <strong>S + V + 不 + V？</strong>.
+    Practice using the <strong>S + V + 不 + V？</strong> pattern.
 </p>
 
 <div class="game-progress">
@@ -1176,65 +1294,7 @@ p {
 
 
 <!-- =====================================================
-     WRITING PRACTICE (HANZI WRITER)
-===================================================== -->
-
-<div class="writing-card">
-
-<h2>✍️ Writing Practice</h2>
-
-<p>
-    Latih urutan goresan Hanzi dengan benar.
-</p>
-
-<div class="writing-mode-buttons">
-
-<button class="mode-btn active" onclick="setWritingMode('quiz',this)">
-    ✍️ Quiz (Stroke Order)
-</button>
-
-<button class="mode-btn" onclick="setWritingMode('animate',this)">
-    👀 Animate
-</button>
-
-</div>
-
-<div class="writing-info" id="writingInfo">
-    Tulis karakter sesuai urutan goresan yang benar!
-</div>
-
-<div class="recall-answer" id="recallAnswer"></div>
-
-<div class="canvas-wrapper">
-    <div id="target-div"></div>
-</div>
-
-<div class="feedback" id="writingFeedback"></div>
-
-<div class="writing-buttons">
-
-<button class="write-btn clear-btn" onclick="resetWritingQuiz()">
-    ↻ Ulangi
-</button>
-
-<button class="write-btn"
-        style="background:#f0f7f4;color:#2d6a4f;"
-        onclick="playCurrentWriting()">
-    🔊 Listen
-</button>
-
-<button class="write-btn next-write-btn"
-        onclick="nextWritingCharacter()">
-    Next →
-</button>
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
-     SENTENCE WRITING
+     SENTENCE WRITING (PLACED BEFORE WRITING PRACTICE)
 ===================================================== -->
 
 <div class="writing-card">
@@ -1242,7 +1302,7 @@ p {
 <h2>📝 Sentence Writing</h2>
 
 <p>
-    Gunakan grammar yang sudah dipelajari.
+    Apply the grammar patterns you have learned.
 </p>
 
 <div class="sentence-writing">
@@ -1281,6 +1341,64 @@ p {
 
 
 <!-- =====================================================
+     WRITING PRACTICE (HANZI WRITER)
+===================================================== -->
+
+<div class="writing-card">
+
+<h2>✍️ Writing Practice</h2>
+
+<p>
+    Practice correct Hanzi stroke orders by hand.
+</p>
+
+<div class="writing-mode-buttons">
+
+<button class="mode-btn active" onclick="setWritingMode('quiz',this)">
+    ✍️ Quiz (Stroke Order)
+</button>
+
+<button class="mode-btn" onclick="setWritingMode('animate',this)">
+    👀 Animate
+</button>
+
+</div>
+
+<div class="writing-info" id="writingInfo">
+    Write the character following the correct stroke order!
+</div>
+
+<div class="recall-answer" id="recallAnswer"></div>
+
+<div class="canvas-wrapper">
+    <div id="target-div"></div>
+</div>
+
+<div class="feedback" id="writingFeedback"></div>
+
+<div class="writing-buttons">
+
+<button class="write-btn clear-btn" onclick="resetWritingQuiz()">
+    ↻ Retry
+</button>
+
+<button class="write-btn"
+        style="background:#f0f7f4;color:#2d6a4f;"
+        onclick="playCurrentWriting()">
+    🔊 Listen
+</button>
+
+<button class="write-btn next-write-btn"
+        onclick="nextWritingCharacter()">
+    Next →
+</button>
+
+</div>
+
+</div>
+
+
+<!-- =====================================================
      FINAL CHALLENGE
 ===================================================== -->
 
@@ -1293,7 +1411,7 @@ p {
 <h2>🏆 Grammar Master</h2>
 
 <p>
-    Kamu sekarang harus membedakan empat pola:
+    Differentiate and master all four core patterns:
 </p>
 
 <div class="grammar-explanation">
@@ -1438,6 +1556,40 @@ function addXP(amount){
 
     document.getElementById("progressFill")
         .style.width = progress + "%";
+}
+
+
+/* =====================================================
+   GRAMMAR SLIDER (CAROUSEL)
+===================================================== */
+
+let currentSlideIndex = 0;
+const totalSlides = 4;
+
+function showSlide(index) {
+    if (index >= totalSlides) currentSlideIndex = 0;
+    else if (index < 0) currentSlideIndex = totalSlides - 1;
+    else currentSlideIndex = index;
+
+    for (let i = 1; i <= totalSlides; i++) {
+        document.getElementById("slide-" + i).classList.remove("active-slide");
+        document.querySelectorAll(".indicator")[i - 1].classList.remove("active");
+    }
+
+    document.getElementById("slide-" + (currentSlideIndex + 1)).classList.add("active-slide");
+    document.querySelectorAll(".indicator")[currentSlideIndex].classList.add("active");
+}
+
+function nextSlide() {
+    showSlide(currentSlideIndex + 1);
+}
+
+function prevSlide() {
+    showSlide(currentSlideIndex - 1);
+}
+
+function currentSlide(n) {
+    showSlide(n - 1);
 }
 
 
@@ -1878,107 +2030,6 @@ function listenCurrent(gameNumber){
 
 
 /* =====================================================
-   WRITING PRACTICE (HANZI WRITER INTEGRATION)
-===================================================== */
-
-const writingCharacters = [
-    { hanzi:"我", pinyin:"wǒ", meaning:"I / me" },
-    { hanzi:"你", pinyin:"nǐ", meaning:"you" },
-    { hanzi:"他", pinyin:"tā", meaning:"he" },
-    { hanzi:"她", pinyin:"tā", meaning:"she" },
-    { hanzi:"吃", pinyin:"chī", meaning:"eat" },
-    { hanzi:"喝", pinyin:"hē", meaning:"drink" },
-    { hanzi:"飯", pinyin:"fàn", meaning:"meal / rice" },
-    { hanzi:"水", pinyin:"shuǐ", meaning:"water" }
-];
-
-let writingIndex = 0;
-let writingMode = "quiz";
-let writer = null;
-
-function initWriter() {
-    const item = writingCharacters[writingIndex];
-    const container = document.getElementById("target-div");
-    container.innerHTML = ""; // Bersihkan kontainer lama
-
-    writer = HanziWriter.create('target-div', item.hanzi, {
-        width: 260,
-        height: 260,
-        padding: 10,
-        showOutline: true,
-        strokeAnimationSpeed: 1,
-        drawingColor: '#5c4033',
-        strokeHighlightColor: '#b8865c',
-        showCharacter: writingMode === 'animate'
-    });
-
-    if(writingMode === 'quiz') {
-        startQuiz();
-    } else {
-        writer.animateCharacter();
-    }
-}
-
-function startQuiz() {
-    const feedback = document.getElementById("writingFeedback");
-    feedback.textContent = "";
-    
-    writer.quiz({
-        onMistake: function(strokeData) {
-            feedback.textContent = "❌ Urutan goresan salah! Coba lagi.";
-            feedback.className = "feedback incorrect";
-        },
-        onCorrectStroke: function(strokeData) {
-            feedback.textContent = "✨ Bagus! Lanjutkan goresan berikutnya.";
-            feedback.className = "feedback correct";
-        },
-        onComplete: function(summaryData) {
-            feedback.textContent = "🎉 Sempurna! Urutan goresan benar.";
-            feedback.className = "feedback correct";
-            addXP(5);
-        }
-    });
-}
-
-function setWritingMode(mode, button){
-    writingMode = mode;
-
-    document
-        .querySelectorAll(".writing-card .mode-btn")
-        .forEach(btn =>
-            btn.classList.remove("active")
-        );
-
-    button.classList.add("active");
-
-    const info = document.getElementById("writingInfo");
-    if(writingMode === 'quiz') {
-        info.textContent = "Tulis karakter sesuai urutan goresan yang benar!";
-    } else {
-        info.textContent = "Perhatikan animasi urutan goresan.";
-    }
-
-    initWriter();
-}
-
-function resetWritingQuiz() {
-    initWriter();
-}
-
-function nextWritingCharacter(){
-    writingIndex++;
-    if(writingIndex >= writingCharacters.length){
-        writingIndex = 0;
-    }
-    initWriter();
-}
-
-function playCurrentWriting(){
-    playAudio(writingCharacters[writingIndex].hanzi);
-}
-
-
-/* =====================================================
    SENTENCE WRITING
 ===================================================== */
 
@@ -2104,6 +2155,107 @@ function nextSentenceWriting(){
 
     loadSentenceWriting();
 
+}
+
+
+/* =====================================================
+   WRITING PRACTICE (HANZI WRITER INTEGRATION)
+===================================================== */
+
+const writingCharacters = [
+    { hanzi:"我", pinyin:"wǒ", meaning:"I / me" },
+    { hanzi:"你", pinyin:"nǐ", meaning:"you" },
+    { hanzi:"他", pinyin:"tā", meaning:"he" },
+    { hanzi:"她", pinyin:"tā", meaning:"she" },
+    { hanzi:"吃", pinyin:"chī", meaning:"eat" },
+    { hanzi:"喝", pinyin:"hē", meaning:"drink" },
+    { hanzi:"飯", pinyin:"fàn", meaning:"meal / rice" },
+    { hanzi:"水", pinyin:"shuǐ", meaning:"water" }
+];
+
+let writingIndex = 0;
+let writingMode = "quiz";
+let writer = null;
+
+function initWriter() {
+    const item = writingCharacters[writingIndex];
+    const container = document.getElementById("target-div");
+    container.innerHTML = "";
+
+    writer = HanziWriter.create('target-div', item.hanzi, {
+        width: 260,
+        height: 260,
+        padding: 10,
+        showOutline: true,
+        strokeAnimationSpeed: 1,
+        drawingColor: '#5c4033',
+        strokeHighlightColor: '#b8865c',
+        showCharacter: writingMode === 'animate'
+    });
+
+    if(writingMode === 'quiz') {
+        startQuiz();
+    } else {
+        writer.animateCharacter();
+    }
+}
+
+function startQuiz() {
+    const feedback = document.getElementById("writingFeedback");
+    feedback.textContent = "";
+    
+    writer.quiz({
+        onMistake: function(strokeData) {
+            feedback.textContent = "❌ Incorrect stroke order! Try again.";
+            feedback.className = "feedback incorrect";
+        },
+        onCorrectStroke: function(strokeData) {
+            feedback.textContent = "✨ Great! Continue with the next stroke.";
+            feedback.className = "feedback correct";
+        },
+        onComplete: function(summaryData) {
+            feedback.textContent = "🎉 Perfect! Correct stroke order.";
+            feedback.className = "feedback correct";
+            addXP(5);
+        }
+    });
+}
+
+function setWritingMode(mode, button){
+    writingMode = mode;
+
+    document
+        .querySelectorAll(".writing-card .mode-btn")
+        .forEach(btn =>
+            btn.classList.remove("active")
+        );
+
+    button.classList.add("active");
+
+    const info = document.getElementById("writingInfo");
+    if(writingMode === 'quiz') {
+        info.textContent = "Write the character following the correct stroke order!";
+    } else {
+        info.textContent = "Watch the animated stroke order.";
+    }
+
+    initWriter();
+}
+
+function resetWritingQuiz() {
+    initWriter();
+}
+
+function nextWritingCharacter(){
+    writingIndex++;
+    if(writingIndex >= writingCharacters.length){
+        writingIndex = 0;
+    }
+    initWriter();
+}
+
+function playCurrentWriting(){
+    playAudio(writingCharacters[writingIndex].hanzi);
 }
 
 
@@ -2302,9 +2454,9 @@ loadGame(2);
 loadGame(3);
 loadGame(4);
 
-initWriter(); // Inisialisasi Hanzi Writer
-
 loadSentenceWriting();
+
+initWriter();
 
 loadFinal();
 
