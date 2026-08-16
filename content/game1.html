@@ -4,14 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Basic Sentence Patterns | Grammar Guide</title>
+<title>Grammar 1 — SVO & Questions | Boba Break Study</title>
 
-<!-- Main CSS -->
 <link rel="stylesheet" href="../style.css">
 
-<!-- Font Awesome -->
 <link rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<!-- Hanzi Writer CDN -->
+<script src="https://cdn.jsdelivr.net/npm/hanzi-writer@3.5.0/dist/hanzi-writer.min.js"></script>
 
 <style>
 
@@ -21,7 +22,9 @@
 
 .lesson-card,
 .grammar-card,
-.game-card {
+.game-card,
+.writing-card,
+.final-card {
     background: white;
     padding: 25px;
     border-radius: 20px;
@@ -30,17 +33,17 @@
     max-width: 750px;
 }
 
-.lesson-card h2,
-.grammar-card h2,
-.game-card h2 {
+h2 {
     color: #b8865c;
     font-size: 24px;
-    margin-bottom: 15px;
+    margin-bottom: 12px;
 }
 
-.lesson-card p,
-.grammar-card p,
-.game-card p {
+h3 {
+    color: #5c4033;
+}
+
+p {
     color: #666;
     font-size: 14px;
     line-height: 1.6;
@@ -48,102 +51,128 @@
 
 
 /* =====================================================
-   GRAMMAR INTRO
+   LESSON HEADER
 ===================================================== */
 
-.grammar-intro {
-    background: #fff8ef;
-    border: 1.5px solid #d7b89c;
-    border-radius: 16px;
-    padding: 18px;
-    margin-top: 15px;
-}
-
-.grammar-intro h3 {
-    color: #5c4033;
-    margin-bottom: 8px;
-    font-size: 18px;
-}
-
-.grammar-intro p {
-    margin-bottom: 8px;
-}
-
-.simple-example {
-    background: white;
-    border-radius: 12px;
-    padding: 12px;
-    margin-top: 10px;
+.lesson-title {
     text-align: center;
-    border: 1px solid #ead7c5;
+    margin-top: 20px;
 }
 
-.simple-example .hanzi {
-    font-size: 25px;
-    font-weight: bold;
+.lesson-title .badge {
+    display: inline-block;
+    background: #fff8ef;
     color: #b8865c;
-}
-
-.simple-example .pinyin {
-    font-size: 13px;
-    color: #666;
-    margin-top: 3px;
-}
-
-.simple-example .meaning {
+    border: 1px solid #d7b89c;
+    padding: 6px 13px;
+    border-radius: 20px;
     font-size: 12px;
-    color: #888;
-    margin-top: 3px;
+    font-weight: bold;
+}
+
+.lesson-title h1 {
+    color: #5c4033;
+    font-size: 28px;
+    margin: 12px 0 5px;
+}
+
+.lesson-title p {
+    margin: 0;
 }
 
 
 /* =====================================================
-   GRAMMAR PATTERNS
+   XP BAR
 ===================================================== */
 
-.pattern-list {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+.progress-box {
+    max-width: 750px;
+    margin: 15px auto;
+    padding: 15px 20px;
+    background: white;
+    border-radius: 18px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
 }
 
-.pattern-item {
+.progress-top {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    font-weight: bold;
+    color: #8c7355;
+    margin-bottom: 8px;
+}
+
+.progress-bar {
+    height: 9px;
+    background: #f0e4d5;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    width: 0%;
+    background: #b8865c;
+    border-radius: 20px;
+    transition: width 0.4s ease;
+}
+
+
+/* =====================================================
+   GRAMMAR EXPLANATION
+===================================================== */
+
+.pattern-display {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+}
+
+.pattern-box {
+    padding: 12px 18px;
+    border-radius: 14px;
+    font-weight: bold;
+    font-size: 18px;
+    border: 1.5px solid #d7b89c;
+    background: #fff8ef;
+    color: #b8865c;
+}
+
+.pattern-symbol {
+    font-size: 20px;
+    color: #999;
+}
+
+.grammar-explanation {
     background: #fff8ef;
     border: 1.5px solid #d7b89c;
-    border-radius: 14px;
-    padding: 14px;
+    padding: 15px;
+    border-radius: 15px;
+    margin-top: 15px;
 }
 
-.pattern-number {
-    font-size: 12px;
-    font-weight: bold;
+.grammar-explanation strong {
     color: #b8865c;
-    margin-bottom: 5px;
 }
 
-.pattern-title {
-    font-size: 16px;
+.example-sentence {
+    text-align: center;
+    margin-top: 18px;
+    padding: 15px;
+    background: white;
+    border-radius: 15px;
+    border: 1px dashed #d7b89c;
+}
+
+.example-hanzi {
+    font-size: 28px;
     font-weight: bold;
     color: #5c4033;
-}
-
-.pattern-description {
-    font-size: 12px;
-    color: #666;
-    margin-top: 5px;
-}
-
-.pattern-example {
-    background: white;
-    padding: 8px 10px;
-    border-radius: 9px;
-    margin-top: 8px;
-    font-size: 14px;
-    color: #444;
-}
-
-.pattern-example strong {
-    color: #b8865c;
+    margin-bottom: 5px;
 }
 
 
@@ -159,9 +188,10 @@
 }
 
 .vocab-pill {
+    position: relative;
     background: #fff8ef;
     border-radius: 14px;
-    padding: 9px 8px;
+    padding: 9px 10px;
     width: 105px;
     text-align: center;
     border: 1.5px solid #d7b89c;
@@ -172,7 +202,6 @@
 .vocab-pill:hover {
     transform: translateY(-2px);
     background: #faedcd;
-    border-color: #b8865c;
 }
 
 .vocab-pill:active {
@@ -188,7 +217,6 @@
 .vocab-pill .pinyin {
     font-size: 11px;
     color: #555;
-    margin-top: 2px;
 }
 
 .vocab-pill .meaning {
@@ -199,85 +227,34 @@
 
 
 /* =====================================================
-   GAME HEADER
+   GAME
 ===================================================== */
 
-.game-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 15px;
+.game-card {
+    position: relative;
 }
 
-.game-badge {
+.game-number {
+    display: inline-block;
     background: #fff8ef;
-    border: 1px solid #d7b89c;
     color: #b8865c;
-    padding: 6px 12px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: bold;
-}
-
-.xp-badge {
-    background: #faedcd;
-    color: #8c6239;
-    padding: 6px 12px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: bold;
-}
-
-
-/* =====================================================
-   GAME TABS
-===================================================== */
-
-.game-tabs {
-    display: flex;
-    gap: 8px;
-    overflow-x: auto;
-    margin-bottom: 18px;
-    padding-bottom: 5px;
-}
-
-.game-tab {
-    flex-shrink: 0;
     border: 1px solid #d7b89c;
-    background: #fff8ef;
-    color: #8c7355;
-    padding: 8px 12px;
-    border-radius: 12px;
-    cursor: pointer;
+    padding: 5px 12px;
+    border-radius: 20px;
     font-size: 12px;
     font-weight: bold;
 }
 
-.game-tab.active {
-    background: #b8865c;
-    color: white;
-    border-color: #b8865c;
-}
-
-
-/* =====================================================
-   GAME QUESTION
-===================================================== */
-
-.game-instruction {
-    text-align: center;
-    color: #777;
-    font-size: 13px;
+.game-description {
     margin-bottom: 15px;
 }
 
 .question-box {
+    text-align: center;
     background: #fff8ef;
     border: 1.5px dashed #d7b89c;
-    border-radius: 15px;
     padding: 15px;
-    text-align: center;
+    border-radius: 15px;
     margin-bottom: 15px;
 }
 
@@ -287,36 +264,48 @@
     margin-bottom: 5px;
 }
 
-.question-text {
-    font-size: 22px;
-    font-weight: bold;
+.question-meaning {
+    font-size: 17px;
     color: #5c4033;
+    font-weight: bold;
 }
 
+.answer-area {
+    min-height: 65px;
+    padding: 12px;
+    border: 2px dashed #d7b89c;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 7px;
+    background: #fdfbf7;
+    margin-bottom: 12px;
+}
 
-/* =====================================================
-   WORD BANK
-===================================================== */
+.answer-placeholder {
+    color: #aaa;
+    font-size: 13px;
+}
 
 .word-bank {
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
-    gap: 9px;
-    margin: 15px 0;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 15px;
 }
 
 .word-btn {
-    background: white;
     border: 1.5px solid #d7b89c;
+    background: white;
     color: #5c4033;
-    padding: 10px 14px;
+    padding: 9px 14px;
     border-radius: 12px;
-    font-size: 18px;
-    font-weight: bold;
+    font-size: 17px;
     cursor: pointer;
     transition: 0.2s;
-    position: relative;
 }
 
 .word-btn:hover {
@@ -324,69 +313,46 @@
     transform: translateY(-2px);
 }
 
-.word-btn:active {
-    transform: scale(0.95);
+.word-btn.selected {
+    background: #faedcd;
+    border-color: #b8865c;
+    color: #8c5d35;
 }
 
-.word-btn small {
-    display: block;
-    font-size: 9px;
-    font-weight: normal;
-    color: #888;
-    margin-top: 2px;
-}
-
-
-/* =====================================================
-   ANSWER AREA
-===================================================== */
-
-.answer-area {
-    min-height: 65px;
-    background: #fafafa;
-    border: 1.5px dashed #cbb49e;
-    border-radius: 14px;
-    padding: 10px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    gap: 7px;
-}
-
-.answer-placeholder {
-    color: #aaa;
-    font-size: 12px;
+.word-btn:disabled {
+    opacity: 0.4;
+    cursor: default;
 }
 
 .selected-word {
     background: #b8865c;
     color: white;
-    padding: 8px 11px;
+    padding: 8px 13px;
     border-radius: 10px;
     font-size: 17px;
     cursor: pointer;
 }
 
-
-/* =====================================================
-   GAME BUTTONS
-===================================================== */
+.selected-word:hover {
+    background: #a0724f;
+}
 
 .game-buttons {
     display: flex;
     gap: 8px;
-    margin-top: 14px;
 }
 
-.game-btn {
+.check-btn,
+.reset-btn,
+.listen-btn,
+.next-game-btn {
     flex: 1;
     border: none;
-    padding: 11px;
     border-radius: 12px;
-    font-weight: bold;
+    padding: 11px;
     cursor: pointer;
-    font-size: 13px;
+    font-weight: bold;
+    transition: 0.2s;
 }
 
 .check-btn {
@@ -394,135 +360,241 @@
     color: white;
 }
 
-.clear-btn {
+.check-btn:hover {
+    background: #a0724f;
+}
+
+.reset-btn {
     background: #fff8ef;
-    border: 1px solid #d7b89c;
     color: #8c7355;
+    border: 1px solid #d7b89c;
 }
 
 .listen-btn {
     background: #f0f7f4;
-    border: 1px solid #b7e4c7;
     color: #2d6a4f;
+    border: 1px solid #b7e4c7;
 }
 
-
-/* =====================================================
-   FEEDBACK
-===================================================== */
+.next-game-btn {
+    background: #5c4033;
+    color: white;
+    display: none;
+    margin-top: 12px;
+}
 
 .feedback {
-    min-height: 30px;
     text-align: center;
-    margin-top: 13px;
-    font-size: 15px;
+    min-height: 30px;
+    margin-top: 12px;
     font-weight: bold;
 }
 
-.feedback.correct {
+.correct {
     color: #2d6a4f;
 }
 
-.feedback.wrong {
+.incorrect {
     color: #9b2226;
 }
 
 
 /* =====================================================
-   PROGRESS
+   QUESTION COUNTER
 ===================================================== */
 
-.progress-container {
-    background: #eee;
-    height: 8px;
-    border-radius: 10px;
-    overflow: hidden;
-    margin: 10px 0 15px;
-}
-
-.progress-bar {
-    height: 100%;
-    width: 0%;
-    background: #b8865c;
-    transition: width 0.3s ease;
-}
-
-
-/* =====================================================
-   MINI GAMES
-===================================================== */
-
-.mini-game {
-    display: none;
-}
-
-.mini-game.active {
-    display: block;
-}
-
-.option-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-}
-
-.option-btn {
-    background: white;
-    border: 1.5px solid #d7b89c;
-    padding: 12px;
-    border-radius: 12px;
-    color: #5c4033;
-    cursor: pointer;
-    font-size: 14px;
-    transition: 0.2s;
-}
-
-.option-btn:hover {
-    background: #fff8ef;
-}
-
-.option-btn.correct {
-    background: #d8f3dc;
-    border-color: #52b788;
-    color: #2d6a4f;
-}
-
-.option-btn.wrong {
-    background: #ffe5e5;
-    border-color: #e5989b;
-    color: #9b2226;
-}
-
-
-/* =====================================================
-   COMPLETION
-===================================================== */
-
-.complete-box {
-    display: none;
-    text-align: center;
-    background: #fff8ef;
-    border: 1.5px solid #d7b89c;
-    padding: 20px;
-    border-radius: 16px;
-}
-
-.complete-box.active {
-    display: block;
-}
-
-.complete-icon {
-    font-size: 40px;
+.game-progress {
+    font-size: 12px;
+    color: #8c7355;
+    text-align: right;
     margin-bottom: 8px;
 }
 
-.complete-box h3 {
-    color: #b8865c;
-    margin-bottom: 6px;
+
+/* =====================================================
+   WRITING
+===================================================== */
+
+.writing-card {
+    text-align: center;
 }
 
-.complete-box p {
+.writing-mode-buttons {
+    display: flex;
+    gap: 8px;
+    margin: 15px 0;
+}
+
+.mode-btn {
+    flex: 1;
+    border: 1px solid #d7b89c;
+    background: #fff8ef;
+    color: #8c7355;
+    padding: 10px 5px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.mode-btn.active {
+    background: #b8865c;
+    color: white;
+}
+
+.writing-info {
+    color: #777;
     font-size: 13px;
+    margin-bottom: 15px;
+}
+
+.canvas-wrapper {
+    margin: 15px auto;
+    width: 280px;
+    max-width: 100%;
+    height: 280px;
+    background:
+        linear-gradient(#eadac7 1px, transparent 1px),
+        linear-gradient(90deg, #eadac7 1px, transparent 1px),
+        linear-gradient(#eadac7 1px, transparent 1px),
+        linear-gradient(90deg, #eadac7 1px, transparent 1px);
+    background-size: 70px 70px;
+    background-position: center;
+    border: 2px solid #d7b89c;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+    touch-action: none;
+}
+
+#target-div {
+    width: 260px;
+    height: 260px;
+}
+
+.writing-buttons {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.write-btn {
+    border: none;
+    padding: 10px 15px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.clear-btn {
+    background: #fff8ef;
+    color: #8c7355;
+    border: 1px solid #d7b89c;
+}
+
+.next-write-btn {
+    background: #b8865c;
+    color: white;
+}
+
+.recall-answer {
+    display: none;
+    font-size: 30px;
+    color: #b8865c;
+    font-weight: bold;
+    margin: 10px;
+}
+
+
+/* =====================================================
+   SENTENCE WRITING
+===================================================== */
+
+.sentence-writing {
+    background: #fff8ef;
+    border: 1.5px solid #d7b89c;
+    padding: 18px;
+    border-radius: 15px;
+    margin-top: 15px;
+}
+
+.sentence-prompt {
+    font-size: 18px;
+    font-weight: bold;
+    color: #5c4033;
+}
+
+.sentence-hint {
+    font-size: 12px;
+    color: #888;
+    margin: 8px 0;
+}
+
+#sentenceInput {
+    width: 100%;
+    padding: 12px;
+    border-radius: 12px;
+    border: 1.5px solid #d7b89c;
+    font-size: 20px;
+    text-align: center;
+    outline: none;
+}
+
+#sentenceInput:focus {
+    border-color: #b8865c;
+}
+
+.check-writing {
+    width: 100%;
+    margin-top: 10px;
+    padding: 11px;
+    background: #b8865c;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+
+/* =====================================================
+   FINAL CHALLENGE
+===================================================== */
+
+.final-card {
+    text-align: center;
+}
+
+.final-score {
+    font-size: 40px;
+    font-weight: bold;
+    color: #b8865c;
+}
+
+.unlock {
+    background: #fff8ef;
+    padding: 15px;
+    border-radius: 15px;
+    border: 1.5px solid #d7b89c;
+    margin-top: 15px;
+}
+
+
+/* =====================================================
+   SOUND
+===================================================== */
+
+.sound-btn {
+    background: #b8865c;
+    color: white;
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
 }
 
 
@@ -553,43 +625,52 @@
 }
 
 @keyframes floatingBoba {
-    0%,100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-8px);
-    }
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
 }
 
 
 /* =====================================================
-   RESPONSIVE
+   MOBILE
 ===================================================== */
 
-@media (max-width: 700px) {
+@media(max-width:700px){
 
     .lesson-card,
     .grammar-card,
-    .game-card {
+    .game-card,
+    .writing-card,
+    .final-card {
         padding: 15px;
         margin: 15px;
     }
 
-    .option-grid {
-        grid-template-columns: 1fr;
+    .lesson-title h1 {
+        font-size: 23px;
     }
 
-    .vocab-pill {
-        width: 95px;
+    .pattern-box {
+        padding: 10px 13px;
+        font-size: 16px;
+    }
+
+    .word-btn {
+        padding: 8px 12px;
+        font-size: 16px;
+    }
+
+    .writing-mode-buttons {
+        flex-wrap: wrap;
+    }
+
+    .mode-btn {
+        min-width: 45%;
     }
 
     .game-buttons {
-        flex-direction: column;
+        flex-wrap: wrap;
     }
 
-    .question-text {
-        font-size: 20px;
-    }
 }
 
 </style>
@@ -599,655 +680,703 @@
 
 <div class="app-container">
 
-    <!-- =================================================
-         SIDEBAR
-    ================================================= -->
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
 
-    <div id="sidebar-container"></div>
-
-
-    <main class="main-content">
+<div id="sidebar-container"></div>
 
 
-        <!-- =================================================
-             TITLE / INTRO
-        ================================================= -->
+<main class="main-content">
 
-        <div class="lesson-card">
 
-            <h2>Basic Sentence Patterns</h2>
+<!-- =====================================================
+     TITLE
+===================================================== -->
 
-            <p>
-                In Mandarin, a simple sentence often follows a basic pattern.
-                Think of it like building a sentence with blocks.
-            </p>
+<div class="lesson-title">
 
-            <div class="grammar-intro">
+    <span class="badge">
+        GRAMMAR 1 • BEGINNER
+    </span>
 
-                <h3>🧱 What is S + V + O?</h3>
+    <h1>S + V + O</h1>
 
-                <p>
-                    <strong>S</strong> = Subject — who does the action
-                    <br>
-                    <strong>V</strong> = Verb — the action
-                    <br>
-                    <strong>O</strong> = Object — what receives the action
-                </p>
+    <p>
+        Build simple Mandarin sentences step by step.
+    </p>
 
-                <div class="simple-example">
+</div>
 
-                    <div class="hanzi">
-                        我　吃　飯。
-                    </div>
 
-                    <div class="pinyin">
-                        Wǒ　chī　fàn.
-                    </div>
+<!-- =====================================================
+     PROGRESS
+===================================================== -->
 
-                    <div class="meaning">
-                        I eat rice / I have a meal.
-                    </div>
+<div class="progress-box">
 
-                </div>
+    <div class="progress-top">
+        <span>Lesson Progress</span>
+        <span>
+            XP: <span id="xp">0</span>
+        </span>
+    </div>
 
-                <p style="margin-top:12px;">
-                    So you can think:
-                    <strong>WHO + DOES WHAT + WHAT</strong>
-                </p>
+    <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+    </div>
 
-            </div>
+</div>
 
+
+<!-- =====================================================
+     GRAMMAR EXPLANATION
+===================================================== -->
+
+<div class="grammar-card">
+
+    <h2>🧠 Grammar: S + V + O</h2>
+
+    <p>
+        Mandarin basic sentences can follow the pattern:
+        <strong>Subject + Verb + Object</strong>.
+    </p>
+
+    <div class="pattern-display">
+
+        <div class="pattern-box">
+            S<br>
+            <small>Subject</small>
         </div>
 
+        <div class="pattern-symbol">+</div>
 
-        <!-- =================================================
-             GRAMMAR PATTERNS
-        ================================================= -->
-
-        <div class="grammar-card">
-
-            <h2>Grammar Patterns</h2>
-
-            <div class="pattern-list">
-
-                <!-- 1 -->
-
-                <div class="pattern-item">
-
-                    <div class="pattern-number">
-                        PATTERN 1
-                    </div>
-
-                    <div class="pattern-title">
-                        S + V + O
-                    </div>
-
-                    <div class="pattern-description">
-                        Make a simple positive sentence.
-                    </div>
-
-                    <div class="pattern-example">
-
-                        <strong>我吃飯。</strong>
-                        <br>
-                        Wǒ chī fàn.
-                        <br>
-                        I eat / I have a meal.
-
-                    </div>
-
-                </div>
-
-
-                <!-- 2 -->
-
-                <div class="pattern-item">
-
-                    <div class="pattern-number">
-                        PATTERN 2
-                    </div>
-
-                    <div class="pattern-title">
-                        S + 不 + V + O
-                    </div>
-
-                    <div class="pattern-description">
-                        Put 不 before the verb to make a simple negative sentence.
-                    </div>
-
-                    <div class="pattern-example">
-
-                        <strong>我不吃飯。</strong>
-                        <br>
-                        Wǒ bù chī fàn.
-                        <br>
-                        I don't eat / I'm not eating.
-
-                    </div>
-
-                </div>
-
-
-                <!-- 3 -->
-
-                <div class="pattern-item">
-
-                    <div class="pattern-number">
-                        PATTERN 3
-                    </div>
-
-                    <div class="pattern-title">
-                        S + V + O + 嗎？
-                    </div>
-
-                    <div class="pattern-description">
-                        Add 嗎 at the end to turn the sentence into a yes/no question.
-                    </div>
-
-                    <div class="pattern-example">
-
-                        <strong>你吃飯嗎？</strong>
-                        <br>
-                        Nǐ chī fàn ma?
-                        <br>
-                        Do you eat? / Have you eaten?
-
-                    </div>
-
-                </div>
-
-
-                <!-- 4 -->
-
-                <div class="pattern-item">
-
-                    <div class="pattern-number">
-                        PATTERN 4
-                    </div>
-
-                    <div class="pattern-title">
-                        S + V + 不 + V？
-                    </div>
-
-                    <div class="pattern-description">
-                        Repeat the verb with 不 between them to ask an A-not-A question.
-                    </div>
-
-                    <div class="pattern-example">
-
-                        <strong>你吃不吃飯？</strong>
-                        <br>
-                        Nǐ chī bù chī fàn?
-                        <br>
-                        Do you eat / Are you going to eat?
-
-                    </div>
-
-                </div>
-
-            </div>
-
+        <div class="pattern-box">
+            V<br>
+            <small>Verb</small>
         </div>
 
+        <div class="pattern-symbol">+</div>
 
-        <!-- =================================================
-             VOCABULARY
-        ================================================= -->
-
-        <div class="lesson-card">
-
-            <h2>20 Core Words</h2>
-
-            <p>
-                Tap any word to hear its pronunciation.
-                These words will be reused throughout the games.
-            </p>
-
-            <div class="vocab-container">
-
-                <!-- SUBJECT -->
-
-                <div class="vocab-pill" onclick="playAudio('我')">
-                    <div class="hanzi">我</div>
-                    <div class="pinyin">wǒ</div>
-                    <div class="meaning">I / me</div>
-                </div>
-
-                <div class="vocab-pill" onclick="playAudio('你')">
-                    <div class="hanzi">你</div>
-                    <div class="pinyin">nǐ</div>
-                    <div class="meaning">you</div>
-                </div>
-
-                <div class="vocab-pill" onclick="playAudio('他')">
-                    <div class="hanzi">他</div>
-                    <div class="pinyin">tā</div>
-                    <div class="meaning">he / him</div>
-                </div>
-
-                <div class="vocab-pill" onclick="playAudio('她')">
-                    <div class="hanzi">她</div>
-                    <div class="pinyin">tā</div>
-                    <div class="meaning">she / her</div>
-                </div>
-
-
-                <!-- VERBS -->
-
-                <div class="vocab-pill" onclick="playAudio('吃')">
-                    <div class="hanzi">吃</div>
-                    <div class="pinyin">chī</div>
-                    <div class="meaning">eat</div>
-                </div>
-
-                <div class="vocab-pill" onclick="playAudio('喝')">
-                    <div class="hanzi">喝</div>
-                    <div class="pinyin">hē</div>
-                    <div class="meaning">drink</div>
-                </div>
-
-                <div class="vocab-pill" onclick="playAudio('看')">
-                    <div class="hanzi">看</div>
-                    <div class="pinyin">kàn</div>
-                    <div class="meaning">look / read</div>
-                </div>
-
-                <div class="vocab-pill" onclick="playAudio('買')">
-                    <div class="hanzi">買</div>
-                    <div class="pinyin">mǎi</div>
-                    <div class="meaning">buy</div>
-                </div>
-
-                <div class="vocab-pill" onclick="playAudio('要')">
-                    <div class="hanzi">要</div>
-                    <div class="pinyin">yào</div>
-                    <div class="meaning">want / need</div>
-                </div>
-
-                <div class="vocab-pill" onclick="playAudio('學')">
-                    <div class="hanzi">學</div>
-                    <div class="pinyin">xué</div>
-                    <div class="meaning">learn / study</div>
-                </div>
-
-
-                <!-- OBJECTS -->
-
-                <div class="vocab-pill" onclick="playAudio('飯')">
-                    <div class="hanzi">飯</div>
-                    <div class="pinyin">fàn</div>
-                    <div class="meaning">meal / rice</div>
-                </div>
-
-                <div class="vocab-pill" onclick="playAudio('水')">
-                    <div class="hanzi">水</div>
-                    <div class="pinyin">shuǐ</div>
-                    <div class="meaning">water</div>
-                </div>
-
-                <div class="vocab-pill" onclick="playAudio('牛奶')">
-                    <div class="hanzi">牛奶</div>
-                    <div class="pinyin">niúnǎi</div>
-                    <div class="meaning">milk</div>
-                </div>
-
-                <div class="vocab-pill" onclick="playAudio('麵包')">
-                    <div class="hanzi">麵包</div>
-                    <div class="pinyin">miànbāo</div>
-                    <div class="meaning">bread</div>
-                </div>
-
-                <div class="vocab-pill" onclick="playAudio('水果')">
-                    <div class="hanzi">水果</div>
-                    <div class="pinyin">shuǐguǒ</div>
-                    <div class="meaning">fruit</div>
-                </div>
-
-                <div class="vocab-pill" onclick="playAudio('咖啡')">
-                    <div class="hanzi">咖啡</div>
-                    <div class="pinyin">kāfēi</div>
-                    <div class="meaning">coffee</div>
-                </div>
-
-                <div class="vocab-pill" onclick="playAudio('書')">
-                    <div class="hanzi">書</div>
-                    <div class="pinyin">shū</div>
-                    <div class="meaning">book</div>
-                </div>
-
-                <div class="vocab-pill" onclick="playAudio('中文')">
-                    <div class="hanzi">中文</div>
-                    <div class="pinyin">Zhōngwén</div>
-                    <div class="meaning">Chinese</div>
-                </div>
-
-                <div class="vocab-pill" onclick="playAudio('電腦')">
-                    <div class="hanzi">電腦</div>
-                    <div class="pinyin">diànnǎo</div>
-                    <div class="meaning">computer</div>
-                </div>
-
-                <div class="vocab-pill" onclick="playAudio('音樂')">
-                    <div class="hanzi">音樂</div>
-                    <div class="pinyin">yīnyuè</div>
-                    <div class="meaning">music</div>
-                </div>
-
-            </div>
-
+        <div class="pattern-box">
+            O<br>
+            <small>Object</small>
         </div>
 
+    </div>
 
-        <!-- =================================================
-             GAME
-        ================================================= -->
+    <div class="grammar-explanation">
 
-        <div class="game-card">
+        <p>
+            <strong>S = Subject</strong><br>
+            Siapa yang melakukan?
+        </p>
 
-            <div class="game-top">
+        <p>
+            <strong>V = Verb</strong><br>
+            Melakukan apa?
+        </p>
 
-                <span class="game-badge">
-                    🧋 Sentence Builder
-                </span>
+        <p>
+            <strong>O = Object</strong><br>
+            Apa yang dikenai tindakan?
+        </p>
 
-                <span class="xp-badge">
-                    ⭐ XP: <span id="xp">0</span>
-                </span>
+    </div>
 
-            </div>
+    <div class="example-sentence">
 
-
-            <div class="game-tabs">
-
-                <button class="game-tab active" onclick="showGame(1)">
-                    Game 1
-                </button>
-
-                <button class="game-tab" onclick="showGame(2)">
-                    Game 2
-                </button>
-
-                <button class="game-tab" onclick="showGame(3)">
-                    Game 3
-                </button>
-
-                <button class="game-tab" onclick="showGame(4)">
-                    Game 4
-                </button>
-
-            </div>
-
-
-            <!-- =================================================
-                 GAME 1
-            ================================================= -->
-
-            <div class="mini-game active" id="game1">
-
-                <h2>🧱 Build the Sentence</h2>
-
-                <p class="game-instruction">
-                    Tap the words in the correct order.
-                    Every word will play its pronunciation.
-                </p>
-
-                <div class="progress-container">
-                    <div class="progress-bar" id="progressBar"></div>
-                </div>
-
-                <div class="question-box">
-
-                    <div class="question-label">
-                        Translate:
-                    </div>
-
-                    <div class="question-text" id="gameQuestion">
-                        I eat rice.
-                    </div>
-
-                </div>
-
-
-                <div class="answer-area" id="answerArea">
-
-                    <span class="answer-placeholder">
-                        Tap words below...
-                    </span>
-
-                </div>
-
-
-                <div class="word-bank" id="wordBank"></div>
-
-
-                <div class="game-buttons">
-
-                    <button class="game-btn clear-btn"
-                            onclick="clearAnswer()">
-
-                        <i class="fas fa-rotate-left"></i>
-                        Clear
-
-                    </button>
-
-                    <button class="game-btn listen-btn"
-                            onclick="listenAnswer()">
-
-                        <i class="fas fa-volume-up"></i>
-                        Listen
-
-                    </button>
-
-                    <button class="game-btn check-btn"
-                            onclick="checkSentence()">
-
-                        <i class="fas fa-check"></i>
-                        Check
-
-                    </button>
-
-                </div>
-
-
-                <div class="feedback" id="feedback"></div>
-
-            </div>
-
-
-            <!-- =================================================
-                 GAME 2
-            ================================================= -->
-
-            <div class="mini-game" id="game2">
-
-                <h2>🚫 Make It Negative</h2>
-
-                <p class="game-instruction">
-                    Choose the correct sentence using
-                    <strong>不</strong>.
-                </p>
-
-                <div class="question-box">
-
-                    <div class="question-label">
-                        Make this sentence negative:
-                    </div>
-
-                    <div class="question-text">
-                        我喝水。
-                    </div>
-
-                </div>
-
-                <div class="option-grid">
-
-                    <button class="option-btn"
-                            onclick="checkOption(this, false)">
-                        我喝不水。
-                    </button>
-
-                    <button class="option-btn"
-                            onclick="checkOption(this, true)">
-                        我不喝水。
-                    </button>
-
-                    <button class="option-btn"
-                            onclick="checkOption(this, false)">
-                        我不水喝。
-                    </button>
-
-                    <button class="option-btn"
-                            onclick="checkOption(this, false)">
-                        不我喝水。
-                    </button>
-
-                </div>
-
-                <div class="feedback" id="negativeFeedback"></div>
-
-            </div>
-
-
-            <!-- =================================================
-                 GAME 3
-            ================================================= -->
-
-            <div class="mini-game" id="game3">
-
-                <h2>❓ Make a Question</h2>
-
-                <p class="game-instruction">
-                    Add <strong>嗎</strong> to make a yes/no question.
-                </p>
-
-                <div class="question-box">
-
-                    <div class="question-label">
-                        Make this a question:
-                    </div>
-
-                    <div class="question-text">
-                        你喝咖啡。
-                    </div>
-
-                </div>
-
-                <div class="option-grid">
-
-                    <button class="option-btn"
-                            onclick="checkOption(this, true)">
-                        你喝咖啡嗎？
-                    </button>
-
-                    <button class="option-btn"
-                            onclick="checkOption(this, false)">
-                        你嗎喝咖啡？
-                    </button>
-
-                    <button class="option-btn"
-                            onclick="checkOption(this, false)">
-                        嗎你喝咖啡？
-                    </button>
-
-                    <button class="option-btn"
-                            onclick="checkOption(this, false)">
-                        你喝嗎咖啡？
-                    </button>
-
-                </div>
-
-                <div class="feedback" id="questionFeedback"></div>
-
-            </div>
-
-
-            <!-- =================================================
-                 GAME 4
-            ================================================= -->
-
-            <div class="mini-game" id="game4">
-
-                <h2>🔄 A-not-A</h2>
-
-                <p class="game-instruction">
-                    Put <strong>不</strong> between the repeated verb.
-                </p>
-
-                <div class="question-box">
-
-                    <div class="question-label">
-                        Ask: “Do you eat?”
-                    </div>
-
-                    <div class="question-text">
-                        你 ___ 飯？
-                    </div>
-
-                </div>
-
-                <div class="option-grid">
-
-                    <button class="option-btn"
-                            onclick="checkOption(this, true)">
-                        吃不吃
-                    </button>
-
-                    <button class="option-btn"
-                            onclick="checkOption(this, false)">
-                        不吃
-                    </button>
-
-                    <button class="option-btn"
-                            onclick="checkOption(this, false)">
-                        吃嗎
-                    </button>
-
-                    <button class="option-btn"
-                            onclick="checkOption(this, false)">
-                        不不吃
-                    </button>
-
-                </div>
-
-                <div class="feedback" id="aNotAFeedback"></div>
-
-            </div>
-
-
-            <!-- =================================================
-                 COMPLETE
-            ================================================= -->
-
-            <div class="complete-box" id="completeBox">
-
-                <div class="complete-icon">
-                    🎉
-                </div>
-
-                <h3>Grammar Unlocked!</h3>
-
-                <p>
-                    You practiced:
-                </p>
-
-                <p>
-                    <strong>S + V + O</strong><br>
-                    <strong>S + 不 + V + O</strong><br>
-                    <strong>S + V + O + 嗎？</strong><br>
-                    <strong>S + V + 不 + V？</strong>
-                </p>
-
-                <p>
-                    Great job! 🧋
-                </p>
-
-            </div>
-
+        <div class="example-hanzi">
+            <span onclick="playAudio('我')">我</span>
+            <span onclick="playAudio('吃')">吃</span>
+            <span onclick="playAudio('飯')">飯</span>
         </div>
 
+        <div>
+            Wǒ chī fàn.
+        </div>
 
-    </main>
+        <div>
+            I eat a meal.
+        </div>
 
+        <button
+            class="sound-btn"
+            onclick="playAudio('我吃飯')">
+            🔊
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     VOCABULARY 20 WORDS
+===================================================== -->
+
+<div class="lesson-card">
+
+<h2>📚 20 Words for This Lesson</h2>
+
+<p>
+    Tap any word to hear its pronunciation.
+</p>
+
+<div class="vocab-container">
+
+<div class="vocab-pill" onclick="playAudio('我')">
+    <div class="hanzi">我</div>
+    <div class="pinyin">wǒ</div>
+    <div class="meaning">I / me</div>
+</div>
+
+<div class="vocab-pill" onclick="playAudio('你')">
+    <div class="hanzi">你</div>
+    <div class="pinyin">nǐ</div>
+    <div class="meaning">you</div>
+</div>
+
+<div class="vocab-pill" onclick="playAudio('他')">
+    <div class="hanzi">他</div>
+    <div class="pinyin">tā</div>
+    <div class="meaning">he / him</div>
+</div>
+
+<div class="vocab-pill" onclick="playAudio('她')">
+    <div class="hanzi">她</div>
+    <div class="pinyin">tā</div>
+    <div class="meaning">she / her</div>
+</div>
+
+<div class="vocab-pill" onclick="playAudio('吃')">
+    <div class="hanzi">吃</div>
+    <div class="pinyin">chī</div>
+    <div class="meaning">eat</div>
+</div>
+
+<div class="vocab-pill" onclick="playAudio('喝')">
+    <div class="hanzi">喝</div>
+    <div class="pinyin">hē</div>
+    <div class="meaning">drink</div>
+</div>
+
+<div class="vocab-pill" onclick="playAudio('看')">
+    <div class="hanzi">看</div>
+    <div class="pinyin">kàn</div>
+    <div class="meaning">look / watch</div>
+</div>
+
+<div class="vocab-pill" onclick="playAudio('買')">
+    <div class="hanzi">買</div>
+    <div class="pinyin">mǎi</div>
+    <div class="meaning">buy</div>
+</div>
+
+<div class="vocab-pill" onclick="playAudio('飯')">
+    <div class="hanzi">飯</div>
+    <div class="pinyin">fàn</div>
+    <div class="meaning">meal / rice</div>
+</div>
+
+<div class="vocab-pill" onclick="playAudio('水')">
+    <div class="hanzi">水</div>
+    <div class="pinyin">shuǐ</div>
+    <div class="meaning">water</div>
+</div>
+
+<div class="vocab-pill" onclick="playAudio('牛奶')">
+    <div class="hanzi">牛奶</div>
+    <div class="pinyin">niúnǎi</div>
+    <div class="meaning">milk</div>
+</div>
+
+<div class="vocab-pill" onclick="playAudio('麵包')">
+    <div class="hanzi">麵包</div>
+    <div class="pinyin">miànbāo</div>
+    <div class="meaning">bread</div>
+</div>
+
+<div class="vocab-pill" onclick="playAudio('水果')">
+    <div class="hanzi">水果</div>
+    <div class="pinyin">shuǐguǒ</div>
+    <div class="meaning">fruit</div>
+</div>
+
+<div class="vocab-pill" onclick="playAudio('書')">
+    <div class="hanzi">書</div>
+    <div class="pinyin">shū</div>
+    <div class="meaning">book</div>
+</div>
+
+<div class="vocab-pill" onclick="playAudio('咖啡')">
+    <div class="hanzi">咖啡</div>
+    <div class="pinyin">kāfēi</div>
+    <div class="meaning">coffee</div>
+</div>
+
+<div class="vocab-pill" onclick="playAudio('電腦')">
+    <div class="hanzi">電腦</div>
+    <div class="pinyin">diànnǎo</div>
+    <div class="meaning">computer</div>
+</div>
+
+<div class="vocab-pill" onclick="playAudio('音樂')">
+    <div class="hanzi">音樂</div>
+    <div class="pinyin">yīnyuè</div>
+    <div class="meaning">music</div>
+</div>
+
+<div class="vocab-pill" onclick="playAudio('不')">
+    <div class="hanzi">不</div>
+    <div class="pinyin">bù</div>
+    <div class="meaning">not</div>
+</div>
+
+<div class="vocab-pill" onclick="playAudio('嗎')">
+    <div class="hanzi">嗎</div>
+    <div class="pinyin">ma</div>
+    <div class="meaning">question particle</div>
+</div>
+
+<div class="vocab-pill" onclick="playAudio('有')">
+    <div class="hanzi">有</div>
+    <div class="pinyin">yǒu</div>
+    <div class="meaning">have</div>
+</div>
+
+</div>
+
+</div>
+
+
+<!-- =====================================================
+     GAME 1
+===================================================== -->
+
+<div class="game-card">
+
+<span class="game-number">GAME 1</span>
+
+<h2>🧩 Build S + V + O</h2>
+
+<p class="game-description">
+    Susun kata menjadi kalimat yang benar.
+</p>
+
+<div class="game-progress">
+    Question <span id="g1Num">1</span> / 6
+</div>
+
+<div class="question-box">
+    <div class="question-label">Translate:</div>
+    <div class="question-meaning" id="g1Meaning"></div>
+</div>
+
+<div class="answer-area" id="g1Answer">
+    <span class="answer-placeholder">
+        Tap the words below
+    </span>
+</div>
+
+<div class="word-bank" id="g1Bank"></div>
+
+<div class="game-buttons">
+
+<button class="check-btn" onclick="checkGame(1)">
+    ✓ Check
+</button>
+
+<button class="reset-btn" onclick="resetGame(1)">
+    ↻ Reset
+</button>
+
+<button class="listen-btn" onclick="listenCurrent(1)">
+    🔊
+</button>
+
+</div>
+
+<div class="feedback" id="g1Feedback"></div>
+
+<button class="next-game-btn" id="g1Next" onclick="nextGameQuestion(1)">
+    Next →
+</button>
+
+</div>
+
+
+<!-- =====================================================
+     GAME 2
+===================================================== -->
+
+<div class="game-card">
+
+<span class="game-number">GAME 2</span>
+
+<h2>🚫 Build Negative Sentences</h2>
+
+<p class="game-description">
+    Gunakan pola <strong>S + 不 + V + O</strong>.
+</p>
+
+<div class="game-progress">
+    Question <span id="g2Num">1</span> / 6
+</div>
+
+<div class="question-box">
+    <div class="question-label">Translate:</div>
+    <div class="question-meaning" id="g2Meaning"></div>
+</div>
+
+<div class="answer-area" id="g2Answer">
+    <span class="answer-placeholder">
+        Tap the words below
+    </span>
+</div>
+
+<div class="word-bank" id="g2Bank"></div>
+
+<div class="game-buttons">
+
+<button class="check-btn" onclick="checkGame(2)">
+    ✓ Check
+</button>
+
+<button class="reset-btn" onclick="resetGame(2)">
+    ↻ Reset
+</button>
+
+<button class="listen-btn" onclick="listenCurrent(2)">
+    🔊
+</button>
+
+</div>
+
+<div class="feedback" id="g2Feedback"></div>
+
+<button class="next-game-btn" id="g2Next" onclick="nextGameQuestion(2)">
+    Next →
+</button>
+
+</div>
+
+
+<!-- =====================================================
+     GAME 3
+===================================================== -->
+
+<div class="game-card">
+
+<span class="game-number">GAME 3</span>
+
+<h2>❓ Build 嗎 Questions</h2>
+
+<p class="game-description">
+    Ubah kalimat menjadi pertanyaan menggunakan
+    <strong>嗎</strong>.
+</p>
+
+<div class="game-progress">
+    Question <span id="g3Num">1</span> / 6
+</div>
+
+<div class="question-box">
+    <div class="question-label">Translate:</div>
+    <div class="question-meaning" id="g3Meaning"></div>
+</div>
+
+<div class="answer-area" id="g3Answer">
+    <span class="answer-placeholder">
+        Tap the words below
+    </span>
+</div>
+
+<div class="word-bank" id="g3Bank"></div>
+
+<div class="game-buttons">
+
+<button class="check-btn" onclick="checkGame(3)">
+    ✓ Check
+</button>
+
+<button class="reset-btn" onclick="resetGame(3)">
+    ↻ Reset
+</button>
+
+<button class="listen-btn" onclick="listenCurrent(3)">
+    🔊
+</button>
+
+</div>
+
+<div class="feedback" id="g3Feedback"></div>
+
+<button class="next-game-btn" id="g3Next" onclick="nextGameQuestion(3)">
+    Next →
+</button>
+
+</div>
+
+
+<!-- =====================================================
+     GAME 4
+===================================================== -->
+
+<div class="game-card">
+
+<span class="game-number">GAME 4</span>
+
+<h2>🔄 Build A-not-A Questions</h2>
+
+<p class="game-description">
+    Gunakan pola <strong>S + V + 不 + V？</strong>.
+</p>
+
+<div class="game-progress">
+    Question <span id="g4Num">1</span> / 6
+</div>
+
+<div class="question-box">
+    <div class="question-label">Translate:</div>
+    <div class="question-meaning" id="g4Meaning"></div>
+</div>
+
+<div class="answer-area" id="g4Answer">
+    <span class="answer-placeholder">
+        Tap the words below
+    </span>
+</div>
+
+<div class="word-bank" id="g4Bank"></div>
+
+<div class="game-buttons">
+
+<button class="check-btn" onclick="checkGame(4)">
+    ✓ Check
+</button>
+
+<button class="reset-btn" onclick="resetGame(4)">
+    ↻ Reset
+</button>
+
+<button class="listen-btn" onclick="listenCurrent(4)">
+    🔊
+</button>
+
+</div>
+
+<div class="feedback" id="g4Feedback"></div>
+
+<button class="next-game-btn" id="g4Next" onclick="nextGameQuestion(4)">
+    Next →
+</button>
+
+</div>
+
+
+<!-- =====================================================
+     WRITING PRACTICE (HANZI WRITER)
+===================================================== -->
+
+<div class="writing-card">
+
+<h2>✍️ Writing Practice</h2>
+
+<p>
+    Latih urutan goresan Hanzi dengan benar.
+</p>
+
+<div class="writing-mode-buttons">
+
+<button class="mode-btn active" onclick="setWritingMode('quiz',this)">
+    ✍️ Quiz (Stroke Order)
+</button>
+
+<button class="mode-btn" onclick="setWritingMode('animate',this)">
+    👀 Animate
+</button>
+
+</div>
+
+<div class="writing-info" id="writingInfo">
+    Tulis karakter sesuai urutan goresan yang benar!
+</div>
+
+<div class="recall-answer" id="recallAnswer"></div>
+
+<div class="canvas-wrapper">
+    <div id="target-div"></div>
+</div>
+
+<div class="feedback" id="writingFeedback"></div>
+
+<div class="writing-buttons">
+
+<button class="write-btn clear-btn" onclick="resetWritingQuiz()">
+    ↻ Ulangi
+</button>
+
+<button class="write-btn"
+        style="background:#f0f7f4;color:#2d6a4f;"
+        onclick="playCurrentWriting()">
+    🔊 Listen
+</button>
+
+<button class="write-btn next-write-btn"
+        onclick="nextWritingCharacter()">
+    Next →
+</button>
+
+</div>
+
+</div>
+
+
+<!-- =====================================================
+     SENTENCE WRITING
+===================================================== -->
+
+<div class="writing-card">
+
+<h2>📝 Sentence Writing</h2>
+
+<p>
+    Gunakan grammar yang sudah dipelajari.
+</p>
+
+<div class="sentence-writing">
+
+<div class="sentence-prompt" id="sentencePrompt">
+    I eat a meal.
+</div>
+
+<div class="sentence-hint">
+    Write the Mandarin sentence.
+</div>
+
+<input
+    type="text"
+    id="sentenceInput"
+    placeholder="Type Hanzi here..."
+    autocomplete="off">
+
+<button class="check-writing"
+        onclick="checkSentenceWriting()">
+    Check Answer
+</button>
+
+<div class="feedback" id="sentenceFeedback"></div>
+
+<button
+    class="next-game-btn"
+    id="nextSentenceBtn"
+    onclick="nextSentenceWriting()">
+    Next →
+</button>
+
+</div>
+
+</div>
+
+
+<!-- =====================================================
+     FINAL CHALLENGE
+===================================================== -->
+
+<div class="final-card">
+
+<span class="game-number">
+    FINAL CHALLENGE
+</span>
+
+<h2>🏆 Grammar Master</h2>
+
+<p>
+    Kamu sekarang harus membedakan empat pola:
+</p>
+
+<div class="grammar-explanation">
+
+<p>
+    <strong>1.</strong> S + V + O
+</p>
+
+<p>
+    <strong>2.</strong> S + 不 + V + O
+</p>
+
+<p>
+    <strong>3.</strong> S + V + O + 嗎？
+</p>
+
+<p>
+    <strong>4.</strong> S + V + 不 + V？
+</p>
+
+</div>
+
+<div class="question-box">
+
+<div class="question-label">
+    Final Question
+</div>
+
+<div class="question-meaning"
+     id="finalMeaning">
+</div>
+
+</div>
+
+<div class="answer-area"
+     id="finalAnswer">
+
+<span class="answer-placeholder">
+    Build your answer
+</span>
+
+</div>
+
+<div class="word-bank"
+     id="finalBank">
+</div>
+
+<button
+    class="check-btn"
+    style="width:100%;"
+    onclick="checkFinal()">
+
+    ✓ Check Final Answer
+
+</button>
+
+<div class="feedback"
+     id="finalFeedback">
+</div>
+
+<div class="final-score"
+     id="finalScore">
+    0 / 4
+</div>
+
+<div class="unlock"
+     id="unlockBox"
+     style="display:none;">
+
+    🎉 <strong>Grammar Unlocked!</strong>
+
+    <p>
+        You can now build basic Mandarin sentences,
+        negative sentences, 嗎 questions,
+        and A-not-A questions.
+    </p>
+
+</div>
+
+</div>
+
+
+</main>
 </div>
 
 
@@ -1275,288 +1404,387 @@
    AUDIO
 ===================================================== */
 
-function playAudio(text) {
+function playAudio(text){
 
-    if ('speechSynthesis' in window) {
+    if(!('speechSynthesis' in window)) return;
 
-        window.speechSynthesis.cancel();
+    window.speechSynthesis.cancel();
 
-        const utterance =
-            new SpeechSynthesisUtterance(text);
+    const utterance =
+        new SpeechSynthesisUtterance(text);
 
-        utterance.lang = 'zh-TW';
-        utterance.rate = 0.82;
-        utterance.pitch = 1;
+    utterance.lang = "zh-TW";
+    utterance.rate = 0.82;
+    utterance.pitch = 1;
 
-        window.speechSynthesis.speak(utterance);
-    }
+    window.speechSynthesis.speak(utterance);
 }
 
 
 /* =====================================================
-   GAME 1 DATA
+   XP
 ===================================================== */
 
-const sentenceQuestions = [
-
-    {
-        english: "I eat rice.",
-        answer: ["我", "吃", "飯"],
-        words: ["我", "吃", "飯"]
-    },
-
-    {
-        english: "You drink water.",
-        answer: ["你", "喝", "水"],
-        words: ["你", "喝", "水"]
-    },
-
-    {
-        english: "He drinks milk.",
-        answer: ["他", "喝", "牛奶"],
-        words: ["他", "喝", "牛奶"]
-    },
-
-    {
-        english: "She buys bread.",
-        answer: ["她", "買", "麵包"],
-        words: ["她", "買", "麵包"]
-    },
-
-    {
-        english: "I eat fruit.",
-        answer: ["我", "吃", "水果"],
-        words: ["我", "吃", "水果"]
-    },
-
-    {
-        english: "You drink coffee.",
-        answer: ["你", "喝", "咖啡"],
-        words: ["你", "喝", "咖啡"]
-    },
-
-    {
-        english: "He reads a book.",
-        answer: ["他", "看", "書"],
-        words: ["他", "看", "書"]
-    },
-
-    {
-        english: "She studies Chinese.",
-        answer: ["她", "學", "中文"],
-        words: ["她", "學", "中文"]
-    },
-
-    {
-        english: "I want coffee.",
-        answer: ["我", "要", "咖啡"],
-        words: ["我", "要", "咖啡"]
-    },
-
-    {
-        english: "You buy fruit.",
-        answer: ["你", "買", "水果"],
-        words: ["你", "買", "水果"]
-    }
-
-];
-
-
-let currentSentence = 0;
-let selectedWords = [];
 let xp = 0;
+let progress = 0;
+
+function addXP(amount){
+
+    xp += amount;
+
+    document.getElementById("xp").textContent = xp;
+
+    progress = Math.min(progress + 2,100);
+
+    document.getElementById("progressFill")
+        .style.width = progress + "%";
+}
 
 
 /* =====================================================
-   LOAD GAME 1
+   GAME DATA
 ===================================================== */
 
-function loadSentence() {
+const games = {
 
-    const question =
-        sentenceQuestions[currentSentence];
+1: [
 
-    document.getElementById("gameQuestion")
-        .textContent = question.english;
+{
+meaning:"I eat a meal.",
+answer:["我","吃","飯"]
+},
 
-    selectedWords = [];
+{
+meaning:"You drink water.",
+answer:["你","喝","水"]
+},
 
-    const answerArea =
-        document.getElementById("answerArea");
+{
+meaning:"He reads a book.",
+answer:["他","看","書"]
+},
 
-    answerArea.innerHTML =
-        `<span class="answer-placeholder">
-            Tap words below...
-        </span>`;
+{
+meaning:"She buys bread.",
+answer:["她","買","麵包"]
+},
+
+{
+meaning:"I drink milk.",
+answer:["我","喝","牛奶"]
+},
+
+{
+meaning:"You eat fruit.",
+answer:["你","吃","水果"]
+}
+
+],
+
+2: [
+
+{
+meaning:"I don't eat a meal.",
+answer:["我","不","吃","飯"]
+},
+
+{
+meaning:"You don't drink coffee.",
+answer:["你","不","喝","咖啡"]
+},
+
+{
+meaning:"He doesn't read a book.",
+answer:["他","不","看","書"]
+},
+
+{
+meaning:"She doesn't buy bread.",
+answer:["她","不","買","麵包"]
+},
+
+{
+meaning:"I don't drink milk.",
+answer:["我","不","喝","牛奶"]
+},
+
+{
+meaning:"You don't eat fruit.",
+answer:["你","不","吃","水果"]
+}
+
+],
+
+3: [
+
+{
+meaning:"Do you eat a meal?",
+answer:["你","吃","飯","嗎"]
+},
+
+{
+meaning:"Do you drink water?",
+answer:["你","喝","水","嗎"]
+},
+
+{
+meaning:"Does he read a book?",
+answer:["他","看","書","嗎"]
+},
+
+{
+meaning:"Does she buy bread?",
+answer:["她","買","麵包","嗎"]
+},
+
+{
+meaning:"Do you drink coffee?",
+answer:["你","喝","咖啡","嗎"]
+},
+
+{
+meaning:"Do you eat fruit?",
+answer:["你","吃","水果","嗎"]
+}
+
+],
+
+4: [
+
+{
+meaning:"Do you eat or not?",
+answer:["你","吃","不","吃"]
+},
+
+{
+meaning:"Do you drink or not?",
+answer:["你","喝","不","喝"]
+},
+
+{
+meaning:"Does he read or not?",
+answer:["他","看","不","看"]
+},
+
+{
+meaning:"Does she buy or not?",
+answer:["她","買","不","買"]
+},
+
+{
+meaning:"Do you drink milk or not?",
+answer:["你","喝","不","喝","牛奶"]
+},
+
+{
+meaning:"Do you eat fruit or not?",
+answer:["你","吃","不","吃","水果"]
+}
+
+]
+
+};
 
 
-    const wordBank =
-        document.getElementById("wordBank");
+/* =====================================================
+   GAME STATE
+===================================================== */
 
-    wordBank.innerHTML = "";
+const gameState = {
+
+1:{index:0,selected:[],done:false},
+2:{index:0,selected:[],done:false},
+3:{index:0,selected:[],done:false},
+4:{index:0,selected:[],done:false}
+
+};
 
 
-    /* Shuffle words */
+/* =====================================================
+   SHUFFLE
+===================================================== */
 
-    const shuffled =
-        [...question.words].sort(
-            () => Math.random() - 0.5
+function shuffle(array){
+
+    return [...array].sort(
+        () => Math.random() - 0.5
+    );
+
+}
+
+
+/* =====================================================
+   LOAD GAME
+===================================================== */
+
+function loadGame(gameNumber){
+
+    const state = gameState[gameNumber];
+
+    const data = games[gameNumber][state.index];
+
+    state.selected = [];
+    state.done = false;
+
+    document.getElementById(
+        "g"+gameNumber+"Num"
+    ).textContent = state.index + 1;
+
+    document.getElementById(
+        "g"+gameNumber+"Meaning"
+    ).textContent = data.meaning;
+
+    const answer =
+        document.getElementById(
+            "g"+gameNumber+"Answer"
         );
 
+    answer.innerHTML =
+        '<span class="answer-placeholder">Tap the words below</span>';
 
-    shuffled.forEach(word => {
+    const bank =
+        document.getElementById(
+            "g"+gameNumber+"Bank"
+        );
+
+    bank.innerHTML = "";
+
+    shuffle(data.answer).forEach((word,index)=>{
 
         const button =
             document.createElement("button");
 
         button.className = "word-btn";
 
-        button.innerHTML =
-            `${word}<small>🔊</small>`;
+        button.textContent = word;
 
-        button.onclick = () => {
+        button.dataset.word = word;
 
-            playAudio(word);
+        button.dataset.id = index;
 
-            selectedWords.push(word);
+        button.onclick = function(){
 
-            renderAnswer();
+            if(this.disabled) return;
 
-            button.disabled = true;
-            button.style.opacity = "0.4";
-        };
-
-        wordBank.appendChild(button);
-
-    });
-
-
-    updateProgress();
-
-    document.getElementById("feedback")
-        .textContent = "";
-
-}
-
-
-/* =====================================================
-   RENDER ANSWER
-===================================================== */
-
-function renderAnswer() {
-
-    const answerArea =
-        document.getElementById("answerArea");
-
-    answerArea.innerHTML = "";
-
-
-    if (selectedWords.length === 0) {
-
-        answerArea.innerHTML =
-            `<span class="answer-placeholder">
-                Tap words below...
-            </span>`;
-
-        return;
-    }
-
-
-    selectedWords.forEach((word, index) => {
-
-        const wordElement =
-            document.createElement("button");
-
-        wordElement.className =
-            "selected-word";
-
-        wordElement.textContent = word;
-
-        wordElement.onclick = () => {
-
-            playAudio(word);
-
-            selectedWords.splice(index, 1);
-
-            restoreWord(word);
-
-            renderAnswer();
+            selectWord(
+                gameNumber,
+                this,
+                word
+            );
 
         };
 
-        answerArea.appendChild(wordElement);
+        bank.appendChild(button);
 
     });
+
+    document.getElementById(
+        "g"+gameNumber+"Feedback"
+    ).textContent = "";
+
+    document.getElementById(
+        "g"+gameNumber+"Next"
+    ).style.display = "none";
 
 }
 
 
 /* =====================================================
-   RESTORE WORD
+   SELECT WORD
 ===================================================== */
 
-function restoreWord(word) {
+function selectWord(gameNumber,button,word){
 
-    const buttons =
-        document.querySelectorAll(".word-btn");
+    gameState[gameNumber]
+        .selected.push(word);
 
-    buttons.forEach(button => {
+    button.disabled = true;
 
-        if (button.textContent.includes(word)) {
+    button.classList.add("selected");
 
-            button.disabled = false;
-            button.style.opacity = "1";
+    playAudio(word);
 
-        }
-
-    });
+    renderSelected(gameNumber);
 
 }
 
 
 /* =====================================================
-   CLEAR
+   RENDER SELECTED
 ===================================================== */
 
-function clearAnswer() {
+function renderSelected(gameNumber){
 
-    selectedWords = [];
+    const answer =
+        document.getElementById(
+            "g"+gameNumber+"Answer"
+        );
 
-    document
-        .querySelectorAll(".word-btn")
-        .forEach(button => {
+    answer.innerHTML = "";
 
-            button.disabled = false;
-            button.style.opacity = "1";
+    gameState[gameNumber]
+        .selected
+        .forEach((word,index)=>{
+
+            const span =
+                document.createElement("span");
+
+            span.className = "selected-word";
+
+            span.textContent = word;
+
+            span.onclick = function(){
+
+                playAudio(word);
+
+            };
+
+            answer.appendChild(span);
 
         });
 
-    renderAnswer();
-
-    document.getElementById("feedback")
-        .textContent = "";
-
 }
 
 
 /* =====================================================
-   CHECK SENTENCE
+   CHECK GAME
 ===================================================== */
 
-function checkSentence() {
+function checkGame(gameNumber){
+
+    const state =
+        gameState[gameNumber];
 
     const correct =
-        sentenceQuestions[currentSentence].answer;
+        games[gameNumber][state.index].answer;
 
+    const selected =
+        state.selected;
 
     const feedback =
-        document.getElementById("feedback");
+        document.getElementById(
+            "g"+gameNumber+"Feedback"
+        );
 
+    if(selected.length !== correct.length){
 
-    if (
-        JSON.stringify(selectedWords)
-        === JSON.stringify(correct)
-    ) {
+        feedback.textContent =
+            "⚠️ Complete the sentence first.";
+
+        feedback.className =
+            "feedback incorrect";
+
+        return;
+
+    }
+
+    const isCorrect =
+        selected.every(
+            (word,index)=>
+            word === correct[index]
+        );
+
+    if(isCorrect){
 
         feedback.textContent =
             "🎉 Correct!";
@@ -1564,49 +1792,23 @@ function checkSentence() {
         feedback.className =
             "feedback correct";
 
+        addXP(10);
+
+        state.done = true;
 
         playAudio(correct.join(""));
 
+        document.getElementById(
+            "g"+gameNumber+"Next"
+        ).style.display = "block";
 
-        xp += 10;
-
-        document.getElementById("xp")
-            .textContent = xp;
-
-
-        setTimeout(() => {
-
-            currentSentence++;
-
-            if (
-                currentSentence
-                >= sentenceQuestions.length
-            ) {
-
-                currentSentence = 0;
-
-                document
-                    .getElementById("completeBox")
-                    .classList.add("active");
-
-                createConfetti();
-
-            } else {
-
-                loadSentence();
-
-            }
-
-        }, 1000);
-
-
-    } else {
+    }else{
 
         feedback.textContent =
             "❌ Not quite. Try again!";
 
         feedback.className =
-            "feedback wrong";
+            "feedback incorrect";
 
     }
 
@@ -1614,126 +1816,477 @@ function checkSentence() {
 
 
 /* =====================================================
-   LISTEN ANSWER
+   RESET GAME
 ===================================================== */
 
-function listenAnswer() {
+function resetGame(gameNumber){
 
-    if (selectedWords.length > 0) {
+    loadGame(gameNumber);
 
-        playAudio(
-            selectedWords.join("")
+}
+
+
+/* =====================================================
+   NEXT GAME QUESTION
+===================================================== */
+
+function nextGameQuestion(gameNumber){
+
+    const state =
+        gameState[gameNumber];
+
+    if(!state.done) return;
+
+    state.index++;
+
+    if(state.index >= games[gameNumber].length){
+
+        state.index = 0;
+
+        document.getElementById(
+            "g"+gameNumber+"Feedback"
+        ).textContent =
+            "🏆 Game Complete!";
+
+        document.getElementById(
+            "g"+gameNumber+"Next"
+        ).textContent =
+            "Replay →";
+
+    }
+
+    loadGame(gameNumber);
+
+}
+
+
+/* =====================================================
+   LISTEN CURRENT
+===================================================== */
+
+function listenCurrent(gameNumber){
+
+    const state =
+        gameState[gameNumber];
+
+    const answer =
+        games[gameNumber][state.index].answer;
+
+    playAudio(answer.join(""));
+
+}
+
+
+/* =====================================================
+   WRITING PRACTICE (HANZI WRITER INTEGRATION)
+===================================================== */
+
+const writingCharacters = [
+    { hanzi:"我", pinyin:"wǒ", meaning:"I / me" },
+    { hanzi:"你", pinyin:"nǐ", meaning:"you" },
+    { hanzi:"他", pinyin:"tā", meaning:"he" },
+    { hanzi:"她", pinyin:"tā", meaning:"she" },
+    { hanzi:"吃", pinyin:"chī", meaning:"eat" },
+    { hanzi:"喝", pinyin:"hē", meaning:"drink" },
+    { hanzi:"飯", pinyin:"fàn", meaning:"meal / rice" },
+    { hanzi:"水", pinyin:"shuǐ", meaning:"water" }
+];
+
+let writingIndex = 0;
+let writingMode = "quiz";
+let writer = null;
+
+function initWriter() {
+    const item = writingCharacters[writingIndex];
+    const container = document.getElementById("target-div");
+    container.innerHTML = ""; // Bersihkan kontainer lama
+
+    writer = HanziWriter.create('target-div', item.hanzi, {
+        width: 260,
+        height: 260,
+        padding: 10,
+        showOutline: true,
+        strokeAnimationSpeed: 1,
+        drawingColor: '#5c4033',
+        strokeHighlightColor: '#b8865c',
+        showCharacter: writingMode === 'animate'
+    });
+
+    if(writingMode === 'quiz') {
+        startQuiz();
+    } else {
+        writer.animateCharacter();
+    }
+}
+
+function startQuiz() {
+    const feedback = document.getElementById("writingFeedback");
+    feedback.textContent = "";
+    
+    writer.quiz({
+        onMistake: function(strokeData) {
+            feedback.textContent = "❌ Urutan goresan salah! Coba lagi.";
+            feedback.className = "feedback incorrect";
+        },
+        onCorrectStroke: function(strokeData) {
+            feedback.textContent = "✨ Bagus! Lanjutkan goresan berikutnya.";
+            feedback.className = "feedback correct";
+        },
+        onComplete: function(summaryData) {
+            feedback.textContent = "🎉 Sempurna! Urutan goresan benar.";
+            feedback.className = "feedback correct";
+            addXP(5);
+        }
+    });
+}
+
+function setWritingMode(mode, button){
+    writingMode = mode;
+
+    document
+        .querySelectorAll(".writing-card .mode-btn")
+        .forEach(btn =>
+            btn.classList.remove("active")
         );
 
+    button.classList.add("active");
+
+    const info = document.getElementById("writingInfo");
+    if(writingMode === 'quiz') {
+        info.textContent = "Tulis karakter sesuai urutan goresan yang benar!";
+    } else {
+        info.textContent = "Perhatikan animasi urutan goresan.";
+    }
+
+    initWriter();
+}
+
+function resetWritingQuiz() {
+    initWriter();
+}
+
+function nextWritingCharacter(){
+    writingIndex++;
+    if(writingIndex >= writingCharacters.length){
+        writingIndex = 0;
+    }
+    initWriter();
+}
+
+function playCurrentWriting(){
+    playAudio(writingCharacters[writingIndex].hanzi);
+}
+
+
+/* =====================================================
+   SENTENCE WRITING
+===================================================== */
+
+const sentenceQuestions = [
+
+{
+prompt:"I eat a meal.",
+answer:"我吃飯"
+},
+
+{
+prompt:"You drink water.",
+answer:"你喝水"
+},
+
+{
+prompt:"I don't eat a meal.",
+answer:"我不吃飯"
+},
+
+{
+prompt:"You don't drink coffee.",
+answer:"你不喝咖啡"
+},
+
+{
+prompt:"Do you eat a meal?",
+answer:"你吃飯嗎"
+},
+
+{
+prompt:"Do you drink water?",
+answer:"你喝水嗎"
+},
+
+{
+prompt:"Do you eat or not?",
+answer:"你吃不吃"
+}
+
+];
+
+let sentenceIndex = 0;
+
+
+function loadSentenceWriting(){
+
+    document.getElementById(
+        "sentencePrompt"
+    ).textContent =
+        sentenceQuestions[sentenceIndex].prompt;
+
+    document.getElementById(
+        "sentenceInput"
+    ).value = "";
+
+    document.getElementById(
+        "sentenceFeedback"
+    ).textContent = "";
+
+    document.getElementById(
+        "nextSentenceBtn"
+    ).style.display = "none";
+
+}
+
+
+function checkSentenceWriting(){
+
+    const input =
+        document.getElementById(
+            "sentenceInput"
+        ).value.trim()
+        .replace(/。/g,"")
+        .replace(/？/g,"");
+
+    const correct =
+        sentenceQuestions[sentenceIndex].answer;
+
+    const feedback =
+        document.getElementById(
+            "sentenceFeedback"
+        );
+
+    if(input === correct){
+
+        feedback.textContent =
+            "🎉 Perfect!";
+
+        feedback.className =
+            "feedback correct";
+
+        playAudio(correct);
+
+        addXP(15);
+
+        document.getElementById(
+            "nextSentenceBtn"
+        ).style.display = "block";
+
+    }else{
+
+        feedback.textContent =
+            "❌ Try again. Think about the grammar pattern.";
+
+        feedback.className =
+            "feedback incorrect";
+
     }
 
 }
 
 
-/* =====================================================
-   PROGRESS
-===================================================== */
+function nextSentenceWriting(){
 
-function updateProgress() {
+    sentenceIndex++;
 
-    const percentage =
-        (currentSentence /
-        sentenceQuestions.length) * 100;
+    if(sentenceIndex >= sentenceQuestions.length){
 
-    document.getElementById("progressBar")
-        .style.width = percentage + "%";
+        sentenceIndex = 0;
 
-}
+    }
 
-
-/* =====================================================
-   GAME TABS
-===================================================== */
-
-function showGame(number) {
-
-    document
-        .querySelectorAll(".mini-game")
-        .forEach(game => {
-
-            game.classList.remove("active");
-
-        });
-
-
-    document
-        .querySelectorAll(".game-tab")
-        .forEach(tab => {
-
-            tab.classList.remove("active");
-
-        });
-
-
-    document
-        .getElementById("game" + number)
-        .classList.add("active");
-
-
-    document
-        .querySelectorAll(".game-tab")[number - 1]
-        .classList.add("active");
+    loadSentenceWriting();
 
 }
 
 
 /* =====================================================
-   OPTION GAMES
+   FINAL CHALLENGE
 ===================================================== */
 
-function checkOption(button, correct) {
+const finalQuestions = [
 
-    const parent =
-        button.parentElement;
+{
+meaning:"I eat a meal.",
+answer:["我","吃","飯"]
+},
 
-    const buttons =
-        parent.querySelectorAll(".option-btn");
+{
+meaning:"I don't drink coffee.",
+answer:["我","不","喝","咖啡"]
+},
+
+{
+meaning:"Do you eat fruit?",
+answer:["你","吃","水果","嗎"]
+},
+
+{
+meaning:"Do you drink or not?",
+answer:["你","喝","不","喝"]
+}
+
+];
+
+let finalIndex = 0;
+let finalScore = 0;
+let finalSelected = [];
 
 
-    buttons.forEach(btn => {
+function loadFinal(){
 
-        btn.disabled = true;
+    const q =
+        finalQuestions[finalIndex];
+
+    document.getElementById(
+        "finalMeaning"
+    ).textContent = q.meaning;
+
+    finalSelected = [];
+
+    document.getElementById(
+        "finalAnswer"
+    ).innerHTML =
+        '<span class="answer-placeholder">Build your answer</span>';
+
+    const bank =
+        document.getElementById(
+            "finalBank"
+        );
+
+    bank.innerHTML = "";
+
+    shuffle(q.answer).forEach(word=>{
+
+        const button =
+            document.createElement("button");
+
+        button.className = "word-btn";
+
+        button.textContent = word;
+
+        button.onclick = ()=>{
+
+            if(button.disabled) return;
+
+            finalSelected.push(word);
+
+            button.disabled = true;
+
+            button.classList.add("selected");
+
+            playAudio(word);
+
+            renderFinal();
+
+        };
+
+        bank.appendChild(button);
 
     });
 
+}
 
-    if (correct) {
 
-        button.classList.add("correct");
+function renderFinal(){
 
-        playAudio(
-            button.textContent.trim()
+    const area =
+        document.getElementById(
+            "finalAnswer"
         );
 
-        xp += 10;
+    area.innerHTML = "";
 
-        document.getElementById("xp")
-            .textContent = xp;
+    finalSelected.forEach(word=>{
 
-        createConfetti();
+        const span =
+            document.createElement("span");
 
-    } else {
+        span.className =
+            "selected-word";
 
-        button.classList.add("wrong");
+        span.textContent = word;
 
-        buttons.forEach(btn => {
+        span.onclick = ()=>{
+            playAudio(word);
+        };
 
-            if (
-                btn.onclick &&
-                btn.getAttribute("onclick")
-                    ?.includes("true")
-            ) {
+        area.appendChild(span);
 
-                btn.classList.add("correct");
+    });
 
-            }
+}
 
-        });
+
+function checkFinal(){
+
+    const correct =
+        finalQuestions[finalIndex].answer;
+
+    const feedback =
+        document.getElementById(
+            "finalFeedback"
+        );
+
+    const isCorrect =
+        finalSelected.length === correct.length &&
+        finalSelected.every(
+            (word,index)=>
+            word === correct[index]
+        );
+
+    if(isCorrect){
+
+        feedback.textContent =
+            "🎉 Correct!";
+
+        feedback.className =
+            "feedback correct";
+
+        finalScore++;
+
+        document.getElementById(
+            "finalScore"
+        ).textContent =
+            finalScore + " / 4";
+
+        addXP(20);
+
+        finalIndex++;
+
+        if(finalIndex < finalQuestions.length){
+
+            setTimeout(
+                loadFinal,
+                700
+            );
+
+        }else{
+
+            document.getElementById(
+                "unlockBox"
+            ).style.display = "block";
+
+            playAudio(
+                "太棒了"
+            );
+
+        }
+
+    }else{
+
+        feedback.textContent =
+            "❌ Check the word order.";
+
+        feedback.className =
+            "feedback incorrect";
 
     }
 
@@ -1741,97 +2294,25 @@ function checkOption(button, correct) {
 
 
 /* =====================================================
-   CONFETTI
+   INITIALIZE
 ===================================================== */
 
-function createConfetti() {
+loadGame(1);
+loadGame(2);
+loadGame(3);
+loadGame(4);
 
-    const colors = [
-        "#b8865c",
-        "#52b788",
-        "#faedcd",
-        "#d7b89c",
-        "#ffb4a2"
-    ];
+initWriter(); // Inisialisasi Hanzi Writer
 
+loadSentenceWriting();
 
-    for (let i = 0; i < 25; i++) {
-
-        const confetti =
-            document.createElement("div");
-
-        confetti.style.position = "fixed";
-        confetti.style.top = "-10px";
-        confetti.style.left =
-            Math.random() * 100 + "vw";
-
-        confetti.style.width = "8px";
-        confetti.style.height = "8px";
-
-        confetti.style.background =
-            colors[
-                Math.floor(
-                    Math.random() * colors.length
-                )
-            ];
-
-        confetti.style.zIndex = "12000";
-
-        confetti.style.pointerEvents =
-            "none";
-
-        confetti.style.borderRadius = "2px";
-
-        confetti.animate(
-
-            [
-                {
-                    transform:
-                        "translateY(0) rotate(0deg)",
-                    opacity: 1
-                },
-
-                {
-                    transform:
-                        `translateY(100vh) rotate(720deg)`,
-                    opacity: 0
-                }
-
-            ],
-
-            {
-                duration: 1500 +
-                    Math.random() * 800,
-
-                easing: "ease-out"
-
-            }
-
-        );
-
-        document.body.appendChild(confetti);
-
-        setTimeout(() => {
-
-            confetti.remove();
-
-        }, 2500);
-
-    }
-
-}
-
-
-/* =====================================================
-   START
-===================================================== */
-
-loadSentence();
+loadFinal();
 
 </script>
 
 
-<!-- Existing Boba Break Study Sidebar Script -->
+<!-- EXISTING SIDEBAR SCRIPT -->
+
 <script src="../script.js"></script>
 
 </body>
