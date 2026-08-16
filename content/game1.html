@@ -478,18 +478,21 @@ p {
 
 .mode-btn {
     flex: 1;
-    border: 1px solid #d7b89c;
+    border: 1.5px solid #d7b89c;
     background: #fff8ef;
     color: #8c7355;
     padding: 10px 5px;
     border-radius: 12px;
     cursor: pointer;
     font-size: 12px;
+    font-weight: bold;
+    transition: 0.2s;
 }
 
 .mode-btn.active {
     background: #b8865c;
     color: white;
+    border-color: #b8865c;
 }
 
 .writing-info {
@@ -1536,7 +1539,7 @@ function currentSlide(n) {
 
 
 /* =====================================================
-   GAME DATA (INCORPORATING ALL VOCABULARY: 我, 你, 妳, 他, 她, 吃, 喝, 看, 買, 飯, 水, 牛奶, 麵包, 水果, 書, 咖啡, 不, 嗎)
+   GAME DATA (INCORPORATING ALL VOCABULARY)
 ===================================================== */
 
 const games = {
@@ -2126,19 +2129,32 @@ function nextSentenceWriting(){
 
 
 /* =====================================================
-   WRITING PRACTICE (HANZI WRITER INTEGRATION)
+   WRITING PRACTICE (HANZI WRITER INTEGRATION - ALL VOCABULARY)
 ===================================================== */
 
 const writingCharacters = [
-    { hanzi:"我", pinyin:"wǒ", meaning:"I / me" },
-    { hanzi:"你", pinyin:"nǐ", meaning:"you" },
-    { hanzi:"妳", pinyin:"nǐ", meaning:"you (female)" },
-    { hanzi:"他", pinyin:"tā", meaning:"he" },
-    { hanzi:"她", pinyin:"tā", meaning:"she" },
-    { hanzi:"吃", pinyin:"chī", meaning:"eat" },
-    { hanzi:"喝", pinyin:"hē", meaning:"drink" },
-    { hanzi:"飯", pinyin:"fàn", meaning:"meal / rice" },
-    { hanzi:"水", pinyin:"shuǐ", meaning:"water" }
+    { hanzi: "我", pinyin: "wǒ", meaning: "I / me" },
+    { hanzi: "你", pinyin: "nǐ", meaning: "you" },
+    { hanzi: "妳", pinyin: "nǐ", meaning: "you (female)" },
+    { hanzi: "他", pinyin: "tā", meaning: "he / him" },
+    { hanzi: "她", pinyin: "tā", meaning: "she / her" },
+    { hanzi: "吃", pinyin: "chī", meaning: "eat" },
+    { hanzi: "喝", pinyin: "hē", meaning: "drink" },
+    { hanzi: "看", pinyin: "kàn", meaning: "look / watch" },
+    { hanzi: "買", pinyin: "mǎi", meaning: "buy" },
+    { hanzi: "飯", pinyin: "fàn", meaning: "meal / rice" },
+    { hanzi: "水", pinyin: "shuǐ", meaning: "water" },
+    { hanzi: "牛", pinyin: "niú", meaning: "ox / cow (from milk)" },
+    { hanzi: "奶", pinyin: "nǎi", meaning: "milk" },
+    { hanzi: "麵", pinyin: "miàn", meaning: "noodles / flour (from bread)" },
+    { hanzi: "包", pinyin: "bāo", meaning: "wrap / bag (from bread)" },
+    { hanzi: "水", pinyin: "shuǐ", meaning: "water (from fruit)" },
+    { hanzi: "果", pinyin: "guǒ", meaning: "fruit" },
+    { hanzi: "書", pinyin: "shū", meaning: "book" },
+    { hanzi: "咖", pinyin: "kā", meaning: "coffee phonetic" },
+    { hanzi: "啡", pinyin: "fēi", meaning: "coffee phonetic" },
+    { hanzi: "不", pinyin: "bù", meaning: "not" },
+    { hanzi: "嗎", pinyin: "ma", meaning: "question particle" }
 ];
 
 let writingIndex = 0;
@@ -2149,6 +2165,14 @@ function initWriter() {
     const item = writingCharacters[writingIndex];
     const container = document.getElementById("target-div");
     container.innerHTML = "";
+
+    // Update info text to show current character being practiced
+    const info = document.getElementById("writingInfo");
+    if(writingMode === 'quiz') {
+        info.innerHTML = `Write <strong>${item.hanzi}</strong> (${item.pinyin} - ${item.meaning}) following correct stroke order! (${writingIndex + 1}/${writingCharacters.length})`;
+    } else {
+        info.innerHTML = `Watch animated stroke order for <strong>${item.hanzi}</strong> (${item.pinyin} - ${item.meaning}). (${writingIndex + 1}/${writingCharacters.length})`;
+    }
 
     writer = HanziWriter.create('target-div', item.hanzi, {
         width: 260,
@@ -2199,13 +2223,6 @@ function setWritingMode(mode, button){
         );
 
     button.classList.add("active");
-
-    const info = document.getElementById("writingInfo");
-    if(writingMode === 'quiz') {
-        info.textContent = "Write the character following the correct stroke order!";
-    } else {
-        info.textContent = "Watch the animated stroke order.";
-    }
 
     initWriter();
 }
