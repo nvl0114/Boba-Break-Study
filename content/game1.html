@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Grammar 1 — SVO & Questions | Boba Break Study</title>
+<title>Basic Sentence Patterns & Questions | Boba Break Study</title>
 
 <link rel="stylesheet" href="../style.css">
 
@@ -650,38 +650,6 @@ p {
 
 
 /* =====================================================
-   FLOATING BOBA
-===================================================== */
-
-.floating-boba-container {
-    position: fixed;
-    bottom: 25px;
-    right: 25px;
-    z-index: 9999;
-    cursor: pointer;
-    animation: floatingBoba 3s ease-in-out infinite;
-}
-
-.boba-bubble {
-    font-size: 40px;
-    background: #fff8ef;
-    width: 60px;
-    height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    border: 2px dashed #d7b89c;
-    box-shadow: 0 6px 15px rgba(184,134,92,0.25);
-}
-
-@keyframes floatingBoba {
-    0%,100% { transform: translateY(0); }
-    50% { transform: translateY(-8px); }
-}
-
-
-/* =====================================================
    MOBILE
 ===================================================== */
 
@@ -748,10 +716,10 @@ p {
 <div class="lesson-title">
 
     <span class="badge">
-        GRAMMAR 1 • BEGINNER
+        INTRODUCTORY LESSON • ESSENTIALS
     </span>
 
-    <h1>S + V + O & Questions</h1>
+    <h1>Mandarin Core Sentence Structures</h1>
 
     <p>
         Build simple Mandarin sentences step by step.
@@ -931,12 +899,12 @@ p {
 
 
 <!-- =====================================================
-     VOCABULARY 20 WORDS
+     VOCABULARY
 ===================================================== -->
 
 <div class="lesson-card">
 
-<h2>📚 20 Words for This Lesson</h2>
+<h2>📚 Vocabulary List</h2>
 
 <p>
     Tap any word to hear its pronunciation.
@@ -954,6 +922,12 @@ p {
     <div class="hanzi">你</div>
     <div class="pinyin">nǐ</div>
     <div class="meaning">you</div>
+</div>
+
+<div class="vocab-pill" onclick="playAudio('妳')">
+    <div class="hanzi">妳</div>
+    <div class="pinyin">nǐ</div>
+    <div class="meaning">you (female)</div>
 </div>
 
 <div class="vocab-pill" onclick="playAudio('他')">
@@ -1034,18 +1008,6 @@ p {
     <div class="meaning">coffee</div>
 </div>
 
-<div class="vocab-pill" onclick="playAudio('電腦')">
-    <div class="hanzi">電腦</div>
-    <div class="pinyin">diànnǎo</div>
-    <div class="meaning">computer</div>
-</div>
-
-<div class="vocab-pill" onclick="playAudio('音樂')">
-    <div class="hanzi">音樂</div>
-    <div class="pinyin">yīnyuè</div>
-    <div class="meaning">music</div>
-</div>
-
 <div class="vocab-pill" onclick="playAudio('不')">
     <div class="hanzi">不</div>
     <div class="pinyin">bù</div>
@@ -1056,12 +1018,6 @@ p {
     <div class="hanzi">嗎</div>
     <div class="pinyin">ma</div>
     <div class="meaning">question particle</div>
-</div>
-
-<div class="vocab-pill" onclick="playAudio('有')">
-    <div class="hanzi">有</div>
-    <div class="pinyin">yǒu</div>
-    <div class="meaning">have</div>
 </div>
 
 </div>
@@ -1084,7 +1040,7 @@ p {
 </p>
 
 <div class="game-progress">
-    Question <span id="g1Num">1</span> / 6
+    Question <span id="g1Num">1</span> / 7
 </div>
 
 <div class="question-box">
@@ -1140,7 +1096,7 @@ p {
 </p>
 
 <div class="game-progress">
-    Question <span id="g2Num">1</span> / 6
+    Question <span id="g2Num">1</span> / 7
 </div>
 
 <div class="question-box">
@@ -1196,7 +1152,7 @@ p {
 </p>
 
 <div class="game-progress">
-    Question <span id="g3Num">1</span> / 6
+    Question <span id="g3Num">1</span> / 7
 </div>
 
 <div class="question-box">
@@ -1252,7 +1208,7 @@ p {
 </p>
 
 <div class="game-progress">
-    Question <span id="g4Num">1</span> / 6
+    Question <span id="g4Num">1</span> / 7
 </div>
 
 <div class="question-box">
@@ -1499,20 +1455,6 @@ p {
 
 
 <!-- =====================================================
-     FLOATING BOBA
-===================================================== -->
-
-<div class="floating-boba-container"
-     onclick="playAudio('加油')">
-
-    <div class="boba-bubble">
-        🧋
-    </div>
-
-</div>
-
-
-<!-- =====================================================
      JAVASCRIPT
 ===================================================== -->
 
@@ -1594,7 +1536,7 @@ function currentSlide(n) {
 
 
 /* =====================================================
-   GAME DATA
+   GAME DATA (INCORPORATING ALL VOCABULARY: 我, 你, 妳, 他, 她, 吃, 喝, 看, 買, 飯, 水, 牛奶, 麵包, 水果, 書, 咖啡, 不, 嗎)
 ===================================================== */
 
 const games = {
@@ -1612,6 +1554,11 @@ answer:["你","喝","水"]
 },
 
 {
+meaning:"Female you drinks milk.",
+answer:["妳","喝","牛奶"]
+},
+
+{
 meaning:"He reads a book.",
 answer:["他","看","書"]
 },
@@ -1622,8 +1569,8 @@ answer:["她","買","麵包"]
 },
 
 {
-meaning:"I drink milk.",
-answer:["我","喝","牛奶"]
+meaning:"I drink coffee.",
+answer:["我","喝","咖啡"]
 },
 
 {
@@ -1643,6 +1590,11 @@ answer:["我","不","吃","飯"]
 {
 meaning:"You don't drink coffee.",
 answer:["你","不","喝","咖啡"]
+},
+
+{
+meaning:"Female you doesn't drink water.",
+answer:["妳","不","喝","水"]
 },
 
 {
@@ -1672,6 +1624,11 @@ answer:["你","不","吃","水果"]
 {
 meaning:"Do you eat a meal?",
 answer:["你","吃","飯","嗎"]
+},
+
+{
+meaning:"Does female you drink water?",
+answer:["妳","喝","水","嗎"]
 },
 
 {
@@ -1706,6 +1663,11 @@ answer:["你","吃","水果","嗎"]
 {
 meaning:"Do you eat or not?",
 answer:["你","吃","不","吃"]
+},
+
+{
+meaning:"Does female you drink or not?",
+answer:["妳","喝","不","喝"]
 },
 
 {
@@ -2046,6 +2008,11 @@ answer:"你喝水"
 },
 
 {
+prompt:"Female you drinks milk.",
+answer:"妳喝牛奶"
+},
+
+{
 prompt:"I don't eat a meal.",
 answer:"我不吃飯"
 },
@@ -2165,6 +2132,7 @@ function nextSentenceWriting(){
 const writingCharacters = [
     { hanzi:"我", pinyin:"wǒ", meaning:"I / me" },
     { hanzi:"你", pinyin:"nǐ", meaning:"you" },
+    { hanzi:"妳", pinyin:"nǐ", meaning:"you (female)" },
     { hanzi:"他", pinyin:"tā", meaning:"he" },
     { hanzi:"她", pinyin:"tā", meaning:"she" },
     { hanzi:"吃", pinyin:"chī", meaning:"eat" },
