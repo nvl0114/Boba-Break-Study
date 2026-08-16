@@ -1948,9 +1948,9 @@ function checkGame(gameNumber){
 ===================================================== */
 
 function resetGame(gameNumber){
-
+    gameState[gameNumber].selected = [];
+    gameState[gameNumber].done = false;
     loadGame(gameNumber);
-
 }
 
 
@@ -2206,7 +2206,7 @@ function initWriter() {
 function startQuiz() {
     const feedback = document.getElementById("writingFeedback");
     feedback.textContent = "";
-    
+
     writer.quiz({
         onMistake: function(strokeData) {
             feedback.textContent = "❌ Incorrect stroke order! Try again.";
@@ -2340,6 +2340,7 @@ function loadFinal(){
 
     });
 
+    document.getElementById("finalFeedback").textContent = "";
 }
 
 
@@ -2352,7 +2353,7 @@ function renderFinal(){
 
     area.innerHTML = "";
 
-    finalSelected.forEach(word=>{
+    finalSelected.forEach((word, index)=>{
 
         const span =
             document.createElement("span");
@@ -2364,6 +2365,17 @@ function renderFinal(){
 
         span.onclick = ()=>{
             playAudio(word);
+            finalSelected.splice(index, 1);
+            
+            const bankButtons = document.querySelectorAll("#finalBank .word-btn");
+            for(let btn of bankButtons) {
+                if(btn.textContent === word && btn.classList.contains("selected")) {
+                    btn.classList.remove("selected");
+                    btn.disabled = false;
+                    break;
+                }
+            }
+            renderFinal();
         };
 
         area.appendChild(span);
@@ -2438,6 +2450,13 @@ function checkFinal(){
 
     }
 
+}
+
+
+// Fungsi Reset Final Challenge
+function resetFinal(){
+    finalSelected = [];
+    loadFinal();
 }
 
 
