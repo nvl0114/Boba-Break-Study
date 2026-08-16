@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game Belajar Bahasa Mandarin</title>
+    <title>Boba Break Study - Mandarin Learning Game</title>
     <style>
         :root {
             --primary: #4f46e5;
@@ -212,7 +212,7 @@
 <body>
 
     <header>
-        <h1>Game & Latihan Mandarin (Tanpa 那 & 這)</h1>
+        <h1>Boba Break Study - Mandarin Game</h1>
         <div id="user-stats">Skor: <span id="total-score">0</span></div>
     </header>
 
@@ -229,26 +229,26 @@
 
         <!-- 1. KOSAKATA -->
         <div id="vocab" class="section active">
-            <h2>Daftar Kosakata Aktif (Pembaruan: Tanpa 那 & 這)</h2>
-            <p>Berikut adalah kosakata yang digunakan dalam latihan dan kuis saat ini:</p>
+            <h2>Daftar Kosakata Aktif (Tanpa 那 & 這)</h2>
+            <p>Berikut adalah kosakata yang digunakan dalam latihan dan kuis:</p>
             <div class="vocab-grid" id="vocabGridContainer"></div>
         </div>
 
-        <!-- 2. MATERI GRAMMAR 的 -->
+        <!-- 2. MATERI GRAMMAR -->
+        <div id="grammar" class="section">
             <h2>Tata Bahasa (Grammar): 的 (De)</h2>
-            <p>Partikel <b>的 (de)</b> digunakan untuk menunjukkan kepemilikan atau modifikasi kata benda (kepunyaan/milik siapa).</p>
+            <p>Partikel <b>的 (de)</b> digunakan untuk menunjukkan kepemilikan atau modifikasi kata benda.</p>
             <ul>
                 <li><b>我 + 的 + 朋友</b> (Wǒ de péngyǒu) = Teman saya</li>
                 <li><b>爸爸 + 的 + 手機</b> (Bàba de shǒujī) = Handphone Ayah</li>
                 <li><b>老師 + 的 + 車</b> (Lǎoshī de chē) = Mobil Guru</li>
             </ul>
-        <div id="grammar" class="section">
         </div>
 
         <!-- 3. SUSUN KATA -->
         <div id="unscramble" class="section">
             <h2>Game Susun Kata (Unscramble)</h2>
-            <p>Susun kembali huruf/pinyin atau karakter acak berikut menjadi kalimat Mandarin yang benar:</p>
+            <p>Susun kembali karakter/pinyin acak berikut menjadi kalimat Mandarin yang benar:</p>
             <div id="unscrambleGameArea">
                 <p id="unscramblePrompt" style="font-size: 1.2rem; font-weight: bold;"></p>
                 <input type="text" id="unscrambleInput" placeholder="Ketik jawaban Anda...">
@@ -258,7 +258,7 @@
             </div>
         </div>
 
-        <!-- 4. TRANSLATING -->
+        <!-- 4. TRANSLATION -->
         <div id="translation" class="section">
             <h2>Terjemahan (Translate ke Bahasa Inggris)</h2>
             <p>Terjemahkan kalimat Mandarin berikut ke dalam Bahasa Inggris:</p>
@@ -286,8 +286,8 @@
 
         <!-- 6. FINAL QUIZ -->
         <div id="quiz" class="section">
-            <h2>Final Quiz (Gabungan Materi 的 + Kosakata Terbaru & Sebelumnya)</h2>
-            <p>Pilih jawaban yang paling tepat untuk menguji pemahaman Anda secara keseluruhan.</p>
+            <h2>Final Quiz (Materi 的 + Kosakata)</h2>
+            <p>Pilih jawaban yang paling tepat untuk menguji pemahaman Anda.</p>
             <div id="quizContainer"></div>
             <button class="btn" onclick="submitQuiz()">Kirim Jawaban Quiz</button>
             <div id="quizResult" class="feedback" style="display:none; margin-top: 1rem;"></div>
@@ -317,7 +317,7 @@
             { hanzi: "禮物", pinyin: "lǐwù", meaning: "Hadiah" },
             { hanzi: "東西", pinyin: "dōngxī", meaning: "Barang / Sesuatu" },
             { hanzi: "信", pinyin: "xìn", meaning: "Surat" },
-            // Materi sebelumnya (tanpa 那 dan 這)
+            // Materi sebelumnya (tanpa 那 & 這)
             { hanzi: "我", pinyin: "wǒ", meaning: "Saya" },
             { hanzi: "你", pinyin: "nǐ", meaning: "Kamu (laki-laki/umum)" },
             { hanzi: "妳", pinyin: "nǐ", meaning: "Kamu (perempuan)" },
@@ -353,9 +353,9 @@
 
         // 3. Unscramble Game Logic
         const unscrambleData = [
-            { prompt: " Susun kata: 友 / 朋 / 我 / 的 (Teman saya) ", answer: "我的朋友" },
-            { prompt: " Susun kata: 机 / 手 / 爸 / 爸 / 的 (HP Ayah) ", answer: "爸爸的手机" },
-            { prompt: " Susun kata: 师 / 老 / 的 / 车 (Mobil Guru) ", answer: "老师的车" }
+            { prompt: "Susun kata: 友 / 朋 / 我 / 的 (Teman saya)", answer: "我的朋友" },
+            { prompt: "Susun kata: 机 / 手 / 爸 / 爸 / 的 (HP Ayah)", answer: "爸爸的手机" },
+            { prompt: "Susun kata: 师 / 老 / 的 / 车 (Mobil Guru)", answer: "老师的车" }
         ];
         let currentUnscrambleIndex = 0;
 
