@@ -884,6 +884,28 @@ p {
             </div>
         </div>
 
+        <!-- SLIDE 5: How to Answer Questions -->
+        <div class="grammar-slide" id="slide-5">
+            <h3>5. How to Answer Questions</h3>
+            <p>Learn how to respond affirmatively or negatively to <strong>吗 (ma)</strong> and <strong>A-not-A</strong> questions.</p>
+
+            <div class="grammar-explanation">
+                <p><strong>Affirmative Answer (Yes): Repeat the Verb</strong><br>
+                To say "Yes", simply use the verb by itself (or repeat the core positive structure).</p>
+                <p><strong>Negative Answer (No): Use 不 + Verb</strong><br>
+                To say "No", use <strong>不 (bù)</strong> followed by the verb.</p>
+            </div>
+
+            <div class="example-sentence">
+                <div class="example-hanzi">
+                    <span onclick="playAudio('吃')">吃</span> / <span onclick="playAudio('不吃')">不吃</span>
+                </div>
+                <div>Chī / Bù chī.</div>
+                <div>Eat (Yes) / Don't eat (No).</div>
+                <button class="sound-btn" onclick="playAudio('吃，不吃')">🔊</button>
+            </div>
+        </div>
+
     </div>
 
     <!-- Slider Navigation Controls -->
@@ -894,6 +916,7 @@ p {
             <span class="indicator" onclick="currentSlide(2)"></span>
             <span class="indicator" onclick="currentSlide(3)"></span>
             <span class="indicator" onclick="currentSlide(4)"></span>
+            <span class="indicator" onclick="currentSlide(5)"></span>
         </div>
         <button class="slider-btn" onclick="nextSlide()">Next →</button>
     </div>
@@ -1253,6 +1276,62 @@ p {
 
 
 <!-- =====================================================
+     GAME 5 (NEW: HOW TO ANSWER QUESTIONS)
+===================================================== -->
+
+<div class="game-card">
+
+<span class="game-number">GAME 5</span>
+
+<h2>💬 Answering Questions (Yes / No)</h2>
+
+<p class="game-description">
+    Practice answering questions affirmatively or negatively.
+</p>
+
+<div class="game-progress">
+    Question <span id="g5Num">1</span> / 6
+</div>
+
+<div class="question-box">
+    <div class="question-label">Translate:</div>
+    <div class="question-meaning" id="g5Meaning"></div>
+</div>
+
+<div class="answer-area" id="g5Answer">
+    <span class="answer-placeholder">
+        Tap the words below
+    </span>
+</div>
+
+<div class="word-bank" id="g5Bank"></div>
+
+<div class="game-buttons">
+
+<button class="check-btn" onclick="checkGame(5)">
+    ✓ Check
+</button>
+
+<button class="reset-btn" onclick="resetGame(5)">
+    ↻ Reset
+</button>
+
+<button class="listen-btn" onclick="listenCurrent(5)">
+    🔊
+</button>
+
+</div>
+
+<div class="feedback" id="g5Feedback"></div>
+
+<button class="next-game-btn" id="g5Next" onclick="nextGameQuestion(5)">
+    Next →
+</button>
+
+</div>
+
+
+<!-- =====================================================
      SENTENCE WRITING (PLACED BEFORE WRITING PRACTICE)
 ===================================================== -->
 
@@ -1370,7 +1449,7 @@ p {
 <h2>🏆 Grammar Master</h2>
 
 <p>
-    Differentiate and master all four core patterns:
+    Differentiate and master all core patterns:
 </p>
 
 <div class="grammar-explanation">
@@ -1389,6 +1468,10 @@ p {
 
 <p>
     <strong>4.</strong> S + V + 不 + V？
+</p>
+
+<p>
+    <strong>5.</strong> Answering (V / 不 + V)
 </p>
 
 </div>
@@ -1456,7 +1539,7 @@ p {
     <p>
         You can now build basic Mandarin sentences,
         negative sentences, 嗎 questions,
-        and A-not-A questions.
+        A-not-A questions, and answer them!
     </p>
 
 </div>
@@ -1508,7 +1591,7 @@ function addXP(amount){
 
     document.getElementById("xp").textContent = xp;
 
-    progress = Math.min(progress + 2,100);
+    progress = Math.min(progress + 1.5,100);
 
     document.getElementById("progressFill")
         .style.width = progress + "%";
@@ -1520,7 +1603,7 @@ function addXP(amount){
 ===================================================== */
 
 let currentSlideIndex = 0;
-const totalSlides = 4;
+const totalSlides = 5;
 
 function showSlide(index) {
     if (index >= totalSlides) currentSlideIndex = 0;
@@ -1550,7 +1633,7 @@ function currentSlide(n) {
 
 
 /* =====================================================
-   GAME DATA (INCORPORATING ALL VOCABULARY)
+   GAME DATA (INCORPORATING ALL VOCABULARY + GAME 5)
 ===================================================== */
 
 const games = {
@@ -1709,6 +1792,40 @@ meaning:"Do you eat fruit or not?",
 answer:["你","吃","不","吃","水果"]
 }
 
+],
+
+5: [
+
+{
+meaning:"Yes (I eat / drink / etc.) - e.g. 'Eat!'",
+answer:["吃"]
+},
+
+{
+meaning:"No (I don't eat)",
+answer:["不","吃"]
+},
+
+{
+meaning:"Yes (Drink!)",
+answer:["喝"]
+},
+
+{
+meaning:"No (Don't drink)",
+answer:["不","喝"]
+},
+
+{
+meaning:"Yes (Read!)",
+answer:["看"]
+},
+
+{
+meaning:"No (Don't read)",
+answer:["不","看"]
+}
+
 ]
 
 };
@@ -1723,7 +1840,8 @@ const gameState = {
 1:{index:0,selected:[],done:false},
 2:{index:0,selected:[],done:false},
 3:{index:0,selected:[],done:false},
-4:{index:0,selected:[],done:false}
+4:{index:0,selected:[],done:false},
+5:{index:0,selected:[],done:false}
 
 };
 
@@ -2049,6 +2167,16 @@ answer:"你喝水嗎"
 {
 prompt:"Do you eat or not?",
 answer:"你吃不吃"
+},
+
+{
+prompt:"Yes (I eat)",
+answer:"吃"
+},
+
+{
+prompt:"No (I don't eat)",
+answer:"不吃"
 }
 
 ];
@@ -2177,7 +2305,6 @@ function initWriter() {
     const container = document.getElementById("target-div");
     container.innerHTML = "";
 
-    // Update info text to show current character being practiced
     const info = document.getElementById("writingInfo");
     if(writingMode === 'quiz') {
         info.innerHTML = `Write <strong>${item.hanzi}</strong> (${item.pinyin} - ${item.meaning}) following correct stroke order! (${writingIndex + 1}/${writingCharacters.length})`;
@@ -2366,7 +2493,7 @@ function renderFinal(){
         span.onclick = ()=>{
             playAudio(word);
             finalSelected.splice(index, 1);
-            
+
             const bankButtons = document.querySelectorAll("#finalBank .word-btn");
             for(let btn of bankButtons) {
                 if(btn.textContent === word && btn.classList.contains("selected")) {
@@ -2453,7 +2580,6 @@ function checkFinal(){
 }
 
 
-// Fungsi Reset Final Challenge
 function resetFinal(){
     finalSelected = [];
     loadFinal();
@@ -2468,6 +2594,7 @@ loadGame(1);
 loadGame(2);
 loadGame(3);
 loadGame(4);
+loadGame(5);
 
 loadSentenceWriting();
 
