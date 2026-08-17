@@ -1371,28 +1371,6 @@
 ========================================================= */
 
 const LESSON_ID = "lesson-2";
-
-/*
-   Lesson 2 maximum XP:
-
-   Game 1:
-   8 × 5 = 40
-
-   Game 2:
-   8 × 5 = 40
-
-   Game 3:
-   8 × 5 = 40
-
-   Hanzi:
-   34 × 3 = 102
-
-   Final:
-   maximum 20
-
-   TOTAL = 242 XP
-*/
-
 const LESSON_MAX_XP = 242;
 
 
@@ -1430,19 +1408,10 @@ function updateLessonXP() {
 
 
 /*
-   Add XP
-
-   Global XP:
-   bobaXP
-
-   Lesson XP:
-   bobaLessonXP
-
-   Reward:
-   bobaRewards
+   Add XP (Menggunakan nama fungsi unik agar tidak bentrok)
 */
 
-function addXP(
+function giveLessonXP(
     amount,
     rewardId
 ) {
@@ -2100,7 +2069,7 @@ function checkBuild() {
             "feedback correct";
 
 
-        addXP(
+        giveLessonXP(
             5,
             `build-${buildIndex}`
         );
@@ -2307,7 +2276,7 @@ function checkTranslation() {
             "feedback correct";
 
 
-        addXP(
+        giveLessonXP(
             5,
             `translation-${translationIndex}`
         );
@@ -2590,7 +2559,7 @@ function checkEnglishGame() {
             "feedback correct";
 
 
-        addXP(
+        giveLessonXP(
             5,
             `english-${englishIndex}`
         );
@@ -2831,7 +2800,7 @@ function startQuiz() {
                     "feedback correct";
 
 
-                addXP(
+                giveLessonXP(
                     3,
                     `writing-${writingIndex}`
                 );
@@ -3566,7 +3535,7 @@ function submitFinal() {
        Give final reward once
     */
 
-    addXP(
+    giveLessonXP(
         finalXP,
         "final"
     );
