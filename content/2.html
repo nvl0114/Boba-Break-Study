@@ -471,11 +471,39 @@
             padding: 11px;
             margin-top: 8px;
             cursor: pointer;
+            transition: .2s;
+        }
+
+        .quiz-option:hover {
+            border-color: var(--brown-light);
         }
 
         .quiz-option.selected {
             background: #f0dfce;
             border-color: var(--brown-light);
+        }
+
+        .quiz-option.correct-answer {
+            background: #dff2e1 !important;
+            border-color: #5d8a68 !important;
+            color: #315b3c;
+        }
+
+        .quiz-option.wrong-answer {
+            background: #f8dddd !important;
+            border-color: #b85c5c !important;
+            color: #7b3737;
+        }
+
+        .quiz-option:disabled {
+            cursor: default;
+            opacity: 1;
+        }
+
+        .quiz-feedback {
+            margin-top: 12px;
+            min-height: 24px;
+            font-weight: 700;
         }
 
         .quiz-nav-buttons {
@@ -1345,22 +1373,22 @@
 const LESSON_ID = "lesson-2";
 
 /*
-   Maximum XP for this lesson:
+   Lesson 2 maximum XP:
 
    Game 1:
-   8 × 5 = 40 XP
+   8 × 5 = 40
 
    Game 2:
-   8 × 5 = 40 XP
+   8 × 5 = 40
 
    Game 3:
-   8 × 5 = 40 XP
+   8 × 5 = 40
 
    Hanzi:
-   34 × 3 = 102 XP
+   34 × 3 = 102
 
-   Final Quiz:
-   maximum 20 XP
+   Final:
+   maximum 20
 
    TOTAL = 242 XP
 */
@@ -1369,12 +1397,12 @@ const LESSON_MAX_XP = 242;
 
 
 /*
-   Update XP shown for this lesson
+   Update lesson XP
 */
 
 function updateLessonXP() {
 
-    const lessonXP =
+    const xp =
         BobaProgress.getLessonXP(
             LESSON_ID
         );
@@ -1383,12 +1411,12 @@ function updateLessonXP() {
     document.getElementById(
         "xpText"
     ).textContent =
-        `${lessonXP} / ${LESSON_MAX_XP} XP`;
+        xp + " / " + LESSON_MAX_XP + " XP";
 
 
     const percentage =
         Math.min(
-            (lessonXP / LESSON_MAX_XP) * 100,
+            (xp / LESSON_MAX_XP) * 100,
             100
         );
 
@@ -1402,12 +1430,16 @@ function updateLessonXP() {
 
 
 /*
-   Add XP to:
+   Add XP
 
-   1. Global XP
-   2. This lesson's XP
+   Global XP:
+   bobaXP
 
-   Each reward can only be claimed once.
+   Lesson XP:
+   bobaLessonXP
+
+   Reward:
+   bobaRewards
 */
 
 function addXP(
@@ -1427,6 +1459,10 @@ function addXP(
         );
 
 
+    /*
+       Reward already claimed
+    */
+
     if (!earned) {
 
         updateLessonXP();
@@ -1441,11 +1477,6 @@ function addXP(
     return true;
 
 }
-
-
-/* Show saved XP immediately */
-
-updateLessonXP();
 
 
 /* =========================================================
@@ -3035,6 +3066,10 @@ const finalQuestions = [
 let currentQuizIndex = 0;
 
 
+/*
+   Load final quiz
+*/
+
 function loadFinalQuiz() {
 
     const container =
@@ -3121,16 +3156,10 @@ function loadFinalQuiz() {
                             playSound("pop");
 
 
-                            if (
-                                /[\u3400-\u9FFF]/.test(
-                                    option
-                                )
-                            ) {
-
-                                speak(option);
-
-                            }
-
+                            /*
+                               Remove previous
+                               selection styling
+                            */
 
                             const allOptions =
                                 document.querySelectorAll(
@@ -3147,13 +3176,118 @@ function loadFinalQuiz() {
                                         "selected"
                                     );
 
+                                    btn.classList.remove(
+                                        "correct-answer"
+                                    );
+
+                                    btn.classList.remove(
+                                        "wrong-answer"
+                                    );
+
                                 }
                             );
 
 
+                            /*
+                               Select current answer
+                            */
+
                             button.classList.add(
                                 "selected"
                             );
+
+
+                            /*
+                               Speak Chinese option
+                            */
+
+                            if (
+                                /[\u3400-\u9FFF]/.test(
+                                    option
+                                )
+                            ) {
+
+                                speak(option);
+
+                            }
+
+
+                            /*
+                               Find / create
+                               feedback box
+                            */
+
+                            let feedback =
+                                questionBox.querySelector(
+                                    ".quiz-feedback"
+                                );
+
+
+                            if (!feedback) {
+
+                                feedback =
+                                    document.createElement(
+                                        "div"
+                                    );
+
+                                feedback.className =
+                                    "quiz-feedback";
+
+                                questionBox.appendChild(
+                                    feedback
+                                );
+
+                            }
+
+
+                            /*
+                               Check immediately
+                            */
+
+                            if (
+                                optionIndex ===
+                                question.answer
+                            ) {
+
+                                button.classList.add(
+                                    "correct-answer"
+                                );
+
+
+                                feedback.textContent =
+                                    "✓ Correct!";
+
+
+                                feedback.className =
+                                    "quiz-feedback correct";
+
+
+                                playSound(
+                                    "correct"
+                                );
+
+                            }
+
+                            else {
+
+                                button.classList.add(
+                                    "wrong-answer"
+                                );
+
+
+                                feedback.textContent =
+                                    "✗ Incorrect. Try again!";
+
+
+                                feedback.className =
+                                    "quiz-feedback incorrect";
+
+
+                                playSound(
+                                    "incorrect"
+                                );
+
+                            }
 
                         }
                     );
@@ -3180,6 +3314,10 @@ function loadFinalQuiz() {
 }
 
 
+/*
+   Change final quiz question
+*/
+
 function changeQuizSlide(
     direction
 ) {
@@ -3195,6 +3333,10 @@ function changeQuizSlide(
 
     currentQuizIndex += direction;
 
+
+    /*
+       Submit after last question
+    */
 
     if (
         currentQuizIndex >=
@@ -3237,6 +3379,10 @@ function changeQuizSlide(
 }
 
 
+/*
+   Update Previous / Next buttons
+*/
+
 function updateQuizNavButtons() {
 
     const prevBtn =
@@ -3277,10 +3423,18 @@ function updateQuizNavButtons() {
 }
 
 
+/*
+   Submit Final Quiz
+*/
+
 function submitFinal() {
 
     let score = 0;
 
+
+    /*
+       Check every question
+    */
 
     finalQuestions.forEach(
         function(
@@ -3296,21 +3450,131 @@ function submitFinal() {
                 );
 
 
-            if (
-                selected &&
+            const allOptions =
+                document.querySelectorAll(
+                    '[data-question="' +
+                    index +
+                    '"]'
+                );
+
+
+            /*
+               Disable options
+            */
+
+            allOptions.forEach(
+                function(btn) {
+
+                    btn.disabled = true;
+
+                }
+            );
+
+
+            /*
+               Find correct answer
+            */
+
+            allOptions.forEach(
+                function(btn) {
+
+                    if (
+                        Number(
+                            btn.dataset.option
+                        ) ===
+                        question.answer
+                    ) {
+
+                        btn.classList.add(
+                            "correct-answer"
+                        );
+
+                    }
+
+                }
+            );
+
+
+            /*
+               No selected answer
+            */
+
+            if (!selected) {
+
+                return;
+
+            }
+
+
+            const selectedAnswer =
                 Number(
                     selected.dataset.option
-                ) ===
+                );
+
+
+            /*
+               Correct
+            */
+
+            if (
+                selectedAnswer ===
                 question.answer
             ) {
 
                 score++;
+
+                selected.classList.add(
+                    "correct-answer"
+                );
+
+            }
+
+
+            /*
+               Incorrect
+            */
+
+            else {
+
+                selected.classList.add(
+                    "wrong-answer"
+                );
 
             }
 
         }
     );
 
+
+    /*
+       Calculate final XP
+
+       Maximum:
+       20 XP
+    */
+
+    const finalXP =
+        Math.round(
+            (
+                score /
+                finalQuestions.length
+            ) * 20
+        );
+
+
+    /*
+       Give final reward once
+    */
+
+    addXP(
+        finalXP,
+        "final"
+    );
+
+
+    /*
+       Result
+    */
 
     const result =
         document.getElementById(
@@ -3395,39 +3659,25 @@ function submitFinal() {
             ${message}
         </p>
 
+        <p>
+            Final XP: +${finalXP} XP
+        </p>
+
     `;
 
 
     /*
-       Final reward is only claimed once.
-
-       Maximum = 20 XP.
-    */
-
-    const finalXP =
-        Math.round(
-            (
-                score /
-                finalQuestions.length
-            ) * 20
-        );
-
-
-    addXP(
-        finalXP,
-        "final"
-    );
-
-
-    /*
        Mark lesson completed
-       if final challenge has been submitted.
     */
 
     BobaProgress.completeLesson(
         LESSON_ID
     );
 
+
+    /*
+       Update XP display
+    */
 
     updateLessonXP();
 
