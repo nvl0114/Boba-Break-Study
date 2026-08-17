@@ -1,0 +1,3729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Boba Break Study - Introduce Self 自我介紹">
+
+    <title>Introduce Self (自我介紹) | Boba Break Study</title>
+
+    <link rel="stylesheet" href="../style.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- Hanzi Writer -->
+    <script src="https://cdn.jsdelivr.net/npm/hanzi-writer@3.5.0/dist/hanzi-writer-lib.min.js"></script>
+
+    <!-- Previous Lesson Data -->
+    <script src="lesson.js"></script>
+
+    <style>
+        :root {
+            --boba-brown: #b8865c;
+            --dark-brown: #5c4033;
+            --light-brown: #d7b89c;
+            --cream: #fff8ef;
+            --cream-dark: #faedcd;
+            --pink: #f5d6d6;
+            --green: #dcebd8;
+            --red: #f4d0d0;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f8efe5;
+        }
+
+        /* =========================
+           MAIN CARDS
+        ========================= */
+
+        .lesson-card,
+        .grammar-card,
+        .conversation-card,
+        .vocab-section,
+        .game-card,
+        .writing-card,
+        .final-card {
+            width: 100%;
+            max-width: 750px;
+            margin: 25px auto;
+            padding: 25px;
+            background: white;
+            border-radius: 22px;
+            box-shadow: 0 8px 25px rgba(92, 64, 51, 0.10);
+        }
+
+        .section-title {
+            color: var(--dark-brown);
+            text-align: center;
+            margin-bottom: 8px;
+            font-size: 1.65rem;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #777;
+            margin-bottom: 22px;
+        }
+
+        /* =========================
+           LESSON HEADER
+        ========================= */
+
+        .lesson-header {
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        .lesson-badge {
+            display: inline-block;
+            padding: 8px 15px;
+            border-radius: 20px;
+            background: var(--cream-dark);
+            color: var(--dark-brown);
+            font-size: 0.8rem;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+            margin-bottom: 15px;
+        }
+
+        .lesson-header h1 {
+            color: var(--dark-brown);
+            font-size: 2.2rem;
+            margin: 5px 0;
+        }
+
+        .lesson-header h1 span {
+            color: var(--boba-brown);
+        }
+
+        .lesson-header p {
+            color: #777;
+            max-width: 600px;
+            margin: 10px auto;
+            line-height: 1.6;
+        }
+
+        .learning-goal {
+            margin-top: 20px;
+            padding: 15px 18px;
+            background: var(--cream);
+            border-radius: 16px;
+            color: var(--dark-brown);
+            text-align: left;
+        }
+
+        .learning-goal i {
+            color: var(--boba-brown);
+            margin-right: 8px;
+        }
+
+        /* =========================
+           CONVERSATION
+        ========================= */
+
+        .conversation-intro {
+            text-align: center;
+            color: #777;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .conversation {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .chat-row {
+            display: flex;
+            align-items: flex-end;
+            gap: 10px;
+            width: 100%;
+        }
+
+        .chat-row.a {
+            justify-content: flex-start;
+        }
+
+        .chat-row.b {
+            justify-content: flex-end;
+        }
+
+        .avatar {
+            width: 48px;
+            height: 48px;
+            min-width: 48px;
+            border-radius: 50%;
+            background: var(--cream-dark);
+            padding: 6px;
+            object-fit: contain;
+            box-shadow: 0 4px 10px rgba(92,64,51,0.12);
+        }
+
+        .chat-content {
+            max-width: 78%;
+        }
+
+        .speaker-name {
+            font-size: 0.78rem;
+            font-weight: bold;
+            color: var(--boba-brown);
+            margin: 0 0 4px 8px;
+        }
+
+        .chat-bubble {
+            position: relative;
+            padding: 13px 15px;
+            border-radius: 18px;
+            box-shadow: 0 3px 10px rgba(92,64,51,0.08);
+        }
+
+        .chat-row.a .chat-bubble {
+            background: #fff4df;
+            border-bottom-left-radius: 5px;
+        }
+
+        .chat-row.b .chat-bubble {
+            background: #fce9ec;
+            border-bottom-right-radius: 5px;
+        }
+
+        .chinese-line {
+            font-size: 1.15rem;
+            font-weight: bold;
+            color: var(--dark-brown);
+            line-height: 1.5;
+        }
+
+        .pinyin-line {
+            font-size: 0.86rem;
+            color: #8c7566;
+            margin-top: 3px;
+            font-style: italic;
+        }
+
+        .english-line {
+            font-size: 0.86rem;
+            color: #555;
+            margin-top: 5px;
+            line-height: 1.4;
+        }
+
+        .chat-audio {
+            border: none;
+            background: white;
+            color: var(--boba-brown);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            margin-top: 7px;
+            box-shadow: 0 2px 7px rgba(0,0,0,0.08);
+        }
+
+        .chat-audio:hover {
+            transform: scale(1.08);
+        }
+
+        /* =========================
+           GRAMMAR CAROUSEL
+        ========================= */
+
+        .grammar-carousel {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .grammar-slide {
+            display: none;
+            animation: fadeSlide 0.3s ease;
+        }
+
+        .grammar-slide.active-slide {
+            display: block;
+        }
+
+        @keyframes fadeSlide {
+            from {
+                opacity: 0;
+                transform: translateX(15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .grammar-number {
+            display: inline-flex;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+            background: var(--boba-brown);
+            color: white;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        .grammar-title {
+            color: var(--dark-brown);
+            font-size: 1.35rem;
+            margin: 5px 0 12px;
+        }
+
+        .pattern-display {
+            padding: 17px;
+            background: var(--cream);
+            border-radius: 15px;
+            text-align: center;
+            margin: 15px 0;
+        }
+
+        .pattern-code {
+            font-size: 1.2rem;
+            color: var(--boba-brown);
+            font-weight: bold;
+        }
+
+        .grammar-explanation {
+            color: #555;
+            line-height: 1.7;
+        }
+
+        .grammar-example {
+            padding: 15px;
+            margin-top: 15px;
+            border-left: 4px solid var(--boba-brown);
+            background: #fffaf5;
+            border-radius: 10px;
+        }
+
+        .example-hanzi {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--dark-brown);
+        }
+
+        .example-pinyin {
+            color: #8b7567;
+            font-size: 0.9rem;
+            margin-top: 4px;
+        }
+
+        .example-meaning {
+            color: #555;
+            margin-top: 5px;
+        }
+
+        .grammar-note {
+            padding: 12px 15px;
+            background: var(--cream-dark);
+            border-radius: 12px;
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: var(--dark-brown);
+        }
+
+        .slider-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 22px;
+        }
+
+        .slider-btn {
+            border: none;
+            background: var(--boba-brown);
+            color: white;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .slider-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .slider-indicators {
+            display: flex;
+            gap: 7px;
+        }
+
+        .indicator {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: #ddd;
+            cursor: pointer;
+        }
+
+        .indicator.active {
+            background: var(--boba-brown);
+        }
+
+        /* =========================
+           VOCABULARY
+        ========================= */
+
+        .vocab-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .vocab-pill {
+            position: relative;
+            padding: 15px;
+            background: var(--cream);
+            border-radius: 16px;
+            border: 1px solid #f0dfcd;
+            transition: 0.2s;
+        }
+
+        .vocab-pill:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 12px rgba(92,64,51,0.08);
+        }
+
+        .vocab-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+        }
+
+        .hanzi {
+            font-size: 1.45rem;
+            font-weight: bold;
+            color: var(--dark-brown);
+        }
+
+        .vocab-audio {
+            border: none;
+            background: white;
+            color: var(--boba-brown);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .pinyin {
+            font-size: 0.85rem;
+            color: #927c6d;
+            margin-top: 3px;
+        }
+
+        .meaning {
+            font-size: 0.84rem;
+            color: #555;
+            margin-top: 5px;
+            line-height: 1.4;
+        }
+
+        /* =========================
+           GAME
+        ========================= */
+
+        .game-number {
+            text-align: center;
+            color: var(--boba-brown);
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .question-box {
+            padding: 20px;
+            background: var(--cream);
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .question-english {
+            color: #555;
+            font-size: 1rem;
+        }
+
+        .question-hint {
+            margin-top: 6px;
+            color: #999;
+            font-size: 0.8rem;
+        }
+
+        .answer-area {
+            min-height: 55px;
+            padding: 10px;
+            background: #fafafa;
+            border: 2px dashed #dcc8b6;
+            border-radius: 14px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+            margin-bottom: 15px;
+        }
+
+        .answer-placeholder {
+            color: #aaa;
+            width: 100%;
+            text-align: center;
+            padding: 8px;
+            font-size: 0.85rem;
+        }
+
+        .selected-word,
+        .word-btn {
+            border: none;
+            padding: 9px 13px;
+            border-radius: 10px;
+            font-size: 1rem;
+            cursor: pointer;
+            color: var(--dark-brown);
+            background: var(--cream-dark);
+        }
+
+        .word-btn:hover,
+        .selected-word:hover {
+            transform: translateY(-2px);
+        }
+
+        .word-bank {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin-bottom: 18px;
+        }
+
+        .game-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .check-btn,
+        .reset-btn,
+        .listen-btn,
+        .next-game-btn {
+            border: none;
+            padding: 11px 17px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .check-btn {
+            background: var(--boba-brown);
+            color: white;
+        }
+
+        .reset-btn {
+            background: #eee;
+            color: #555;
+        }
+
+        .listen-btn {
+            background: #f5d6d6;
+            color: var(--dark-brown);
+        }
+
+        .next-game-btn {
+            background: var(--green);
+            color: var(--dark-brown);
+            display: none;
+        }
+
+        .feedback {
+            text-align: center;
+            margin-top: 15px;
+            font-weight: bold;
+            min-height: 22px;
+        }
+
+        .feedback.correct {
+            color: #54815a;
+        }
+
+        .feedback.incorrect {
+            color: #b45a5a;
+        }
+
+        .game-progress {
+            text-align: center;
+            color: #999;
+            font-size: 0.8rem;
+            margin-top: 15px;
+        }
+
+        /* =========================
+           HANZI WRITER
+        ========================= */
+
+        .writing-character {
+            text-align: center;
+            font-size: 2rem;
+            color: var(--dark-brown);
+            font-weight: bold;
+        }
+
+        .writing-info {
+            text-align: center;
+            color: #777;
+            margin: 7px 0 20px;
+        }
+
+        .writing-info strong {
+            color: var(--boba-brown);
+        }
+
+        .writing-mode-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .mode-btn {
+            border: none;
+            padding: 10px 18px;
+            border-radius: 12px;
+            background: #eee;
+            cursor: pointer;
+            color: #555;
+        }
+
+        .mode-btn.active {
+            background: var(--boba-brown);
+            color: white;
+        }
+
+        .canvas-wrapper {
+            width: 270px;
+            height: 270px;
+            margin: auto;
+            border-radius: 20px;
+            background: #fffaf5;
+            border: 2px solid #ead9c8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #target-div {
+            width: 260px;
+            height: 260px;
+        }
+
+        .writing-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 18px;
+        }
+
+        .write-btn,
+        .clear-btn,
+        .next-write-btn {
+            border: none;
+            padding: 10px 15px;
+            border-radius: 11px;
+            cursor: pointer;
+        }
+
+        .write-btn {
+            background: var(--boba-brown);
+            color: white;
+        }
+
+        .clear-btn {
+            background: #eee;
+            color: #555;
+        }
+
+        .next-write-btn {
+            background: var(--green);
+            color: var(--dark-brown);
+        }
+
+        .recall-answer {
+            text-align: center;
+            margin-top: 12px;
+            min-height: 25px;
+            color: #5b805d;
+            font-weight: bold;
+        }
+
+        .writing-progress {
+            text-align: center;
+            margin-top: 10px;
+            color: #999;
+            font-size: 0.8rem;
+        }
+
+        /* =========================
+           FINAL REVIEW
+        ========================= */
+
+        .final-score {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--boba-brown);
+            margin-bottom: 15px;
+        }
+
+        .unlock {
+            display: none;
+            text-align: center;
+            padding: 18px;
+            background: var(--cream-dark);
+            border-radius: 15px;
+            margin-top: 20px;
+            color: var(--dark-brown);
+        }
+
+        .unlock i {
+            font-size: 2rem;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 700px) {
+
+            .lesson-card,
+            .grammar-card,
+            .conversation-card,
+            .vocab-section,
+            .game-card,
+            .writing-card,
+            .final-card {
+                padding: 18px;
+                margin: 18px auto;
+                border-radius: 18px;
+            }
+
+            .lesson-header h1 {
+                font-size: 1.7rem;
+            }
+
+            .vocab-container {
+                grid-template-columns: 1fr;
+            }
+
+            .chat-content {
+                max-width: 82%;
+            }
+
+            .avatar {
+                width: 42px;
+                height: 42px;
+                min-width: 42px;
+            }
+
+            .chinese-line {
+                font-size: 1.05rem;
+            }
+
+            .pinyin-line,
+            .english-line {
+                font-size: 0.78rem;
+            }
+
+            .canvas-wrapper {
+                width: 250px;
+                height: 250px;
+            }
+
+            #target-div {
+                width: 240px;
+                height: 240px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="app-container">
+
+    <!-- SIDEBAR -->
+    <div id="sidebar-container"></div>
+
+    <main class="main-content">
+
+        <!-- =========================================
+             LESSON HEADER
+        ========================================== -->
+
+        <section class="lesson-header">
+
+            <div class="lesson-badge">
+                CONVERSATION LESSON • SELF INTRODUCTION
+            </div>
+
+            <h1>
+                Introduce Self
+                <span>自我介紹</span>
+            </h1>
+
+            <p>
+                Learn how to introduce yourself, ask someone's name,
+                surname, nationality, age, and hobbies in Mandarin.
+            </p>
+
+            <div class="learning-goal">
+                <i class="fa-solid fa-bullseye"></i>
+
+                <strong>In this lesson, you will learn:</strong>
+
+                <br><br>
+
+                • How to say your name and surname<br>
+                • How to ask someone's name and age<br>
+                • How to use <strong>什麼</strong> for questions<br>
+                • How to use <strong>呢</strong> to ask “How about you?”<br>
+                • How to use <strong>也</strong> for “also / too”<br>
+                • How to introduce your hobbies
+            </div>
+
+        </section>
+
+
+        <!-- =========================================
+             CONVERSATION
+        ========================================== -->
+
+        <section class="conversation-card">
+
+            <h2 class="section-title">
+                💬 Meet David & Meimei
+            </h2>
+
+            <p class="conversation-intro">
+                Listen to the conversation and follow along with
+                the Chinese, Pinyin, and English translation.
+                Tap 🔊 to hear each sentence.
+            </p>
+
+            <div class="conversation">
+
+                <!-- A -->
+                <div class="chat-row a">
+
+                    <img
+                        class="avatar"
+                        src="https://img.icons8.com/?size=100&id=80976&format=png&color=000000"
+                        alt="David">
+
+                    <div class="chat-content">
+
+                        <div class="speaker-name">
+                            大衛 • David
+                        </div>
+
+                        <div class="chat-bubble">
+
+                            <div class="chinese-line">
+                                您好！
+                            </div>
+
+                            <div class="pinyin-line">
+                                Nín hǎo!
+                            </div>
+
+                            <div class="english-line">
+                                Hello!
+                            </div>
+
+                            <button
+                                class="chat-audio"
+                                onclick="speak('您好')">
+                                🔊
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- B -->
+                <div class="chat-row b">
+
+                    <div class="chat-content">
+
+                        <div class="speaker-name">
+                            美美 • Meimei
+                        </div>
+
+                        <div class="chat-bubble">
+
+                            <div class="chinese-line">
+                                您好！
+                            </div>
+
+                            <div class="pinyin-line">
+                                Nín hǎo!
+                            </div>
+
+                            <div class="english-line">
+                                Hello!
+                            </div>
+
+                            <button
+                                class="chat-audio"
+                                onclick="speak('您好')">
+                                🔊
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <img
+                        class="avatar"
+                        src="https://img.icons8.com/?size=100&id=80841&format=png&color=000000"
+                        alt="Meimei">
+
+                </div>
+
+
+                <!-- A -->
+                <div class="chat-row a">
+
+                    <img
+                        class="avatar"
+                        src="https://img.icons8.com/?size=100&id=80976&format=png&color=000000"
+                        alt="David">
+
+                    <div class="chat-content">
+
+                        <div class="speaker-name">
+                            大衛 • David
+                        </div>
+
+                        <div class="chat-bubble">
+
+                            <div class="chinese-line">
+                                請問，您叫什麼名字？
+                            </div>
+
+                            <div class="pinyin-line">
+                                Qǐngwèn, nín jiào shénme míngzi?
+                            </div>
+
+                            <div class="english-line">
+                                May I ask, what is your name?
+                            </div>
+
+                            <button
+                                class="chat-audio"
+                                onclick="speak('請問，您叫什麼名字？')">
+                                🔊
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- B -->
+                <div class="chat-row b">
+
+                    <div class="chat-content">
+
+                        <div class="speaker-name">
+                            美美 • Meimei
+                        </div>
+
+                        <div class="chat-bubble">
+
+                            <div class="chinese-line">
+                                我叫美美。您呢？
+                            </div>
+
+                            <div class="pinyin-line">
+                                Wǒ jiào Měiměi. Nín ne?
+                            </div>
+
+                            <div class="english-line">
+                                My name is Meimei. How about you?
+                            </div>
+
+                            <button
+                                class="chat-audio"
+                                onclick="speak('我叫美美。您呢？')">
+                                🔊
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <img
+                        class="avatar"
+                        src="https://img.icons8.com/?size=100&id=80841&format=png&color=000000"
+                        alt="Meimei">
+
+                </div>
+
+
+                <!-- A -->
+                <div class="chat-row a">
+
+                    <img
+                        class="avatar"
+                        src="https://img.icons8.com/?size=100&id=80976&format=png&color=000000"
+                        alt="David">
+
+                    <div class="chat-content">
+
+                        <div class="speaker-name">
+                            大衛 • David
+                        </div>
+
+                        <div class="chat-bubble">
+
+                            <div class="chinese-line">
+                                我叫大衛。
+                            </div>
+
+                            <div class="pinyin-line">
+                                Wǒ jiào Dàwèi.
+                            </div>
+
+                            <div class="english-line">
+                                My name is David.
+                            </div>
+
+                            <button
+                                class="chat-audio"
+                                onclick="speak('我叫大衛')">
+                                🔊
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- B -->
+                <div class="chat-row b">
+
+                    <div class="chat-content">
+
+                        <div class="speaker-name">
+                            美美 • Meimei
+                        </div>
+
+                        <div class="chat-bubble">
+
+                            <div class="chinese-line">
+                                您貴姓？
+                            </div>
+
+                            <div class="pinyin-line">
+                                Nín guìxìng?
+                            </div>
+
+                            <div class="english-line">
+                                What is your surname?
+                            </div>
+
+                            <button
+                                class="chat-audio"
+                                onclick="speak('您貴姓？')">
+                                🔊
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <img
+                        class="avatar"
+                        src="https://img.icons8.com/?size=100&id=80841&format=png&color=000000"
+                        alt="Meimei">
+
+                </div>
+
+
+                <!-- A -->
+                <div class="chat-row a">
+
+                    <img
+                        class="avatar"
+                        src="https://img.icons8.com/?size=100&id=80976&format=png&color=000000"
+                        alt="David">
+
+                    <div class="chat-content">
+
+                        <div class="speaker-name">
+                            大衛 • David
+                        </div>
+
+                        <div class="chat-bubble">
+
+                            <div class="chinese-line">
+                                我姓林。您姓什麼？
+                            </div>
+
+                            <div class="pinyin-line">
+                                Wǒ xìng Lín. Nín xìng shénme?
+                            </div>
+
+                            <div class="english-line">
+                                My surname is Lin. What is your surname?
+                            </div>
+
+                            <button
+                                class="chat-audio"
+                                onclick="speak('我姓林。您姓什麼？')">
+                                🔊
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- B -->
+                <div class="chat-row b">
+
+                    <div class="chat-content">
+
+                        <div class="speaker-name">
+                            美美 • Meimei
+                        </div>
+
+                        <div class="chat-bubble">
+
+                            <div class="chinese-line">
+                                我姓王。
+                            </div>
+
+                            <div class="pinyin-line">
+                                Wǒ xìng Wáng.
+                            </div>
+
+                            <div class="english-line">
+                                My surname is Wang.
+                            </div>
+
+                            <button
+                                class="chat-audio"
+                                onclick="speak('我姓王')">
+                                🔊
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <img
+                        class="avatar"
+                        src="https://img.icons8.com/?size=100&id=80841&format=png&color=000000"
+                        alt="Meimei">
+
+                </div>
+
+
+                <!-- A -->
+                <div class="chat-row a">
+
+                    <img
+                        class="avatar"
+                        src="https://img.icons8.com/?size=100&id=80976&format=png&color=000000"
+                        alt="David">
+
+                    <div class="chat-content">
+
+                        <div class="speaker-name">
+                            大衛 • David
+                        </div>
+
+                        <div class="chat-bubble">
+
+                            <div class="chinese-line">
+                                您是哪國人？
+                            </div>
+
+                            <div class="pinyin-line">
+                                Nín shì nǎ guó rén?
+                            </div>
+
+                            <div class="english-line">
+                                What country are you from?
+                            </div>
+
+                            <button
+                                class="chat-audio"
+                                onclick="speak('您是哪國人？')">
+                                🔊
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- B -->
+                <div class="chat-row b">
+
+                    <div class="chat-content">
+
+                        <div class="speaker-name">
+                            美美 • Meimei
+                        </div>
+
+                        <div class="chat-bubble">
+
+                            <div class="chinese-line">
+                                我是台灣人。您呢？
+                            </div>
+
+                            <div class="pinyin-line">
+                                Wǒ shì Táiwān rén. Nín ne?
+                            </div>
+
+                            <div class="english-line">
+                                I'm Taiwanese. How about you?
+                            </div>
+
+                            <button
+                                class="chat-audio"
+                                onclick="speak('我是台灣人。您呢？')">
+                                🔊
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <img
+                        class="avatar"
+                        src="https://img.icons8.com/?size=100&id=80841&format=png&color=000000"
+                        alt="Meimei">
+
+                </div>
+
+
+                <!-- A -->
+                <div class="chat-row a">
+
+                    <img
+                        class="avatar"
+                        src="https://img.icons8.com/?size=100&id=80976&format=png&color=000000"
+                        alt="David">
+
+                    <div class="chat-content">
+
+                        <div class="speaker-name">
+                            大衛 • David
+                        </div>
+
+                        <div class="chat-bubble">
+
+                            <div class="chinese-line">
+                                我來自美國。
+                            </div>
+
+                            <div class="pinyin-line">
+                                Wǒ láizì Měiguó.
+                            </div>
+
+                            <div class="english-line">
+                                I'm from the United States.
+                            </div>
+
+                            <button
+                                class="chat-audio"
+                                onclick="speak('我來自美國')">
+                                🔊
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- B -->
+                <div class="chat-row b">
+
+                    <div class="chat-content">
+
+                        <div class="speaker-name">
+                            美美 • Meimei
+                        </div>
+
+                        <div class="chat-bubble">
+
+                            <div class="chinese-line">
+                                您幾歲？
+                            </div>
+
+                            <div class="pinyin-line">
+                                Nín jǐ suì?
+                            </div>
+
+                            <div class="english-line">
+                                How old are you?
+                            </div>
+
+                            <button
+                                class="chat-audio"
+                                onclick="speak('您幾歲？')">
+                                🔊
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <img
+                        class="avatar"
+                        src="https://img.icons8.com/?size=100&id=80841&format=png&color=000000"
+                        alt="Meimei">
+
+                </div>
+
+
+                <!-- A -->
+                <div class="chat-row a">
+
+                    <img
+                        class="avatar"
+                        src="https://img.icons8.com/?size=100&id=80976&format=png&color=000000"
+                        alt="David">
+
+                    <div class="chat-content">
+
+                        <div class="speaker-name">
+                            大衛 • David
+                        </div>
+
+                        <div class="chat-bubble">
+
+                            <div class="chinese-line">
+                                我二十歲。您呢？
+                            </div>
+
+                            <div class="pinyin-line">
+                                Wǒ èrshí suì. Nín ne?
+                            </div>
+
+                            <div class="english-line">
+                                I'm 20 years old. How about you?
+                            </div>
+
+                            <button
+                                class="chat-audio"
+                                onclick="speak('我二十歲。您呢？')">
+                                🔊
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- B -->
+                <div class="chat-row b">
+
+                    <div class="chat-content">
+
+                        <div class="speaker-name">
+                            美美 • Meimei
+                        </div>
+
+                        <div class="chat-bubble">
+
+                            <div class="chinese-line">
+                                我二十二歲。
+                            </div>
+
+                            <div class="pinyin-line">
+                                Wǒ èrshí'èr suì.
+                            </div>
+
+                            <div class="english-line">
+                                I'm 22 years old.
+                            </div>
+
+                            <button
+                                class="chat-audio"
+                                onclick="speak('我二十二歲')">
+                                🔊
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <img
+                        class="avatar"
+                        src="https://img.icons8.com/?size=100&id=80841&format=png&color=000000"
+                        alt="Meimei">
+
+                </div>
+
+
+                <!-- A -->
+                <div class="chat-row a">
+
+                    <img
+                        class="avatar"
+                        src="https://img.icons8.com/?size=100&id=80976&format=png&color=000000"
+                        alt="David">
+
+                    <div class="chat-content">
+
+                        <div class="speaker-name">
+                            大衛 • David
+                        </div>
+
+                        <div class="chat-bubble">
+
+                            <div class="chinese-line">
+                                您的愛好是什麼？
+                            </div>
+
+                            <div class="pinyin-line">
+                                Nín de àihào shì shénme?
+                            </div>
+
+                            <div class="english-line">
+                                What are your hobbies?
+                            </div>
+
+                            <button
+                                class="chat-audio"
+                                onclick="speak('您的愛好是什麼？')">
+                                🔊
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- B -->
+                <div class="chat-row b">
+
+                    <div class="chat-content">
+
+                        <div class="speaker-name">
+                            美美 • Meimei
+                        </div>
+
+                        <div class="chat-bubble">
+
+                            <div class="chinese-line">
+                                我的愛好是看電影。您呢？
+                            </div>
+
+                            <div class="pinyin-line">
+                                Wǒ de àihào shì kàn diànyǐng. Nín ne?
+                            </div>
+
+                            <div class="english-line">
+                                My hobby is watching movies. How about you?
+                            </div>
+
+                            <button
+                                class="chat-audio"
+                                onclick="speak('我的愛好是看電影。您呢？')">
+                                🔊
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <img
+                        class="avatar"
+                        src="https://img.icons8.com/?size=100&id=80841&format=png&color=000000"
+                        alt="Meimei">
+
+                </div>
+
+
+                <!-- A -->
+                <div class="chat-row a">
+
+                    <img
+                        class="avatar"
+                        src="https://img.icons8.com/?size=100&id=80976&format=png&color=000000"
+                        alt="David">
+
+                    <div class="chat-content">
+
+                        <div class="speaker-name">
+                            大衛 • David
+                        </div>
+
+                        <div class="chat-bubble">
+
+                            <div class="chinese-line">
+                                我喜歡聽音樂。
+                            </div>
+
+                            <div class="pinyin-line">
+                                Wǒ xǐhuān tīng yīnyuè.
+                            </div>
+
+                            <div class="english-line">
+                                I like listening to music.
+                            </div>
+
+                            <button
+                                class="chat-audio"
+                                onclick="speak('我喜歡聽音樂')">
+                                🔊
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- B -->
+                <div class="chat-row b">
+
+                    <div class="chat-content">
+
+                        <div class="speaker-name">
+                            美美 • Meimei
+                        </div>
+
+                        <div class="chat-bubble">
+
+                            <div class="chinese-line">
+                                很高興認識您！
+                            </div>
+
+                            <div class="pinyin-line">
+                                Hěn gāoxìng rènshi nín!
+                            </div>
+
+                            <div class="english-line">
+                                Nice to meet you!
+                            </div>
+
+                            <button
+                                class="chat-audio"
+                                onclick="speak('很高興認識您')">
+                                🔊
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <img
+                        class="avatar"
+                        src="https://img.icons8.com/?size=100&id=80841&format=png&color=000000"
+                        alt="Meimei">
+
+                </div>
+
+
+                <!-- A -->
+                <div class="chat-row a">
+
+                    <img
+                        class="avatar"
+                        src="https://img.icons8.com/?size=100&id=80976&format=png&color=000000"
+                        alt="David">
+
+                    <div class="chat-content">
+
+                        <div class="speaker-name">
+                            大衛 • David
+                        </div>
+
+                        <div class="chat-bubble">
+
+                            <div class="chinese-line">
+                                我也很高興認識您！再見！
+                            </div>
+
+                            <div class="pinyin-line">
+                                Wǒ yě hěn gāoxìng rènshi nín! Zàijiàn!
+                            </div>
+
+                            <div class="english-line">
+                                Nice to meet you too! Goodbye!
+                            </div>
+
+                            <button
+                                class="chat-audio"
+                                onclick="speak('我也很高興認識您！再見！')">
+                                🔊
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- B -->
+                <div class="chat-row b">
+
+                    <div class="chat-content">
+
+                        <div class="speaker-name">
+                            美美 • Meimei
+                        </div>
+
+                        <div class="chat-bubble">
+
+                            <div class="chinese-line">
+                                再見！
+                            </div>
+
+                            <div class="pinyin-line">
+                                Zàijiàn!
+                            </div>
+
+                            <div class="english-line">
+                                Goodbye!
+                            </div>
+
+                            <button
+                                class="chat-audio"
+                                onclick="speak('再見')">
+                                🔊
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <img
+                        class="avatar"
+                        src="https://img.icons8.com/?size=100&id=80841&format=png&color=000000"
+                        alt="Meimei">
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- =========================================
+             GRAMMAR
+        ========================================== -->
+
+        <section class="grammar-card">
+
+            <h2 class="section-title">
+                📚 Grammar
+            </h2>
+
+            <p class="section-subtitle">
+                Let's understand the sentence patterns from the conversation.
+            </p>
+
+            <div class="grammar-carousel">
+
+                <!-- 1 -->
+                <div class="grammar-slide active-slide">
+
+                    <span class="grammar-number">1</span>
+
+                    <h3 class="grammar-title">
+                        Asking & Saying Names
+                    </h3>
+
+                    <div class="pattern-display">
+                        <div class="pattern-code">
+                            叫什麼名字？
+                        </div>
+                    </div>
+
+                    <div class="grammar-explanation">
+
+                        <strong>叫</strong> means “to be called / to be named.”
+
+                        <br><br>
+
+                        To ask someone's name:
+
+                        <br>
+
+                        <strong>你 / 您 + 叫什麼名字？</strong>
+
+                        <br><br>
+
+                        To say your name:
+
+                        <br>
+
+                        <strong>我叫 + Name。</strong>
+
+                    </div>
+
+                    <div class="grammar-example">
+
+                        <div class="example-hanzi">
+                            您叫什麼名字？
+                        </div>
+
+                        <div class="example-pinyin">
+                            Nín jiào shénme míngzi?
+                        </div>
+
+                        <div class="example-meaning">
+                            What is your name?
+                        </div>
+
+                        <br>
+
+                        <div class="example-hanzi">
+                            我叫美美。
+                        </div>
+
+                        <div class="example-pinyin">
+                            Wǒ jiào Měiměi.
+                        </div>
+
+                        <div class="example-meaning">
+                            My name is Meimei.
+                        </div>
+
+                    </div>
+
+                    <div class="grammar-note">
+                        💡 <strong>叫 + Name</strong> = “be called + name”
+                    </div>
+
+                </div>
+
+
+                <!-- 2 -->
+                <div class="grammar-slide">
+
+                    <span class="grammar-number">2</span>
+
+                    <h3 class="grammar-title">
+                        Saying Your Surname
+                    </h3>
+
+                    <div class="pattern-display">
+                        <div class="pattern-code">
+                            我姓 + Surname
+                        </div>
+                    </div>
+
+                    <div class="grammar-explanation">
+
+                        <strong>姓</strong> means “surname / family name.”
+
+                        <br><br>
+
+                        Use:
+
+                        <br>
+
+                        <strong>我姓 + 姓氏。</strong>
+
+                        <br><br>
+
+                        To ask someone's surname:
+
+                        <br>
+
+                        <strong>您貴姓？</strong>
+
+                    </div>
+
+                    <div class="grammar-example">
+
+                        <div class="example-hanzi">
+                            我姓林。
+                        </div>
+
+                        <div class="example-pinyin">
+                            Wǒ xìng Lín.
+                        </div>
+
+                        <div class="example-meaning">
+                            My surname is Lin.
+                        </div>
+
+                        <br>
+
+                        <div class="example-hanzi">
+                            您貴姓？
+                        </div>
+
+                        <div class="example-pinyin">
+                            Nín guìxìng?
+                        </div>
+
+                        <div class="example-meaning">
+                            What is your surname?
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- 3 -->
+                <div class="grammar-slide">
+
+                    <span class="grammar-number">3</span>
+
+                    <h3 class="grammar-title">
+                        Asking Age: 幾歲
+                    </h3>
+
+                    <div class="pattern-display">
+                        <div class="pattern-code">
+                            Number + 歲
+                        </div>
+                    </div>
+
+                    <div class="grammar-explanation">
+
+                        <strong>幾歲</strong> means “how old?”
+
+                        <br><br>
+
+                        Ask:
+
+                        <br>
+
+                        <strong>你 / 您 + 幾歲？</strong>
+
+                        <br><br>
+
+                        Answer:
+
+                        <br>
+
+                        <strong>我 + Number + 歲。</strong>
+
+                    </div>
+
+                    <div class="grammar-example">
+
+                        <div class="example-hanzi">
+                            您幾歲？
+                        </div>
+
+                        <div class="example-pinyin">
+                            Nín jǐ suì?
+                        </div>
+
+                        <div class="example-meaning">
+                            How old are you?
+                        </div>
+
+                        <br>
+
+                        <div class="example-hanzi">
+                            我二十二歲。
+                        </div>
+
+                        <div class="example-pinyin">
+                            Wǒ èrshí'èr suì.
+                        </div>
+
+                        <div class="example-meaning">
+                            I'm 22 years old.
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- 4 -->
+                <div class="grammar-slide">
+
+                    <span class="grammar-number">4</span>
+
+                    <h3 class="grammar-title">
+                        Numbers: 十
+                    </h3>
+
+                    <div class="pattern-display">
+                        <div class="pattern-code">
+                            Number + 十 + Number
+                        </div>
+                    </div>
+
+                    <div class="grammar-explanation">
+
+                        For numbers from 20–99, Mandarin uses
+                        <strong>十</strong> as the tens marker.
+
+                        <br><br>
+
+                        For example:
+
+                        <br>
+
+                        <strong>二十</strong> = 20
+
+                        <br>
+
+                        <strong>二十二</strong> = 22
+
+                        <br>
+
+                        <strong>三十五</strong> = 35
+
+                    </div>
+
+                    <div class="grammar-example">
+
+                        <div class="example-hanzi">
+                            二十歲
+                        </div>
+
+                        <div class="example-pinyin">
+                            èrshí suì
+                        </div>
+
+                        <div class="example-meaning">
+                            20 years old
+                        </div>
+
+                        <br>
+
+                        <div class="example-hanzi">
+                            二十二歲
+                        </div>
+
+                        <div class="example-pinyin">
+                            èrshí'èr suì
+                        </div>
+
+                        <div class="example-meaning">
+                            22 years old
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- 5 -->
+                <div class="grammar-slide">
+
+                    <span class="grammar-number">5</span>
+
+                    <h3 class="grammar-title">
+                        呢 — “How about...?”
+                    </h3>
+
+                    <div class="pattern-display">
+                        <div class="pattern-code">
+                            Statement + 呢？
+                        </div>
+                    </div>
+
+                    <div class="grammar-explanation">
+
+                        <strong>呢</strong> is commonly used to return
+                        a question to another person.
+
+                        <br><br>
+
+                        English:
+
+                        <br>
+
+                        “How about you?”
+
+                        <br><br>
+
+                        Instead of repeating the whole sentence,
+                        simply use <strong>呢？</strong>
+
+                    </div>
+
+                    <div class="grammar-example">
+
+                        <div class="example-hanzi">
+                            我叫美美。您呢？
+                        </div>
+
+                        <div class="example-pinyin">
+                            Wǒ jiào Měiměi. Nín ne?
+                        </div>
+
+                        <div class="example-meaning">
+                            My name is Meimei. How about you?
+                        </div>
+
+                        <br>
+
+                        <div class="example-hanzi">
+                            我二十歲。您呢？
+                        </div>
+
+                        <div class="example-pinyin">
+                            Wǒ èrshí suì. Nín ne?
+                        </div>
+
+                        <div class="example-meaning">
+                            I'm 20 years old. How about you?
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- 6 -->
+                <div class="grammar-slide">
+
+                    <span class="grammar-number">6</span>
+
+                    <h3 class="grammar-title">
+                        什麼 — “What”
+                    </h3>
+
+                    <div class="pattern-display">
+                        <div class="pattern-code">
+                            Question Word + Sentence
+                        </div>
+                    </div>
+
+                    <div class="grammar-explanation">
+
+                        <strong>什麼</strong> means <strong>“what.”</strong>
+
+                        <br><br>
+
+                        Mandarin usually does not move question words
+                        to the beginning like English.
+
+                        <br><br>
+
+                        Keep <strong>什麼</strong> in the position
+                        where the answer would normally appear.
+
+                    </div>
+
+                    <div class="grammar-example">
+
+                        <div class="example-hanzi">
+                            您叫什麼名字？
+                        </div>
+
+                        <div class="example-pinyin">
+                            Nín jiào shénme míngzi?
+                        </div>
+
+                        <div class="example-meaning">
+                            What is your name?
+                        </div>
+
+                        <br>
+
+                        <div class="example-hanzi">
+                            您姓什麼？
+                        </div>
+
+                        <div class="example-pinyin">
+                            Nín xìng shénme?
+                        </div>
+
+                        <div class="example-meaning">
+                            What is your surname?
+                        </div>
+
+                        <br>
+
+                        <div class="example-hanzi">
+                            您的愛好是什麼？
+                        </div>
+
+                        <div class="example-pinyin">
+                            Nín de àihào shì shénme?
+                        </div>
+
+                        <div class="example-meaning">
+                            What are your hobbies?
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- 7 -->
+                <div class="grammar-slide">
+
+                    <span class="grammar-number">7</span>
+
+                    <h3 class="grammar-title">
+                        也 — “Also / Too”
+                    </h3>
+
+                    <div class="pattern-display">
+                        <div class="pattern-code">
+                            Subject + 也 + Verb / Adjective
+                        </div>
+                    </div>
+
+                    <div class="grammar-explanation">
+
+                        <strong>也</strong> means <strong>“also / too.”</strong>
+
+                        <br><br>
+
+                        It usually comes <strong>before the verb or
+                        adjective</strong>.
+
+                    </div>
+
+                    <div class="grammar-example">
+
+                        <div class="example-hanzi">
+                            我也很高興認識您。
+                        </div>
+
+                        <div class="example-pinyin">
+                            Wǒ yě hěn gāoxìng rènshi nín.
+                        </div>
+
+                        <div class="example-meaning">
+                            Nice to meet you too.
+                        </div>
+
+                    </div>
+
+                    <div class="grammar-note">
+                        💡 <strong>也</strong> = also / too<br>
+                        我也... = I also... / Me too...
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="slider-nav">
+
+                <button
+                    class="slider-btn"
+                    onclick="prevGrammar()">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </button>
+
+                <div class="slider-indicators">
+
+                    <span class="indicator active"
+                          onclick="showGrammar(0)"></span>
+
+                    <span class="indicator"
+                          onclick="showGrammar(1)"></span>
+
+                    <span class="indicator"
+                          onclick="showGrammar(2)"></span>
+
+                    <span class="indicator"
+                          onclick="showGrammar(3)"></span>
+
+                    <span class="indicator"
+                          onclick="showGrammar(4)"></span>
+
+                    <span class="indicator"
+                          onclick="showGrammar(5)"></span>
+
+                    <span class="indicator"
+                          onclick="showGrammar(6)"></span>
+
+                </div>
+
+                <button
+                    class="slider-btn"
+                    onclick="nextGrammar()">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================================
+             VOCABULARY
+        ========================================== -->
+
+        <section class="vocab-section">
+
+            <h2 class="section-title">
+                🧋 Vocabulary
+            </h2>
+
+            <p class="section-subtitle">
+                Tap 🔊 to hear each word.
+            </p>
+
+            <div class="vocab-container" id="vocabContainer"></div>
+
+        </section>
+
+
+        <!-- =========================================
+             SENTENCE BUILDING GAME
+        ========================================== -->
+
+        <section class="game-card">
+
+            <h2 class="section-title">
+                🎮 Sentence Building Challenge
+            </h2>
+
+            <p class="section-subtitle">
+                Put the Chinese words in the correct order.
+            </p>
+
+            <div class="game-number" id="gameNumber">
+                Question 1
+            </div>
+
+            <div class="question-box">
+
+                <div class="question-english"
+                     id="gameQuestion">
+                    What is your name?
+                </div>
+
+                <div class="question-hint">
+                    Build the Mandarin sentence.
+                </div>
+
+            </div>
+
+            <div class="answer-area"
+                 id="answerArea">
+
+                <div class="answer-placeholder">
+                    Tap the words below to build your sentence.
+                </div>
+
+            </div>
+
+            <div class="word-bank"
+                 id="wordBank">
+            </div>
+
+            <div class="game-buttons">
+
+                <button
+                    class="check-btn"
+                    onclick="checkGameAnswer()">
+                    <i class="fa-solid fa-check"></i>
+                    Check
+                </button>
+
+                <button
+                    class="reset-btn"
+                    onclick="resetGame()">
+                    <i class="fa-solid fa-rotate-left"></i>
+                    Reset
+                </button>
+
+                <button
+                    class="listen-btn"
+                    onclick="listenGameAnswer()">
+                    🔊 Listen
+                </button>
+
+                <button
+                    class="next-game-btn"
+                    id="nextGameBtn"
+                    onclick="nextGameQuestion()">
+                    Next →
+                </button>
+
+            </div>
+
+            <div class="feedback"
+                 id="gameFeedback">
+            </div>
+
+            <div class="game-progress"
+                 id="gameProgress">
+                1 / 8
+            </div>
+
+        </section>
+
+
+        <!-- =========================================
+             HANZI WRITING
+        ========================================== -->
+
+        <section class="writing-card">
+
+            <h2 class="section-title">
+                ✍️ Hanzi Writing
+            </h2>
+
+            <p class="section-subtitle">
+                Practice the stroke order of every character
+                from this lesson's vocabulary.
+            </p>
+
+            <div class="writing-mode-buttons">
+
+                <button
+                    class="mode-btn active"
+                    id="quizModeBtn"
+                    onclick="setWritingMode('quiz')">
+                    ✏️ Quiz
+                </button>
+
+                <button
+                    class="mode-btn"
+                    id="animateModeBtn"
+                    onclick="setWritingMode('animate')">
+                    👀 Animate
+                </button>
+
+            </div>
+
+            <div class="writing-character"
+                 id="writingCharacter">
+                您
+            </div>
+
+            <div class="writing-info"
+                 id="writingInfo">
+                <strong>Nín</strong> — polite “you”
+            </div>
+
+            <div class="canvas-wrapper">
+
+                <div id="target-div"></div>
+
+            </div>
+
+            <div class="writing-buttons">
+
+                <button
+                    class="write-btn"
+                    onclick="animateCharacter()">
+                    <i class="fa-solid fa-play"></i>
+                    Show Strokes
+                </button>
+
+                <button
+                    class="clear-btn"
+                    onclick="quizCharacter()">
+                    ✏️ Practice
+                </button>
+
+                <button
+                    class="next-write-btn"
+                    onclick="nextWritingCharacter()">
+                    Next →
+                </button>
+
+            </div>
+
+            <div class="recall-answer"
+                 id="writingFeedback">
+            </div>
+
+            <div class="writing-progress"
+                 id="writingProgress">
+                1 / 30
+            </div>
+
+        </section>
+
+
+        <!-- =========================================
+             FINAL REVIEW
+        ========================================== -->
+
+        <section class="final-card">
+
+            <h2 class="section-title">
+                🏆 Grammar Master Review
+            </h2>
+
+            <p class="section-subtitle">
+                Test what you learned in this lesson
+                and review material from previous lessons.
+            </p>
+
+            <div class="final-score"
+                 id="finalScore">
+                0 / 10
+            </div>
+
+            <div class="question-box">
+
+                <div class="question-english"
+                     id="finalQuestion">
+                    Loading question...
+                </div>
+
+                <div class="question-hint">
+                    Arrange the words to make the correct Mandarin sentence.
+                </div>
+
+            </div>
+
+            <div class="answer-area"
+                 id="finalAnswerArea">
+
+                <div class="answer-placeholder">
+                    Tap the words below.
+                </div>
+
+            </div>
+
+            <div class="word-bank"
+                 id="finalWordBank">
+            </div>
+
+            <div class="game-buttons">
+
+                <button
+                    class="check-btn"
+                    onclick="checkFinalAnswer()">
+                    <i class="fa-solid fa-check"></i>
+                    Check
+                </button>
+
+                <button
+                    class="reset-btn"
+                    onclick="resetFinalAnswer()">
+                    Reset
+                </button>
+
+            </div>
+
+            <div class="feedback"
+                 id="finalFeedback">
+            </div>
+
+            <div class="game-progress"
+                 id="finalProgress">
+                Question 1 / 10
+            </div>
+
+            <div class="unlock"
+                 id="unlockMessage">
+
+                <i class="fa-solid fa-trophy"></i>
+
+                <strong>Grammar Master Unlocked! 🎉</strong>
+
+                <br><br>
+
+                太棒了！
+
+                <br>
+
+                You've completed the
+                <strong>Introduce Self</strong> lesson.
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   AUDIO
+===================================================== */
+
+function speak(text) {
+
+    if (!window.speechSynthesis) {
+        return;
+    }
+
+    window.speechSynthesis.cancel();
+
+    const utterance =
+        new SpeechSynthesisUtterance(text);
+
+    utterance.lang = "zh-TW";
+    utterance.rate = 0.82;
+    utterance.pitch = 1;
+
+    window.speechSynthesis.speak(utterance);
+}
+
+
+/* =====================================================
+   GRAMMAR SLIDER
+===================================================== */
+
+let grammarIndex = 0;
+
+const grammarSlides =
+    document.querySelectorAll(".grammar-slide");
+
+const grammarIndicators =
+    document.querySelectorAll(".indicator");
+
+function showGrammar(index) {
+
+    if (index < 0) {
+        index = grammarSlides.length - 1;
+    }
+
+    if (index >= grammarSlides.length) {
+        index = 0;
+    }
+
+    grammarIndex = index;
+
+    grammarSlides.forEach((slide, i) => {
+
+        slide.classList.toggle(
+            "active-slide",
+            i === index
+        );
+
+    });
+
+    grammarIndicators.forEach((indicator, i) => {
+
+        indicator.classList.toggle(
+            "active",
+            i === index
+        );
+
+    });
+}
+
+function nextGrammar() {
+    showGrammar(grammarIndex + 1);
+}
+
+function prevGrammar() {
+    showGrammar(grammarIndex - 1);
+}
+
+
+/* =====================================================
+   VOCABULARY
+===================================================== */
+
+const vocabulary = [
+
+    {
+        hanzi: "您",
+        pinyin: "nín",
+        meaning: "you (polite)"
+    },
+
+    {
+        hanzi: "好",
+        pinyin: "hǎo",
+        meaning: "good; well"
+    },
+
+    {
+        hanzi: "你好",
+        pinyin: "nǐ hǎo",
+        meaning: "hello"
+    },
+
+    {
+        hanzi: "請問",
+        pinyin: "qǐngwèn",
+        meaning: "may I ask..."
+    },
+
+    {
+        hanzi: "叫",
+        pinyin: "jiào",
+        meaning: "to be called; to call"
+    },
+
+    {
+        hanzi: "什麼",
+        pinyin: "shénme",
+        meaning: "what"
+    },
+
+    {
+        hanzi: "名字",
+        pinyin: "míngzi",
+        meaning: "name"
+    },
+
+    {
+        hanzi: "呢",
+        pinyin: "ne",
+        meaning: "how about...?; sentence-final particle"
+    },
+
+    {
+        hanzi: "貴姓",
+        pinyin: "guìxìng",
+        meaning: "what is your surname? (polite)"
+    },
+
+    {
+        hanzi: "姓",
+        pinyin: "xìng",
+        meaning: "surname; to have the surname"
+    },
+
+    {
+        hanzi: "哪國人",
+        pinyin: "nǎ guó rén",
+        meaning: "what nationality; what country are you from"
+    },
+
+    {
+        hanzi: "台灣",
+        pinyin: "Táiwān",
+        meaning: "Taiwan"
+    },
+
+    {
+        hanzi: "美國",
+        pinyin: "Měiguó",
+        meaning: "United States"
+    },
+
+    {
+        hanzi: "來自",
+        pinyin: "láizì",
+        meaning: "to come from"
+    },
+
+    {
+        hanzi: "幾",
+        pinyin: "jǐ",
+        meaning: "how many; how much"
+    },
+
+    {
+        hanzi: "歲",
+        pinyin: "suì",
+        meaning: "years old"
+    },
+
+    {
+        hanzi: "幾歲",
+        pinyin: "jǐ suì",
+        meaning: "how old"
+    },
+
+    {
+        hanzi: "二十二",
+        pinyin: "èrshí'èr",
+        meaning: "twenty-two"
+    },
+
+    {
+        hanzi: "愛好",
+        pinyin: "àihào",
+        meaning: "hobby; interest"
+    },
+
+    {
+        hanzi: "電影",
+        pinyin: "diànyǐng",
+        meaning: "movie; film"
+    },
+
+    {
+        hanzi: "聽",
+        pinyin: "tīng",
+        meaning: "to listen; to hear"
+    },
+
+    {
+        hanzi: "音樂",
+        pinyin: "yīnyuè",
+        meaning: "music"
+    },
+
+    {
+        hanzi: "高興",
+        pinyin: "gāoxìng",
+        meaning: "happy; glad"
+    },
+
+    {
+        hanzi: "認識",
+        pinyin: "rènshi",
+        meaning: "to know; to meet"
+    },
+
+    {
+        hanzi: "很高興認識你",
+        pinyin: "hěn gāoxìng rènshi nǐ",
+        meaning: "nice to meet you"
+    },
+
+    {
+        hanzi: "也",
+        pinyin: "yě",
+        meaning: "also; too"
+    },
+
+    {
+        hanzi: "再見",
+        pinyin: "zàijiàn",
+        meaning: "goodbye"
+    }
+
+];
+
+
+/* Render vocabulary */
+
+const vocabContainer =
+    document.getElementById("vocabContainer");
+
+vocabulary.forEach(word => {
+
+    const card =
+        document.createElement("div");
+
+    card.className = "vocab-pill";
+
+    card.innerHTML = `
+
+        <div class="vocab-top">
+
+            <div class="hanzi">
+                ${word.hanzi}
+            </div>
+
+            <button
+                class="vocab-audio"
+                onclick="speak('${word.hanzi.replace(/'/g, "\\'")}')">
+                🔊
+            </button>
+
+        </div>
+
+        <div class="pinyin">
+            ${word.pinyin}
+        </div>
+
+        <div class="meaning">
+            ${word.meaning}
+        </div>
+
+    `;
+
+    vocabContainer.appendChild(card);
+
+});
+
+
+/* =====================================================
+   GAME 1 — SENTENCE BUILDING
+===================================================== */
+
+const gameQuestions = [
+
+    {
+        question: "What is your name?",
+        answer: ["您", "叫", "什麼", "名字"],
+        listen: "您叫什麼名字？"
+    },
+
+    {
+        question: "My name is Meimei.",
+        answer: ["我", "叫", "美美"],
+        listen: "我叫美美。"
+    },
+
+    {
+        question: "My surname is Lin.",
+        answer: ["我", "姓", "林"],
+        listen: "我姓林。"
+    },
+
+    {
+        question: "What is your surname?",
+        answer: ["您", "姓", "什麼"],
+        listen: "您姓什麼？"
+    },
+
+    {
+        question: "What country are you from?",
+        answer: ["您", "是", "哪", "國", "人"],
+        listen: "您是哪國人？"
+    },
+
+    {
+        question: "How old are you?",
+        answer: ["您", "幾", "歲"],
+        listen: "您幾歲？"
+    },
+
+    {
+        question: "I am 20 years old.",
+        answer: ["我", "二十", "歲"],
+        listen: "我二十歲。"
+    },
+
+    {
+        question: "Nice to meet you too!",
+        answer: ["我", "也", "很", "高興", "認識", "您"],
+        listen: "我也很高興認識您！"
+    }
+
+];
+
+let currentGame = 0;
+let selectedGameWords = [];
+
+function shuffle(array) {
+
+    const copy = [...array];
+
+    for (let i = copy.length - 1; i > 0; i--) {
+
+        const j =
+            Math.floor(Math.random() * (i + 1));
+
+        [copy[i], copy[j]] =
+            [copy[j], copy[i]];
+    }
+
+    return copy;
+}
+
+function loadGame() {
+
+    const q =
+        gameQuestions[currentGame];
+
+    selectedGameWords = [];
+
+    document.getElementById("gameNumber")
+        .textContent =
+        `Question ${currentGame + 1}`;
+
+    document.getElementById("gameQuestion")
+        .textContent =
+        q.question;
+
+    document.getElementById("gameProgress")
+        .textContent =
+        `${currentGame + 1} / ${gameQuestions.length}`;
+
+    document.getElementById("gameFeedback")
+        .textContent = "";
+
+    document.getElementById("nextGameBtn")
+        .style.display = "none";
+
+    renderGame();
+
+}
+
+function renderGame() {
+
+    const answerArea =
+        document.getElementById("answerArea");
+
+    const wordBank =
+        document.getElementById("wordBank");
+
+    answerArea.innerHTML = "";
+
+    wordBank.innerHTML = "";
+
+    if (selectedGameWords.length === 0) {
+
+        answerArea.innerHTML = `
+            <div class="answer-placeholder">
+                Tap the words below to build your sentence.
+            </div>
+        `;
+
+    } else {
+
+        selectedGameWords.forEach((word, index) => {
+
+            const button =
+                document.createElement("button");
+
+            button.className = "selected-word";
+
+            button.textContent = word;
+
+            button.onclick = () => {
+
+                selectedGameWords.splice(index, 1);
+
+                renderGame();
+
+            };
+
+            answerArea.appendChild(button);
+
+        });
+
+    }
+
+    const remaining =
+        gameQuestions[currentGame]
+            .answer
+            .filter((word, index) => {
+
+                const usedCount =
+                    selectedGameWords
+                        .slice(0, selectedGameWords.length)
+                        .filter(x => x === word)
+                        .length;
+
+                const originalCount =
+                    gameQuestions[currentGame]
+                        .answer
+                        .filter(x => x === word)
+                        .length;
+
+                return true;
+            });
+
+    const allWords =
+        gameQuestions[currentGame]
+            .answer;
+
+    const usedIndices = [];
+
+    selectedGameWords.forEach(word => {
+
+        for (let i = 0; i < allWords.length; i++) {
+
+            if (
+                allWords[i] === word &&
+                !usedIndices.includes(i)
+            ) {
+                usedIndices.push(i);
+                break;
+            }
+
+        }
+
+    });
+
+    const shuffled =
+        shuffle(
+            allWords
+                .map((word, index) => ({
+                    word,
+                    index
+                }))
+                .filter(item =>
+                    !usedIndices.includes(item.index)
+                )
+        );
+
+    shuffled.forEach(item => {
+
+        const button =
+            document.createElement("button");
+
+        button.className = "word-btn";
+
+        button.textContent = item.word;
+
+        button.onclick = () => {
+
+            selectedGameWords.push(item.word);
+
+            renderGame();
+
+        };
+
+        wordBank.appendChild(button);
+
+    });
+
+}
+
+function checkGameAnswer() {
+
+    const correct =
+        gameQuestions[currentGame].answer;
+
+    const feedback =
+        document.getElementById("gameFeedback");
+
+    if (
+        selectedGameWords.join("") ===
+        correct.join("")
+    ) {
+
+        feedback.textContent =
+            "✓ Correct! 太棒了！";
+
+        feedback.className =
+            "feedback correct";
+
+        document.getElementById("nextGameBtn")
+            .style.display = "inline-block";
+
+    } else {
+
+        feedback.textContent =
+            "Not quite. Check the word order and try again!";
+
+        feedback.className =
+            "feedback incorrect";
+
+    }
+
+}
+
+function resetGame() {
+
+    selectedGameWords = [];
+
+    renderGame();
+
+    document.getElementById("gameFeedback")
+        .textContent = "";
+
+}
+
+function listenGameAnswer() {
+
+    speak(
+        gameQuestions[currentGame].listen
+    );
+
+}
+
+function nextGameQuestion() {
+
+    if (
+        currentGame <
+        gameQuestions.length - 1
+    ) {
+
+        currentGame++;
+
+        loadGame();
+
+    } else {
+
+        currentGame = 0;
+
+        loadGame();
+
+    }
+
+}
+
+
+/* =====================================================
+   HANZI WRITER
+===================================================== */
+
+/*
+    Unique characters from the vocabulary.
+
+    Multi-character vocabulary is split into
+    individual Hanzi for stroke-order practice.
+*/
+
+const writingCharacters = [
+
+    { char: "您", pinyin: "nín", meaning: "you (polite)" },
+    { char: "好", pinyin: "hǎo", meaning: "good" },
+    { char: "你", pinyin: "nǐ", meaning: "you" },
+    { char: "請", pinyin: "qǐng", meaning: "please" },
+    { char: "問", pinyin: "wèn", meaning: "ask" },
+    { char: "叫", pinyin: "jiào", meaning: "to be called" },
+    { char: "什", pinyin: "shén", meaning: "what" },
+    { char: "麼", pinyin: "me", meaning: "what" },
+    { char: "名", pinyin: "míng", meaning: "name" },
+    { char: "字", pinyin: "zì", meaning: "character; word" },
+    { char: "呢", pinyin: "ne", meaning: "how about...?" },
+    { char: "貴", pinyin: "guì", meaning: "honorable; expensive" },
+    { char: "姓", pinyin: "xìng", meaning: "surname" },
+    { char: "哪", pinyin: "nǎ", meaning: "which" },
+    { char: "國", pinyin: "guó", meaning: "country" },
+    { char: "人", pinyin: "rén", meaning: "person" },
+    { char: "台", pinyin: "tái", meaning: "Taiwan / platform" },
+    { char: "灣", pinyin: "wān", meaning: "bay" },
+    { char: "美", pinyin: "měi", meaning: "beautiful / America" },
+    { char: "來", pinyin: "lái", meaning: "come" },
+    { char: "自", pinyin: "zì", meaning: "from / self" },
+    { char: "幾", pinyin: "jǐ", meaning: "how many" },
+    { char: "歲", pinyin: "suì", meaning: "years old" },
+    { char: "二", pinyin: "èr", meaning: "two" },
+    { char: "十", pinyin: "shí", meaning: "ten" },
+    { char: "愛", pinyin: "ài", meaning: "love" },
+    { char: "好", pinyin: "hǎo", meaning: "good" },
+    { char: "電", pinyin: "diàn", meaning: "electricity" },
+    { char: "影", pinyin: "yǐng", meaning: "shadow / film" },
+    { char: "聽", pinyin: "tīng", meaning: "listen" },
+    { char: "音", pinyin: "yīn", meaning: "sound" },
+    { char: "樂", pinyin: "yuè", meaning: "music" },
+    { char: "高", pinyin: "gāo", meaning: "high / tall" },
+    { char: "興", pinyin: "xìng", meaning: "interest / happiness" },
+    { char: "認", pinyin: "rèn", meaning: "recognize" },
+    { char: "識", pinyin: "shi", meaning: "know" },
+    { char: "我", pinyin: "wǒ", meaning: "I / me" },
+    { char: "也", pinyin: "yě", meaning: "also" },
+    { char: "再", pinyin: "zài", meaning: "again" },
+    { char: "見", pinyin: "jiàn", meaning: "see" }
+
+];
+
+
+/*
+    Remove duplicate characters.
+*/
+
+const uniqueWritingCharacters = [];
+
+writingCharacters.forEach(item => {
+
+    if (
+        !uniqueWritingCharacters
+            .some(x => x.char === item.char)
+    ) {
+
+        uniqueWritingCharacters.push(item);
+
+    }
+
+});
+
+
+let writingIndex = 0;
+let writingMode = "quiz";
+let writer = null;
+
+function initWriter() {
+
+    loadWritingCharacter();
+
+}
+
+function loadWritingCharacter() {
+
+    const item =
+        uniqueWritingCharacters[writingIndex];
+
+    document.getElementById("writingCharacter")
+        .textContent =
+        item.char;
+
+    document.getElementById("writingInfo")
+        .innerHTML =
+        `<strong>${item.pinyin}</strong> — ${item.meaning}`;
+
+    document.getElementById("writingProgress")
+        .textContent =
+        `${writingIndex + 1} / ${uniqueWritingCharacters.length}`;
+
+    document.getElementById("writingFeedback")
+        .textContent = "";
+
+    const target =
+        document.getElementById("target-div");
+
+    target.innerHTML = "";
+
+    writer =
+        HanziWriter.create(
+            "target-div",
+            item.char,
+            {
+                width: 260,
+                height: 260,
+                padding: 10,
+
+                showOutline: true,
+
+                showCharacter:
+                    writingMode === "animate",
+
+                strokeAnimationSpeed: 1,
+
+                drawingFadeDuration: 300,
+
+                strokeFadeDuration: 400,
+
+                strokeHighlightSpeed: 2,
+
+                strokeHighlightDuration: 500,
+
+                drawingColor: "#5c4033",
+
+                strokeColor: "#b8865c",
+
+                highlightColor: "#b8865c",
+
+                outlineColor: "#d7b89c",
+
+                showHintAfterMisses: 2,
+
+                highlightOnComplete: true,
+
+                onCorrectStroke: () => {
+
+                    document.getElementById(
+                        "writingFeedback"
+                    ).textContent =
+                        "✓ Nice stroke!";
+
+                },
+
+                onMistake: () => {
+
+                    document.getElementById(
+                        "writingFeedback"
+                    ).textContent =
+                        "Keep going! Follow the stroke guide ✍️";
+
+                },
+
+                onComplete: () => {
+
+                    document.getElementById(
+                        "writingFeedback"
+                    ).textContent =
+                        "🎉 Perfect! Great job!";
+
+                }
+
+            }
+        );
+
+}
+
+function animateCharacter() {
+
+    if (writer) {
+
+        writer.showCharacter();
+
+        writer.animateCharacter();
+
+    }
+
+}
+
+function quizCharacter() {
+
+    if (!writer) return;
+
+    writer.hideCharacter();
+
+    writer.quiz({
+        showHintAfterMisses: 2,
+
+        highlightOnComplete: true,
+
+        onComplete: () => {
+
+            document.getElementById(
+                "writingFeedback"
+            ).textContent =
+                "🎉 Excellent!";
+
+        }
+
+    });
+
+}
+
+function setWritingMode(mode) {
+
+    writingMode = mode;
+
+    document.getElementById("quizModeBtn")
+        .classList.toggle(
+            "active",
+            mode === "quiz"
+        );
+
+    document.getElementById("animateModeBtn")
+        .classList.toggle(
+            "active",
+            mode === "animate"
+        );
+
+    loadWritingCharacter();
+
+}
+
+function nextWritingCharacter() {
+
+    writingIndex++;
+
+    if (
+        writingIndex >=
+        uniqueWritingCharacters.length
+    ) {
+        writingIndex = 0;
+    }
+
+    loadWritingCharacter();
+
+}
+
+
+/* =====================================================
+   FINAL REVIEW
+===================================================== */
+
+/*
+    If lesson.js provides reviewQuestions,
+    those questions are used first.
+
+    Otherwise this lesson's own review questions
+    are used.
+
+    Expected lesson.js format:
+
+    lessonData.reviewQuestions = [
+        {
+            question: "...",
+            answer: ["我", "是", "學生"]
+        }
+    ];
+*/
+
+const localReviewQuestions = [
+
+    {
+        question: "What is your name?",
+        answer: ["您", "叫", "什麼", "名字"]
+    },
+
+    {
+        question: "My name is Meimei.",
+        answer: ["我", "叫", "美美"]
+    },
+
+    {
+        question: "My surname is Wang.",
+        answer: ["我", "姓", "王"]
+    },
+
+    {
+        question: "How old are you?",
+        answer: ["您", "幾", "歲"]
+    },
+
+    {
+        question: "I am 22 years old.",
+        answer: ["我", "二十二", "歲"]
+    },
+
+    {
+        question: "What is your hobby?",
+        answer: ["您的", "愛好", "是", "什麼"]
+    },
+
+    {
+        question: "I like listening to music.",
+        answer: ["我", "喜歡", "聽", "音樂"]
+    },
+
+    {
+        question: "Nice to meet you.",
+        answer: ["很", "高興", "認識", "您"]
+    },
+
+    {
+        question: "Nice to meet you too.",
+        answer: ["我", "也", "很", "高興", "認識", "您"]
+    },
+
+    {
+        question: "Goodbye!",
+        answer: ["再見"]
+    }
+
+];
+
+
+/*
+    Pull previous lesson questions
+    if available.
+*/
+
+let finalQuestions = [];
+
+try {
+
+    if (
+        typeof lessonData !== "undefined" &&
+        Array.isArray(lessonData.reviewQuestions) &&
+        lessonData.reviewQuestions.length > 0
+    ) {
+
+        finalQuestions = [
+            ...lessonData.reviewQuestions,
+            ...localReviewQuestions
+        ];
+
+    } else {
+
+        finalQuestions =
+            [...localReviewQuestions];
+
+    }
+
+} catch (error) {
+
+    finalQuestions =
+        [...localReviewQuestions];
+
+}
+
+
+/*
+    Keep final review at 10 questions.
+*/
+
+finalQuestions =
+    finalQuestions.slice(0, 10);
+
+
+let finalIndex = 0;
+let finalScore = 0;
+let finalSelected = [];
+
+function loadFinalQuestion() {
+
+    if (
+        finalIndex >=
+        finalQuestions.length
+    ) {
+
+        finishFinal();
+
+        return;
+
+    }
+
+    finalSelected = [];
+
+    const q =
+        finalQuestions[finalIndex];
+
+    document.getElementById("finalQuestion")
+        .textContent =
+        q.question;
+
+    document.getElementById("finalProgress")
+        .textContent =
+        `Question ${finalIndex + 1} / ${finalQuestions.length}`;
+
+    document.getElementById("finalScore")
+        .textContent =
+        `${finalScore} / ${finalQuestions.length}`;
+
+    document.getElementById("finalFeedback")
+        .textContent = "";
+
+    renderFinal();
+
+}
+
+function renderFinal() {
+
+    const answerArea =
+        document.getElementById(
+            "finalAnswerArea"
+        );
+
+    const wordBank =
+        document.getElementById(
+            "finalWordBank"
+        );
+
+    answerArea.innerHTML = "";
+
+    wordBank.innerHTML = "";
+
+    if (finalSelected.length === 0) {
+
+        answerArea.innerHTML = `
+            <div class="answer-placeholder">
+                Tap the words below.
+            </div>
+        `;
+
+    } else {
+
+        finalSelected.forEach(
+            (word, index) => {
+
+                const button =
+                    document.createElement("button");
+
+                button.className =
+                    "selected-word";
+
+                button.textContent =
+                    word;
+
+                button.onclick = () => {
+
+                    finalSelected.splice(
+                        index,
+                        1
+                    );
+
+                    renderFinal();
+
+                };
+
+                answerArea.appendChild(button);
+
+            }
+        );
+
+    }
+
+    const words =
+        finalQuestions[finalIndex]
+            .answer;
+
+    const usedIndices = [];
+
+    finalSelected.forEach(word => {
+
+        for (
+            let i = 0;
+            i < words.length;
+            i++
+        ) {
+
+            if (
+                words[i] === word &&
+                !usedIndices.includes(i)
+            ) {
+
+                usedIndices.push(i);
+
+                break;
+
+            }
+
+        }
+
+    });
+
+    const remaining =
+        words
+            .map((word, index) => ({
+                word,
+                index
+            }))
+            .filter(item =>
+                !usedIndices.includes(item.index)
+            );
+
+    shuffle(remaining)
+        .forEach(item => {
+
+            const button =
+                document.createElement("button");
+
+            button.className =
+                "word-btn";
+
+            button.textContent =
+                item.word;
+
+            button.onclick = () => {
+
+                finalSelected.push(
+                    item.word
+                );
+
+                renderFinal();
+
+            };
+
+            wordBank.appendChild(button);
+
+        });
+
+}
+
+function checkFinalAnswer() {
+
+    const correct =
+        finalQuestions[finalIndex]
+            .answer;
+
+    const feedback =
+        document.getElementById(
+            "finalFeedback"
+        );
+
+    if (
+        finalSelected.join("") ===
+        correct.join("")
+    ) {
+
+        finalScore++;
+
+        feedback.textContent =
+            "✓ Correct! 太棒了！";
+
+        feedback.className =
+            "feedback correct";
+
+        document.getElementById(
+            "finalScore"
+        ).textContent =
+            `${finalScore} / ${finalQuestions.length}`;
+
+        setTimeout(() => {
+
+            finalIndex++;
+
+            loadFinalQuestion();
+
+        }, 900);
+
+    } else {
+
+        feedback.textContent =
+            "Not quite. Try again!";
+
+        feedback.className =
+            "feedback incorrect";
+
+    }
+
+}
+
+function resetFinalAnswer() {
+
+    finalSelected = [];
+
+    renderFinal();
+
+    document.getElementById(
+        "finalFeedback"
+    ).textContent = "";
+
+}
+
+function finishFinal() {
+
+    document.getElementById(
+        "finalQuestion"
+    ).textContent =
+        "Lesson complete! 🎉";
+
+    document.getElementById(
+        "finalWordBank"
+    ).innerHTML = "";
+
+    document.getElementById(
+        "finalAnswerArea"
+    ).innerHTML = `
+        <div class="answer-placeholder">
+            You completed the review!
+        </div>
+    `;
+
+    document.getElementById(
+        "finalProgress"
+    ).textContent =
+        "Completed";
+
+    document.getElementById(
+        "unlockMessage"
+    ).style.display =
+        "block";
+
+    document.getElementById(
+        "finalFeedback"
+    ).textContent =
+        `You scored ${finalScore} / ${finalQuestions.length}.`;
+
+}
+
+
+/* =====================================================
+   INITIALIZE
+===================================================== */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        loadGame();
+
+        initWriter();
+
+        loadFinalQuestion();
+
+    }
+);
+
+</script>
+
+
+<!-- Sidebar -->
+<script src="../script.js"></script>
+
+</body>
+</html>
