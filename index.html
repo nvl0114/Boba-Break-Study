@@ -12,26 +12,141 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* CSS Tambahan untuk Tampilan Announcement di dalam Card */
-        .announcement-post { padding: 10px 5px; }
-        .post-header { display: flex; align-items: center; gap: 11px; margin-bottom: 15px; }
-        .post-avatar { width: 40px; height: 40px; border-radius: 50%; border: 2px solid #f0dfce; }
-        .post-name { font-weight: 700; color: #4b3528; font-size: 15px; }
-        .post-handle { color: #9b8b80; font-size: 13px; }
-        .post-content p { color: #49372d; font-size: 14px; line-height: 1.6; white-space: pre-line; margin-bottom: 15px; }
-        .post-date { color: #9b8b80; font-size: 12px; border-top: 1px solid #eee4db; padding-top: 10px; }
+        /* =====================================================
+           PENGUMUMAN (SOCIAL POST STYLE) - GANTI ISI CARD VIDEO
+        ===================================================== */
+        .announcement-in-card {
+            width: 100%;
+            box-sizing: border-box;
+        }
 
-        /* Slideshow */
-        .course3-slideshow { width: 100%; height: 180px; overflow: hidden; border-radius: 12px; position: relative; margin-bottom: 15px; }
-        .course3-slideshow img { width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; opacity: 0; animation: course3Slide 15s infinite; }
+        .post-header {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            margin-bottom: 12px;
+        }
+
+        .post-avatar {
+            width: 40px; 
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #f0dfce;
+        }
+
+        .post-user-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .post-name {
+            font-weight: 800; /* Lebih tebal */
+            color: #0f1419; /* Warna teks Twitter */
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .verified {
+            display: inline-flex;
+            align-items: center; justify-content: center;
+            width: 14px; height: 14px; margin-left: 4px;
+            border-radius: 50%; background: #1d9bf0; /* Biru Twitter */
+            color: white; font-size: 9px;
+        }
+
+        .post-handle {
+            color: #536471; /* Warna handle Twitter */
+            font-size: 14px;
+            font-weight: 400;
+        }
+
+        .post-content {
+            margin-bottom: 12px;
+        }
+
+        .post-content p {
+            margin: 0;
+            color: #0f1419;
+            font-size: 15px;
+            line-height: 1.6;
+            white-space: pre-line;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        .post-date-time {
+            color: #536471;
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+
+        /* Gaya Ikon Twitter/X */
+        .post-actions {
+            display: flex;
+            justify-content: space-between;
+            max-width: 425px; /* Lebar aksi seperti di X */
+            border-top: 1px solid #eff3f4;
+            padding-top: 12px;
+            margin-top: 4px;
+        }
+
+        .post-action {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #536471;
+            font-size: 13px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0;
+            transition: color 0.2s;
+        }
+
+        /* Warna hover ikon ala Twitter */
+        .post-action.reply:hover { color: #1d9bf0; } /* Biru */
+        .post-action.retweet:hover { color: #00ba7c; } /* Hijau */
+        .post-action.like:hover { color: #f91880; } /* Pink */
+        .post-action.share:hover { color: #1d9bf0; } /* Biru */
+
+        .post-action i {
+            font-size: 18px;
+        }
+
+        .post-action span {
+            font-weight: 500;
+        }
+
+        /* =====================================================
+           TAIWAN PHRASEBOOK SLIDESHOW (Original, jangan dihapus)
+        ===================================================== */
+        .course3-slideshow {
+            width: 100%; height: 180px; overflow: hidden;
+            border-radius: 12px; position: relative; margin-bottom: 15px;
+        }
+        .course3-slideshow img {
+            width: 100%; height: 100%; object-fit: cover;
+            position: absolute; top: 0; left: 0; opacity: 0;
+            animation: course3Slide 15s infinite;
+        }
         .course3-slideshow img:nth-child(1) { animation-delay: 0s; }
         .course3-slideshow img:nth-child(2) { animation-delay: 3s; }
         .course3-slideshow img:nth-child(3) { animation-delay: 6s; }
         .course3-slideshow img:nth-child(4) { animation-delay: 9s; }
         .course3-slideshow img:nth-child(5) { animation-delay: 12s; }
-        @keyframes course3Slide { 0%, 100% { opacity: 0; } 10%, 25% { opacity: 1; } 35% { opacity: 0; } }
+        @keyframes course3Slide {
+            0%, 100% { opacity: 0; }
+            10%, 25% { opacity: 1; }
+            35% { opacity: 0; }
+        }
 
-        @media(max-width:700px) { .course3-slideshow { height: 160px; } }
+        /* Penyesuaian Mobile */
+        @media(max-width:700px) {
+            .course3-slideshow { height: 160px; }
+            .post-actions { max-width: 100%; }
+            .post-action i { font-size: 16px; }
+        }
     </style>
 </head>
 
@@ -41,33 +156,63 @@
     <div id="sidebar-container"></div>
 
     <main class="main-content">
+        <!-- HEADER (Jangan dihapus) -->
         <header class="top-header">
             <div class="welcome-text">
                 <h1>Hello and welcome!!</h1>
-                <p>Boba Break Study is your one-stop shop for learning Traditional Chinese. We’ve gathered the best free and easy-to-access learning resources from across the web, bringing everything together in one cozy spot so you can study hassle-free. Grab a cup of boba and start exploring!</p>
+                <p>Boba Break Study is your one-stop shop for learning Traditional Chinese. Grab a cup of boba and start exploring!</p>
             </div>
             <div class="user-actions"></div>
         </header>
 
         <section class="section-container">
-            <!-- PENGUMUMAN (Menggantikan Video) -->
+            
+            <!-- =================================================
+                 CARD 1: PENGUMUMAN (Gaya Twitter/X)
+            ================================================= -->
             <article class="card video-card">
-                <div class="announcement-post">
+                <div class="announcement-in-card">
+                    <!-- Header Post -->
                     <div class="post-header">
-                        <img src="logo.png" alt="Admin" class="post-avatar">
-                        <div>
-                            <div class="post-name">Admin ✓</div>
+                        <img src="logo.png" alt="Boba Break Study" class="post-avatar">
+                        <div class="post-user-info">
+                            <div class="post-name">Admin<span class="verified"><i class="fas fa-check"></i></span></div>
                             <div class="post-handle">@bobabreakstudy</div>
                         </div>
                     </div>
+
+                    <!-- Isi Konten -->
                     <div class="post-content">
                         <p>We’re still brewing new lessons! 🧋✨<br>More Mandarin learning materials are coming soon. Stay tuned!</p>
                     </div>
-                    <div class="post-date">12:46 PM · Aug 17, 2026</div>
+
+                    <!-- Tanggal dan Waktu -->
+                    <div class="post-date-time">
+                        12:46 PM · Aug 17, 2026
+                    </div>
+
+                    <!-- Tombol Aksi (Reply, Retweet, Like, Share) -->
+                    <div class="post-actions">
+                        <button class="post-action reply">
+                            <i class="far fa-comment"></i>
+                            <span>1K</span>
+                        </button>
+                        <button class="post-action retweet">
+                            <i class="fas fa-retweet"></i>
+                            <span>9K</span>
+                        </button>
+                        <button class="post-action like">
+                            <i class="far fa-heart"></i>
+                            <span>994</span>
+                        </button>
+                        <button class="post-action share">
+                            <i class="far fa-envelope"></i> <!-- Ikon Amplop (Share) -->
+                        </button>
+                    </div>
                 </div>
             </article>
 
-            <!-- HANZI OF THE DAY -->
+            <!-- HANZI OF THE DAY (Jangan dihapus) -->
             <div class="card lesson-card">
                 <h2>🧋 Hanzi of The Day</h2>
                 <div class="flashcard" id="card">
@@ -79,7 +224,7 @@
                 <p class="instruction">👆 Tap the card to flip<br>👈 Swipe for new Hanzi</p>
             </div>
 
-            <!-- TAIWAN TRAVELER'S PHRASEBOOK -->
+            <!-- TAIWAN TRAVELER'S PHRASEBOOK (Jangan dihapus) -->
             <article class="card">
                 <div class="course3-slideshow">
                     <img src="https://images.pexels.com/photos/981150/pexels-photo-981150.jpeg" alt="Slide 1">
@@ -92,10 +237,12 @@
                 <p>Easy Phrases for your Taiwan adventures.</p>
                 <button class="btn-resume" onclick="location.href='phrasebook.html'">Let's Go!!!!!!</button>
             </article>
+
         </section>
     </main>
 </div>
 
+<!-- Scripts -->
 <script src="flashcard.js"></script>
 <script src="script.js"></script>
 
