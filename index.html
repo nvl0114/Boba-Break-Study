@@ -2,1001 +2,111 @@
 <html lang="id">
 
 <head>
-
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <meta name="description"
-          content="Boba Break Study Dashboard">
-
-    <title>
-        Boba Break Study - Dashboard
-    </title>
-
-    <link rel="stylesheet"
-          href="./style.css">
-
-    <link rel="icon"
-          href="logo.png"
-          type="image/png">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Boba Break Study Dashboard">
+    <title>Boba Break Study - Dashboard</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="icon" href="logo.png" type="image/png">
     <!-- Font Awesome -->
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-
-        /* =====================================================
-           ANNOUNCEMENT CONTAINER
-        ===================================================== */
-
-        .announcement-container {
-
-            width: 100%;
-
-            grid-column: 1 / -1; /* Membuat pengumuman memenuhi lebar penuh grid */
-
-            margin-bottom: 0px;
-
-        }
-
-
-        /* =====================================================
-           ANNOUNCEMENT CARD
-        ===================================================== */
-
+        /* CSS untuk Announcement Card */
         .announcement-card {
-
             width: 100%;
-
             box-sizing: border-box;
-
             padding: 24px 28px;
-
-            margin: 0 0 16px 0;
-
+            margin-bottom: 20px;
             background: #fffdf9;
-
             border: 1px solid #eadfd3;
-
             border-radius: 18px;
-
-            box-shadow:
-                0 5px 18px rgba(120, 85, 55, 0.08);
-
+            box-shadow: 0 5px 18px rgba(120, 85, 55, 0.08);
         }
 
-
-        /* =====================================================
-           POST HEADER
-        ===================================================== */
-
-        .post-header {
-
-            display: flex;
-
-            align-items: center;
-
-            gap: 11px;
-
-        }
-
-
-        .post-avatar {
-
-            width: 46px;
-
-            height: 46px;
-
-            flex-shrink: 0;
-
-            border-radius: 50%;
-
-            object-fit: cover;
-
-            border: 2px solid #f0dfce;
-
-        }
-
-
-        .post-user {
-
-            line-height: 1.25;
-
-        }
-
-
-        .post-name {
-
-            font-weight: 700;
-
-            color: #4b3528;
-
-            font-size: 15px;
-
-        }
-
-
-        .verified {
-
-            display: inline-flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            width: 15px;
-
-            height: 15px;
-
-            margin-left: 3px;
-
-            border-radius: 50%;
-
-            background: #b8865c;
-
-            color: white;
-
-            font-size: 9px;
-
-        }
-
-
-        .post-handle {
-
-            color: #9b8b80;
-
-            font-size: 13px;
-
-        }
-
-
-        .post-more {
-
-            margin-left: auto;
-
-            color: #9b8b80;
-
-            letter-spacing: 2px;
-
-            font-size: 14px;
-
-        }
-
-
-        /* =====================================================
-           POST CONTENT
-        ===================================================== */
-
-        .post-content {
-
-            margin: 16px 5px 12px 57px;
-
-        }
-
-
-        .post-content p {
-
-            margin: 0;
-
-            color: #49372d;
-
-            font-size: 15px;
-
-            line-height: 1.7;
-
-            white-space: pre-line;
-
-        }
-
-
-        /* =====================================================
-           POST DATE
-        ===================================================== */
-
-        .post-date {
-
-            margin-left: 57px;
-
-            color: #9b8b80;
-
-            font-size: 12px;
-
-            padding-bottom: 15px;
-
-        }
-
-
-        /* =====================================================
-           POST ACTIONS
-        ===================================================== */
-
-        .post-actions {
-
-            margin-left: 57px;
-
-            padding-top: 13px;
-
-            border-top: 1px solid #eee4db;
-
-            display: flex;
-
-            justify-content: space-between;
-
-            max-width: 500px;
-
-        }
-
-
-        .post-action {
-
-            display: flex;
-
-            align-items: center;
-
-            gap: 6px;
-
-            color: #9b8b80;
-
-            font-size: 13px;
-
-            cursor: default;
-
-            user-select: none;
-
-        }
-
-
-        .post-action i {
-
-            font-size: 15px;
-
-        }
-
-
-        .post-action span {
-
-            font-size: 12px;
-
-        }
-
-
-        /* =====================================================
-           HANZI + PHRASEBOOK GRID
-        ===================================================== */
-
-        .dashboard-grid {
-
-            display: grid;
-
-            grid-template-columns: 1fr 1fr;
-
-            gap: 20px;
-
-            width: 100%;
-
-            align-items: stretch;
-
-        }
-
-
-        .dashboard-grid .card {
-
-            width: 100%;
-
-            box-sizing: border-box;
-
-            margin: 0;
-
-        }
-
-
-        /* =====================================================
-           HANZI CARD
-        ===================================================== */
-
-        .lesson-card {
-
-            display: flex;
-
-            flex-direction: column;
-
-        }
-
-
-        .lesson-card h2 {
-
-            margin-top: 0;
-
-        }
-
-
-        .lesson-card .instruction {
-
-            margin-top: auto;
-
-            padding-top: 15px;
-
-        }
-
-
-        /* =====================================================
-           TAIWAN PHRASEBOOK SLIDESHOW
-        ===================================================== */
-
-        .course3-slideshow {
-
-            width: 100%;
-
-            height: 180px;
-
-            overflow: hidden;
-
-            border-radius: 12px;
-
-            position: relative;
-
-            margin-bottom: 15px;
-
-        }
-
-
-        .course3-slideshow img {
-
-            width: 100%;
-
-            height: 100%;
-
-            object-fit: cover;
-
-            position: absolute;
-
-            top: 0;
-
-            left: 0;
-
-            opacity: 0;
-
-            animation: course3Slide 15s infinite;
-
-        }
-
-
-        .course3-slideshow img:nth-child(1) {
-
-            animation-delay: 0s;
-
-        }
-
-
-        .course3-slideshow img:nth-child(2) {
-
-            animation-delay: 3s;
-
-        }
-
-
-        .course3-slideshow img:nth-child(3) {
-
-            animation-delay: 6s;
-
-        }
-
-
-        .course3-slideshow img:nth-child(4) {
-
-            animation-delay: 9s;
-
-        }
-
-
-        .course3-slideshow img:nth-child(5) {
-
-            animation-delay: 12s;
-
-        }
-
-
-        @keyframes course3Slide {
-
-            0%,
-            100% {
-
-                opacity: 0;
-
-            }
-
-            10%,
-            25% {
-
-                opacity: 1;
-
-            }
-
-            35% {
-
-                opacity: 0;
-
-            }
-
-        }
-
-
-        /* =====================================================
-           PHRASEBOOK CARD
-        ===================================================== */
-
-        .phrasebook-card {
-
-            display: flex;
-
-            flex-direction: column;
-
-        }
-
-
-        .phrasebook-card .btn-resume {
-
-            margin-top: auto;
-
-        }
-
-
-        /* =====================================================
-           MOBILE
-        ===================================================== */
-
-        @media(max-width:700px) {
-
-            .dashboard-grid {
-
-                grid-template-columns: 1fr;
-
-                gap: 16px;
-
-            }
-
-
-            .announcement-card {
-
-                padding: 18px;
-
-                border-radius: 15px;
-
-            }
-
-
-            .post-content,
-            .post-date,
-            .post-actions {
-
-                margin-left: 0;
-
-            }
-
-
-            .post-content {
-
-                margin-top: 15px;
-
-            }
-
-
-            .post-actions {
-
-                max-width: 100%;
-
-            }
-
-
-            .course3-slideshow {
-
-                height: 160px;
-
-            }
-
-        }
-
+        .post-header { display: flex; align-items: center; gap: 11px; margin-bottom: 16px; }
+        .post-avatar { width: 46px; height: 46px; border-radius: 50%; object-fit: cover; border: 2px solid #f0dfce; }
+        .post-name { font-weight: 700; color: #4b3528; font-size: 15px; }
+        .post-handle { color: #9b8b80; font-size: 13px; }
+        .post-content p { color: #49372d; font-size: 15px; line-height: 1.7; white-space: pre-line; margin: 0; }
+        .post-date { color: #9b8b80; font-size: 12px; margin-top: 15px; }
     </style>
-
 </head>
-
 
 <body>
 
-
 <div class="app-container">
-
-
-    <!-- =====================================================
-         SIDEBAR
-    ===================================================== -->
-
     <div id="sidebar-container"></div>
 
-
-
-    <!-- =====================================================
-         MAIN CONTENT
-    ===================================================== -->
-
     <main class="main-content">
-
-
-        <!-- =================================================
-             WELCOME HEADER
-        ================================================= -->
-
         <header class="top-header">
-
-
             <div class="welcome-text">
-
-
-                <h1>
-                    Hello and welcome!!
-                </h1>
-
-
-                <p>
-
-                    Boba Break Study is your one-stop shop for
-                    learning Traditional Chinese. We’ve gathered
-                    the best free and easy-to-access learning
-                    resources from across the web, bringing
-                    everything together in one cozy spot so you
-                    can study hassle-free. Grab a cup of boba
-                    and start exploring!
-
-                </p>
-
-
+                <h1>Hello and welcome!!</h1>
+                <p>Boba Break Study is your one-stop shop for learning Traditional Chinese. Grab a cup of boba and start exploring!</p>
             </div>
-
-
-            <div class="user-actions"></div>
-
-
         </header>
 
-
-
-        <!-- =================================================
-             DASHBOARD CONTENT
-        ================================================= -->
-
         <section class="section-container">
+            
+            <!-- Tempat munculnya Announcement -->
+            <div id="announcement-container"></div>
 
-
-
-            <!-- =================================================
-                 DASHBOARD GRID (ANNOUNCEMENT + HANZI + PHRASEBOOK)
-            ================================================= -->
-
-            <div class="dashboard-grid">
-
-
-
-                <!-- =================================================
-                     ANNOUNCEMENTS
-                ================================================= -->
-
-                <div
-                    class="announcement-container"
-                    id="announcement-container">
-
+            <!-- MANDARIN MUSIC -->
+            <article class="card video-card">
+                <h3 class="video-title">🎵 Mandarin Music</h3>
+                <div class="youtube-frame">
+                    <iframe src="https://www.youtube.com/embed/fdQgPu3iUYk" title="Mandarin Music" frameborder="0" allowfullscreen></iframe>
                 </div>
+                <p>Enjoy Mandarin music while improving your listening skills.</p>
+            </article>
 
-
-
-                <!-- =============================================
-                     HANZI OF THE DAY
-                ============================================== -->
-
-                <div class="card lesson-card">
-
-
-                    <h2>
-
-                        🧋 Hanzi of The Day
-
-                    </h2>
-
-
-                    <div
-                        class="flashcard"
-                        id="card">
-
-
-                        <div class="card-inner">
-
-
-                            <div class="card-front">
-
-                                <span id="hanzi"></span>
-
-                            </div>
-
-
-                            <div class="card-back">
-
-                                <span id="pinyin"></span>
-
-                                <span id="meaning"></span>
-
-                            </div>
-
-
-                        </div>
-
-
+            <!-- HANZI OF THE DAY -->
+            <div class="card lesson-card">
+                <h2>🧋 Hanzi of The Day</h2>
+                <div class="flashcard" id="card">
+                    <div class="card-inner">
+                        <div class="card-front"><span id="hanzi"></span></div>
+                        <div class="card-back"><span id="pinyin"></span><span id="meaning"></span></div>
                     </div>
-
-
-                    <p class="instruction">
-
-                        👆 Tap the card to flip
-
-                        <br>
-
-                        👈 Swipe for new Hanzi
-
-                    </p>
-
-
                 </div>
-
-
-
-                <!-- =============================================
-                     TAIWAN TRAVELER'S PHRASEBOOK
-                ============================================== -->
-
-                <article class="card phrasebook-card">
-
-
-                    <div class="course3-slideshow">
-
-
-                        <img
-                            src="https://images.pexels.com/photos/981150/pexels-photo-981150.jpeg"
-                            alt="Taiwan Traveler's Phrasebook Slide 1">
-
-
-                        <img
-                            src="https://images.pexels.com/photos/7478010/pexels-photo-7478010.jpeg"
-                            alt="Taiwan Traveler's Phrasebook Slide 2">
-
-
-                        <img
-                            src="https://images.pexels.com/photos/13408361/pexels-photo-13408361.jpeg"
-                            alt="Taiwan Traveler's Phrasebook Slide 3">
-
-
-                        <img
-                            src="https://images.pexels.com/photos/35299411/pexels-photo-35299411.jpeg"
-                            alt="Taiwan Traveler's Phrasebook Slide 4">
-
-
-                        <img
-                            src="https://images.pexels.com/photos/15415349/pexels-photo-15415349.jpeg"
-                            alt="Taiwan Traveler's Phrasebook Slide 5">
-
-
-                    </div>
-
-
-                    <h3>
-
-                        Taiwan Traveler's Phrasebook
-
-                    </h3>
-
-
-                    <p>
-
-                        Easy Phrases for your Taiwan adventures.
-
-                    </p>
-
-
-                    <button
-                        class="btn-resume"
-                        onclick="location.href='phrasebook.html'">
-
-                        Let's Go!!!!!!
-
-                    </button>
-
-
-                </article>
-
-
+                <p class="instruction">👆 Tap to flip <br> 👈 Swipe for new</p>
             </div>
-
-
         </section>
-
-
     </main>
-
-
 </div>
 
-
-
-<!-- =====================================================
-     ANNOUNCEMENT SYSTEM
-===================================================== -->
-
 <script>
-
-
-    /*
-    ========================================================
-       ANNOUNCEMENT DATA
-
-       Pengumuman terbaru taruh PALING ATAS.
-
-       Untuk menambah pengumuman:
-       1. Copy satu object
-       2. Ubah text
-       3. Ubah time
-       4. Ubah date
-       5. Ubah angka comments/reposts/likes
-    ========================================================
-    */
-
-
+    // Data Pengumuman
     const announcements = [
-
-
-        /* =================================================
-           ANNOUNCEMENT #1
-        ================================================= */
-
         {
-
-            text:
-                "We’re still brewing new lessons! 🧋✨\nMore Mandarin learning materials are coming soon. Stay tuned!",
-
-            time:
-                "12:46 PM",
-
-            date:
-                "Aug 17, 2026",
-
-            comments:
-                3,
-
-            reposts:
-                5,
-
-            likes:
-                18
-
+            text: "We’re still brewing new lessons! 🧋✨\nMore Mandarin learning materials are coming soon. Stay tuned!",
+            time: "12:46 PM",
+            date: "Aug 17, 2026"
         }
-
-
-        /*
-        =====================================================
-        CONTOH PENGUMUMAN BARU
-
-        Tambahkan koma setelah } di atas, lalu:
-
-        ,
-
-        {
-            text:
-                "A new Mandarin lesson has just been added! 📚🧋\nCome check it out and keep learning with us!",
-
-            time:
-                "09:30 AM",
-
-            date:
-                "Aug 20, 2026",
-
-            comments:
-                0,
-
-            reposts:
-                0,
-
-            likes:
-                0
-        }
-
-        =====================================================
-        */
-
-
     ];
 
+    const container = document.getElementById("announcement-container");
 
-
-    /* =====================================================
-       GENERATE ANNOUNCEMENT CARDS
-    ===================================================== */
-
-    const announcementContainer =
-        document.getElementById(
-            "announcement-container"
-        );
-
-
-    announcements.forEach(
-        function(announcement) {
-
-
-            const article =
-                document.createElement("article");
-
-
-            article.className =
-                "announcement-card";
-
-
-            article.innerHTML = `
-
-
-                <!-- POST HEADER -->
-
-                <div class="post-header">
-
-
-                    <img
-                        src="logo.png"
-                        alt="Boba Break Study"
-                        class="post-avatar">
-
-
-                    <div class="post-user">
-
-
-                        <div class="post-name">
-
-                            Admin
-
-                            <span class="verified">
-
-                                ✓
-
-                            </span>
-
-                        </div>
-
-
-                        <div class="post-handle">
-
-                            @bobabreakstudy
-
-                        </div>
-
-
-                    </div>
-
-
-                    <div class="post-more">
-
-                        •••
-
-                    </div>
-
-
+    announcements.forEach(ann => {
+        const article = document.createElement("article");
+        article.className = "announcement-card";
+        article.innerHTML = `
+            <div class="post-header">
+                <img src="logo.png" class="post-avatar" alt="Admin">
+                <div>
+                    <div class="post-name">Admin ✓</div>
+                    <div class="post-handle">@bobabreakstudy</div>
                 </div>
-
-
-
-                <!-- POST CONTENT -->
-
-                <div class="post-content">
-
-
-                    <p>
-
-                        ${announcement.text}
-
-                    </p>
-
-
-                </div>
-
-
-
-                <!-- DATE -->
-
-                <div class="post-date">
-
-                    ${announcement.time}
-                    ·
-                    ${announcement.date}
-
-                </div>
-
-
-
-                <!-- ACTIONS -->
-
-                <div class="post-actions">
-
-
-                    <div class="post-action">
-
-                        <i class="fa-regular fa-comment"></i>
-
-                        <span>
-                            ${announcement.comments}
-                        </span>
-
-                    </div>
-
-
-                    <div class="post-action">
-
-                        <i class="fa-solid fa-retweet"></i>
-
-                        <span>
-                            ${announcement.reposts}
-                        </span>
-
-                    </div>
-
-
-                    <div class="post-action">
-
-                        <i class="fa-regular fa-heart"></i>
-
-                        <span>
-                            ${announcement.likes}
-                        </span>
-
-                    </div>
-
-
-                    <div class="post-action">
-
-                        <i class="fa-regular fa-envelope"></i>
-
-                    </div>
-
-
-                </div>
-
-
-            `;
-
-
-            announcementContainer.appendChild(
-                article
-            );
-
-
-        }
-    );
-
-
+            </div>
+            <div class="post-content"><p>${ann.text}</p></div>
+            <div class="post-date">${ann.time} · ${ann.date}</div>
+        `;
+        container.appendChild(article);
+    });
 </script>
 
-
-
-<!-- =====================================================
-     EXISTING FLASHCARD
-===================================================== -->
-
 <script src="flashcard.js"></script>
-
-
-
-<!-- =====================================================
-     EXISTING SIDEBAR
-===================================================== -->
-
 <script src="script.js"></script>
 
-
 </body>
-
 </html>
