@@ -82,7 +82,7 @@ p {
 
 
 /* =====================================================
-   XP BAR
+   PROGRESS BAR
 ===================================================== */
 
 .progress-box {
@@ -740,7 +740,7 @@ p {
     <div class="progress-top">
         <span>Lesson Progress</span>
         <span>
-            XP: <span id="xp">0</span>
+            Completed: <span id="xp">0</span> / 100%
         </span>
     </div>
 
@@ -1511,22 +1511,18 @@ function playAudio(text){
 
 
 /* =====================================================
-   XP
+   PROGRESS / COMPLETION TRACKING
 ===================================================== */
 
-let xp = 0;
-let progress = 0;
+let completedCount = 0;
+const totalTasks = 25; // 5 games per game category (4 games) + 5 final challenge questions
 
-function addXP(amount){
+function addProgress(amount){
+    completedCount = Math.min(completedCount + amount, totalTasks);
+    let percentage = Math.round((completedCount / totalTasks) * 100);
 
-    xp += amount;
-
-    document.getElementById("xp").textContent = xp;
-
-    progress = Math.min(progress + 2,100);
-
-    document.getElementById("progressFill")
-        .style.width = progress + "%";
+    document.getElementById("xp").textContent = percentage + "%";
+    document.getElementById("progressFill").style.width = percentage + "%";
 }
 
 
@@ -1610,10 +1606,10 @@ const games = {
 ===================================================== */
 
 const gameState = {
-1:{index:0,selected:[],done:false},
-2:{index:0,selected:[],done:false},
-3:{index:0,selected:[],done:false},
-4:{index:0,selected:[],done:false}
+1:{index:0,selected:[],done:false,counted:false},
+2:{index:0,selected:[],done:false,counted:false},
+3:{index:0,selected:[],done:false,counted:false},
+4:{index:0,selected:[],done:false,counted:false}
 };
 
 
@@ -1636,6 +1632,7 @@ function loadGame(gameNumber){
 
     state.selected = [];
     state.done = false;
+    state.counted = false;
 
     document.getElementById("g" + gameNumber + "Num").textContent = state.index + 1;
     document.getElementById("g" + gameNumber + "Meaning").textContent = data.meaning;
@@ -1718,7 +1715,10 @@ function checkGame(gameNumber){
     if(isCorrect){
         feedback.textContent = "🎉 Correct!";
         feedback.className = "feedback correct";
-        addXP(10);
+        if(!state.counted){
+            addProgress(1);
+            state.counted = true;
+        }
         state.done = true;
         playAudio(correct.join(""));
         document.getElementById("g" + gameNumber + "Next").style.display = "block";
@@ -1800,7 +1800,6 @@ function checkSentenceWriting(){
         feedback.textContent = "🎉 Perfect!";
         feedback.className = "feedback correct";
         playAudio(correct);
-        addXP(15);
         document.getElementById("nextSentenceBtn").style.display = "block";
     } else {
         feedback.textContent = "❌ Try again. Check your sentence structure.";
@@ -1898,7 +1897,6 @@ function startQuiz() {
         onComplete: function(summaryData) {
             feedback.textContent = "🎉 Perfect! Correct stroke order.";
             feedback.className = "feedback correct";
-            addXP(5);
         }
     });
 }
@@ -1967,7 +1965,7 @@ function loadFinal(){
         };
         bank.appendChild(button);
     });
-    
+
     document.getElementById("finalFeedback").textContent = "";
 }
 
@@ -2002,7 +2000,7 @@ function checkFinal(){
         feedback.className = "feedback correct";
         finalScore++;
         document.getElementById("finalScore").textContent = finalScore + " / 5";
-        addXP(20);
+        addProgress(1);
         finalIndex++;
 
         if(finalIndex < finalQuestions.length){
