@@ -82,44 +82,6 @@ p {
 
 
 /* =====================================================
-   XP BAR
-===================================================== */
-
-.progress-box {
-    max-width: 750px;
-    margin: 15px auto;
-    padding: 15px 20px;
-    background: white;
-    border-radius: 18px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-}
-
-.progress-top {
-    display: flex;
-    justify-content: space-between;
-    font-size: 12px;
-    font-weight: bold;
-    color: #8c7355;
-    margin-bottom: 8px;
-}
-
-.progress-bar {
-    height: 9px;
-    background: #f0e4d5;
-    border-radius: 20px;
-    overflow: hidden;
-}
-
-.progress-fill {
-    height: 100%;
-    width: 0%;
-    background: #b8865c;
-    border-radius: 20px;
-    transition: width 0.4s ease;
-}
-
-
-/* =====================================================
    GRAMMAR CAROUSEL EXPLANATION
 ===================================================== */
 
@@ -727,26 +689,6 @@ p {
     <p>
         Build simple Mandarin sentences step by step.
     </p>
-
-</div>
-
-
-<!-- =====================================================
-     PROGRESS
-===================================================== -->
-
-<div class="progress-box">
-
-    <div class="progress-top">
-        <span>Lesson Progress</span>
-        <span>
-            XP: <span id="xp">0</span> / 690
-        </span>
-    </div>
-
-    <div class="progress-bar">
-        <div class="progress-fill" id="progressFill"></div>
-    </div>
 
 </div>
 
@@ -1554,8 +1496,6 @@ p {
      JAVASCRIPT
 ===================================================== -->
 
-<script src="../progress.js"></script>
-
 <script>
 
 /* =====================================================
@@ -1576,94 +1516,6 @@ function playAudio(text){
     utterance.pitch = 1;
 
     window.speechSynthesis.speak(utterance);
-}
-
-
-/* =====================================================
-   XP
-   ONLY XP SYSTEM CHANGED
-===================================================== */
-
-const LESSON_ID = "lesson-1";
-
-/*
-   Maximum XP for this lesson:
-
-   Game 1 = 7 × 10 = 70
-   Game 2 = 7 × 10 = 70
-   Game 3 = 7 × 10 = 70
-   Game 4 = 7 × 10 = 70
-   Game 5 = 6 × 10 = 60
-
-   Sentence Writing = 10 × 15 = 150
-
-   Hanzi Writing = 22 × 5 = 110
-
-   Final Challenge = 4 × 20 = 80
-
-   TOTAL = 690 XP
-*/
-
-const MAX_LESSON_XP = 690;
-
-
-/* ===============================
-   UPDATE LESSON XP DISPLAY
-=============================== */
-
-function updateLessonXP(){
-
-    const currentXP =
-        BobaProgress.getLessonXP(LESSON_ID);
-
-    document.getElementById("xp").textContent =
-        currentXP;
-
-    const percentage =
-        Math.min(
-            (currentXP / MAX_LESSON_XP) * 100,
-            100
-        );
-
-    document.getElementById("progressFill")
-        .style.width =
-        percentage + "%";
-
-}
-
-
-/* ===============================
-   ADD XP
-=============================== */
-
-function addXP(amount, rewardId){
-
-    const uniqueRewardId =
-        `${LESSON_ID}-${rewardId}`;
-
-    const earned =
-        BobaProgress.addXP(
-            amount,
-            uniqueRewardId,
-            LESSON_ID
-        );
-
-    /*
-       If this reward was already earned,
-       do not add XP again.
-    */
-
-    if(!earned){
-
-        updateLessonXP();
-
-        return false;
-    }
-
-    updateLessonXP();
-
-    return true;
-
 }
 
 
@@ -2157,17 +2009,6 @@ function checkGame(gameNumber){
         feedback.className =
             "feedback correct";
 
-        /*
-           XP:
-           10 XP per question.
-           Reward ID makes it one-time only.
-        */
-
-        addXP(
-            10,
-            `game-${gameNumber}-question-${state.index}`
-        );
-
         state.done = true;
 
         playAudio(
@@ -2383,16 +2224,6 @@ function checkSentenceWriting(){
 
         playAudio(correct);
 
-        /*
-           XP:
-           15 XP per sentence.
-        */
-
-        addXP(
-            15,
-            `sentence-${sentenceIndex}`
-        );
-
         document.getElementById(
             "nextSentenceBtn"
         ).style.display =
@@ -2593,19 +2424,6 @@ function startQuiz(){
 
             feedback.className =
                 "feedback correct";
-
-            /*
-               XP:
-               5 XP per Hanzi character.
-
-               The reward ID uses the character index,
-               so each character can only reward once.
-            */
-
-            addXP(
-                5,
-                `writing-${writingIndex}`
-            );
 
         }
 
@@ -2882,25 +2700,6 @@ function checkFinal(){
         ).textContent =
             finalScore + " / 4";
 
-
-        const completedQuestion =
-            finalIndex;
-
-
-        /*
-           XP:
-           20 XP per final question.
-
-           Reward ID prevents the same final
-           question from giving XP again.
-        */
-
-        addXP(
-            20,
-            `final-${completedQuestion}`
-        );
-
-
         finalIndex++;
 
         if(
@@ -2914,15 +2713,6 @@ function checkFinal(){
             );
 
         }else{
-
-            /*
-               All 4 final questions completed.
-               Mark Lesson 1 as completed.
-            */
-
-            BobaProgress.completeLesson(
-                LESSON_ID
-            );
 
             document.getElementById(
                 "unlockBox"
@@ -2974,13 +2764,6 @@ loadSentenceWriting();
 initWriter();
 
 loadFinal();
-
-
-/* =====================================================
-   LOAD SAVED LESSON XP
-===================================================== */
-
-updateLessonXP();
 
 </script>
 
