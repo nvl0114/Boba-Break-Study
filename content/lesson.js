@@ -1,6 +1,6 @@
 // ============================================================
 // Boba Break Study — Lesson Database
-// Previously Learned Grammar & Vocabulary
+// Previously Learned Grammar & Vocabulary (Updated)
 // ============================================================
 
 const lessonData = {
@@ -56,6 +56,17 @@ const lessonData = {
         },
 
         {
+            id: "answer-v-bu-v",
+            name: "Answer with V and 不 + V",
+            category: "Answer",
+            examples: [
+                "吃 / 不吃",
+                "喝 / 不喝",
+                "看 / 不看"
+            ]
+        },
+
+        {
             id: "de",
             name: "的",
             category: "Possession",
@@ -71,9 +82,9 @@ const lessonData = {
             name: "是",
             category: "Identity",
             examples: [
-                "我是學生。",
+                "我是老師。",
                 "她是醫生。",
-                "他是老師。"
+                "他是學生。"
             ]
         },
 
@@ -93,9 +104,9 @@ const lessonData = {
             name: "是...嗎",
             category: "Identity Question",
             examples: [
-                "你是學生嗎？",
+                "你是老師嗎？",
                 "她是醫生嗎？",
-                "他是老師嗎？"
+                "他是學生嗎？"
             ]
         },
 
@@ -104,9 +115,9 @@ const lessonData = {
             name: "是不是",
             category: "A-not-A Question",
             examples: [
-                "你是不是學生？",
+                "你是不是老師？",
                 "她是不是醫生？",
-                "他是不是老師？"
+                "他是不是學生？"
             ]
         },
 
@@ -116,7 +127,7 @@ const lessonData = {
             category: "Answer",
             examples: [
                 "是。",
-                "是，我是學生。",
+                "是，我是老師。",
                 "是，她是醫生。"
             ]
         },
@@ -127,7 +138,7 @@ const lessonData = {
             category: "Answer",
             examples: [
                 "不是。",
-                "不是，我不是學生。",
+                "不是，我不是老師。",
                 "不是，她不是醫生。"
             ]
         }
@@ -479,6 +490,13 @@ const lessonData = {
         },
 
         {
+            hanzi: "老師",
+            pinyin: "lǎoshī",
+            meaning: "teacher",
+            category: "Occupation"
+        },
+
+        {
             hanzi: "醫生",
             pinyin: "yīshēng",
             meaning: "doctor",
@@ -569,49 +587,36 @@ const lessonData = {
 // HELPER FUNCTIONS
 // ============================================================
 
-// Get all learned vocabulary
 function getLearnedVocabulary() {
     return lessonData.vocabulary;
 }
 
-
-// Get all learned grammar
 function getLearnedGrammar() {
     return lessonData.grammar;
 }
 
-
-// Find vocabulary by Hanzi
 function findVocabulary(hanzi) {
     return lessonData.vocabulary.find(
         word => word.hanzi === hanzi
     );
 }
 
-
-// Find grammar by ID
 function findGrammar(id) {
     return lessonData.grammar.find(
         grammar => grammar.id === id
     );
 }
 
-
-// Get vocabulary by category
 function getVocabularyByCategory(category) {
     return lessonData.vocabulary.filter(
         word => word.category === category
     );
 }
 
-
-// Get total vocabulary count
 function getVocabularyCount() {
     return lessonData.vocabulary.length;
 }
 
-
-// Get total grammar count
 function getGrammarCount() {
     return lessonData.grammar.length;
 }
