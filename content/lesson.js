@@ -141,6 +141,61 @@ const lessonData = {
                 "不是，我不是老師。",
                 "不是，她不是醫生。"
             ]
+        },
+
+        // --- New Grammar Additions ---
+        {
+            id: "s-hen-adj",
+            name: "S + 很 + Adj",
+            category: "Adjective Sentence",
+            examples: [
+                "我很累。",
+                "你很好。",
+                "她很高。"
+            ]
+        },
+
+        {
+            id: "s-bu-adj",
+            name: "S + 不 + Adj",
+            category: "Negative Adjective Sentence",
+            examples: [
+                "我不累。",
+                "你不好。",
+                "她不高。"
+            ]
+        },
+
+        {
+            id: "s-hen-adj-ma",
+            name: "S + 很 + Adj + 嗎",
+            category: "Adjective Question",
+            examples: [
+                "你很累嗎？",
+                "你很好嗎？",
+                "她很高嗎？"
+            ]
+        },
+
+        {
+            id: "s-adj-bu-adj",
+            name: "S + Adj + 不 + Adj",
+            category: "A-not-A Adjective Question",
+            examples: [
+                "你累不累？",
+                "你好不好？",
+                "她高不高？"
+            ]
+        },
+
+        {
+            id: "s-hen-v-o-ma",
+            name: "S + 很 + V + O + 嗎",
+            category: "Adverbial Question",
+            examples: [
+                "你很看書嗎？",
+                "你很吃飯嗎？"
+            ]
         }
 
     ],
@@ -575,6 +630,13 @@ const lessonData = {
             hanzi: "嗎",
             pinyin: "ma",
             meaning: "question particle",
+            category: "Grammar"
+        },
+
+        {
+            hanzi: "很",
+            pinyin: "hěn",
+            meaning: "very",
             category: "Grammar"
         }
 
