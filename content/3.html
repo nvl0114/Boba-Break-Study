@@ -82,45 +82,7 @@ p {
 
 
 /* =====================================================
-   PROGRESS BAR
-===================================================== */
-
-.progress-box {
-    max-width: 750px;
-    margin: 15px auto;
-    padding: 15px 20px;
-    background: white;
-    border-radius: 18px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-}
-
-.progress-top {
-    display: flex;
-    justify-content: space-between;
-    font-size: 12px;
-    font-weight: bold;
-    color: #8c7355;
-    margin-bottom: 8px;
-}
-
-.progress-bar {
-    height: 9px;
-    background: #f0e4d5;
-    border-radius: 20px;
-    overflow: hidden;
-}
-
-.progress-fill {
-    height: 100%;
-    width: 0%;
-    background: #b8865c;
-    border-radius: 20px;
-    transition: width 0.4s ease;
-}
-
-
-/* =====================================================
-   GRAMMAR CAROUSEL EXPLANATION
+   GRAMMAR CAROUSEL
 ===================================================== */
 
 .grammar-slider-container {
@@ -595,6 +557,7 @@ p {
     font-size: 20px;
     text-align: center;
     outline: none;
+    box-sizing: border-box;
 }
 
 #sentenceInput:focus {
@@ -732,27 +695,7 @@ p {
 
 
 <!-- =====================================================
-     PROGRESS
-===================================================== -->
-
-<div class="progress-box">
-
-    <div class="progress-top">
-        <span>Lesson Progress</span>
-        <span>
-            Completed: <span id="progressText">0%</span>
-        </span>
-    </div>
-
-    <div class="progress-bar">
-        <div class="progress-fill" id="progressFill"></div>
-    </div>
-
-</div>
-
-
-<!-- =====================================================
-     GRAMMAR CAROUSEL EXPLANATION
+     GRAMMAR CAROUSEL
 ===================================================== -->
 
 <div class="grammar-card">
@@ -761,163 +704,376 @@ p {
 
     <div class="grammar-slider-container">
 
-        <!-- SLIDE 1: 是 -->
+        <!-- SLIDE 1 -->
         <div class="grammar-slide active-slide" id="slide-1">
+
             <h3>1. Affirmative Identity: 是 (Shì)</h3>
-            <p>Use <strong>是 (shì)</strong> like "to be" (am/is/are) to connect a subject to a noun/identity.</p>
+
+            <p>
+                Use <strong>是 (shì)</strong> like "to be" (am/is/are)
+                to connect a subject to a noun/identity.
+            </p>
 
             <div class="pattern-display">
-                <div class="pattern-box">Subject</div>
+
+                <div class="pattern-box">
+                    Subject
+                </div>
+
                 <div class="pattern-symbol">+</div>
-                <div class="pattern-box" style="background:#faedcd; color:#8c5d35;">是<br><small>shì</small></div>
+
+                <div class="pattern-box"
+                     style="background:#faedcd;color:#8c5d35;">
+                    是<br>
+                    <small>shì</small>
+                </div>
+
                 <div class="pattern-symbol">+</div>
-                <div class="pattern-box">Noun</div>
+
+                <div class="pattern-box">
+                    Noun
+                </div>
+
             </div>
 
             <div class="grammar-explanation">
-                <p><strong>是 (shì)</strong> equates the subject to the noun phrase that follows it.</p>
+
+                <p>
+                    <strong>是 (shì)</strong> equates the subject
+                    to the noun phrase that follows it.
+                </p>
+
             </div>
 
             <div class="example-sentence">
+
                 <div class="example-hanzi">
+
                     <span onclick="playAudio('我')">我</span>
+
                     <span onclick="playAudio('是')">是</span>
+
                     <span onclick="playAudio('醫生')">醫生</span>
+
                 </div>
+
                 <div>Wǒ shì yīshēng.</div>
+
                 <div>I am a doctor.</div>
-                <button class="sound-btn" onclick="playAudio('我是醫生')">🔊</button>
+
+                <button class="sound-btn"
+                        onclick="playAudio('我是醫生')">
+                    🔊
+                </button>
+
             </div>
+
         </div>
 
-        <!-- SLIDE 2: 不是 -->
+
+        <!-- SLIDE 2 -->
         <div class="grammar-slide" id="slide-2">
+
             <h3>2. Negative Identity: 不是 (Bú shì)</h3>
-            <p>Place <strong>不 (bù)</strong> before 是 to say "is not / am not / are not".</p>
+
+            <p>
+                Place <strong>不 (bù)</strong> before 是 to say
+                "is not / am not / are not".
+            </p>
 
             <div class="pattern-display">
-                <div class="pattern-box">Subject</div>
+
+                <div class="pattern-box">
+                    Subject
+                </div>
+
                 <div class="pattern-symbol">+</div>
-                <div class="pattern-box" style="background:#faedcd; color:#8c5d35;">不是<br><small>bú shì</small></div>
+
+                <div class="pattern-box"
+                     style="background:#faedcd;color:#8c5d35;">
+                    不是<br>
+                    <small>bú shì</small>
+                </div>
+
                 <div class="pattern-symbol">+</div>
-                <div class="pattern-box">Noun</div>
+
+                <div class="pattern-box">
+                    Noun
+                </div>
+
             </div>
 
             <div class="grammar-explanation">
-                <p>Note: Due to tone sandhi rules, 不 (bù) changes to <strong>bú</strong> when followed by a 4th tone word like 是 (shì).</p>
+
+                <p>
+                    Note: Due to tone sandhi rules, 不 (bù)
+                    changes to <strong>bú</strong> when followed
+                    by a 4th tone word like 是 (shì).
+                </p>
+
             </div>
 
             <div class="example-sentence">
+
                 <div class="example-hanzi">
+
                     <span onclick="playAudio('他')">他</span>
+
                     <span onclick="playAudio('不')">不</span>
+
                     <span onclick="playAudio('是')">是</span>
+
                     <span onclick="playAudio('老闆')">老闆</span>
+
                 </div>
+
                 <div>Tā bú shì lǎobǎn.</div>
+
                 <div>He is not the boss.</div>
-                <button class="sound-btn" onclick="playAudio('他不是老闆')">🔊</button>
+
+                <button class="sound-btn"
+                        onclick="playAudio('他不是老闆')">
+                    🔊
+                </button>
+
             </div>
+
         </div>
 
-        <!-- SLIDE 3: 是。。嗎 -->
+
+        <!-- SLIDE 3 -->
         <div class="grammar-slide" id="slide-3">
+
             <h3>3. Question Particle: 是 ... 嗎 (Shì ... ma)</h3>
-            <p>Turn any 是 sentence into a yes/no question by putting 是 before the noun and 嗎 at the end.</p>
+
+            <p>
+                Turn any 是 sentence into a yes/no question
+                by putting 是 before the noun and 嗎 at the end.
+            </p>
 
             <div class="pattern-display">
-                <div class="pattern-box" style="background:#faedcd; color:#8c5d35;">是<br><small>shì</small></div>
+
+                <div class="pattern-box"
+                     style="background:#faedcd;color:#8c5d35;">
+                    是<br>
+                    <small>shì</small>
+                </div>
+
                 <div class="pattern-symbol">...</div>
-                <div class="pattern-box" style="background:#faedcd; color:#8c5d35;">嗎<br><small>ma</small></div>
+
+                <div class="pattern-box"
+                     style="background:#faedcd;color:#8c5d35;">
+                    嗎<br>
+                    <small>ma</small>
+                </div>
+
             </div>
 
             <div class="grammar-explanation">
-                <p>Structure: <strong>Subject + 是 + Noun + 嗎？</strong></p>
+
+                <p>
+                    Structure:
+                    <strong>Subject + 是 + Noun + 嗎？</strong>
+                </p>
+
             </div>
 
             <div class="example-sentence">
+
                 <div class="example-hanzi">
+
                     <span onclick="playAudio('你')">你</span>
+
                     <span onclick="playAudio('是')">是</span>
+
                     <span onclick="playAudio('學生')">學生</span>
+
                     <span onclick="playAudio('嗎')">嗎</span>
+
                 </div>
+
                 <div>Nǐ shì xuésheng ma?</div>
+
                 <div>Are you a student?</div>
-                <button class="sound-btn" onclick="playAudio('你是學生嗎')">🔊</button>
+
+                <button class="sound-btn"
+                        onclick="playAudio('你是學生嗎')">
+                    🔊
+                </button>
+
             </div>
+
         </div>
 
-        <!-- SLIDE 4: 是不是 -->
+
+        <!-- SLIDE 4 -->
         <div class="grammar-slide" id="slide-4">
+
             <h3>4. Alternative Question: 是不是 (Shì bú shì)</h3>
-            <p>Ask "is it or isn't it?" using <strong>是不是</strong> right before the noun or predicate.</p>
+
+            <p>
+                Ask "is it or isn't it?" using
+                <strong>是不是</strong> right before the noun or predicate.
+            </p>
 
             <div class="pattern-display">
-                <div class="pattern-box">Subject</div>
+
+                <div class="pattern-box">
+                    Subject
+                </div>
+
                 <div class="pattern-symbol">+</div>
-                <div class="pattern-box" style="background:#faedcd; color:#8c5d35;">是不是<br><small>shì bú shì</small></div>
+
+                <div class="pattern-box"
+                     style="background:#faedcd;color:#8c5d35;">
+                    是不是<br>
+                    <small>shì bú shì</small>
+                </div>
+
                 <div class="pattern-symbol">+</div>
-                <div class="pattern-box">Noun</div>
+
+                <div class="pattern-box">
+                    Noun
+                </div>
+
             </div>
 
             <div class="grammar-explanation">
-                <p>This prompts confirmation from the listener (similar to "Right?" or "Isn't it true that...").</p>
+
+                <p>
+                    This prompts confirmation from the listener
+                    (similar to "Right?" or "Isn't it true that...").
+                </p>
+
             </div>
 
             <div class="example-sentence">
+
                 <div class="example-hanzi">
+
                     <span onclick="playAudio('她')">她</span>
-                    <span onclick="playAudio('是不')">是不</span>
-                    <span onclick="playAudio('是')">是</span>
+
+                    <span onclick="playAudio('是不是')">是不是</span>
+
                     <span onclick="playAudio('護士')">護士</span>
+
                 </div>
+
                 <div>Tā shì bú shì hùshi?</div>
+
                 <div>Is she a nurse or not?</div>
-                <button class="sound-btn" onclick="playAudio('她是不是護士')">🔊</button>
+
+                <button class="sound-btn"
+                        onclick="playAudio('她是不是護士')">
+                    🔊
+                </button>
+
             </div>
+
         </div>
 
-        <!-- SLIDE 5: How to answer -->
+
+        <!-- SLIDE 5 -->
         <div class="grammar-slide" id="slide-5">
+
             <h3>5. How to Answer: 是 / 不是</h3>
-            <p>When answering questions with 是, simply use <strong>是 (shì)</strong> for "Yes" or <strong>不是 (bú shì)</strong> for "No".</p>
+
+            <p>
+                When answering questions with 是,
+                simply use <strong>是 (shì)</strong> for "Yes"
+                or <strong>不是 (bú shì)</strong> for "No".
+            </p>
 
             <div class="pattern-display">
-                <div class="pattern-box" style="background:#faedcd; color:#2d6a4f;">是 (Yes)</div>
+
+                <div class="pattern-box"
+                     style="background:#faedcd;color:#2d6a4f;">
+                    是 (Yes)
+                </div>
+
                 <div class="pattern-symbol">/</div>
-                <div class="pattern-box" style="background:#faedcd; color:#9b2226;">不是 (No)</div>
+
+                <div class="pattern-box"
+                     style="background:#faedcd;color:#9b2226;">
+                    不是 (No)
+                </div>
+
             </div>
 
             <div class="grammar-explanation">
-                <p>You can also repeat the verb phrase or provide a complete sentence for clarity.</p>
+
+                <p>
+                    You can also repeat the verb phrase or provide
+                    a complete sentence for clarity.
+                </p>
+
             </div>
 
             <div class="example-sentence">
+
                 <div class="example-hanzi">
+
                     <span onclick="playAudio('是')">是</span>,
                     <span onclick="playAudio('我')">我</span>
                     <span onclick="playAudio('是')">是</span>
+
                 </div>
+
                 <div>Shì, wǒ shì.</div>
+
                 <div>Yes, I am.</div>
-                <button class="sound-btn" onclick="playAudio('是，我是')">🔊</button>
+
+                <button class="sound-btn"
+                        onclick="playAudio('是，我是')">
+                    🔊
+                </button>
+
             </div>
+
         </div>
 
     </div>
 
-    <!-- Slider Navigation Controls -->
+
+    <!-- Slider Navigation -->
+
     <div class="slider-nav">
-        <button class="slider-btn" onclick="prevSlide()">← Prev</button>
-        <div class="slider-indicators" id="sliderIndicators">
-            <span class="indicator active" onclick="currentSlide(1)"></span>
-            <span class="indicator" onclick="currentSlide(2)"></span>
-            <span class="indicator" onclick="currentSlide(3)"></span>
-            <span class="indicator" onclick="currentSlide(4)"></span>
-            <span class="indicator" onclick="currentSlide(5)"></span>
+
+        <button class="slider-btn"
+                onclick="prevSlide()">
+            ← Prev
+        </button>
+
+        <div class="slider-indicators"
+             id="sliderIndicators">
+
+            <span class="indicator active"
+                  onclick="currentSlide(1)">
+            </span>
+
+            <span class="indicator"
+                  onclick="currentSlide(2)">
+            </span>
+
+            <span class="indicator"
+                  onclick="currentSlide(3)">
+            </span>
+
+            <span class="indicator"
+                  onclick="currentSlide(4)">
+            </span>
+
+            <span class="indicator"
+                  onclick="currentSlide(5)">
+            </span>
+
         </div>
-        <button class="slider-btn" onclick="nextSlide()">Next →</button>
+
+        <button class="slider-btn"
+                onclick="nextSlide()">
+            Next →
+        </button>
+
     </div>
 
 </div>
@@ -1069,37 +1225,56 @@ p {
 </div>
 
 <div class="question-box">
-    <div class="question-label">Translate:</div>
-    <div class="question-meaning" id="g1Meaning"></div>
+
+    <div class="question-label">
+        Translate:
+    </div>
+
+    <div class="question-meaning"
+         id="g1Meaning">
+    </div>
+
 </div>
 
-<div class="answer-area" id="g1Answer">
+<div class="answer-area"
+     id="g1Answer">
+
     <span class="answer-placeholder">
         Tap the words below
     </span>
+
 </div>
 
-<div class="word-bank" id="g1Bank"></div>
+<div class="word-bank"
+     id="g1Bank">
+</div>
 
 <div class="game-buttons">
 
-<button class="check-btn" onclick="checkGame(1)">
+<button class="check-btn"
+        onclick="checkGame(1)">
     ✓ Check
 </button>
 
-<button class="reset-btn" onclick="resetGame(1)">
+<button class="reset-btn"
+        onclick="resetGame(1)">
     ↻ Reset
 </button>
 
-<button class="listen-btn" onclick="listenCurrent(1)">
+<button class="listen-btn"
+        onclick="listenCurrent(1)">
     🔊
 </button>
 
 </div>
 
-<div class="feedback" id="g1Feedback"></div>
+<div class="feedback"
+     id="g1Feedback">
+</div>
 
-<button class="next-game-btn" id="g1Next" onclick="nextGameQuestion(1)">
+<button class="next-game-btn"
+        id="g1Next"
+        onclick="nextGameQuestion(1)">
     Next →
 </button>
 
@@ -1125,37 +1300,56 @@ p {
 </div>
 
 <div class="question-box">
-    <div class="question-label">Translate:</div>
-    <div class="question-meaning" id="g2Meaning"></div>
+
+    <div class="question-label">
+        Translate:
+    </div>
+
+    <div class="question-meaning"
+         id="g2Meaning">
+    </div>
+
 </div>
 
-<div class="answer-area" id="g2Answer">
+<div class="answer-area"
+     id="g2Answer">
+
     <span class="answer-placeholder">
         Tap the words below
     </span>
+
 </div>
 
-<div class="word-bank" id="g2Bank"></div>
+<div class="word-bank"
+     id="g2Bank">
+</div>
 
 <div class="game-buttons">
 
-<button class="check-btn" onclick="checkGame(2)">
+<button class="check-btn"
+        onclick="checkGame(2)">
     ✓ Check
 </button>
 
-<button class="reset-btn" onclick="resetGame(2)">
+<button class="reset-btn"
+        onclick="resetGame(2)">
     ↻ Reset
 </button>
 
-<button class="listen-btn" onclick="listenCurrent(2)">
+<button class="listen-btn"
+        onclick="listenCurrent(2)">
     🔊
 </button>
 
 </div>
 
-<div class="feedback" id="g2Feedback"></div>
+<div class="feedback"
+     id="g2Feedback">
+</div>
 
-<button class="next-game-btn" id="g2Next" onclick="nextGameQuestion(2)">
+<button class="next-game-btn"
+        id="g2Next"
+        onclick="nextGameQuestion(2)">
     Next →
 </button>
 
@@ -1181,37 +1375,56 @@ p {
 </div>
 
 <div class="question-box">
-    <div class="question-label">Translate:</div>
-    <div class="question-meaning" id="g3Meaning"></div>
+
+    <div class="question-label">
+        Translate:
+    </div>
+
+    <div class="question-meaning"
+         id="g3Meaning">
+    </div>
+
 </div>
 
-<div class="answer-area" id="g3Answer">
+<div class="answer-area"
+     id="g3Answer">
+
     <span class="answer-placeholder">
         Tap the words below
     </span>
+
 </div>
 
-<div class="word-bank" id="g3Bank"></div>
+<div class="word-bank"
+     id="g3Bank">
+</div>
 
 <div class="game-buttons">
 
-<button class="check-btn" onclick="checkGame(3)">
+<button class="check-btn"
+        onclick="checkGame(3)">
     ✓ Check
 </button>
 
-<button class="reset-btn" onclick="resetGame(3)">
+<button class="reset-btn"
+        onclick="resetGame(3)">
     ↻ Reset
 </button>
 
-<button class="listen-btn" onclick="listenCurrent(3)">
+<button class="listen-btn"
+        onclick="listenCurrent(3)">
     🔊
 </button>
 
 </div>
 
-<div class="feedback" id="g3Feedback"></div>
+<div class="feedback"
+     id="g3Feedback">
+</div>
 
-<button class="next-game-btn" id="g3Next" onclick="nextGameQuestion(3)">
+<button class="next-game-btn"
+        id="g3Next"
+        onclick="nextGameQuestion(3)">
     Next →
 </button>
 
@@ -1237,37 +1450,56 @@ p {
 </div>
 
 <div class="question-box">
-    <div class="question-label">Translate:</div>
-    <div class="question-meaning" id="g4Meaning"></div>
+
+    <div class="question-label">
+        Translate:
+    </div>
+
+    <div class="question-meaning"
+         id="g4Meaning">
+    </div>
+
 </div>
 
-<div class="answer-area" id="g4Answer">
+<div class="answer-area"
+     id="g4Answer">
+
     <span class="answer-placeholder">
         Tap the words below
     </span>
+
 </div>
 
-<div class="word-bank" id="g4Bank"></div>
+<div class="word-bank"
+     id="g4Bank">
+</div>
 
 <div class="game-buttons">
 
-<button class="check-btn" onclick="checkGame(4)">
+<button class="check-btn"
+        onclick="checkGame(4)">
     ✓ Check
 </button>
 
-<button class="reset-btn" onclick="resetGame(4)">
+<button class="reset-btn"
+        onclick="resetGame(4)">
     ↻ Reset
 </button>
 
-<button class="listen-btn" onclick="listenCurrent(4)">
+<button class="listen-btn"
+        onclick="listenCurrent(4)">
     🔊
 </button>
 
 </div>
 
-<div class="feedback" id="g4Feedback"></div>
+<div class="feedback"
+     id="g4Feedback">
+</div>
 
-<button class="next-game-btn" id="g4Next" onclick="nextGameQuestion(4)">
+<button class="next-game-btn"
+        id="g4Next"
+        onclick="nextGameQuestion(4)">
     Next →
 </button>
 
@@ -1288,7 +1520,8 @@ p {
 
 <div class="sentence-writing">
 
-<div class="sentence-prompt" id="sentencePrompt">
+<div class="sentence-prompt"
+     id="sentencePrompt">
     I am a doctor.
 </div>
 
@@ -1307,7 +1540,9 @@ p {
     Check Answer
 </button>
 
-<div class="feedback" id="sentenceFeedback"></div>
+<div class="feedback"
+     id="sentenceFeedback">
+</div>
 
 <button
     class="next-game-btn"
@@ -1322,7 +1557,7 @@ p {
 
 
 <!-- =====================================================
-     WRITING PRACTICE (HANZI WRITER)
+     WRITING PRACTICE
 ===================================================== -->
 
 <div class="writing-card">
@@ -1335,31 +1570,41 @@ p {
 
 <div class="writing-mode-buttons">
 
-<button class="mode-btn active" onclick="setWritingMode('quiz',this)">
+<button class="mode-btn active"
+        onclick="setWritingMode('quiz',this)">
     ✍️ Quiz (Stroke Order)
 </button>
 
-<button class="mode-btn" onclick="setWritingMode('animate',this)">
+<button class="mode-btn"
+        onclick="setWritingMode('animate',this)">
     👀 Animate
 </button>
 
 </div>
 
-<div class="writing-info" id="writingInfo">
+<div class="writing-info"
+     id="writingInfo">
     Write the character following the correct stroke order!
 </div>
 
-<div class="recall-answer" id="recallAnswer"></div>
-
-<div class="canvas-wrapper">
-    <div id="target-div"></div>
+<div class="recall-answer"
+     id="recallAnswer">
 </div>
 
-<div class="feedback" id="writingFeedback"></div>
+<div class="canvas-wrapper">
+
+    <div id="target-div"></div>
+
+</div>
+
+<div class="feedback"
+     id="writingFeedback">
+</div>
 
 <div class="writing-buttons">
 
-<button class="write-btn clear-btn" onclick="resetWritingQuiz()">
+<button class="write-btn clear-btn"
+        onclick="resetWritingQuiz()">
     ↻ Retry
 </button>
 
@@ -1380,7 +1625,7 @@ p {
 
 
 <!-- =====================================================
-     FINAL CHALLENGE (GRAMMAR MASTER)
+     FINAL CHALLENGE
 ===================================================== -->
 
 <div class="final-card">
@@ -1392,7 +1637,9 @@ p {
 <h2>🏆 Grammar Master</h2>
 
 <p>
-    Mixed quiz combining previous topics (S+V+O, Negatives, 嗎, A-not-A, 的) and current 是 structures:
+    Mixed quiz combining previous topics
+    (S+V+O, Negatives, 嗎, A-not-A, 的)
+    and current 是 structures:
 </p>
 
 <div class="grammar-explanation">
@@ -1471,7 +1718,9 @@ p {
     🎉 <strong>Grammar Master Unlocked!</strong>
 
     <p>
-        You have successfully mastered identity sentences with 是, possessive structures with 的, and core sentence patterns!
+        You have successfully mastered identity sentences
+        with 是, possessive structures with 的,
+        and core sentence patterns!
     </p>
 
 </div>
@@ -1511,51 +1760,52 @@ function playAudio(text){
 
 
 /* =====================================================
-   PROGRESS / COMPLETION TRACKING
-===================================================== */
-
-let completedCount = 0;
-const totalTasks = 25; // 5 games per game category (4 games) + 5 final challenge questions
-
-function addProgress(amount){
-    completedCount = Math.min(completedCount + amount, totalTasks);
-    let percentage = Math.round((completedCount / totalTasks) * 100);
-
-    document.getElementById("progressText").textContent = percentage + "%";
-    document.getElementById("progressFill").style.width = percentage + "%";
-}
-
-
-/* =====================================================
-   GRAMMAR SLIDER (CAROUSEL)
+   GRAMMAR SLIDER
 ===================================================== */
 
 let currentSlideIndex = 0;
 const totalSlides = 5;
 
 function showSlide(index) {
-    if (index >= totalSlides) currentSlideIndex = 0;
-    else if (index < 0) currentSlideIndex = totalSlides - 1;
-    else currentSlideIndex = index;
 
-    for (let i = 1; i <= totalSlides; i++) {
-        document.getElementById("slide-" + i).classList.remove("active-slide");
-        document.querySelectorAll(".indicator")[i - 1].classList.remove("active");
+    if(index >= totalSlides)
+        currentSlideIndex = 0;
+
+    else if(index < 0)
+        currentSlideIndex = totalSlides - 1;
+
+    else
+        currentSlideIndex = index;
+
+    for(let i = 1; i <= totalSlides; i++){
+
+        document
+            .getElementById("slide-" + i)
+            .classList.remove("active-slide");
+
+        document
+            .querySelectorAll(".indicator")[i - 1]
+            .classList.remove("active");
     }
 
-    document.getElementById("slide-" + (currentSlideIndex + 1)).classList.add("active-slide");
-    document.querySelectorAll(".indicator")[currentSlideIndex].classList.add("active");
+    document
+        .getElementById("slide-" + (currentSlideIndex + 1))
+        .classList.add("active-slide");
+
+    document
+        .querySelectorAll(".indicator")[currentSlideIndex]
+        .classList.add("active");
 }
 
-function nextSlide() {
+function nextSlide(){
     showSlide(currentSlideIndex + 1);
 }
 
-function prevSlide() {
+function prevSlide(){
     showSlide(currentSlideIndex - 1);
 }
 
-function currentSlide(n) {
+function currentSlide(n){
     showSlide(n - 1);
 }
 
@@ -1567,35 +1817,119 @@ function currentSlide(n) {
 const games = {
 
 1: [
-{ meaning: "I am a doctor.", answer: ["我", "是", "醫生"] },
-{ meaning: "He is a driver.", answer: ["他", "是", "司機"] },
-{ meaning: "She is a nurse.", answer: ["她", "是", "護士"] },
-{ meaning: "The boy is a student.", answer: ["男生", "是", "學生"] },
-{ meaning: "My younger sister is a nurse.", answer: ["我", "的", "妹妹", "是", "護士"] }
+
+{
+    meaning: "I am a doctor.",
+    answer: ["我", "是", "醫生"]
+},
+
+{
+    meaning: "He is a driver.",
+    answer: ["他", "是", "司機"]
+},
+
+{
+    meaning: "She is a nurse.",
+    answer: ["她", "是", "護士"]
+},
+
+{
+    meaning: "The boy is a student.",
+    answer: ["男生", "是", "學生"]
+},
+
+{
+    meaning: "My younger sister is a nurse.",
+    answer: ["我", "的", "妹妹", "是", "護士"]
+}
+
 ],
 
 2: [
-{ meaning: "I am not a worker.", answer: ["我", "不", "是", "工人"] },
-{ meaning: "He is not the boss.", answer: ["他", "不", "是", "老闆"] },
-{ meaning: "She is not a nurse.", answer: ["她", "不", "是", "護士"] },
-{ meaning: "My son is not a child.", answer: ["我", "的", "兒子", "不", "是", "孩子"] },
-{ meaning: "You are not my colleague.", answer: ["你", "不", "是", "我", "的", "同事"] }
+
+{
+    meaning: "I am not a worker.",
+    answer: ["我", "不", "是", "工人"]
+},
+
+{
+    meaning: "He is not the boss.",
+    answer: ["他", "不", "是", "老闆"]
+},
+
+{
+    meaning: "She is not a nurse.",
+    answer: ["她", "不", "是", "護士"]
+},
+
+{
+    meaning: "My son is not a child.",
+    answer: ["我", "的", "兒子", "不", "是", "孩子"]
+},
+
+{
+    meaning: "You are not my colleague.",
+    answer: ["你", "不", "是", "我", "的", "同事"]
+}
+
 ],
 
 3: [
-{ meaning: "Are you a doctor?", answer: ["你", "是", "醫生", "嗎"] },
-{ meaning: "Is she your older sister?", answer: ["她", "是", "你", "的", "姊姊", "嗎"] },
-{ meaning: "Is he a driver?", answer: ["他", "是", "司機", "嗎"] },
-{ meaning: "Is the younger brother a student?", answer: ["弟弟", "是", "學生", "嗎"] },
-{ meaning: "Is the girl a classmate?", answer: ["女生", "是", "同學", "嗎"] }
+
+{
+    meaning: "Are you a doctor?",
+    answer: ["你", "是", "醫生", "嗎"]
+},
+
+{
+    meaning: "Is she your older sister?",
+    answer: ["她", "是", "你", "的", "姊姊", "嗎"]
+},
+
+{
+    meaning: "Is he a driver?",
+    answer: ["他", "是", "司機", "嗎"]
+},
+
+{
+    meaning: "Is the younger brother a student?",
+    answer: ["弟弟", "是", "學生", "嗎"]
+},
+
+{
+    meaning: "Is the girl a classmate?",
+    answer: ["女生", "是", "同學", "嗎"]
+}
+
 ],
 
 4: [
-{ meaning: "Are you a doctor or not?", answer: ["你", "是", "不", "是", "醫生"] },
-{ meaning: "Is he the boss or not?", answer: ["他", "是", "不", "是", "老闆"] },
-{ meaning: "Is she a nurse or not?", answer: ["她", "是", "不", "是", "護士"] },
-{ meaning: "Is your son a child or not?", answer: ["你", "的", "兒子", "是", "不", "是", "孩子"] },
-{ meaning: "Is your daughter a student or not?", answer: ["你", "的", "女兒", "是", "不", "是", "學生"] }
+
+{
+    meaning: "Are you a doctor or not?",
+    answer: ["你", "是", "不", "是", "醫生"]
+},
+
+{
+    meaning: "Is he the boss or not?",
+    answer: ["他", "是", "不", "是", "老闆"]
+},
+
+{
+    meaning: "Is she a nurse or not?",
+    answer: ["她", "是", "不", "是", "護士"]
+},
+
+{
+    meaning: "Is your son a child or not?",
+    answer: ["你", "的", "兒子", "是", "不", "是", "孩子"]
+},
+
+{
+    meaning: "Is your daughter a student or not?",
+    answer: ["你", "的", "女兒", "是", "不", "是", "學生"]
+}
+
 ]
 
 };
@@ -1606,10 +1940,31 @@ const games = {
 ===================================================== */
 
 const gameState = {
-1:{index:0,selected:[],done:false,counted:false},
-2:{index:0,selected:[],done:false,counted:false},
-3:{index:0,selected:[],done:false,counted:false},
-4:{index:0,selected:[],done:false,counted:false}
+
+1:{
+    index:0,
+    selected:[],
+    done:false
+},
+
+2:{
+    index:0,
+    selected:[],
+    done:false
+},
+
+3:{
+    index:0,
+    selected:[],
+    done:false
+},
+
+4:{
+    index:0,
+    selected:[],
+    done:false
+}
+
 };
 
 
@@ -1618,7 +1973,10 @@ const gameState = {
 ===================================================== */
 
 function shuffle(array){
-    return [...array].sort(() => Math.random() - 0.5);
+
+    return [...array]
+        .sort(() => Math.random() - 0.5);
+
 }
 
 
@@ -1627,37 +1985,83 @@ function shuffle(array){
 ===================================================== */
 
 function loadGame(gameNumber){
+
     const state = gameState[gameNumber];
-    const data = games[gameNumber][state.index];
+
+    const data =
+        games[gameNumber][state.index];
 
     state.selected = [];
+
     state.done = false;
-    state.counted = false;
 
-    document.getElementById("g" + gameNumber + "Num").textContent = state.index + 1;
-    document.getElementById("g" + gameNumber + "Meaning").textContent = data.meaning;
+    document
+        .getElementById("g" + gameNumber + "Num")
+        .textContent = state.index + 1;
 
-    const answer = document.getElementById("g" + gameNumber + "Answer");
-    answer.innerHTML = '<span class="answer-placeholder">Tap the words below</span>';
+    document
+        .getElementById("g" + gameNumber + "Meaning")
+        .textContent = data.meaning;
 
-    const bank = document.getElementById("g" + gameNumber + "Bank");
+
+    const answer =
+        document.getElementById(
+            "g" + gameNumber + "Answer"
+        );
+
+    answer.innerHTML =
+        '<span class="answer-placeholder">Tap the words below</span>';
+
+
+    const bank =
+        document.getElementById(
+            "g" + gameNumber + "Bank"
+        );
+
     bank.innerHTML = "";
 
-    shuffle(data.answer).forEach((word, index) => {
-        const button = document.createElement("button");
-        button.className = "word-btn";
-        button.textContent = word;
-        button.dataset.word = word;
-        button.dataset.id = index;
-        button.onclick = function(){
-            if(this.disabled) return;
-            selectWord(gameNumber, this, word);
-        };
-        bank.appendChild(button);
-    });
 
-    document.getElementById("g" + gameNumber + "Feedback").textContent = "";
-    document.getElementById("g" + gameNumber + "Next").style.display = "none";
+    shuffle(data.answer).forEach(
+        (word,index) => {
+
+            const button =
+                document.createElement("button");
+
+            button.className = "word-btn";
+
+            button.textContent = word;
+
+            button.dataset.word = word;
+
+            button.dataset.id = index;
+
+            button.onclick = function(){
+
+                if(this.disabled) return;
+
+                selectWord(
+                    gameNumber,
+                    this,
+                    word
+                );
+
+            };
+
+            bank.appendChild(button);
+
+        }
+    );
+
+
+    document
+        .getElementById("g" + gameNumber + "Feedback")
+        .textContent = "";
+
+
+    document
+        .getElementById("g" + gameNumber + "Next")
+        .style.display = "none";
+
 }
 
 
@@ -1665,12 +2069,24 @@ function loadGame(gameNumber){
    SELECT WORD
 ===================================================== */
 
-function selectWord(gameNumber, button, word){
-    gameState[gameNumber].selected.push(word);
+function selectWord(
+    gameNumber,
+    button,
+    word
+){
+
+    gameState[gameNumber]
+        .selected
+        .push(word);
+
     button.disabled = true;
+
     button.classList.add("selected");
+
     playAudio(word);
+
     renderSelected(gameNumber);
+
 }
 
 
@@ -1679,18 +2095,36 @@ function selectWord(gameNumber, button, word){
 ===================================================== */
 
 function renderSelected(gameNumber){
-    const answer = document.getElementById("g" + gameNumber + "Answer");
+
+    const answer =
+        document.getElementById(
+            "g" + gameNumber + "Answer"
+        );
+
     answer.innerHTML = "";
 
-    gameState[gameNumber].selected.forEach((word) => {
-        const span = document.createElement("span");
-        span.className = "selected-word";
-        span.textContent = word;
-        span.onclick = function(){
-            playAudio(word);
-        };
-        answer.appendChild(span);
-    });
+
+    gameState[gameNumber]
+        .selected
+        .forEach(word => {
+
+            const span =
+                document.createElement("span");
+
+            span.className = "selected-word";
+
+            span.textContent = word;
+
+            span.onclick = function(){
+
+                playAudio(word);
+
+            };
+
+            answer.appendChild(span);
+
+        });
+
 }
 
 
@@ -1699,33 +2133,74 @@ function renderSelected(gameNumber){
 ===================================================== */
 
 function checkGame(gameNumber){
-    const state = gameState[gameNumber];
-    const correct = games[gameNumber][state.index].answer;
-    const selected = state.selected;
-    const feedback = document.getElementById("g" + gameNumber + "Feedback");
+
+    const state =
+        gameState[gameNumber];
+
+    const correct =
+        games[gameNumber][state.index].answer;
+
+    const selected =
+        state.selected;
+
+    const feedback =
+        document.getElementById(
+            "g" + gameNumber + "Feedback"
+        );
+
 
     if(selected.length !== correct.length){
-        feedback.textContent = "⚠️ Complete the sentence first.";
-        feedback.className = "feedback incorrect";
+
+        feedback.textContent =
+            "⚠️ Complete the sentence first.";
+
+        feedback.className =
+            "feedback incorrect";
+
         return;
+
     }
 
-    const isCorrect = selected.every((word, index) => word === correct[index]);
+
+    const isCorrect =
+        selected.every(
+            (word,index) =>
+                word === correct[index]
+        );
+
 
     if(isCorrect){
-        feedback.textContent = "🎉 Correct!";
-        feedback.className = "feedback correct";
-        if(!state.counted){
-            addProgress(1);
-            state.counted = true;
-        }
+
+        feedback.textContent =
+            "🎉 Correct!";
+
+        feedback.className =
+            "feedback correct";
+
         state.done = true;
-        playAudio(correct.join(""));
-        document.getElementById("g" + gameNumber + "Next").style.display = "block";
-    } else {
-        feedback.textContent = "❌ Not quite. Try again!";
-        feedback.className = "feedback incorrect";
+
+        playAudio(
+            correct.join("")
+        );
+
+        document
+            .getElementById(
+                "g" + gameNumber + "Next"
+            )
+            .style.display = "block";
+
     }
+
+    else{
+
+        feedback.textContent =
+            "❌ Not quite. Try again!";
+
+        feedback.className =
+            "feedback incorrect";
+
+    }
+
 }
 
 
@@ -1734,7 +2209,9 @@ function checkGame(gameNumber){
 ===================================================== */
 
 function resetGame(gameNumber){
+
     loadGame(gameNumber);
+
 }
 
 
@@ -1743,18 +2220,42 @@ function resetGame(gameNumber){
 ===================================================== */
 
 function nextGameQuestion(gameNumber){
-    const state = gameState[gameNumber];
+
+    const state =
+        gameState[gameNumber];
+
     if(!state.done) return;
+
 
     state.index++;
 
-    if(state.index >= games[gameNumber].length){
+
+    if(
+        state.index >=
+        games[gameNumber].length
+    ){
+
         state.index = 0;
-        document.getElementById("g" + gameNumber + "Feedback").textContent = "🏆 Game Complete!";
-        document.getElementById("g" + gameNumber + "Next").textContent = "Replay →";
+
+        document
+            .getElementById(
+                "g" + gameNumber + "Feedback"
+            )
+            .textContent =
+            "🏆 Game Complete!";
+
+        document
+            .getElementById(
+                "g" + gameNumber + "Next"
+            )
+            .textContent =
+            "Replay →";
+
     }
 
+
     loadGame(gameNumber);
+
 }
 
 
@@ -1763,9 +2264,17 @@ function nextGameQuestion(gameNumber){
 ===================================================== */
 
 function listenCurrent(gameNumber){
-    const state = gameState[gameNumber];
-    const answer = games[gameNumber][state.index].answer;
-    playAudio(answer.join(""));
+
+    const state =
+        gameState[gameNumber];
+
+    const answer =
+        games[gameNumber][state.index].answer;
+
+    playAudio(
+        answer.join("")
+    );
+
 }
 
 
@@ -1774,245 +2283,727 @@ function listenCurrent(gameNumber){
 ===================================================== */
 
 const sentenceQuestions = [
-{ prompt: "I am a doctor.", answer: "我是醫生" },
-{ prompt: "He is not the boss.", answer: "他不是老闆" },
-{ prompt: "Are you a student?", answer: "你是學生嗎" },
-{ prompt: "Is she a nurse or not?", answer: "她是不是護士" },
-{ prompt: "My older brother is a driver.", answer: "我哥哥是司機" }
+
+{
+    prompt: "I am a doctor.",
+    answer: "我是醫生"
+},
+
+{
+    prompt: "He is not the boss.",
+    answer: "他不是老闆"
+},
+
+{
+    prompt: "Are you a student?",
+    answer: "你是學生嗎"
+},
+
+{
+    prompt: "Is she a nurse or not?",
+    answer: "她是不是護士"
+},
+
+{
+    prompt: "My older brother is a driver.",
+    answer: "我哥哥是司機"
+}
+
 ];
+
 
 let sentenceIndex = 0;
 
+
 function loadSentenceWriting(){
-    document.getElementById("sentencePrompt").textContent = sentenceQuestions[sentenceIndex].prompt;
-    document.getElementById("sentenceInput").value = "";
-    document.getElementById("sentenceFeedback").textContent = "";
-    document.getElementById("nextSentenceBtn").style.display = "none";
+
+    document
+        .getElementById("sentencePrompt")
+        .textContent =
+        sentenceQuestions[sentenceIndex].prompt;
+
+    document
+        .getElementById("sentenceInput")
+        .value = "";
+
+    document
+        .getElementById("sentenceFeedback")
+        .textContent = "";
+
+    document
+        .getElementById("nextSentenceBtn")
+        .style.display = "none";
+
 }
+
 
 function checkSentenceWriting(){
-    const input = document.getElementById("sentenceInput").value.trim()
-        .replace(/。/g,"").replace(/？/g,"");
-    const correct = sentenceQuestions[sentenceIndex].answer;
-    const feedback = document.getElementById("sentenceFeedback");
+
+    const input =
+        document
+        .getElementById("sentenceInput")
+        .value
+        .trim()
+        .replace(/。/g,"")
+        .replace(/？/g,"");
+
+
+    const correct =
+        sentenceQuestions[sentenceIndex].answer;
+
+
+    const feedback =
+        document.getElementById(
+            "sentenceFeedback"
+        );
+
 
     if(input === correct){
-        feedback.textContent = "🎉 Perfect!";
-        feedback.className = "feedback correct";
+
+        feedback.textContent =
+            "🎉 Perfect!";
+
+        feedback.className =
+            "feedback correct";
+
         playAudio(correct);
-        document.getElementById("nextSentenceBtn").style.display = "block";
-    } else {
-        feedback.textContent = "❌ Try again. Check your sentence structure.";
-        feedback.className = "feedback incorrect";
+
+        document
+            .getElementById(
+                "nextSentenceBtn"
+            )
+            .style.display = "block";
+
     }
+
+    else{
+
+        feedback.textContent =
+            "❌ Try again. Check your sentence structure.";
+
+        feedback.className =
+            "feedback incorrect";
+
+    }
+
 }
 
+
 function nextSentenceWriting(){
+
     sentenceIndex++;
-    if(sentenceIndex >= sentenceQuestions.length){
+
+
+    if(
+        sentenceIndex >=
+        sentenceQuestions.length
+    ){
+
         sentenceIndex = 0;
+
     }
+
+
     loadSentenceWriting();
+
 }
 
 
 /* =====================================================
-   WRITING PRACTICE (HANZI WRITER)
+   WRITING PRACTICE
 ===================================================== */
 
 const writingCharacters = [
-    { hanzi: "男", pinyin: "nán", meaning: "male" },
-    { hanzi: "生", pinyin: "shēng", meaning: "student/life" },
-    { hanzi: "女", pinyin: "nǚ", meaning: "female" },
-    { hanzi: "孩", pinyin: "hái", meaning: "child" },
-    { hanzi: "子", pinyin: "zǐ", meaning: "child/son" },
-    { hanzi: "兒", pinyin: "ér", meaning: "son/child" },
-    { hanzi: "弟", pinyin: "dì", meaning: "younger brother" },
-    { hanzi: "哥", pinyin: "gē", meaning: "older brother" },
-    { hanzi: "妹", pinyin: "mèi", meaning: "younger sister" },
-    { hanzi: "姐", pinyin: "jiě", meaning: "older sister" },
-    { hanzi: "姊", pinyin: "jiě", meaning: "older sister (alt)" },
-    { hanzi: "醫", pinyin: "yī", meaning: "medical" },
-    { hanzi: "護", pinyin: "hù", meaning: "protect/nurse" },
-    { hanzi: "士", pinyin: "shì", meaning: "scholar/professional" },
-    { hanzi: "司", pinyin: "sī", meaning: "manage" },
-    { hanzi: "機", pinyin: "jī", meaning: "machine" },
-    { hanzi: "同", pinyin: "tóng", meaning: "same" },
-    { hanzi: "學", pinyin: "xué", meaning: "study" },
-    { hanzi: "事", pinyin: "shì", meaning: "affair/work" },
-    { hanzi: "工", pinyin: "gōng", meaning: "work" },
-    { hanzi: "人", pinyin: "rén", meaning: "person" },
-    { hanzi: "老", pinyin: "lǎo", meaning: "old" },
-    { hanzi: "板", pinyin: "bǎn", meaning: "board/boss" },
-    { hanzi: "娘", pinyin: "niáng", meaning: "mother/lady" }
+
+{
+    hanzi: "男",
+    pinyin: "nán",
+    meaning: "male"
+},
+
+{
+    hanzi: "生",
+    pinyin: "shēng",
+    meaning: "student/life"
+},
+
+{
+    hanzi: "女",
+    pinyin: "nǚ",
+    meaning: "female"
+},
+
+{
+    hanzi: "孩",
+    pinyin: "hái",
+    meaning: "child"
+},
+
+{
+    hanzi: "子",
+    pinyin: "zǐ",
+    meaning: "child/son"
+},
+
+{
+    hanzi: "兒",
+    pinyin: "ér",
+    meaning: "son/child"
+},
+
+{
+    hanzi: "弟",
+    pinyin: "dì",
+    meaning: "younger brother"
+},
+
+{
+    hanzi: "哥",
+    pinyin: "gē",
+    meaning: "older brother"
+},
+
+{
+    hanzi: "妹",
+    pinyin: "mèi",
+    meaning: "younger sister"
+},
+
+{
+    hanzi: "姐",
+    pinyin: "jiě",
+    meaning: "older sister"
+},
+
+{
+    hanzi: "姊",
+    pinyin: "jiě",
+    meaning: "older sister (alt)"
+},
+
+{
+    hanzi: "醫",
+    pinyin: "yī",
+    meaning: "medical"
+},
+
+{
+    hanzi: "護",
+    pinyin: "hù",
+    meaning: "protect/nurse"
+},
+
+{
+    hanzi: "士",
+    pinyin: "shì",
+    meaning: "scholar/professional"
+},
+
+{
+    hanzi: "司",
+    pinyin: "sī",
+    meaning: "manage"
+},
+
+{
+    hanzi: "機",
+    pinyin: "jī",
+    meaning: "machine"
+},
+
+{
+    hanzi: "同",
+    pinyin: "tóng",
+    meaning: "same"
+},
+
+{
+    hanzi: "學",
+    pinyin: "xué",
+    meaning: "study"
+},
+
+{
+    hanzi: "事",
+    pinyin: "shì",
+    meaning: "affair/work"
+},
+
+{
+    hanzi: "工",
+    pinyin: "gōng",
+    meaning: "work"
+},
+
+{
+    hanzi: "人",
+    pinyin: "rén",
+    meaning: "person"
+},
+
+{
+    hanzi: "老",
+    pinyin: "lǎo",
+    meaning: "old"
+},
+
+{
+    hanzi: "板",
+    pinyin: "bǎn",
+    meaning: "board/boss"
+},
+
+{
+    hanzi: "娘",
+    pinyin: "niáng",
+    meaning: "mother/lady"
+}
+
 ];
 
+
 let writingIndex = 0;
+
 let writingMode = "quiz";
+
 let writer = null;
 
-function initWriter() {
-    const item = writingCharacters[writingIndex];
-    const container = document.getElementById("target-div");
+
+function initWriter(){
+
+    const item =
+        writingCharacters[writingIndex];
+
+    const container =
+        document.getElementById(
+            "target-div"
+        );
+
     container.innerHTML = "";
 
-    const info = document.getElementById("writingInfo");
-    if(writingMode === 'quiz') {
-        info.innerHTML = `Write <strong>${item.hanzi}</strong> (${item.pinyin} - ${item.meaning}) following correct stroke order! (${writingIndex + 1}/${writingCharacters.length})`;
-    } else {
-        info.innerHTML = `Watch animated stroke order for <strong>${item.hanzi}</strong> (${item.pinyin} - ${item.meaning}). (${writingIndex + 1}/${writingCharacters.length})`;
+
+    const info =
+        document.getElementById(
+            "writingInfo"
+        );
+
+
+    if(writingMode === "quiz"){
+
+        info.innerHTML =
+            `Write <strong>${item.hanzi}</strong>
+            (${item.pinyin} - ${item.meaning})
+            following correct stroke order!
+            (${writingIndex + 1}/${writingCharacters.length})`;
+
     }
 
-    writer = HanziWriter.create('target-div', item.hanzi, {
-        width: 260,
-        height: 260,
-        padding: 10,
-        showOutline: true,
-        strokeAnimationSpeed: 1,
-        drawingColor: '#5c4033',
-        strokeHighlightColor: '#b8865c',
-        showCharacter: writingMode === 'animate'
-    });
+    else{
 
-    if(writingMode === 'quiz') {
+        info.innerHTML =
+            `Watch animated stroke order for
+            <strong>${item.hanzi}</strong>
+            (${item.pinyin} - ${item.meaning}).
+            (${writingIndex + 1}/${writingCharacters.length})`;
+
+    }
+
+
+    writer =
+        HanziWriter.create(
+            "target-div",
+            item.hanzi,
+            {
+
+                width: 260,
+
+                height: 260,
+
+                padding: 10,
+
+                showOutline: true,
+
+                strokeAnimationSpeed: 1,
+
+                drawingColor: "#5c4033",
+
+                strokeHighlightColor: "#b8865c",
+
+                showCharacter:
+                    writingMode === "animate"
+
+            }
+        );
+
+
+    if(writingMode === "quiz"){
+
         startQuiz();
-    } else {
-        writer.animateCharacter();
+
     }
+
+    else{
+
+        writer.animateCharacter();
+
+    }
+
 }
 
-function startQuiz() {
-    const feedback = document.getElementById("writingFeedback");
+
+function startQuiz(){
+
+    const feedback =
+        document.getElementById(
+            "writingFeedback"
+        );
+
     feedback.textContent = "";
 
+
     writer.quiz({
-        onMistake: function(strokeData) {
-            feedback.textContent = "❌ Incorrect stroke order! Try again.";
-            feedback.className = "feedback incorrect";
+
+        onMistake:
+        function(strokeData){
+
+            feedback.textContent =
+                "❌ Incorrect stroke order! Try again.";
+
+            feedback.className =
+                "feedback incorrect";
+
         },
-        onCorrectStroke: function(strokeData) {
-            feedback.textContent = "✨ Great! Continue with the next stroke.";
-            feedback.className = "feedback correct";
+
+
+        onCorrectStroke:
+        function(strokeData){
+
+            feedback.textContent =
+                "✨ Great! Continue with the next stroke.";
+
+            feedback.className =
+                "feedback correct";
+
         },
-        onComplete: function(summaryData) {
-            feedback.textContent = "🎉 Perfect! Correct stroke order.";
-            feedback.className = "feedback correct";
+
+
+        onComplete:
+        function(summaryData){
+
+            feedback.textContent =
+                "🎉 Perfect! Correct stroke order.";
+
+            feedback.className =
+                "feedback correct";
+
         }
+
     });
+
 }
 
-function setWritingMode(mode, button){
+
+function setWritingMode(mode,button){
+
     writingMode = mode;
-    document.querySelectorAll(".writing-card .mode-btn").forEach(btn => btn.classList.remove("active"));
+
+
+    document
+        .querySelectorAll(
+            ".writing-card .mode-btn"
+        )
+        .forEach(
+            btn =>
+                btn.classList.remove("active")
+        );
+
+
     button.classList.add("active");
+
+
     initWriter();
+
 }
 
-function resetWritingQuiz() {
+
+function resetWritingQuiz(){
+
     initWriter();
+
 }
+
 
 function nextWritingCharacter(){
+
     writingIndex++;
-    if(writingIndex >= writingCharacters.length){
+
+
+    if(
+        writingIndex >=
+        writingCharacters.length
+    ){
+
         writingIndex = 0;
+
     }
+
+
     initWriter();
+
 }
 
+
 function playCurrentWriting(){
-    playAudio(writingCharacters[writingIndex].hanzi);
+
+    playAudio(
+        writingCharacters[writingIndex].hanzi
+    );
+
 }
 
 
 /* =====================================================
-   FINAL CHALLENGE (GRAMMAR MASTER)
+   FINAL CHALLENGE
 ===================================================== */
 
 const finalQuestions = [
-{ meaning: "I eat a meal. (Previous: S+V+O)", answer: ["我", "吃", "飯"] },
-{ meaning: "My older brother's book. (Previous: 的)", answer: ["我", "哥哥", "的", "書"] },
-{ meaning: "I am a doctor. (Current: 是)", answer: ["我", "是", "醫生"] },
-{ meaning: "Is she your older sister? (Current: 是...嗎)", answer: ["她", "是", "你", "姊姊", "嗎"] },
-{ meaning: "Is he the boss or not? (Current: 是不是)", answer: ["他", "是", "不", "是", "老闆"] }
+
+{
+    meaning: "I eat a meal. (Previous: S+V+O)",
+    answer: ["我", "吃", "飯"]
+},
+
+{
+    meaning: "My older brother's book. (Previous: 的)",
+    answer: ["我", "哥哥", "的", "書"]
+},
+
+{
+    meaning: "I am a doctor. (Current: 是)",
+    answer: ["我", "是", "醫生"]
+},
+
+{
+    meaning: "Is she your older sister? (Current: 是...嗎)",
+    answer: ["她", "是", "你", "姊姊", "嗎"]
+},
+
+{
+    meaning: "Is he the boss or not? (Current: 是不是)",
+    answer: ["他", "是", "不", "是", "老闆"]
+}
+
 ];
 
+
 let finalIndex = 0;
+
 let finalScore = 0;
+
 let finalSelected = [];
 
+
 function loadFinal(){
-    const q = finalQuestions[finalIndex];
-    document.getElementById("finalMeaning").textContent = q.meaning;
+
+    const q =
+        finalQuestions[finalIndex];
+
+
+    document
+        .getElementById("finalMeaning")
+        .textContent =
+        q.meaning;
+
+
     finalSelected = [];
 
-    document.getElementById("finalAnswer").innerHTML = '<span class="answer-placeholder">Build your answer</span>';
 
-    const bank = document.getElementById("finalBank");
+    document
+        .getElementById("finalAnswer")
+        .innerHTML =
+        '<span class="answer-placeholder">Build your answer</span>';
+
+
+    const bank =
+        document.getElementById(
+            "finalBank"
+        );
+
     bank.innerHTML = "";
 
-    shuffle(q.answer).forEach(word => {
-        const button = document.createElement("button");
-        button.className = "word-btn";
-        button.textContent = word;
-        button.onclick = ()=>{
-            if(button.disabled) return;
-            finalSelected.push(word);
-            button.disabled = true;
-            button.classList.add("selected");
-            playAudio(word);
-            renderFinal();
-        };
-        bank.appendChild(button);
-    });
 
-    document.getElementById("finalFeedback").textContent = "";
+    shuffle(q.answer)
+        .forEach(word => {
+
+            const button =
+                document.createElement("button");
+
+            button.className =
+                "word-btn";
+
+            button.textContent =
+                word;
+
+
+            button.onclick = () => {
+
+                if(button.disabled)
+                    return;
+
+
+                finalSelected.push(word);
+
+                button.disabled = true;
+
+                button.classList.add(
+                    "selected"
+                );
+
+                playAudio(word);
+
+                renderFinal();
+
+            };
+
+
+            bank.appendChild(button);
+
+        });
+
+
+    document
+        .getElementById(
+            "finalFeedback"
+        )
+        .textContent = "";
+
 }
+
 
 function renderFinal(){
-    const area = document.getElementById("finalAnswer");
+
+    const area =
+        document.getElementById(
+            "finalAnswer"
+        );
+
+
     area.innerHTML = "";
 
+
     finalSelected.forEach(word => {
-        const span = document.createElement("span");
-        span.className = "selected-word";
-        span.textContent = word;
-        span.onclick = ()=>{
+
+        const span =
+            document.createElement("span");
+
+        span.className =
+            "selected-word";
+
+        span.textContent =
+            word;
+
+
+        span.onclick = () => {
+
             playAudio(word);
+
         };
+
+
         area.appendChild(span);
+
     });
+
 }
+
 
 function resetFinal(){
+
     loadFinal();
+
 }
 
-function checkFinal(){
-    const correct = finalQuestions[finalIndex].answer;
-    const feedback = document.getElementById("finalFeedback");
 
-    const isCorrect = finalSelected.length === correct.length &&
-        finalSelected.every((word, index) => word === correct[index]);
+function checkFinal(){
+
+    const correct =
+        finalQuestions[finalIndex].answer;
+
+
+    const feedback =
+        document.getElementById(
+            "finalFeedback"
+        );
+
+
+    const isCorrect =
+        finalSelected.length === correct.length &&
+        finalSelected.every(
+            (word,index) =>
+                word === correct[index]
+        );
+
 
     if(isCorrect){
-        feedback.textContent = "🎉 Correct!";
-        feedback.className = "feedback correct";
+
+        feedback.textContent =
+            "🎉 Correct!";
+
+        feedback.className =
+            "feedback correct";
+
+
         finalScore++;
-        document.getElementById("finalScore").textContent = finalScore + " / 5";
-        addProgress(1);
+
+
+        document
+            .getElementById(
+                "finalScore"
+            )
+            .textContent =
+            finalScore + " / 5";
+
+
         finalIndex++;
 
-        if(finalIndex < finalQuestions.length){
-            setTimeout(loadFinal, 700);
-        } else {
-            document.getElementById("unlockBox").style.display = "block";
-            playAudio("太棒了");
+
+        if(
+            finalIndex <
+            finalQuestions.length
+        ){
+
+            setTimeout(
+                loadFinal,
+                700
+            );
+
         }
-    } else {
-        feedback.textContent = "❌ Check the word order.";
-        feedback.className = "feedback incorrect";
+
+        else{
+
+            document
+                .getElementById(
+                    "unlockBox"
+                )
+                .style.display = "block";
+
+
+            playAudio("太棒了");
+
+        }
+
     }
+
+    else{
+
+        feedback.textContent =
+            "❌ Check the word order.";
+
+        feedback.className =
+            "feedback incorrect";
+
+    }
+
 }
 
 
@@ -2021,17 +3012,24 @@ function checkFinal(){
 ===================================================== */
 
 loadGame(1);
+
 loadGame(2);
+
 loadGame(3);
+
 loadGame(4);
 
 loadSentenceWriting();
+
 initWriter();
+
 loadFinal();
 
 </script>
 
+
 <!-- EXISTING SIDEBAR SCRIPT -->
+
 <script src="../script.js"></script>
 
 </body>
