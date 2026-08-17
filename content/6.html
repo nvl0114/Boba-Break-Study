@@ -85,93 +85,165 @@ p {
 
 
 /* =====================================================
-   CHAT CONVERSATION (DAVID = KIRI, MEIMEI = KANAN)
+   CHATROOM (LINE STYLE - COMPACT & SCROLLABLE)
 ===================================================== */
 
-.chat-container {
+.line-chat-box {
     max-width: 750px;
-    margin: 25px auto;
+    margin: 15px auto;
+    background: #7494c0;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    overflow: hidden;
+    border: 2px solid #5c7ba8;
 }
 
-.chat-row {
+.line-chat-header {
+    background: #5c7ba8;
+    color: white;
+    padding: 12px 16px;
+    font-size: 14px;
+    font-weight: bold;
     display: flex;
-    align-items: flex-end;
-    gap: 10px;
-    max-width: 65%;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.chat-row.left {
+.line-chat-scroll {
+    padding: 15px 12px;
+    max-height: 380px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.line-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    max-width: 80%;
+}
+
+.line-row.left {
     align-self: flex-start;
-    justify-content: flex-start;
 }
 
-.chat-row.right {
+.line-row.right {
     align-self: flex-end;
-    justify-content: flex-end;
     flex-direction: row-reverse;
 }
 
-.chat-avatar {
-    width: 40px;
-    height: 40px;
+.line-avatar {
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
     object-fit: cover;
-    background: #fff8ef;
-    border: 1px solid #d7b89c;
+    background: #fff;
+    border: 1px solid #ddd;
     flex-shrink: 0;
 }
 
-.chat-bubble {
-    background: #fff8ef;
-    border: 1.5px solid #d7b89c;
-    padding: 12px 35px 12px 18px;
-    border-radius: 16px;
+.line-content-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.line-row.right .line-content-group {
+    align-items: flex-end;
+}
+
+.line-sender-name {
+    font-size: 11px;
+    color: #e2ecff;
+    margin-bottom: 2px;
+    margin-left: 2px;
+    margin-right: 2px;
+}
+
+.line-bubble-wrapper {
+    display: flex;
+    align-items: flex-end;
+    gap: 6px;
+}
+
+.line-row.right .line-bubble-wrapper {
+    flex-direction: row-reverse;
+}
+
+.line-bubble {
+    background: #ffffff;
+    padding: 8px 30px 8px 12px;
+    border-radius: 12px;
     position: relative;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.03);
-    width: 100%;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    max-width: 280px;
 }
 
-.chat-row.right .chat-bubble {
-    background: #faedcd;
-    border-color: #c5a880;
+.line-row.right .line-bubble {
+    background: #85e249;
 }
 
-.chat-hanzi {
-    font-size: 18px;
+.line-hanzi {
+    font-size: 15px;
     font-weight: bold;
-    color: #5c4033;
+    color: #222;
 }
 
-.chat-pinyin {
-    font-size: 12px;
-    color: #8c7355;
-    margin-top: 2px;
+.line-row.right .line-hanzi {
+    color: #111;
 }
 
-.chat-meaning {
+.line-pinyin {
     font-size: 11px;
     color: #666;
-    margin-top: 2px;
+    margin-top: 1px;
 }
 
-.chat-bubble .sound-btn {
+.line-row.right .line-pinyin {
+    color: #333;
+}
+
+.line-meaning {
+    font-size: 10px;
+    color: #888;
+    margin-top: 1px;
+}
+
+.line-row.right .line-meaning {
+    color: #444;
+}
+
+.line-sound-btn {
     position: absolute;
-    right: 8px;
-    top: 8px;
-    width: 26px;
-    height: 26px;
-    font-size: 11px;
+    right: 6px;
+    top: 6px;
+    width: 22px;
+    height: 22px;
+    font-size: 9px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #b8865c;
-    color: white;
+    background: rgba(0,0,0,0.1);
+    color: #333;
     border: none;
     border-radius: 50%;
     cursor: pointer;
+    transition: 0.2s;
+}
+
+.line-sound-btn:hover {
+    background: rgba(0,0,0,0.2);
+}
+
+.line-time {
+    font-size: 9px;
+    color: #dbe4f0;
+    align-self: flex-end;
+    margin-bottom: 1px;
+    white-space: nowrap;
 }
 
 
@@ -685,7 +757,7 @@ p {
 
 
 <!-- =====================================================
-     CONVERSATION CHAT
+     CONVERSATION CHAT (LINE STYLE)
 ===================================================== -->
 
 <div class="lesson-card">
@@ -694,235 +766,362 @@ p {
 
     <p>Tap the sound button on any bubble to listen to the dialogue.</p>
 
-    <div class="chat-container">
-
-        <!-- Turn 1 -->
-        <div class="chat-row left">
-            <img src="../assets/david.png" class="chat-avatar" alt="David">
-            <div class="chat-bubble">
-                <div class="chat-hanzi">您好！</div>
-                <div class="chat-pinyin">Nín hǎo!</div>
-                <div class="chat-meaning">Hello!</div>
-                <button class="sound-btn" onclick="playAudio('您好！')">🔊</button>
-            </div>
+    <div class="line-chat-box">
+        <div class="line-chat-header">
+            <span>💬 Self-Introduction Chatroom</span>
+            <span style="font-size:11px; opacity:0.8;">Online</span>
         </div>
 
-        <!-- Turn 2 -->
-        <div class="chat-row right">
-            <div class="chat-bubble">
-                <div class="chat-hanzi">您好！</div>
-                <div class="chat-pinyin">Nín hǎo!</div>
-                <div class="chat-meaning">Hello!</div>
-                <button class="sound-btn" onclick="playAudio('您好！')">🔊</button>
-            </div>
-            <img src="../assets/meimei.png" class="chat-avatar" alt="Meimei">
-        </div>
+        <div class="line-chat-scroll">
 
-        <!-- Turn 3 -->
-        <div class="chat-row left">
-            <img src="../assets/david.png" class="chat-avatar" alt="David">
-            <div class="chat-bubble">
-                <div class="chat-hanzi">請問，您叫什麼名字？</div>
-                <div class="chat-pinyin">Qǐngwèn, nín jiào shénme míngzi?</div>
-                <div class="chat-meaning">May I ask, what is your name?</div>
-                <button class="sound-btn" onclick="playAudio('請問，您叫什麼名字？')">🔊</button>
+            <!-- Turn 1 (David - Left) -->
+            <div class="line-row left">
+                <img src="../assets/david.png" class="line-avatar" alt="David">
+                <div class="line-content-group">
+                    <span class="line-sender-name">David</span>
+                    <div class="line-bubble-wrapper">
+                        <div class="line-bubble">
+                            <div class="line-hanzi">您好！</div>
+                            <div class="line-pinyin">Nín hǎo!</div>
+                            <div class="line-meaning">Hello!</div>
+                            <button class="line-sound-btn" onclick="playAudio('您好！')">🔊</button>
+                        </div>
+                        <span class="line-time">08:00</span>
+                    </div>
+                </div>
             </div>
-        </div>
 
-        <!-- Turn 4 -->
-        <div class="chat-row right">
-            <div class="chat-bubble">
-                <div class="chat-hanzi">我叫美美。您呢？</div>
-                <div class="chat-pinyin">Wǒ jiào Měiměi. Nín ne?</div>
-                <div class="chat-meaning">My name is Meimei. How about you?</div>
-                <button class="sound-btn" onclick="playAudio('我叫美美。您呢？')">🔊</button>
+            <!-- Turn 2 (Meimei - Right) -->
+            <div class="line-row right">
+                <img src="../assets/meimei.png" class="line-avatar" alt="Meimei">
+                <div class="line-content-group">
+                    <span class="line-sender-name">Meimei</span>
+                    <div class="line-bubble-wrapper">
+                        <div class="line-bubble">
+                            <div class="line-hanzi">您好！</div>
+                            <div class="line-pinyin">Nín hǎo!</div>
+                            <div class="line-meaning">Hello!</div>
+                            <button class="line-sound-btn" onclick="playAudio('您好！')">🔊</button>
+                        </div>
+                        <span class="line-time">08:00</span>
+                    </div>
+                </div>
             </div>
-            <img src="../assets/meimei.png" class="chat-avatar" alt="Meimei">
-        </div>
 
-        <!-- Turn 5 -->
-        <div class="chat-row left">
-            <img src="../assets/david.png" class="chat-avatar" alt="David">
-            <div class="chat-bubble">
-                <div class="chat-hanzi">我叫大衛。</div>
-                <div class="chat-pinyin">Wǒ jiào Dàwèi.</div>
-                <div class="chat-meaning">My name is David.</div>
-                <button class="sound-btn" onclick="playAudio('我叫大衛。')">🔊</button>
+            <!-- Turn 3 (David - Left) -->
+            <div class="line-row left">
+                <img src="../assets/david.png" class="line-avatar" alt="David">
+                <div class="line-content-group">
+                    <span class="line-sender-name">David</span>
+                    <div class="line-bubble-wrapper">
+                        <div class="line-bubble">
+                            <div class="line-hanzi">請問，您叫什麼名字？</div>
+                            <div class="line-pinyin">Qǐngwèn, nín jiào shénme míngzi?</div>
+                            <div class="line-meaning">May I ask, what is your name?</div>
+                            <button class="line-sound-btn" onclick="playAudio('請問，您叫什麼名字？')">🔊</button>
+                        </div>
+                        <span class="line-time">08:01</span>
+                    </div>
+                </div>
             </div>
-        </div>
 
-        <!-- Turn 6 -->
-        <div class="chat-row right">
-            <div class="chat-bubble">
-                <div class="chat-hanzi">您貴姓？</div>
-                <div class="chat-pinyin">Nín guìxìng?</div>
-                <div class="chat-meaning">What is your surname?</div>
-                <button class="sound-btn" onclick="playAudio('您貴姓？')">🔊</button>
+            <!-- Turn 4 (Meimei - Right) -->
+            <div class="line-row right">
+                <img src="../assets/meimei.png" class="line-avatar" alt="Meimei">
+                <div class="line-content-group">
+                    <span class="line-sender-name">Meimei</span>
+                    <div class="line-bubble-wrapper">
+                        <div class="line-bubble">
+                            <div class="line-hanzi">我叫美美。您呢？</div>
+                            <div class="line-pinyin">Wǒ jiào Měiměi. Nín ne?</div>
+                            <div class="line-meaning">My name is Meimei. How about you?</div>
+                            <button class="line-sound-btn" onclick="playAudio('我叫美美。您呢？')">🔊</button>
+                        </div>
+                        <span class="line-time">08:01</span>
+                    </div>
+                </div>
             </div>
-            <img src="../assets/meimei.png" class="chat-avatar" alt="Meimei">
-        </div>
 
-        <!-- Turn 7 -->
-        <div class="chat-row left">
-            <img src="../assets/david.png" class="chat-avatar" alt="David">
-            <div class="chat-bubble">
-                <div class="chat-hanzi">我姓林。您姓什麼？</div>
-                <div class="chat-pinyin">Wǒ xìng Lín. Nín xìng shénme?</div>
-                <div class="chat-meaning">My surname is Lin. What is your surname?</div>
-                <button class="sound-btn" onclick="playAudio('我姓林。您姓什麼？')">🔊</button>
+            <!-- Turn 5 (David - Left) -->
+            <div class="line-row left">
+                <img src="../assets/david.png" class="line-avatar" alt="David">
+                <div class="line-content-group">
+                    <span class="line-sender-name">David</span>
+                    <div class="line-bubble-wrapper">
+                        <div class="line-bubble">
+                            <div class="line-hanzi">我叫大衛。</div>
+                            <div class="line-pinyin">Wǒ jiào Dàwèi.</div>
+                            <div class="line-meaning">My name is David.</div>
+                            <button class="line-sound-btn" onclick="playAudio('我叫大衛。')">🔊</button>
+                        </div>
+                        <span class="line-time">08:02</span>
+                    </div>
+                </div>
             </div>
-        </div>
 
-        <!-- Turn 8 -->
-        <div class="chat-row right">
-            <div class="chat-bubble">
-                <div class="chat-hanzi">我姓王。</div>
-                <div class="chat-pinyin">Wǒ xìng Wáng.</div>
-                <div class="chat-meaning">My surname is Wang.</div>
-                <button class="sound-btn" onclick="playAudio('我姓王。')">🔊</button>
+            <!-- Turn 6 (Meimei - Right) -->
+            <div class="line-row right">
+                <img src="../assets/meimei.png" class="line-avatar" alt="Meimei">
+                <div class="line-content-group">
+                    <span class="line-sender-name">Meimei</span>
+                    <div class="line-bubble-wrapper">
+                        <div class="line-bubble">
+                            <div class="line-hanzi">您貴姓？</div>
+                            <div class="line-pinyin">Nín guìxìng?</div>
+                            <div class="line-meaning">What is your surname?</div>
+                            <button class="line-sound-btn" onclick="playAudio('您貴姓？')">🔊</button>
+                        </div>
+                        <span class="line-time">08:02</span>
+                    </div>
+                </div>
             </div>
-            <img src="../assets/meimei.png" class="chat-avatar" alt="Meimei">
-        </div>
 
-        <!-- Turn 9 -->
-        <div class="chat-row left">
-            <img src="../assets/david.png" class="chat-avatar" alt="David">
-            <div class="chat-bubble">
-                <div class="chat-hanzi">您是哪國人？</div>
-                <div class="chat-pinyin">Nín shì nǎ guó rén?</div>
-                <div class="chat-meaning">What country are you from?</div>
-                <button class="sound-btn" onclick="playAudio('您是哪國人？')">🔊</button>
+            <!-- Turn 7 (David - Left) -->
+            <div class="line-row left">
+                <img src="../assets/david.png" class="line-avatar" alt="David">
+                <div class="line-content-group">
+                    <span class="line-sender-name">David</span>
+                    <div class="line-bubble-wrapper">
+                        <div class="line-bubble">
+                            <div class="line-hanzi">我姓林。您姓什麼？</div>
+                            <div class="line-pinyin">Wǒ xìng Lín. Nín xìng shénme?</div>
+                            <div class="line-meaning">My surname is Lin. What is your surname?</div>
+                            <button class="line-sound-btn" onclick="playAudio('我姓林。您姓什麼？')">🔊</button>
+                        </div>
+                        <span class="line-time">08:03</span>
+                    </div>
+                </div>
             </div>
-        </div>
 
-        <!-- Turn 10 -->
-        <div class="chat-row right">
-            <div class="chat-bubble">
-                <div class="chat-hanzi">我是台灣人。您呢？</div>
-                <div class="chat-pinyin">Wǒ shì Táiwān rén. Nín ne?</div>
-                <div class="chat-meaning">I’m Taiwanese. How about you?</div>
-                <button class="sound-btn" onclick="playAudio('我是台灣人。您呢？')">🔊</button>
+            <!-- Turn 8 (Meimei - Right) -->
+            <div class="line-row right">
+                <img src="../assets/meimei.png" class="line-avatar" alt="Meimei">
+                <div class="line-content-group">
+                    <span class="line-sender-name">Meimei</span>
+                    <div class="line-bubble-wrapper">
+                        <div class="line-bubble">
+                            <div class="line-hanzi">我姓王。</div>
+                            <div class="line-pinyin">Wǒ xìng Wáng.</div>
+                            <div class="line-meaning">My surname is Wang.</div>
+                            <button class="line-sound-btn" onclick="playAudio('我姓王。')">🔊</button>
+                        </div>
+                        <span class="line-time">08:03</span>
+                    </div>
+                </div>
             </div>
-            <img src="../assets/meimei.png" class="chat-avatar" alt="Meimei">
-        </div>
 
-        <!-- Turn 11 -->
-        <div class="chat-row left">
-            <img src="../assets/david.png" class="chat-avatar" alt="David">
-            <div class="chat-bubble">
-                <div class="chat-hanzi">我來自美國。</div>
-                <div class="chat-pinyin">Wǒ láizì Měiguó.</div>
-                <div class="chat-meaning">I’m from the United States.</div>
-                <button class="sound-btn" onclick="playAudio('我來自美國。')">🔊</button>
+            <!-- Turn 9 (David - Left) -->
+            <div class="line-row left">
+                <img src="../assets/david.png" class="line-avatar" alt="David">
+                <div class="line-content-group">
+                    <span class="line-sender-name">David</span>
+                    <div class="line-bubble-wrapper">
+                        <div class="line-bubble">
+                            <div class="line-hanzi">您是哪國人？</div>
+                            <div class="line-pinyin">Nín shì nǎ guó rén?</div>
+                            <div class="line-meaning">What country are you from?</div>
+                            <button class="line-sound-btn" onclick="playAudio('您是哪國人？')">🔊</button>
+                        </div>
+                        <span class="line-time">08:04</span>
+                    </div>
+                </div>
             </div>
-        </div>
 
-        <!-- Turn 12 -->
-        <div class="chat-row right">
-            <div class="chat-bubble">
-                <div class="chat-hanzi">您幾歲？</div>
-                <div class="chat-pinyin">Nín jǐ suì?</div>
-                <div class="chat-meaning">How old are you?</div>
-                <button class="sound-btn" onclick="playAudio('您幾歲？')">🔊</button>
+            <!-- Turn 10 (Meimei - Right) -->
+            <div class="line-row right">
+                <img src="../assets/meimei.png" class="line-avatar" alt="Meimei">
+                <div class="line-content-group">
+                    <span class="line-sender-name">Meimei</span>
+                    <div class="line-bubble-wrapper">
+                        <div class="line-bubble">
+                            <div class="line-hanzi">我是台灣人。您呢？</div>
+                            <div class="line-pinyin">Wǒ shì Táiwān rén. Nín ne?</div>
+                            <div class="line-meaning">I’m Taiwanese. How about you?</div>
+                            <button class="line-sound-btn" onclick="playAudio('我是台灣人。您呢？')">🔊</button>
+                        </div>
+                        <span class="line-time">08:04</span>
+                    </div>
+                </div>
             </div>
-            <img src="../assets/meimei.png" class="chat-avatar" alt="Meimei">
-        </div>
 
-        <!-- Turn 13 -->
-        <div class="chat-row left">
-            <img src="../assets/david.png" class="chat-avatar" alt="David">
-            <div class="chat-bubble">
-                <div class="chat-hanzi">我二十歲。您呢？</div>
-                <div class="chat-pinyin">Wǒ èrshí suì. Nín ne?</div>
-                <div class="chat-meaning">I’m 20 years old. How about you?</div>
-                <button class="sound-btn" onclick="playAudio('我二十歲。您呢？')">🔊</button>
+            <!-- Turn 11 (David - Left) -->
+            <div class="line-row left">
+                <img src="../assets/david.png" class="line-avatar" alt="David">
+                <div class="line-content-group">
+                    <span class="line-sender-name">David</span>
+                    <div class="line-bubble-wrapper">
+                        <div class="line-bubble">
+                            <div class="line-hanzi">我來自美國。</div>
+                            <div class="line-pinyin">Wǒ láizì Měiguó.</div>
+                            <div class="line-meaning">I’m from the United States.</div>
+                            <button class="line-sound-btn" onclick="playAudio('我來自美國。')">🔊</button>
+                        </div>
+                        <span class="line-time">08:05</span>
+                    </div>
+                </div>
             </div>
-        </div>
 
-        <!-- Turn 14 -->
-        <div class="chat-row right">
-            <div class="chat-bubble">
-                <div class="chat-hanzi">我二十二歲。</div>
-                <div class="chat-pinyin">Wǒ èrshí'èr suì.</div>
-                <div class="chat-meaning">I’m 22 years old.</div>
-                <button class="sound-btn" onclick="playAudio('我二十二歲。')">🔊</button>
+            <!-- Turn 12 (Meimei - Right) -->
+            <div class="line-row right">
+                <img src="../assets/meimei.png" class="line-avatar" alt="Meimei">
+                <div class="line-content-group">
+                    <span class="line-sender-name">Meimei</span>
+                    <div class="line-bubble-wrapper">
+                        <div class="line-bubble">
+                            <div class="line-hanzi">您幾歲？</div>
+                            <div class="line-pinyin">Nín jǐ suì?</div>
+                            <div class="line-meaning">How old are you?</div>
+                            <button class="line-sound-btn" onclick="playAudio('您幾歲？')">🔊</button>
+                        </div>
+                        <span class="line-time">08:05</span>
+                    </div>
+                </div>
             </div>
-            <img src="../assets/meimei.png" class="chat-avatar" alt="Meimei">
-        </div>
 
-        <!-- Turn 15 -->
-        <div class="chat-row left">
-            <img src="../assets/david.png" class="chat-avatar" alt="David">
-            <div class="chat-bubble">
-                <div class="chat-hanzi">您的愛好是什麼？</div>
-                <div class="chat-pinyin">Nín de àihào shì shénme?</div>
-                <div class="chat-meaning">What are your hobbies?</div>
-                <button class="sound-btn" onclick="playAudio('您的愛好是什麼？')">🔊</button>
+            <!-- Turn 13 (David - Left) -->
+            <div class="line-row left">
+                <img src="../assets/david.png" class="line-avatar" alt="David">
+                <div class="line-content-group">
+                    <span class="line-sender-name">David</span>
+                    <div class="line-bubble-wrapper">
+                        <div class="line-bubble">
+                            <div class="line-hanzi">我二十歲。您呢？</div>
+                            <div class="line-pinyin">Wǒ èrshí suì. Nín ne?</div>
+                            <div class="line-meaning">I’m 20 years old. How about you?</div>
+                            <button class="line-sound-btn" onclick="playAudio('我二十歲。您呢？')">🔊</button>
+                        </div>
+                        <span class="line-time">08:06</span>
+                    </div>
+                </div>
             </div>
-        </div>
 
-        <!-- Turn 16 -->
-        <div class="chat-row right">
-            <div class="chat-bubble">
-                <div class="chat-hanzi">我的愛好是看電影。您呢？</div>
-                <div class="chat-pinyin">Wǒ de àihào shì kàn diànyǐng. Nín ne?</div>
-                <div class="chat-meaning">My hobby is watching movies. How about you?</div>
-                <button class="sound-btn" onclick="playAudio('我的愛好是看電影。您呢？')">🔊</button>
+            <!-- Turn 14 (Meimei - Right) -->
+            <div class="line-row right">
+                <img src="../assets/meimei.png" class="line-avatar" alt="Meimei">
+                <div class="line-content-group">
+                    <span class="line-sender-name">Meimei</span>
+                    <div class="line-bubble-wrapper">
+                        <div class="line-bubble">
+                            <div class="line-hanzi">我二十二歲。</div>
+                            <div class="line-pinyin">Wǒ èrshí'èr suì.</div>
+                            <div class="line-meaning">I’m 22 years old.</div>
+                            <button class="line-sound-btn" onclick="playAudio('我二十二歲。')">🔊</button>
+                        </div>
+                        <span class="line-time">08:06</span>
+                    </div>
+                </div>
             </div>
-            <img src="../assets/meimei.png" class="chat-avatar" alt="Meimei">
-        </div>
 
-        <!-- Turn 17 -->
-        <div class="chat-row left">
-            <img src="../assets/david.png" class="chat-avatar" alt="David">
-            <div class="chat-bubble">
-                <div class="chat-hanzi">我喜歡聽音樂。</div>
-                <div class="chat-pinyin">Wǒ xǐhuān tīng yīnyuè.</div>
-                <div class="chat-meaning">I like listening to music.</div>
-                <button class="sound-btn" onclick="playAudio('我喜歡聽音樂。')">🔊</button>
+            <!-- Turn 15 (David - Left) -->
+            <div class="line-row left">
+                <img src="../assets/david.png" class="line-avatar" alt="David">
+                <div class="line-content-group">
+                    <span class="line-sender-name">David</span>
+                    <div class="line-bubble-wrapper">
+                        <div class="line-bubble">
+                            <div class="line-hanzi">您的愛好是什麼？</div>
+                            <div class="line-pinyin">Nín de àihào shì shénme?</div>
+                            <div class="line-meaning">What are your hobbies?</div>
+                            <button class="line-sound-btn" onclick="playAudio('您的愛好是什麼？')">🔊</button>
+                        </div>
+                        <span class="line-time">08:07</span>
+                    </div>
+                </div>
             </div>
-        </div>
 
-        <!-- Turn 18 -->
-        <div class="chat-row right">
-            <div class="chat-bubble">
-                <div class="chat-hanzi">很高興認識您！</div>
-                <div class="chat-pinyin">Hěn gāoxìng rènshi nín!</div>
-                <div class="chat-meaning">Nice to meet you!</div>
-                <button class="sound-btn" onclick="playAudio('很高興認識您！')">🔊</button>
+            <!-- Turn 16 (Meimei - Right) -->
+            <div class="line-row right">
+                <img src="../assets/meimei.png" class="line-avatar" alt="Meimei">
+                <div class="line-content-group">
+                    <span class="line-sender-name">Meimei</span>
+                    <div class="line-bubble-wrapper">
+                        <div class="line-bubble">
+                            <div class="line-hanzi">我的愛好是看電影。您呢？</div>
+                            <div class="line-pinyin">Wǒ de àihào shì kàn diànyǐng. Nín ne?</div>
+                            <div class="line-meaning">My hobby is watching movies. How about you?</div>
+                            <button class="line-sound-btn" onclick="playAudio('我的愛好是看電影。您呢？')">🔊</button>
+                        </div>
+                        <span class="line-time">08:07</span>
+                    </div>
+                </div>
             </div>
-            <img src="../assets/meimei.png" class="chat-avatar" alt="Meimei">
-        </div>
 
-        <!-- Turn 19 -->
-        <div class="chat-row left">
-            <img src="../assets/david.png" class="chat-avatar" alt="David">
-            <div class="chat-bubble">
-                <div class="chat-hanzi">我也很高興認識您！再見！</div>
-                <div class="chat-pinyin">Wǒ yě hěn gāoxìng rènshi nín! Zàijiàn!</div>
-                <div class="chat-meaning">Nice to meet you too! Goodbye!</div>
-                <button class="sound-btn" onclick="playAudio('我也很高興認識您！再見！')">🔊</button>
+            <!-- Turn 17 (David - Left) -->
+            <div class="line-row left">
+                <img src="../assets/david.png" class="line-avatar" alt="David">
+                <div class="line-content-group">
+                    <span class="line-sender-name">David</span>
+                    <div class="line-bubble-wrapper">
+                        <div class="line-bubble">
+                            <div class="line-hanzi">我喜歡聽音樂。</div>
+                            <div class="line-pinyin">Wǒ xǐhuān tīng yīnyuè.</div>
+                            <div class="line-meaning">I like listening to music.</div>
+                            <button class="line-sound-btn" onclick="playAudio('我喜歡聽音樂。')">🔊</button>
+                        </div>
+                        <span class="line-time">08:08</span>
+                    </div>
+                </div>
             </div>
-        </div>
 
-        <!-- Turn 20 -->
-        <div class="chat-row right">
-            <div class="chat-bubble">
-                <div class="chat-hanzi">再見！</div>
-                <div class="chat-pinyin">Zàijiàn!</div>
-                <div class="chat-meaning">Goodbye!</div>
-                <button class="sound-btn" onclick="playAudio('再見！')">🔊</button>
+            <!-- Turn 18 (Meimei - Right) -->
+            <div class="line-row right">
+                <img src="../assets/meimei.png" class="line-avatar" alt="Meimei">
+                <div class="line-content-group">
+                    <span class="line-sender-name">Meimei</span>
+                    <div class="line-bubble-wrapper">
+                        <div class="line-bubble">
+                            <div class="line-hanzi">很高興認識您！</div>
+                            <div class="line-pinyin">Hěn gāoxìng rènshi nín!</div>
+                            <div class="line-meaning">Nice to meet you!</div>
+                            <button class="line-sound-btn" onclick="playAudio('很高興認識您！')">🔊</button>
+                        </div>
+                        <span class="line-time">08:08</span>
+                    </div>
+                </div>
             </div>
-            <img src="../assets/meimei.png" class="chat-avatar" alt="Meimei">
-        </div>
 
+            <!-- Turn 19 (David - Left) -->
+            <div class="line-row left">
+                <img src="../assets/david.png" class="line-avatar" alt="David">
+                <div class="line-content-group">
+                    <span class="line-sender-name">David</span>
+                    <div class="line-bubble-wrapper">
+                        <div class="line-bubble">
+                            <div class="line-hanzi">我也很高興認識您！再見！</div>
+                            <div class="line-pinyin">Wǒ yě hěn gāoxìng rènshi nín! Zàijiàn!</div>
+                            <div class="line-meaning">Nice to meet you too! Goodbye!</div>
+                            <button class="line-sound-btn" onclick="playAudio('我也很高興認識您！再見！')">🔊</button>
+                        </div>
+                        <span class="line-time">08:09</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Turn 20 (Meimei - Right) -->
+            <div class="line-row right">
+                <img src="../assets/meimei.png" class="line-avatar" alt="Meimei">
+                <div class="line-content-group">
+                    <span class="line-sender-name">Meimei</span>
+                    <div class="line-bubble-wrapper">
+                        <div class="line-bubble">
+                            <div class="line-hanzi">再見！</div>
+                            <div class="line-pinyin">Zàijiàn!</div>
+                            <div class="line-meaning">Goodbye!</div>
+                            <button class="line-sound-btn" onclick="playAudio('再見！')">🔊</button>
+                        </div>
+                        <span class="line-time">08:09</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </div>
 
 </div>
 
 
 <!-- =====================================================
-     GRAMMAR CARD (SLIDER - REFINED)
+     GRAMMAR CARD (SLIDER - REFINED & CLEAN)
 ===================================================== -->
 
 <div class="grammar-card">
@@ -933,13 +1132,13 @@ p {
 
         <!-- Slide 1 -->
         <div class="grammar-slide active" id="gSlide0">
-            <h3>1. Asking Names & Surnames (叫什麼名字 & 貴姓)</h3>
+            <h3>1. Asking Names, Surnames & Polite Inquiries (叫什麼名字 & 貴姓)</h3>
             <div class="grammar-box-content">
                 <div class="grammar-point-item">
                     <strong>叫 (jiào) & 什麼名字 (shénme míngzi):</strong> Means "to be called" + "what name". Structure: <code>Name + 叫 + Name</code>. E.g., <code>您叫什麼名字？</code> (What is your name?)
                 </div>
                 <div class="grammar-point-item">
-                    <strong>貴姓 (guìxìng):</strong> Polite way to ask someone's surname. Literally means "noble surname". E.g., <code>您貴姓？</code> (What is your honorable surname?). Response uses <code>姓 + Surname</code> (E.g., <code>我姓林</code>).
+                    <strong>貴姓 (guìxìng):</strong> Highly formal and polite way to ask someone's surname. Literally translates to "noble surname". E.g., <code>您貴姓？</code> (What is your honorable surname?). Response uses <code>姓 + Surname</code> (E.g., <code>我姓林</code>).
                 </div>
             </div>
         </div>
