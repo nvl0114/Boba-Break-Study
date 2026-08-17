@@ -13,7 +13,7 @@
 
     <style>
         /* =====================================================
-           PENGUMUMAN (SOCIAL POST STYLE) - GANTI ISI CARD VIDEO
+           PENGUMUMAN (SOCIAL POST STYLE) - Disesuaikan agar lebih besar
         ===================================================== */
         .announcement-in-card {
             width: 100%;
@@ -23,13 +23,14 @@
         .post-header {
             display: flex;
             align-items: center;
-            gap: 11px;
-            margin-bottom: 12px;
+            gap: 15px; /* Sedikit dilebarkan */
+            margin-bottom: 15px;
         }
 
         .post-avatar {
-            width: 40px; 
-            height: 40px;
+            /* AVATAR DIPERBESAR (dari 40px ke 50px) */
+            width: 50px; 
+            height: 50px;
             border-radius: 50%;
             object-fit: cover;
             border: 2px solid #f0dfce;
@@ -41,9 +42,10 @@
         }
 
         .post-name {
-            font-weight: 800; /* Lebih tebal */
-            color: #0f1419; /* Warna teks Twitter */
-            font-size: 15px;
+            /* NAMA DIPERBESAR (dari 15px ke 17px) */
+            font-weight: 800;
+            color: #0f1419;
+            font-size: 17px;
             display: flex;
             align-items: center;
         }
@@ -51,71 +53,75 @@
         .verified {
             display: inline-flex;
             align-items: center; justify-content: center;
-            width: 14px; height: 14px; margin-left: 4px;
-            border-radius: 50%; background: #1d9bf0; /* Biru Twitter */
-            color: white; font-size: 9px;
+            /* Ikon verifikasi disesuaikan */
+            width: 16px; height: 16px; margin-left: 5px;
+            border-radius: 50%; background: #1d9bf0;
+            color: white; font-size: 10px;
         }
 
         .post-handle {
-            color: #536471; /* Warna handle Twitter */
-            font-size: 14px;
+            /* HANDLE DIPERBESAR (dari 14px ke 15px) */
+            color: #536471;
+            font-size: 15px;
             font-weight: 400;
+            margin-top: 2px;
         }
 
         .post-content {
-            margin-bottom: 12px;
+            margin-bottom: 15px;
         }
 
         .post-content p {
             margin: 0;
             color: #0f1419;
-            font-size: 15px;
+            /* ISI KONTEN DIPERBESAR (dari 15px ke 17px) */
+            font-size: 17px;
             line-height: 1.6;
             white-space: pre-line;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
 
         .post-date-time {
+            /* TANGGAL DIPERBESAR (dari 14px ke 15px) */
             color: #536471;
-            font-size: 14px;
-            margin-bottom: 12px;
+            font-size: 15px;
+            margin-bottom: 15px;
         }
 
         /* Gaya Ikon Twitter/X */
         .post-actions {
             display: flex;
             justify-content: space-between;
-            max-width: 425px; /* Lebar aksi seperti di X */
+            max-width: 450px; /* Sedikit dilebarkan */
             border-top: 1px solid #eff3f4;
-            padding-top: 12px;
-            margin-top: 4px;
+            padding-top: 15px;
+            margin-top: 5px;
         }
 
         .post-action {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             color: #536471;
-            font-size: 13px;
+            /* TOMBOL AKSI DIPERBESAR (dari 13px ke 15px) */
+            font-size: 15px;
             cursor: pointer;
             background: none;
             border: none;
             padding: 0;
             transition: color 0.2s;
+            font-weight: 500;
         }
 
         /* Warna hover ikon ala Twitter */
-        .post-action.reply:hover { color: #1d9bf0; } /* Biru */
-        .post-action.retweet:hover { color: #00ba7c; } /* Hijau */
-        .post-action.like:hover { color: #f91880; } /* Pink */
-        .post-action.share:hover { color: #1d9bf0; } /* Biru */
+        .post-action.reply:hover { color: #1d9bf0; }
+        .post-action.retweet:hover { color: #00ba7c; }
+        .post-action.like:hover { color: #f91880; }
+        .post-action.share:hover { color: #1d9bf0; }
 
         .post-action i {
-            font-size: 18px;
-        }
-
-        .post-action span {
-            font-weight: 500;
+            /* IKON DIPERBESAR (dari 18px ke 20px) */
+            font-size: 20px;
         }
 
         /* =====================================================
@@ -145,7 +151,11 @@
         @media(max-width:700px) {
             .course3-slideshow { height: 160px; }
             .post-actions { max-width: 100%; }
-            .post-action i { font-size: 16px; }
+            /* Sedikit penyesuaian ukuran di mobile agar tidak terlalu besar */
+            .post-avatar { width: 45px; height: 45px; }
+            .post-name { font-size: 16px; }
+            .post-handle, .post-content p, .post-date-time, .post-action { font-size: 16px; }
+            .post-action i { font-size: 18px; }
         }
     </style>
 </head>
@@ -168,7 +178,7 @@
         <section class="section-container">
             
             <!-- =================================================
-                 CARD 1: PENGUMUMAN (Gaya Twitter/X)
+                 CARD 1: PENGUMUMAN (Versi Diperbesar)
             ================================================= -->
             <article class="card video-card">
                 <div class="announcement-in-card">
@@ -191,7 +201,7 @@
                         12:46 PM · Aug 17, 2026
                     </div>
 
-                    <!-- Tombol Aksi (Reply, Retweet, Like, Share) -->
+                    <!-- Tombol Aksi -->
                     <div class="post-actions">
                         <button class="post-action reply">
                             <i class="far fa-comment"></i>
@@ -206,7 +216,7 @@
                             <span>994</span>
                         </button>
                         <button class="post-action share">
-                            <i class="far fa-envelope"></i> <!-- Ikon Amplop (Share) -->
+                            <i class="far fa-envelope"></i>
                         </button>
                     </div>
                 </div>
