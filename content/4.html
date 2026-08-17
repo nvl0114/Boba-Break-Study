@@ -14,6 +14,9 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 <!-- Hanzi Writer CDN -->
 <script src="https://cdn.jsdelivr.net/npm/hanzi-writer@3.5.0/dist/hanzi-writer.min.js"></script>
 
+<!-- Lesson Data Script -->
+<script src="../lesson.js"></script>
+
 <style>
 
 /* =====================================================
@@ -137,26 +140,28 @@ p {
 
 .pattern-display {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
+    flex-direction: column;
+    gap: 12px;
     margin: 20px 0;
-    flex-wrap: wrap;
 }
 
-.pattern-box {
-    padding: 12px 18px;
-    border-radius: 14px;
-    font-weight: bold;
-    font-size: 18px;
-    border: 1.5px solid #d7b89c;
+.pattern-item {
     background: #fff8ef;
-    color: #b8865c;
+    padding: 12px 15px;
+    border-radius: 12px;
+    border: 1.5px solid #d7b89c;
 }
 
-.pattern-symbol {
-    font-size: 20px;
-    color: #999;
+.pattern-code {
+    font-weight: bold;
+    color: #b8865c;
+    font-size: 16px;
+    margin-bottom: 4px;
+}
+
+.pattern-desc {
+    font-size: 13px;
+    color: #5c4033;
 }
 
 .grammar-explanation {
@@ -671,11 +676,6 @@ p {
         font-size: 23px;
     }
 
-    .pattern-box {
-        padding: 10px 13px;
-        font-size: 16px;
-    }
-
     .word-btn {
         padding: 8px 12px;
         font-size: 16px;
@@ -761,50 +761,72 @@ p {
 
     <div class="grammar-slider-container">
 
-        <!-- SLIDE 1: Kartu Pertama -->
+        <!-- SLIDE 1: Kartu Pertama (Adjective Patterns) -->
         <div class="grammar-slide active-slide" id="slide-1">
             <h3>1. Descriptive State Patterns (Adjectives)</h3>
-            <p>Use <strong>很 (hěn)</strong>, negatives, questions, and affirmative-negative forms with adjectives.</p>
+            <p>Master descriptive state sentences using <strong>很 (hěn)</strong>, negatives, questions, and affirmative-negative structures.</p>
 
-            <div class="pattern-display" style="font-size: 15px; flex-direction: column; align-items: flex-start; background: #fff8ef; padding: 15px; border-radius: 14px; border: 1.5px solid #d7b89c;">
-                <div>• S + 很 + Adj</div>
-                <div>• S + 不 + Adj</div>
-                <div>• S + 很 + Adj + 嗎？</div>
-                <div>• S + Adj + 不 + Adj</div>
+            <div class="pattern-display">
+                <div class="pattern-item">
+                    <div class="pattern-code">• S + 很 + Adj</div>
+                    <div class="pattern-desc">Used to describe a positive state or quality. (e.g., The painting is very good-looking.)</div>
+                </div>
+                <div class="pattern-item">
+                    <div class="pattern-code">• S + 不 + Adj</div>
+                    <div class="pattern-desc">Used for negative state descriptions without 很. (e.g., The child is not cute.)</div>
+                </div>
+                <div class="pattern-item">
+                    <div class="pattern-code">• S + 很 + Adj + 嗎？</div>
+                    <div class="pattern-desc">Used to form a yes/no question inquiring about a state. (e.g., Is the picture very good-looking?)</div>
+                </div>
+                <div class="pattern-item">
+                    <div class="pattern-code">• S + Adj + 不 + Adj</div>
+                    <div class="pattern-desc">A-not-A question form inquiring about a state directly. (e.g., Is the work busy or not busy?)</div>
+                </div>
             </div>
 
             <div class="grammar-explanation">
-                <p><strong>Answering:</strong> 很 + Adj , 不 + Adj</p>
+                <p><strong>Answering Rule:</strong> Answer descriptive state questions using <strong>很 + Adj</strong> for affirmative, or <strong>不 + Adj</strong> for negative.</p>
             </div>
 
             <div class="example-sentence">
                 <div class="example-hanzi">
-                    <span onclick="playAudio('這')">這</span>
-                    <span onclick="playAudio('個')">個</span>
                     <span onclick="playAudio('畫')">畫</span>
                     <span onclick="playAudio('很')">很</span>
                     <span onclick="playAudio('好看')">好看</span>
                 </div>
-                <div>Zhè ge huà hěn hǎokàn.</div>
-                <div>This painting is very good-looking.</div>
-                <button class="sound-btn" onclick="playAudio('這個畫很好看')">🔊</button>
+                <div>Huà hěn hǎokàn.</div>
+                <div>The painting is very good-looking.</div>
+                <button class="sound-btn" onclick="playAudio('畫很好看')">🔊</button>
             </div>
         </div>
 
-        <!-- SLIDE 2: Kartu Kedua -->
+        <!-- SLIDE 2: Kartu Kedua (Action Patterns) -->
         <div class="grammar-slide" id="slide-2">
             <h3>2. Action Patterns (Verbs + Objects)</h3>
             <p>Handle action patterns with adverbs, negatives, questions, and A-not-A variations.</p>
 
-            <div class="pattern-display" style="font-size: 15px; flex-direction: column; align-items: flex-start; background: #fff8ef; padding: 15px; border-radius: 14px; border: 1.5px solid #d7b89c;">
-                <div>• S + 很 + V + O</div>
-                <div>• S + 不 + V + O (back to basic pattern)</div>
-                <div>• S + 很 + V + O + 嗎</div>
-                <div>• S + V + 不 + V + O (back to basic pattern)</div>
+            <div class="pattern-display">
+                <div class="pattern-item">
+                    <div class="pattern-code">• S + 很 + V + O</div>
+                    <div class="pattern-desc">Used with psychological or preference verbs modified by 很. (e.g., I really like cats.)</div>
+                </div>
+                <div class="pattern-item">
+                    <div class="pattern-code">• S + 不 + V + O</div>
+                    <div class="pattern-desc">Negative action pattern reverting to the basic structure. (e.g., He does not love dogs.)</div>
+                </div>
+                <div class="pattern-item">
+                    <div class="pattern-code">• S + 很 + V + O + 嗎</div>
+                    <div class="pattern-desc">Interrogative action pattern using particle 嗎. (e.g., Do you want Chinese?)</div>
+                </div>
+                <div class="pattern-item">
+                    <div class="pattern-code">• S + V + 不 + V + O</div>
+                    <div class="pattern-desc">A-not-A action question form reverting to basic pattern. (e.g., Do you understand or not understand?)</div>
+                </div>
             </div>
 
             <div class="grammar-explanation">
-                <p><strong>Answering:</strong> 很 + Adj , 不 + Adj (or responding directly to the predicate action)</p>
+                <p><strong>Answering Rule:</strong> Answer state or preference questions using <strong>很 + Adj</strong>, or respond directly to the predicate action.</p>
             </div>
 
             <div class="example-sentence">
@@ -975,17 +997,17 @@ p {
 
 
 <!-- =====================================================
-     GAME 1
+     GAME 1 (POSITIVE SENTENCES)
 ===================================================== -->
 
 <div class="game-card">
 
 <span class="game-number">GAME 1</span>
 
-<h2>🧩 Build State & Action Sentences (Part 1)</h2>
+<h2>🧩 Positive Sentences (Part 1)</h2>
 
 <p class="game-description">
-    Mixed practice using Kartu Pertama and Kartu Kedua patterns.
+    Practice positive statements using S + 很 + Adj and S + 很 + V + O patterns, ensuring complete vocabulary coverage.
 </p>
 
 <div class="game-progress">
@@ -1031,17 +1053,17 @@ p {
 
 
 <!-- =====================================================
-     GAME 2
+     GAME 2 (NEGATIVE SENTENCES)
 ===================================================== -->
 
 <div class="game-card">
 
 <span class="game-number">GAME 2</span>
 
-<h2>🧩 Build State & Action Sentences (Part 2)</h2>
+<h2>🧩 Negative Sentences (Part 2)</h2>
 
 <p class="game-description">
-    Continue building sentences with vocabulary items including all required words.
+    Practice negative structures using S + 不 + Adj and S + 不 + V + O patterns.
 </p>
 
 <div class="game-progress">
@@ -1087,17 +1109,17 @@ p {
 
 
 <!-- =====================================================
-     GAME 3
+     GAME 3 (INTERROGATIVE SENTENCES)
 ===================================================== -->
 
 <div class="game-card">
 
 <span class="game-number">GAME 3</span>
 
-<h2>🧩 Build State & Action Sentences (Part 3)</h2>
+<h2>🧩 Interrogative Sentences (Part 3)</h2>
 
 <p class="game-description">
-    Advanced sentence building ensuring all vocabulary coverage.
+    Practice question structures using 嗎 and A-not-A formations.
 </p>
 
 <div class="game-progress">
@@ -1157,7 +1179,7 @@ p {
 <div class="sentence-writing">
 
 <div class="sentence-prompt" id="sentencePrompt">
-    This painting is very good-looking.
+    The painting is very good-looking.
 </div>
 
 <div class="sentence-hint">
@@ -1260,7 +1282,7 @@ p {
 <h2>🏆 Grammar Master</h2>
 
 <p>
-    Extended mixed quiz combining current 很 / verb patterns and previous lesson reviews:
+    Mixed challenge combining current lesson patterns and previous lesson concepts pulled dynamically from lesson.js:
 </p>
 
 <div class="grammar-explanation">
@@ -1274,7 +1296,7 @@ p {
 </p>
 
 <p>
-    <strong>3.</strong> Review: S+V+O, 的, 是 (shì) & Questions
+    <strong>3.</strong> Review from lesson.js: Prior vocabulary & grammatical structures
 </p>
 
 </div>
@@ -1433,33 +1455,32 @@ function currentSlide(n) {
 
 
 /* =====================================================
-   GAME DATA
+   GAME DATA (ENSURING ALL VOCABULARY IS COVERED)
 ===================================================== */
 
 const games = {
 
-1: [
-{ meaning: "This painting is very good-looking.", answer: ["這", "個", "畫", "很", "好看"] },
-{ meaning: "The wife is very pretty.", answer: ["太太", "很", "漂亮"] },
-{ meaning: "The child is not cute.", answer: ["小孩", "不", "可愛"] },
-{ meaning: "Is the picture very good-looking?", answer: ["圖片", "很", "好看", "嗎"] },
-{ meaning: "Is the work busy or not busy?", answer: ["工作", "忙", "不", "忙"] }
-],
-
-2: [
+1: [ /* Part 1: Positive Sentences */
+{ meaning: "The painting is very good-looking.", answer: ["畫", "很", "好看"] },
+{ meaning: "The picture is very pretty.", answer: ["圖片", "很", "漂亮"] },
+{ meaning: "The wife is very busy.", answer: ["太太", "很", "忙"] },
 { meaning: "I really like cats.", answer: ["我", "很", "喜歡", "貓咪"] },
-{ meaning: "He does not love dogs.", answer: ["他", "不", "愛", "狗"] },
-{ meaning: "Do you want Chinese?", answer: ["你", "很", "想", "中文", "嗎"] },
-{ meaning: "Do you understand or not understand?", answer: ["你", "了解", "不", "了解"] },
-{ meaning: "The miss is very busy.", answer: ["小姐", "很", "忙"] }
+{ meaning: "Chinese is very difficult.", answer: ["中文", "很", "難"] },
+{ meaning: "I am very tired.", answer: ["我", "很", "累"] }
 ],
 
-3: [
-{ meaning: "Chinese is very difficult.", answer: ["中文", "很", "難"] },
-{ meaning: "I am very tired.", answer: ["我", "很", "累"] },
+2: [ /* Part 2: Negative Sentences */
+{ meaning: "The child is not cute.", answer: ["小孩", "不", "可愛"] },
+{ meaning: "He does not love dogs.", answer: ["他", "不", "愛", "狗"] },
 { meaning: "She is not afraid.", answer: ["她", "不", "怕"] },
-{ meaning: "Is the older brother busy?", answer: ["哥哥", "很", "忙", "嗎"] },
-{ meaning: "Is the dog cute or not cute?", answer: ["狗", "可愛", "不", "可愛"] }
+{ meaning: "The miss does not work.", answer: ["小姐", "不", "工作"] }
+],
+
+3: [ /* Part 3: Interrogative Sentences (嗎 and A-not-A) */
+{ meaning: "Is the picture very good-looking?", answer: ["圖片", "很", "好看", "嗎"] },
+{ meaning: "Is the work busy or not busy?", answer: ["工作", "忙", "不", "忙"] },
+{ meaning: "Do you want Chinese?", answer: ["你", "很", "想", "中文", "嗎"] },
+{ meaning: "Do you understand or not understand?", answer: ["你", "了解", "不", "了解"] }
 ]
 
 };
@@ -1633,7 +1654,7 @@ function listenCurrent(gameNumber){
 ===================================================== */
 
 const sentenceQuestions = [
-{ prompt: "This painting is very good-looking.", answer: "這幅畫很好看" },
+{ prompt: "The painting is very good-looking.", answer: "畫很好看" },
 { prompt: "I really like cats.", answer: "我很喜歡貓咪" },
 { prompt: "Chinese is very difficult.", answer: "中文很難" },
 { prompt: "The wife is very pretty.", answer: "太太很漂亮" },
@@ -1792,28 +1813,38 @@ function playCurrentWriting(){
 
 
 /* =====================================================
-   FINAL CHALLENGE (GRAMMAR MASTER)
+   FINAL CHALLENGE (GRAMMAR MASTER - PULLED FROM lesson.js)
 ===================================================== */
 
-const finalQuestions = [
-{ meaning: "This painting is very good-looking. (Current: 很 + Adj)", answer: ["這", "個", "畫", "很", "好看"] },
-{ meaning: "I really like cats. (Current: 很 + V + O)", answer: ["我", "很", "喜歡", "貓咪"] },
-{ meaning: "Is the work busy or not busy? (Current: A-not-A)", answer: ["工作", "忙", "不", "忙"] },
-{ meaning: "Chinese is very difficult. (Current: 很 + Adj)", answer: ["中文", "很", "難"] },
-{ meaning: "I am a doctor. (Review: 是)", answer: ["我", "是", "醫生"] },
-{ meaning: "My older brother's book. (Review: 的)", answer: ["我", "哥哥", "的", "書"] },
-{ meaning: "Are you a student? (Review: 嗎)", answer: ["你", "是", "學生", "嗎"] },
-{ meaning: "I eat a meal. (Review: S+V+O)", answer: ["我", "吃", "飯"] },
-{ meaning: "He is not the boss. (Review: 不是)", answer: ["他", "不", "是", "老闆"] },
-{ meaning: "Is she your older sister or not? (Review: 是不是)", answer: ["她", "是", "不", "是", "你", "姊姊"] }
-];
+// Mengambil soal campuran dari lesson.js jika tersedia, atau menggunakan kombinasi data lokal dan lesson.js
+let finalQuestions = [];
+
+function initFinalQuestions() {
+    // Memeriksa apakah lessonData dari lesson.js tersedia
+    if (typeof lessonData !== 'undefined' && lessonData.reviewQuestions) {
+        finalQuestions = lessonData.reviewQuestions;
+    } else {
+        // Fallback default mixed questions dari lesson ini dan sebelumnya
+        finalQuestions = [
+            { meaning: "The painting is very good-looking. (Current: 很 + Adj)", answer: ["畫", "很", "好看"] },
+            { meaning: "I really like cats. (Current: 很 + V + O)", answer: ["我", "很", "喜歡", "貓咪"] },
+            { meaning: "Is the work busy or not busy? (Current: A-not-A)", answer: ["工作", "忙", "不", "忙"] },
+            { meaning: "Chinese is very difficult. (Current: 很 + Adj)", answer: ["中文", "很", "難"] },
+            { meaning: "I eat a meal. (Review)", answer: ["我", "吃", "飯"] },
+            { meaning: "My older brother's book. (Review)", answer: ["我", "哥哥", "的", "書"] },
+            { meaning: "Are you a student? (Review)", answer: ["你", "是", "學生", "嗎"] }
+        ];
+    }
+}
 
 let finalIndex = 0;
 let finalScore = 0;
 let finalSelected = [];
 
 function loadFinal(){
+    if(finalQuestions.length === 0) initFinalQuestions();
     if(finalIndex >= finalQuestions.length) return;
+    
     const q = finalQuestions[finalIndex];
     document.getElementById("finalNum").textContent = finalIndex + 1;
     document.getElementById("finalMeaning").textContent = q.meaning;
@@ -1872,7 +1903,7 @@ function checkFinal(){
         feedback.textContent = "🎉 Correct!";
         feedback.className = "feedback correct";
         finalScore++;
-        document.getElementById("finalScore").textContent = finalScore + " / 10";
+        document.getElementById("finalScore").textContent = finalScore + " / " + finalQuestions.length;
         addXP(20);
         finalIndex++;
 
@@ -1899,6 +1930,7 @@ loadGame(3);
 
 loadSentenceWriting();
 initWriter();
+initFinalQuestions();
 loadFinal();
 
 </script>
