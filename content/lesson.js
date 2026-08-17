@@ -346,6 +346,7 @@ const lessonData = {
         { hanzi: "叫", pinyin: "jiào", meaning: "to be called / to call", category: "Verb" },
         { hanzi: "姓", pinyin: "xìng", meaning: "to be surnamed / surname", category: "Verb" },
         { hanzi: "來", pinyin: "lái", meaning: "to come", category: "Verb" },
+        { hanzi: "介紹", pinyin: "jièshào", meaning: "to introduce / introduction", category: "Verb" },
 
         // Food & Drinks
         { hanzi: "飯", pinyin: "fàn", meaning: "rice / meal", category: "Food" },
@@ -455,9 +456,12 @@ const lessonData = {
         { hanzi: "再見", pinyin: "zàijiàn", meaning: "goodbye / see you again", category: "Greeting" },
 
         // Grammar Words & Particles
+        { hanzi: "的", pinyin: "de", meaning: "possessive particle / of", category: "Grammar" },
+        { hanzi: "是", pinyin: "shì", meaning: "to be / am / is / are", category: "Grammar" },
+        { hanzi: "很", pinyin: "hěn", meaning: "very", category: "Grammar" },
+        { hanzi: "個", pinyin: "gè", meaning: "general measure word", category: "Measure Word" },
         { hanzi: "不", pinyin: "bù", meaning: "not / no", category: "Grammar" },
         { hanzi: "嗎", pinyin: "ma", meaning: "question particle", category: "Grammar" },
-        { hanzi: "很", pinyin: "hěn", meaning: "very", category: "Grammar" },
         { hanzi: "呢", pinyin: "ne", meaning: "particle for bouncing questions / what about...", category: "Grammar" },
         { hanzi: "也", pinyin: "yě", meaning: "also / too", category: "Grammar" }
 
