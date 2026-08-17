@@ -30,7 +30,7 @@
     <style>
 
         /* =====================================================
-           BOBA BREAK ANNOUNCEMENT TIMELINE
+           ANNOUNCEMENT CONTAINER
         ===================================================== */
 
         .announcement-container {
@@ -52,9 +52,9 @@
 
             box-sizing: border-box;
 
-            padding: 20px;
+            padding: 24px 28px;
 
-            margin-bottom: 16px;
+            margin: 0 0 16px 0;
 
             background: #fffdf9;
 
@@ -171,9 +171,7 @@
 
         .post-content {
 
-            margin:
-
-                16px 5px 12px 57px;
+            margin: 16px 5px 12px 57px;
 
         }
 
@@ -265,7 +263,66 @@
 
 
         /* =====================================================
-           COURSE 3 SLIDESHOW
+           HANZI + PHRASEBOOK GRID
+        ===================================================== */
+
+        .dashboard-grid {
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 20px;
+
+            width: 100%;
+
+            align-items: stretch;
+
+        }
+
+
+        .dashboard-grid .card {
+
+            width: 100%;
+
+            box-sizing: border-box;
+
+            margin: 0;
+
+        }
+
+
+        /* =====================================================
+           HANZI CARD
+        ===================================================== */
+
+        .lesson-card {
+
+            display: flex;
+
+            flex-direction: column;
+
+        }
+
+
+        .lesson-card h2 {
+
+            margin-top: 0;
+
+        }
+
+
+        .lesson-card .instruction {
+
+            margin-top: auto;
+
+            padding-top: 15px;
+
+        }
+
+
+        /* =====================================================
+           TAIWAN PHRASEBOOK SLIDESHOW
         ===================================================== */
 
         .course3-slideshow {
@@ -367,21 +424,43 @@
 
 
         /* =====================================================
+           PHRASEBOOK CARD
+        ===================================================== */
+
+        .phrasebook-card {
+
+            display: flex;
+
+            flex-direction: column;
+
+        }
+
+
+        .phrasebook-card .btn-resume {
+
+            margin-top: auto;
+
+        }
+
+
+        /* =====================================================
            MOBILE
         ===================================================== */
 
         @media(max-width:700px) {
 
-            .course3-slideshow {
+            .dashboard-grid {
 
-                height: 160px;
+                grid-template-columns: 1fr;
+
+                gap: 16px;
 
             }
 
 
             .announcement-card {
 
-                padding: 16px;
+                padding: 18px;
 
                 border-radius: 15px;
 
@@ -407,6 +486,13 @@
             .post-actions {
 
                 max-width: 100%;
+
+            }
+
+
+            .course3-slideshow {
+
+                height: 160px;
 
             }
 
@@ -439,7 +525,7 @@
 
 
         <!-- =================================================
-             HEADER
+             WELCOME HEADER
         ================================================= -->
 
         <header class="top-header">
@@ -477,7 +563,7 @@
 
 
         <!-- =================================================
-             COURSES
+             DASHBOARD CONTENT
         ================================================= -->
 
         <section class="section-container">
@@ -492,53 +578,54 @@
                 class="announcement-container"
                 id="announcement-container">
 
-                <!--
-                    Announcement cards will be generated
-                    automatically by JavaScript.
-                -->
-
             </div>
 
 
 
             <!-- =================================================
-                 HANZI OF THE DAY
+                 HANZI + PHRASEBOOK
             ================================================= -->
 
-            <div class="card lesson-card">
+            <div class="dashboard-grid">
 
 
-                <h2>
 
-                    🧋 Hanzi of The Day
+                <!-- =============================================
+                     HANZI OF THE DAY
+                ============================================== -->
 
-                </h2>
-
-
-                <div
-                    class="flashcard"
-                    id="card">
+                <div class="card lesson-card">
 
 
-                    <div class="card-inner">
+                    <h2>
+
+                        🧋 Hanzi of The Day
+
+                    </h2>
 
 
-                        <div class="card-front">
+                    <div
+                        class="flashcard"
+                        id="card">
 
 
-                            <span id="hanzi"></span>
+                        <div class="card-inner">
 
 
-                        </div>
+                            <div class="card-front">
+
+                                <span id="hanzi"></span>
+
+                            </div>
 
 
-                        <div class="card-back">
+                            <div class="card-back">
 
+                                <span id="pinyin"></span>
 
-                            <span id="pinyin"></span>
+                                <span id="meaning"></span>
 
-
-                            <span id="meaning"></span>
+                            </div>
 
 
                         </div>
@@ -547,86 +634,86 @@
                     </div>
 
 
+                    <p class="instruction">
+
+                        👆 Tap the card to flip
+
+                        <br>
+
+                        👈 Swipe for new Hanzi
+
+                    </p>
+
+
                 </div>
 
 
-                <p class="instruction">
 
-                    👆 Tap the card to flip
+                <!-- =============================================
+                     TAIWAN TRAVELER'S PHRASEBOOK
+                ============================================== -->
 
-                    <br>
+                <article class="card phrasebook-card">
 
-                    👈 Swipe for new Hanzi
 
-                </p>
+                    <div class="course3-slideshow">
+
+
+                        <img
+                            src="https://images.pexels.com/photos/981150/pexels-photo-981150.jpeg"
+                            alt="Taiwan Traveler's Phrasebook Slide 1">
+
+
+                        <img
+                            src="https://images.pexels.com/photos/7478010/pexels-photo-7478010.jpeg"
+                            alt="Taiwan Traveler's Phrasebook Slide 2">
+
+
+                        <img
+                            src="https://images.pexels.com/photos/13408361/pexels-photo-13408361.jpeg"
+                            alt="Taiwan Traveler's Phrasebook Slide 3">
+
+
+                        <img
+                            src="https://images.pexels.com/photos/35299411/pexels-photo-35299411.jpeg"
+                            alt="Taiwan Traveler's Phrasebook Slide 4">
+
+
+                        <img
+                            src="https://images.pexels.com/photos/15415349/pexels-photo-15415349.jpeg"
+                            alt="Taiwan Traveler's Phrasebook Slide 5">
+
+
+                    </div>
+
+
+                    <h3>
+
+                        Taiwan Traveler's Phrasebook
+
+                    </h3>
+
+
+                    <p>
+
+                        Easy Phrases for your Taiwan adventures.
+
+                    </p>
+
+
+                    <button
+                        class="btn-resume"
+                        onclick="location.href='phrasebook.html'">
+
+                        Let's Go!!!!!!
+
+                    </button>
+
+
+                </article>
 
 
             </div>
-
-
-
-            <!-- =================================================
-                 TAIWAN TRAVELER'S PHRASEBOOK
-            ================================================= -->
-
-            <article class="card">
-
-
-                <div class="course3-slideshow">
-
-
-                    <img
-                        src="https://images.pexels.com/photos/981150/pexels-photo-981150.jpeg"
-                        alt="Taiwan Traveler's Phrasebook Slide 1">
-
-
-                    <img
-                        src="https://images.pexels.com/photos/7478010/pexels-photo-7478010.jpeg"
-                        alt="Taiwan Traveler's Phrasebook Slide 2">
-
-
-                    <img
-                        src="https://images.pexels.com/photos/13408361/pexels-photo-13408361.jpeg"
-                        alt="Taiwan Traveler's Phrasebook Slide 3">
-
-
-                    <img
-                        src="https://images.pexels.com/photos/35299411/pexels-photo-35299411.jpeg"
-                        alt="Taiwan Traveler's Phrasebook Slide 4">
-
-
-                    <img
-                        src="https://images.pexels.com/photos/15415349/pexels-photo-15415349.jpeg"
-                        alt="Taiwan Traveler's Phrasebook Slide 5">
-
-
-                </div>
-
-
-                <h3>
-
-                    Taiwan Traveler's Phrasebook
-
-                </h3>
-
-
-                <p>
-
-                    Easy Phrases for your Taiwan adventures.
-
-                </p>
-
-
-                <button
-                    class="btn-resume"
-                    onclick="location.href='phrasebook.html'">
-
-                    Let's Go!!!!!!
-
-                </button>
-
-
-            </article>
 
 
         </section>
@@ -648,20 +735,16 @@
 
     /*
     ========================================================
-       HOW TO ADD A NEW ANNOUNCEMENT
+       ANNOUNCEMENT DATA
 
-       Copy this format:
+       Pengumuman terbaru taruh PALING ATAS.
 
-       {
-           text: "Your announcement here 🧋",
-           time: "09:30 AM",
-           date: "Aug 20, 2026",
-           comments: 0,
-           reposts: 0,
-           likes: 0
-       }
-
-       Put the newest announcement at the TOP.
+       Untuk menambah pengumuman:
+       1. Copy satu object
+       2. Ubah text
+       3. Ubah time
+       4. Ubah date
+       5. Ubah angka comments/reposts/likes
     ========================================================
     */
 
@@ -693,14 +776,16 @@
             likes:
                 18
 
-        },
+        }
 
 
-        /* =================================================
-           CONTOH UNTUK PENGUMUMAN BERIKUTNYA
+        /*
+        =====================================================
+        CONTOH PENGUMUMAN BARU
 
-           Tinggal hapus tanda komentar jika ingin
-           mengaktifkannya.
+        Tambahkan koma setelah } di atas, lalu:
+
+        ,
 
         {
             text:
@@ -722,7 +807,8 @@
                 0
         }
 
-        ================================================= */
+        =====================================================
+        */
 
 
     ];
@@ -730,7 +816,7 @@
 
 
     /* =====================================================
-       CREATE ANNOUNCEMENT CARD
+       GENERATE ANNOUNCEMENT CARDS
     ===================================================== */
 
     const announcementContainer =
@@ -739,9 +825,8 @@
         );
 
 
-
     announcements.forEach(
-        function (announcement) {
+        function(announcement) {
 
 
             const article =
@@ -753,6 +838,7 @@
 
 
             article.innerHTML = `
+
 
                 <!-- POST HEADER -->
 
@@ -818,7 +904,7 @@
 
 
 
-                <!-- POST DATE -->
+                <!-- DATE -->
 
                 <div class="post-date">
 
@@ -830,7 +916,7 @@
 
 
 
-                <!-- POST ACTIONS -->
+                <!-- ACTIONS -->
 
                 <div class="post-actions">
 
@@ -876,6 +962,7 @@
 
 
                 </div>
+
 
             `;
 
