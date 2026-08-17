@@ -3,110 +3,916 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <meta name="description" content="Boba Break Study Dashboard">
+
     <title>Boba Break Study - Dashboard</title>
 
     <link rel="stylesheet" href="./style.css">
+
     <link rel="icon" href="logo.png" type="image/png">
+
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* CSS Slideshow dipindahkan ke sini agar lebih rapi */
+
+        /* =====================================================
+           COURSE 3 SLIDESHOW
+        ===================================================== */
+
         .course3-slideshow {
+
             width: 100%;
             height: 180px;
+
             overflow: hidden;
+
             border-radius: 12px;
+
             position: relative;
+
             margin-bottom: 15px;
         }
+
+
         .course3-slideshow img {
+
             width: 100%;
             height: 100%;
+
             object-fit: cover;
+
             position: absolute;
+
             top: 0;
             left: 0;
+
             opacity: 0;
+
             animation: course3Slide 15s infinite;
         }
-        .course3-slideshow img:nth-child(1) { animation-delay: 0s; }
-        .course3-slideshow img:nth-child(2) { animation-delay: 3s; }
-        .course3-slideshow img:nth-child(3) { animation-delay: 6s; }
-        .course3-slideshow img:nth-child(4) { animation-delay: 9s; }
-        .course3-slideshow img:nth-child(5) { animation-delay: 12s; }
+
+
+        .course3-slideshow img:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .course3-slideshow img:nth-child(2) {
+            animation-delay: 3s;
+        }
+
+        .course3-slideshow img:nth-child(3) {
+            animation-delay: 6s;
+        }
+
+        .course3-slideshow img:nth-child(4) {
+            animation-delay: 9s;
+        }
+
+        .course3-slideshow img:nth-child(5) {
+            animation-delay: 12s;
+        }
+
 
         @keyframes course3Slide {
-            0%, 100% { opacity: 0; }
-            10%, 25% { opacity: 1; }
-            35% { opacity: 0; }
+
+            0%, 100% {
+                opacity: 0;
+            }
+
+            10%, 25% {
+                opacity: 1;
+            }
+
+            35% {
+                opacity: 0;
+            }
+
         }
+
+
+        /* =====================================================
+           BOBA PROGRESS DASHBOARD
+        ===================================================== */
+
+        .progress-dashboard-card {
+
+            background: white;
+
+            padding: 22px;
+
+            border-radius: 20px;
+
+            box-shadow:
+                0 6px 15px rgba(0,0,0,0.06);
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .progress-dashboard-header {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 15px;
+
+        }
+
+
+        .progress-dashboard-header small {
+
+            color: #b8865c;
+
+            font-weight: bold;
+
+            font-size: 11px;
+
+            letter-spacing: 0.5px;
+
+        }
+
+
+        .progress-dashboard-header h2 {
+
+            margin: 5px 0 0;
+
+            color: #5c4033;
+
+            font-size: 21px;
+
+        }
+
+
+        .dashboard-xp {
+
+            background: #fff8ef;
+
+            color: #b8865c;
+
+            padding: 10px 14px;
+
+            border-radius: 15px;
+
+            font-weight: bold;
+
+            white-space: nowrap;
+
+            border: 1px solid #d7b89c;
+
+        }
+
+
+        .dashboard-level {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            margin-top: 18px;
+
+            margin-bottom: 7px;
+
+            font-size: 12px;
+
+            font-weight: bold;
+
+            color: #8c7355;
+
+        }
+
+
+        .dashboard-progress-bar {
+
+            height: 10px;
+
+            background: #f0e4d5;
+
+            border-radius: 20px;
+
+            overflow: hidden;
+
+        }
+
+
+        .dashboard-progress-fill {
+
+            height: 100%;
+
+            width: 0%;
+
+            background: #b8865c;
+
+            border-radius: 20px;
+
+            transition: width 0.5s ease;
+
+        }
+
+
+        .progress-dashboard-card p {
+
+            margin-top: 12px;
+
+            margin-bottom: 0;
+
+        }
+
+
+        /* =====================================================
+           PROGRESS STATS
+        ===================================================== */
+
+        .progress-stats {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 10px;
+
+            margin-top: 18px;
+
+        }
+
+
+        .progress-stat {
+
+            background: #fff8ef;
+
+            border: 1px solid #ead8c5;
+
+            border-radius: 15px;
+
+            padding: 12px;
+
+            text-align: center;
+
+        }
+
+
+        .progress-stat-icon {
+
+            font-size: 20px;
+
+            margin-bottom: 4px;
+
+        }
+
+
+        .progress-stat-number {
+
+            font-size: 18px;
+
+            font-weight: bold;
+
+            color: #5c4033;
+
+        }
+
+
+        .progress-stat-label {
+
+            font-size: 10px;
+
+            color: #8c7355;
+
+            margin-top: 2px;
+
+        }
+
+
+        /* =====================================================
+           MOBILE
+        ===================================================== */
+
+        @media(max-width:700px){
+
+            .progress-dashboard-card {
+
+                padding: 17px;
+
+            }
+
+
+            .progress-dashboard-header {
+
+                align-items: flex-start;
+
+            }
+
+
+            .progress-dashboard-header h2 {
+
+                font-size: 18px;
+
+            }
+
+
+            .dashboard-xp {
+
+                font-size: 12px;
+
+                padding: 8px 10px;
+
+            }
+
+
+            .progress-stats {
+
+                grid-template-columns:
+                    repeat(3, 1fr);
+
+                gap: 7px;
+
+            }
+
+
+            .progress-stat {
+
+                padding: 9px 5px;
+
+            }
+
+
+            .progress-stat-number {
+
+                font-size: 16px;
+
+            }
+
+
+            .progress-stat-label {
+
+                font-size: 9px;
+
+            }
+
+        }
+
     </style>
+
 </head>
+
 
 <body>
 
 <div class="app-container">
 
-    <!-- Sidebar -->
- <div id="sidebar-container"></div>
 
-    <!-- Main Content -->
+    <!-- =====================================================
+         SIDEBAR
+    ===================================================== -->
+
+    <div id="sidebar-container"></div>
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ===================================================== -->
+
     <main class="main-content">
-        <!-- Header -->
+
+
+        <!-- =================================================
+             HEADER
+        ================================================= -->
+
         <header class="top-header">
+
             <div class="welcome-text">
+
                 <h1>Hello and welcome!!</h1>
-                <p>Boba Break Study is your one-stop shop for learning Traditional Chinese. We’ve gathered the best free and easy-to-access learning resources from across the web, bringing everything together in one cozy spot so you can study hassle-free. Grab a cup of boba and start exploring!</p>
+
+                <p>
+                    Boba Break Study is your one-stop shop for
+                    learning Traditional Chinese. We’ve gathered
+                    the best free and easy-to-access learning
+                    resources from across the web, bringing
+                    everything together in one cozy spot so you
+                    can study hassle-free. Grab a cup of boba
+                    and start exploring!
+                </p>
+
             </div>
+
+
             <div class="user-actions"></div>
+
         </header>
 
-        <!-- Courses -->
-        <section class="section-container">
-            <article class="card video-card">
-                <h3 class="video-title">🎵 Mandarin Music</h3>
-                <div class="youtube-frame">
-                    <iframe src="https://www.youtube.com/embed/fdQgPu3iUYk" title="Mandarin Music" frameborder="0" allowfullscreen></iframe>
-                </div>
-                <p>Enjoy Mandarin music while improving your listening skills and learning new vocabulary.</p>
-            </article>
 
-            <div class="card lesson-card">
-                <h2>🧋 Hanzi of The Day</h2>
-                <div class="flashcard" id="card">
-                    <div class="card-inner">
-                        <div class="card-front"><span id="hanzi"></span></div>
-                        <div class="card-back">
-                            <span id="pinyin"></span>
-                            <span id="meaning"></span>
-                        </div>
-                    </div>
+        <!-- =================================================
+             BOBA PROGRESS
+        ================================================= -->
+
+        <section class="progress-dashboard-card">
+
+
+            <div class="progress-dashboard-header">
+
+                <div>
+
+                    <small>
+                        YOUR PROGRESS
+                    </small>
+
+                    <h2>
+                        🧋 Boba Progress
+                    </h2>
+
                 </div>
-                <p class="instruction">
-                    👆 Tap the card to flip<br>
-                    👈 Swipe for new Hanzi
-                </p>
+
+
+                <div class="dashboard-xp">
+
+                    ⭐
+                    <span id="dashboardXP">
+                        0
+                    </span>
+
+                    XP
+
+                </div>
+
             </div>
 
-            <article class="card">
-                <div class="course3-slideshow">
-                    <img src="https://images.pexels.com/photos/981150/pexels-photo-981150.jpeg" alt="Slide 1">
-                    <img src="https://images.pexels.com/photos/7478010/pexels-photo-7478010.jpeg" alt="Slide 2">
-                    <img src="https://images.pexels.com/photos/13408361/pexels-photo-13408361.jpeg" alt="Slide 3">
-                    <img src="https://images.pexels.com/photos/35299411/pexels-photo-35299411.jpeg" alt="Slide 4">
-                    <img src="https://images.pexels.com/photos/15415349/pexels-photo-15415349.jpeg" alt="Slide 5">
+
+            <!-- LEVEL -->
+
+            <div class="dashboard-level">
+
+                <span id="dashboardLevel">
+                    Level 1
+                </span>
+
+                <span id="levelProgressText">
+                    0 / 100 XP
+                </span>
+
+            </div>
+
+
+            <!-- XP BAR -->
+
+            <div class="dashboard-progress-bar">
+
+                <div
+                    id="dashboardProgressFill"
+                    class="dashboard-progress-fill">
                 </div>
-                <h3>Taiwan Traveler's Phrasebook</h3>
-                <p>Easy Phrases for your Taiwan adventures.</p>
-                <button class="btn-resume" onclick="location.href='phrasebook.html'">Let's Go!!!!!!</button>
-            </article>
+
+            </div>
+
+
+            <!-- MESSAGE -->
+
+            <p id="dashboardMessage">
+
+                Start your Mandarin journey! 🧋
+
+            </p>
+
+
+            <!-- STATS -->
+
+            <div class="progress-stats">
+
+
+                <!-- XP -->
+
+                <div class="progress-stat">
+
+                    <div class="progress-stat-icon">
+                        ⭐
+                    </div>
+
+                    <div
+                        class="progress-stat-number"
+                        id="statXP">
+
+                        0
+
+                    </div>
+
+                    <div class="progress-stat-label">
+
+                        Total XP
+
+                    </div>
+
+                </div>
+
+
+                <!-- LESSONS -->
+
+                <div class="progress-stat">
+
+                    <div class="progress-stat-icon">
+                        📚
+                    </div>
+
+                    <div
+                        class="progress-stat-number"
+                        id="statLessons">
+
+                        0
+
+                    </div>
+
+                    <div class="progress-stat-label">
+
+                        Lessons
+
+                    </div>
+
+                </div>
+
+
+                <!-- LEVEL -->
+
+                <div class="progress-stat">
+
+                    <div class="progress-stat-icon">
+                        🏆
+                    </div>
+
+                    <div
+                        class="progress-stat-number"
+                        id="statLevel">
+
+                        1
+
+                    </div>
+
+                    <div class="progress-stat-label">
+
+                        Level
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
         </section>
+
+
+        <!-- =================================================
+             COURSES
+        ================================================= -->
+
+        <section class="section-container">
+
+
+            <!-- =================================================
+                 MANDARIN MUSIC
+            ================================================= -->
+
+            <article class="card video-card">
+
+                <h3 class="video-title">
+                    🎵 Mandarin Music
+                </h3>
+
+
+                <div class="youtube-frame">
+
+                    <iframe
+                        src="https://www.youtube.com/embed/fdQgPu3iUYk"
+                        title="Mandarin Music"
+                        frameborder="0"
+                        allowfullscreen>
+                    </iframe>
+
+                </div>
+
+
+                <p>
+
+                    Enjoy Mandarin music while improving
+                    your listening skills and learning new
+                    vocabulary.
+
+                </p>
+
+            </article>
+
+
+            <!-- =================================================
+                 HANZI OF THE DAY
+            ================================================= -->
+
+            <div class="card lesson-card">
+
+                <h2>
+                    🧋 Hanzi of The Day
+                </h2>
+
+
+                <div
+                    class="flashcard"
+                    id="card">
+
+                    <div class="card-inner">
+
+
+                        <div class="card-front">
+
+                            <span id="hanzi"></span>
+
+                        </div>
+
+
+                        <div class="card-back">
+
+                            <span id="pinyin"></span>
+
+                            <span id="meaning"></span>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+                <p class="instruction">
+
+                    👆 Tap the card to flip
+                    <br>
+                    👈 Swipe for new Hanzi
+
+                </p>
+
+            </div>
+
+
+            <!-- =================================================
+                 TAIWAN TRAVELER'S PHRASEBOOK
+            ================================================= -->
+
+            <article class="card">
+
+
+                <div class="course3-slideshow">
+
+
+                    <img
+                        src="https://images.pexels.com/photos/981150/pexels-photo-981150.jpeg"
+                        alt="Slide 1">
+
+
+                    <img
+                        src="https://images.pexels.com/photos/7478010/pexels-photo-7478010.jpeg"
+                        alt="Slide 2">
+
+
+                    <img
+                        src="https://images.pexels.com/photos/13408361/pexels-photo-13408361.jpeg"
+                        alt="Slide 3">
+
+
+                    <img
+                        src="https://images.pexels.com/photos/35299411/pexels-photo-35299411.jpeg"
+                        alt="Slide 4">
+
+
+                    <img
+                        src="https://images.pexels.com/photos/15415349/pexels-photo-15415349.jpeg"
+                        alt="Slide 5">
+
+
+                </div>
+
+
+                <h3>
+                    Taiwan Traveler's Phrasebook
+                </h3>
+
+
+                <p>
+
+                    Easy Phrases for your Taiwan adventures.
+
+                </p>
+
+
+                <button
+                    class="btn-resume"
+                    onclick="location.href='phrasebook.html'">
+
+                    Let's Go!!!!!!
+
+                </button>
+
+
+            </article>
+
+
+        </section>
+
+
     </main>
+
 </div>
 
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+
+<!-- GLOBAL PROGRESS SYSTEM -->
+
+<script src="progress.js"></script>
+
+
+<!-- EXISTING FLASHCARD -->
+
 <script src="flashcard.js"></script>
+
+
+<!-- EXISTING SIDEBAR -->
+
 <script src="script.js"></script>
+
+
+<!-- =====================================================
+     DASHBOARD PROGRESS SCRIPT
+===================================================== -->
+
+<script>
+
+function updateDashboardProgress() {
+
+
+    /* ================================================
+       GET TOTAL XP
+    ================================================ */
+
+    const totalXP =
+        BobaProgress.getXP();
+
+
+    /* ================================================
+       CALCULATE LEVEL
+
+       Every 100 XP = 1 level
+    ================================================ */
+
+    const level =
+        Math.floor(totalXP / 100) + 1;
+
+
+    /* ================================================
+       XP INSIDE CURRENT LEVEL
+    ================================================ */
+
+    const currentLevelXP =
+        totalXP % 100;
+
+
+    const percentage =
+        currentLevelXP;
+
+
+    /* ================================================
+       UPDATE TOTAL XP
+    ================================================ */
+
+    document.getElementById(
+        "dashboardXP"
+    ).textContent =
+        totalXP;
+
+
+    document.getElementById(
+        "statXP"
+    ).textContent =
+        totalXP;
+
+
+    /* ================================================
+       UPDATE LEVEL
+    ================================================ */
+
+    document.getElementById(
+        "dashboardLevel"
+    ).textContent =
+        "Level " + level;
+
+
+    document.getElementById(
+        "statLevel"
+    ).textContent =
+        level;
+
+
+    /* ================================================
+       UPDATE LEVEL XP
+    ================================================ */
+
+    document.getElementById(
+        "levelProgressText"
+    ).textContent =
+        currentLevelXP + " / 100 XP";
+
+
+    /* ================================================
+       UPDATE PROGRESS BAR
+    ================================================ */
+
+    document.getElementById(
+        "dashboardProgressFill"
+    ).style.width =
+        percentage + "%";
+
+
+    /* ================================================
+       COMPLETED LESSONS
+    ================================================ */
+
+    const completedLessons =
+        BobaProgress.getCompletedLessons();
+
+
+    document.getElementById(
+        "statLessons"
+    ).textContent =
+        completedLessons.length;
+
+
+    /* ================================================
+       PROGRESS MESSAGE
+    ================================================ */
+
+    let message;
+
+
+    if(totalXP === 0){
+
+        message =
+            "Start your Mandarin journey! 🧋";
+
+
+    }else if(totalXP < 100){
+
+        message =
+            "Great start! Keep learning! 🌱";
+
+
+    }else if(totalXP < 300){
+
+        message =
+            "You're building a strong foundation! 📚";
+
+
+    }else if(totalXP < 500){
+
+        message =
+            "Amazing progress! Keep going! ✨";
+
+
+    }else if(totalXP < 1000){
+
+        message =
+            "You're making serious progress! 🔥";
+
+
+    }else{
+
+        message =
+            "You're becoming a Mandarin master! 🏆";
+
+    }
+
+
+    document.getElementById(
+        "dashboardMessage"
+    ).textContent =
+        message;
+
+}
+
+
+/* ================================================
+   INITIALIZE DASHBOARD
+================================================ */
+
+updateDashboardProgress();
+
+</script>
+
+
 </body>
 </html>
