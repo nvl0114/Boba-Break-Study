@@ -2917,26 +2917,6 @@ function renderGame() {
 
     }
 
-    const remaining =
-        gameQuestions[currentGame]
-            .answer
-            .filter((word, index) => {
-
-                const usedCount =
-                    selectedGameWords
-                        .slice(0, selectedGameWords.length)
-                        .filter(x => x === word)
-                        .length;
-
-                const originalCount =
-                    gameQuestions[currentGame]
-                        .answer
-                        .filter(x => x === word)
-                        .length;
-
-                return true;
-            });
-
     const allWords =
         gameQuestions[currentGame]
             .answer;
@@ -2981,6 +2961,8 @@ function renderGame() {
         button.textContent = item.word;
 
         button.onclick = () => {
+
+            speak(item.word);
 
             selectedGameWords.push(item.word);
 
@@ -3070,15 +3052,8 @@ function nextGameQuestion() {
 
 
 /* =====================================================
-   HANZI WRITER
+   HANZI WRITING
 ===================================================== */
-
-/*
-    Unique characters from the vocabulary.
-
-    Multi-character vocabulary is split into
-    individual Hanzi for stroke-order practice.
-*/
 
 const writingCharacters = [
 
@@ -3108,7 +3083,6 @@ const writingCharacters = [
     { char: "二", pinyin: "èr", meaning: "two" },
     { char: "十", pinyin: "shí", meaning: "ten" },
     { char: "愛", pinyin: "ài", meaning: "love" },
-    { char: "好", pinyin: "hǎo", meaning: "good" },
     { char: "電", pinyin: "diàn", meaning: "electricity" },
     { char: "影", pinyin: "yǐng", meaning: "shadow / film" },
     { char: "聽", pinyin: "tīng", meaning: "listen" },
@@ -3125,11 +3099,6 @@ const writingCharacters = [
 
 ];
 
-
-/*
-    Remove duplicate characters.
-*/
-
 const uniqueWritingCharacters = [];
 
 writingCharacters.forEach(item => {
@@ -3145,16 +3114,9 @@ writingCharacters.forEach(item => {
 
 });
 
-
 let writingIndex = 0;
 let writingMode = "quiz";
 let writer = null;
-
-function initWriter() {
-
-    loadWritingCharacter();
-
-}
 
 function loadWritingCharacter() {
 
@@ -3189,64 +3151,43 @@ function loadWritingCharacter() {
                 width: 260,
                 height: 260,
                 padding: 10,
-
                 showOutline: true,
-
-                showCharacter:
-                    writingMode === "animate",
-
+                showCharacter: writingMode === "animate",
                 strokeAnimationSpeed: 1,
-
                 drawingFadeDuration: 300,
-
                 strokeFadeDuration: 400,
-
                 strokeHighlightSpeed: 2,
-
                 strokeHighlightDuration: 500,
-
                 drawingColor: "#5c4033",
-
                 strokeColor: "#b8865c",
-
                 highlightColor: "#b8865c",
-
                 outlineColor: "#d7b89c",
-
                 showHintAfterMisses: 2,
-
                 highlightOnComplete: true,
-
                 onCorrectStroke: () => {
-
                     document.getElementById(
                         "writingFeedback"
                     ).textContent =
                         "✓ Nice stroke!";
-
                 },
-
                 onMistake: () => {
-
                     document.getElementById(
                         "writingFeedback"
                     ).textContent =
                         "Keep going! Follow the stroke guide ✍️";
-
                 },
-
                 onComplete: () => {
-
                     document.getElementById(
                         "writingFeedback"
                     ).textContent =
                         "🎉 Perfect! Great job!";
-
                 }
-
             }
         );
 
+    if (writingMode === "quiz") {
+        writer.hideCharacter();
+    }
 }
 
 function animateCharacter() {
@@ -3269,18 +3210,13 @@ function quizCharacter() {
 
     writer.quiz({
         showHintAfterMisses: 2,
-
         highlightOnComplete: true,
-
         onComplete: () => {
-
             document.getElementById(
                 "writingFeedback"
             ).textContent =
                 "🎉 Excellent!";
-
         }
-
     });
 
 }
@@ -3324,23 +3260,6 @@ function nextWritingCharacter() {
 /* =====================================================
    FINAL REVIEW
 ===================================================== */
-
-/*
-    If lesson.js provides reviewQuestions,
-    those questions are used first.
-
-    Otherwise this lesson's own review questions
-    are used.
-
-    Expected lesson.js format:
-
-    lessonData.reviewQuestions = [
-        {
-            question: "...",
-            answer: ["我", "是", "學生"]
-        }
-    ];
-*/
 
 const localReviewQuestions = [
 
@@ -3396,12 +3315,6 @@ const localReviewQuestions = [
 
 ];
 
-
-/*
-    Pull previous lesson questions
-    if available.
-*/
-
 let finalQuestions = [];
 
 try {
@@ -3431,14 +3344,8 @@ try {
 
 }
 
-
-/*
-    Keep final review at 10 questions.
-*/
-
 finalQuestions =
     finalQuestions.slice(0, 10);
-
 
 let finalIndex = 0;
 let finalScore = 0;
@@ -3590,6 +3497,8 @@ function renderFinal() {
 
             button.onclick = () => {
 
+                speak(item.word);
+
                 finalSelected.push(
                     item.word
                 );
@@ -3712,7 +3621,7 @@ document.addEventListener(
 
         loadGame();
 
-        initWriter();
+        loadWritingCharacter();
 
         loadFinalQuestion();
 
