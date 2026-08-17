@@ -1555,6 +1555,9 @@ p {
      JAVASCRIPT
 ===================================================== -->
 
+
+<script src="../progress.js"></script>
+
 <script>
 
 /* =====================================================
@@ -1582,19 +1585,59 @@ function playAudio(text){
    XP
 ===================================================== */
 
-let xp = 0;
-let progress = 0;
+const LESSON_ID = "lesson-1";
 
-function addXP(amount){
+let lessonXP = 0;
+const MAX_LESSON_XP = 100;
 
-    xp += amount;
 
-    document.getElementById("xp").textContent = xp;
+/* ===============================
+   UPDATE LESSON DISPLAY
+=============================== */
 
-    progress = Math.min(progress + 1.5,100);
+function updateLessonXP(){
+
+    document.getElementById("xp").textContent =
+        lessonXP;
+
+    const percentage =
+        Math.min(
+            (lessonXP / MAX_LESSON_XP) * 100,
+            100
+        );
 
     document.getElementById("progressFill")
-        .style.width = progress + "%";
+        .style.width =
+        percentage + "%";
+}
+
+
+/* ===============================
+   ADD XP
+=============================== */
+
+function addXP(amount, rewardId){
+
+    const earned =
+        BobaProgress.addXP(
+            amount,
+            `${LESSON_ID}-${rewardId}`
+        );
+
+    if(!earned){
+
+        /*
+           Already earned this reward
+        */
+
+        return false;
+    }
+
+    lessonXP += amount;
+
+    updateLessonXP();
+
+    return true;
 }
 
 
@@ -2038,8 +2081,10 @@ function checkGame(gameNumber){
         feedback.className =
             "feedback correct";
 
-        addXP(10);
-
+        addXP(
+    10,
+    `game-${gameNumber}-question-${state.index}`
+);
         state.done = true;
 
         playAudio(correct.join(""));
@@ -2233,7 +2278,10 @@ function checkSentenceWriting(){
 
         playAudio(correct);
 
-        addXP(15);
+        addXP(
+    15,
+    `sentence-${sentenceIndex}`
+);
 
         document.getElementById(
             "nextSentenceBtn"
@@ -2346,7 +2394,10 @@ function startQuiz() {
         onComplete: function(summaryData) {
             feedback.textContent = "🎉 Perfect! Correct stroke order.";
             feedback.className = "feedback correct";
-            addXP(5);
+            addXP(
+    5,
+    `writing-${writingIndex}`
+);
         }
     });
 }
@@ -2531,43 +2582,50 @@ function checkFinal(){
 
     if(isCorrect){
 
-        feedback.textContent =
-            "🎉 Correct!";
+    feedback.textContent =
+        "🎉 Correct!";
 
-        feedback.className =
-            "feedback correct";
+    feedback.className =
+        "feedback correct";
 
-        finalScore++;
+    finalScore++;
 
-        document.getElementById(
-            "finalScore"
-        ).textContent =
-            finalScore + " / 4";
+    document.getElementById(
+        "finalScore"
+    ).textContent =
+        finalScore + " / 4";
 
-        addXP(20);
 
-        finalIndex++;
+    const completedQuestion =
+        finalIndex;
 
-        if(finalIndex < finalQuestions.length){
+    addXP(
+        20,
+        `final-${completedQuestion}`
+    );
 
-            setTimeout(
-                loadFinal,
-                700
-            );
 
-        }else{
+    finalIndex++;
 
-            document.getElementById(
-                "unlockBox"
-            ).style.display = "block";
+    if(finalIndex < finalQuestions.length){
 
-            playAudio(
-                "太棒了"
-            );
-
-        }
+        setTimeout(
+            loadFinal,
+            700
+        );
 
     }else{
+
+        document.getElementById(
+            "unlockBox"
+        ).style.display = "block";
+
+        playAudio("太棒了");
+
+    }
+
+}
+else{
 
         feedback.textContent =
             "❌ Check the word order.";
