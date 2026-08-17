@@ -1367,84 +1367,72 @@
 <script>
 
 /* =========================================================
-   LESSON XP SYSTEM
+   LESSON XP SYSTEM (TERINTEGRASI DENGAN progress.js & DASHBOARD)
 ========================================================= */
 
 const LESSON_ID = "lesson-2";
 const LESSON_MAX_XP = 242;
 
-
-/*
-   Update lesson XP
-*/
-
-function updateLessonXP() {
-
-    const xp =
-        BobaProgress.getLessonXP(
-            LESSON_ID
-        );
-
-
-    document.getElementById(
-        "xpText"
-    ).textContent =
-        xp + " / " + LESSON_MAX_XP + " XP";
-
-
-    const percentage =
-        Math.min(
-            (xp / LESSON_MAX_XP) * 100,
-            100
-        );
-
-
-    document.getElementById(
-        "progressFill"
-    ).style.width =
-        percentage + "%";
-
+// Fungsi untuk membaca XP dari progress.js jika ada, atau fallback ke localStorage
+function getLocalLessonXP() {
+    if (typeof BobaProgress !== "undefined" && typeof BobaProgress.getLessonXP === "function") {
+        return BobaProgress.getLessonXP(LESSON_ID);
+    }
+    const data = JSON.parse(localStorage.getItem("boba_lesson_xp")) || {};
+    return data[LESSON_ID] || 0;
 }
 
+// Update tampilan progress bar dan angka XP
+function updateLessonXP() {
+    const xp = getLocalLessonXP();
 
-/*
-   Add XP (Menggunakan nama fungsi unik agar tidak bentrok)
-*/
+    document.getElementById("xpText").textContent = xp + " / " + LESSON_MAX_XP + " XP";
 
-function giveLessonXP(
-    amount,
-    rewardId
-) {
+    const percentage = Math.min((xp / LESSON_MAX_XP) * 100, 100);
+    document.getElementById("progressFill").style.width = percentage + "%";
+}
 
-    const uniqueRewardId =
-        `${LESSON_ID}-${rewardId}`;
+// Fungsi utama untuk menambah XP (Mendukung BobaProgress & Dashboard)
+function giveLessonXP(amount, rewardId) {
+    const uniqueRewardId = `${LESSON_ID}-${rewardId}`;
+    
+    // Cek penyimpanan lokal untuk mencegah spam klik (double claim)
+    const storageKeyClaims = "boba_claimed_rewards";
+    let claimedRewards = JSON.parse(localStorage.getItem(storageKeyClaims)) || [];
 
-
-    const earned =
-        BobaProgress.addXP(
-            amount,
-            uniqueRewardId,
-            LESSON_ID
-        );
-
-
-    /*
-       Reward already claimed
-    */
-
-    if (!earned) {
-
-        updateLessonXP();
-
-        return false;
-
+    if (claimedRewards.includes(uniqueRewardId)) {
+        return false; 
     }
 
+    // Tandai sudah diklaim
+    claimedRewards.push(uniqueRewardId);
+    localStorage.setItem(storageKeyClaims, JSON.stringify(claimedRewards));
+
+    let earned = false;
+
+    // 1. Coba gunakan fungsi bawaan dari progress.js (agar masuk dashboard)
+    if (typeof BobaProgress !== "undefined" && typeof BobaProgress.addXP === "function") {
+        earned = BobaProgress.addXP(amount, uniqueRewardId, LESSON_ID);
+    } else {
+        // 2. Fallback manual ke localStorage jika progress.js belum siap
+        let lessonXPData = JSON.parse(localStorage.getItem("boba_lesson_xp")) || {};
+        lessonXPData[LESSON_ID] = (lessonXPData[LESSON_ID] || 0) + amount;
+        localStorage.setItem("boba_lesson_xp", JSON.stringify(lessonXPData));
+
+        let globalXP = Number(localStorage.getItem("boba_total_xp") || 0) + amount;
+        localStorage.setItem("boba_total_xp", globalXP);
+        earned = true;
+    }
 
     updateLessonXP();
+    return earned;
+}
 
-    return true;
-
+// Fungsi untuk menandai lesson selesai di progress.js
+function markLessonCompleted() {
+    if (typeof BobaProgress !== "undefined" && typeof BobaProgress.completeLesson === "function") {
+        BobaProgress.completeLesson(LESSON_ID);
+    }
 }
 
 
@@ -3125,11 +3113,6 @@ function loadFinalQuiz() {
                             playSound("pop");
 
 
-                            /*
-                               Remove previous
-                               selection styling
-                            */
-
                             const allOptions =
                                 document.querySelectorAll(
                                     '[data-question="' +
@@ -3157,18 +3140,10 @@ function loadFinalQuiz() {
                             );
 
 
-                            /*
-                               Select current answer
-                            */
-
                             button.classList.add(
                                 "selected"
                             );
 
-
-                            /*
-                               Speak Chinese option
-                            */
 
                             if (
                                 /[\u3400-\u9FFF]/.test(
@@ -3180,11 +3155,6 @@ function loadFinalQuiz() {
 
                             }
 
-
-                            /*
-                               Find / create
-                               feedback box
-                            */
 
                             let feedback =
                                 questionBox.querySelector(
@@ -3208,10 +3178,6 @@ function loadFinalQuiz() {
 
                             }
 
-
-                            /*
-                               Check immediately
-                            */
 
                             if (
                                 optionIndex ===
@@ -3302,10 +3268,6 @@ function changeQuizSlide(
 
     currentQuizIndex += direction;
 
-
-    /*
-       Submit after last question
-    */
 
     if (
         currentQuizIndex >=
@@ -3401,10 +3363,6 @@ function submitFinal() {
     let score = 0;
 
 
-    /*
-       Check every question
-    */
-
     finalQuestions.forEach(
         function(
             question,
@@ -3427,10 +3385,6 @@ function submitFinal() {
                 );
 
 
-            /*
-               Disable options
-            */
-
             allOptions.forEach(
                 function(btn) {
 
@@ -3439,10 +3393,6 @@ function submitFinal() {
                 }
             );
 
-
-            /*
-               Find correct answer
-            */
 
             allOptions.forEach(
                 function(btn) {
@@ -3464,10 +3414,6 @@ function submitFinal() {
             );
 
 
-            /*
-               No selected answer
-            */
-
             if (!selected) {
 
                 return;
@@ -3480,10 +3426,6 @@ function submitFinal() {
                     selected.dataset.option
                 );
 
-
-            /*
-               Correct
-            */
 
             if (
                 selectedAnswer ===
@@ -3498,11 +3440,6 @@ function submitFinal() {
 
             }
 
-
-            /*
-               Incorrect
-            */
-
             else {
 
                 selected.classList.add(
@@ -3515,13 +3452,6 @@ function submitFinal() {
     );
 
 
-    /*
-       Calculate final XP
-
-       Maximum:
-       20 XP
-    */
-
     const finalXP =
         Math.round(
             (
@@ -3531,19 +3461,11 @@ function submitFinal() {
         );
 
 
-    /*
-       Give final reward once
-    */
-
     giveLessonXP(
         finalXP,
         "final"
     );
 
-
-    /*
-       Result
-    */
 
     const result =
         document.getElementById(
@@ -3635,18 +3557,8 @@ function submitFinal() {
     `;
 
 
-    /*
-       Mark lesson completed
-    */
-
-    BobaProgress.completeLesson(
-        LESSON_ID
-    );
-
-
-    /*
-       Update XP display
-    */
+    // Mark lesson completed for dashboard
+    markLessonCompleted();
 
     updateLessonXP();
 
