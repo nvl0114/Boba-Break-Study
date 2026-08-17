@@ -91,38 +91,6 @@
         }
 
         /* =========================
-           XP
-        ========================= */
-
-        .xp-box {
-            margin-top: 20px;
-        }
-
-        .xp-top {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 7px;
-            font-size: .85rem;
-            font-weight: 700;
-            color: var(--brown);
-        }
-
-        .progress-bar {
-            width: 100%;
-            height: 10px;
-            background: #eadbcd;
-            border-radius: 20px;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            width: 0%;
-            height: 100%;
-            background: var(--brown-light);
-            transition: .4s;
-        }
-
-        /* =========================
            CARDS
         ========================= */
 
@@ -592,31 +560,6 @@
     <p>
         Learn how to connect people and things with 的.
     </p>
-
-    <div class="xp-box">
-
-        <div class="xp-top">
-
-            <span>
-                Lesson Progress
-            </span>
-
-            <span id="xpText">
-                0 / 242 XP
-            </span>
-
-        </div>
-
-        <div class="progress-bar">
-
-            <div
-                class="progress-fill"
-                id="progressFill">
-            </div>
-
-        </div>
-
-    </div>
 
 </section>
 
@@ -1351,13 +1294,6 @@
 
 
 <!-- =====================================================
-     GLOBAL PROGRESS
-===================================================== -->
-
-<script src="../progress.js"></script>
-
-
-<!-- =====================================================
      SIDEBAR
 ===================================================== -->
 
@@ -1365,76 +1301,6 @@
 
 
 <script>
-
-/* =========================================================
-   LESSON XP SYSTEM (TERINTEGRASI DENGAN progress.js & DASHBOARD)
-========================================================= */
-
-const LESSON_ID = "lesson-2";
-const LESSON_MAX_XP = 242;
-
-// Fungsi untuk membaca XP dari progress.js jika ada, atau fallback ke localStorage
-function getLocalLessonXP() {
-    if (typeof BobaProgress !== "undefined" && typeof BobaProgress.getLessonXP === "function") {
-        return BobaProgress.getLessonXP(LESSON_ID);
-    }
-    const data = JSON.parse(localStorage.getItem("boba_lesson_xp")) || {};
-    return data[LESSON_ID] || 0;
-}
-
-// Update tampilan progress bar dan angka XP
-function updateLessonXP() {
-    const xp = getLocalLessonXP();
-
-    document.getElementById("xpText").textContent = xp + " / " + LESSON_MAX_XP + " XP";
-
-    const percentage = Math.min((xp / LESSON_MAX_XP) * 100, 100);
-    document.getElementById("progressFill").style.width = percentage + "%";
-}
-
-// Fungsi utama untuk menambah XP (Mendukung BobaProgress & Dashboard)
-function giveLessonXP(amount, rewardId) {
-    const uniqueRewardId = `${LESSON_ID}-${rewardId}`;
-    
-    // Cek penyimpanan lokal untuk mencegah spam klik (double claim)
-    const storageKeyClaims = "boba_claimed_rewards";
-    let claimedRewards = JSON.parse(localStorage.getItem(storageKeyClaims)) || [];
-
-    if (claimedRewards.includes(uniqueRewardId)) {
-        return false; 
-    }
-
-    // Tandai sudah diklaim
-    claimedRewards.push(uniqueRewardId);
-    localStorage.setItem(storageKeyClaims, JSON.stringify(claimedRewards));
-
-    let earned = false;
-
-    // 1. Coba gunakan fungsi bawaan dari progress.js (agar masuk dashboard)
-    if (typeof BobaProgress !== "undefined" && typeof BobaProgress.addXP === "function") {
-        earned = BobaProgress.addXP(amount, uniqueRewardId, LESSON_ID);
-    } else {
-        // 2. Fallback manual ke localStorage jika progress.js belum siap
-        let lessonXPData = JSON.parse(localStorage.getItem("boba_lesson_xp")) || {};
-        lessonXPData[LESSON_ID] = (lessonXPData[LESSON_ID] || 0) + amount;
-        localStorage.setItem("boba_lesson_xp", JSON.stringify(lessonXPData));
-
-        let globalXP = Number(localStorage.getItem("boba_total_xp") || 0) + amount;
-        localStorage.setItem("boba_total_xp", globalXP);
-        earned = true;
-    }
-
-    updateLessonXP();
-    return earned;
-}
-
-// Fungsi untuk menandai lesson selesai di progress.js
-function markLessonCompleted() {
-    if (typeof BobaProgress !== "undefined" && typeof BobaProgress.completeLesson === "function") {
-        BobaProgress.completeLesson(LESSON_ID);
-    }
-}
-
 
 /* =========================================================
    AUDIO
@@ -2056,12 +1922,6 @@ function checkBuild() {
         feedback.className =
             "feedback correct";
 
-
-        giveLessonXP(
-            5,
-            `build-${buildIndex}`
-        );
-
     }
 
     else {
@@ -2262,12 +2122,6 @@ function checkTranslation() {
 
         feedback.className =
             "feedback correct";
-
-
-        giveLessonXP(
-            5,
-            `translation-${translationIndex}`
-        );
 
     }
 
@@ -2546,12 +2400,6 @@ function checkEnglishGame() {
         feedback.className =
             "feedback correct";
 
-
-        giveLessonXP(
-            5,
-            `english-${englishIndex}`
-        );
-
     }
 
     else {
@@ -2786,12 +2634,6 @@ function startQuiz() {
 
                 feedback.className =
                     "feedback correct";
-
-
-                giveLessonXP(
-                    3,
-                    `writing-${writingIndex}`
-                );
 
             }
 
@@ -3452,21 +3294,6 @@ function submitFinal() {
     );
 
 
-    const finalXP =
-        Math.round(
-            (
-                score /
-                finalQuestions.length
-            ) * 20
-        );
-
-
-    giveLessonXP(
-        finalXP,
-        "final"
-    );
-
-
     const result =
         document.getElementById(
             "finalResult"
@@ -3550,17 +3377,7 @@ function submitFinal() {
             ${message}
         </p>
 
-        <p>
-            Final XP: +${finalXP} XP
-        </p>
-
     `;
-
-
-    // Mark lesson completed for dashboard
-    markLessonCompleted();
-
-    updateLessonXP();
 
 }
 
@@ -3582,8 +3399,6 @@ document.addEventListener(
         initWriter();
 
         loadFinalQuiz();
-
-        updateLessonXP();
 
     }
 );
