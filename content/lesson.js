@@ -1,12 +1,12 @@
 // ============================================================
 // Boba Break Study — Lesson Database
-// Previously Learned Grammar & Vocabulary (Updated)
+// Measure Word (個 / gè) Update
 // ============================================================
 
 const lessonData = {
 
     // ========================================================
-    // GRAMMAR ALREADY LEARNED
+    // GRAMMAR ALREADY LEARNED & NEW ADDITION
     // ========================================================
 
     grammar: [
@@ -143,7 +143,6 @@ const lessonData = {
             ]
         },
 
-        // --- New Grammar Additions ---
         {
             id: "s-hen-adj",
             name: "S + 很 + Adj",
@@ -196,13 +195,27 @@ const lessonData = {
                 "你很看書嗎？",
                 "你很吃飯嗎？"
             ]
+        },
+
+        // --- New Measure Word Grammar Addition ---
+        {
+            id: "measure-word-ge",
+            name: "Number / This / That + 個 + Noun",
+            category: "Measure Word Structure",
+            explanation: "In Mandarin, you cannot place a number, 'this' (這), or 'that' (那) directly in front of a noun. You must use the universal measure word 個 (gè) in between them.",
+            examples: [
+                "一個人 (One person)",
+                "這個問題 (This question / problem)",
+                "那個地方 (That place)",
+                "兩個月 (Two months - note: use 兩 instead of 二 before measure words)"
+            ]
         }
 
     ],
 
 
     // ========================================================
-    // VOCABULARY ALREADY LEARNED
+    // VOCABULARY ALREADY LEARNED & NEW ADDITIONS
     // ========================================================
 
     vocabulary: [
@@ -241,7 +254,7 @@ const lessonData = {
         { hanzi: "咖啡", pinyin: "kāfēi", meaning: "coffee", category: "Drink" },
         { hanzi: "巧克力", pinyin: "qiǎokèlì", meaning: "chocolate", category: "Food" },
 
-        // Objects
+        // Objects & Places / Concepts
         { hanzi: "書", pinyin: "shū", meaning: "book", category: "Object" },
         { hanzi: "手機", pinyin: "shǒujī", meaning: "mobile phone", category: "Object" },
         { hanzi: "電腦", pinyin: "diànnǎo", meaning: "computer", category: "Object" },
@@ -254,6 +267,10 @@ const lessonData = {
         { hanzi: "禮物", pinyin: "lǐwù", meaning: "gift / present", category: "Object" },
         { hanzi: "東西", pinyin: "dōngxi", meaning: "thing / things", category: "Object" },
         { hanzi: "信", pinyin: "xìn", meaning: "letter / mail", category: "Object" },
+        { hanzi: "地方", pinyin: "dìfang", meaning: "place", category: "Place" },
+        { hanzi: "問題", pinyin: "wèntí", meaning: "question / problem", category: "Concept" },
+        { hanzi: "月", pinyin: "yuè", meaning: "month", category: "Time" },
+        { hanzi: "公司", pinyin: "gōngsī", meaning: "company", category: "Place" },
 
         // Family
         { hanzi: "媽媽", pinyin: "māma", meaning: "mother / mom", category: "Family" },
@@ -273,6 +290,7 @@ const lessonData = {
         { hanzi: "太太", pinyin: "tàitai", meaning: "wife / Mrs.", category: "People" },
         { hanzi: "小姐", pinyin: "xiǎojiě", meaning: "miss / young lady", category: "People" },
         { hanzi: "小孩", pinyin: "xiǎohái", meaning: "child / kid", category: "People" },
+        { hanzi: "人", pinyin: "rén", meaning: "person / people", category: "People" },
         { hanzi: "老師", pinyin: "lǎoshī", meaning: "teacher", category: "Occupation" },
         { hanzi: "醫生", pinyin: "yīshēng", meaning: "doctor", category: "Occupation" },
         { hanzi: "護士", pinyin: "hùshì", meaning: "nurse", category: "Occupation" },
@@ -296,6 +314,25 @@ const lessonData = {
 
         // Languages & Subjects
         { hanzi: "中文", pinyin: "zhōngwén", meaning: "Chinese language", category: "Language" },
+
+        // Demonstratives & Measure Words
+        { hanzi: "這", pinyin: "zhè", meaning: "this", category: "Demonstrative" },
+        { hanzi: "那", pinyin: "nà", meaning: "that", category: "Demonstrative" },
+        { hanzi: "個", pinyin: "gè", meaning: "measure word (general)", category: "Measure Word" },
+
+        // Numbers (0 - 10)
+        { hanzi: "零", pinyin: "líng", meaning: "zero", category: "Number" },
+        { hanzi: "一", pinyin: "yī", meaning: "one", category: "Number" },
+        { hanzi: "兩", pinyin: "liǎng", meaning: "two (used with measure words)", category: "Number" },
+        { hanzi: "二", pinyin: "èr", meaning: "two (counting / numbers)", category: "Number" },
+        { hanzi: "三", pinyin: "sān", meaning: "three", category: "Number" },
+        { hanzi: "四", pinyin: "sì", meaning: "four", category: "Number" },
+        { hanzi: "五", pinyin: "wǔ", meaning: "five", category: "Number" },
+        { hanzi: "六", pinyin: "liù", meaning: "six", category: "Number" },
+        { hanzi: "七", pinyin: "qī", meaning: "seven", category: "Number" },
+        { hanzi: "八", pinyin: "bā", meaning: "eight", category: "Number" },
+        { hanzi: "九", pinyin: "jiǔ", meaning: "nine", category: "Number" },
+        { hanzi: "十", pinyin: "shí", meaning: "ten", category: "Number" },
 
         // Grammar Words
         { hanzi: "不", pinyin: "bù", meaning: "not / no", category: "Grammar" },
