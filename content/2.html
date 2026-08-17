@@ -527,6 +527,7 @@
                 width: 230px;
                 height: 230px;
             }
+
         }
 
     </style>
@@ -573,7 +574,7 @@
             </span>
 
             <span id="xpText">
-                0 XP
+                0 / 242 XP
             </span>
 
         </div>
@@ -1343,148 +1344,51 @@
 
 const LESSON_ID = "lesson-2";
 
-const LESSON_MAX_XP = 100;
-
-
 /*
-   Calculate XP already earned
-   from this lesson's rewards.
+   Maximum XP for this lesson:
+
+   Game 1:
+   8 × 5 = 40 XP
+
+   Game 2:
+   8 × 5 = 40 XP
+
+   Game 3:
+   8 × 5 = 40 XP
+
+   Hanzi:
+   34 × 3 = 102 XP
+
+   Final Quiz:
+   maximum 20 XP
+
+   TOTAL = 242 XP
 */
 
-function calculateLessonXP() {
-
-    const rewards =
-        JSON.parse(
-            localStorage.getItem("bobaRewards")
-        ) || {};
-
-    let total = 0;
-
-
-    /*
-       Game 1
-       8 questions × 5 XP
-    */
-
-    for (let i = 0; i < 8; i++) {
-
-        if (
-            rewards[
-                `${LESSON_ID}-build-${i}`
-            ]
-        ) {
-
-            total += 5;
-
-        }
-
-    }
-
-
-    /*
-       Game 2
-       8 questions × 5 XP
-    */
-
-    for (let i = 0; i < 8; i++) {
-
-        if (
-            rewards[
-                `${LESSON_ID}-translation-${i}`
-            ]
-        ) {
-
-            total += 5;
-
-        }
-
-    }
-
-
-    /*
-       Game 3
-       8 questions × 5 XP
-    */
-
-    for (let i = 0; i < 8; i++) {
-
-        if (
-            rewards[
-                `${LESSON_ID}-english-${i}`
-            ]
-        ) {
-
-            total += 5;
-
-        }
-
-    }
-
-
-    /*
-       Game 4
-       Hanzi
-       34 characters × 3 XP
-    */
-
-    for (let i = 0; i < writingCharacters.length; i++) {
-
-        if (
-            rewards[
-                `${LESSON_ID}-writing-${i}`
-            ]
-        ) {
-
-            total += 3;
-
-        }
-
-    }
-
-
-    /*
-       Final Challenge
-    */
-
-    if (
-        rewards[
-            `${LESSON_ID}-final`
-        ]
-    ) {
-
-        /*
-           Maximum final quiz reward = 20
-        */
-
-        total += 20;
-
-    }
-
-
-    return total;
-
-}
+const LESSON_MAX_XP = 242;
 
 
 /*
-   Update lesson progress UI
+   Update XP shown for this lesson
 */
 
 function updateLessonXP() {
 
-    const xp =
-        calculateLessonXP();
+    const lessonXP =
+        BobaProgress.getLessonXP(
+            LESSON_ID
+        );
 
 
     document.getElementById(
         "xpText"
     ).textContent =
-        xp + " XP";
+        `${lessonXP} / ${LESSON_MAX_XP} XP`;
 
 
     const percentage =
         Math.min(
-            (xp / LESSON_MAX_XP) * 100,
+            (lessonXP / LESSON_MAX_XP) * 100,
             100
         );
 
@@ -1498,8 +1402,12 @@ function updateLessonXP() {
 
 
 /*
-   Add XP globally
-   and update this lesson.
+   Add XP to:
+
+   1. Global XP
+   2. This lesson's XP
+
+   Each reward can only be claimed once.
 */
 
 function addXP(
@@ -1514,13 +1422,10 @@ function addXP(
     const earned =
         BobaProgress.addXP(
             amount,
-            uniqueRewardId
+            uniqueRewardId,
+            LESSON_ID
         );
 
-
-    /*
-       Already received this reward.
-    */
 
     if (!earned) {
 
@@ -1536,6 +1441,11 @@ function addXP(
     return true;
 
 }
+
+
+/* Show saved XP immediately */
+
+updateLessonXP();
 
 
 /* =========================================================
