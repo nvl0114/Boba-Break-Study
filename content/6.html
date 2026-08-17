@@ -85,7 +85,7 @@ p {
 
 
 /* =====================================================
-   CHAT CONVERSATION
+   CHAT CONVERSATION (DAVID = KIRI, MEIMEI = KANAN)
 ===================================================== */
 
 .chat-container {
@@ -100,14 +100,18 @@ p {
     display: flex;
     align-items: flex-end;
     gap: 10px;
+    max-width: 65%;
 }
 
 .chat-row.left {
+    align-self: flex-start;
     justify-content: flex-start;
 }
 
 .chat-row.right {
+    align-self: flex-end;
     justify-content: flex-end;
+    flex-direction: row-reverse;
 }
 
 .chat-avatar {
@@ -117,6 +121,7 @@ p {
     object-fit: cover;
     background: #fff8ef;
     border: 1px solid #d7b89c;
+    flex-shrink: 0;
 }
 
 .chat-bubble {
@@ -124,9 +129,9 @@ p {
     border: 1.5px solid #d7b89c;
     padding: 12px 35px 12px 18px;
     border-radius: 16px;
-    max-width: 70%;
     position: relative;
     box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+    width: 100%;
 }
 
 .chat-row.right .chat-bubble {
@@ -167,6 +172,66 @@ p {
     border: none;
     border-radius: 50%;
     cursor: pointer;
+}
+
+
+/* =====================================================
+   GRAMMAR CAROUSEL / SLIDER
+===================================================== */
+
+.grammar-slider-container {
+    position: relative;
+    background: #fff8ef;
+    border: 1.5px solid #d7b89c;
+    border-radius: 15px;
+    padding: 20px;
+    min-height: 180px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.grammar-slide {
+    display: none;
+}
+
+.grammar-slide.active {
+    display: block;
+}
+
+.grammar-nav-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+    border-top: 1px solid #e7d6c4;
+    padding-top: 12px;
+}
+
+.grammar-btn {
+    background: #b8865c;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.grammar-btn:hover {
+    background: #a0724f;
+}
+
+.grammar-btn:disabled {
+    opacity: 0.4;
+    cursor: default;
+}
+
+.grammar-counter {
+    font-size: 13px;
+    font-weight: bold;
+    color: #8c7355;
 }
 
 
@@ -832,48 +897,64 @@ p {
 
 
 <!-- =====================================================
-     GRAMMAR CARD
+     GRAMMAR CARD (SLIDER)
 ===================================================== -->
 
 <div class="grammar-card">
 
     <h2>🧠 Grammar & Sentence Explanations</h2>
 
-    <div class="grammar-explanation">
-        <p><strong>1. 叫什麼名字 (What name) & 叫... / 我姓...</strong></p>
-        <p>• <strong>叫 (jiào)</strong> means "to be called" or "to be named". Structure: `Name + 叫 + Name`<br>
-        • <strong>什麼名字 (shénme míngzi)</strong> translates to "what name". E.g., `您叫什麼名字？` (What is your name?)<br>
-        • <strong>姓 (xìng)</strong> means family surname. E.g., `我姓林` (My surname is Lin).</p>
-    </div>
+    <div class="grammar-slider-container">
 
-    <div class="grammar-explanation" style="margin-top:12px;">
-        <p><strong>2. 幾歲 (How old) & Number + 歲</strong></p>
-        <p>• <strong>幾 (jǐ)</strong> means "how many" (typically for numbers under 10). <strong>歲 (suì)</strong> means "years old".<br>
-        • To state your age, combine a number with 歲: `Number + 歲` (E.g., `二十歲` for 20 years old).</p>
-    </div>
+        <!-- Slide 1 -->
+        <div class="grammar-slide active" id="gSlide0">
+            <h3>1. 叫什麼名字 (What name) & 叫... / 我姓...</h3>
+            <p>• <strong>叫 (jiào)</strong> means "to be called" or "to be named". Structure: `Name + 叫 + Name`<br>
+            • <strong>什麼名字 (shénme míngzi)</strong> translates to "what name". E.g., `您叫什麼名字？` (What is your name?)<br>
+            • <strong>姓 (xìng)</strong> means family surname. E.g., `我姓林` (My surname is Lin).</p>
+        </div>
 
-    <div class="grammar-explanation" style="margin-top:12px;">
-        <p><strong>3. Number + 十 + Number (Tens Formation)</strong></p>
-        <p>• In Mandarin, tens are formed by putting the multiplier digit before <strong>十 (shí)</strong>, and the remainder unit after.<br>
-        • E.g., `二十` (èrshí) = 2 × 10 = 20. `二十二` (èrshí'èr) = 20 + 2 = 22.</p>
-    </div>
+        <!-- Slide 2 -->
+        <div class="grammar-slide" id="gSlide1">
+            <h3>2. 幾歲 (How old) & Number + 歲</h3>
+            <p>• <strong>幾 (jǐ)</strong> means "how many" (typically for numbers under 10). <strong>歲 (suì)</strong> means "years old".<br>
+            • To state your age, combine a number with 歲: `Number + 歲` (E.g., `二十歲` for 20 years old).</p>
+        </div>
 
-    <div class="grammar-explanation" style="margin-top:12px;">
-        <p><strong>4. S + 呢 (Topic Marker / Turn-Tossing)</strong></p>
-        <p>• <strong>呢 (ne)</strong> is a structural particle placed at the end of a noun or pronoun to toss a question back to the other person (equivalent to "How about...?" or "And you?").<br>
-        • E.g., `我叫美美。您呢？` (My name is Meimei. How about you?).</p>
-    </div>
+        <!-- Slide 3 -->
+        <div class="grammar-slide" id="gSlide2">
+            <h3>3. Number + 十 + Number (Tens Formation)</h3>
+            <p>• In Mandarin, tens are formed by putting the multiplier digit before <strong>十 (shí)</strong>, and the remainder unit after.<br>
+            • E.g., `二十` (èrshí) = 2 × 10 = 20. `二十二` (èrshí'èr) = 20 + 2 = 22.</p>
+        </div>
 
-    <div class="grammar-explanation" style="margin-top:12px;">
-        <p><strong>5. 什麼 (shénme - What) & Interrogative Sentences</strong></p>
-        <p>• In Mandarin, question words like <strong>什麼</strong> stay in the exact same position where the answer would go in a regular statement (no moving to the front like in English).<br>
-        • E.g., Statement: `我的愛好是電影。` → Question: `您的愛好是什麼？` (What is your hobby?).</p>
-    </div>
+        <!-- Slide 4 -->
+        <div class="grammar-slide" id="gSlide3">
+            <h3>4. S + 呢 (Topic Marker / Turn-Tossing)</h3>
+            <p>• <strong>呢 (ne)</strong> is a structural particle placed at the end of a noun or pronoun to toss a question back to the other person (equivalent to "How about...?" or "And you?").<br>
+            • E.g., `我叫美美。您呢？` (My name is Meimei. How about you?).</p>
+        </div>
 
-    <div class="grammar-explanation" style="margin-top:12px;">
-        <p><strong>6. 也 (yě - Also / Too)</strong></p>
-        <p>• <strong>也 (yě)</strong> means "also" or "too". Word order rule: **也** always comes **before the verb or adjective**, right after the subject.<br>
-        • E.g., `我也很高興認識您！` (I *also* am very glad to meet you!).</p>
+        <!-- Slide 5 -->
+        <div class="grammar-slide" id="gSlide4">
+            <h3>5. 什麼 (shénme - What) & Interrogative Sentences</h3>
+            <p>• In Mandarin, question words like <strong>什麼</strong> stay in the exact same position where the answer would go in a regular statement (no moving to the front like in English).<br>
+            • E.g., Statement: `我的愛好是電影。` → Question: `您的愛好是什麼？` (What is your hobby?).</p>
+        </div>
+
+        <!-- Slide 6 -->
+        <div class="grammar-slide" id="gSlide5">
+            <h3>6. 也 (yě - Also / Too)</h3>
+            <p>• <strong>也 (yě)</strong> means "also" or "too". Word order rule: **也** always comes **before the verb or adjective**, right after the subject.<br>
+            • E.g., `我也很高興認識您！` (I *also* am very glad to meet you!).</p>
+        </div>
+
+        <div class="grammar-nav-row">
+            <button class="grammar-btn" id="prevGrammarBtn" onclick="changeGrammarSlide(-1)" disabled>← Previous</button>
+            <span class="grammar-counter" id="grammarCounter">1 / 6</span>
+            <button class="grammar-btn" id="nextGrammarBtn" onclick="changeGrammarSlide(1)">Next →</button>
+        </div>
+
     </div>
 
 </div>
@@ -1135,7 +1216,7 @@ p {
 
 
 <!-- =====================================================
-     FINAL CHALLENGE (REVIEW MASTER)
+     FINAL CHALLENGE (REVIEW MASTER - 10 QUESTIONS)
 ===================================================== -->
 
 <div class="final-card">
@@ -1145,17 +1226,16 @@ p {
     <h2>🏆 Comprehensive Review Master</h2>
 
     <p>
-        Mixed challenge covering self-introduction dialogue phrases combined with prior lesson concepts from lesson.js:
+        Extended review covering self-introductions combined with prior lesson vocabulary and grammar (10 questions):
     </p>
 
     <div class="grammar-explanation">
-        <p><strong>1.</strong> Self-introduction (Names, Nationalities, Age, Hobbies)</p>
-        <p><strong>2.</strong> Prior grammar & vocabulary (Measure words 個, numbers, adjectives, etc.)</p>
+        <p><strong>Topics:</strong> SVO sentences, measure words (個), numbers, pronouns, questions, and self-introductions.</p>
     </div>
 
     <div class="question-box">
         <div class="question-label">
-            Final Question (<span id="finalNum">1</span> / 5)
+            Final Question (<span id="finalNum">1</span> / 10)
         </div>
         <div class="question-meaning" id="finalMeaning"></div>
     </div>
@@ -1176,11 +1256,11 @@ p {
 
     <div class="feedback" id="finalFeedback"></div>
 
-    <div class="final-score" id="finalScore">0 / 5</div>
+    <div class="final-score" id="finalScore">0 / 10</div>
 
     <div class="unlock" id="unlockBox" style="display:none;">
         🎉 <strong>Mastery Unlocked!</strong>
-        <p>You have successfully mastered self-introductions and integrated prior lesson content!</p>
+        <p>You have successfully completed all 10 comprehensive review questions!</p>
     </div>
 
 </div>
@@ -1207,6 +1287,29 @@ function playAudio(text){
     utterance.rate = 0.82;
     utterance.pitch = 1;
     window.speechSynthesis.speak(utterance);
+}
+
+
+/* =====================================================
+   GRAMMAR CAROUSEL CONTROLLER
+===================================================== */
+
+let currentGrammarSlide = 0;
+const totalGrammarSlides = 6;
+
+function changeGrammarSlide(direction){
+    currentGrammarSlide += direction;
+    if(currentGrammarSlide < 0) currentGrammarSlide = 0;
+    if(currentGrammarSlide >= totalGrammarSlides) currentGrammarSlide = totalGrammarSlides - 1;
+
+    for(let i = 0; i < totalGrammarSlides; i++){
+        document.getElementById("gSlide" + i).classList.remove("active");
+    }
+    document.getElementById("gSlide" + currentGrammarSlide).classList.add("active");
+    document.getElementById("grammarCounter").textContent = (currentGrammarSlide + 1) + " / " + totalGrammarSlides;
+
+    document.getElementById("prevGrammarBtn").disabled = (currentGrammarSlide === 0);
+    document.getElementById("nextGrammarBtn").disabled = (currentGrammarSlide === totalGrammarSlides - 1);
 }
 
 
@@ -1453,33 +1556,27 @@ function playCurrentWriting(){
 
 
 /* =====================================================
-   FINAL CHALLENGE (REVIEW MASTER)
+   FINAL CHALLENGE (REVIEW MASTER - 10 QUESTIONS)
 ===================================================== */
 
-let finalQuestions = [];
-
-function initFinalQuestions(){
-    if(typeof lessonData !== "undefined" && lessonData.reviewQuestions){
-        finalQuestions = lessonData.reviewQuestions;
-    } else {
-        finalQuestions = [
-            { meaning: "My name is David.", answer: ["我", "叫", "大", "衛"] },
-            { meaning: "I am from the United States.", answer: ["我", "來", "自", "美", "國"] },
-            { meaning: "What are your hobbies?", answer: ["您", "的", "愛", "好", "是", "什", "麼"] },
-            { meaning: "Three people", answer: ["三", "個", "人"] },
-            { meaning: "Are you a student?", answer: ["你", "是", "學", "生", "嗎"] }
-        ];
-    }
-}
+let finalQuestions = [
+    { meaning: "My name is David.", answer: ["我", "叫", "大", "衛"] },
+    { meaning: "I am from the United States.", answer: ["我", "來", "自", "美", "國"] },
+    { meaning: "What are your hobbies?", answer: ["您", "的", "愛", "好", "是", "什", "麼"] },
+    { meaning: "Three people", answer: ["三", "個", "人"] },
+    { meaning: "Are you a student?", answer: ["你", "是", "學", "生", "嗎"] },
+    { meaning: "This company has ten problems.", answer: ["這", "個", "公", "司", "有", "十", "個", "問", "題"] },
+    { meaning: "That person is twenty-two years old.", answer: ["那", "個", "人", "二", "十", "二", "歲"] },
+    { meaning: "I like listening to music.", answer: ["我", "喜", "歡", "聽", "音", "樂"] },
+    { meaning: "Nice to meet you too!", answer: ["我", "也", "很", "高", "興", "認", "識", "你"] },
+    { meaning: "Zero problems this month.", answer: ["這", "個", "月", "零", "問", "題"] }
+];
 
 let finalIndex = 0;
 let finalScore = 0;
 let finalSelected = [];
 
 function loadFinal(){
-    if(finalQuestions.length === 0){
-        initFinalQuestions();
-    }
     if(finalIndex >= finalQuestions.length){
         return;
     }
@@ -1563,7 +1660,6 @@ function checkFinal(){
 
 loadGame(1);
 initWriter();
-initFinalQuestions();
 loadFinal();
 
 </script>
