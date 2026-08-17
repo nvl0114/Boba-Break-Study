@@ -1,6 +1,6 @@
 // ============================================================
 // Boba Break Study — Lesson Database
-// Measure Word (個 / gè) Update
+// Updated with Self-Introduction Vocabulary & Grammar
 // ============================================================
 
 const lessonData = {
@@ -197,7 +197,6 @@ const lessonData = {
             ]
         },
 
-        // --- New Measure Word Grammar Addition ---
         {
             id: "measure-word-ge",
             name: "Number / This / That + 個 + Noun",
@@ -208,6 +207,106 @@ const lessonData = {
                 "這個問題 (This question / problem)",
                 "那個地方 (That place)",
                 "兩個月 (Two months - note: use 兩 instead of 二 before measure words)"
+            ]
+        },
+
+        // --- New Self-Introduction Grammar Additions ---
+        {
+            id: "jiao-what-name",
+            name: "叫什麼名字",
+            category: "Self-Introduction",
+            explanation: "Used to ask someone's full name. Structure: 請問，您叫什麼名字？ (May I ask, what is your name?)",
+            examples: [
+                "你叫什麼名字？ (What is your name?)",
+                "請問，您叫什麼名字？ (May I ask, what is your name? - polite)"
+            ]
+        },
+
+        {
+            id: "jiao-name",
+            name: "叫。。。",
+            category: "Self-Introduction",
+            explanation: "Used to state your name. Structure: 我叫 + Name.",
+            examples: [
+                "我叫大衛。 (My name is David.)",
+                "她叫美美。 (Her name is Meimei.)"
+            ]
+        },
+
+        {
+            id: "wo-xing",
+            name: "我姓。。。",
+            category: "Self-Introduction",
+            explanation: "Used to state your family name (surname). Structure: 我姓 + Surname.",
+            examples: [
+                "我姓王。 (My surname is Wang.)",
+                "我姓李。 (My surname is Li.)"
+            ]
+        },
+
+        {
+            id: "gui-xing",
+            name: "貴姓",
+            category: "Self-Introduction",
+            explanation: "A polite way to ask someone's honorable surname. Often used as 請問您貴姓？",
+            examples: [
+                "請問您貴姓？ (May I ask your honorable surname?)"
+            ]
+        },
+
+        {
+            id: "number-sui",
+            name: "幾歲 & Number + 歲",
+            category: "Age",
+            explanation: "Used to ask and state age. Use 幾歲 for asking children or peers, and Number + 歲 for stating age.",
+            examples: [
+                "你幾歲？ (How old are you?)",
+                "我二十歲。 (I am twenty years old.)"
+            ]
+        },
+
+        {
+            id: "number-ten-number",
+            name: "Number + 十 + Number",
+            category: "Numbers",
+            explanation: "Structure for numbers from 11 to 99 in Mandarin (Tens and Units).",
+            examples: [
+                "十一 (11)",
+                "二十五 (25)",
+                "九十九 (99)"
+            ]
+        },
+
+        {
+            id: "particle-ne",
+            name: "S + 呢",
+            category: "Question Particle",
+            explanation: "Used to bounce a question back to the other person (What about...?).",
+            examples: [
+                "我很好，你呢？ (I'm good, and you?)",
+                "我是台灣人，他呢？ (I am Taiwanese, what about him?)"
+            ]
+        },
+
+        {
+            id: "question-word-shenme",
+            name: "什麼 (How to make interrogative)",
+            category: "Question Word",
+            explanation: "什麼 (shénme) means 'what'. Place it in the position of the noun you want to ask about.",
+            examples: [
+                "你叫什麼名字？ (What is your name?)",
+                "這是什麼？ (What is this?)"
+            ]
+        },
+
+        {
+            id: "adverb-ye",
+            name: "也",
+            category: "Adverb",
+            explanation: "Means 'also' or 'too'. It is placed right before the verb or predicate.",
+            examples: [
+                "我也是。 (Me too / I am too.)",
+                "我也喜歡聽音樂。 (I also like listening to music.)"
             ]
         }
 
@@ -244,6 +343,9 @@ const lessonData = {
         { hanzi: "想", pinyin: "xiǎng", meaning: "to want / would like / to think", category: "Verb" },
         { hanzi: "怕", pinyin: "pà", meaning: "to fear / be afraid of", category: "Verb" },
         { hanzi: "了解", pinyin: "liǎojiě", meaning: "to understand / comprehend", category: "Verb" },
+        { hanzi: "叫", pinyin: "jiào", meaning: "to be called / to call", category: "Verb" },
+        { hanzi: "姓", pinyin: "xìng", meaning: "to be surnamed / surname", category: "Verb" },
+        { hanzi: "來", pinyin: "lái", meaning: "to come", category: "Verb" },
 
         // Food & Drinks
         { hanzi: "飯", pinyin: "fàn", meaning: "rice / meal", category: "Food" },
@@ -271,6 +373,9 @@ const lessonData = {
         { hanzi: "問題", pinyin: "wèntí", meaning: "question / problem", category: "Concept" },
         { hanzi: "月", pinyin: "yuè", meaning: "month", category: "Time" },
         { hanzi: "公司", pinyin: "gōngsī", meaning: "company", category: "Place" },
+        { hanzi: "電影", pinyin: "diànyǐng", meaning: "movie / film", category: "Entertainment" },
+        { hanzi: "音樂", pinyin: "yīnyuè", meaning: "music", category: "Entertainment" },
+        { hanzi: "愛好", pinyin: "àihào", meaning: "hobby", category: "Concept" },
 
         // Family
         { hanzi: "媽媽", pinyin: "māma", meaning: "mother / mom", category: "Family" },
@@ -284,7 +389,7 @@ const lessonData = {
         { hanzi: "姐姐", pinyin: "jiějie", meaning: "older sister", category: "Family" },
         { hanzi: "姊姊", pinyin: "jiějie", meaning: "older sister", category: "Family" },
 
-        // People / Occupations / Animals
+        // People / Occupations / Nationalities / Animals
         { hanzi: "男生", pinyin: "nánshēng", meaning: "boy / male student", category: "People" },
         { hanzi: "女生", pinyin: "nǚshēng", meaning: "girl / female student", category: "People" },
         { hanzi: "太太", pinyin: "tàitai", meaning: "wife / Mrs.", category: "People" },
@@ -301,6 +406,9 @@ const lessonData = {
         { hanzi: "老闆", pinyin: "lǎobǎn", meaning: "boss / owner", category: "Occupation" },
         { hanzi: "老闆娘", pinyin: "lǎobǎnniáng", meaning: "female boss / owner's wife", category: "Occupation" },
         { hanzi: "朋友", pinyin: "péngyou", meaning: "friend", category: "People" },
+        { hanzi: "台灣", pinyin: "táiwān", meaning: "Taiwan", category: "Place" },
+        { hanzi: "美國", pinyin: "měiguó", meaning: "America / United States", category: "Place" },
+        { hanzi: "哪國人", pinyin: "nǎ guó rén", meaning: "people of which country / nationality", category: "People" },
         { hanzi: "貓咪", pinyin: "māomī", meaning: "kitty / cat", category: "Animal" },
         { hanzi: "狗", pinyin: "gǒu", meaning: "dog", category: "Animal" },
 
@@ -311,16 +419,19 @@ const lessonData = {
         { hanzi: "累", pinyin: "lèi", meaning: "tired", category: "Adjective" },
         { hanzi: "忙", pinyin: "máng", meaning: "busy", category: "Adjective" },
         { hanzi: "難", pinyin: "nán", meaning: "difficult / hard", category: "Adjective" },
+        { hanzi: "高", pinyin: "gāo", meaning: "tall / high", category: "Adjective" },
 
         // Languages & Subjects
         { hanzi: "中文", pinyin: "zhōngwén", meaning: "Chinese language", category: "Language" },
 
-        // Demonstratives & Measure Words
+        // Demonstratives, Measure Words & Question Words
         { hanzi: "這", pinyin: "zhè", meaning: "this", category: "Demonstrative" },
         { hanzi: "那", pinyin: "nà", meaning: "that", category: "Demonstrative" },
         { hanzi: "個", pinyin: "gè", meaning: "measure word (general)", category: "Measure Word" },
+        { hanzi: "什麼", pinyin: "shénme", meaning: "what", category: "Question Word" },
+        { hanzi: "幾", pinyin: "jǐ", meaning: "how many / how much (usually under 10)", category: "Question Word" },
 
-        // Numbers (0 - 10)
+        // Numbers & Age
         { hanzi: "零", pinyin: "líng", meaning: "zero", category: "Number" },
         { hanzi: "一", pinyin: "yī", meaning: "one", category: "Number" },
         { hanzi: "兩", pinyin: "liǎng", meaning: "two (used with measure words)", category: "Number" },
@@ -333,11 +444,22 @@ const lessonData = {
         { hanzi: "八", pinyin: "bā", meaning: "eight", category: "Number" },
         { hanzi: "九", pinyin: "jiǔ", meaning: "nine", category: "Number" },
         { hanzi: "十", pinyin: "shí", meaning: "ten", category: "Number" },
+        { hanzi: "歲", pinyin: "suì", meaning: "years old (age)", category: "Time" },
+        { hanzi: "幾歲", pinyin: "jǐ suì", meaning: "how old", category: "Question" },
 
-        // Grammar Words
+        // Greetings & Polite Expressions
+        { hanzi: "您好", pinyin: "nín hǎo", meaning: "hello (polite)", category: "Greeting" },
+        { hanzi: "你好", pinyin: "nǐ hǎo", meaning: "hello", category: "Greeting" },
+        { hanzi: "請問", pinyin: "qǐngwèn", meaning: "may I ask / excuse me", category: "Greeting" },
+        { hanzi: "認識", pinyin: "rènshi", meaning: "to know / to recognize / to meet", category: "Verb" },
+        { hanzi: "再見", pinyin: "zàijiàn", meaning: "goodbye / see you again", category: "Greeting" },
+
+        // Grammar Words & Particles
         { hanzi: "不", pinyin: "bù", meaning: "not / no", category: "Grammar" },
         { hanzi: "嗎", pinyin: "ma", meaning: "question particle", category: "Grammar" },
-        { hanzi: "很", pinyin: "hěn", meaning: "very", category: "Grammar" }
+        { hanzi: "很", pinyin: "hěn", meaning: "very", category: "Grammar" },
+        { hanzi: "呢", pinyin: "ne", meaning: "particle for bouncing questions / what about...", category: "Grammar" },
+        { hanzi: "也", pinyin: "yě", meaning: "also / too", category: "Grammar" }
 
     ]
 
