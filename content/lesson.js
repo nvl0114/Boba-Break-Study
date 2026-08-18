@@ -1,6 +1,6 @@
 // ============================================================
 // Boba Break Study — Lesson Database
-// Updated with Location, Activity, Ongoing Actions, Review Questions
+// Updated with Location, Activity, Ongoing Actions, and Mixed Quiz Generator
 // ============================================================
 
 const lessonData = {
@@ -702,7 +702,7 @@ const lessonData = {
     reviewQuestions: [
 
         // -------------------------
-        // ONGOING ACTIONS (在 / 正在)
+        // ONGOING ACTIONS (在 / 正在) - (Latest Material Pool)
         // -------------------------
 
         {
@@ -1284,6 +1284,40 @@ function getRandomReviewQuestions(count = 12) {
         0,
         Math.min(count, questions.length)
     );
+}
+
+
+// ============================================================
+// MIXED QUIZ GENERATOR (40% Latest Material + 60% Review)
+// ============================================================
+
+function getMixedReviewQuestions(totalCount = 20) {
+    const allQuestions = getReviewQuestions();
+    
+    // 40% dari 20 = 8 soal materi terbaru (Ongoing Actions)
+    // 60% dari 20 = 12 soal review materi lama
+    const targetLatestCount = Math.round(totalCount * 0.4); 
+    const targetReviewCount = totalCount - targetLatestCount;
+
+    // Kata kunci untuk mengidentifikasi soal materi terbaru
+    const latestKeywords = ["正在", "沒在", "逛街", "散步", "做作業", "寫功課", "學習", "休息", "睡覺", "跑步"];
+
+    const isLatestQuestion = (q) => {
+        return q.answer.some(word => latestKeywords.some(keyword => word.includes(keyword)));
+    };
+
+    const latestQuestionsPool = allQuestions.filter(isLatestQuestion);
+    const oldReviewPool = allQuestions.filter(q => !isLatestQuestion(q));
+
+    const shuffle = (array) => [...array].sort(() => Math.random() - 0.5);
+    
+    const shuffledLatest = shuffle(latestQuestionsPool);
+    const shuffledOld = shuffle(oldReviewPool);
+
+    const selectedLatest = shuffledLatest.slice(0, targetLatestCount);
+    const selectedOld = shuffledOld.slice(0, targetReviewCount);
+
+    return shuffle([...selectedLatest, ...selectedOld]);
 }
 
 
