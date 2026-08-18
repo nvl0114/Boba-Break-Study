@@ -4,2195 +4,2278 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Grammar: 在 (Zài) & Locations | Boba Break Study</title>
+<title>Grammar: 在 (Zài) & Places | Boba Break Study</title>
 
 <link rel="stylesheet" href="../style.css">
 
 <link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-<!-- Hanzi Writer CDN -->
-<script src="https://cdn.jsdelivr.net/npm/hanzi-writer@3.5.0/dist/hanzi-writer.min.js"></script>
-
-<!-- Lesson Data Script -->
-<script src="lesson.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/hanzi-writer@3.5/dist/hanzi-writer-lib.js"></script>
+<script src="../lesson.js"></script>
 
 <style>
 
-/* =====================================================
-   GENERAL
-===================================================== */
+/* =========================================================
+   LESSON VARIABLES
+========================================================= */
 
-.lesson-card,
-.grammar-card,
-.game-card,
-.writing-card,
-.final-card {
-    background: white;
-    padding: 25px;
-    border-radius: 20px;
-    box-shadow: 0 6px 15px rgba(0,0,0,0.06);
-    margin: 25px auto;
-    max-width: 750px;
-}
-
-h2 {
-    color: #b8865c;
-    font-size: 24px;
-    margin-bottom: 12px;
-}
-
-h3 {
-    color: #5c4033;
-}
-
-p {
-    color: #666;
-    font-size: 14px;
-    line-height: 1.6;
+:root {
+    --boba-brown: #5c4033;
+    --boba-light: #fff8ef;
+    --boba-cream: #fffaf4;
+    --boba-caramel: #b8865c;
+    --boba-soft: #ead7c5;
+    --boba-dark: #3f2b22;
+    --boba-green: #8fa58a;
+    --boba-red: #c98278;
 }
 
 
-/* =====================================================
-   LESSON HEADER
-===================================================== */
+/* =========================================================
+   GENERAL LESSON
+========================================================= */
+
+.lesson-container {
+    max-width: 1050px;
+    margin: 0 auto;
+    padding: 30px 20px 80px;
+}
 
 .lesson-title {
     text-align: center;
-    margin-top: 20px;
+    margin-bottom: 30px;
 }
 
 .lesson-title .badge {
     display: inline-block;
-    background: #fff8ef;
-    color: #b8865c;
-    border: 1px solid #d7b89c;
-    padding: 6px 13px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: bold;
+    padding: 7px 15px;
+    border-radius: 30px;
+    background: var(--boba-soft);
+    color: var(--boba-brown);
+    font-size: 0.82rem;
+    font-weight: 700;
+    margin-bottom: 12px;
 }
 
 .lesson-title h1 {
-    color: #5c4033;
-    font-size: 28px;
-    margin: 12px 0 5px;
+    color: var(--boba-brown);
+    font-size: clamp(2rem, 5vw, 3rem);
+    margin: 5px 0 10px;
 }
 
 .lesson-title p {
-    margin: 0;
+    color: #806c5f;
+    margin: 0 auto;
+    max-width: 650px;
+    line-height: 1.7;
 }
 
 
-/* =====================================================
-   GRAMMAR CAROUSEL
-===================================================== */
+/* =========================================================
+   SECTION
+========================================================= */
 
-.grammar-slider-container {
-    position: relative;
+.lesson-section {
+    margin-top: 45px;
 }
 
-.grammar-slide {
-    display: none;
+.section-heading {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--boba-brown);
+    margin-bottom: 20px;
 }
 
-.grammar-slide.active-slide {
-    display: block;
-}
-
-.pattern-display {
-    background: #fff8ef;
-    padding: 15px;
+.section-heading i {
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border-radius: 14px;
-    border: 1.5px solid #d7b89c;
-    margin: 15px 0;
+    background: var(--boba-soft);
+    color: var(--boba-brown);
+}
+
+.section-heading h2 {
+    margin: 0;
+    font-size: 1.55rem;
+}
+
+
+/* =========================================================
+   GRAMMAR CARDS
+========================================================= */
+
+.grammar-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px;
+}
+
+.grammar-card {
+    background: var(--boba-cream);
+    border: 1px solid #eadbcd;
+    border-radius: 24px;
+    padding: 25px;
+    box-shadow: 0 8px 25px rgba(92, 64, 51, 0.07);
+    transition: transform 0.25s ease,
+                box-shadow 0.25s ease,
+                border-color 0.25s ease;
+}
+
+.grammar-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 35px rgba(92, 64, 51, 0.12);
+    border-color: var(--boba-caramel);
+}
+
+.grammar-number {
+    width: 38px;
+    height: 38px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--boba-brown);
+    color: white;
+    font-weight: 800;
+    margin-bottom: 15px;
+}
+
+.grammar-card h3 {
+    color: var(--boba-brown);
+    margin: 0 0 10px;
+    font-size: 1.25rem;
+}
+
+.grammar-description {
+    color: #705e53;
+    line-height: 1.7;
+    margin-bottom: 18px;
+}
+
+
+/* =========================================================
+   PATTERN BOX
+========================================================= */
+
+.pattern-box {
+    background: #f4e7d9;
+    border-radius: 15px;
+    padding: 14px 17px;
+    margin-bottom: 20px;
     text-align: center;
 }
 
-.pattern-code {
-    font-weight: bold;
-    color: #b8865c;
-    font-size: 18px;
-}
-
-.grammar-explanation {
-    background: #fff8ef;
-    border: 1.5px solid #d7b89c;
-    padding: 15px;
-    border-radius: 15px;
-    margin-top: 15px;
-}
-
-.grammar-explanation strong {
-    color: #b8865c;
-}
-
-.example-sentence {
-    text-align: center;
-    margin-top: 18px;
-    padding: 15px;
-    background: white;
-    border-radius: 15px;
-    border: 1px dashed #d7b89c;
-}
-
-.example-hanzi {
-    font-size: 28px;
-    font-weight: bold;
-    color: #5c4033;
+.pattern-label {
+    display: block;
+    color: #806c5f;
+    font-size: 0.76rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
     margin-bottom: 5px;
 }
 
-.slider-nav {
+.pattern {
+    color: var(--boba-brown);
+    font-size: 1.08rem;
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   EXAMPLES
+========================================================= */
+
+.examples-title {
+    color: #806c5f;
+    font-size: 0.85rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 10px;
+}
+
+.example-list {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 20px;
-}
-
-.slider-btn {
-    background: #fff8ef;
-    border: 1.5px solid #d7b89c;
-    color: #8c7355;
-    padding: 8px 16px;
-    border-radius: 12px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.2s;
-}
-
-.slider-btn:hover {
-    background: #faedcd;
-}
-
-.slider-indicators {
-    display: flex;
-    gap: 6px;
-    flex-wrap: wrap;
-    justify-content: center;
-    max-width: 400px;
-}
-
-.indicator {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: #f0e4d5;
-    cursor: pointer;
-}
-
-.indicator.active {
-    background: #b8865c;
-}
-
-
-/* =====================================================
-   VOCABULARY
-===================================================== */
-
-.vocab-container {
-    display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     gap: 10px;
-    justify-content: center;
 }
 
-.vocab-pill {
-    position: relative;
-    background: #fff8ef;
-    border-radius: 14px;
-    padding: 9px 10px;
-    width: 105px;
-    text-align: center;
-    border: 1.5px solid #d7b89c;
+.example-card {
+    background: white;
+    border: 1px solid #eaded3;
+    border-radius: 15px;
+    padding: 13px 15px;
     cursor: pointer;
-    transition: 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
 }
 
-.vocab-pill:hover {
-    transform: translateY(-2px);
-    background: #faedcd;
+.example-card:hover {
+    background: #fff9f2;
+    border-color: var(--boba-caramel);
+    transform: translateX(3px);
 }
 
-.vocab-pill:active {
-    transform: scale(0.95);
+.example-card:active {
+    transform: scale(0.98);
 }
 
-.vocab-pill .hanzi {
-    font-size: 20px;
-    font-weight: bold;
-    color: #b8865c;
+.example-sound {
+    min-width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background: var(--boba-soft);
+    color: var(--boba-brown);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
 }
 
-.vocab-pill .pinyin {
-    font-size: 11px;
-    color: #555;
+.example-card:hover .example-sound {
+    background: var(--boba-brown);
+    color: white;
 }
 
-.vocab-pill .meaning {
-    font-size: 10px;
-    color: #777;
+.example-content {
+    flex: 1;
+}
+
+.example-chinese {
+    display: block;
+    color: var(--boba-dark);
+    font-size: 1.05rem;
+    margin-bottom: 3px;
+}
+
+.example-pinyin {
+    display: block;
+    color: #9a8779;
+    font-size: 0.82rem;
+}
+
+.example-meaning {
+    display: block;
+    color: #806c5f;
+    font-size: 0.82rem;
     margin-top: 2px;
 }
 
 
-/* =====================================================
+/* Sound animation */
+
+.example-card.playing {
+    border-color: var(--boba-caramel);
+    background: #fff5e9;
+}
+
+.example-card.playing .example-sound {
+    background: var(--boba-caramel);
+    color: white;
+    animation: soundPulse 0.8s infinite;
+}
+
+@keyframes soundPulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.12);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+
+/* =========================================================
+   SPECIAL NOTE
+========================================================= */
+
+.grammar-note {
+    margin-top: 16px;
+    padding: 13px 15px;
+    border-left: 4px solid var(--boba-caramel);
+    background: #fff5e9;
+    border-radius: 0 12px 12px 0;
+    color: #705e53;
+    font-size: 0.88rem;
+    line-height: 1.6;
+}
+
+.grammar-note strong {
+    color: var(--boba-brown);
+}
+
+
+/* =========================================================
+   VOCABULARY
+========================================================= */
+
+.vocab-container {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.vocab-card {
+    background: var(--boba-cream);
+    border: 1px solid #eadbcd;
+    border-radius: 18px;
+    padding: 17px 12px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.22s ease;
+}
+
+.vocab-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--boba-caramel);
+    box-shadow: 0 8px 20px rgba(92, 64, 51, 0.09);
+}
+
+.vocab-card.playing {
+    background: #fff2df;
+    border-color: var(--boba-caramel);
+}
+
+.vocab-hanzi {
+    display: block;
+    font-size: 1.65rem;
+    font-weight: 800;
+    color: var(--boba-brown);
+}
+
+.vocab-pinyin {
+    display: block;
+    color: #9a8779;
+    font-size: 0.78rem;
+    margin-top: 3px;
+}
+
+.vocab-meaning {
+    display: block;
+    color: #705e53;
+    font-size: 0.8rem;
+    margin-top: 5px;
+}
+
+.vocab-sound {
+    margin-top: 9px;
+    color: var(--boba-caramel);
+    font-size: 0.75rem;
+}
+
+
+/* =========================================================
    GAME
-===================================================== */
+========================================================= */
 
 .game-card {
-    position: relative;
+    background: var(--boba-cream);
+    border-radius: 25px;
+    padding: 25px;
+    border: 1px solid #eadbcd;
+    box-shadow: 0 8px 25px rgba(92, 64, 51, 0.07);
+    margin-bottom: 22px;
 }
 
-.game-number {
-    display: inline-block;
-    background: #fff8ef;
-    color: #b8865c;
-    border: 1px solid #d7b89c;
-    padding: 5px 12px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: bold;
-}
-
-.game-description {
-    margin-bottom: 15px;
-}
-
-.question-box {
-    text-align: center;
-    background: #fff8ef;
-    border: 1.5px dashed #d7b89c;
-    padding: 15px;
-    border-radius: 15px;
-    margin-bottom: 15px;
-}
-
-.question-label {
-    font-size: 11px;
-    color: #999;
-    margin-bottom: 5px;
-}
-
-.question-meaning {
-    font-size: 17px;
-    color: #5c4033;
-    font-weight: bold;
-}
-
-.answer-area {
-    min-height: 65px;
-    padding: 12px;
-    border: 2px dashed #d7b89c;
-    border-radius: 15px;
+.game-header {
     display: flex;
+    justify-content: space-between;
+    gap: 15px;
     align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 7px;
-    background: #fdfbf7;
-    margin-bottom: 12px;
+    margin-bottom: 20px;
 }
 
-.answer-placeholder {
-    color: #aaa;
-    font-size: 13px;
+.game-title {
+    color: var(--boba-brown);
+    margin: 0;
+}
+
+.game-progress {
+    font-size: 0.8rem;
+    color: #907d70;
+}
+
+.game-instruction {
+    color: #806c5f;
+    margin-bottom: 15px;
+}
+
+.target-sentence {
+    text-align: center;
+    background: #f4e7d9;
+    border-radius: 18px;
+    padding: 18px;
+    margin-bottom: 20px;
+}
+
+.target-sentence strong {
+    color: var(--boba-brown);
+    font-size: 1.25rem;
 }
 
 .word-bank {
     display: flex;
-    justify-content: center;
     flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 15px;
+    justify-content: center;
+    gap: 9px;
+    margin-bottom: 18px;
 }
 
 .word-btn {
-    border: 1.5px solid #d7b89c;
+    border: 1px solid #ddc9b8;
     background: white;
-    color: #5c4033;
-    padding: 9px 14px;
+    color: var(--boba-brown);
     border-radius: 12px;
-    font-size: 17px;
+    padding: 10px 14px;
     cursor: pointer;
-    transition: 0.2s;
+    font-weight: 700;
+    transition: all 0.2s ease;
 }
 
 .word-btn:hover {
-    background: #fff8ef;
-    transform: translateY(-2px);
+    background: var(--boba-soft);
 }
 
 .word-btn.selected {
-    background: #faedcd;
-    border-color: #b8865c;
-    color: #8c5d35;
-}
-
-.word-btn:disabled {
-    opacity: 0.4;
-    cursor: default;
-}
-
-.selected-word {
-    background: #b8865c;
-    color: white;
-    padding: 8px 13px;
-    border-radius: 10px;
-    font-size: 17px;
-    cursor: pointer;
-}
-
-.selected-word:hover {
-    background: #a0724f;
-}
-
-.game-buttons {
-    display: flex;
-    gap: 8px;
-}
-
-.check-btn,
-.reset-btn,
-.listen-btn,
-.next-game-btn {
-    flex: 1;
-    border: none;
-    border-radius: 12px;
-    padding: 11px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: 0.2s;
-}
-
-.check-btn {
-    background: #b8865c;
+    background: var(--boba-brown);
     color: white;
 }
 
-.check-btn:hover {
-    background: #a0724f;
-}
-
-.reset-btn {
-    background: #fff8ef;
-    color: #8c7355;
-    border: 1px solid #d7b89c;
-}
-
-.listen-btn {
-    background: #f0f7f4;
-    color: #2d6a4f;
-    border: 1px solid #b7e4c7;
-}
-
-.next-game-btn {
-    background: #5c4033;
-    color: white;
-    display: none;
-    margin-top: 12px;
-}
-
-.feedback {
+.selected-sentence {
+    min-height: 50px;
+    padding: 13px;
+    border: 2px dashed #d9c3b0;
+    border-radius: 15px;
+    margin-bottom: 15px;
     text-align: center;
-    min-height: 30px;
-    margin-top: 12px;
-    font-weight: bold;
+    color: var(--boba-brown);
+    font-weight: 700;
 }
 
-.correct {
-    color: #2d6a4f;
+.game-actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
 }
 
-.incorrect {
-    color: #9b2226;
+.game-btn {
+    border: none;
+    border-radius: 13px;
+    padding: 11px 18px;
+    cursor: pointer;
+    font-weight: 800;
+    background: var(--boba-brown);
+    color: white;
+    transition: all 0.2s ease;
+}
+
+.game-btn:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+}
+
+.game-btn.secondary {
+    background: var(--boba-soft);
+    color: var(--boba-brown);
+}
+
+.game-feedback {
+    text-align: center;
+    min-height: 25px;
+    margin-top: 15px;
+    font-weight: 700;
 }
 
 
-/* =====================================================
-   QUESTION COUNTER
-===================================================== */
-
-.game-progress {
-    font-size: 12px;
-    color: #8c7355;
-    text-align: right;
-    margin-bottom: 8px;
-}
-
-
-/* =====================================================
+/* =========================================================
    WRITING
-===================================================== */
+========================================================= */
 
 .writing-card {
+    background: var(--boba-cream);
+    border: 1px solid #eadbcd;
+    border-radius: 25px;
+    padding: 25px;
     text-align: center;
 }
 
-.writing-mode-buttons {
-    display: flex;
-    gap: 8px;
-    margin: 15px 0;
-}
-
-.mode-btn {
-    flex: 1;
-    border: 1.5px solid #d7b89c;
-    background: #fff8ef;
-    color: #8c7355;
-    padding: 10px 5px;
-    border-radius: 12px;
-    cursor: pointer;
-    font-size: 12px;
-    font-weight: bold;
-    transition: 0.2s;
-}
-
-.mode-btn.active {
-    background: #b8865c;
-    color: white;
-    border-color: #b8865c;
-}
-
-.writing-info {
-    color: #777;
-    font-size: 13px;
-    margin-bottom: 15px;
-}
-
-.canvas-wrapper {
-    margin: 15px auto;
-    width: 280px;
-    max-width: 100%;
-    height: 280px;
-    background:
-        linear-gradient(#eadac7 1px, transparent 1px),
-        linear-gradient(90deg, #eadac7 1px, transparent 1px),
-        linear-gradient(#eadac7 1px, transparent 1px),
-        linear-gradient(90deg, #eadac7 1px, transparent 1px);
-    background-size: 70px 70px;
-    background-position: center;
-    border: 2px solid #d7b89c;
-    border-radius: 15px;
+.writer-box {
+    width: 220px;
+    height: 220px;
+    margin: 20px auto;
+    border: 2px solid #decbb9;
+    border-radius: 18px;
+    background: white;
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
-    position: relative;
-    touch-action: none;
 }
 
-#target-div {
-    width: 260px;
-    height: 260px;
+#character-target {
+    font-size: 3rem;
+    color: var(--boba-brown);
 }
 
-.writing-buttons {
+.writing-info {
+    color: #806c5f;
+    margin-bottom: 15px;
+}
+
+.writing-actions {
     display: flex;
-    gap: 8px;
     justify-content: center;
-    margin-top: 15px;
-}
-
-.write-btn {
-    border: none;
-    padding: 10px 15px;
-    border-radius: 12px;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-.clear-btn {
-    background: #fff8ef;
-    color: #8c7355;
-    border: 1px solid #d7b89c;
-}
-
-.next-write-btn {
-    background: #b8865c;
-    color: white;
-}
-
-.recall-answer {
-    display: none;
-    font-size: 30px;
-    color: #b8865c;
-    font-weight: bold;
-    margin: 10px;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
 
-/* =====================================================
+/* =========================================================
    FINAL CHALLENGE
-===================================================== */
+========================================================= */
 
 .final-card {
+    background: linear-gradient(
+        145deg,
+        #fff8ef,
+        #f2dfcc
+    );
+    border: 1px solid #e1cbb7;
+    border-radius: 27px;
+    padding: 28px;
+    box-shadow: 0 10px 30px rgba(92, 64, 51, 0.08);
+}
+
+.final-question {
     text-align: center;
+    color: var(--boba-brown);
+    font-size: 1.15rem;
+    font-weight: 800;
+    margin-bottom: 20px;
 }
 
-.final-score {
-    font-size: 40px;
-    font-weight: bold;
-    color: #b8865c;
+.final-options {
+    display: grid;
+    gap: 10px;
 }
 
-.unlock {
+.final-option {
+    border: 1px solid #dcc8b6;
+    background: white;
+    color: var(--boba-brown);
+    padding: 14px;
+    border-radius: 14px;
+    cursor: pointer;
+    text-align: left;
+    font-weight: 700;
+    transition: all 0.2s ease;
+}
+
+.final-option:hover {
+    border-color: var(--boba-caramel);
     background: #fff8ef;
-    padding: 15px;
-    border-radius: 15px;
-    border: 1.5px solid #d7b89c;
-    margin-top: 15px;
+}
+
+.final-option.correct {
+    background: #e5eee1;
+    border-color: #8fa58a;
+}
+
+.final-option.wrong {
+    background: #f7e3df;
+    border-color: #c98278;
+}
+
+.final-result {
+    text-align: center;
+    margin-top: 18px;
+    font-weight: 800;
+    color: var(--boba-brown);
 }
 
 
-/* =====================================================
-   SOUND
-===================================================== */
+/* =========================================================
+   AUDIO BUTTON
+========================================================= */
 
-.sound-btn {
-    background: #b8865c;
-    color: white;
-    border: none;
-    width: 32px;
-    height: 32px;
+.audio-inline {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
+    border: none;
+    background: var(--boba-soft);
+    color: var(--boba-brown);
     cursor: pointer;
 }
 
 
-/* =====================================================
+/* =========================================================
    MOBILE
-===================================================== */
+========================================================= */
 
-@media(max-width:700px){
+@media (max-width: 800px) {
 
-    .lesson-card,
-    .grammar-card,
-    .game-card,
-    .writing-card,
-    .final-card {
-        padding: 15px;
-        margin: 15px;
+    .grammar-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .vocab-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .lesson-container {
+        padding: 25px 14px 60px;
+    }
+
+    .grammar-card {
+        padding: 20px;
+    }
+}
+
+
+@media (max-width: 520px) {
+
+    .vocab-container {
+        grid-template-columns: repeat(2, 1fr);
     }
 
     .lesson-title h1 {
-        font-size: 23px;
+        font-size: 2rem;
     }
 
-    .word-btn {
-        padding: 8px 12px;
-        font-size: 16px;
+    .section-heading h2 {
+        font-size: 1.3rem;
     }
 
-    .writing-mode-buttons {
-        flex-wrap: wrap;
+    .example-card {
+        padding: 11px;
     }
 
-    .mode-btn {
-        min-width: 45%;
+    .game-card,
+    .writing-card,
+    .final-card {
+        padding: 20px 15px;
     }
-
-    .game-buttons {
-        flex-wrap: wrap;
-    }
-
 }
 
 </style>
 </head>
 
+
 <body>
 
-<div class="app-container">
-
-<!-- =====================================================
+<!-- =========================================================
      SIDEBAR
-===================================================== -->
+========================================================= -->
 
 <div id="sidebar-container"></div>
 
-<main class="main-content">
+
+<main class="lesson-container">
+
+    <!-- =====================================================
+         TITLE
+    ====================================================== -->
+
+    <header class="lesson-title">
+
+        <span class="badge">
+            Grammar Lesson • TOCFL A1
+        </span>
+
+        <h1>
+            Grammar: 在 (Zài) & Places
+        </h1>
+
+        <p>
+            Learn how to say where someone or something is,
+            ask about locations, and combine <strong>在</strong>
+            with activities.
+        </p>
+
+    </header>
 
 
-<!-- =====================================================
-     TITLE
-===================================================== -->
+    <!-- =====================================================
+         GRAMMAR
+    ====================================================== -->
 
-<div class="lesson-title">
+    <section class="lesson-section">
 
-    <span class="badge">
-        GRAMMAR LESSON • LOCATIONS & ACTIONS
-    </span>
-
-    <h1>Grammar: 在 (Zài) & Places</h1>
-
-    <p>
-        Learn how to express locations, ask where someone is, and combine places with daily activities in Mandarin.
-    </p>
-
-</div>
+        <div class="section-heading">
+            <i class="fa-solid fa-location-dot"></i>
+            <h2>Grammar Patterns</h2>
+        </div>
 
 
-<!-- =====================================================
-     GRAMMAR CAROUSEL EXPLANATION
-===================================================== -->
+        <div class="grammar-grid">
 
-<div class="grammar-card">
 
-    <h2>🧠 Grammar Patterns: 在 (Zài) & Locations</h2>
+            <!-- =================================================
+                 PATTERN 1
+            ================================================== -->
 
-    <div class="grammar-slider-container">
+            <article class="grammar-card">
 
-        <!-- SLIDE 1 -->
-        <div class="grammar-slide active-slide" id="slide-1">
+                <div class="grammar-number">1</div>
 
-            <h3>1. Basic Location Patterns</h3>
+                <h3>
+                    Basic Location
+                </h3>
 
-            <div class="pattern-display">
-                <div class="pattern-code">Positive: Subject + 在 + Place<br>Negative: Subject + 不 + 在 + Place</div>
-            </div>
-
-            <div class="grammar-explanation">
-
-                <p>
-                    <strong>Explanation:</strong>
-                    The word 在 (zài) means "at" or "in". To state someone or something is at a location, use **Subject + 在 + Place**. To state they are not there, insert 不 (bù) right before 在: **Subject + 不 + 在 + Place**.
+                <p class="grammar-description">
+                    Use <strong>在</strong> to say that a person
+                    or thing is located somewhere.
                 </p>
 
-                <p style="margin-top:8px;">
-                    <strong>Examples:</strong><br>
-                    • 醫生在醫院 (The doctor is at the hospital)<br>
-                    • 蘋果在家 (The apple is at home)<br>
-                    • 他不在公園 (He is not at the park)<br>
-                    • 香蕉不在學校 (The banana is not at school)
+                <div class="pattern-box">
+
+                    <span class="pattern-label">
+                        Pattern
+                    </span>
+
+                    <span class="pattern">
+                        Subject + 在 + Place
+                    </span>
+
+                </div>
+
+                <div class="examples-title">
+                    Examples
+                </div>
+
+                <div class="example-list">
+
+                    <div class="example-card"
+                         onclick="playExample(this, '我在家。')">
+
+                        <div class="example-sound">
+                            <i class="fa-solid fa-volume-high"></i>
+                        </div>
+
+                        <div class="example-content">
+
+                            <strong class="example-chinese">
+                                我在家。
+                            </strong>
+
+                            <span class="example-pinyin">
+                                Wǒ zài jiā.
+                            </span>
+
+                            <span class="example-meaning">
+                                I am at home.
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="example-card"
+                         onclick="playExample(this, '爸爸在辦公室。')">
+
+                        <div class="example-sound">
+                            <i class="fa-solid fa-volume-high"></i>
+                        </div>
+
+                        <div class="example-content">
+
+                            <strong class="example-chinese">
+                                爸爸在辦公室。
+                            </strong>
+
+                            <span class="example-pinyin">
+                                Bàba zài bàngōngshì.
+                            </span>
+
+                            <span class="example-meaning">
+                                Dad is in the office.
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="example-card"
+                         onclick="playExample(this, '老師在學校。')">
+
+                        <div class="example-sound">
+                            <i class="fa-solid fa-volume-high"></i>
+                        </div>
+
+                        <div class="example-content">
+
+                            <strong class="example-chinese">
+                                老師在學校。
+                            </strong>
+
+                            <span class="example-pinyin">
+                                Lǎoshī zài xuéxiào.
+                            </span>
+
+                            <span class="example-meaning">
+                                The teacher is at school.
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- =================================================
+                 PATTERN 2
+            ================================================== -->
+
+            <article class="grammar-card">
+
+                <div class="grammar-number">2</div>
+
+                <h3>
+                    Negative Location
+                </h3>
+
+                <p class="grammar-description">
+                    Use <strong>不在</strong> when someone or
+                    something is not at a particular place.
                 </p>
+
+                <div class="pattern-box">
+
+                    <span class="pattern-label">
+                        Pattern
+                    </span>
+
+                    <span class="pattern">
+                        Subject + 不在 + Place
+                    </span>
+
+                </div>
+
+                <div class="examples-title">
+                    Examples
+                </div>
+
+                <div class="example-list">
+
+                    <div class="example-card"
+                         onclick="playExample(this, '我不在家。')">
+
+                        <div class="example-sound">
+                            <i class="fa-solid fa-volume-high"></i>
+                        </div>
+
+                        <div class="example-content">
+
+                            <strong class="example-chinese">
+                                我不在家。
+                            </strong>
+
+                            <span class="example-pinyin">
+                                Wǒ bú zài jiā.
+                            </span>
+
+                            <span class="example-meaning">
+                                I am not at home.
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="example-card"
+                         onclick="playExample(this, '他不在學校。')">
+
+                        <div class="example-sound">
+                            <i class="fa-solid fa-volume-high"></i>
+                        </div>
+
+                        <div class="example-content">
+
+                            <strong class="example-chinese">
+                                他不在學校。
+                            </strong>
+
+                            <span class="example-pinyin">
+                                Tā bú zài xuéxiào.
+                            </span>
+
+                            <span class="example-meaning">
+                                He is not at school.
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="example-card"
+                         onclick="playExample(this, '媽媽不在醫院。')">
+
+                        <div class="example-sound">
+                            <i class="fa-solid fa-volume-high"></i>
+                        </div>
+
+                        <div class="example-content">
+
+                            <strong class="example-chinese">
+                                媽媽不在醫院。
+                            </strong>
+
+                            <span class="example-pinyin">
+                                Māma bú zài yīyuàn.
+                            </span>
+
+                            <span class="example-meaning">
+                                Mom is not at the hospital.
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- =================================================
+                 PATTERN 3
+            ================================================== -->
+
+            <article class="grammar-card">
+
+                <div class="grammar-number">3</div>
+
+                <h3>
+                    Yes / No Questions with 嗎
+                </h3>
+
+                <p class="grammar-description">
+                    Add <strong>嗎</strong> at the end of a
+                    location sentence to make a yes/no question.
+                </p>
+
+                <div class="pattern-box">
+
+                    <span class="pattern-label">
+                        Pattern
+                    </span>
+
+                    <span class="pattern">
+                        S + 在 + Place + 嗎？
+                    </span>
+
+                </div>
+
+                <div class="examples-title">
+                    Examples
+                </div>
+
+                <div class="example-list">
+
+                    <div class="example-card"
+                         onclick="playExample(this, '你在家嗎？')">
+
+                        <div class="example-sound">
+                            <i class="fa-solid fa-volume-high"></i>
+                        </div>
+
+                        <div class="example-content">
+
+                            <strong class="example-chinese">
+                                你在家嗎？
+                            </strong>
+
+                            <span class="example-pinyin">
+                                Nǐ zài jiā ma?
+                            </span>
+
+                            <span class="example-meaning">
+                                Are you at home?
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="example-card"
+                         onclick="playExample(this, '老師在學校嗎？')">
+
+                        <div class="example-sound">
+                            <i class="fa-solid fa-volume-high"></i>
+                        </div>
+
+                        <div class="example-content">
+
+                            <strong class="example-chinese">
+                                老師在學校嗎？
+                            </strong>
+
+                            <span class="example-pinyin">
+                                Lǎoshī zài xuéxiào ma?
+                            </span>
+
+                            <span class="example-meaning">
+                                Is the teacher at school?
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="example-card"
+                         onclick="playExample(this, '爸爸在辦公室嗎？')">
+
+                        <div class="example-sound">
+                            <i class="fa-solid fa-volume-high"></i>
+                        </div>
+
+                        <div class="example-content">
+
+                            <strong class="example-chinese">
+                                爸爸在辦公室嗎？
+                            </strong>
+
+                            <span class="example-pinyin">
+                                Bàba zài bàngōngshì ma?
+                            </span>
+
+                            <span class="example-meaning">
+                                Is Dad in the office?
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- =================================================
+                 PATTERN 4
+            ================================================== -->
+
+            <article class="grammar-card">
+
+                <div class="grammar-number">4</div>
+
+                <h3>
+                    A-not-A Location Questions
+                </h3>
+
+                <p class="grammar-description">
+                    Use <strong>在不在</strong> to ask whether
+                    someone is at a place or not.
+                </p>
+
+                <div class="pattern-box">
+
+                    <span class="pattern-label">
+                        Pattern
+                    </span>
+
+                    <span class="pattern">
+                        S + 在不在 + Place？
+                    </span>
+
+                </div>
+
+                <div class="examples-title">
+                    Examples
+                </div>
+
+                <div class="example-list">
+
+                    <div class="example-card"
+                         onclick="playExample(this, '你在不在家？')">
+
+                        <div class="example-sound">
+                            <i class="fa-solid fa-volume-high"></i>
+                        </div>
+
+                        <div class="example-content">
+
+                            <strong class="example-chinese">
+                                你在不在家？
+                            </strong>
+
+                            <span class="example-pinyin">
+                                Nǐ zài bú zài jiā?
+                            </span>
+
+                            <span class="example-meaning">
+                                Are you at home?
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="example-card"
+                         onclick="playExample(this, '媽媽在不在醫院？')">
+
+                        <div class="example-sound">
+                            <i class="fa-solid fa-volume-high"></i>
+                        </div>
+
+                        <div class="example-content">
+
+                            <strong class="example-chinese">
+                                媽媽在不在醫院？
+                            </strong>
+
+                            <span class="example-pinyin">
+                                Māma zài bú zài yīyuàn?
+                            </span>
+
+                            <span class="example-meaning">
+                                Is Mom at the hospital?
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="example-card"
+                         onclick="playExample(this, '老師在不在學校？')">
+
+                        <div class="example-sound">
+                            <i class="fa-solid fa-volume-high"></i>
+                        </div>
+
+                        <div class="example-content">
+
+                            <strong class="example-chinese">
+                                老師在不在學校？
+                            </strong>
+
+                            <span class="example-pinyin">
+                                Lǎoshī zài bú zài xuéxiào?
+                            </span>
+
+                            <span class="example-meaning">
+                                Is the teacher at school?
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="grammar-note">
+                    <strong>Tip:</strong>
+                    <strong>在不在</strong> is an A-not-A pattern.
+                    It literally asks “is there / isn't there?”
+                </div>
+
+            </article>
+
+
+
+            <!-- =================================================
+                 PATTERN 5
+            ================================================== -->
+
+            <article class="grammar-card">
+
+                <div class="grammar-number">5</div>
+
+                <h3>
+                    Asking “Where?”
+                </h3>
+
+                <p class="grammar-description">
+                    Use <strong>哪裡</strong> to ask where someone
+                    or something is.
+                </p>
+
+                <div class="pattern-box">
+
+                    <span class="pattern-label">
+                        Pattern
+                    </span>
+
+                    <span class="pattern">
+                        S + 在 + 哪裡？
+                    </span>
+
+                </div>
+
+                <div class="examples-title">
+                    Examples
+                </div>
+
+                <div class="example-list">
+
+                    <div class="example-card"
+                         onclick="playExample(this, '你在哪裡？')">
+
+                        <div class="example-sound">
+                            <i class="fa-solid fa-volume-high"></i>
+                        </div>
+
+                        <div class="example-content">
+
+                            <strong class="example-chinese">
+                                你在哪裡？
+                            </strong>
+
+                            <span class="example-pinyin">
+                                Nǐ zài nǎlǐ?
+                            </span>
+
+                            <span class="example-meaning">
+                                Where are you?
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="example-card"
+                         onclick="playExample(this, '媽媽在哪裡？')">
+
+                        <div class="example-sound">
+                            <i class="fa-solid fa-volume-high"></i>
+                        </div>
+
+                        <div class="example-content">
+
+                            <strong class="example-chinese">
+                                媽媽在哪裡？
+                            </strong>
+
+                            <span class="example-pinyin">
+                                Māma zài nǎlǐ?
+                            </span>
+
+                            <span class="example-meaning">
+                                Where is Mom?
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="example-card"
+                         onclick="playExample(this, '老師在哪裡？')">
+
+                        <div class="example-sound">
+                            <i class="fa-solid fa-volume-high"></i>
+                        </div>
+
+                        <div class="example-content">
+
+                            <strong class="example-chinese">
+                                老師在哪裡？
+                            </strong>
+
+                            <span class="example-pinyin">
+                                Lǎoshī zài nǎlǐ?
+                            </span>
+
+                            <span class="example-meaning">
+                                Where is the teacher?
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- =================================================
+                 PATTERN 6
+            ================================================== -->
+
+            <article class="grammar-card">
+
+                <div class="grammar-number">6</div>
+
+                <h3>
+                    Location + Activity
+                </h3>
+
+                <p class="grammar-description">
+                    You can place an activity after the location
+                    to say what someone is doing at that place.
+                </p>
+
+                <div class="pattern-box">
+
+                    <span class="pattern-label">
+                        Pattern
+                    </span>
+
+                    <span class="pattern">
+                        S + 在 + Place + Activity
+                    </span>
+
+                </div>
+
+                <div class="examples-title">
+                    Examples
+                </div>
+
+                <div class="example-list">
+
+                    <div class="example-card"
+                         onclick="playExample(this, '我在學校讀書。')">
+
+                        <div class="example-sound">
+                            <i class="fa-solid fa-volume-high"></i>
+                        </div>
+
+                        <div class="example-content">
+
+                            <strong class="example-chinese">
+                                我在學校讀書。
+                            </strong>
+
+                            <span class="example-pinyin">
+                                Wǒ zài xuéxiào dúshū.
+                            </span>
+
+                            <span class="example-meaning">
+                                I study at school.
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="example-card"
+                         onclick="playExample(this, '爸爸在辦公室上班。')">
+
+                        <div class="example-sound">
+                            <i class="fa-solid fa-volume-high"></i>
+                        </div>
+
+                        <div class="example-content">
+
+                            <strong class="example-chinese">
+                                爸爸在辦公室上班。
+                            </strong>
+
+                            <span class="example-pinyin">
+                                Bàba zài bàngōngshì shàngbān.
+                            </span>
+
+                            <span class="example-meaning">
+                                Dad works at the office.
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="example-card"
+                         onclick="playExample(this, '哥哥在公園運動。')">
+
+                        <div class="example-sound">
+                            <i class="fa-solid fa-volume-high"></i>
+                        </div>
+
+                        <div class="example-content">
+
+                            <strong class="example-chinese">
+                                哥哥在公園運動。
+                            </strong>
+
+                            <span class="example-pinyin">
+                                Gēge zài gōngyuán yùndòng.
+                            </span>
+
+                            <span class="example-meaning">
+                                My older brother exercises in the park.
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         VOCABULARY
+    ====================================================== -->
+
+    <section class="lesson-section">
+
+        <div class="section-heading">
+
+            <i class="fa-solid fa-book-open"></i>
+
+            <h2>
+                Vocabulary
+            </h2>
+
+        </div>
+
+
+        <div class="vocab-container">
+
+
+            <!-- Locations -->
+
+            <div class="vocab-card"
+                 onclick="playVocab(this, '在')">
+
+                <span class="vocab-hanzi">在</span>
+                <span class="vocab-pinyin">zài</span>
+                <span class="vocab-meaning">at; in</span>
+                <div class="vocab-sound">
+                    🔊 Listen
+                </div>
 
             </div>
 
-            <div class="example-sentence">
 
-                <div class="example-hanzi">
-                    醫生在醫院
-                </div>
+            <div class="vocab-card"
+                 onclick="playVocab(this, '家')">
 
-                <div>
-                    Yīshēng zài yīyuàn.
-                </div>
+                <span class="vocab-hanzi">家</span>
+                <span class="vocab-pinyin">jiā</span>
+                <span class="vocab-meaning">home</span>
+                <div class="vocab-sound">🔊 Listen</div>
 
-                <div>
-                    The doctor is at the hospital.
-                </div>
+            </div>
 
-                <button class="sound-btn"
-                        onclick="playAudio('醫生在醫院')">
-                    🔊
+
+            <div class="vocab-card"
+                 onclick="playVocab(this, '日本')">
+
+                <span class="vocab-hanzi">日本</span>
+                <span class="vocab-pinyin">Rìběn</span>
+                <span class="vocab-meaning">Japan</span>
+                <div class="vocab-sound">🔊 Listen</div>
+
+            </div>
+
+
+            <div class="vocab-card"
+                 onclick="playVocab(this, '醫院')">
+
+                <span class="vocab-hanzi">醫院</span>
+                <span class="vocab-pinyin">yīyuàn</span>
+                <span class="vocab-meaning">hospital</span>
+                <div class="vocab-sound">🔊 Listen</div>
+
+            </div>
+
+
+            <div class="vocab-card"
+                 onclick="playVocab(this, '辦公室')">
+
+                <span class="vocab-hanzi">辦公室</span>
+                <span class="vocab-pinyin">bàngōngshì</span>
+                <span class="vocab-meaning">office</span>
+                <div class="vocab-sound">🔊 Listen</div>
+
+            </div>
+
+
+            <div class="vocab-card"
+                 onclick="playVocab(this, '工廠')">
+
+                <span class="vocab-hanzi">工廠</span>
+                <span class="vocab-pinyin">gōngchǎng</span>
+                <span class="vocab-meaning">factory</span>
+                <div class="vocab-sound">🔊 Listen</div>
+
+            </div>
+
+
+            <div class="vocab-card"
+                 onclick="playVocab(this, '學校')">
+
+                <span class="vocab-hanzi">學校</span>
+                <span class="vocab-pinyin">xuéxiào</span>
+                <span class="vocab-meaning">school</span>
+                <div class="vocab-sound">🔊 Listen</div>
+
+            </div>
+
+
+            <div class="vocab-card"
+                 onclick="playVocab(this, '大學')">
+
+                <span class="vocab-hanzi">大學</span>
+                <span class="vocab-pinyin">dàxué</span>
+                <span class="vocab-meaning">university</span>
+                <div class="vocab-sound">🔊 Listen</div>
+
+            </div>
+
+
+            <div class="vocab-card"
+                 onclick="playVocab(this, '公園')">
+
+                <span class="vocab-hanzi">公園</span>
+                <span class="vocab-pinyin">gōngyuán</span>
+                <span class="vocab-meaning">park</span>
+                <div class="vocab-sound">🔊 Listen</div>
+
+            </div>
+
+
+            <!-- Activities -->
+
+            <div class="vocab-card"
+                 onclick="playVocab(this, '讀書')">
+
+                <span class="vocab-hanzi">讀書</span>
+                <span class="vocab-pinyin">dúshū</span>
+                <span class="vocab-meaning">study; read</span>
+                <div class="vocab-sound">🔊 Listen</div>
+
+            </div>
+
+
+            <div class="vocab-card"
+                 onclick="playVocab(this, '學習')">
+
+                <span class="vocab-hanzi">學習</span>
+                <span class="vocab-pinyin">xuéxí</span>
+                <span class="vocab-meaning">learn; study</span>
+                <div class="vocab-sound">🔊 Listen</div>
+
+            </div>
+
+
+            <div class="vocab-card"
+                 onclick="playVocab(this, '上班')">
+
+                <span class="vocab-hanzi">上班</span>
+                <span class="vocab-pinyin">shàngbān</span>
+                <span class="vocab-meaning">go to work; work</span>
+                <div class="vocab-sound">🔊 Listen</div>
+
+            </div>
+
+
+            <div class="vocab-card"
+                 onclick="playVocab(this, '上課')">
+
+                <span class="vocab-hanzi">上課</span>
+                <span class="vocab-pinyin">shàngkè</span>
+                <span class="vocab-meaning">attend class</span>
+                <div class="vocab-sound">🔊 Listen</div>
+
+            </div>
+
+
+            <div class="vocab-card"
+                 onclick="playVocab(this, '運動')">
+
+                <span class="vocab-hanzi">運動</span>
+                <span class="vocab-pinyin">yùndòng</span>
+                <span class="vocab-meaning">exercise; sport</span>
+                <div class="vocab-sound">🔊 Listen</div>
+
+            </div>
+
+
+            <div class="vocab-card"
+                 onclick="playVocab(this, '玩')">
+
+                <span class="vocab-hanzi">玩</span>
+                <span class="vocab-pinyin">wán</span>
+                <span class="vocab-meaning">play; have fun</span>
+                <div class="vocab-sound">🔊 Listen</div>
+
+            </div>
+
+
+            <div class="vocab-card"
+                 onclick="playVocab(this, '遊戲')">
+
+                <span class="vocab-hanzi">遊戲</span>
+                <span class="vocab-pinyin">yóuxì</span>
+                <span class="vocab-meaning">game</span>
+                <div class="vocab-sound">🔊 Listen</div>
+
+            </div>
+
+
+            <div class="vocab-card"
+                 onclick="playVocab(this, '蘋果')">
+
+                <span class="vocab-hanzi">蘋果</span>
+                <span class="vocab-pinyin">píngguǒ</span>
+                <span class="vocab-meaning">apple</span>
+                <div class="vocab-sound">🔊 Listen</div>
+
+            </div>
+
+
+            <div class="vocab-card"
+                 onclick="playVocab(this, '香蕉')">
+
+                <span class="vocab-hanzi">香蕉</span>
+                <span class="vocab-pinyin">xiāngjiāo</span>
+                <span class="vocab-meaning">banana</span>
+                <div class="vocab-sound">🔊 Listen</div>
+
+            </div>
+
+
+            <div class="vocab-card"
+                 onclick="playVocab(this, '教學')">
+
+                <span class="vocab-hanzi">教學</span>
+                <span class="vocab-pinyin">jiàoxué</span>
+                <span class="vocab-meaning">teaching</span>
+                <div class="vocab-sound">🔊 Listen</div>
+
+            </div>
+
+
+            <div class="vocab-card"
+                 onclick="playVocab(this, '對')">
+
+                <span class="vocab-hanzi">對</span>
+                <span class="vocab-pinyin">duì</span>
+                <span class="vocab-meaning">correct; right</span>
+                <div class="vocab-sound">🔊 Listen</div>
+
+            </div>
+
+
+            <div class="vocab-card"
+                 onclick="playVocab(this, '哪裡')">
+
+                <span class="vocab-hanzi">哪裡</span>
+                <span class="vocab-pinyin">nǎlǐ</span>
+                <span class="vocab-meaning">where</span>
+                <div class="vocab-sound">🔊 Listen</div>
+
+            </div>
+
+
+            <div class="vocab-card"
+                 onclick="playVocab(this, '和')">
+
+                <span class="vocab-hanzi">和</span>
+                <span class="vocab-pinyin">hé</span>
+                <span class="vocab-meaning">and</span>
+                <div class="vocab-sound">🔊 Listen</div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         SENTENCE BUILDING
+    ====================================================== -->
+
+    <section class="lesson-section">
+
+        <div class="section-heading">
+
+            <i class="fa-solid fa-puzzle-piece"></i>
+
+            <h2>
+                Sentence Builder
+            </h2>
+
+        </div>
+
+
+        <div class="game-card">
+
+            <div class="game-header">
+
+                <h3 class="game-title">
+                    🧋 Build the Sentence
+                </h3>
+
+                <span class="game-progress"
+                      id="game-progress">
+                    1 / 3
+                </span>
+
+            </div>
+
+
+            <p class="game-instruction">
+                Tap the words in the correct order.
+            </p>
+
+
+            <div class="target-sentence">
+
+                <strong id="game-translation">
+                    I am at home.
+                </strong>
+
+            </div>
+
+
+            <div class="word-bank"
+                 id="word-bank">
+            </div>
+
+
+            <div class="selected-sentence"
+                 id="selected-sentence">
+                Tap the words above 👆
+            </div>
+
+
+            <div class="game-actions">
+
+                <button class="game-btn"
+                        onclick="checkGame()">
+                    Check
+                </button>
+
+                <button class="game-btn secondary"
+                        onclick="resetGame()">
+                    Reset
+                </button>
+
+                <button class="game-btn secondary"
+                        onclick="nextGameQuestion()">
+                    Next →
+                </button>
+
+            </div>
+
+
+            <div class="game-feedback"
+                 id="game-feedback">
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         WRITING
+    ====================================================== -->
+
+    <section class="lesson-section">
+
+        <div class="section-heading">
+
+            <i class="fa-solid fa-pen"></i>
+
+            <h2>
+                Hanzi Writing Practice
+            </h2>
+
+        </div>
+
+
+        <div class="writing-card">
+
+            <h3 id="character-target">
+                在
+            </h3>
+
+            <p class="writing-info"
+               id="writing-info">
+                zài · at; in
+            </p>
+
+
+            <div class="writer-box"
+                 id="writer">
+            </div>
+
+
+            <div class="writing-actions">
+
+                <button class="game-btn"
+                        onclick="playCurrentWriting()">
+
+                    <i class="fa-solid fa-volume-high"></i>
+                    Listen
+
+                </button>
+
+
+                <button class="game-btn secondary"
+                        onclick="nextWritingCharacter()">
+
+                    Next Character →
+
                 </button>
 
             </div>
 
         </div>
 
+    </section>
 
-        <!-- SLIDE 2 -->
-        <div class="grammar-slide" id="slide-2">
 
-            <h3>2. Questions with 嗎 and A-not-A</h3>
 
-            <div class="pattern-display">
-                <div class="pattern-code">S + 在 + Place + 嗎 / S + 在 + 不 + 在 + Place</div>
+    <!-- =====================================================
+         FINAL CHALLENGE
+    ====================================================== -->
+
+    <section class="lesson-section">
+
+        <div class="section-heading">
+
+            <i class="fa-solid fa-trophy"></i>
+
+            <h2>
+                Final Challenge
+            </h2>
+
+        </div>
+
+
+        <div class="final-card">
+
+            <div class="game-progress"
+                 style="text-align:center; margin-bottom:15px;"
+                 id="final-progress">
+                Question 1
             </div>
 
-            <div class="grammar-explanation">
 
-                <p>
-                    <strong>Explanation:</strong>
-                    To ask if someone is at a place, you can add 嗎 (ma) at the end, or use the A-not-A form (在不在). Short answers are usually **對 (duì - correct)** for confirmation or **不 (bù)** with the negative sentence, or simply **在 / 不在**.
-                </p>
-
-                <p style="margin-top:8px;">
-                    <strong>Examples & Answers:</strong><br>
-                    • 老師在教室嗎？ $\rightarrow$ 對，老師在教室 / 不，老師不在教室<br>
-                    • 爸爸在辦公室嗎？ $\rightarrow$ 對，爸爸在辦公室 / 不，爸爸不在辦公室<br>
-                    • 他在不在日本？ $\rightarrow$ 在 / 不在<br>
-                    • 護士在不在醫院 $\rightarrow$ 在 / 不在
-                </p>
-
+            <div class="final-question"
+                 id="final-question">
             </div>
 
-            <div class="example-sentence">
 
-                <div class="example-hanzi">
-                    老師在教室嗎？
-                </div>
+            <div class="final-options"
+                 id="final-options">
+            </div>
 
-                <div>
-                    Lǎoshī zài jiàoshì ma?
-                </div>
 
-                <div>
-                    Is the teacher in the classroom?
-                </div>
+            <div class="final-result"
+                 id="final-result">
+            </div>
 
-                <button class="sound-btn"
-                        onclick="playAudio('老師在教室嗎')">
-                    🔊
+
+            <div class="game-actions"
+                 style="margin-top:20px;">
+
+                <button class="game-btn secondary"
+                        onclick="nextFinalQuestion()">
+
+                    Next Question →
+
                 </button>
 
             </div>
 
         </div>
 
-
-        <!-- SLIDE 3 -->
-        <div class="grammar-slide" id="slide-3">
-
-            <h3>3. Asking "Is someone there?" & "Where?"</h3>
-
-            <div class="pattern-display">
-                <div class="pattern-code">在不在 / 在嗎 (No place) & S + 在 + 哪裡</div>
-            </div>
-
-            <div class="grammar-explanation">
-
-                <p>
-                    <strong>Explanation:</strong>
-                    You can ask if someone is present generally without naming a place using **在嗎** or **在不在**. To ask *where* someone is, use **在哪裡 (zài nǎlǐ)**.
-                </p>
-
-                <p style="margin-top:8px;">
-                    <strong>Examples & Answers:</strong><br>
-                    • 她在嗎？ $\rightarrow$ 在 / 不在<br>
-                    • 哥哥在不在？ $\rightarrow$ 在 / 不在<br>
-                    • 媽媽在哪裡？ $\rightarrow$ 媽媽在家 (Mom is at home)
-                </p>
-
-            </div>
-
-            <div class="example-sentence">
-
-                <div class="example-hanzi">
-                    媽媽在哪裡？
-                </div>
-
-                <div>
-                    Māma zài nǎlǐ?
-                </div>
-
-                <div>
-                    Where is mom?
-                </div>
-
-                <button class="sound-btn"
-                        onclick="playAudio('媽媽在哪裡')">
-                    🔊
-                </button>
-
-            </div>
-
-        </div>
-
-
-        <!-- SLIDE 4 -->
-        <div class="grammar-slide" id="slide-4">
-
-            <h3>4. Location + Activity Patterns</h3>
-
-            <div class="pattern-display">
-                <div class="pattern-code">S + 在 + Place + Activity (Positive & Negative)</div>
-            </div>
-
-            <div class="grammar-explanation">
-
-                <p>
-                    <strong>Explanation:</strong>
-                    To say someone is doing an activity at a specific location, place the activity at the very end: **Subject + 在 + Place + Activity**. For negative statements, insert 不 before 在.
-                </p>
-
-                <p style="margin-top:8px;">
-                    <strong>Examples:</strong><br>
-                    • 哥哥在日本讀書 (Older brother studies in Japan)<br>
-                    • 弟弟在家玩遊戲 (Younger brother plays games at home)<br>
-                    • 老師不在醫院工作 (Teacher does not work at the hospital)<br>
-                    • 醫生不在教室教學 (Doctor does not teach in the classroom)
-                </p>
-
-            </div>
-
-            <div class="example-sentence">
-
-                <div class="example-hanzi">
-                    哥哥在日本讀書
-                </div>
-
-                <div>
-                    Gēge zài Rìběn dúshū.
-                </div>
-
-                <div>
-                    Older brother studies in Japan.
-                </div>
-
-                <button class="sound-btn"
-                        onclick="playAudio('哥哥在日本讀書')">
-                    🔊
-                </button>
-
-            </div>
-
-        </div>
-
-
-        <!-- SLIDE 5 -->
-        <div class="grammar-slide" id="slide-5">
-
-            <h3>5. Questions with Activities, 哪裡, & 和 (And)</h3>
-
-            <div class="pattern-display">
-                <div class="pattern-code">S + 在 + Place + Activity + 嗎 / 哪裡 / 和</div>
-            </div>
-
-            <div class="grammar-explanation">
-
-                <p>
-                    <strong>Explanation:</strong>
-                    You can add **嗎**, **在不在**, or **哪裡** into activity sentences. The word **和 (hé)** means "and" to connect nouns (e.g., apples and bananas).
-                </p>
-
-                <p style="margin-top:8px;">
-                    <strong>Examples & Answers:</strong><br>
-                    • 妹妹在學校上課嗎？ $\rightarrow$ 對，妹妹在學校上課 / 不，妹妹不在學校上課<br>
-                    • 你們在不在家吃蘋果和香蕉 $\rightarrow$ 在 / 不在 (*和 connects items like "A and B")<br>
-                    • 爸爸在哪裡上班？ $\rightarrow$ 爸爸在辦公室上班
-                </p>
-
-            </div>
-
-            <div class="example-sentence">
-
-                <div class="example-hanzi">
-                    爸爸在哪裡上班？
-                </div>
-
-                <div>
-                    Bàba zài bàngōngshì shàngbān?
-                </div>
-
-                <div>
-                    Where does dad work?
-                </div>
-
-                <button class="sound-btn"
-                        onclick="playAudio('爸爸在哪裡上班')">
-                    🔊
-                </button>
-
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <div class="slider-nav">
-
-        <button class="slider-btn"
-                onclick="prevSlide()">
-            ← Prev
-        </button>
-
-        <div class="slider-indicators"
-             id="sliderIndicators">
-
-            <span class="indicator active"
-                  onclick="currentSlide(1)">
-            </span>
-
-            <span class="indicator"
-                  onclick="currentSlide(2)">
-            </span>
-
-            <span class="indicator"
-                  onclick="currentSlide(3)">
-            </span>
-
-            <span class="indicator"
-                  onclick="currentSlide(4)">
-            </span>
-
-            <span class="indicator"
-                  onclick="currentSlide(5)">
-            </span>
-
-        </div>
-
-        <button class="slider-btn"
-                onclick="nextSlide()">
-            Next →
-        </button>
-
-    </div>
-
-</div>
-
-
-<!-- =====================================================
-     VOCABULARY CARD 1: PLACES & ESSENTIALS
-===================================================== -->
-
-<div class="lesson-card">
-
-<h2>📚 Vocabulary List (Part 1: Places & Core Words)</h2>
-
-<p>
-    Tap any word to hear its pronunciation.
-</p>
-
-<div class="vocab-container">
-
-<div class="vocab-pill" onclick="playAudio('在')">
-    <div class="hanzi">在</div>
-    <div class="pinyin">zài</div>
-    <div class="meaning">at / in</div>
-</div>
-
-<div class="vocab-pill" onclick="playAudio('家')">
-    <div class="hanzi">家</div>
-    <div class="pinyin">jiā</div>
-    <div class="meaning">home / family</div>
-</div>
-
-<div class="vocab-pill" onclick="playAudio('日本')">
-    <div class="hanzi">日本</div>
-    <div class="pinyin">Rìběn</div>
-    <div class="meaning">Japan</div>
-</div>
-
-<div class="vocab-pill" onclick="playAudio('醫院')">
-    <div class="hanzi">醫院</div>
-    <div class="pinyin">yīyuàn</div>
-    <div class="meaning">hospital</div>
-</div>
-
-<div class="vocab-pill" onclick="playAudio('辦公室')">
-    <div class="hanzi">辦公室</div>
-    <div class="pinyin">bàngōngshì</div>
-    <div class="meaning">office</div>
-</div>
-
-<div class="vocab-pill" onclick="playAudio('學校')">
-    <div class="hanzi">學校</div>
-    <div class="pinyin">xuéxiào</div>
-    <div class="meaning">school</div>
-</div>
-
-<div class="vocab-pill" onclick="playAudio('教室')">
-    <div class="hanzi">教室</div>
-    <div class="pinyin">jiàoshì</div>
-    <div class="meaning">classroom</div>
-</div>
-
-<div class="vocab-pill" onclick="playAudio('公園')">
-    <div class="hanzi">公園</div>
-    <div class="pinyin">gōngyuán</div>
-    <div class="meaning">park</div>
-</div>
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
-     VOCABULARY CARD 2: ACTIVITIES & OBJECTS
-===================================================== -->
-
-<div class="lesson-card">
-
-<h2>🏃‍♂️ Vocabulary List (Part 2: Activities & Objects)</h2>
-
-<p>
-    Tap any word to hear its pronunciation.
-</p>
-
-<div class="vocab-container">
-
-<div class="vocab-pill" onclick="playAudio('讀書')">
-    <div class="hanzi">讀書</div>
-    <div class="pinyin">dúshū</div>
-    <div class="meaning">study / read books</div>
-</div>
-
-<div class="vocab-pill" onclick="playAudio('學習')">
-    <div class="hanzi">學習</div>
-    <div class="pinyin">xuéxí</div>
-    <div class="meaning">learn</div>
-</div>
-
-<div class="vocab-pill" onclick="playAudio('上班')">
-    <div class="hanzi">上班</div>
-    <div class="pinyin">shàngbān</div>
-    <div class="meaning">go to work</div>
-</div>
-
-<div class="vocab-pill" onclick="playAudio('上課')">
-    <div class="hanzi">上課</div>
-    <div class="pinyin">shàngkè</div>
-    <div class="meaning">attend class</div>
-</div>
-
-<div class="vocab-pill" onclick="playAudio('運動')">
-    <div class="hanzi">運動</div>
-    <div class="pinyin">yùndòng</div>
-    <div class="meaning">exercise / sports</div>
-</div>
-
-<div class="vocab-pill" onclick="playAudio('玩')">
-    <div class="hanzi">玩</div>
-    <div class="pinyin">wán</div>
-    <div class="meaning">play</div>
-</div>
-
-<div class="vocab-pill" onclick="playAudio('遊戲')">
-    <div class="hanzi">遊戲</div>
-    <div class="pinyin">yóuxì</div>
-    <div class="meaning">game</div>
-</div>
-
-<div class="vocab-pill" onclick="playAudio('蘋果')">
-    <div class="hanzi">蘋果</div>
-    <div class="pinyin">píngguǒ</div>
-    <div class="meaning">apple</div>
-</div>
-
-<div class="vocab-pill" onclick="playAudio('香蕉')">
-    <div class="hanzi">香蕉</div>
-    <div class="pinyin">xiāngjiāo</div>
-    <div class="meaning">banana</div>
-</div>
-
-<div class="vocab-pill" onclick="playAudio('教學')">
-    <div class="hanzi">教學</div>
-    <div class="pinyin">jiàoxué</div>
-    <div class="meaning">teach</div>
-</div>
-
-<div class="vocab-pill" onclick="playAudio('對')">
-    <div class="hanzi">對</div>
-    <div class="pinyin">duì</div>
-    <div class="meaning">correct / right</div>
-</div>
-
-<div class="vocab-pill" onclick="playAudio('哪裡')">
-    <div class="hanzi">哪裡</div>
-    <div class="pinyin">nǎlǐ</div>
-    <div class="meaning">where</div>
-</div>
-
-<div class="vocab-pill" onclick="playAudio('和')">
-    <div class="hanzi">和</div>
-    <div class="pinyin">hé</div>
-    <div class="meaning">and</div>
-</div>
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
-     GAME 1: POSITIVE SENTENCE BUILDING
-===================================================== -->
-
-<div class="game-card">
-
-<span class="game-number">GAME 1</span>
-
-<h2>🧩 Positive Sentences Challenge</h2>
-
-<p class="game-description">
-    Assemble positive location and activity sentences.
-</p>
-
-<div class="game-progress">
-    Question <span id="g1Num">1</span> / 3
-</div>
-
-<div class="question-box">
-
-    <div class="question-label">
-        Translate:
-    </div>
-
-    <div class="question-meaning"
-         id="g1Meaning">
-    </div>
-
-</div>
-
-<div class="answer-area"
-     id="g1Answer">
-
-    <span class="answer-placeholder">
-        Tap the words below
-    </span>
-
-</div>
-
-<div class="word-bank"
-     id="g1Bank">
-</div>
-
-<div class="game-buttons">
-
-<button class="check-btn"
-        onclick="checkGame(1)">
-    ✓ Check
-</button>
-
-<button class="reset-btn"
-        onclick="resetGame(1)">
-    ↻ Reset
-</button>
-
-<button class="listen-btn"
-        onclick="listenCurrent(1)">
-    🔊
-</button>
-
-</div>
-
-<div class="feedback"
-     id="g1Feedback">
-</div>
-
-<button class="next-game-btn"
-        id="g1Next"
-        onclick="nextGameQuestion(1)">
-    Next →
-</button>
-
-</div>
-
-
-<!-- =====================================================
-     GAME 2: NEGATIVE SENTENCE BUILDING
-===================================================== -->
-
-<div class="game-card">
-
-<span class="game-number">GAME 2</span>
-
-<h2>🧩 Negative Sentences Challenge</h2>
-
-<p class="game-description">
-    Assemble negative location and activity sentences (using 不在).
-</p>
-
-<div class="game-progress">
-    Question <span id="g2Num">1</span> / 3
-</div>
-
-<div class="question-box">
-
-    <div class="question-label">
-        Translate:
-    </div>
-
-    <div class="question-meaning"
-         id="g2Meaning">
-    </div>
-
-</div>
-
-<div class="answer-area"
-     id="g2Answer">
-
-    <span class="answer-placeholder">
-        Tap the words below
-    </span>
-
-</div>
-
-<div class="word-bank"
-     id="g2Bank">
-</div>
-
-<div class="game-buttons">
-
-<button class="check-btn"
-        onclick="checkGame(2)">
-    ✓ Check
-</button>
-
-<button class="reset-btn"
-        onclick="resetGame(2)">
-    ↻ Reset
-</button>
-
-<button class="listen-btn"
-        onclick="listenCurrent(2)">
-    🔊
-</button>
-
-</div>
-
-<div class="feedback"
-     id="g2Feedback">
-</div>
-
-<button class="next-game-btn"
-        id="g2Next"
-        onclick="nextGameQuestion(2)">
-    Next →
-</button>
-
-</div>
-
-
-<!-- =====================================================
-     GAME 3: INTERROGATIVE SENTENCES
-===================================================== -->
-
-<div class="game-card">
-
-<span class="game-number">GAME 3</span>
-
-<h2>🧩 Interrogative Sentences Challenge</h2>
-
-<p class="game-description">
-    Assemble questions using 嗎, A-not-A (在不在), and 哪裡.
-</p>
-
-<div class="game-progress">
-    Question <span id="g3Num">1</span> / 3
-</div>
-
-<div class="question-box">
-
-    <div class="question-label">
-        Translate:
-    </div>
-
-    <div class="question-meaning"
-         id="g3Meaning">
-    </div>
-
-</div>
-
-<div class="answer-area"
-     id="g3Answer">
-
-    <span class="answer-placeholder">
-        Tap the words below
-    </span>
-
-</div>
-
-<div class="word-bank"
-     id="g3Bank">
-</div>
-
-<div class="game-buttons">
-
-<button class="check-btn"
-        onclick="checkGame(3)">
-    ✓ Check
-</button>
-
-<button class="reset-btn"
-        onclick="resetGame(3)">
-    ↻ Reset
-</button>
-
-<button class="listen-btn"
-        onclick="listenCurrent(3)">
-    🔊
-</button>
-
-</div>
-
-<div class="feedback"
-     id="g3Feedback">
-</div>
-
-<button class="next-game-btn"
-        id="g3Next"
-        onclick="nextGameQuestion(3)">
-    Next →
-</button>
-
-</div>
-
-
-<!-- =====================================================
-     HANZI WRITING
-===================================================== -->
-
-<div class="writing-card">
-
-<h2>✍️ Writing Practice</h2>
-
-<p>
-    Practice correct Hanzi stroke orders by hand for all lesson vocabulary characters.
-</p>
-
-<div class="writing-mode-buttons">
-
-<button class="mode-btn active"
-        onclick="setWritingMode('quiz',this)">
-    ✍️ Quiz (Stroke Order)
-</button>
-
-<button class="mode-btn"
-        onclick="setWritingMode('animate',this)">
-    👀 Animate
-</button>
-
-</div>
-
-<div class="writing-info"
-     id="writingInfo">
-    Write the character following the correct stroke order!
-</div>
-
-<div class="recall-answer"
-     id="recallAnswer">
-</div>
-
-<div class="canvas-wrapper">
-
-    <div id="target-div"></div>
-
-</div>
-
-<div class="feedback"
-     id="writingFeedback">
-</div>
-
-<div class="writing-buttons">
-
-<button class="write-btn clear-btn"
-        onclick="resetWritingQuiz()">
-    ↻ Retry
-</button>
-
-<button class="write-btn"
-        style="background:#f0f7f4;color:#2d6a4f;"
-        onclick="playCurrentWriting()">
-    🔊 Listen
-</button>
-
-<button class="write-btn next-write-btn"
-        onclick="nextWritingCharacter()">
-    Next →
-</button>
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
-     FINAL CHALLENGE (GRAMMAR MASTER)
-===================================================== -->
-
-<div class="final-card">
-
-<span class="game-number">
-    FINAL CHALLENGE
-</span>
-
-<h2>🏆 Grammar Master</h2>
-
-<p>
-    Comprehensive review challenge combining this lesson's concepts (在, locations, activities) and previous lessons pulled dynamically from lesson.js:
-</p>
-
-<div class="grammar-explanation">
-
-<p>
-    <strong>1.</strong>
-    Locations & Activities with 在 (zài)
-</p>
-
-<p>
-    <strong>2.</strong>
-    Interrogatives (嗎, 在不在, 哪裡) & Conjunctions (和)
-</p>
-
-<p>
-    <strong>3.</strong>
-    Prior lesson structures & vocabulary from lesson.js
-</p>
-
-</div>
-
-<div class="question-box">
-
-<div class="question-label">
-    Final Question
-    (<span id="finalNum">1</span> / 12)
-</div>
-
-<div class="question-meaning"
-     id="finalMeaning">
-</div>
-
-</div>
-
-<div class="answer-area"
-     id="finalAnswer">
-
-<span class="answer-placeholder">
-    Build your answer
-</span>
-
-</div>
-
-<div class="word-bank"
-     id="finalBank">
-</div>
-
-<button
-    class="check-btn"
-    style="width:100%;"
-    onclick="checkFinal()">
-
-    ✓ Check Final Answer
-
-</button>
-
-<button
-    class="reset-btn"
-    id="finalResetBtn"
-    onclick="resetFinal()"
-    style="width:100%; margin-top:8px;">
-
-    ↻ Reset Answer
-
-</button>
-
-<div class="feedback"
-     id="finalFeedback">
-</div>
-
-<div class="final-score"
-     id="finalScore">
-
-    0 / 12
-
-</div>
-
-<div class="unlock"
-     id="unlockBox"
-     style="display:none;">
-
-    🎉 <strong>Grammar Master Unlocked!</strong>
-
-    <p>
-        You have successfully mastered locations, activities, and all prior lesson structures!
-    </p>
-
-</div>
-
-</div>
+    </section>
 
 </main>
-</div>
 
 
-<!-- =====================================================
-     JAVASCRIPT
-===================================================== -->
 
 <script>
 
-/* =====================================================
-   AUDIO
-===================================================== */
+/* =========================================================
+   AUDIO SYSTEM
+========================================================= */
 
-function playAudio(text){
+let currentUtterance = null;
+let currentElement = null;
 
-    if(!('speechSynthesis' in window)) return;
 
-    window.speechSynthesis.cancel();
+function speakChinese(text, element = null) {
 
-    const utterance =
-        new SpeechSynthesisUtterance(text);
+    if (!("speechSynthesis" in window)) {
+        alert("Your browser does not support text-to-speech.");
+        return;
+    }
+
+    speechSynthesis.cancel();
+
+    if (currentElement) {
+        currentElement.classList.remove("playing");
+    }
+
+    currentElement = element;
+
+    if (currentElement) {
+        currentElement.classList.add("playing");
+    }
+
+    const utterance = new SpeechSynthesisUtterance(text);
 
     utterance.lang = "zh-TW";
     utterance.rate = 0.82;
     utterance.pitch = 1;
 
-    window.speechSynthesis.speak(utterance);
+    utterance.onend = () => {
+
+        if (currentElement) {
+            currentElement.classList.remove("playing");
+        }
+
+        currentElement = null;
+
+    };
+
+    currentUtterance = utterance;
+
+    speechSynthesis.speak(utterance);
 }
 
 
-/* =====================================================
-   GRAMMAR SLIDER
-===================================================== */
+/* =========================================================
+   EXAMPLE AUDIO
+========================================================= */
 
-let currentSlideIndex = 0;
+function playExample(element, text) {
 
-const totalSlides = 5;
-
-function showSlide(index){
-
-    if(index >= totalSlides){
-        currentSlideIndex = 0;
-    }
-
-    else if(index < 0){
-        currentSlideIndex = totalSlides - 1;
-    }
-
-    else{
-        currentSlideIndex = index;
-    }
-
-    for(let i = 1; i <= totalSlides; i++){
-
-        document
-            .getElementById("slide-" + i)
-            .classList
-            .remove("active-slide");
-
-        document
-            .querySelectorAll(".indicator")[i - 1]
-            .classList
-            .remove("active");
-    }
-
-    document
-        .getElementById(
-            "slide-" + (currentSlideIndex + 1)
-        )
-        .classList
-        .add("active-slide");
-
-    document
-        .querySelectorAll(".indicator")[currentSlideIndex]
-        .classList
-        .add("active");
-}
-
-function nextSlide(){
-
-    showSlide(currentSlideIndex + 1);
-
-}
-
-function prevSlide(){
-
-    showSlide(currentSlideIndex - 1);
-
-}
-
-function currentSlide(n){
-
-    showSlide(n - 1);
+    speakChinese(text, element);
 
 }
 
 
-/* =====================================================
-   GAME DATA (GAMES 1, 2, 3)
-===================================================== */
+/* =========================================================
+   VOCAB AUDIO
+========================================================= */
 
-const games = {
+function playVocab(element, text) {
 
-1: [
+    speakChinese(text, element);
+
+}
+
+
+/* =========================================================
+   SENTENCE BUILDER
+========================================================= */
+
+const gameQuestions = [
+
     {
-        meaning: "The doctor is at the hospital.",
-        answer: ["醫生", "在", "醫院"]
+        translation: "I am at home.",
+        words: ["我", "在", "家"],
+        answer: ["我", "在", "家"]
     },
+
     {
-        meaning: "Older brother studies in Japan.",
-        answer: ["哥哥", "在", "日本", "讀書"]
-    },
-    {
-        meaning: "Dad works in the office.",
+        translation: "Dad works at the office.",
+        words: ["爸爸", "在", "辦公室", "上班"],
         answer: ["爸爸", "在", "辦公室", "上班"]
-    }
-],
-
-2: [
-    {
-        meaning: "He is not at the park.",
-        answer: ["他", "不", "在", "公園"]
     },
+
     {
-        meaning: "The teacher does not work at the hospital.",
-        answer: ["老師", "不", "在", "醫院", "工作"]
-    },
-    {
-        meaning: "The banana is not at school.",
-        answer: ["香蕉", "不", "在", "學校"]
+        translation: "The teacher is at school.",
+        words: ["老師", "在", "學校"],
+        answer: ["老師", "在", "學校"]
     }
-],
-
-3: [
-    {
-        meaning: "Is the teacher in the classroom?",
-        answer: ["老師", "在", "教室", "嗎"]
-    },
-    {
-        meaning: "Where is mom?",
-        answer: ["媽媽", "在", "哪裡"]
-    },
-    {
-        meaning: "Are you at home eating apples and bananas?",
-        answer: ["你", "們", "在", "不", "在", "家", "吃", "蘋果", "和", "香蕉"]
-    }
-]
-
-};
-
-
-/* =====================================================
-   GAME STATE
-===================================================== */
-
-const gameState = {
-
-1:{ index:0, selected:[], done:false },
-2:{ index:0, selected:[], done:false },
-3:{ index:0, selected:[], done:false }
-
-};
-
-
-/* =====================================================
-   SHUFFLE
-===================================================== */
-
-function shuffle(array){
-
-    return [...array].sort(
-        () => Math.random() - 0.5
-    );
-
-}
-
-
-/* =====================================================
-   LOAD GAME
-===================================================== */
-
-function loadGame(gameNumber){
-
-    const state =
-        gameState[gameNumber];
-
-    const data =
-        games[gameNumber][state.index];
-
-    state.selected = [];
-
-    state.done = false;
-
-    document
-        .getElementById(
-            "g" + gameNumber + "Num"
-        )
-        .textContent =
-        state.index + 1;
-
-    document
-        .getElementById(
-            "g" + gameNumber + "Meaning"
-        )
-        .textContent =
-        data.meaning;
-
-    const answer =
-        document.getElementById(
-            "g" + gameNumber + "Answer"
-        );
-
-    answer.innerHTML =
-        '<span class="answer-placeholder">Tap the words below</span>';
-
-    const bank =
-        document.getElementById(
-            "g" + gameNumber + "Bank"
-        );
-
-    bank.innerHTML = "";
-
-    shuffle(data.answer)
-        .forEach((word,index)=>{
-
-            const button =
-                document.createElement("button");
-
-            button.className =
-                "word-btn";
-
-            button.textContent =
-                word;
-
-            button.dataset.word =
-                word;
-
-            button.dataset.id =
-                index;
-
-            button.onclick =
-                function(){
-
-                    if(this.disabled) return;
-
-                    selectWord(
-                        gameNumber,
-                        this,
-                        word
-                    );
-
-                };
-
-            bank.appendChild(button);
-
-        });
-
-    document
-        .getElementById(
-            "g" + gameNumber + "Feedback"
-        )
-        .textContent = "";
-
-    document
-        .getElementById(
-            "g" + gameNumber + "Next"
-        )
-        .style.display = "none";
-
-}
-
-
-/* =====================================================
-   SELECT WORD
-===================================================== */
-
-function selectWord(
-    gameNumber,
-    button,
-    word
-){
-
-    gameState[gameNumber]
-        .selected
-        .push(word);
-
-    button.disabled = true;
-
-    button.classList.add("selected");
-
-    playAudio(word);
-
-    renderSelected(gameNumber);
-
-}
-
-
-/* =====================================================
-   RENDER SELECTED
-===================================================== */
-
-function renderSelected(gameNumber){
-
-    const answer =
-        document.getElementById(
-            "g" + gameNumber + "Answer"
-        );
-
-    answer.innerHTML = "";
-
-    gameState[gameNumber]
-        .selected
-        .forEach(word=>{
-
-            const span =
-                document.createElement("span");
-
-            span.className =
-                "selected-word";
-
-            span.textContent =
-                word;
-
-            span.onclick =
-                function(){
-
-                    playAudio(word);
-
-                };
-
-            answer.appendChild(span);
-
-        });
-
-}
-
-
-/* =====================================================
-   CHECK GAME
-===================================================== */
-
-function checkGame(gameNumber){
-
-    const state =
-        gameState[gameNumber];
-
-    const correct =
-        games[gameNumber]
-        [state.index]
-        .answer;
-
-    const selected =
-        state.selected;
-
-    const feedback =
-        document.getElementById(
-            "g" + gameNumber + "Feedback"
-        );
-
-
-    if(selected.length !== correct.length){
-
-        feedback.textContent =
-            "⚠️ Complete the sentence first.";
-
-        feedback.className =
-            "feedback incorrect";
-
-        return;
-    }
-
-
-    const isCorrect =
-        selected.every(
-            (word,index)=>
-                word === correct[index]
-        );
-
-
-    if(isCorrect){
-
-        feedback.textContent =
-            "🎉 Correct!";
-
-        feedback.className =
-            "feedback correct";
-
-        state.done = true;
-
-        playAudio(
-            correct.join("")
-        );
-
-        document
-            .getElementById(
-                "g" + gameNumber + "Next"
-            )
-            .style.display =
-            "block";
-
-    }
-
-    else{
-
-        feedback.textContent =
-            "❌ Not quite. Try again!";
-
-        feedback.className =
-            "feedback incorrect";
-
-    }
-
-}
-
-
-/* =====================================================
-   RESET GAME
-===================================================== */
-
-function resetGame(gameNumber){
-
-    loadGame(gameNumber);
-
-}
-
-
-/* =====================================================
-   NEXT GAME QUESTION
-===================================================== */
-
-function nextGameQuestion(gameNumber){
-
-    const state =
-        gameState[gameNumber];
-
-    if(!state.done) return;
-
-    state.index++;
-
-    if(
-        state.index >=
-        games[gameNumber].length
-    ){
-
-        state.index = 0;
-
-    }
-
-    loadGame(gameNumber);
-
-}
-
-
-/* =====================================================
-   LISTEN CURRENT
-===================================================== */
-
-function listenCurrent(gameNumber){
-
-    const state =
-        gameState[gameNumber];
-
-    const answer =
-        games[gameNumber]
-        [state.index]
-        .answer;
-
-    playAudio(
-        answer.join("")
-    );
-
-}
-
-
-/* =====================================================
-   WRITING PRACTICE (ALL VOCABULARY)
-===================================================== */
-
-const writingCharacters = [
-
-{ hanzi:"在", pinyin:"zài", meaning:"at/in" },
-{ hanzi:"家", pinyin:"jiā", meaning:"home" },
-{ hanzi:"日", pinyin:"rì", meaning:"sun/Japan" },
-{ hanzi:"本", pinyin:"běn", meaning:"root/Japan" },
-{ hanzi:"醫", pinyin:"yī", meaning:"medical" },
-{ hanzi:"院", pinyin:"yuàn", meaning:"institution" },
-{ hanzi:"辦", pinyin:"bàn", meaning:"manage" },
-{ hanzi:"公", pinyin:"gōng", meaning:"public" },
-{ hanzi:"室", pinyin:"shì", meaning:"room" },
-{ hanzi:"學", pinyin:"xué", meaning:"study" },
-{ hanzi:"校", pinyin:"xiào", meaning:"school" },
-{ hanzi:"教", pinyin:"jiào", meaning:"teach" },
-{ hanzi:"室", pinyin:"shì", meaning:"room" },
-{ hanzi:"公", pinyin:"gōng", meaning:"public" },
-{ hanzi:"園", pinyin:"yuán", meaning:"garden" },
-{ hanzi:"讀", pinyin:"dú", meaning:"read" },
-{ hanzi:"書", pinyin:"shū", meaning:"book" },
-{ hanzi:"習", pinyin:"xí", meaning:"practice" },
-{ hanzi:"上", pinyin:"shàng", meaning:"up/go" },
-{ hanzi:"班", pinyin:"bān", meaning:"shift/class" },
-{ hanzi:"課", pinyin:"kè", meaning:"class" },
-{ hanzi:"運", pinyin:"yùn", meaning:"move" },
-{ hanzi:"動", pinyin:"dòng", meaning:"action" },
-{ hanzi:"玩", pinyin:"wán", meaning:"play" },
-{ hanzi:"遊", pinyin:"yóu", meaning:"wander" },
-{ hanzi:"戲", pinyin:"xì", meaning:"play/game" },
-{ hanzi:"蘋", pinyin:"píng", meaning:"apple" },
-{ hanzi:"果", pinyin:"guǒ", meaning:"fruit" },
-{ hanzi:"香", pinyin:"xiāng", meaning:"fragrant" },
-{ hanzi:"蕉", pinyin:"jiāo", meaning:"banana" },
-{ hanzi:"對", pinyin:"duì", meaning:"correct" },
-{ hanzi:"哪", pinyin:"nǎ", meaning:"which" },
-{ hanzi:"裡", pinyin:"lǐ", meaning:"inside" },
-{ hanzi:"和", pinyin:"hé", meaning:"and" }
 
 ];
 
 
-let writingIndex = 0;
-
-let writingMode = "quiz";
-
-let writer = null;
+let currentGame = 0;
+let selectedWords = [];
 
 
-function initWriter(){
+function shuffle(array) {
 
-    const item =
-        writingCharacters[writingIndex];
-
-    const container =
-        document.getElementById(
-            "target-div"
-        );
-
-    container.innerHTML = "";
-
-    const info =
-        document.getElementById(
-            "writingInfo"
-        );
-
-
-    if(writingMode === "quiz"){
-
-        info.innerHTML =
-            `Write <strong>${item.hanzi}</strong>
-            (${item.pinyin} - ${item.meaning})
-            following correct stroke order!
-            (${writingIndex + 1}/${writingCharacters.length})`;
-
-    }
-
-    else{
-
-        info.innerHTML =
-            `Watch animated stroke order for
-            <strong>${item.hanzi}</strong>
-            (${item.pinyin} - ${item.meaning}).
-            (${writingIndex + 1}/${writingCharacters.length})`;
-
-    }
-
-
-    writer =
-        HanziWriter.create(
-            "target-div",
-            item.hanzi,
-            {
-
-                width:260,
-
-                height:260,
-
-                padding:10,
-
-                showOutline:true,
-
-                strokeAnimationSpeed:1,
-
-                drawingColor:"#5c4033",
-
-                strokeHighlightColor:"#b8865c",
-
-                showCharacter:
-                    writingMode === "animate"
-
-            }
-        );
-
-
-    if(writingMode === "quiz"){
-
-        startQuiz();
-
-    }
-
-    else{
-
-        writer.animateCharacter();
-
-    }
+    return [...array].sort(() => Math.random() - 0.5);
 
 }
 
 
-function startQuiz(){
+function loadGame() {
 
-    const feedback =
-        document.getElementById(
-            "writingFeedback"
-        );
+    const question = gameQuestions[currentGame];
 
-    feedback.textContent = "";
+    document.getElementById("game-translation").textContent =
+        question.translation;
 
+    document.getElementById("game-progress").textContent =
+        `${currentGame + 1} / ${gameQuestions.length}`;
 
-    writer.quiz({
+    const bank = document.getElementById("word-bank");
 
-        onMistake:function(){
+    bank.innerHTML = "";
 
-            feedback.textContent =
-                "❌ Incorrect stroke order! Try again.";
+    selectedWords = [];
 
-            feedback.className =
-                "feedback incorrect";
+    document.getElementById("selected-sentence").textContent =
+        "Tap the words above 👆";
 
-        },
+    document.getElementById("game-feedback").textContent = "";
 
+    shuffle(question.words).forEach(word => {
 
-        onCorrectStroke:function(){
+        const button = document.createElement("button");
 
-            feedback.textContent =
-                "✨ Great! Continue with the next stroke.";
+        button.className = "word-btn";
 
-            feedback.className =
-                "feedback correct";
+        button.textContent = word;
 
-        },
+        button.onclick = () => selectWord(button, word);
 
-
-        onComplete:function(){
-
-            feedback.textContent =
-                "🎉 Perfect! Correct stroke order.";
-
-            feedback.className =
-                "feedback correct";
-
-        }
+        bank.appendChild(button);
 
     });
 
 }
 
 
-function setWritingMode(
-    mode,
-    button
-){
+function selectWord(button, word) {
 
-    writingMode = mode;
+    if (button.classList.contains("selected")) {
+        return;
+    }
 
-    document
-        .querySelectorAll(
-            ".writing-card .mode-btn"
-        )
-        .forEach(btn =>
-            btn.classList.remove("active")
-        );
+    button.classList.add("selected");
 
-    button.classList.add("active");
+    selectedWords.push(word);
 
-    initWriter();
+    renderSelected();
 
 }
 
 
-function resetWritingQuiz(){
+function renderSelected() {
 
-    initWriter();
+    const container =
+        document.getElementById("selected-sentence");
+
+    container.textContent =
+        selectedWords.length
+            ? selectedWords.join(" ")
+            : "Tap the words above 👆";
 
 }
 
 
-function nextWritingCharacter(){
+function checkGame() {
+
+    const question = gameQuestions[currentGame];
+
+    const correct =
+        JSON.stringify(selectedWords) ===
+        JSON.stringify(question.answer);
+
+    const feedback =
+        document.getElementById("game-feedback");
+
+    if (correct) {
+
+        feedback.textContent =
+            "✨ Correct! Great job!";
+
+        feedback.style.color = "#71906c";
+
+        speakChinese(question.answer.join(""));
+
+    } else {
+
+        feedback.textContent =
+            "Try again! Check the word order.";
+
+        feedback.style.color = "#b86f66";
+
+    }
+
+}
+
+
+function resetGame() {
+
+    loadGame();
+
+}
+
+
+function nextGameQuestion() {
+
+    currentGame++;
+
+    if (currentGame >= gameQuestions.length) {
+        currentGame = 0;
+    }
+
+    loadGame();
+
+}
+
+
+/* =========================================================
+   WRITING PRACTICE
+========================================================= */
+
+const writingCharacters = [
+
+    {
+        character: "在",
+        pinyin: "zài",
+        meaning: "at; in"
+    },
+
+    {
+        character: "家",
+        pinyin: "jiā",
+        meaning: "home"
+    },
+
+    {
+        character: "學",
+        pinyin: "xué",
+        meaning: "study; learn"
+    },
+
+    {
+        character: "校",
+        pinyin: "xiào",
+        meaning: "school"
+    },
+
+    {
+        character: "醫",
+        pinyin: "yī",
+        meaning: "medicine"
+    },
+
+    {
+        character: "院",
+        pinyin: "yuàn",
+        meaning: "institution; hospital"
+    },
+
+    {
+        character: "辦",
+        pinyin: "bàn",
+        meaning: "handle; manage"
+    },
+
+    {
+        character: "公",
+        pinyin: "gōng",
+        meaning: "public"
+    },
+
+    {
+        character: "室",
+        pinyin: "shì",
+        meaning: "room"
+    },
+
+    {
+        character: "公",
+        pinyin: "gōng",
+        meaning: "public"
+    },
+
+    {
+        character: "園",
+        pinyin: "yuán",
+        meaning: "garden; park"
+    }
+
+];
+
+
+let writingIndex = 0;
+let writerInstance = null;
+
+
+function initWriter() {
+
+    const item = writingCharacters[writingIndex];
+
+    document.getElementById("character-target").textContent =
+        item.character;
+
+    document.getElementById("writing-info").textContent =
+        `${item.pinyin} · ${item.meaning}`;
+
+    const container =
+        document.getElementById("writer");
+
+    container.innerHTML = "";
+
+    writerInstance = HanziWriter.create(
+        container,
+        item.character,
+        {
+            width: 200,
+            height: 200,
+            padding: 10,
+            showOutline: true,
+            showCharacter: false,
+            strokeAnimationSpeed: 1,
+            delayBetweenStrokes: 250
+        }
+    );
+
+    writerInstance.animateCharacter();
+
+}
+
+
+function nextWritingCharacter() {
 
     writingIndex++;
 
-    if(
-        writingIndex >=
-        writingCharacters.length
-    ){
-
+    if (writingIndex >= writingCharacters.length) {
         writingIndex = 0;
-
     }
 
     initWriter();
@@ -2200,352 +2283,219 @@ function nextWritingCharacter(){
 }
 
 
-function playCurrentWriting(){
+function playCurrentWriting() {
 
-    playAudio(
-        writingCharacters
-        [writingIndex]
-        .hanzi
-    );
+    const item = writingCharacters[writingIndex];
+
+    speakChinese(item.character);
 
 }
 
 
-/* =====================================================
-   FINAL CHALLENGE (GRAMMAR MASTER)
-===================================================== */
+/* =========================================================
+   FINAL CHALLENGE
+========================================================= */
 
-let finalQuestions = [];
+const finalQuestions = [
 
+    {
+        question: "How do you say “I am at home”?",
+        options: [
+            "我在家。",
+            "我不在家。",
+            "我在學校。",
+            "我在哪裡？"
+        ],
+        answer: "我在家。"
+    },
 
-function initFinalQuestions(){
+    {
+        question: "Which sentence means “He is not at school”?",
+        options: [
+            "他在學校。",
+            "他不在學校。",
+            "他在哪裡？",
+            "他在家嗎？"
+        ],
+        answer: "他不在學校。"
+    },
 
-    if(
-        typeof lessonData !== "undefined" &&
-        lessonData.reviewQuestions
-    ){
+    {
+        question: "How do you ask “Where are you?”",
+        options: [
+            "你在家嗎？",
+            "你在不在家？",
+            "你在哪裡？",
+            "你不在家。"
+        ],
+        answer: "你在哪裡？"
+    },
 
-        finalQuestions =
-            lessonData.reviewQuestions;
+    {
+        question: "Which sentence uses 在 + Place + Activity?",
+        options: [
+            "我在家。",
+            "我不在家。",
+            "我在學校讀書。",
+            "我在哪裡？"
+        ],
+        answer: "我在學校讀書。"
+    },
 
+    {
+        question: "How do you ask “Is Mom at the hospital?” using A-not-A?",
+        options: [
+            "媽媽在醫院嗎？",
+            "媽媽不在醫院。",
+            "媽媽在不在醫院？",
+            "媽媽在哪裡？"
+        ],
+        answer: "媽媽在不在醫院？"
+    },
+
+    {
+        question: "Which word means “where”?",
+        options: [
+            "哪裡",
+            "醫院",
+            "家",
+            "學校"
+        ],
+        answer: "哪裡"
     }
 
-    else{
-
-        finalQuestions = [
-
-            {
-                meaning: "The doctor is at the hospital",
-                answer: ["醫生", "在", "醫院"]
-            },
-            {
-                meaning: "He is not at the park",
-                answer: ["他", "不", "在", "公園"]
-            },
-            {
-                meaning: "Is the teacher in the classroom?",
-                answer: ["老師", "在", "教室", "嗎"]
-            },
-            {
-                meaning: "Where is mom?",
-                answer: ["媽媽", "在", "哪裡"]
-            },
-            {
-                meaning: "Older brother studies in Japan",
-                answer: ["哥哥", "在", "日本", "讀書"]
-            },
-            {
-                meaning: "Teacher does not work at the hospital",
-                answer: ["老師", "不", "在", "醫院", "工作"]
-            },
-            {
-                meaning: "Is younger sister having class at school?",
-                answer: ["妹妹", "在", "學校", "上課", "嗎"]
-            },
-            {
-                meaning: "Where does dad work?",
-                answer: ["爸爸", "在", "辦公室", "上班"]
-            },
-            {
-                meaning: "Three people",
-                answer: ["三", "個", "人"]
-            },
-            {
-                meaning: "This place",
-                answer: ["這", "個", "地方"]
-            },
-            {
-                meaning: "I really like cats",
-                answer: ["我", "很", "喜歡", "貓咪"]
-            },
-            {
-                meaning: "Are you a student?",
-                answer: ["你", "是", "學生", "嗎"]
-            }
-
-        ];
-
-    }
-
-}
+];
 
 
 let finalIndex = 0;
-
-let finalScore = 0;
-
-let finalSelected = [];
+let finalAnswered = false;
 
 
-function loadFinal(){
+function loadFinal() {
 
-    if(finalQuestions.length === 0){
+    const question = finalQuestions[finalIndex];
 
-        initFinalQuestions();
+    finalAnswered = false;
 
-    }
+    document.getElementById("final-progress").textContent =
+        `Question ${finalIndex + 1} / ${finalQuestions.length}`;
 
-    if(
-        finalIndex >=
-        finalQuestions.length
-    ){
+    document.getElementById("final-question").textContent =
+        question.question;
 
+    document.getElementById("final-result").textContent = "";
+
+    const options =
+        document.getElementById("final-options");
+
+    options.innerHTML = "";
+
+    shuffle(question.options).forEach(option => {
+
+        const button = document.createElement("button");
+
+        button.className = "final-option";
+
+        button.textContent = option;
+
+        button.onclick = () =>
+            checkFinal(button, option);
+
+        options.appendChild(button);
+
+    });
+
+}
+
+
+function checkFinal(button, option) {
+
+    if (finalAnswered) {
         return;
+    }
+
+    finalAnswered = true;
+
+    const question = finalQuestions[finalIndex];
+
+    if (option === question.answer) {
+
+        button.classList.add("correct");
+
+        document.getElementById("final-result").textContent =
+            "🎉 Correct! You got it!";
+
+        speakChinese(question.answer);
+
+    } else {
+
+        button.classList.add("wrong");
+
+        document.getElementById("final-result").textContent =
+            `❌ Not quite. The answer is ${question.answer}.`;
+
+        document.querySelectorAll(".final-option")
+            .forEach(btn => {
+
+                if (btn.textContent === question.answer) {
+                    btn.classList.add("correct");
+                }
+
+            });
 
     }
 
-
-    const q =
-        finalQuestions[finalIndex];
-
-
-    document
-        .getElementById(
-            "finalNum"
-        )
-        .textContent =
-        finalIndex + 1;
-
-
-    document
-        .getElementById(
-            "finalMeaning"
-        )
-        .textContent =
-        q.meaning;
-
-
-    finalSelected = [];
-
-
-    document
-        .getElementById(
-            "finalAnswer"
-        )
-        .innerHTML =
-        '<span class="answer-placeholder">Build your answer</span>';
-
-
-    const bank =
-        document.getElementById(
-            "finalBank"
-        );
-
-    bank.innerHTML = "";
-
-
-    shuffle(q.answer)
-        .forEach(word=>{
-
-            const button =
-                document.createElement("button");
-
-            button.className =
-                "word-btn";
-
-            button.textContent =
-                word;
-
-
-            button.onclick = ()=>{
-
-                if(button.disabled) return;
-
-                finalSelected.push(word);
-
-                button.disabled = true;
-
-                button.classList.add("selected");
-
-                playAudio(word);
-
-                renderFinal();
-
-            };
-
-
-            bank.appendChild(button);
-
-        });
-
-
-    document
-        .getElementById(
-            "finalFeedback"
-        )
-        .textContent = "";
-
 }
 
 
-function renderFinal(){
+function nextFinalQuestion() {
 
-    const area =
-        document.getElementById(
-            "finalAnswer"
-        );
+    finalIndex++;
 
-    area.innerHTML = "";
+    if (finalIndex >= finalQuestions.length) {
 
+        finalIndex = 0;
 
-    finalSelected
-        .forEach(word=>{
-
-            const span =
-                document.createElement("span");
-
-            span.className =
-                "selected-word";
-
-            span.textContent =
-                word;
-
-
-            span.onclick = ()=>{
-
-                playAudio(word);
-
-            };
-
-
-            area.appendChild(span);
-
-        });
-
-}
-
-
-function resetFinal(){
+    }
 
     loadFinal();
 
 }
 
 
-function checkFinal(){
-
-    const correct =
-        finalQuestions
-        [finalIndex]
-        .answer;
-
-    const feedback =
-        document.getElementById(
-            "finalFeedback"
-        );
-
-
-    const isCorrect =
-        finalSelected.length === correct.length &&
-        finalSelected.every(
-            (word,index)=>
-                word === correct[index]
-        );
-
-
-    if(isCorrect){
-
-        feedback.textContent =
-            "🎉 Correct!";
-
-        feedback.className =
-            "feedback correct";
-
-
-        finalScore++;
-
-
-        document
-            .getElementById(
-                "finalScore"
-            )
-            .textContent =
-            finalScore +
-            " / " +
-            finalQuestions.length;
-
-
-        finalIndex++;
-
-
-        if(
-            finalIndex <
-            finalQuestions.length
-        ){
-
-            setTimeout(
-                loadFinal,
-                700
-            );
-
-        }
-
-        else{
-
-            document
-                .getElementById(
-                    "unlockBox"
-                )
-                .style.display =
-                "block";
-
-            playAudio("太棒了");
-
-        }
-
-    }
-
-    else{
-
-        feedback.textContent =
-            "❌ Check the word order.";
-
-        feedback.className =
-            "feedback incorrect";
-
-    }
-
-}
-
-
-/* =====================================================
+/* =========================================================
    INITIALIZE
-===================================================== */
+========================================================= */
 
-loadGame(1);
-loadGame(2);
-loadGame(3);
+document.addEventListener("DOMContentLoaded", () => {
 
-initWriter();
+    loadGame();
 
-initFinalQuestions();
+    initWriter();
 
-loadFinal();
+    loadFinal();
+
+});
+
+
+/* =========================================================
+   STOP AUDIO WHEN LEAVING PAGE
+========================================================= */
+
+window.addEventListener("beforeunload", () => {
+
+    if ("speechSynthesis" in window) {
+        speechSynthesis.cancel();
+    }
+
+});
 
 </script>
 
 
-<!-- EXISTING SIDEBAR SCRIPT -->
+<!-- =========================================================
+     SHARED SIDEBAR
+========================================================= -->
 
 <script src="../script.js"></script>
 
