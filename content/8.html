@@ -916,7 +916,7 @@ p {
             </div>
 
             <div class="grammar-explanation">
-                <p><strong>Explanation:</strong> Form questions with objects using <strong>嗎</strong> and answer positively or negatively.</p>
+                <p><strong>Explanation:</strong> Form questions with objects using 嗎 and answer positively or negatively.</p>
             </div>
 
             <div class="example-box">
@@ -1115,7 +1115,7 @@ p {
 <h2>🏆 Grammar Master</h2>
 <p>Comprehensive review challenge combining this lesson's concepts and previous lessons:</p>
 <div class="question-box">
-    <div class="question-label">Final Question (<span id="finalNum">1</span> / 12)</div>
+    <div class="question-label">Final Question (<span id="finalNum">1</span> / <span id="finalTotalNum">12</span>)</div>
     <div class="question-meaning" id="finalMeaning"></div>
 </div>
 <div class="answer-area" id="finalAnswer">
@@ -1429,12 +1429,16 @@ function playCurrentWriting(){ playAudio(writingCharacters[writingIndex].hanzi);
 
 
 /* =====================================================
-   FINAL CHALLENGE (VOCABULARY & MIXED LESSON DATA)
+   FINAL CHALLENGE (LOADED FROM lesson.js)
 ===================================================== */
 
 let finalQuestions = [];
+let finalIndex = 0;
+let finalScore = 0;
+let finalSelected = [];
 
 function initFinalQuestions(){
+    // Mengambil soal dari lessonData.reviewQuestions jika tersedia di lesson.js, jika tidak pakai data fallback
     if(typeof lessonData !== "undefined" && lessonData.reviewQuestions){
         finalQuestions = lessonData.reviewQuestions;
     } else {
@@ -1453,11 +1457,8 @@ function initFinalQuestions(){
             { meaning: "What are you doing?", answer: ["你", "在", "做", "什麼"] }
         ];
     }
+    document.getElementById("finalTotalNum").textContent = finalQuestions.length;
 }
-
-let finalIndex = 0;
-let finalScore = 0;
-let finalSelected = [];
 
 function loadFinal(){
     if(finalQuestions.length === 0) initFinalQuestions();
@@ -1504,6 +1505,7 @@ function renderFinal(){
 function resetFinal(){ loadFinal(); }
 
 function checkFinal(){
+    if(finalQuestions.length === 0) return;
     const correct = finalQuestions[finalIndex].answer;
     const feedback = document.getElementById("finalFeedback");
     const isCorrect = finalSelected.length === correct.length && finalSelected.every((word,index)=> word === correct[index]);
