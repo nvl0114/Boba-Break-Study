@@ -1875,7 +1875,7 @@ let finalSelected = [];
 
 /* =====================================================
    THIS LESSON QUESTIONS
-   EXACTLY 8 QUESTIONS
+   EXACTLY 8 UNIQUE QUESTIONS
 ===================================================== */
 
 const currentLessonFinalQuestions = [
@@ -1924,27 +1924,71 @@ const currentLessonFinalQuestions = [
 
 
 /* =====================================================
+   REMOVE DUPLICATES
+===================================================== */
+
+function removeDuplicateQuestions(questions){
+
+    const seen = new Set();
+
+    return questions.filter(question => {
+
+        /*
+           Create a unique key using
+           both the English meaning
+           and the Chinese answer.
+        */
+
+        const key =
+            String(question.meaning || "")
+            .trim()
+            .toLowerCase()
+            +
+            "||"
+            +
+            JSON.stringify(
+                question.answer || []
+            );
+
+
+        if(seen.has(key)){
+            return false;
+        }
+
+
+        seen.add(key);
+
+        return true;
+
+    });
+
+}
+
+
+/* =====================================================
    INITIALIZE FINAL QUESTIONS
 ===================================================== */
 
 function initFinalQuestions(){
 
     /*
-       40% = 8 questions from this lesson
-       60% = 12 questions from lesson.js
+       -------------------------------------------------
+       1. GET THE 8 QUESTIONS FROM THIS LESSON
+       -------------------------------------------------
     */
-
 
     const currentLessonQuestions =
         [...currentLessonFinalQuestions];
 
 
+    /*
+       -------------------------------------------------
+       2. GET QUESTIONS FROM lesson.js
+       -------------------------------------------------
+    */
+
     let previousLessonQuestions = [];
 
-
-    /*
-       Read reviewQuestions from lesson.js
-    */
 
     if(
         typeof lessonData !== "undefined" &&
@@ -1960,56 +2004,60 @@ function initFinalQuestions(){
 
 
     /*
-       Randomly select 12 questions
-       from lesson.js.
+       -------------------------------------------------
+       3. REMOVE DUPLICATES FROM lesson.js
+       -------------------------------------------------
+    */
+
+    previousLessonQuestions =
+        removeDuplicateQuestions(
+            previousLessonQuestions
+        );
+
+
+    /*
+       -------------------------------------------------
+       4. RANDOMIZE lesson.js
+       -------------------------------------------------
     */
 
     previousLessonQuestions =
         shuffle(
             previousLessonQuestions
-        ).slice(0,12);
+        );
 
 
     /*
-       Safety fallback.
-
-       If lesson.js contains fewer than
-       12 review questions, fill the
-       missing slots using this lesson's
-       questions.
+       -------------------------------------------------
+       5. TAKE ONLY 12 UNIQUE QUESTIONS
+       -------------------------------------------------
     */
 
-    if(
-        previousLessonQuestions.length < 12
-    ){
-
-        const needed =
-            12 -
-            previousLessonQuestions.length;
-
-
-        const fallbackQuestions =
-            shuffle(
-                currentLessonFinalQuestions
-            ).slice(0,needed);
-
-
-        previousLessonQuestions = [
-            ...previousLessonQuestions,
-            ...fallbackQuestions
-        ];
-
-    }
+    previousLessonQuestions =
+        previousLessonQuestions.slice(0,12);
 
 
     /*
-       Combine:
+       -------------------------------------------------
+       IMPORTANT:
+       DO NOT USE CURRENT LESSON QUESTIONS
+       AS FALLBACK.
 
+       This prevents the same questions from appearing
+       twice just to reach 20.
+       ------------------------------------------------- */
+
+
+    /*
+       -------------------------------------------------
+       6. COMBINE
+       
        8 current lesson
        +
        12 lesson.js
-
-       = 20 questions
+       =
+       20
+       -------------------------------------------------
     */
 
     finalQuestions = [
@@ -2022,7 +2070,9 @@ function initFinalQuestions(){
 
 
     /*
-       Shuffle all 20 questions.
+       -------------------------------------------------
+       7. RANDOMIZE ALL QUESTIONS
+       -------------------------------------------------
     */
 
     finalQuestions =
@@ -2030,15 +2080,9 @@ function initFinalQuestions(){
 
 
     /*
-       Safety limit.
-    */
-
-    finalQuestions =
-        finalQuestions.slice(0,20);
-
-
-    /*
-       Update UI.
+       -------------------------------------------------
+       8. UPDATE TOTAL
+       -------------------------------------------------
     */
 
     document.getElementById(
@@ -2052,6 +2096,17 @@ function initFinalQuestions(){
     ).textContent =
         "0 / " +
         finalQuestions.length;
+
+
+    /*
+       RESET
+    */
+
+    finalIndex = 0;
+
+    finalScore = 0;
+
+    finalSelected = [];
 
 }
 
@@ -2075,12 +2130,16 @@ function loadFinal(){
         finalIndex >=
         finalQuestions.length
     ){
+
         return;
+
     }
 
 
     const q =
-        finalQuestions[finalIndex];
+        finalQuestions[
+            finalIndex
+        ];
 
 
     document.getElementById(
@@ -2114,7 +2173,9 @@ function loadFinal(){
 
 
     /*
-       Shuffle answer choices.
+       Shuffle answer choices
+       so the learner cannot memorize
+       the position of the answer.
     */
 
     shuffle(q.answer).forEach(word => {
@@ -2133,29 +2194,30 @@ function loadFinal(){
             word;
 
 
-        button.onclick = () => {
+        button.onclick =
+            function(){
 
-            if(button.disabled)
-                return;
-
-
-            finalSelected.push(word);
+                if(this.disabled)
+                    return;
 
 
-            button.disabled = true;
+                finalSelected.push(word);
 
 
-            button.classList.add(
-                "selected"
-            );
+                this.disabled = true;
 
 
-            playAudio(word);
+                this.classList.add(
+                    "selected"
+                );
 
 
-            renderFinal();
+                playAudio(word);
 
-        };
+
+                renderFinal();
+
+            };
 
 
         bank.appendChild(button);
@@ -2166,6 +2228,12 @@ function loadFinal(){
     document.getElementById(
         "finalFeedback"
     ).textContent = "";
+
+
+    document.getElementById(
+        "finalFeedback"
+    ).className =
+        "feedback";
 
 }
 
@@ -2185,6 +2253,16 @@ function renderFinal(){
     area.innerHTML = "";
 
 
+    if(finalSelected.length === 0){
+
+        area.innerHTML =
+            '<span class="answer-placeholder">Build your answer</span>';
+
+        return;
+
+    }
+
+
     finalSelected.forEach(word => {
 
         const span =
@@ -2201,11 +2279,12 @@ function renderFinal(){
             word;
 
 
-        span.onclick = () => {
+        span.onclick =
+            function(){
 
-            playAudio(word);
+                playAudio(word);
 
-        };
+            };
 
 
         area.appendChild(span);
@@ -2216,18 +2295,58 @@ function renderFinal(){
 
 
 /* =====================================================
-   RESET FINAL
+   RESET FINAL ANSWER
 ===================================================== */
 
 function resetFinal(){
 
-    loadFinal();
+    finalSelected = [];
+
+
+    const q =
+        finalQuestions[
+            finalIndex
+        ];
+
+
+    if(!q)
+        return;
+
+
+    document.getElementById(
+        "finalAnswer"
+    ).innerHTML =
+        '<span class="answer-placeholder">Build your answer</span>';
+
+
+    document.querySelectorAll(
+        "#finalBank .word-btn"
+    ).forEach(button => {
+
+        button.disabled = false;
+
+        button.classList.remove(
+            "selected"
+        );
+
+    });
+
+
+    document.getElementById(
+        "finalFeedback"
+    ).textContent = "";
+
+
+    document.getElementById(
+        "finalFeedback"
+    ).className =
+        "feedback";
 
 }
 
 
 /* =====================================================
-   CHECK FINAL
+   CHECK FINAL ANSWER
 ===================================================== */
 
 function checkFinal(){
@@ -2235,7 +2354,9 @@ function checkFinal(){
     if(
         finalQuestions.length === 0
     ){
+
         return;
+
     }
 
 
@@ -2251,11 +2372,33 @@ function checkFinal(){
         );
 
 
+    /*
+       First make sure the learner
+       selected the correct number
+       of words.
+    */
+
+    if(
+        finalSelected.length !==
+        correct.length
+    ){
+
+        feedback.textContent =
+            "⚠️ Complete the sentence first.";
+
+        feedback.className =
+            "feedback incorrect";
+
+        return;
+
+    }
+
+
+    /*
+       Compare word order.
+    */
+
     const isCorrect =
-
-        finalSelected.length ===
-        correct.length &&
-
         finalSelected.every(
             (word,index) =>
                 word === correct[index]
@@ -2283,8 +2426,17 @@ function checkFinal(){
             finalQuestions.length;
 
 
+        playAudio(
+            correct.join("")
+        );
+
+
         finalIndex++;
 
+
+        /*
+           NEXT QUESTION
+        */
 
         if(
             finalIndex <
@@ -2298,12 +2450,21 @@ function checkFinal(){
 
         }
 
+
+        /*
+           FINISHED
+        */
+
         else{
 
             document.getElementById(
                 "unlockBox"
             ).style.display =
                 "block";
+
+
+            feedback.textContent =
+                "🎉 You completed the Grammar Master!";
 
 
             playAudio("太棒了");
