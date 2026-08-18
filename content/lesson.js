@@ -1,6 +1,6 @@
 // ============================================================
 // Boba Break Study — Lesson Database
-// Updated with Location, Activity, Review Questions
+// Updated with Location, Activity, Ongoing Actions, Review Questions
 // ============================================================
 
 const lessonData = {
@@ -10,6 +10,67 @@ const lessonData = {
     // ========================================================
 
     grammar: [
+
+        // ----------------------------------------------------
+        // ONGOING ACTIONS (在 / 正在) - NEW LESSON
+        // ----------------------------------------------------
+
+        {
+            id: "s-zai-v",
+            name: "S + 在 / 正在 + V",
+            category: "Ongoing Action",
+            explanation: "Equivalent to 'is / am / are + V-ing' in English, indicating an ongoing action.",
+            examples: [
+                "他在睡覺。",
+                "哥哥正在跑步。"
+            ]
+        },
+
+        {
+            id: "s-mei-zai-v",
+            name: "S + 沒在 + V",
+            category: "Negative Ongoing Action",
+            explanation: "Used to negate an ongoing action (not currently doing). Note: '在不在 + Verb' is not natural.",
+            examples: [
+                "我沒在休息。"
+            ]
+        },
+
+        {
+            id: "s-zai-v-ma",
+            name: "S + 在 / 正在 + V + 嗎？",
+            category: "Ongoing Action Question",
+            explanation: "Used to ask whether someone is currently doing an action. Answers can be positive or negative, or short answers like 對 / 不.",
+            examples: [
+                "他们在逛街嗎？",
+                "狗正在散步嗎？"
+            ]
+        },
+
+        {
+            id: "s-zai-v-o",
+            name: "S + 在 / 正在 + V + O",
+            category: "Ongoing Action with Object",
+            explanation: "Expresses an ongoing action acting upon a specific object.",
+            examples: [
+                "學生在做作業。",
+                "你正在學習英文。"
+            ]
+        },
+
+        {
+            id: "s-mei-zai-v-o",
+            name: "S + 沒在 + V + O",
+            category: "Negative Ongoing Action with Object",
+            explanation: "Negates an ongoing action involving an object.",
+            examples: [
+                "弟弟沒在寫功課。"
+            ]
+        },
+
+        // ----------------------------------------------------
+        // EXISTING GRAMMAR
+        // ----------------------------------------------------
 
         {
             id: "svo",
@@ -195,8 +256,7 @@ const lessonData = {
             id: "measure-word-ge",
             name: "Number / This / That + 個 + Noun",
             category: "Measure Word Structure",
-            explanation:
-                "In Mandarin, use 個 (gè) between a number, 這, or 那 and a noun.",
+            explanation: "In Mandarin, use 個 (gè) between a number, 這, or 那 and a noun.",
             examples: [
                 "一個人 (One person)",
                 "這個問題 (This question)",
@@ -213,8 +273,7 @@ const lessonData = {
             id: "jiao-what-name",
             name: "叫什麼名字",
             category: "Self-Introduction",
-            explanation:
-                "Used to ask someone's full name.",
+            explanation: "Used to ask someone's full name.",
             examples: [
                 "你叫什麼名字？",
                 "請問，您叫什麼名字？"
@@ -225,8 +284,7 @@ const lessonData = {
             id: "jiao-name",
             name: "叫。。。",
             category: "Self-Introduction",
-            explanation:
-                "Used to state your name. Structure: 我叫 + Name.",
+            explanation: "Used to state your name. Structure: 我叫 + Name.",
             examples: [
                 "我叫大衛。",
                 "她叫美美。"
@@ -237,8 +295,7 @@ const lessonData = {
             id: "wo-xing",
             name: "我姓。。。",
             category: "Self-Introduction",
-            explanation:
-                "Used to state your surname.",
+            explanation: "Used to state your surname.",
             examples: [
                 "我姓王。",
                 "我姓李。"
@@ -249,8 +306,7 @@ const lessonData = {
             id: "gui-xing",
             name: "貴姓",
             category: "Self-Introduction",
-            explanation:
-                "A polite way to ask someone's surname.",
+            explanation: "A polite way to ask someone's surname.",
             examples: [
                 "請問您貴姓？"
             ]
@@ -264,8 +320,7 @@ const lessonData = {
             id: "number-sui",
             name: "幾歲 & Number + 歲",
             category: "Age",
-            explanation:
-                "Used to ask and state age.",
+            explanation: "Used to ask and state age.",
             examples: [
                 "你幾歲？",
                 "我二十歲。"
@@ -276,8 +331,7 @@ const lessonData = {
             id: "number-ten-number",
             name: "Number + 十 + Number",
             category: "Numbers",
-            explanation:
-                "Structure for numbers from 11 to 99.",
+            explanation: "Structure for numbers from 11 to 99.",
             examples: [
                 "十一 (11)",
                 "二十五 (25)",
@@ -289,8 +343,7 @@ const lessonData = {
             id: "particle-ne",
             name: "S + 呢",
             category: "Question Particle",
-            explanation:
-                "Used to bounce a question back to another person.",
+            explanation: "Used to bounce a question back to another person.",
             examples: [
                 "我很好，你呢？",
                 "我是台灣人，他呢？"
@@ -301,8 +354,7 @@ const lessonData = {
             id: "question-word-shenme",
             name: "什麼",
             category: "Question Word",
-            explanation:
-                "什麼 means 'what'.",
+            explanation: "什麼 means 'what'.",
             examples: [
                 "你叫什麼名字？",
                 "這是什麼？"
@@ -313,8 +365,7 @@ const lessonData = {
             id: "adverb-ye",
             name: "也",
             category: "Adverb",
-            explanation:
-                "Means 'also' or 'too'.",
+            explanation: "Means 'also' or 'too'.",
             examples: [
                 "我也是。",
                 "我也喜歡聽音樂。"
@@ -329,8 +380,7 @@ const lessonData = {
             id: "s-zai-place",
             name: "S + 在 + Place",
             category: "Location",
-            explanation:
-                "Indicates that someone or something is at a specific place.",
+            explanation: "Indicates that someone or something is at a specific place.",
             examples: [
                 "醫生在醫院。",
                 "蘋果在家。"
@@ -341,8 +391,7 @@ const lessonData = {
             id: "s-bu-zai-place",
             name: "S + 不 + 在 + Place",
             category: "Location",
-            explanation:
-                "Indicates that someone or something is not at a place.",
+            explanation: "Indicates that someone or something is not at a place.",
             examples: [
                 "他不在公園。",
                 "香蕉不在學校。"
@@ -353,8 +402,7 @@ const lessonData = {
             id: "s-zai-place-ma",
             name: "S + 在 + Place + 嗎",
             category: "Location Question",
-            explanation:
-                "Asks whether someone or something is at a place.",
+            explanation: "Asks whether someone or something is at a place.",
             examples: [
                 "老師在教室嗎？",
                 "爸爸在辦公室嗎？"
@@ -365,8 +413,7 @@ const lessonData = {
             id: "s-zai-bu-zai-place",
             name: "S + 在 + 不 + 在 + Place",
             category: "Location A-not-A",
-            explanation:
-                "Asks whether someone or something is at a place or not.",
+            explanation: "Asks whether someone or something is at a place or not.",
             examples: [
                 "他在不在日本？",
                 "護士在不在醫院？"
@@ -377,8 +424,7 @@ const lessonData = {
             id: "existential-zai",
             name: "在嗎 / 在不在",
             category: "Location Question",
-            explanation:
-                "Asks whether someone is present.",
+            explanation: "Asks whether someone is present.",
             examples: [
                 "她在嗎？",
                 "哥哥在不在？"
@@ -389,8 +435,7 @@ const lessonData = {
             id: "s-zai-nali",
             name: "S + 在 + 哪裡",
             category: "Location Question",
-            explanation:
-                "Asks where someone or something is.",
+            explanation: "Asks where someone or something is.",
             examples: [
                 "媽媽在哪裡？"
             ]
@@ -404,8 +449,7 @@ const lessonData = {
             id: "s-zai-place-activity",
             name: "S + 在 + Place + Activity",
             category: "Location & Activity",
-            explanation:
-                "Describes an activity performed at a specific place.",
+            explanation: "Describes an activity performed at a specific place.",
             examples: [
                 "哥哥在日本讀書。",
                 "弟弟在家玩遊戲。"
@@ -416,8 +460,7 @@ const lessonData = {
             id: "s-bu-zai-place-activity",
             name: "S + 不 + 在 + Place + Activity",
             category: "Location & Activity",
-            explanation:
-                "Describes an activity not performed at a specific place.",
+            explanation: "Describes an activity not performed at a specific place.",
             examples: [
                 "老師不在醫院工作。",
                 "醫生不在教室教學。"
@@ -428,8 +471,7 @@ const lessonData = {
             id: "s-zai-place-activity-ma",
             name: "S + 在 + Place + Activity + 嗎",
             category: "Location & Activity Question",
-            explanation:
-                "Asks if an activity is performed at a place.",
+            explanation: "Asks if an activity is performed at a place.",
             examples: [
                 "妹妹在學校上課嗎？",
                 "他在公園運動嗎？"
@@ -440,8 +482,7 @@ const lessonData = {
             id: "s-zai-bu-zai-place-activity",
             name: "S + 在 + 不 + 在 + Place + Activity",
             category: "Location & Activity Question",
-            explanation:
-                "A-not-A question combining location and activity.",
+            explanation: "A-not-A question combining location and activity.",
             examples: [
                 "你在不在家吃蘋果和香蕉？"
             ]
@@ -451,8 +492,7 @@ const lessonData = {
             id: "s-zai-nali-activity",
             name: "S + 在 + 哪裡 + Activity",
             category: "Location & Activity Question",
-            explanation:
-                "Asks where an activity takes place.",
+            explanation: "Asks where an activity takes place.",
             examples: [
                 "爸爸在哪裡上班？"
             ]
@@ -467,7 +507,24 @@ const lessonData = {
 
     vocabulary: [
 
-        // Pronouns
+        // Newly Added Vocabulary (從使用者要求新增)
+        { hanzi: "沒", pinyin: "méi", meaning: "not / have not", category: "Grammar" },
+        { hanzi: "正在", pinyin: "zhèngzài", meaning: "in the process of (doing)", category: "Adverb" },
+        { hanzi: "休息", pinyin: "xiūxí", meaning: "to rest", category: "Verb" },
+        { hanzi: "睡覺", pinyin: "shuìjiào", meaning: "to sleep", category: "Verb" },
+        { hanzi: "逛街", pinyin: "guàngjiē", meaning: "to stroll the street / go shopping", category: "Verb" },
+        { hanzi: "跑步", pinyin: "pǎobù", meaning: "to run / running", category: "Verb" },
+        { hanzi: "散步", pinyin: "sànbù", meaning: "to take a walk", category: "Verb" },
+        { hanzi: "做", pinyin: "zuò", meaning: "to do / to make", category: "Verb" },
+        { hanzi: "寫", pinyin: "xiě", meaning: "to write", category: "Verb" },
+        { hanzi: "作業", pinyin: "zuòyè", meaning: "homework / assignment", category: "Object" },
+        { hanzi: "功課", pinyin: "gōngkè", meaning: "homework / schoolwork", category: "Object" },
+        { hanzi: "英文", pinyin: "Yīngwén", meaning: "English language", category: "Language" },
+        { hanzi: "唱歌", pinyin: "chànggē", meaning: "to sing", category: "Verb" },
+        { hanzi: "蛋糕", pinyin: "dàngāo", meaning: "cake", category: "Food" },
+        { hanzi: "幹嘛", pinyin: "gànmá", meaning: "what are you doing / why on earth / whatever for", category: "Question" },
+
+        // Existing Vocabulary
         { hanzi: "我", pinyin: "wǒ", meaning: "I / me", category: "Pronoun" },
         { hanzi: "你", pinyin: "nǐ", meaning: "you", category: "Pronoun" },
         { hanzi: "妳", pinyin: "nǐ", meaning: "you (female)", category: "Pronoun" },
@@ -612,11 +669,8 @@ const lessonData = {
         { hanzi: "呢", pinyin: "ne", meaning: "what about...", category: "Grammar" },
         { hanzi: "也", pinyin: "yě", meaning: "also / too", category: "Grammar" },
 
-        // ====================================================
-        // LOCATION & ACTIVITY VOCABULARY
-        // ====================================================
-
-        { hanzi: "在", pinyin: "zài", meaning: "at / in", category: "Preposition" },
+        // Location & Activity Vocabulary
+        { hanzi: "在", pinyin: "zài", meaning: "at / in / ongoing", category: "Preposition" },
         { hanzi: "家", pinyin: "jiā", meaning: "home / family", category: "Place" },
         { hanzi: "日本", pinyin: "Rìběn", meaning: "Japan", category: "Place" },
         { hanzi: "醫院", pinyin: "yīyuàn", meaning: "hospital", category: "Place" },
@@ -626,7 +680,6 @@ const lessonData = {
         { hanzi: "公園", pinyin: "gōngyuán", meaning: "park", category: "Place" },
 
         { hanzi: "讀書", pinyin: "dúshū", meaning: "to study / to read", category: "Verb" },
-        { hanzi: "學習", pinyin: "xuéxí", meaning: "to learn / to study", category: "Verb" },
         { hanzi: "上班", pinyin: "shàngbān", meaning: "to go to work / work", category: "Verb" },
         { hanzi: "上課", pinyin: "shàngkè", meaning: "to attend class", category: "Verb" },
         { hanzi: "運動", pinyin: "yùndòng", meaning: "to exercise / sports", category: "Verb" },
@@ -645,11 +698,45 @@ const lessonData = {
     // ========================================================
     // REVIEW QUESTIONS
     // ========================================================
-    // These are used by Grammar Master.
-    // The current lesson can select a random subset.
-    // ========================================================
 
     reviewQuestions: [
+
+        // -------------------------
+        // ONGOING ACTIONS (在 / 正在)
+        // -------------------------
+
+        {
+            meaning: "He is sleeping.",
+            answer: ["他", "在", "睡覺"]
+        },
+        {
+            meaning: "Older brother is running.",
+            answer: ["哥哥", "正在", "跑步"]
+        },
+        {
+            meaning: "I am not resting.",
+            answer: ["我", "沒", "在", "休息"]
+        },
+        {
+            meaning: "Are they shopping?",
+            answer: ["他們", "在", "逛街", "嗎"]
+        },
+        {
+            meaning: "Is the dog taking a walk?",
+            answer: ["狗", "正在", "散步", "嗎"]
+        },
+        {
+            meaning: "Students are doing homework.",
+            answer: ["學生", "在", "做", "作業"]
+        },
+        {
+            meaning: "You are studying English.",
+            answer: ["你", "正在", "學習", "英文"]
+        },
+        {
+            meaning: "Younger brother is not writing homework.",
+            answer: ["弟弟", "沒", "在", "寫", "功課"]
+        },
 
         // -------------------------
         // S + V + O
@@ -659,22 +746,18 @@ const lessonData = {
             meaning: "I eat rice.",
             answer: ["我", "吃", "飯"]
         },
-
         {
             meaning: "You drink water.",
             answer: ["你", "喝", "水"]
         },
-
         {
             meaning: "She reads a book.",
             answer: ["她", "看", "書"]
         },
-
         {
             meaning: "He buys bread.",
             answer: ["他", "買", "麵包"]
         },
-
         {
             meaning: "I drink milk.",
             answer: ["我", "喝", "牛奶"]
@@ -688,17 +771,14 @@ const lessonData = {
             meaning: "I don't eat rice.",
             answer: ["我", "不", "吃", "飯"]
         },
-
         {
             meaning: "She doesn't drink milk.",
             answer: ["她", "不", "喝", "牛奶"]
         },
-
         {
             meaning: "He doesn't read a book.",
             answer: ["他", "不", "看", "書"]
         },
-
         {
             meaning: "I don't buy bread.",
             answer: ["我", "不", "買", "麵包"]
@@ -712,17 +792,14 @@ const lessonData = {
             meaning: "Do you eat rice?",
             answer: ["你", "吃", "飯", "嗎"]
         },
-
         {
             meaning: "Does she drink water?",
             answer: ["她", "喝", "水", "嗎"]
         },
-
         {
             meaning: "Does he read a book?",
             answer: ["他", "看", "書", "嗎"]
         },
-
         {
             meaning: "Do you buy coffee?",
             answer: ["你", "買", "咖啡", "嗎"]
@@ -736,12 +813,10 @@ const lessonData = {
             meaning: "Do you eat or not?",
             answer: ["你", "吃", "不", "吃"]
         },
-
         {
             meaning: "Do you drink or not?",
             answer: ["你", "喝", "不", "喝"]
         },
-
         {
             meaning: "Does she watch TV or not?",
             answer: ["她", "看", "不", "看"]
@@ -755,12 +830,10 @@ const lessonData = {
             meaning: "My phone.",
             answer: ["我", "的", "手機"]
         },
-
         {
             meaning: "Your book.",
             answer: ["你", "的", "書"]
         },
-
         {
             meaning: "Her mother.",
             answer: ["她", "的", "媽媽"]
@@ -774,12 +847,10 @@ const lessonData = {
             meaning: "I am a teacher.",
             answer: ["我", "是", "老師"]
         },
-
         {
             meaning: "She is a doctor.",
             answer: ["她", "是", "醫生"]
         },
-
         {
             meaning: "He is a student.",
             answer: ["他", "是", "學生"]
@@ -793,12 +864,10 @@ const lessonData = {
             meaning: "I am not a teacher.",
             answer: ["我", "不是", "老師"]
         },
-
         {
             meaning: "She is not a doctor.",
             answer: ["她", "不是", "醫生"]
         },
-
         {
             meaning: "He is not a student.",
             answer: ["他", "不是", "學生"]
@@ -812,12 +881,10 @@ const lessonData = {
             meaning: "Are you a teacher?",
             answer: ["你", "是", "老師", "嗎"]
         },
-
         {
             meaning: "Is she a doctor?",
             answer: ["她", "是", "醫生", "嗎"]
         },
-
         {
             meaning: "Is he a student?",
             answer: ["他", "是", "學生", "嗎"]
@@ -831,12 +898,10 @@ const lessonData = {
             meaning: "Are you a teacher or not?",
             answer: ["你", "是不是", "老師"]
         },
-
         {
             meaning: "Is she a doctor or not?",
             answer: ["她", "是不是", "醫生"]
         },
-
         {
             meaning: "Is he a student or not?",
             answer: ["他", "是不是", "學生"]
@@ -850,17 +915,14 @@ const lessonData = {
             meaning: "I am very tired.",
             answer: ["我", "很", "累"]
         },
-
         {
             meaning: "You are very good.",
             answer: ["你", "很", "好"]
         },
-
         {
             meaning: "She is very tall.",
             answer: ["她", "很", "高"]
         },
-
         {
             meaning: "He is very busy.",
             answer: ["他", "很", "忙"]
@@ -874,12 +936,10 @@ const lessonData = {
             meaning: "I am not tired.",
             answer: ["我", "不", "累"]
         },
-
         {
             meaning: "You are not good.",
             answer: ["你", "不", "好"]
         },
-
         {
             meaning: "She is not tall.",
             answer: ["她", "不", "高"]
@@ -893,12 +953,10 @@ const lessonData = {
             meaning: "Are you tired?",
             answer: ["你", "很", "累", "嗎"]
         },
-
         {
             meaning: "Are you very good?",
             answer: ["你", "很", "好", "嗎"]
         },
-
         {
             meaning: "Is she very tall?",
             answer: ["她", "很", "高", "嗎"]
@@ -921,7 +979,6 @@ const lessonData = {
             meaning: "I am also a student.",
             answer: ["我", "也", "是", "學生"]
         },
-
         {
             meaning: "I also like music.",
             answer: ["我", "也", "喜歡", "音樂"]
@@ -935,17 +992,14 @@ const lessonData = {
             meaning: "One person.",
             answer: ["一", "個", "人"]
         },
-
         {
             meaning: "Two people.",
             answer: ["兩", "個", "人"]
         },
-
         {
             meaning: "This place.",
             answer: ["這", "個", "地方"]
         },
-
         {
             meaning: "That question.",
             answer: ["那", "個", "問題"]
@@ -959,17 +1013,14 @@ const lessonData = {
             meaning: "What is your name?",
             answer: ["你", "叫", "什麼", "名字"]
         },
-
         {
             meaning: "My name is David.",
             answer: ["我", "叫", "大衛"]
         },
-
         {
             meaning: "My surname is Wang.",
             answer: ["我", "姓", "王"]
         },
-
         {
             meaning: "May I ask your surname?",
             answer: ["請問", "您", "貴姓"]
@@ -983,12 +1034,10 @@ const lessonData = {
             meaning: "How old are you?",
             answer: ["你", "幾歲"]
         },
-
         {
             meaning: "I am twenty years old.",
             answer: ["我", "二十", "歲"]
         },
-
         {
             meaning: "She is twenty-five years old.",
             answer: ["她", "二十五", "歲"]
@@ -1002,17 +1051,14 @@ const lessonData = {
             meaning: "I am at home.",
             answer: ["我", "在", "家"]
         },
-
         {
             meaning: "He is at school.",
             answer: ["他", "在", "學校"]
         },
-
         {
             meaning: "She is at the hospital.",
             answer: ["她", "在", "醫院"]
         },
-
         {
             meaning: "The teacher is in the classroom.",
             answer: ["老師", "在", "教室"]
@@ -1026,12 +1072,10 @@ const lessonData = {
             meaning: "He is not at the park.",
             answer: ["他", "不", "在", "公園"]
         },
-
         {
             meaning: "She is not at school.",
             answer: ["她", "不", "在", "學校"]
         },
-
         {
             meaning: "Dad is not in the office.",
             answer: ["爸爸", "不", "在", "辦公室"]
@@ -1045,12 +1089,10 @@ const lessonData = {
             meaning: "Is the teacher in the classroom?",
             answer: ["老師", "在", "教室", "嗎"]
         },
-
         {
             meaning: "Is dad in the office?",
             answer: ["爸爸", "在", "辦公室", "嗎"]
         },
-
         {
             meaning: "Is she at the hospital?",
             answer: ["她", "在", "醫院", "嗎"]
@@ -1064,12 +1106,10 @@ const lessonData = {
             meaning: "Is he in Japan or not?",
             answer: ["他", "在", "不", "在", "日本"]
         },
-
         {
             meaning: "Is the nurse at the hospital or not?",
             answer: ["護士", "在", "不", "在", "醫院"]
         },
-
         {
             meaning: "Is mom at home or not?",
             answer: ["媽媽", "在", "不", "在", "家"]
@@ -1083,12 +1123,10 @@ const lessonData = {
             meaning: "Is she there?",
             answer: ["她", "在", "嗎"]
         },
-
         {
             meaning: "Is older brother there or not?",
             answer: ["哥哥", "在", "不", "在"]
         },
-
         {
             meaning: "Is dad there?",
             answer: ["爸爸", "在", "嗎"]
@@ -1102,7 +1140,6 @@ const lessonData = {
             meaning: "Where is mother?",
             answer: ["媽媽", "在", "哪裡"]
         },
-
         {
             meaning: "Where is the teacher?",
             answer: ["老師", "在", "哪裡"]
@@ -1116,22 +1153,18 @@ const lessonData = {
             meaning: "Older brother studies in Japan.",
             answer: ["哥哥", "在", "日本", "讀書"]
         },
-
         {
             meaning: "Younger brother plays games at home.",
             answer: ["弟弟", "在", "家", "玩", "遊戲"]
         },
-
         {
             meaning: "Dad works at the office.",
             answer: ["爸爸", "在", "辦公室", "上班"]
         },
-
         {
             meaning: "Younger sister attends class at school.",
             answer: ["妹妹", "在", "學校", "上課"]
         },
-
         {
             meaning: "He exercises in the park.",
             answer: ["他", "在", "公園", "運動"]
@@ -1145,12 +1178,10 @@ const lessonData = {
             meaning: "Does younger sister attend class at school?",
             answer: ["妹妹", "在", "學校", "上課", "嗎"]
         },
-
         {
             meaning: "Does he exercise in the park?",
             answer: ["他", "在", "公園", "運動", "嗎"]
         },
-
         {
             meaning: "Does dad work at the office?",
             answer: ["爸爸", "在", "辦公室", "上班", "嗎"]
@@ -1164,7 +1195,6 @@ const lessonData = {
             meaning: "The teacher doesn't work at the hospital.",
             answer: ["老師", "不", "在", "醫院", "工作"]
         },
-
         {
             meaning: "The doctor doesn't teach in the classroom.",
             answer: ["醫生", "不", "在", "教室", "教學"]
@@ -1178,7 +1208,6 @@ const lessonData = {
             meaning: "Where does dad work?",
             answer: ["爸爸", "在", "哪裡", "上班"]
         },
-
         {
             meaning: "Where does older brother study?",
             answer: ["哥哥", "在", "哪裡", "讀書"]
@@ -1244,15 +1273,11 @@ function getReviewQuestions() {
 
 
 function getRandomReviewQuestions(count = 12) {
-
     const questions = [...getReviewQuestions()];
 
     for (let i = questions.length - 1; i > 0; i--) {
-
         const j = Math.floor(Math.random() * (i + 1));
-
-        [questions[i], questions[j]] =
-            [questions[j], questions[i]];
+        [questions[i], questions[j]] = [questions[j], questions[i]];
     }
 
     return questions.slice(
@@ -1268,7 +1293,6 @@ function getRandomReviewQuestions(count = 12) {
 // ============================================================
 
 function getQuestionSignature(question) {
-
     if (!question || !Array.isArray(question.answer)) {
         return "";
     }
@@ -1287,7 +1311,6 @@ function getUniqueRandomReviewQuestions(
     count = 12,
     excludedQuestions = []
 ) {
-
     const excluded = new Set(
         excludedQuestions.map(getQuestionSignature)
     );
@@ -1302,9 +1325,7 @@ function getUniqueRandomReviewQuestions(
     const used = new Set(excluded);
 
     for (const question of shuffled) {
-
-        const signature =
-            getQuestionSignature(question);
+        const signature = getQuestionSignature(question);
 
         if (!signature) continue;
 
@@ -1313,7 +1334,6 @@ function getUniqueRandomReviewQuestions(
         }
 
         used.add(signature);
-
         result.push(question);
 
         if (result.length >= count) {
