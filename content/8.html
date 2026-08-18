@@ -712,8 +712,8 @@ p {
 
             <div class="example-box">
                 <div class="example-item">
-                    <span class="example-text"><strong>他在逛街嗎？</strong> (Tā zài guànjiē ma? - Are they shopping / strolling?)</span>
-                    <button class="sound-btn" onclick="playAudio('他在逛街嗎')">🔊</button>
+                    <span class="example-text"><strong>他们在逛街嗎？</strong> (Tāmen zài guànjiē ma? - Are they shopping / strolling?)</span>
+                    <button class="sound-btn" onclick="playAudio('他们在逛街嗎')">🔊</button>
                 </div>
                 <div class="example-item">
                     <span class="example-text"><strong>狗正在散步嗎？</strong> (Gǒu zhèngzài sànbù ma? - Is the dog taking a walk?)</span>
@@ -1111,25 +1111,66 @@ p {
 ===================================================== -->
 
 <div class="final-card">
+
 <span class="game-number">FINAL CHALLENGE</span>
+
 <h2>🏆 Grammar Master</h2>
-<p>Comprehensive review challenge combining this lesson's concepts and previous lessons:</p>
+
+<p>
+Comprehensive review challenge combining this lesson's concepts
+and previous lessons:
+</p>
+
 <div class="question-box">
-    <div class="question-label">Final Question (<span id="finalNum">1</span> / <span id="finalTotalNum">10</span>)</div>
+
+    <div class="question-label">
+        Final Question
+        (<span id="finalNum">1</span> /
+        <span id="finalTotalNum">20</span>)
+    </div>
+
     <div class="question-meaning" id="finalMeaning"></div>
+
 </div>
+
 <div class="answer-area" id="finalAnswer">
     <span class="answer-placeholder">Build your answer</span>
 </div>
+
 <div class="word-bank" id="finalBank"></div>
-<button class="check-btn" style="width:100%;" onclick="checkFinal()">✓ Check Final Answer</button>
-<button class="reset-btn" id="finalResetBtn" onclick="resetFinal()" style="width:100%; margin-top:8px;">↻ Reset Answer</button>
+
+<button
+    class="check-btn"
+    style="width:100%;"
+    onclick="checkFinal()">
+    ✓ Check Final Answer
+</button>
+
+<button
+    class="reset-btn"
+    id="finalResetBtn"
+    onclick="resetFinal()"
+    style="width:100%; margin-top:8px;">
+    ↻ Reset Answer
+</button>
+
 <div class="feedback" id="finalFeedback"></div>
-<div class="final-score" id="finalScore">0 / 10</div>
-<div class="unlock" id="unlockBox" style="display:none;">
-    🎉 <strong>Grammar Master Unlocked!</strong>
-    <p>You have successfully mastered continuous actions, vocabulary, and all prior lesson structures!</p>
+
+<div class="final-score" id="finalScore">
+    0 / 20
 </div>
+
+<div class="unlock" id="unlockBox" style="display:none;">
+
+    🎉 <strong>Grammar Master Unlocked!</strong>
+
+    <p>
+        You have successfully mastered continuous actions,
+        vocabulary, and all prior lesson structures!
+    </p>
+
+</div>
+
 </div>
 
 </main>
@@ -1147,12 +1188,18 @@ p {
 ===================================================== */
 
 function playAudio(text){
+
     if(!('speechSynthesis' in window)) return;
+
     window.speechSynthesis.cancel();
-    const utterance = new SpeechSynthesisUtterance(text);
+
+    const utterance =
+        new SpeechSynthesisUtterance(text);
+
     utterance.lang = "zh-TW";
     utterance.rate = 0.82;
     utterance.pitch = 1;
+
     window.speechSynthesis.speak(utterance);
 }
 
@@ -1165,21 +1212,56 @@ let card1Index = 0;
 const card1Total = 6;
 
 function showCard1Slide(index){
-    if(index >= card1Total) card1Index = 0;
-    else if(index < 0) card1Index = card1Total - 1;
-    else card1Index = index;
+
+    if(index >= card1Total)
+        card1Index = 0;
+
+    else if(index < 0)
+        card1Index = card1Total - 1;
+
+    else
+        card1Index = index;
+
 
     for(let i = 1; i <= card1Total; i++){
-        document.getElementById("card1-slide-" + i).classList.remove("active-slide");
-        document.querySelectorAll("#card1Indicators .indicator")[i - 1].classList.remove("active");
+
+        document
+            .getElementById("card1-slide-" + i)
+            .classList
+            .remove("active-slide");
+
+        document
+            .querySelectorAll("#card1Indicators .indicator")[i - 1]
+            .classList
+            .remove("active");
     }
-    document.getElementById("card1-slide-" + (card1Index + 1)).classList.add("active-slide");
-    document.querySelectorAll("#card1Indicators .indicator")[card1Index].classList.add("active");
+
+
+    document
+        .getElementById(
+            "card1-slide-" + (card1Index + 1)
+        )
+        .classList
+        .add("active-slide");
+
+
+    document
+        .querySelectorAll("#card1Indicators .indicator")[card1Index]
+        .classList
+        .add("active");
 }
 
-function nextCard1Slide(){ showCard1Slide(card1Index + 1); }
-function prevCard1Slide(){ showCard1Slide(card1Index - 1); }
-function currentCard1Slide(n){ showCard1Slide(n - 1); }
+function nextCard1Slide(){
+    showCard1Slide(card1Index + 1);
+}
+
+function prevCard1Slide(){
+    showCard1Slide(card1Index - 1);
+}
+
+function currentCard1Slide(n){
+    showCard1Slide(n - 1);
+}
 
 
 /* =====================================================
@@ -1190,21 +1272,56 @@ let card2Index = 0;
 const card2Total = 3;
 
 function showCard2Slide(index){
-    if(index >= card2Total) card2Index = 0;
-    else if(index < 0) card2Index = card2Total - 1;
-    else card2Index = index;
+
+    if(index >= card2Total)
+        card2Index = 0;
+
+    else if(index < 0)
+        card2Index = card2Total - 1;
+
+    else
+        card2Index = index;
+
 
     for(let i = 1; i <= card2Total; i++){
-        document.getElementById("card2-slide-" + i).classList.remove("active-slide");
-        document.querySelectorAll("#card2Indicators .indicator")[i - 1].classList.remove("active");
+
+        document
+            .getElementById("card2-slide-" + i)
+            .classList
+            .remove("active-slide");
+
+        document
+            .querySelectorAll("#card2Indicators .indicator")[i - 1]
+            .classList
+            .remove("active");
     }
-    document.getElementById("card2-slide-" + (card2Index + 1)).classList.add("active-slide");
-    document.querySelectorAll("#card2Indicators .indicator")[card2Index].classList.add("active");
+
+
+    document
+        .getElementById(
+            "card2-slide-" + (card2Index + 1)
+        )
+        .classList
+        .add("active-slide");
+
+
+    document
+        .querySelectorAll("#card2Indicators .indicator")[card2Index]
+        .classList
+        .add("active");
 }
 
-function nextCard2Slide(){ showCard2Slide(card2Index + 1); }
-function prevCard2Slide(){ showCard2Slide(card2Index - 1); }
-function currentCard2Slide(n){ showCard2Slide(n - 1); }
+function nextCard2Slide(){
+    showCard2Slide(card2Index + 1);
+}
+
+function prevCard2Slide(){
+    showCard2Slide(card2Index - 1);
+}
+
+function currentCard2Slide(n){
+    showCard2Slide(n - 1);
+}
 
 
 /* =====================================================
@@ -1212,126 +1329,332 @@ function currentCard2Slide(n){ showCard2Slide(n - 1); }
 ===================================================== */
 
 const games = {
+
 1: [
-    { meaning: "He is sleeping.", answer: ["他", "在", "睡覺"] },
-    { meaning: "Older brother is running right now.", answer: ["哥哥", "正在", "跑步"] },
-    { meaning: "Students are doing homework.", answer: ["學生", "在", "做", "作業"] }
+    {
+        meaning: "He is sleeping.",
+        answer: ["他", "在", "睡覺"]
+    },
+    {
+        meaning: "Older brother is running right now.",
+        answer: ["哥哥", "正在", "跑步"]
+    },
+    {
+        meaning: "Students are doing homework.",
+        answer: ["學生", "在", "做", "作業"]
+    }
 ],
+
 2: [
-    { meaning: "I am not resting.", answer: ["我", "沒", "在", "休息"] },
-    { meaning: "Younger brother is not writing homework.", answer: ["弟弟", "沒", "在", "寫", "功課"] },
-    { meaning: "She is not singing.", answer: ["她", "沒", "在", "唱歌"] }
+    {
+        meaning: "I am not resting.",
+        answer: ["我", "沒", "在", "休息"]
+    },
+    {
+        meaning: "Younger brother is not writing homework.",
+        answer: ["弟弟", "沒", "在", "寫", "功課"]
+    },
+    {
+        meaning: "She is not singing.",
+        answer: ["她", "沒", "在", "唱歌"]
+    }
 ],
+
 3: [
-    { meaning: "Are they shopping?", answer: ["他", "們", "在", "逛街", "嗎"] },
-    { meaning: "Is the dog taking a walk right now?", answer: ["狗", "正在", "散步", "嗎"] },
-    { meaning: "Are you studying English right now?", answer: ["你", "正在", "學習", "英文", "嗎"] }
+    {
+        meaning: "Are they shopping?",
+        answer: ["他", "們", "在", "逛街", "嗎"]
+    },
+    {
+        meaning: "Is the dog taking a walk right now?",
+        answer: ["狗", "正在", "散步", "嗎"]
+    },
+    {
+        meaning: "Are you studying English right now?",
+        answer: ["你", "正在", "學習", "英文", "嗎"]
+    }
 ]
+
 };
+
 
 const gameState = {
-1:{ index:0, selected:[], done:false },
-2:{ index:0, selected:[], done:false },
-3:{ index:0, selected:[], done:false }
-};
 
-function shuffle(array){
-    return [...array].sort(() => Math.random() - 0.5);
+1:{
+    index:0,
+    selected:[],
+    done:false
+},
+
+2:{
+    index:0,
+    selected:[],
+    done:false
+},
+
+3:{
+    index:0,
+    selected:[],
+    done:false
 }
 
+};
+
+
+function shuffle(array){
+
+    return [...array].sort(
+        () => Math.random() - 0.5
+    );
+
+}
+
+
 function loadGame(gameNumber){
+
     const state = gameState[gameNumber];
-    const data = games[gameNumber][state.index];
+
+    const data =
+        games[gameNumber][state.index];
+
     state.selected = [];
     state.done = false;
 
-    document.getElementById("g" + gameNumber + "Num").textContent = state.index + 1;
-    document.getElementById("g" + gameNumber + "Meaning").textContent = data.meaning;
 
-    const answer = document.getElementById("g" + gameNumber + "Answer");
-    answer.innerHTML = '<span class="answer-placeholder">Tap the words below</span>';
+    document.getElementById(
+        "g" + gameNumber + "Num"
+    ).textContent =
+        state.index + 1;
 
-    const bank = document.getElementById("g" + gameNumber + "Bank");
+
+    document.getElementById(
+        "g" + gameNumber + "Meaning"
+    ).textContent =
+        data.meaning;
+
+
+    const answer =
+        document.getElementById(
+            "g" + gameNumber + "Answer"
+        );
+
+
+    answer.innerHTML =
+        '<span class="answer-placeholder">Tap the words below</span>';
+
+
+    const bank =
+        document.getElementById(
+            "g" + gameNumber + "Bank"
+        );
+
+
     bank.innerHTML = "";
 
-    shuffle(data.answer).forEach((word,index)=>{
-        const button = document.createElement("button");
-        button.className = "word-btn";
-        button.textContent = word;
-        button.onclick = function(){
-            if(this.disabled) return;
-            gameState[gameNumber].selected.push(word);
-            this.disabled = true;
-            this.classList.add("selected");
-            playAudio(word);
-            renderSelected(gameNumber);
-        };
-        bank.appendChild(button);
-    });
 
-    document.getElementById("g" + gameNumber + "Feedback").textContent = "";
-    document.getElementById("g" + gameNumber + "Next").style.display = "none";
+    shuffle(data.answer).forEach(
+        (word,index) => {
+
+            const button =
+                document.createElement("button");
+
+            button.className =
+                "word-btn";
+
+            button.textContent =
+                word;
+
+
+            button.onclick = function(){
+
+                if(this.disabled) return;
+
+                gameState[gameNumber]
+                    .selected
+                    .push(word);
+
+                this.disabled = true;
+
+                this.classList.add("selected");
+
+                playAudio(word);
+
+                renderSelected(gameNumber);
+            };
+
+
+            bank.appendChild(button);
+        }
+    );
+
+
+    document.getElementById(
+        "g" + gameNumber + "Feedback"
+    ).textContent = "";
+
+
+    document.getElementById(
+        "g" + gameNumber + "Next"
+    ).style.display = "none";
+
 }
+
 
 function renderSelected(gameNumber){
-    const answer = document.getElementById("g" + gameNumber + "Answer");
+
+    const answer =
+        document.getElementById(
+            "g" + gameNumber + "Answer"
+        );
+
     answer.innerHTML = "";
-    gameState[gameNumber].selected.forEach(word=>{
-        const span = document.createElement("span");
-        span.className = "selected-word";
-        span.textContent = word;
-        span.onclick = function(){ playAudio(word); };
-        answer.appendChild(span);
-    });
+
+
+    gameState[gameNumber]
+        .selected
+        .forEach(word => {
+
+            const span =
+                document.createElement("span");
+
+            span.className =
+                "selected-word";
+
+            span.textContent =
+                word;
+
+            span.onclick =
+                function(){
+                    playAudio(word);
+                };
+
+            answer.appendChild(span);
+        });
 }
 
+
 function checkGame(gameNumber){
-    const state = gameState[gameNumber];
-    const correct = games[gameNumber][state.index].answer;
-    const selected = state.selected;
-    const feedback = document.getElementById("g" + gameNumber + "Feedback");
+
+    const state =
+        gameState[gameNumber];
+
+    const correct =
+        games[gameNumber]
+        [state.index]
+        .answer;
+
+    const selected =
+        state.selected;
+
+    const feedback =
+        document.getElementById(
+            "g" + gameNumber + "Feedback"
+        );
+
 
     if(selected.length !== correct.length){
-        feedback.textContent = "⚠️ Complete the sentence first.";
-        feedback.className = "feedback incorrect";
+
+        feedback.textContent =
+            "⚠️ Complete the sentence first.";
+
+        feedback.className =
+            "feedback incorrect";
+
         return;
     }
 
-    const isCorrect = selected.every((word,index)=> word === correct[index]);
+
+    const isCorrect =
+        selected.every(
+            (word,index) =>
+                word === correct[index]
+        );
+
 
     if(isCorrect){
-        feedback.textContent = "🎉 Correct!";
-        feedback.className = "feedback correct";
+
+        feedback.textContent =
+            "🎉 Correct!";
+
+        feedback.className =
+            "feedback correct";
+
         state.done = true;
-        playAudio(correct.join(""));
-        document.getElementById("g" + gameNumber + "Next").style.display = "block";
-    } else {
-        feedback.textContent = "❌ Not quite. Try again!";
-        feedback.className = "feedback incorrect";
+
+        playAudio(
+            correct.join("")
+        );
+
+
+        document.getElementById(
+            "g" + gameNumber + "Next"
+        ).style.display = "block";
+
     }
+
+    else{
+
+        feedback.textContent =
+            "❌ Not quite. Try again!";
+
+        feedback.className =
+            "feedback incorrect";
+    }
+
 }
 
-function resetGame(gameNumber){ loadGame(gameNumber); }
+
+function resetGame(gameNumber){
+
+    loadGame(gameNumber);
+
+}
+
 
 function nextGameQuestion(gameNumber){
-    const state = gameState[gameNumber];
+
+    const state =
+        gameState[gameNumber];
+
     if(!state.done) return;
+
     state.index++;
-    if(state.index >= games[gameNumber].length) state.index = 0;
+
+
+    if(
+        state.index >=
+        games[gameNumber].length
+    ){
+        state.index = 0;
+    }
+
+
     loadGame(gameNumber);
+
 }
 
+
 function listenCurrent(gameNumber){
-    const state = gameState[gameNumber];
-    playAudio(games[gameNumber][state.index].answer.join(""));
+
+    const state =
+        gameState[gameNumber];
+
+    playAudio(
+        games[gameNumber]
+        [state.index]
+        .answer
+        .join("")
+    );
+
 }
 
 
 /* =====================================================
-   WRITING PRACTICE (ALL 15 VOCABULARY CHARACTERS/WORDS)
+   WRITING PRACTICE
 ===================================================== */
 
 const writingCharacters = [
+
 { hanzi:"沒", pinyin:"méi", meaning:"not" },
 { hanzi:"正", pinyin:"zhèng", meaning:"just/straight" },
 { hanzi:"在", pinyin:"zài", meaning:"at/in" },
@@ -1358,181 +1681,647 @@ const writingCharacters = [
 { hanzi:"糕", pinyin:"gāo", meaning:"cake" },
 { hanzi:"幹", pinyin:"gàn", meaning:"do" },
 { hanzi:"嘛", pinyin:"ma", meaning:"modal particle" }
+
 ];
+
 
 let writingIndex = 0;
 let writingMode = "quiz";
 let writer = null;
 
+
 function initWriter(){
-    const item = writingCharacters[writingIndex];
-    document.getElementById("target-div").innerHTML = "";
-    const info = document.getElementById("writingInfo");
+
+    const item =
+        writingCharacters[writingIndex];
+
+    document.getElementById(
+        "target-div"
+    ).innerHTML = "";
+
+
+    const info =
+        document.getElementById(
+            "writingInfo"
+        );
+
 
     if(writingMode === "quiz"){
-        info.innerHTML = `Write <strong>${item.hanzi}</strong> (${item.pinyin} - ${item.meaning}) following correct stroke order! (${writingIndex + 1}/${writingCharacters.length})`;
-    } else {
-        info.innerHTML = `Watch animated stroke order for <strong>${item.hanzi}</strong> (${item.pinyin} - ${item.meaning}). (${writingIndex + 1}/${writingCharacters.length})`;
+
+        info.innerHTML =
+            `Write <strong>${item.hanzi}</strong>
+            (${item.pinyin} - ${item.meaning})
+            following correct stroke order!
+            (${writingIndex + 1}/${writingCharacters.length})`;
+
     }
 
-    writer = HanziWriter.create("target-div", item.hanzi, {
-        width: 260,
-        height: 260,
-        padding: 10,
-        showOutline: true,
-        strokeAnimationSpeed: 1,
-        drawingColor: "#5c4033",
-        strokeHighlightColor: "#b8865c",
-        showCharacter: writingMode === "animate"
-    });
+    else{
+
+        info.innerHTML =
+            `Watch animated stroke order for
+            <strong>${item.hanzi}</strong>
+            (${item.pinyin} - ${item.meaning}).
+            (${writingIndex + 1}/${writingCharacters.length})`;
+    }
+
+
+    writer =
+        HanziWriter.create(
+            "target-div",
+            item.hanzi,
+            {
+                width:260,
+                height:260,
+                padding:10,
+                showOutline:true,
+                strokeAnimationSpeed:1,
+                drawingColor:"#5c4033",
+                strokeHighlightColor:"#b8865c",
+                showCharacter:
+                    writingMode === "animate"
+            }
+        );
+
 
     if(writingMode === "quiz"){
         startQuiz();
-    } else {
+    }
+
+    else{
         writer.animateCharacter();
     }
+
 }
+
 
 function startQuiz(){
-    const feedback = document.getElementById("writingFeedback");
+
+    const feedback =
+        document.getElementById(
+            "writingFeedback"
+        );
+
     feedback.textContent = "";
+
+
     writer.quiz({
-        onMistake: function(){
-            feedback.textContent = "❌ Incorrect stroke order! Try again.";
-            feedback.className = "feedback incorrect";
+
+        onMistake:function(){
+
+            feedback.textContent =
+                "❌ Incorrect stroke order! Try again.";
+
+            feedback.className =
+                "feedback incorrect";
         },
-        onCorrectStroke: function(){
-            feedback.textContent = "✨ Great! Continue with the next stroke.";
-            feedback.className = "feedback correct";
+
+
+        onCorrectStroke:function(){
+
+            feedback.textContent =
+                "✨ Great! Continue with the next stroke.";
+
+            feedback.className =
+                "feedback correct";
         },
-        onComplete: function(){
-            feedback.textContent = "🎉 Perfect! Correct stroke order.";
-            feedback.className = "feedback correct";
+
+
+        onComplete:function(){
+
+            feedback.textContent =
+                "🎉 Perfect! Correct stroke order.";
+
+            feedback.className =
+                "feedback correct";
         }
+
     });
+
 }
 
-function setWritingMode(mode, button){
+
+function setWritingMode(mode,button){
+
     writingMode = mode;
-    document.querySelectorAll(".writing-card .mode-btn").forEach(btn => btn.classList.remove("active"));
+
+    document
+        .querySelectorAll(
+            ".writing-card .mode-btn"
+        )
+        .forEach(
+            btn =>
+                btn.classList.remove("active")
+        );
+
     button.classList.add("active");
+
     initWriter();
 }
 
-function resetWritingQuiz(){ initWriter(); }
+
+function resetWritingQuiz(){
+
+    initWriter();
+
+}
+
+
 function nextWritingCharacter(){
+
     writingIndex++;
-    if(writingIndex >= writingCharacters.length) writingIndex = 0;
+
+    if(
+        writingIndex >=
+        writingCharacters.length
+    ){
+        writingIndex = 0;
+    }
+
     initWriter();
 }
-function playCurrentWriting(){ playAudio(writingCharacters[writingIndex].hanzi); }
+
+
+function playCurrentWriting(){
+
+    playAudio(
+        writingCharacters[
+            writingIndex
+        ].hanzi
+    );
+
+}
 
 
 /* =====================================================
-   FINAL CHALLENGE (40% CURRENT LESSON + 60% FROM lesson.js)
+   FINAL CHALLENGE / GRAMMAR MASTER
+
+   20 QUESTIONS TOTAL
+
+   8 QUESTIONS  = THIS LESSON
+   12 QUESTIONS = lesson.js
+
+   40% / 60%
 ===================================================== */
 
 let finalQuestions = [];
+
 let finalIndex = 0;
+
 let finalScore = 0;
+
 let finalSelected = [];
 
+
+/* =====================================================
+   THIS LESSON QUESTIONS
+   EXACTLY 8 QUESTIONS
+===================================================== */
+
+const currentLessonFinalQuestions = [
+
+    {
+        meaning: "He is sleeping.",
+        answer: ["他", "在", "睡覺"]
+    },
+
+    {
+        meaning: "Older brother is running right now.",
+        answer: ["哥哥", "正在", "跑步"]
+    },
+
+    {
+        meaning: "I am not resting.",
+        answer: ["我", "沒", "在", "休息"]
+    },
+
+    {
+        meaning: "Are they shopping?",
+        answer: ["他", "們", "在", "逛街", "嗎"]
+    },
+
+    {
+        meaning: "Is the dog taking a walk right now?",
+        answer: ["狗", "正在", "散步", "嗎"]
+    },
+
+    {
+        meaning: "Students are doing homework.",
+        answer: ["學生", "在", "做", "作業"]
+    },
+
+    {
+        meaning: "You are studying English right now.",
+        answer: ["你", "正在", "學習", "英文"]
+    },
+
+    {
+        meaning: "Younger brother is not writing homework.",
+        answer: ["弟弟", "沒", "在", "寫", "功課"]
+    }
+
+];
+
+
+/* =====================================================
+   INITIALIZE FINAL QUESTIONS
+===================================================== */
+
 function initFinalQuestions(){
-    // 40% dari materi lesson ini (Continuous Actions) -> 4 soal
-    const currentLessonQuestions = [
-        { meaning: "He is sleeping", answer: ["他", "在", "睡覺"] },
-        { meaning: "Older brother is running", answer: ["哥哥", "正在", "跑步"] },
-        { meaning: "I am not resting", answer: ["我", "沒", "在", "休息"] },
-        { meaning: "Are they shopping?", answer: ["他", "們", "在", "逛街", "嗎"] }
+
+    /*
+       40% = 8 questions from this lesson
+       60% = 12 questions from lesson.js
+    */
+
+
+    const currentLessonQuestions =
+        [...currentLessonFinalQuestions];
+
+
+    let previousLessonQuestions = [];
+
+
+    /*
+       Read reviewQuestions from lesson.js
+    */
+
+    if(
+        typeof lessonData !== "undefined" &&
+        Array.isArray(
+            lessonData.reviewQuestions
+        )
+    ){
+
+        previousLessonQuestions =
+            [...lessonData.reviewQuestions];
+
+    }
+
+
+    /*
+       Randomly select 12 questions
+       from lesson.js.
+    */
+
+    previousLessonQuestions =
+        shuffle(
+            previousLessonQuestions
+        ).slice(0,12);
+
+
+    /*
+       Safety fallback.
+
+       If lesson.js contains fewer than
+       12 review questions, fill the
+       missing slots using this lesson's
+       questions.
+    */
+
+    if(
+        previousLessonQuestions.length < 12
+    ){
+
+        const needed =
+            12 -
+            previousLessonQuestions.length;
+
+
+        const fallbackQuestions =
+            shuffle(
+                currentLessonFinalQuestions
+            ).slice(0,needed);
+
+
+        previousLessonQuestions = [
+            ...previousLessonQuestions,
+            ...fallbackQuestions
+        ];
+
+    }
+
+
+    /*
+       Combine:
+
+       8 current lesson
+       +
+       12 lesson.js
+
+       = 20 questions
+    */
+
+    finalQuestions = [
+
+        ...currentLessonQuestions,
+
+        ...previousLessonQuestions
+
     ];
 
-    // 60% dari lesson.js (Materi sebelumnya) -> 6 soal
-    // Jika lessonData.reviewQuestions tersedia, ambil 6 soal darinya. Jika tidak, pakai data fallback.
-    let previousLessonQuestions = [];
-    if(typeof lessonData !== "undefined" && lessonData.reviewQuestions && lessonData.reviewQuestions.length > 0){
-        previousLessonQuestions = lessonData.reviewQuestions.slice(0, 6);
-    } else {
-        previousLessonQuestions = [
-            { meaning: "Doctor is at the hospital", answer: ["醫", "生", "在", "醫", "院"] },
-            { meaning: "Apple is at home", answer: ["蘋", "果", "在", "家"] },
-            { meaning: "He is not in the park", answer: ["他", "不", "在", "公", "園"] },
-            { meaning: "Is the teacher in the classroom?", answer: ["老", "師", "在", "教", "室", "嗎"] },
-            { meaning: "Is he in Japan or not?", answer: ["他", "在", "不", "在", "日", "本"] },
-            { meaning: "Older brother is studying in Japan", answer: ["哥", "哥", "在", "日", "本", "讀", "書"] }
-        ];
-    }
 
-    // Gabungkan menjadi total 10 soal (40% + 60%)
-    finalQuestions = [...currentLessonQuestions, ...previousLessonQuestions];
-    document.getElementById("finalTotalNum").textContent = finalQuestions.length;
+    /*
+       Shuffle all 20 questions.
+    */
+
+    finalQuestions =
+        shuffle(finalQuestions);
+
+
+    /*
+       Safety limit.
+    */
+
+    finalQuestions =
+        finalQuestions.slice(0,20);
+
+
+    /*
+       Update UI.
+    */
+
+    document.getElementById(
+        "finalTotalNum"
+    ).textContent =
+        finalQuestions.length;
+
+
+    document.getElementById(
+        "finalScore"
+    ).textContent =
+        "0 / " +
+        finalQuestions.length;
+
 }
+
+
+/* =====================================================
+   LOAD FINAL QUESTION
+===================================================== */
 
 function loadFinal(){
-    if(finalQuestions.length === 0) initFinalQuestions();
-    if(finalIndex >= finalQuestions.length) return;
 
-    const q = finalQuestions[finalIndex];
-    document.getElementById("finalNum").textContent = finalIndex + 1;
-    document.getElementById("finalMeaning").textContent = q.meaning;
+    if(
+        finalQuestions.length === 0
+    ){
+
+        initFinalQuestions();
+
+    }
+
+
+    if(
+        finalIndex >=
+        finalQuestions.length
+    ){
+        return;
+    }
+
+
+    const q =
+        finalQuestions[finalIndex];
+
+
+    document.getElementById(
+        "finalNum"
+    ).textContent =
+        finalIndex + 1;
+
+
+    document.getElementById(
+        "finalMeaning"
+    ).textContent =
+        q.meaning;
+
+
     finalSelected = [];
 
-    document.getElementById("finalAnswer").innerHTML = '<span class="answer-placeholder">Build your answer</span>';
-    const bank = document.getElementById("finalBank");
+
+    document.getElementById(
+        "finalAnswer"
+    ).innerHTML =
+        '<span class="answer-placeholder">Build your answer</span>';
+
+
+    const bank =
+        document.getElementById(
+            "finalBank"
+        );
+
+
     bank.innerHTML = "";
 
-    shuffle(q.answer).forEach(word=>{
-        const button = document.createElement("button");
-        button.className = "word-btn";
-        button.textContent = word;
-        button.onclick = ()=>{
-            if(button.disabled) return;
+
+    /*
+       Shuffle answer choices.
+    */
+
+    shuffle(q.answer).forEach(word => {
+
+        const button =
+            document.createElement(
+                "button"
+            );
+
+
+        button.className =
+            "word-btn";
+
+
+        button.textContent =
+            word;
+
+
+        button.onclick = () => {
+
+            if(button.disabled)
+                return;
+
+
             finalSelected.push(word);
+
+
             button.disabled = true;
-            button.classList.add("selected");
+
+
+            button.classList.add(
+                "selected"
+            );
+
+
             playAudio(word);
+
+
             renderFinal();
+
         };
+
+
         bank.appendChild(button);
+
     });
-    document.getElementById("finalFeedback").textContent = "";
+
+
+    document.getElementById(
+        "finalFeedback"
+    ).textContent = "";
+
 }
+
+
+/* =====================================================
+   RENDER FINAL ANSWER
+===================================================== */
 
 function renderFinal(){
-    const area = document.getElementById("finalAnswer");
+
+    const area =
+        document.getElementById(
+            "finalAnswer"
+        );
+
+
     area.innerHTML = "";
-    finalSelected.forEach(word=>{
-        const span = document.createElement("span");
-        span.className = "selected-word";
-        span.textContent = word;
-        span.onclick = ()=>{ playAudio(word); };
+
+
+    finalSelected.forEach(word => {
+
+        const span =
+            document.createElement(
+                "span"
+            );
+
+
+        span.className =
+            "selected-word";
+
+
+        span.textContent =
+            word;
+
+
+        span.onclick = () => {
+
+            playAudio(word);
+
+        };
+
+
         area.appendChild(span);
+
     });
+
 }
 
-function resetFinal(){ loadFinal(); }
+
+/* =====================================================
+   RESET FINAL
+===================================================== */
+
+function resetFinal(){
+
+    loadFinal();
+
+}
+
+
+/* =====================================================
+   CHECK FINAL
+===================================================== */
 
 function checkFinal(){
-    if(finalQuestions.length === 0) return;
-    const correct = finalQuestions[finalIndex].answer;
-    const feedback = document.getElementById("finalFeedback");
-    const isCorrect = finalSelected.length === correct.length && finalSelected.every((word,index)=> word === correct[index]);
+
+    if(
+        finalQuestions.length === 0
+    ){
+        return;
+    }
+
+
+    const correct =
+        finalQuestions[
+            finalIndex
+        ].answer;
+
+
+    const feedback =
+        document.getElementById(
+            "finalFeedback"
+        );
+
+
+    const isCorrect =
+
+        finalSelected.length ===
+        correct.length &&
+
+        finalSelected.every(
+            (word,index) =>
+                word === correct[index]
+        );
+
 
     if(isCorrect){
-        feedback.textContent = "🎉 Correct!";
-        feedback.className = "feedback correct";
+
+        feedback.textContent =
+            "🎉 Correct!";
+
+        feedback.className =
+            "feedback correct";
+
+
         finalScore++;
-        document.getElementById("finalScore").textContent = finalScore + " / " + finalQuestions.length;
+
+
+        document.getElementById(
+            "finalScore"
+        ).textContent =
+
+            finalScore +
+            " / " +
+            finalQuestions.length;
+
+
         finalIndex++;
-        if(finalIndex < finalQuestions.length){
-            setTimeout(loadFinal, 700);
-        } else {
-            document.getElementById("unlockBox").style.display = "block";
-            playAudio("太棒了");
+
+
+        if(
+            finalIndex <
+            finalQuestions.length
+        ){
+
+            setTimeout(
+                loadFinal,
+                700
+            );
+
         }
-    } else {
-        feedback.textContent = "❌ Check the word order.";
-        feedback.className = "feedback incorrect";
+
+        else{
+
+            document.getElementById(
+                "unlockBox"
+            ).style.display =
+                "block";
+
+
+            playAudio("太棒了");
+
+        }
+
     }
+
+    else{
+
+        feedback.textContent =
+            "❌ Check the word order.";
+
+        feedback.className =
+            "feedback incorrect";
+
+    }
+
 }
 
 
@@ -1541,10 +2330,15 @@ function checkFinal(){
 ===================================================== */
 
 loadGame(1);
+
 loadGame(2);
+
 loadGame(3);
+
 initWriter();
+
 initFinalQuestions();
+
 loadFinal();
 
 </script>
