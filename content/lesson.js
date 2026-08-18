@@ -1,12 +1,12 @@
 // ============================================================
 // Boba Break Study — Lesson Database
-// Updated with Self-Introduction Vocabulary & Grammar
+// Updated with Location, Activity, and New Vocabulary & Grammar
 // ============================================================
 
 const lessonData = {
 
     // ========================================================
-    // GRAMMAR ALREADY LEARNED & NEW ADDITION
+    // GRAMMAR: PREVIOUS + NEW LOCATION & ACTIVITY PATTERNS
     // ========================================================
 
     grammar: [
@@ -210,7 +210,6 @@ const lessonData = {
             ]
         },
 
-        // --- New Self-Introduction Grammar Additions ---
         {
             id: "jiao-what-name",
             name: "叫什麼名字",
@@ -308,13 +307,132 @@ const lessonData = {
                 "我也是。 (Me too / I am too.)",
                 "我也喜歡聽音樂。 (I also like listening to music.)"
             ]
+        },
+
+        // --- New Location & Activity Grammar Patterns ---
+        {
+            id: "s-zai-place",
+            name: "S/noun + 在 + Place",
+            category: "Location",
+            explanation: "Indicates that someone or something is at a specific place.",
+            examples: [
+                "醫生在醫院 (The doctor is at the hospital)",
+                "蘋果在家 (The apple is at home)"
+            ]
+        },
+
+        {
+            id: "s-bu-zai-place",
+            name: "S/noun + 不 + 在 + Place",
+            category: "Location",
+            explanation: "Indicates that someone or something is NOT at a specific place.",
+            examples: [
+                "他不在公園 (He is not at the park)",
+                "香蕉不在學校 (The banana is not at school)"
+            ]
+        },
+
+        {
+            id: "s-zai-place-ma",
+            name: "S/noun + 在 + Place + 嗎",
+            category: "Location Question",
+            explanation: "Yes/No question asking if someone or something is at a place.",
+            examples: [
+                "老師在教室嗎？ (Is the teacher in the classroom?) -> 對，老師在教室 / 不，老師不在教室",
+                "爸爸在辦公室嗎？ (Is dad in the office?) -> 對，爸爸在辦公室 / 不，爸爸不在辦公室"
+            ]
+        },
+
+        {
+            id: "s-zai-bu-zai-place",
+            name: "S/noun + 在 + 不 + 在 + Place",
+            category: "Location Question (A-not-A)",
+            explanation: "Alternative question format asking whether someone is at a place or not.",
+            examples: [
+                "他在不在日本？ (Is he in Japan or not?) -> 在 / 不在",
+                "護士在不在醫院？ (Is the nurse in the hospital or not?) -> 在 / 不在"
+            ]
+        },
+
+        {
+            id: "existential-zai",
+            name: "在不在 / 在嗎 (without place)",
+            category: "Location Question",
+            explanation: "Asking whether someone is present or around.",
+            examples: [
+                "她在嗎？ -> 在 / 不在",
+                "哥哥在不在？ -> 在 / 不在"
+            ]
+        },
+
+        {
+            id: "s-zai-nali",
+            name: "S/noun + 在 + 哪裡",
+            category: "Location Question",
+            explanation: "Asking for the location of someone or something using 哪裡 (where).",
+            examples: [
+                "媽媽在哪裡？ -> 媽媽在家"
+            ]
+        },
+
+        {
+            id: "s-zai-place-activity",
+            name: "S + 在 + Place + Activity",
+            category: "Location & Activity",
+            explanation: "Describes an activity being performed at a specific place.",
+            examples: [
+                "哥哥在日本讀書 (Older brother studies in Japan)",
+                "弟弟在家玩遊戲 (Younger brother plays games at home)"
+            ]
+        },
+
+        {
+            id: "s-bu-zai-place-activity",
+            name: "S + 不 + 在 + Place + Activity",
+            category: "Location & Activity",
+            explanation: "Describes an activity not being performed at a specific place.",
+            examples: [
+                "老師不在醫院工作 (Teacher doesn't work at the hospital)",
+                "醫生不在教室教學 (Doctor doesn't teach in the classroom)"
+            ]
+        },
+
+        {
+            id: "s-zai-place-activity-ma",
+            name: "S + 在 + Place + Activity + 嗎",
+            category: "Location & Activity Question",
+            explanation: "Asking if an activity is being performed at a place.",
+            examples: [
+                "妹妹在學校上課嗎？ -> 對，妹妹在學校上課 / 不，妹妹不在學校上課",
+                "他在公園運動嗎？ -> 對，他在公園運動 / 不，他不在公園運動"
+            ]
+        },
+
+        {
+            id: "s-zai-bu-zai-place-activity",
+            name: "S + 在 + 不 + 在 + Place + activity",
+            category: "Location & Activity Question",
+            explanation: "A-not-A question combining location and activity. '和' means 'and' to connect nouns.",
+            examples: [
+                "你們在不在家吃蘋果和香蕉？ -> 在 / 不在"
+            ]
+        },
+
+        {
+            id: "s-zai-nali-activity",
+            name: "S + 在 + 哪裡 + activity",
+            category: "Location & Activity Question",
+            explanation: "Asking where an activity takes place.",
+            examples: [
+                "爸爸在哪裡上班？ -> 爸爸在辦公室上班"
+            ]
         }
 
     ],
 
 
     // ========================================================
-    // VOCABULARY ALREADY LEARNED & NEW ADDITIONS
+    // VOCABULARY: PREVIOUS + NEW LOCATION & ACTIVITY VOCAB
     // ========================================================
 
     vocabulary: [
@@ -463,7 +581,30 @@ const lessonData = {
         { hanzi: "不", pinyin: "bù", meaning: "not / no", category: "Grammar" },
         { hanzi: "嗎", pinyin: "ma", meaning: "question particle", category: "Grammar" },
         { hanzi: "呢", pinyin: "ne", meaning: "particle for bouncing questions / what about...", category: "Grammar" },
-        { hanzi: "也", pinyin: "yě", meaning: "also / too", category: "Grammar" }
+        { hanzi: "也", pinyin: "yě", meaning: "also / too", category: "Grammar" },
+
+        // --- New Location & Activity Vocabulary ---
+        { hanzi: "在", pinyin: "zài", meaning: "at / in", category: "Preposition" },
+        { hanzi: "家", pinyin: "jiā", meaning: "home / family", category: "Place" },
+        { hanzi: "日本", pinyin: "Rìběn", meaning: "Japan", category: "Place" },
+        { hanzi: "醫院", pinyin: "yīyuàn", meaning: "hospital", category: "Place" },
+        { hanzi: "辦公室", pinyin: "bàngōngshì", meaning: "office", category: "Place" },
+        { hanzi: "學校", pinyin: "xuéxiào", meaning: "school", category: "Place" },
+        { hanzi: "教室", pinyin: "jiàoshì", meaning: "classroom", category: "Place" },
+        { hanzi: "公園", pinyin: "gōngyuán", meaning: "park", category: "Place" },
+        { hanzi: "讀書", pinyin: "dúshū", meaning: "to study / to read", category: "Verb" },
+        { hanzi: "學習", pinyin: "xuéxí", meaning: "to learn / to study", category: "Verb" },
+        { hanzi: "上班", pinyin: "shàngbān", meaning: "to go to work / to work", category: "Verb" },
+        { hanzi: "上課", pinyin: "shàngkè", meaning: "to attend class / to have class", category: "Verb" },
+        { hanzi: "運動", pinyin: "yùndòng", meaning: "to exercise / sports", category: "Verb" },
+        { hanzi: "玩", pinyin: "wán", meaning: "to play", category: "Verb" },
+        { hanzi: "遊戲", pinyin: "yóuxì", meaning: "game", category: "Object" },
+        { hanzi: "蘋果", pinyin: "píngguǒ", meaning: "apple", category: "Food" },
+        { hanzi: "香蕉", pinyin: "xiāngjiāo", meaning: "banana", category: "Food" },
+        { hanzi: "教學", pinyin: "jiàoxué", meaning: "to teach / teaching", category: "Verb" },
+        { hanzi: "對", pinyin: "duì", meaning: "correct / right / yes", category: "Adjective" },
+        { hanzi: "哪裡", pinyin: "nǎlǐ", meaning: "where", category: "Question Word" },
+        { hanzi: "和", pinyin: "hé", meaning: "and", category: "Conjunction" }
 
     ]
 
