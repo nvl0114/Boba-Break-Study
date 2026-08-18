@@ -11,13 +11,14 @@
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-<!-- Hanzi Writer CDN -->
 <script src="https://cdn.jsdelivr.net/npm/hanzi-writer@3.5.0/dist/hanzi-writer.min.js"></script>
 
-<!-- Lesson Data Script -->
 <script src="lesson.js"></script>
 <script>
-    const lessonData = allLessonsData[7];
+    // Memastikan lessonData mengambil dari allLessonsData[7] jika lesson.js menggunakan format master
+    if (typeof allLessonsData !== 'undefined' && allLessonsData[7]) {
+        var lessonData = allLessonsData[7];
+    }
 </script>
 
 <style>
@@ -612,18 +613,10 @@ p {
 
 <div class="app-container">
 
-<!-- =====================================================
-     SIDEBAR
-===================================================== -->
-
 <div id="sidebar-container"></div>
 
 <main class="main-content">
 
-
-<!-- =====================================================
-     TITLE
-===================================================== -->
 
 <div class="lesson-title">
 
@@ -640,17 +633,12 @@ p {
 </div>
 
 
-<!-- =====================================================
-     GRAMMAR CARD 1 (6 SLIDES - NO ACTIVITY)
-===================================================== -->
-
 <div class="grammar-card">
 
     <h2>🧠 Grammar Card 1: Simple Locations & Presence</h2>
 
     <div class="grammar-slider-container">
 
-        <!-- SLIDE 1 -->
         <div class="grammar-slide active-slide" id="card1-slide-1">
 
             <h3>1. Simple Positive Location</h3>
@@ -677,7 +665,6 @@ p {
         </div>
 
 
-        <!-- SLIDE 2 -->
         <div class="grammar-slide" id="card1-slide-2">
 
             <h3>2. Simple Negative Location</h3>
@@ -704,7 +691,6 @@ p {
         </div>
 
 
-        <!-- SLIDE 3 -->
         <div class="grammar-slide" id="card1-slide-3">
 
             <h3>3. Location Question with 嗎</h3>
@@ -747,7 +733,6 @@ p {
         </div>
 
 
-        <!-- SLIDE 4 -->
         <div class="grammar-slide" id="card1-slide-4">
 
             <h3>4. A-not-A Presence Question</h3>
@@ -782,7 +767,6 @@ p {
         </div>
 
 
-        <!-- SLIDE 5 -->
         <div class="grammar-slide" id="card1-slide-5">
 
             <h3>5. Asking If Someone Is There (Without Place)</h3>
@@ -825,7 +809,6 @@ p {
         </div>
 
 
-        <!-- SLIDE 6 -->
         <div class="grammar-slide" id="card1-slide-6">
 
             <h3>6. Asking Where with 哪裡</h3>
@@ -870,17 +853,12 @@ p {
 </div>
 
 
-<!-- =====================================================
-     GRAMMAR CARD 2 (5 SLIDES - WITH ACTIVITY)
-===================================================== -->
-
 <div class="grammar-card">
 
     <h2>🧠 Grammar Card 2: Locations with Activities</h2>
 
     <div class="grammar-slider-container">
 
-        <!-- SLIDE 1 -->
         <div class="grammar-slide active-slide" id="card2-slide-1">
 
             <h3>1. Positive Activity at Place</h3>
@@ -907,7 +885,6 @@ p {
         </div>
 
 
-        <!-- SLIDE 2 -->
         <div class="grammar-slide" id="card2-slide-2">
 
             <h3>2. Negative Activity at Place</h3>
@@ -934,7 +911,6 @@ p {
         </div>
 
 
-        <!-- SLIDE 3 -->
         <div class="grammar-slide" id="card2-slide-3">
 
             <h3>3. Activity Question with 嗎</h3>
@@ -977,7 +953,6 @@ p {
         </div>
 
 
-        <!-- SLIDE 4 -->
         <div class="grammar-slide" id="card2-slide-4">
 
             <h3>4. A-not-A Activity & Conjunction 和</h3>
@@ -1008,7 +983,6 @@ p {
         </div>
 
 
-        <!-- SLIDE 5 -->
         <div class="grammar-slide" id="card2-slide-5">
 
             <h3>5. Asking Where with Activity</h3>
@@ -1052,10 +1026,6 @@ p {
 </div>
 
 
-<!-- =====================================================
-     VOCABULARY
-===================================================== -->
-
 <div class="lesson-card">
 
     <h2>📚 Vocabulary List</h2>
@@ -1090,10 +1060,6 @@ p {
 </div>
 
 
-<!-- =====================================================
-     GAME 1: POSITIVE SENTENCE BUILDING
-===================================================== -->
-
 <div class="game-card">
 <span class="game-number">GAME 1</span>
 <h2>🧩 Positive Sentences Challenge</h2>
@@ -1116,10 +1082,6 @@ p {
 <button class="next-game-btn" id="g1Next" onclick="nextGameQuestion(1)">Next →</button>
 </div>
 
-
-<!-- =====================================================
-     GAME 2: NEGATIVE SENTENCE BUILDING
-===================================================== -->
 
 <div class="game-card">
 <span class="game-number">GAME 2</span>
@@ -1144,10 +1106,6 @@ p {
 </div>
 
 
-<!-- =====================================================
-     GAME 3: INTERROGATIVE SENTENCES
-===================================================== -->
-
 <div class="game-card">
 <span class="game-number">GAME 3</span>
 <h2>🧩 Interrogative Sentences Challenge</h2>
@@ -1171,10 +1129,6 @@ p {
 </div>
 
 
-<!-- =====================================================
-     HANZI WRITING
-===================================================== -->
-
 <div class="writing-card">
 <h2>✍️ Writing Practice</h2>
 <p>Practice correct Hanzi stroke orders by hand for all lesson vocabulary characters.</p>
@@ -1195,16 +1149,12 @@ p {
 </div>
 
 
-<!-- =====================================================
-     FINAL CHALLENGE (GRAMMAR MASTER)
-===================================================== -->
-
 <div class="final-card">
 <span class="game-number">FINAL CHALLENGE</span>
 <h2>🏆 Grammar Master</h2>
-<p>Comprehensive review challenge combining this lesson's concepts and previous lessons:</p>
+<p>Comprehensive review challenge combining this lesson's concepts from lesson.js:</p>
 <div class="question-box">
-    <div class="question-label">Final Question (<span id="finalNum">1</span> / 12)</div>
+    <div class="question-label">Final Question (<span id="finalNum">1</span> / <span id="finalTotal">1</span>)</div>
     <div class="question-meaning" id="finalMeaning"></div>
 </div>
 <div class="answer-area" id="finalAnswer">
@@ -1214,20 +1164,16 @@ p {
 <button class="check-btn" style="width:100%;" onclick="checkFinal()">✓ Check Final Answer</button>
 <button class="reset-btn" id="finalResetBtn" onclick="resetFinal()" style="width:100%; margin-top:8px;">↻ Reset Answer</button>
 <div class="feedback" id="finalFeedback"></div>
-<div class="final-score" id="finalScore">0 / 12</div>
+<div class="final-score" id="finalScore">0 / 0</div>
 <div class="unlock" id="unlockBox" style="display:none;">
     🎉 <strong>Grammar Master Unlocked!</strong>
-    <p>You have successfully mastered locations, activities, and all prior lesson structures!</p>
+    <p>You have successfully mastered locations and activities from lesson.js!</p>
 </div>
 </div>
 
 </main>
 </div>
 
-
-<!-- =====================================================
-     JAVASCRIPT
-===================================================== -->
 
 <script>
 
@@ -1524,35 +1470,26 @@ function playCurrentWriting(){ playAudio(writingCharacters[writingIndex].hanzi);
 
 
 /* =====================================================
-   FINAL CHALLENGE
+   FINAL CHALLENGE (DYNAMIC FROM lesson.js)
 ===================================================== */
 
 let finalQuestions = [];
+let finalIndex = 0;
+let finalScore = 0;
+let finalSelected = [];
 
 function initFinalQuestions(){
     if(typeof lessonData !== "undefined" && lessonData.reviewQuestions){
         finalQuestions = lessonData.reviewQuestions;
     } else {
+        // Fallback jika lessonData belum termuat
         finalQuestions = [
-            { meaning: "The doctor is at the hospital", answer: ["醫生", "在", "醫院"] },
-            { meaning: "He is not at the park", answer: ["他", "不", "在", "公園"] },
-            { meaning: "Is the teacher in the classroom?", answer: ["老師", "在", "教室", "嗎"] },
-            { meaning: "Where is mom?", answer: ["媽媽", "在", "哪裡"] },
-            { meaning: "Older brother studies in Japan", answer: ["哥哥", "在", "日本", "讀書"] },
-            { meaning: "Teacher does not work at the hospital", answer: ["老師", "不", "在", "醫院", "工作"] },
-            { meaning: "Is younger sister having class at school?", answer: ["妹妹", "在", "學校", "上課", "嗎"] },
-            { meaning: "Where does dad work?", answer: ["爸爸", "在", "辦公室", "上班"] },
-            { meaning: "Three people", answer: ["三", "個", "人"] },
-            { meaning: "This place", answer: ["這", "個", "地方"] },
-            { meaning: "I really like cats", answer: ["我", "很", "喜歡", "貓咪"] },
-            { meaning: "Are you a student?", answer: ["你", "是", "學生", "嗎"] }
+            { meaning: "The doctor is at the hospital.", answer: ["醫", "生", "在", "醫", "院"] }
         ];
     }
+    document.getElementById("finalTotal").textContent = finalQuestions.length;
+    document.getElementById("finalScore").textContent = finalScore + " / " + finalQuestions.length;
 }
-
-let finalIndex = 0;
-let finalScore = 0;
-let finalSelected = [];
 
 function loadFinal(){
     if(finalQuestions.length === 0) initFinalQuestions();
@@ -1599,6 +1536,7 @@ function renderFinal(){
 function resetFinal(){ loadFinal(); }
 
 function checkFinal(){
+    if(finalQuestions.length === 0) return;
     const correct = finalQuestions[finalIndex].answer;
     const feedback = document.getElementById("finalFeedback");
     const isCorrect = finalSelected.length === correct.length && finalSelected.every((word,index)=> word === correct[index]);
