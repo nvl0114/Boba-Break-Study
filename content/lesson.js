@@ -1,6 +1,6 @@
 // ============================================================
 // Boba Break Study — Lesson Database
-// Updated with Location, Activity, Ongoing Actions, and Mixed Quiz Generator
+// Updated with Dynamic Mixed Quiz Generator (40% Current + 60% Review)
 // ============================================================
 
 const lessonData = {
@@ -12,7 +12,7 @@ const lessonData = {
     grammar: [
 
         // ----------------------------------------------------
-        // ONGOING ACTIONS (在 / 正在) - NEW LESSON
+        // ONGOING ACTIONS (在 / 正在)
         // ----------------------------------------------------
 
         {
@@ -258,10 +258,10 @@ const lessonData = {
             category: "Measure Word Structure",
             explanation: "In Mandarin, use 個 (gè) between a number, 這, or 那 and a noun.",
             examples: [
-                "一個人 (One person)",
-                "這個問題 (This question)",
-                "那個地方 (That place)",
-                "兩個月 (Two months)"
+                "一個人",
+                "這個問題",
+                "那個地方",
+                "兩個月"
             ]
         },
 
@@ -333,9 +333,9 @@ const lessonData = {
             category: "Numbers",
             explanation: "Structure for numbers from 11 to 99.",
             examples: [
-                "十一 (11)",
-                "二十五 (25)",
-                "九十九 (99)"
+                "十一",
+                "二十五",
+                "九十九"
             ]
         },
 
@@ -507,7 +507,7 @@ const lessonData = {
 
     vocabulary: [
 
-        // Newly Added Vocabulary (從使用者要求新增)
+        // Ongoing Actions Vocabulary
         { hanzi: "沒", pinyin: "méi", meaning: "not / have not", category: "Grammar" },
         { hanzi: "正在", pinyin: "zhèngzài", meaning: "in the process of (doing)", category: "Adverb" },
         { hanzi: "休息", pinyin: "xiūxí", meaning: "to rest", category: "Verb" },
@@ -522,9 +522,9 @@ const lessonData = {
         { hanzi: "英文", pinyin: "Yīngwén", meaning: "English language", category: "Language" },
         { hanzi: "唱歌", pinyin: "chànggē", meaning: "to sing", category: "Verb" },
         { hanzi: "蛋糕", pinyin: "dàngāo", meaning: "cake", category: "Food" },
-        { hanzi: "幹嘛", pinyin: "gànmá", meaning: "what are you doing / why on earth / whatever for", category: "Question" },
+        { hanzi: "幹嘛", pinyin: "gànmá", meaning: "what are you doing / why on earth", category: "Question" },
 
-        // Existing Vocabulary
+        // Pronouns
         { hanzi: "我", pinyin: "wǒ", meaning: "I / me", category: "Pronoun" },
         { hanzi: "你", pinyin: "nǐ", meaning: "you", category: "Pronoun" },
         { hanzi: "妳", pinyin: "nǐ", meaning: "you (female)", category: "Pronoun" },
@@ -702,7 +702,7 @@ const lessonData = {
     reviewQuestions: [
 
         // -------------------------
-        // ONGOING ACTIONS (在 / 正在) - (Latest Material Pool)
+        // ONGOING ACTIONS (在 / 正在)
         // -------------------------
 
         {
@@ -1288,36 +1288,55 @@ function getRandomReviewQuestions(count = 12) {
 
 
 // ============================================================
-// MIXED QUIZ GENERATOR (40% Latest Material + 60% Review)
+// DYNAMIC MIXED QUIZ GENERATOR (40% Current Page Material + 60% Review)
 // ============================================================
 
-function getMixedReviewQuestions(totalCount = 20) {
+function getMixedReviewQuestions(totalCount = 20, currentGrammarIds = []) {
     const allQuestions = getReviewQuestions();
     
-    // 40% dari 20 = 8 soal materi terbaru (Ongoing Actions)
-    // 60% dari 20 = 12 soal review materi lama
-    const targetLatestCount = Math.round(totalCount * 0.4); 
-    const targetReviewCount = totalCount - targetLatestCount;
+    // Jika tidak ada ID materi yang diberikan, ambil random biasa
+    if (!currentGrammarIds || currentGrammarIds.length === 0) {
+        return getUniqueRandomReviewQuestions(totalCount);
+    }
 
-    // Kata kunci untuk mengidentifikasi soal materi terbaru
-    const latestKeywords = ["正在", "沒在", "逛街", "散步", "做作業", "寫功課", "學習", "休息", "睡覺", "跑步"];
+    // 40% dari totalCount (misal 20 * 0.4 = 8 soal materi saat ini)
+    // 60% sisanya (12 soal review materi lama)
+    const targetCurrentCount = Math.round(totalCount * 0.4); 
+    const targetReviewCount = totalCount - targetCurrentCount;
 
-    const isLatestQuestion = (q) => {
-        return q.answer.some(word => latestKeywords.some(keyword => word.includes(keyword)));
+    // Ambil data grammar berdasarkan ID materi yang sedang dibuka di halaman HTML
+    const currentGrammars = lessonData.grammar.filter(g => currentGrammarIds.includes(g.id));
+    
+    // Kumpulkan contoh kalimat dari grammar tersebut sebagai acuan
+    const currentExamples = [];
+    currentGrammars.forEach(g => {
+        if (g.examples) {
+            currentExamples.push(...g.examples);
+        }
+    });
+
+    // Cek apakah sebuah soal review cocok dengan contoh kalimat di materi halaman ini
+    const isCurrentQuestion = (q) => {
+        const fullAnswerString = q.answer.join("");
+        return currentExamples.some(example => example.replace(/[。？！，]/g, '') === fullAnswerString);
     };
 
-    const latestQuestionsPool = allQuestions.filter(isLatestQuestion);
-    const oldReviewPool = allQuestions.filter(q => !isLatestQuestion(q));
+    // Pisahkan kelompok soal
+    const currentQuestionsPool = allQuestions.filter(isCurrentQuestion);
+    const reviewQuestionsPool = allQuestions.filter(q => !isCurrentQuestion(q));
 
     const shuffle = (array) => [...array].sort(() => Math.random() - 0.5);
     
-    const shuffledLatest = shuffle(latestQuestionsPool);
-    const shuffledOld = shuffle(oldReviewPool);
+    const shuffledCurrent = shuffle(currentQuestionsPool);
+    const shuffledReview = shuffle(reviewQuestionsPool);
 
-    const selectedLatest = shuffledLatest.slice(0, targetLatestCount);
-    const selectedOld = shuffledOld.slice(0, targetReviewCount);
+    // Ambil soal sesuai kuota (jika soal materi kurang, otomatis ditutup dari pool review)
+    let selectedCurrent = shuffledCurrent.slice(0, targetCurrentCount);
+    let remainingSlots = totalCount - selectedCurrent.length;
+    let selectedReview = shuffledReview.slice(0, remainingSlots);
 
-    return shuffle([...selectedLatest, ...selectedOld]);
+    // Gabungkan dan acak urutannya agar tercampur rata
+    return shuffle([...selectedCurrent, ...selectedReview]);
 }
 
 
