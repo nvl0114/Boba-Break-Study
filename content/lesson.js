@@ -388,6 +388,7 @@ const allLessonsData = {
             { meaning: "May I ask your honorable surname?", answer: ["請", "問", "您", "貴", "姓"] }
         ]
     },
+     
     // ========================================================
     // LESSON 7
     // ========================================================
@@ -422,6 +423,7 @@ const allLessonsData = {
                 examples: ["你在哪裡？", "我在公園。", "你在哪裡上班？"]
             }
         ],
+
         vocabulary: [
             { hanzi: "在", pinyin: "zài", meaning: "at / in / on", category: "Preposition" },
             { hanzi: "家", pinyin: "jiā", meaning: "home / family", category: "Place" },
@@ -444,8 +446,8 @@ const allLessonsData = {
             { hanzi: "對", pinyin: "duì", meaning: "correct / right", category: "Adjective" },
             { hanzi: "和", pinyin: "hé", meaning: "and / with", category: "Conjunction" }
         ],
+
         reviewQuestions: [
-            
             { meaning: "Where are you?", answer: ["你", "在", "哪", "裡"] },
             { meaning: "I study at school.", answer: ["我", "在", "學", "校", "讀", "書"] },
             { meaning: "He is playing a game right now.", answer: ["他", "正", "在", "玩", "遊", "戲"] },
@@ -454,4 +456,12 @@ const allLessonsData = {
             { meaning: "Are you at home?", answer: ["你", "在", "家", "嗎"] },
             { meaning: "Where do you study?", answer: ["你", "在", "哪", "裡", "讀", "書"] }
         ]
-    },
+    }
+};
+
+
+// ============================================================
+// MAKE DATABASE AVAILABLE TO HTML
+// ============================================================
+
+window.allLessonsData = allLessonsData;
