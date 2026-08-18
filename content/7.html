@@ -16,9 +16,10 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
 <!-- Lesson Data Script -->
 <script src="lesson.js"></script>
+
 <script>
-    // Ambil data khusus Lesson dan masukkan ke variabel lessonData
-    const lessonData = allLessonsData[7]; 
+    // Ambil data khusus Lesson 7
+    const lessonData = allLessonsData[7];
 </script>
 
 
@@ -879,7 +880,7 @@ p {
 
 
 <!-- =====================================================
-     VOCABULARY CARD 1: PLACES & PREPOSITIONS
+     VOCABULARY CARD 1
 ===================================================== -->
 
 <div class="lesson-card">
@@ -952,7 +953,7 @@ p {
 
 
 <!-- =====================================================
-     VOCABULARY CARD 2: VERBS, NOUNS, & PARTICLES
+     VOCABULARY CARD 2
 ===================================================== -->
 
 <div class="lesson-card">
@@ -1037,7 +1038,7 @@ p {
 
 
 <!-- =====================================================
-     GAME PART 1: POSITIVE SENTENCES
+     GAME PART 1
 ===================================================== -->
 
 <div class="game-card">
@@ -1072,13 +1073,18 @@ p {
 </div>
 
 <div class="feedback" id="g1Feedback"></div>
-<button class="next-game-btn" id="g1Next" onclick="nextGameQuestion(1)">Next →</button>
+
+<button class="next-game-btn"
+        id="g1Next"
+        onclick="nextGameQuestion(1)">
+    Next →
+</button>
 
 </div>
 
 
 <!-- =====================================================
-     GAME PART 2: NEGATIVE SENTENCES
+     GAME PART 2
 ===================================================== -->
 
 <div class="game-card">
@@ -1113,13 +1119,18 @@ p {
 </div>
 
 <div class="feedback" id="g2Feedback"></div>
-<button class="next-game-btn" id="g2Next" onclick="nextGameQuestion(2)">Next →</button>
+
+<button class="next-game-btn"
+        id="g2Next"
+        onclick="nextGameQuestion(2)">
+    Next →
+</button>
 
 </div>
 
 
 <!-- =====================================================
-     GAME PART 3: INTERROGATIVE SENTENCES
+     GAME PART 3
 ===================================================== -->
 
 <div class="game-card">
@@ -1154,7 +1165,12 @@ p {
 </div>
 
 <div class="feedback" id="g3Feedback"></div>
-<button class="next-game-btn" id="g3Next" onclick="nextGameQuestion(3)">Next →</button>
+
+<button class="next-game-btn"
+        id="g3Next"
+        onclick="nextGameQuestion(3)">
+    Next →
+</button>
 
 </div>
 
@@ -1266,7 +1282,8 @@ p {
 
 <div class="question-label">
     Final Question
-    (<span id="finalNum">1</span> / 10)
+    (<span id="finalNum">1</span> /
+    <span id="finalTotal">10</span>)
 </div>
 
 <div class="question-meaning"
@@ -1431,26 +1448,23 @@ function currentSlide(n){
 
 
 /* =====================================================
-   GAME DATA (3 PARTS: POSITIVE, NEGATIVE, INTERROGATIVE)
+   GAME DATA
 ===================================================== */
 
 const games = {
 
-// 1: Positive
 1: [
     { meaning: "I am at home.", answer: ["我", "在", "家"] },
     { meaning: "I study at school.", answer: ["我", "在", "學校", "讀書"] },
     { meaning: "He is playing a game right now.", answer: ["他", "正在", "玩", "遊戲"] }
 ],
 
-// 2: Negative
 2: [
     { meaning: "I am not at home.", answer: ["我", "不", "在", "家"] },
     { meaning: "I am not studying at school.", answer: ["我", "不", "在", "學校", "讀書"] },
     { meaning: "He is not currently playing a game.", answer: ["他", "沒", "有", "正", "在", "玩", "遊", "戲"] }
 ],
 
-// 3: Interrogative
 3: [
     { meaning: "Where are you?", answer: ["你", "在", "哪", "裡"] },
     { meaning: "Where do you study?", answer: ["你", "在", "哪", "裡", "讀", "書"] },
@@ -1476,7 +1490,11 @@ const gameState = {
 ===================================================== */
 
 function shuffle(array){
-    return [...array].sort(() => Math.random() - 0.5);
+
+    return [...array].sort(
+        () => Math.random() - 0.5
+    );
+
 }
 
 
@@ -1492,32 +1510,65 @@ function loadGame(gameNumber){
     state.selected = [];
     state.done = false;
 
-    document.getElementById("g" + gameNumber + "Num").textContent = state.index + 1;
-    document.getElementById("g" + gameNumber + "Meaning").textContent = data.meaning;
+    document.getElementById(
+        "g" + gameNumber + "Num"
+    ).textContent = state.index + 1;
 
-    const answer = document.getElementById("g" + gameNumber + "Answer");
-    answer.innerHTML = '<span class="answer-placeholder">Tap the words below</span>';
+    document.getElementById(
+        "g" + gameNumber + "Meaning"
+    ).textContent = data.meaning;
 
-    const bank = document.getElementById("g" + gameNumber + "Bank");
+    const answer =
+        document.getElementById(
+            "g" + gameNumber + "Answer"
+        );
+
+    answer.innerHTML =
+        '<span class="answer-placeholder">Tap the words below</span>';
+
+    const bank =
+        document.getElementById(
+            "g" + gameNumber + "Bank"
+        );
+
     bank.innerHTML = "";
 
-    shuffle(data.answer).forEach((word, index) => {
-        const button = document.createElement("button");
-        button.className = "word-btn";
-        button.textContent = word;
-        button.dataset.word = word;
-        button.dataset.id = index;
+    shuffle(data.answer).forEach(
+        (word, index) => {
 
-        button.onclick = function(){
-            if(this.disabled) return;
-            selectWord(gameNumber, this, word);
-        };
+            const button =
+                document.createElement("button");
 
-        bank.appendChild(button);
-    });
+            button.className = "word-btn";
+            button.textContent = word;
 
-    document.getElementById("g" + gameNumber + "Feedback").textContent = "";
-    document.getElementById("g" + gameNumber + "Next").style.display = "none";
+            button.dataset.word = word;
+            button.dataset.id = index;
+
+            button.onclick = function(){
+
+                if(this.disabled) return;
+
+                selectWord(
+                    gameNumber,
+                    this,
+                    word
+                );
+
+            };
+
+            bank.appendChild(button);
+
+        }
+    );
+
+    document.getElementById(
+        "g" + gameNumber + "Feedback"
+    ).textContent = "";
+
+    document.getElementById(
+        "g" + gameNumber + "Next"
+    ).style.display = "none";
 }
 
 
@@ -1525,11 +1576,20 @@ function loadGame(gameNumber){
    SELECT WORD
 ===================================================== */
 
-function selectWord(gameNumber, button, word){
+function selectWord(
+    gameNumber,
+    button,
+    word
+){
+
     gameState[gameNumber].selected.push(word);
+
     button.disabled = true;
+
     button.classList.add("selected");
+
     playAudio(word);
+
     renderSelected(gameNumber);
 }
 
@@ -1539,18 +1599,34 @@ function selectWord(gameNumber, button, word){
 ===================================================== */
 
 function renderSelected(gameNumber){
-    const answer = document.getElementById("g" + gameNumber + "Answer");
+
+    const answer =
+        document.getElementById(
+            "g" + gameNumber + "Answer"
+        );
+
     answer.innerHTML = "";
 
-    gameState[gameNumber].selected.forEach(word => {
-        const span = document.createElement("span");
-        span.className = "selected-word";
-        span.textContent = word;
-        span.onclick = function(){
-            playAudio(word);
-        };
-        answer.appendChild(span);
-    });
+    gameState[gameNumber].selected.forEach(
+        word => {
+
+            const span =
+                document.createElement("span");
+
+            span.className = "selected-word";
+
+            span.textContent = word;
+
+            span.onclick = function(){
+
+                playAudio(word);
+
+            };
+
+            answer.appendChild(span);
+
+        }
+    );
 }
 
 
@@ -1561,28 +1637,60 @@ function renderSelected(gameNumber){
 function checkGame(gameNumber){
 
     const state = gameState[gameNumber];
-    const correct = games[gameNumber][state.index].answer;
+
+    const correct =
+        games[gameNumber][state.index].answer;
+
     const selected = state.selected;
-    const feedback = document.getElementById("g" + gameNumber + "Feedback");
+
+    const feedback =
+        document.getElementById(
+            "g" + gameNumber + "Feedback"
+        );
 
     if(selected.length !== correct.length){
-        feedback.textContent = "⚠️ Complete the sentence first.";
-        feedback.className = "feedback incorrect";
+
+        feedback.textContent =
+            "⚠️ Complete the sentence first.";
+
+        feedback.className =
+            "feedback incorrect";
+
         return;
     }
 
-    const isCorrect = selected.every((word, index) => word === correct[index]);
+    const isCorrect =
+        selected.every(
+            (word, index) =>
+                word === correct[index]
+        );
 
     if(isCorrect){
-        feedback.textContent = "🎉 Correct!";
-        feedback.className = "feedback correct";
+
+        feedback.textContent =
+            "🎉 Correct!";
+
+        feedback.className =
+            "feedback correct";
+
         state.done = true;
+
         playAudio(correct.join(""));
-        document.getElementById("g" + gameNumber + "Next").style.display = "block";
+
+        document.getElementById(
+            "g" + gameNumber + "Next"
+        ).style.display = "block";
+
     } else {
-        feedback.textContent = "❌ Not quite. Try again!";
-        feedback.className = "feedback incorrect";
+
+        feedback.textContent =
+            "❌ Not quite. Try again!";
+
+        feedback.className =
+            "feedback incorrect";
+
     }
+
 }
 
 
@@ -1591,7 +1699,9 @@ function checkGame(gameNumber){
 ===================================================== */
 
 function resetGame(gameNumber){
+
     loadGame(gameNumber);
+
 }
 
 
@@ -1600,15 +1710,21 @@ function resetGame(gameNumber){
 ===================================================== */
 
 function nextGameQuestion(gameNumber){
+
     const state = gameState[gameNumber];
+
     if(!state.done) return;
 
     state.index++;
+
     if(state.index >= games[gameNumber].length){
+
         state.index = 0;
+
     }
 
     loadGame(gameNumber);
+
 }
 
 
@@ -1617,9 +1733,14 @@ function nextGameQuestion(gameNumber){
 ===================================================== */
 
 function listenCurrent(gameNumber){
+
     const state = gameState[gameNumber];
-    const answer = games[gameNumber][state.index].answer;
+
+    const answer =
+        games[gameNumber][state.index].answer;
+
     playAudio(answer.join(""));
+
 }
 
 
@@ -1628,209 +1749,791 @@ function listenCurrent(gameNumber){
 ===================================================== */
 
 const writingCharacters = [
+
     { hanzi:"在", pinyin:"zài", meaning:"at / in" },
+
     { hanzi:"家", pinyin:"jiā", meaning:"home" },
+
     { hanzi:"學", pinyin:"xué", meaning:"study" },
+
     { hanzi:"校", pinyin:"xiào", meaning:"school" },
+
     { hanzi:"醫", pinyin:"yī", meaning:"medical" },
+
     { hanzi:"院", pinyin:"yuàn", meaning:"courtyard" },
+
     { hanzi:"公", pinyin:"gōng", meaning:"public" },
+
     { hanzi:"園", pinyin:"yuán", meaning:"garden" },
+
     { hanzi:"讀", pinyin:"dú", meaning:"read" },
+
     { hanzi:"運", pinyin:"yùn", meaning:"move" },
+
     { hanzi:"動", pinyin:"dòng", meaning:"action" },
+
     { hanzi:"玩", pinyin:"wán", meaning:"play" }
+
 ];
 
 let writingIndex = 0;
+
 let writingMode = "quiz";
+
 let writer = null;
 
+
 function initWriter(){
-    const item = writingCharacters[writingIndex];
-    const container = document.getElementById("target-div");
+
+    const item =
+        writingCharacters[writingIndex];
+
+    const container =
+        document.getElementById("target-div");
+
     container.innerHTML = "";
-    const info = document.getElementById("writingInfo");
+
+    const info =
+        document.getElementById("writingInfo");
 
     if(writingMode === "quiz"){
-        info.innerHTML = `Write <strong>${item.hanzi}</strong> (${item.pinyin} - ${item.meaning}) following correct stroke order! (${writingIndex + 1}/${writingCharacters.length})`;
+
+        info.innerHTML =
+            `Write <strong>${item.hanzi}</strong> (${item.pinyin} - ${item.meaning}) following correct stroke order! (${writingIndex + 1}/${writingCharacters.length})`;
+
     } else {
-        info.innerHTML = `Watch animated stroke order for <strong>${item.hanzi}</strong> (${item.pinyin} - ${item.meaning}). (${writingIndex + 1}/${writingCharacters.length})`;
+
+        info.innerHTML =
+            `Watch animated stroke order for <strong>${item.hanzi}</strong> (${item.pinyin} - ${item.meaning}). (${writingIndex + 1}/${writingCharacters.length})`;
+
     }
 
-    writer = HanziWriter.create("target-div", item.hanzi, {
-        width: 260,
-        height: 260,
-        padding: 10,
-        showOutline: true,
-        strokeAnimationSpeed: 1,
-        drawingColor: "#5c4033",
-        strokeHighlightColor: "#b8865c",
-        showCharacter: writingMode === "animate"
-    });
+    writer =
+        HanziWriter.create(
+            "target-div",
+            item.hanzi,
+            {
+                width: 260,
+                height: 260,
+                padding: 10,
+                showOutline: true,
+                strokeAnimationSpeed: 1,
+                drawingColor: "#5c4033",
+                strokeHighlightColor: "#b8865c",
+                showCharacter:
+                    writingMode === "animate"
+            }
+        );
 
     if(writingMode === "quiz"){
+
         startQuiz();
+
     } else {
+
         writer.animateCharacter();
+
     }
+
 }
 
+
 function startQuiz(){
-    const feedback = document.getElementById("writingFeedback");
+
+    const feedback =
+        document.getElementById(
+            "writingFeedback"
+        );
+
     feedback.textContent = "";
 
     writer.quiz({
+
         onMistake: function(){
-            feedback.textContent = "❌ Incorrect stroke order! Try again.";
-            feedback.className = "feedback incorrect";
+
+            feedback.textContent =
+                "❌ Incorrect stroke order! Try again.";
+
+            feedback.className =
+                "feedback incorrect";
+
         },
+
         onCorrectStroke: function(){
-            feedback.textContent = "✨ Great! Continue with the next stroke.";
-            feedback.className = "feedback correct";
+
+            feedback.textContent =
+                "✨ Great! Continue with the next stroke.";
+
+            feedback.className =
+                "feedback correct";
+
         },
+
         onComplete: function(){
-            feedback.textContent = "🎉 Perfect! Correct stroke order.";
-            feedback.className = "feedback correct";
+
+            feedback.textContent =
+                "🎉 Perfect! Correct stroke order.";
+
+            feedback.className =
+                "feedback correct";
+
         }
+
     });
+
 }
+
 
 function setWritingMode(mode, button){
+
     writingMode = mode;
-    document.querySelectorAll(".writing-card .mode-btn").forEach(btn => btn.classList.remove("active"));
+
+    document
+        .querySelectorAll(
+            ".writing-card .mode-btn"
+        )
+        .forEach(
+            btn =>
+                btn.classList.remove("active")
+        );
+
     button.classList.add("active");
+
     initWriter();
+
 }
+
 
 function resetWritingQuiz(){
+
     initWriter();
+
 }
+
 
 function nextWritingCharacter(){
+
     writingIndex++;
-    if(writingIndex >= writingCharacters.length){
+
+    if(
+        writingIndex >=
+        writingCharacters.length
+    ){
+
         writingIndex = 0;
+
     }
+
     initWriter();
+
 }
 
+
 function playCurrentWriting(){
-    playAudio(writingCharacters[writingIndex].hanzi);
+
+    playAudio(
+        writingCharacters[writingIndex].hanzi
+    );
+
 }
 
 
 /* =====================================================
-   FINAL CHALLENGE (GRAMMAR MASTER)
+   FINAL CHALLENGE — GRAMMAR MASTER
+   DYNAMICALLY LOAD LESSON 1–7
 ===================================================== */
 
 let finalQuestions = [];
 
+
+/*
+ * Ambil semua reviewQuestions dari Lesson 1 sampai
+ * Lesson 7 yang tersedia di lesson.js.
+ *
+ * Setiap question tetap mempertahankan:
+ * {
+ *     meaning: "...",
+ *     answer: [...]
+ * }
+ *
+ * Jadi Hanzi di answer akan langsung menjadi
+ * tombol yang bisa disusun di Grammar Master.
+ */
+
 function initFinalQuestions(){
-    if(typeof lessonData !== "undefined" && lessonData.reviewQuestions){
-        finalQuestions = lessonData.reviewQuestions;
-    } else {
-        finalQuestions = [
-            { meaning: "I am at home.", answer: ["我","在","家"] },
-            { meaning: "Where are you?", answer: ["你","在","哪","裡"] },
-            { meaning: "He is working at the office.", answer: ["他","在","辦","公","室","上","班"] },
-            { meaning: "I am not in Japan.", answer: ["我","不","在","日","本"] },
-            { meaning: "She is currently exercising.", answer: ["她","正","在","運","動"] },
-            { meaning: "The painting is very good-looking.", answer: ["畫","很","好","看"] },
-            { meaning: "I really like cats.", answer: ["我","很","喜","歡","貓","咪"] },
-            { meaning: "Is the work busy or not busy?", answer: ["工","作","忙","不","忙"] },
-            { meaning: "Chinese is very difficult.", answer: ["中","文","很","難"] },
-            { meaning: "Are you a student?", answer: ["你","是","學","生","嗎"] }
-        ];
+
+    finalQuestions = [];
+
+    /*
+     * Pastikan lesson.js berhasil dimuat.
+     */
+    if(
+        typeof allLessonsData === "undefined"
+    ){
+
+        console.error(
+            "ERROR: allLessonsData tidak ditemukan. Pastikan lesson.js sudah dimuat."
+        );
+
+        return;
+
     }
+
+
+    /*
+     * Loop Lesson 1 sampai Lesson 7.
+     */
+    for(
+        let lessonNumber = 1;
+        lessonNumber <= 7;
+        lessonNumber++
+    ){
+
+        const lesson =
+            allLessonsData[lessonNumber];
+
+        /*
+         * Pastikan lesson memiliki
+         * reviewQuestions.
+         */
+        if(
+            !lesson ||
+            !Array.isArray(
+                lesson.reviewQuestions
+            )
+        ){
+
+            continue;
+
+        }
+
+
+        /*
+         * Masukkan semua review question
+         * ke Grammar Master.
+         */
+        lesson.reviewQuestions.forEach(
+            question => {
+
+                if(
+                    !question ||
+                    typeof question.meaning !== "string" ||
+                    !Array.isArray(question.answer) ||
+                    question.answer.length === 0
+                ){
+
+                    return;
+
+                }
+
+
+                /*
+                 * Copy array answer agar data asli
+                 * di lesson.js tidak berubah.
+                 */
+                finalQuestions.push({
+
+                    meaning:
+                        question.meaning,
+
+                    answer:
+                        [...question.answer],
+
+                    lesson:
+                        lessonNumber
+
+                });
+
+            }
+        );
+
+    }
+
+
+    /*
+     * Acak semua soal dari Lesson 1–7.
+     */
+    finalQuestions =
+        shuffle(finalQuestions);
+
+
+    /*
+     * Grammar Master selalu menggunakan
+     * maksimal 10 soal.
+     */
+    finalQuestions =
+        finalQuestions.slice(0, 10);
+
+
+    /*
+     * Kalau jumlah soal kurang dari 10,
+     * tetap gunakan jumlah yang tersedia.
+     */
+    const totalElement =
+        document.getElementById(
+            "finalTotal"
+        );
+
+    if(totalElement){
+
+        totalElement.textContent =
+            finalQuestions.length;
+
+    }
+
+
+    console.log(
+        "Grammar Master Questions:",
+        finalQuestions
+    );
+
 }
+
+
+/* =====================================================
+   FINAL STATE
+===================================================== */
 
 let finalIndex = 0;
+
 let finalScore = 0;
+
 let finalSelected = [];
 
+
+/* =====================================================
+   LOAD FINAL
+===================================================== */
+
 function loadFinal(){
-    if(finalQuestions.length === 0){
+
+    /*
+     * Kalau data belum tersedia,
+     * coba initialize sekali lagi.
+     */
+    if(
+        !Array.isArray(finalQuestions) ||
+        finalQuestions.length === 0
+    ){
+
         initFinalQuestions();
+
     }
-    if(finalIndex >= finalQuestions.length){
+
+
+    /*
+     * Kalau tetap tidak ada soal,
+     * tampilkan pesan error yang jelas.
+     */
+    if(
+        !finalQuestions ||
+        finalQuestions.length === 0
+    ){
+
+        document.getElementById(
+            "finalMeaning"
+        ).textContent =
+            "Grammar Master data could not be loaded.";
+
+        document.getElementById(
+            "finalBank"
+        ).innerHTML = "";
+
+        console.error(
+            "Grammar Master: finalQuestions kosong."
+        );
+
         return;
+
     }
 
-    const q = finalQuestions[finalIndex];
-    document.getElementById("finalNum").textContent = finalIndex + 1;
-    document.getElementById("finalMeaning").textContent = q.meaning;
 
+    /*
+     * Kalau semua soal sudah selesai,
+     * hentikan proses.
+     */
+    if(
+        finalIndex >=
+        finalQuestions.length
+    ){
+
+        return;
+
+    }
+
+
+    const q =
+        finalQuestions[finalIndex];
+
+
+    /*
+     * Update counter.
+     */
+    document.getElementById(
+        "finalNum"
+    ).textContent =
+        finalIndex + 1;
+
+    document.getElementById(
+        "finalTotal"
+    ).textContent =
+        finalQuestions.length;
+
+
+    /*
+     * Tampilkan arti Bahasa Inggris.
+     */
+    document.getElementById(
+        "finalMeaning"
+    ).textContent =
+        q.meaning;
+
+
+    /*
+     * Reset jawaban yang sedang disusun.
+     */
     finalSelected = [];
-    document.getElementById("finalAnswer").innerHTML = '<span class="answer-placeholder">Build your answer</span>';
 
-    const bank = document.getElementById("finalBank");
+
+    document.getElementById(
+        "finalAnswer"
+    ).innerHTML =
+        '<span class="answer-placeholder">Build your answer</span>';
+
+
+    /*
+     * Ambil word bank.
+     */
+    const bank =
+        document.getElementById(
+            "finalBank"
+        );
+
     bank.innerHTML = "";
 
-    shuffle(q.answer).forEach(word => {
-        const button = document.createElement("button");
-        button.className = "word-btn";
-        button.textContent = word;
 
-        button.onclick = () => {
-            if(button.disabled) return;
-            finalSelected.push(word);
-            button.disabled = true;
-            button.classList.add("selected");
-            playAudio(word);
-            renderFinal();
-        };
+    /*
+     * =================================================
+     * INI BAGIAN PENTING
+     *
+     * q.answer berasal langsung dari lesson.js.
+     *
+     * Contoh:
+     *
+     * ["你", "在", "哪", "裡"]
+     *
+     * akan menjadi 4 tombol:
+     *
+     * 你   在   哪   裡
+     *
+     * =================================================
+     */
 
-        bank.appendChild(button);
-    });
+    shuffle(q.answer).forEach(
+        (word, index) => {
 
-    document.getElementById("finalFeedback").textContent = "";
+            const button =
+                document.createElement(
+                    "button"
+                );
+
+            button.type = "button";
+
+            button.className =
+                "word-btn";
+
+            button.textContent =
+                word;
+
+            /*
+             * Simpan index supaya setiap
+             * tombol tetap bisa dibedakan
+             * walaupun ada Hanzi yang sama.
+             */
+            button.dataset.index =
+                index;
+
+            button.onclick =
+                function(){
+
+                    if(this.disabled){
+
+                        return;
+
+                    }
+
+
+                    /*
+                     * Tambahkan Hanzi ke jawaban.
+                     */
+                    finalSelected.push(word);
+
+
+                    /*
+                     * Matikan tombol yang sudah dipilih.
+                     */
+                    this.disabled = true;
+
+                    this.classList.add(
+                        "selected"
+                    );
+
+
+                    /*
+                     * Dengarkan Hanzi.
+                     */
+                    playAudio(word);
+
+
+                    /*
+                     * Render jawaban.
+                     */
+                    renderFinal();
+
+                };
+
+
+            /*
+             * Masukkan tombol ke word bank.
+             */
+            bank.appendChild(button);
+
+        }
+    );
+
+
+    /*
+     * Reset feedback.
+     */
+    document.getElementById(
+        "finalFeedback"
+    ).textContent = "";
+
+    document.getElementById(
+        "finalFeedback"
+    ).className =
+        "feedback";
+
 }
+
+
+/* =====================================================
+   RENDER FINAL ANSWER
+===================================================== */
 
 function renderFinal(){
-    const area = document.getElementById("finalAnswer");
+
+    const area =
+        document.getElementById(
+            "finalAnswer"
+        );
+
     area.innerHTML = "";
 
-    finalSelected.forEach(word => {
-        const span = document.createElement("span");
-        span.className = "selected-word";
-        span.textContent = word;
-        span.onclick = () => {
-            playAudio(word);
-        };
-        area.appendChild(span);
-    });
+
+    /*
+     * Kalau belum ada kata yang dipilih,
+     * tampilkan placeholder.
+     */
+    if(finalSelected.length === 0){
+
+        area.innerHTML =
+            '<span class="answer-placeholder">Build your answer</span>';
+
+        return;
+
+    }
+
+
+    /*
+     * Tampilkan setiap Hanzi yang dipilih
+     * sebagai tile.
+     */
+    finalSelected.forEach(
+        (word, index) => {
+
+            const span =
+                document.createElement(
+                    "span"
+                );
+
+            span.className =
+                "selected-word";
+
+            span.textContent =
+                word;
+
+
+            /*
+             * Klik tile untuk mendengarkan
+             * pronunciation.
+             */
+            span.onclick =
+                function(){
+
+                    playAudio(word);
+
+                };
+
+
+            area.appendChild(span);
+
+        }
+    );
+
 }
+
+
+/* =====================================================
+   RESET FINAL
+===================================================== */
 
 function resetFinal(){
+
+    /*
+     * Jangan mengubah soal.
+     * Hanya reload soal yang sedang aktif.
+     */
     loadFinal();
+
 }
 
-function checkFinal(){
-    const correct = finalQuestions[finalIndex].answer;
-    const feedback = document.getElementById("finalFeedback");
 
-    const isCorrect = finalSelected.length === correct.length &&
-        finalSelected.every((word, index) => word === correct[index]);
+/* =====================================================
+   CHECK FINAL
+===================================================== */
+
+function checkFinal(){
+
+    /*
+     * Pastikan question tersedia.
+     */
+    if(
+        !finalQuestions ||
+        finalQuestions.length === 0
+    ){
+
+        return;
+
+    }
+
+
+    const currentQuestion =
+        finalQuestions[finalIndex];
+
+
+    if(!currentQuestion){
+
+        return;
+
+    }
+
+
+    const correct =
+        currentQuestion.answer;
+
+    const feedback =
+        document.getElementById(
+            "finalFeedback"
+        );
+
+
+    /*
+     * Pastikan jumlah Hanzi sama.
+     */
+    const sameLength =
+        finalSelected.length ===
+        correct.length;
+
+
+    /*
+     * Pastikan urutannya sama persis.
+     */
+    const sameOrder =
+        sameLength &&
+        finalSelected.every(
+            (word, index) =>
+                word === correct[index]
+        );
+
+
+    const isCorrect =
+        sameLength &&
+        sameOrder;
+
 
     if(isCorrect){
-        feedback.textContent = "🎉 Correct!";
-        feedback.className = "feedback correct";
+
+        feedback.textContent =
+            "🎉 Correct!";
+
+        feedback.className =
+            "feedback correct";
+
+
+        /*
+         * Tambahkan score.
+         */
         finalScore++;
 
-        document.getElementById("finalScore").textContent = finalScore + " / " + finalQuestions.length;
+
+        document.getElementById(
+            "finalScore"
+        ).textContent =
+            finalScore +
+            " / " +
+            finalQuestions.length;
+
+
+        /*
+         * Pindah ke soal berikutnya.
+         */
         finalIndex++;
 
-        if(finalIndex < finalQuestions.length){
-            setTimeout(loadFinal, 700);
-        } else {
-            document.getElementById("unlockBox").style.display = "block";
-            playAudio("太棒了");
+
+        /*
+         * Kalau masih ada soal,
+         * load soal berikutnya.
+         */
+        if(
+            finalIndex <
+            finalQuestions.length
+        ){
+
+            setTimeout(
+                loadFinal,
+                700
+            );
+
         }
+
+
+        /*
+         * Kalau semua soal selesai.
+         */
+        else{
+
+            document.getElementById(
+                "unlockBox"
+            ).style.display =
+                "block";
+
+
+            playAudio("太棒了");
+
+        }
+
+
     } else {
-        feedback.textContent = "❌ Check the word order.";
-        feedback.className = "feedback incorrect";
+
+        feedback.textContent =
+            "❌ Check the word order.";
+
+        feedback.className =
+            "feedback incorrect";
+
     }
+
 }
 
 
@@ -1839,14 +2542,23 @@ function checkFinal(){
 ===================================================== */
 
 loadGame(1);
+
 loadGame(2);
+
 loadGame(3);
 
 initWriter();
+
+/*
+ * Initialize Grammar Master
+ * satu kali saja.
+ */
 initFinalQuestions();
+
 loadFinal();
 
 </script>
+
 
 <!-- EXISTING SIDEBAR SCRIPT -->
 <script src="../script.js"></script>
