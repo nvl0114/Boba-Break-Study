@@ -388,6 +388,73 @@ const allLessonsData = {
             { meaning: "May I ask your honorable surname?", answer: ["請", "問", "您", "貴", "姓"] }
         ]
     },
+    // ========================================================
+    // LESSON 7
+    // ========================================================
+    7: {
+        grammar: [
+            {
+                id: "zài-location",
+                name: "Subject + 在 (Zài) + Location",
+                category: "Location Pattern",
+                explanation: "The word 在 (zài) acts as a preposition meaning 'at' or 'in'. It is placed before a location noun to tell where someone or something is located.",
+                examples: ["我在家。", "你在學校。", "他在醫院。"]
+            },
+            {
+                id: "subject-zài-location-verb",
+                name: "Subject + 在 + Location + Verb",
+                category: "Action at Location",
+                explanation: "Unlike English, Chinese structure places the location before the action verb: Subject + [At Location] + [Verb].",
+                examples: ["我在學校讀書。", "他在辦公室上班。", "他在公園運動。"]
+            },
+            {
+                id: "ongoing-action",
+                name: "Subject + 正在 (Zhèngzài) + Verb",
+                category: "Ongoing Action",
+                explanation: "To express that an action is currently in progress (equivalent to '-ing' in English), use 正在 (zhèngzài) or just 在 right before the verb.",
+                examples: ["我正在上課。", "他正在玩遊戲。", "她正在教學。"]
+            },
+            {
+                id: "question-where",
+                name: "Question: 你在哪裡？ Answer: 我在...",
+                category: "Interrogative & Answer",
+                explanation: "To ask 'Where are you?', use 哪裡 (nǎlǐ). The response mirrors the pattern using 在 + Location.",
+                examples: ["你在哪裡？", "我在公園。", "你在哪裡上班？"]
+            }
+        ],
+        vocabulary: [
+            { hanzi: "在", pinyin: "zài", meaning: "at / in / on", category: "Preposition" },
+            { hanzi: "家", pinyin: "jiā", meaning: "home / family", category: "Place" },
+            { hanzi: "日本", pinyin: "Rìběn", meaning: "Japan", category: "Place" },
+            { hanzi: "醫院", pinyin: "yīyuàn", meaning: "hospital", category: "Place" },
+            { hanzi: "辦公室", pinyin: "bàngōngshì", meaning: "office", category: "Place" },
+            { hanzi: "學校", pinyin: "xuéxiào", meaning: "school", category: "Place" },
+            { hanzi: "教室", pinyin: "jiàoshì", meaning: "classroom", category: "Place" },
+            { hanzi: "公園", pinyin: "gōngyuán", meaning: "park", category: "Place" },
+            { hanzi: "哪裡", pinyin: "nǎlǐ", meaning: "where", category: "Question Word" },
+            { hanzi: "讀書", pinyin: "dúshū", meaning: "study / read", category: "Verb" },
+            { hanzi: "上班", pinyin: "shàngbān", meaning: "go to work", category: "Verb" },
+            { hanzi: "上課", pinyin: "shàngkè", meaning: "attend class", category: "Verb" },
+            { hanzi: "運動", pinyin: "yùndòng", meaning: "exercise / sports", category: "Verb" },
+            { hanzi: "玩", pinyin: "wán", meaning: "play", category: "Verb" },
+            { hanzi: "遊戲", pinyin: "yóuxì", meaning: "game", category: "Noun" },
+            { hanzi: "蘋果", pinyin: "píngguǒ", meaning: "apple", category: "Food" },
+            { hanzi: "香蕉", pinyin: "xiāngjiāo", meaning: "banana", category: "Food" },
+            { hanzi: "教學", pinyin: "jiàoxué", meaning: "teaching", category: "Verb" },
+            { hanzi: "對", pinyin: "duì", meaning: "correct / right", category: "Adjective" },
+            { hanzi: "和", pinyin: "hé", meaning: "and / with", category: "Conjunction" }
+        ],
+        reviewQuestions: [
+            
+            { meaning: "Where are you?", answer: ["你", "在", "哪", "裡"] },
+            { meaning: "I study at school.", answer: ["我", "在", "學", "校", "讀", "書"] },
+            { meaning: "He is playing a game right now.", answer: ["他", "正", "在", "玩", "遊", "戲"] },
+            { meaning: "I am not at home.", answer: ["我", "不", "在", "家"] },
+            { meaning: "She is currently exercising.", answer: ["她", "正", "在", "運", "動"] },
+            { meaning: "Are you at home?", answer: ["你", "在", "家", "嗎"] },
+            { meaning: "Where do you study?", answer: ["你", "在", "哪", "裡", "讀", "書"] }
+        ]
+    }
 
 
     
