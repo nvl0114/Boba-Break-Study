@@ -712,8 +712,8 @@ p {
 
             <div class="example-box">
                 <div class="example-item">
-                    <span class="example-text"><strong>他们在逛街嗎？</strong> (Tāmen zài guànjiē ma? - Are they shopping / strolling?)</span>
-                    <button class="sound-btn" onclick="playAudio('他们在逛街嗎')">🔊</button>
+                    <span class="example-text"><strong>他在逛街嗎？</strong> (Tā zài guànjiē ma? - Are they shopping / strolling?)</span>
+                    <button class="sound-btn" onclick="playAudio('他在逛街嗎')">🔊</button>
                 </div>
                 <div class="example-item">
                     <span class="example-text"><strong>狗正在散步嗎？</strong> (Gǒu zhèngzài sànbù ma? - Is the dog taking a walk?)</span>
@@ -1115,7 +1115,7 @@ p {
 <h2>🏆 Grammar Master</h2>
 <p>Comprehensive review challenge combining this lesson's concepts and previous lessons:</p>
 <div class="question-box">
-    <div class="question-label">Final Question (<span id="finalNum">1</span> / <span id="finalTotalNum">12</span>)</div>
+    <div class="question-label">Final Question (<span id="finalNum">1</span> / <span id="finalTotalNum">10</span>)</div>
     <div class="question-meaning" id="finalMeaning"></div>
 </div>
 <div class="answer-area" id="finalAnswer">
@@ -1125,7 +1125,7 @@ p {
 <button class="check-btn" style="width:100%;" onclick="checkFinal()">✓ Check Final Answer</button>
 <button class="reset-btn" id="finalResetBtn" onclick="resetFinal()" style="width:100%; margin-top:8px;">↻ Reset Answer</button>
 <div class="feedback" id="finalFeedback"></div>
-<div class="final-score" id="finalScore">0 / 12</div>
+<div class="final-score" id="finalScore">0 / 10</div>
 <div class="unlock" id="unlockBox" style="display:none;">
     🎉 <strong>Grammar Master Unlocked!</strong>
     <p>You have successfully mastered continuous actions, vocabulary, and all prior lesson structures!</p>
@@ -1429,7 +1429,7 @@ function playCurrentWriting(){ playAudio(writingCharacters[writingIndex].hanzi);
 
 
 /* =====================================================
-   FINAL CHALLENGE (LOADED FROM lesson.js)
+   FINAL CHALLENGE (40% CURRENT LESSON + 60% FROM lesson.js)
 ===================================================== */
 
 let finalQuestions = [];
@@ -1438,25 +1438,32 @@ let finalScore = 0;
 let finalSelected = [];
 
 function initFinalQuestions(){
-    // Mengambil soal dari lessonData.reviewQuestions jika tersedia di lesson.js, jika tidak pakai data fallback
-    if(typeof lessonData !== "undefined" && lessonData.reviewQuestions){
-        finalQuestions = lessonData.reviewQuestions;
+    // 40% dari materi lesson ini (Continuous Actions) -> 4 soal
+    const currentLessonQuestions = [
+        { meaning: "He is sleeping", answer: ["他", "在", "睡覺"] },
+        { meaning: "Older brother is running", answer: ["哥哥", "正在", "跑步"] },
+        { meaning: "I am not resting", answer: ["我", "沒", "在", "休息"] },
+        { meaning: "Are they shopping?", answer: ["他", "們", "在", "逛街", "嗎"] }
+    ];
+
+    // 60% dari lesson.js (Materi sebelumnya) -> 6 soal
+    // Jika lessonData.reviewQuestions tersedia, ambil 6 soal darinya. Jika tidak, pakai data fallback.
+    let previousLessonQuestions = [];
+    if(typeof lessonData !== "undefined" && lessonData.reviewQuestions && lessonData.reviewQuestions.length > 0){
+        previousLessonQuestions = lessonData.reviewQuestions.slice(0, 6);
     } else {
-        finalQuestions = [
-            { meaning: "He is sleeping", answer: ["他", "在", "睡覺"] },
-            { meaning: "Older brother is running", answer: ["哥哥", "正在", "跑步"] },
-            { meaning: "I am not resting", answer: ["我", "沒", "在", "休息"] },
-            { meaning: "Are they shopping?", answer: ["他", "們", "在", "逛街", "嗎"] },
-            { meaning: "Is the dog taking a walk?", answer: ["狗", "正在", "散步", "嗎"] },
-            { meaning: "Students are doing homework", answer: ["學生", "在", "做", "作業"] },
-            { meaning: "You are studying English", answer: ["你", "正在", "學習", "英文"] },
-            { meaning: "Younger brother is not writing homework", answer: ["弟弟", "沒", "在", "寫", "功課"] },
-            { meaning: "She is not singing", answer: ["她", "沒", "在", "唱歌"] },
-            { meaning: "Is mom seeing a doctor?", answer: ["媽媽", "在", "看", "醫生", "嗎"] },
-            { meaning: "Are they eating cake?", answer: ["他", "們", "正在", "吃", "蛋糕", "嗎"] },
-            { meaning: "What are you doing?", answer: ["你", "在", "做", "什麼"] }
+        previousLessonQuestions = [
+            { meaning: "Doctor is at the hospital", answer: ["醫", "生", "在", "醫", "院"] },
+            { meaning: "Apple is at home", answer: ["蘋", "果", "在", "家"] },
+            { meaning: "He is not in the park", answer: ["他", "不", "在", "公", "園"] },
+            { meaning: "Is the teacher in the classroom?", answer: ["老", "師", "在", "教", "室", "嗎"] },
+            { meaning: "Is he in Japan or not?", answer: ["他", "在", "不", "在", "日", "本"] },
+            { meaning: "Older brother is studying in Japan", answer: ["哥", "哥", "在", "日", "本", "讀", "書"] }
         ];
     }
+
+    // Gabungkan menjadi total 10 soal (40% + 60%)
+    finalQuestions = [...currentLessonQuestions, ...previousLessonQuestions];
     document.getElementById("finalTotalNum").textContent = finalQuestions.length;
 }
 
