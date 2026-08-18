@@ -1,12 +1,12 @@
 // ============================================================
 // Boba Break Study — Lesson Database
-// Updated with Location, Activity, and New Vocabulary & Grammar
+// Updated with Location, Activity, Review Questions
 // ============================================================
 
 const lessonData = {
 
     // ========================================================
-    // GRAMMAR: PREVIOUS + NEW LOCATION & ACTIVITY PATTERNS
+    // GRAMMAR
     // ========================================================
 
     grammar: [
@@ -187,37 +187,37 @@ const lessonData = {
             ]
         },
 
-        {
-            id: "s-hen-v-o-ma",
-            name: "S + 很 + V + O + 嗎",
-            category: "Adverbial Question",
-            examples: [
-                "你很看書嗎？",
-                "你很吃飯嗎？"
-            ]
-        },
+        // ====================================================
+        // MEASURE WORD
+        // ====================================================
 
         {
             id: "measure-word-ge",
             name: "Number / This / That + 個 + Noun",
             category: "Measure Word Structure",
-            explanation: "In Mandarin, you cannot place a number, 'this' (這), or 'that' (那) directly in front of a noun. You must use the universal measure word 個 (gè) in between them.",
+            explanation:
+                "In Mandarin, use 個 (gè) between a number, 這, or 那 and a noun.",
             examples: [
                 "一個人 (One person)",
-                "這個問題 (This question / problem)",
+                "這個問題 (This question)",
                 "那個地方 (That place)",
-                "兩個月 (Two months - note: use 兩 instead of 二 before measure words)"
+                "兩個月 (Two months)"
             ]
         },
+
+        // ====================================================
+        // SELF INTRODUCTION
+        // ====================================================
 
         {
             id: "jiao-what-name",
             name: "叫什麼名字",
             category: "Self-Introduction",
-            explanation: "Used to ask someone's full name. Structure: 請問，您叫什麼名字？ (May I ask, what is your name?)",
+            explanation:
+                "Used to ask someone's full name.",
             examples: [
-                "你叫什麼名字？ (What is your name?)",
-                "請問，您叫什麼名字？ (May I ask, what is your name? - polite)"
+                "你叫什麼名字？",
+                "請問，您叫什麼名字？"
             ]
         },
 
@@ -225,10 +225,11 @@ const lessonData = {
             id: "jiao-name",
             name: "叫。。。",
             category: "Self-Introduction",
-            explanation: "Used to state your name. Structure: 我叫 + Name.",
+            explanation:
+                "Used to state your name. Structure: 我叫 + Name.",
             examples: [
-                "我叫大衛。 (My name is David.)",
-                "她叫美美。 (Her name is Meimei.)"
+                "我叫大衛。",
+                "她叫美美。"
             ]
         },
 
@@ -236,10 +237,11 @@ const lessonData = {
             id: "wo-xing",
             name: "我姓。。。",
             category: "Self-Introduction",
-            explanation: "Used to state your family name (surname). Structure: 我姓 + Surname.",
+            explanation:
+                "Used to state your surname.",
             examples: [
-                "我姓王。 (My surname is Wang.)",
-                "我姓李。 (My surname is Li.)"
+                "我姓王。",
+                "我姓李。"
             ]
         },
 
@@ -247,20 +249,26 @@ const lessonData = {
             id: "gui-xing",
             name: "貴姓",
             category: "Self-Introduction",
-            explanation: "A polite way to ask someone's honorable surname. Often used as 請問您貴姓？",
+            explanation:
+                "A polite way to ask someone's surname.",
             examples: [
-                "請問您貴姓？ (May I ask your honorable surname?)"
+                "請問您貴姓？"
             ]
         },
+
+        // ====================================================
+        // AGE / NUMBERS
+        // ====================================================
 
         {
             id: "number-sui",
             name: "幾歲 & Number + 歲",
             category: "Age",
-            explanation: "Used to ask and state age. Use 幾歲 for asking children or peers, and Number + 歲 for stating age.",
+            explanation:
+                "Used to ask and state age.",
             examples: [
-                "你幾歲？ (How old are you?)",
-                "我二十歲。 (I am twenty years old.)"
+                "你幾歲？",
+                "我二十歲。"
             ]
         },
 
@@ -268,7 +276,8 @@ const lessonData = {
             id: "number-ten-number",
             name: "Number + 十 + Number",
             category: "Numbers",
-            explanation: "Structure for numbers from 11 to 99 in Mandarin (Tens and Units).",
+            explanation:
+                "Structure for numbers from 11 to 99.",
             examples: [
                 "十一 (11)",
                 "二十五 (25)",
@@ -280,21 +289,23 @@ const lessonData = {
             id: "particle-ne",
             name: "S + 呢",
             category: "Question Particle",
-            explanation: "Used to bounce a question back to the other person (What about...?).",
+            explanation:
+                "Used to bounce a question back to another person.",
             examples: [
-                "我很好，你呢？ (I'm good, and you?)",
-                "我是台灣人，他呢？ (I am Taiwanese, what about him?)"
+                "我很好，你呢？",
+                "我是台灣人，他呢？"
             ]
         },
 
         {
             id: "question-word-shenme",
-            name: "什麼 (How to make interrogative)",
+            name: "什麼",
             category: "Question Word",
-            explanation: "什麼 (shénme) means 'what'. Place it in the position of the noun you want to ask about.",
+            explanation:
+                "什麼 means 'what'.",
             examples: [
-                "你叫什麼名字？ (What is your name?)",
-                "這是什麼？ (What is this?)"
+                "你叫什麼名字？",
+                "這是什麼？"
             ]
         },
 
@@ -302,87 +313,102 @@ const lessonData = {
             id: "adverb-ye",
             name: "也",
             category: "Adverb",
-            explanation: "Means 'also' or 'too'. It is placed right before the verb or predicate.",
+            explanation:
+                "Means 'also' or 'too'.",
             examples: [
-                "我也是。 (Me too / I am too.)",
-                "我也喜歡聽音樂。 (I also like listening to music.)"
+                "我也是。",
+                "我也喜歡聽音樂。"
             ]
         },
 
-        // --- New Location & Activity Grammar Patterns ---
+        // ====================================================
+        // LOCATION
+        // ====================================================
+
         {
             id: "s-zai-place",
-            name: "S/noun + 在 + Place",
+            name: "S + 在 + Place",
             category: "Location",
-            explanation: "Indicates that someone or something is at a specific place.",
+            explanation:
+                "Indicates that someone or something is at a specific place.",
             examples: [
-                "醫生在醫院 (The doctor is at the hospital)",
-                "蘋果在家 (The apple is at home)"
+                "醫生在醫院。",
+                "蘋果在家。"
             ]
         },
 
         {
             id: "s-bu-zai-place",
-            name: "S/noun + 不 + 在 + Place",
+            name: "S + 不 + 在 + Place",
             category: "Location",
-            explanation: "Indicates that someone or something is NOT at a specific place.",
+            explanation:
+                "Indicates that someone or something is not at a place.",
             examples: [
-                "他不在公園 (He is not at the park)",
-                "香蕉不在學校 (The banana is not at school)"
+                "他不在公園。",
+                "香蕉不在學校。"
             ]
         },
 
         {
             id: "s-zai-place-ma",
-            name: "S/noun + 在 + Place + 嗎",
+            name: "S + 在 + Place + 嗎",
             category: "Location Question",
-            explanation: "Yes/No question asking if someone or something is at a place.",
+            explanation:
+                "Asks whether someone or something is at a place.",
             examples: [
-                "老師在教室嗎？ (Is the teacher in the classroom?) -> 對，老師在教室 / 不，老師不在教室",
-                "爸爸在辦公室嗎？ (Is dad in the office?) -> 對，爸爸在辦公室 / 不，爸爸不在辦公室"
+                "老師在教室嗎？",
+                "爸爸在辦公室嗎？"
             ]
         },
 
         {
             id: "s-zai-bu-zai-place",
-            name: "S/noun + 在 + 不 + 在 + Place",
-            category: "Location Question (A-not-A)",
-            explanation: "Alternative question format asking whether someone is at a place or not.",
+            name: "S + 在 + 不 + 在 + Place",
+            category: "Location A-not-A",
+            explanation:
+                "Asks whether someone or something is at a place or not.",
             examples: [
-                "他在不在日本？ (Is he in Japan or not?) -> 在 / 不在",
-                "護士在不在醫院？ (Is the nurse in the hospital or not?) -> 在 / 不在"
+                "他在不在日本？",
+                "護士在不在醫院？"
             ]
         },
 
         {
             id: "existential-zai",
-            name: "在不在 / 在嗎 (without place)",
+            name: "在嗎 / 在不在",
             category: "Location Question",
-            explanation: "Asking whether someone is present or around.",
+            explanation:
+                "Asks whether someone is present.",
             examples: [
-                "她在嗎？ -> 在 / 不在",
-                "哥哥在不在？ -> 在 / 不在"
+                "她在嗎？",
+                "哥哥在不在？"
             ]
         },
 
         {
             id: "s-zai-nali",
-            name: "S/noun + 在 + 哪裡",
+            name: "S + 在 + 哪裡",
             category: "Location Question",
-            explanation: "Asking for the location of someone or something using 哪裡 (where).",
+            explanation:
+                "Asks where someone or something is.",
             examples: [
-                "媽媽在哪裡？ -> 媽媽在家"
+                "媽媽在哪裡？"
             ]
         },
+
+        // ====================================================
+        // LOCATION + ACTIVITY
+        // ====================================================
 
         {
             id: "s-zai-place-activity",
             name: "S + 在 + Place + Activity",
             category: "Location & Activity",
-            explanation: "Describes an activity being performed at a specific place.",
+            explanation:
+                "Describes an activity performed at a specific place.",
             examples: [
-                "哥哥在日本讀書 (Older brother studies in Japan)",
-                "弟弟在家玩遊戲 (Younger brother plays games at home)"
+                "哥哥在日本讀書。",
+                "弟弟在家玩遊戲。"
             ]
         },
 
@@ -390,10 +416,11 @@ const lessonData = {
             id: "s-bu-zai-place-activity",
             name: "S + 不 + 在 + Place + Activity",
             category: "Location & Activity",
-            explanation: "Describes an activity not being performed at a specific place.",
+            explanation:
+                "Describes an activity not performed at a specific place.",
             examples: [
-                "老師不在醫院工作 (Teacher doesn't work at the hospital)",
-                "醫生不在教室教學 (Doctor doesn't teach in the classroom)"
+                "老師不在醫院工作。",
+                "醫生不在教室教學。"
             ]
         },
 
@@ -401,30 +428,33 @@ const lessonData = {
             id: "s-zai-place-activity-ma",
             name: "S + 在 + Place + Activity + 嗎",
             category: "Location & Activity Question",
-            explanation: "Asking if an activity is being performed at a place.",
+            explanation:
+                "Asks if an activity is performed at a place.",
             examples: [
-                "妹妹在學校上課嗎？ -> 對，妹妹在學校上課 / 不，妹妹不在學校上課",
-                "他在公園運動嗎？ -> 對，他在公園運動 / 不，他不在公園運動"
+                "妹妹在學校上課嗎？",
+                "他在公園運動嗎？"
             ]
         },
 
         {
             id: "s-zai-bu-zai-place-activity",
-            name: "S + 在 + 不 + 在 + Place + activity",
+            name: "S + 在 + 不 + 在 + Place + Activity",
             category: "Location & Activity Question",
-            explanation: "A-not-A question combining location and activity. '和' means 'and' to connect nouns.",
+            explanation:
+                "A-not-A question combining location and activity.",
             examples: [
-                "你們在不在家吃蘋果和香蕉？ -> 在 / 不在"
+                "你在不在家吃蘋果和香蕉？"
             ]
         },
 
         {
             id: "s-zai-nali-activity",
-            name: "S + 在 + 哪裡 + activity",
+            name: "S + 在 + 哪裡 + Activity",
             category: "Location & Activity Question",
-            explanation: "Asking where an activity takes place.",
+            explanation:
+                "Asks where an activity takes place.",
             examples: [
-                "爸爸在哪裡上班？ -> 爸爸在辦公室上班"
+                "爸爸在哪裡上班？"
             ]
         }
 
@@ -432,7 +462,7 @@ const lessonData = {
 
 
     // ========================================================
-    // VOCABULARY: PREVIOUS + NEW LOCATION & ACTIVITY VOCAB
+    // VOCABULARY
     // ========================================================
 
     vocabulary: [
@@ -445,7 +475,7 @@ const lessonData = {
         { hanzi: "她", pinyin: "tā", meaning: "she / her", category: "Pronoun" },
         { hanzi: "你們", pinyin: "nǐmen", meaning: "you (plural)", category: "Pronoun" },
         { hanzi: "妳們", pinyin: "nǐmen", meaning: "you (plural, female)", category: "Pronoun" },
-        { hanzi: "他們", pinyin: "tāmen", meaning: "they / them (male or mixed)", category: "Pronoun" },
+        { hanzi: "他們", pinyin: "tāmen", meaning: "they / them", category: "Pronoun" },
         { hanzi: "她們", pinyin: "tāmen", meaning: "they / them (female)", category: "Pronoun" },
         { hanzi: "我們", pinyin: "wǒmen", meaning: "we / us", category: "Pronoun" },
 
@@ -455,16 +485,16 @@ const lessonData = {
         { hanzi: "看", pinyin: "kàn", meaning: "to look / watch / read", category: "Verb" },
         { hanzi: "買", pinyin: "mǎi", meaning: "to buy", category: "Verb" },
         { hanzi: "畫", pinyin: "huà", meaning: "to draw / paint", category: "Verb" },
-        { hanzi: "工作", pinyin: "gōngzuò", meaning: "to work / work", category: "Verb" },
+        { hanzi: "工作", pinyin: "gōngzuò", meaning: "to work", category: "Verb" },
         { hanzi: "喜歡", pinyin: "xǐhuan", meaning: "to like", category: "Verb" },
         { hanzi: "愛", pinyin: "ài", meaning: "to love", category: "Verb" },
-        { hanzi: "想", pinyin: "xiǎng", meaning: "to want / would like / to think", category: "Verb" },
+        { hanzi: "想", pinyin: "xiǎng", meaning: "to want / would like / think", category: "Verb" },
         { hanzi: "怕", pinyin: "pà", meaning: "to fear / be afraid of", category: "Verb" },
-        { hanzi: "了解", pinyin: "liǎojiě", meaning: "to understand / comprehend", category: "Verb" },
-        { hanzi: "叫", pinyin: "jiào", meaning: "to be called / to call", category: "Verb" },
-        { hanzi: "姓", pinyin: "xìng", meaning: "to be surnamed / surname", category: "Verb" },
+        { hanzi: "了解", pinyin: "liǎojiě", meaning: "to understand", category: "Verb" },
+        { hanzi: "叫", pinyin: "jiào", meaning: "to be called / call", category: "Verb" },
+        { hanzi: "姓", pinyin: "xìng", meaning: "surname / to be surnamed", category: "Verb" },
         { hanzi: "來", pinyin: "lái", meaning: "to come", category: "Verb" },
-        { hanzi: "介紹", pinyin: "jièshào", meaning: "to introduce / introduction", category: "Verb" },
+        { hanzi: "介紹", pinyin: "jièshào", meaning: "to introduce", category: "Verb" },
 
         // Food & Drinks
         { hanzi: "飯", pinyin: "fàn", meaning: "rice / meal", category: "Food" },
@@ -475,17 +505,17 @@ const lessonData = {
         { hanzi: "咖啡", pinyin: "kāfēi", meaning: "coffee", category: "Drink" },
         { hanzi: "巧克力", pinyin: "qiǎokèlì", meaning: "chocolate", category: "Food" },
 
-        // Objects & Places / Concepts
+        // Objects & Places
         { hanzi: "書", pinyin: "shū", meaning: "book", category: "Object" },
         { hanzi: "手機", pinyin: "shǒujī", meaning: "mobile phone", category: "Object" },
         { hanzi: "電腦", pinyin: "diànnǎo", meaning: "computer", category: "Object" },
         { hanzi: "電視", pinyin: "diànshì", meaning: "television / TV", category: "Object" },
         { hanzi: "車子", pinyin: "chēzi", meaning: "car", category: "Object" },
         { hanzi: "報紙", pinyin: "bàozhǐ", meaning: "newspaper", category: "Object" },
-        { hanzi: "照片", pinyin: "zhàopiàn", meaning: "photo / photograph", category: "Object" },
+        { hanzi: "照片", pinyin: "zhàopiàn", meaning: "photo", category: "Object" },
         { hanzi: "圖片", pinyin: "túpiàn", meaning: "picture / image", category: "Object" },
         { hanzi: "眼鏡", pinyin: "yǎnjìng", meaning: "glasses", category: "Object" },
-        { hanzi: "禮物", pinyin: "lǐwù", meaning: "gift / present", category: "Object" },
+        { hanzi: "禮物", pinyin: "lǐwù", meaning: "gift", category: "Object" },
         { hanzi: "東西", pinyin: "dōngxi", meaning: "thing / things", category: "Object" },
         { hanzi: "信", pinyin: "xìn", meaning: "letter / mail", category: "Object" },
         { hanzi: "地方", pinyin: "dìfang", meaning: "place", category: "Place" },
@@ -508,7 +538,7 @@ const lessonData = {
         { hanzi: "姐姐", pinyin: "jiějie", meaning: "older sister", category: "Family" },
         { hanzi: "姊姊", pinyin: "jiějie", meaning: "older sister", category: "Family" },
 
-        // People / Occupations / Nationalities / Animals
+        // People / Occupations / Animals
         { hanzi: "男生", pinyin: "nánshēng", meaning: "boy / male student", category: "People" },
         { hanzi: "女生", pinyin: "nǚshēng", meaning: "girl / female student", category: "People" },
         { hanzi: "太太", pinyin: "tàitai", meaning: "wife / Mrs.", category: "People" },
@@ -531,8 +561,8 @@ const lessonData = {
         { hanzi: "貓咪", pinyin: "māomī", meaning: "kitty / cat", category: "Animal" },
         { hanzi: "狗", pinyin: "gǒu", meaning: "dog", category: "Animal" },
 
-        // Adjectives & Descriptions
-        { hanzi: "好看", pinyin: "hǎokàn", meaning: "good-looking / beautiful / interesting", category: "Adjective" },
+        // Adjectives
+        { hanzi: "好看", pinyin: "hǎokàn", meaning: "good-looking / interesting", category: "Adjective" },
         { hanzi: "漂亮", pinyin: "piàoliang", meaning: "pretty / beautiful", category: "Adjective" },
         { hanzi: "可愛", pinyin: "kě'ài", meaning: "cute / lovely", category: "Adjective" },
         { hanzi: "累", pinyin: "lèi", meaning: "tired", category: "Adjective" },
@@ -540,21 +570,21 @@ const lessonData = {
         { hanzi: "難", pinyin: "nán", meaning: "difficult / hard", category: "Adjective" },
         { hanzi: "高", pinyin: "gāo", meaning: "tall / high", category: "Adjective" },
 
-        // Languages & Subjects
+        // Languages
         { hanzi: "中文", pinyin: "zhōngwén", meaning: "Chinese language", category: "Language" },
 
-        // Demonstratives, Measure Words & Question Words
+        // Demonstratives / Measure Words / Questions
         { hanzi: "這", pinyin: "zhè", meaning: "this", category: "Demonstrative" },
         { hanzi: "那", pinyin: "nà", meaning: "that", category: "Demonstrative" },
-        { hanzi: "個", pinyin: "gè", meaning: "measure word (general)", category: "Measure Word" },
+        { hanzi: "個", pinyin: "gè", meaning: "measure word", category: "Measure Word" },
         { hanzi: "什麼", pinyin: "shénme", meaning: "what", category: "Question Word" },
-        { hanzi: "幾", pinyin: "jǐ", meaning: "how many / how much (usually under 10)", category: "Question Word" },
+        { hanzi: "幾", pinyin: "jǐ", meaning: "how many / how much", category: "Question Word" },
 
-        // Numbers & Age
+        // Numbers
         { hanzi: "零", pinyin: "líng", meaning: "zero", category: "Number" },
         { hanzi: "一", pinyin: "yī", meaning: "one", category: "Number" },
-        { hanzi: "兩", pinyin: "liǎng", meaning: "two (used with measure words)", category: "Number" },
-        { hanzi: "二", pinyin: "èr", meaning: "two (counting / numbers)", category: "Number" },
+        { hanzi: "兩", pinyin: "liǎng", meaning: "two", category: "Number" },
+        { hanzi: "二", pinyin: "èr", meaning: "two", category: "Number" },
         { hanzi: "三", pinyin: "sān", meaning: "three", category: "Number" },
         { hanzi: "四", pinyin: "sì", meaning: "four", category: "Number" },
         { hanzi: "五", pinyin: "wǔ", meaning: "five", category: "Number" },
@@ -563,27 +593,29 @@ const lessonData = {
         { hanzi: "八", pinyin: "bā", meaning: "eight", category: "Number" },
         { hanzi: "九", pinyin: "jiǔ", meaning: "nine", category: "Number" },
         { hanzi: "十", pinyin: "shí", meaning: "ten", category: "Number" },
-        { hanzi: "歲", pinyin: "suì", meaning: "years old (age)", category: "Time" },
+        { hanzi: "歲", pinyin: "suì", meaning: "years old", category: "Time" },
         { hanzi: "幾歲", pinyin: "jǐ suì", meaning: "how old", category: "Question" },
 
-        // Greetings & Polite Expressions
+        // Greetings
         { hanzi: "您好", pinyin: "nín hǎo", meaning: "hello (polite)", category: "Greeting" },
         { hanzi: "你好", pinyin: "nǐ hǎo", meaning: "hello", category: "Greeting" },
         { hanzi: "請問", pinyin: "qǐngwèn", meaning: "may I ask / excuse me", category: "Greeting" },
-        { hanzi: "認識", pinyin: "rènshi", meaning: "to know / to recognize / to meet", category: "Verb" },
-        { hanzi: "再見", pinyin: "zàijiàn", meaning: "goodbye / see you again", category: "Greeting" },
+        { hanzi: "認識", pinyin: "rènshi", meaning: "to know / to meet", category: "Verb" },
+        { hanzi: "再見", pinyin: "zàijiàn", meaning: "goodbye", category: "Greeting" },
 
-        // Grammar Words & Particles
+        // Grammar Words
         { hanzi: "的", pinyin: "de", meaning: "possessive particle / of", category: "Grammar" },
-        { hanzi: "是", pinyin: "shì", meaning: "to be / am / is / are", category: "Grammar" },
+        { hanzi: "是", pinyin: "shì", meaning: "to be", category: "Grammar" },
         { hanzi: "很", pinyin: "hěn", meaning: "very", category: "Grammar" },
-        { hanzi: "個", pinyin: "gè", meaning: "general measure word", category: "Measure Word" },
         { hanzi: "不", pinyin: "bù", meaning: "not / no", category: "Grammar" },
         { hanzi: "嗎", pinyin: "ma", meaning: "question particle", category: "Grammar" },
-        { hanzi: "呢", pinyin: "ne", meaning: "particle for bouncing questions / what about...", category: "Grammar" },
+        { hanzi: "呢", pinyin: "ne", meaning: "what about...", category: "Grammar" },
         { hanzi: "也", pinyin: "yě", meaning: "also / too", category: "Grammar" },
 
-        // --- New Location & Activity Vocabulary ---
+        // ====================================================
+        // LOCATION & ACTIVITY VOCABULARY
+        // ====================================================
+
         { hanzi: "在", pinyin: "zài", meaning: "at / in", category: "Preposition" },
         { hanzi: "家", pinyin: "jiā", meaning: "home / family", category: "Place" },
         { hanzi: "日本", pinyin: "Rìběn", meaning: "Japan", category: "Place" },
@@ -592,10 +624,11 @@ const lessonData = {
         { hanzi: "學校", pinyin: "xuéxiào", meaning: "school", category: "Place" },
         { hanzi: "教室", pinyin: "jiàoshì", meaning: "classroom", category: "Place" },
         { hanzi: "公園", pinyin: "gōngyuán", meaning: "park", category: "Place" },
+
         { hanzi: "讀書", pinyin: "dúshū", meaning: "to study / to read", category: "Verb" },
         { hanzi: "學習", pinyin: "xuéxí", meaning: "to learn / to study", category: "Verb" },
-        { hanzi: "上班", pinyin: "shàngbān", meaning: "to go to work / to work", category: "Verb" },
-        { hanzi: "上課", pinyin: "shàngkè", meaning: "to attend class / to have class", category: "Verb" },
+        { hanzi: "上班", pinyin: "shàngbān", meaning: "to go to work / work", category: "Verb" },
+        { hanzi: "上課", pinyin: "shàngkè", meaning: "to attend class", category: "Verb" },
         { hanzi: "運動", pinyin: "yùndòng", meaning: "to exercise / sports", category: "Verb" },
         { hanzi: "玩", pinyin: "wán", meaning: "to play", category: "Verb" },
         { hanzi: "遊戲", pinyin: "yóuxì", meaning: "game", category: "Object" },
@@ -605,6 +638,551 @@ const lessonData = {
         { hanzi: "對", pinyin: "duì", meaning: "correct / right / yes", category: "Adjective" },
         { hanzi: "哪裡", pinyin: "nǎlǐ", meaning: "where", category: "Question Word" },
         { hanzi: "和", pinyin: "hé", meaning: "and", category: "Conjunction" }
+
+    ],
+
+
+    // ========================================================
+    // REVIEW QUESTIONS
+    // ========================================================
+    // These are used by Grammar Master.
+    // The current lesson can select a random subset.
+    // ========================================================
+
+    reviewQuestions: [
+
+        // -------------------------
+        // S + V + O
+        // -------------------------
+
+        {
+            meaning: "I eat rice.",
+            answer: ["我", "吃", "飯"]
+        },
+
+        {
+            meaning: "You drink water.",
+            answer: ["你", "喝", "水"]
+        },
+
+        {
+            meaning: "She reads a book.",
+            answer: ["她", "看", "書"]
+        },
+
+        {
+            meaning: "He buys bread.",
+            answer: ["他", "買", "麵包"]
+        },
+
+        {
+            meaning: "I drink milk.",
+            answer: ["我", "喝", "牛奶"]
+        },
+
+        // -------------------------
+        // NEGATIVE
+        // -------------------------
+
+        {
+            meaning: "I don't eat rice.",
+            answer: ["我", "不", "吃", "飯"]
+        },
+
+        {
+            meaning: "She doesn't drink milk.",
+            answer: ["她", "不", "喝", "牛奶"]
+        },
+
+        {
+            meaning: "He doesn't read a book.",
+            answer: ["他", "不", "看", "書"]
+        },
+
+        {
+            meaning: "I don't buy bread.",
+            answer: ["我", "不", "買", "麵包"]
+        },
+
+        // -------------------------
+        // 嗎 QUESTIONS
+        // -------------------------
+
+        {
+            meaning: "Do you eat rice?",
+            answer: ["你", "吃", "飯", "嗎"]
+        },
+
+        {
+            meaning: "Does she drink water?",
+            answer: ["她", "喝", "水", "嗎"]
+        },
+
+        {
+            meaning: "Does he read a book?",
+            answer: ["他", "看", "書", "嗎"]
+        },
+
+        {
+            meaning: "Do you buy coffee?",
+            answer: ["你", "買", "咖啡", "嗎"]
+        },
+
+        // -------------------------
+        // A-NOT-A
+        // -------------------------
+
+        {
+            meaning: "Do you eat or not?",
+            answer: ["你", "吃", "不", "吃"]
+        },
+
+        {
+            meaning: "Do you drink or not?",
+            answer: ["你", "喝", "不", "喝"]
+        },
+
+        {
+            meaning: "Does she watch TV or not?",
+            answer: ["她", "看", "不", "看"]
+        },
+
+        // -------------------------
+        // 的
+        // -------------------------
+
+        {
+            meaning: "My phone.",
+            answer: ["我", "的", "手機"]
+        },
+
+        {
+            meaning: "Your book.",
+            answer: ["你", "的", "書"]
+        },
+
+        {
+            meaning: "Her mother.",
+            answer: ["她", "的", "媽媽"]
+        },
+
+        // -------------------------
+        // 是
+        // -------------------------
+
+        {
+            meaning: "I am a teacher.",
+            answer: ["我", "是", "老師"]
+        },
+
+        {
+            meaning: "She is a doctor.",
+            answer: ["她", "是", "醫生"]
+        },
+
+        {
+            meaning: "He is a student.",
+            answer: ["他", "是", "學生"]
+        },
+
+        // -------------------------
+        // 不是
+        // -------------------------
+
+        {
+            meaning: "I am not a teacher.",
+            answer: ["我", "不是", "老師"]
+        },
+
+        {
+            meaning: "She is not a doctor.",
+            answer: ["她", "不是", "醫生"]
+        },
+
+        {
+            meaning: "He is not a student.",
+            answer: ["他", "不是", "學生"]
+        },
+
+        // -------------------------
+        // 是...嗎
+        // -------------------------
+
+        {
+            meaning: "Are you a teacher?",
+            answer: ["你", "是", "老師", "嗎"]
+        },
+
+        {
+            meaning: "Is she a doctor?",
+            answer: ["她", "是", "醫生", "嗎"]
+        },
+
+        {
+            meaning: "Is he a student?",
+            answer: ["他", "是", "學生", "嗎"]
+        },
+
+        // -------------------------
+        // 是不是
+        // -------------------------
+
+        {
+            meaning: "Are you a teacher or not?",
+            answer: ["你", "是不是", "老師"]
+        },
+
+        {
+            meaning: "Is she a doctor or not?",
+            answer: ["她", "是不是", "醫生"]
+        },
+
+        {
+            meaning: "Is he a student or not?",
+            answer: ["他", "是不是", "學生"]
+        },
+
+        // -------------------------
+        // 很 + ADJECTIVE
+        // -------------------------
+
+        {
+            meaning: "I am very tired.",
+            answer: ["我", "很", "累"]
+        },
+
+        {
+            meaning: "You are very good.",
+            answer: ["你", "很", "好"]
+        },
+
+        {
+            meaning: "She is very tall.",
+            answer: ["她", "很", "高"]
+        },
+
+        {
+            meaning: "He is very busy.",
+            answer: ["他", "很", "忙"]
+        },
+
+        // -------------------------
+        // NEGATIVE ADJECTIVE
+        // -------------------------
+
+        {
+            meaning: "I am not tired.",
+            answer: ["我", "不", "累"]
+        },
+
+        {
+            meaning: "You are not good.",
+            answer: ["你", "不", "好"]
+        },
+
+        {
+            meaning: "She is not tall.",
+            answer: ["她", "不", "高"]
+        },
+
+        // -------------------------
+        // ADJECTIVE QUESTIONS
+        // -------------------------
+
+        {
+            meaning: "Are you tired?",
+            answer: ["你", "很", "累", "嗎"]
+        },
+
+        {
+            meaning: "Are you very good?",
+            answer: ["你", "很", "好", "嗎"]
+        },
+
+        {
+            meaning: "Is she very tall?",
+            answer: ["她", "很", "高", "嗎"]
+        },
+
+        // -------------------------
+        // 呢
+        // -------------------------
+
+        {
+            meaning: "I'm good. What about you?",
+            answer: ["我", "很好", "你", "呢"]
+        },
+
+        // -------------------------
+        // 也
+        // -------------------------
+
+        {
+            meaning: "I am also a student.",
+            answer: ["我", "也", "是", "學生"]
+        },
+
+        {
+            meaning: "I also like music.",
+            answer: ["我", "也", "喜歡", "音樂"]
+        },
+
+        // -------------------------
+        // MEASURE WORD
+        // -------------------------
+
+        {
+            meaning: "One person.",
+            answer: ["一", "個", "人"]
+        },
+
+        {
+            meaning: "Two people.",
+            answer: ["兩", "個", "人"]
+        },
+
+        {
+            meaning: "This place.",
+            answer: ["這", "個", "地方"]
+        },
+
+        {
+            meaning: "That question.",
+            answer: ["那", "個", "問題"]
+        },
+
+        // -------------------------
+        // NAME
+        // -------------------------
+
+        {
+            meaning: "What is your name?",
+            answer: ["你", "叫", "什麼", "名字"]
+        },
+
+        {
+            meaning: "My name is David.",
+            answer: ["我", "叫", "大衛"]
+        },
+
+        {
+            meaning: "My surname is Wang.",
+            answer: ["我", "姓", "王"]
+        },
+
+        {
+            meaning: "May I ask your surname?",
+            answer: ["請問", "您", "貴姓"]
+        },
+
+        // -------------------------
+        // AGE
+        // -------------------------
+
+        {
+            meaning: "How old are you?",
+            answer: ["你", "幾歲"]
+        },
+
+        {
+            meaning: "I am twenty years old.",
+            answer: ["我", "二十", "歲"]
+        },
+
+        {
+            meaning: "She is twenty-five years old.",
+            answer: ["她", "二十五", "歲"]
+        },
+
+        // ====================================================
+        // LOCATION
+        // ====================================================
+
+        {
+            meaning: "I am at home.",
+            answer: ["我", "在", "家"]
+        },
+
+        {
+            meaning: "He is at school.",
+            answer: ["他", "在", "學校"]
+        },
+
+        {
+            meaning: "She is at the hospital.",
+            answer: ["她", "在", "醫院"]
+        },
+
+        {
+            meaning: "The teacher is in the classroom.",
+            answer: ["老師", "在", "教室"]
+        },
+
+        // -------------------------
+        // LOCATION NEGATIVE
+        // -------------------------
+
+        {
+            meaning: "He is not at the park.",
+            answer: ["他", "不", "在", "公園"]
+        },
+
+        {
+            meaning: "She is not at school.",
+            answer: ["她", "不", "在", "學校"]
+        },
+
+        {
+            meaning: "Dad is not in the office.",
+            answer: ["爸爸", "不", "在", "辦公室"]
+        },
+
+        // -------------------------
+        // LOCATION 嗎
+        // -------------------------
+
+        {
+            meaning: "Is the teacher in the classroom?",
+            answer: ["老師", "在", "教室", "嗎"]
+        },
+
+        {
+            meaning: "Is dad in the office?",
+            answer: ["爸爸", "在", "辦公室", "嗎"]
+        },
+
+        {
+            meaning: "Is she at the hospital?",
+            answer: ["她", "在", "醫院", "嗎"]
+        },
+
+        // -------------------------
+        // LOCATION A-NOT-A
+        // -------------------------
+
+        {
+            meaning: "Is he in Japan or not?",
+            answer: ["他", "在", "不", "在", "日本"]
+        },
+
+        {
+            meaning: "Is the nurse at the hospital or not?",
+            answer: ["護士", "在", "不", "在", "醫院"]
+        },
+
+        {
+            meaning: "Is mom at home or not?",
+            answer: ["媽媽", "在", "不", "在", "家"]
+        },
+
+        // -------------------------
+        // 在嗎 / 在不在
+        // -------------------------
+
+        {
+            meaning: "Is she there?",
+            answer: ["她", "在", "嗎"]
+        },
+
+        {
+            meaning: "Is older brother there or not?",
+            answer: ["哥哥", "在", "不", "在"]
+        },
+
+        {
+            meaning: "Is dad there?",
+            answer: ["爸爸", "在", "嗎"]
+        },
+
+        // -------------------------
+        // 哪裡
+        // -------------------------
+
+        {
+            meaning: "Where is mother?",
+            answer: ["媽媽", "在", "哪裡"]
+        },
+
+        {
+            meaning: "Where is the teacher?",
+            answer: ["老師", "在", "哪裡"]
+        },
+
+        // ====================================================
+        // LOCATION + ACTIVITY
+        // ====================================================
+
+        {
+            meaning: "Older brother studies in Japan.",
+            answer: ["哥哥", "在", "日本", "讀書"]
+        },
+
+        {
+            meaning: "Younger brother plays games at home.",
+            answer: ["弟弟", "在", "家", "玩", "遊戲"]
+        },
+
+        {
+            meaning: "Dad works at the office.",
+            answer: ["爸爸", "在", "辦公室", "上班"]
+        },
+
+        {
+            meaning: "Younger sister attends class at school.",
+            answer: ["妹妹", "在", "學校", "上課"]
+        },
+
+        {
+            meaning: "He exercises in the park.",
+            answer: ["他", "在", "公園", "運動"]
+        },
+
+        // -------------------------
+        // LOCATION + ACTIVITY 嗎
+        // -------------------------
+
+        {
+            meaning: "Does younger sister attend class at school?",
+            answer: ["妹妹", "在", "學校", "上課", "嗎"]
+        },
+
+        {
+            meaning: "Does he exercise in the park?",
+            answer: ["他", "在", "公園", "運動", "嗎"]
+        },
+
+        {
+            meaning: "Does dad work at the office?",
+            answer: ["爸爸", "在", "辦公室", "上班", "嗎"]
+        },
+
+        // -------------------------
+        // LOCATION + ACTIVITY NEGATIVE
+        // -------------------------
+
+        {
+            meaning: "The teacher doesn't work at the hospital.",
+            answer: ["老師", "不", "在", "醫院", "工作"]
+        },
+
+        {
+            meaning: "The doctor doesn't teach in the classroom.",
+            answer: ["醫生", "不", "在", "教室", "教學"]
+        },
+
+        // -------------------------
+        // LOCATION + ACTIVITY WHERE
+        // -------------------------
+
+        {
+            meaning: "Where does dad work?",
+            answer: ["爸爸", "在", "哪裡", "上班"]
+        },
+
+        {
+            meaning: "Where does older brother study?",
+            answer: ["哥哥", "在", "哪裡", "讀書"]
+        }
 
     ]
 
@@ -619,9 +1197,11 @@ function getLearnedVocabulary() {
     return lessonData.vocabulary;
 }
 
+
 function getLearnedGrammar() {
     return lessonData.grammar;
 }
+
 
 function findVocabulary(hanzi) {
     return lessonData.vocabulary.find(
@@ -629,11 +1209,13 @@ function findVocabulary(hanzi) {
     );
 }
 
+
 function findGrammar(id) {
     return lessonData.grammar.find(
         grammar => grammar.id === id
     );
 }
+
 
 function getVocabularyByCategory(category) {
     return lessonData.vocabulary.filter(
@@ -641,10 +1223,103 @@ function getVocabularyByCategory(category) {
     );
 }
 
+
 function getVocabularyCount() {
     return lessonData.vocabulary.length;
 }
 
+
 function getGrammarCount() {
     return lessonData.grammar.length;
+}
+
+
+// ============================================================
+// REVIEW QUESTION HELPERS
+// ============================================================
+
+function getReviewQuestions() {
+    return lessonData.reviewQuestions || [];
+}
+
+
+function getRandomReviewQuestions(count = 12) {
+
+    const questions = [...getReviewQuestions()];
+
+    for (let i = questions.length - 1; i > 0; i--) {
+
+        const j = Math.floor(Math.random() * (i + 1));
+
+        [questions[i], questions[j]] =
+            [questions[j], questions[i]];
+    }
+
+    return questions.slice(
+        0,
+        Math.min(count, questions.length)
+    );
+}
+
+
+// ============================================================
+// QUESTION SIGNATURE
+// Used to prevent duplicate questions
+// ============================================================
+
+function getQuestionSignature(question) {
+
+    if (!question || !Array.isArray(question.answer)) {
+        return "";
+    }
+
+    return question.answer
+        .map(word => String(word).trim())
+        .join("|");
+}
+
+
+// ============================================================
+// GET UNIQUE RANDOM REVIEW QUESTIONS
+// ============================================================
+
+function getUniqueRandomReviewQuestions(
+    count = 12,
+    excludedQuestions = []
+) {
+
+    const excluded = new Set(
+        excludedQuestions.map(getQuestionSignature)
+    );
+
+    const source = [...getReviewQuestions()];
+
+    const shuffled = source.sort(
+        () => Math.random() - 0.5
+    );
+
+    const result = [];
+    const used = new Set(excluded);
+
+    for (const question of shuffled) {
+
+        const signature =
+            getQuestionSignature(question);
+
+        if (!signature) continue;
+
+        if (used.has(signature)) {
+            continue;
+        }
+
+        used.add(signature);
+
+        result.push(question);
+
+        if (result.length >= count) {
+            break;
+        }
+    }
+
+    return result;
 }
