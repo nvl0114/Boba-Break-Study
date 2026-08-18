@@ -390,322 +390,76 @@ const allLessonsData = {
     },
      
     // ========================================================
-// LESSON 7
-// ========================================================
-7: {
-    grammar: [
-        {
-            id: "s-zai-location",
-            name: "S + 在 + Location",
-            category: "Location Pattern",
-            explanation: "在 (zài) is used to say where a person or thing is located. It is placed after the subject and before the location.",
-            examples: [
-                "我在家。",
-                "你在學校。",
-                "他在醫院。"
-            ]
-        },
+    // LESSON 7
+    // ========================================================
+    7: {
+        grammar: [
+            {
+                id: "zài-location",
+                name: "Subject + 在 (Zài) + Location",
+                category: "Location Pattern",
+                explanation: "The word 在 (zài) acts as a preposition meaning 'at' or 'in'. It is placed before a location noun to tell where someone or something is located.",
+                examples: ["我在家。", "你在學校。", "他在醫院。"]
+            },
+            {
+                id: "subject-zài-location-verb",
+                name: "Subject + 在 + Location + Verb",
+                category: "Action at Location",
+                explanation: "Unlike English, Chinese structure places the location before the action verb: Subject + [At Location] + [Verb].",
+                examples: ["我在學校讀書。", "他在辦公室上班。", "他在公園運動。"]
+            },
+            {
+                id: "ongoing-action",
+                name: "Subject + 正在 (Zhèngzài) + Verb",
+                category: "Ongoing Action",
+                explanation: "To express that an action is currently in progress (equivalent to '-ing' in English), use 正在 (zhèngzài) or just 在 right before the verb.",
+                examples: ["我正在上課。", "他正在玩遊戲。", "她正在教學。"]
+            },
+            {
+                id: "question-where",
+                name: "Question: 你在哪裡？ Answer: 我在...",
+                category: "Interrogative & Answer",
+                explanation: "To ask 'Where are you?', use 哪裡 (nǎlǐ). The response mirrors the pattern using 在 + Location.",
+                examples: ["你在哪裡？", "我在公園。", "你在哪裡上班？"]
+            }
+        ],
 
-        {
-            id: "s-bu-zai-location",
-            name: "S + 不 + 在 + Location",
-            category: "Negative Location",
-            explanation: "To say that someone or something is not at a particular location, use 不 before 在.",
-            examples: [
-                "我不在家。",
-                "他不在學校。",
-                "她不在醫院。"
-            ]
-        },
+        vocabulary: [
+            { hanzi: "在", pinyin: "zài", meaning: "at / in / on", category: "Preposition" },
+            { hanzi: "家", pinyin: "jiā", meaning: "home / family", category: "Place" },
+            { hanzi: "日本", pinyin: "Rìběn", meaning: "Japan", category: "Place" },
+            { hanzi: "醫院", pinyin: "yīyuàn", meaning: "hospital", category: "Place" },
+            { hanzi: "辦公室", pinyin: "bàngōngshì", meaning: "office", category: "Place" },
+            { hanzi: "學校", pinyin: "xuéxiào", meaning: "school", category: "Place" },
+            { hanzi: "教室", pinyin: "jiàoshì", meaning: "classroom", category: "Place" },
+            { hanzi: "公園", pinyin: "gōngyuán", meaning: "park", category: "Place" },
+            { hanzi: "哪裡", pinyin: "nǎlǐ", meaning: "where", category: "Question Word" },
+            { hanzi: "讀書", pinyin: "dúshū", meaning: "study / read", category: "Verb" },
+            { hanzi: "上班", pinyin: "shàngbān", meaning: "go to work", category: "Verb" },
+            { hanzi: "上課", pinyin: "shàngkè", meaning: "attend class", category: "Verb" },
+            { hanzi: "運動", pinyin: "yùndòng", meaning: "exercise / sports", category: "Verb" },
+            { hanzi: "玩", pinyin: "wán", meaning: "play", category: "Verb" },
+            { hanzi: "遊戲", pinyin: "yóuxì", meaning: "game", category: "Noun" },
+            { hanzi: "蘋果", pinyin: "píngguǒ", meaning: "apple", category: "Food" },
+            { hanzi: "香蕉", pinyin: "xiāngjiāo", meaning: "banana", category: "Food" },
+            { hanzi: "教學", pinyin: "jiàoxué", meaning: "teaching", category: "Verb" },
+            { hanzi: "對", pinyin: "duì", meaning: "correct / right", category: "Adjective" },
+            { hanzi: "和", pinyin: "hé", meaning: "and / with", category: "Conjunction" }
+        ],
 
-        {
-            id: "s-zai-location-v",
-            name: "S + 在 + Location + V",
-            category: "Action at Location",
-            explanation: "When describing an action performed at a location, Chinese places the location before the verb.",
-            examples: [
-                "我在學校讀書。",
-                "他在辦公室上班。",
-                "她在公園運動。"
-            ]
-        },
+        reviewQuestions: [
+            { meaning: "Where are you?", answer: ["你", "在", "哪", "裡"] },
+            { meaning: "I study at school.", answer: ["我", "在", "學", "校", "讀", "書"] },
+            { meaning: "He is playing a game right now.", answer: ["他", "正", "在", "玩", "遊", "戲"] },
+            { meaning: "I am not at home.", answer: ["我", "不", "在", "家"] },
+            { meaning: "She is currently exercising.", answer: ["她", "正", "在", "運", "動"] },
+            { meaning: "Are you at home?", answer: ["你", "在", "家", "嗎"] },
+            { meaning: "Where do you study?", answer: ["你", "在", "哪", "裡", "讀", "書"] }
+        ]
+    }
+};
 
-        {
-            id: "s-zai-location-v-o",
-            name: "S + 在 + Location + V + O",
-            category: "Action at Location",
-            explanation: "The location comes before the action verb and its object: Subject + 在 + Location + Verb + Object.",
-            examples: [
-                "我在學校讀書。",
-                "他在公園玩遊戲。",
-                "她在教室吃蘋果。"
-            ]
-        },
 
-        {
-            id: "s-bu-zai-location-v-o",
-            name: "S + 不 + 在 + Location + V + O",
-            category: "Negative Action at Location",
-            explanation: "To say that someone does not do an action at a particular location, 不 is placed before 在.",
-            examples: [
-                "我不在學校讀書。",
-                "他不在公園玩遊戲。",
-                "她不在教室吃蘋果。"
-            ]
-        },
-
-        {
-            id: "s-zai-v",
-            name: "S + 在 + V",
-            category: "Ongoing Action",
-            explanation: "在 can be placed directly before a verb to indicate that an action is currently happening.",
-            examples: [
-                "我在讀書。",
-                "他在上課。",
-                "她在運動。"
-            ]
-        },
-
-        {
-            id: "s-zai-v-o",
-            name: "S + 在 + V + O",
-            category: "Ongoing Action",
-            explanation: "在 + Verb + Object expresses an action that is currently in progress.",
-            examples: [
-                "我在玩遊戲。",
-                "他在吃蘋果。",
-                "她在讀書。"
-            ]
-        },
-
-        {
-            id: "s-zhengzai-v-o",
-            name: "S + 正在 + V + O",
-            category: "Ongoing Action",
-            explanation: "正在 (zhèngzài) emphasizes that an action is happening right now. It is placed directly before the verb.",
-            examples: [
-                "我正在讀書。",
-                "他正在玩遊戲。",
-                "她正在上課。"
-            ]
-        },
-
-        {
-            id: "s-meiyou-zai-v-o",
-            name: "S + 沒有在 + V + O",
-            category: "Negative Ongoing Action",
-            explanation: "沒有在 is used to say that someone is not currently doing an action.",
-            examples: [
-                "我沒有在讀書。",
-                "他沒有在玩遊戲。",
-                "她沒有在上課。"
-            ]
-        },
-
-        {
-            id: "s-zai-nali",
-            name: "S + 在 + 哪裡？",
-            category: "Location Question",
-            explanation: "哪裡 (nǎlǐ) means 'where'. It is used after 在 to ask where someone or something is located.",
-            examples: [
-                "你在哪裡？",
-                "他在哪裡？",
-                "老師在哪裡？"
-            ]
-        },
-
-        {
-            id: "s-zai-nali-v",
-            name: "S + 在 + 哪裡 + V？",
-            category: "Location & Action Question",
-            explanation: "To ask where someone performs an action, place 哪裡 after 在 and before the verb.",
-            examples: [
-                "你在哪裡讀書？",
-                "他在哪裡上班？",
-                "她在哪裡上課？"
-            ]
-        },
-
-        {
-            id: "s-zai-nali-v-o",
-            name: "S + 在 + 哪裡 + V + O？",
-            category: "Location & Action Question",
-            explanation: "This pattern asks where someone is doing a specific action involving an object.",
-            examples: [
-                "你在哪裡玩遊戲？",
-                "他在哪裡吃蘋果？",
-                "她在哪裡讀書？"
-            ]
-        },
-
-        {
-            id: "s-zai-location-ma",
-            name: "S + 在 + Location + 嗎？",
-            category: "Location Yes / No Question",
-            explanation: "Add 嗎 (ma) at the end of a sentence to ask whether someone or something is at a particular location.",
-            examples: [
-                "你在家嗎？",
-                "他在學校嗎？",
-                "她在醫院嗎？"
-            ]
-        },
-
-        {
-            id: "s-zai-location-v-o-ma",
-            name: "S + 在 + Location + V + O + 嗎？",
-            category: "Action at Location Question",
-            explanation: "Add 嗎 at the end to ask whether someone is performing an action at a particular location.",
-            examples: [
-                "你在學校讀書嗎？",
-                "他在公園玩遊戲嗎？",
-                "她在教室上課嗎？"
-            ]
-        },
-
-        {
-            id: "s-zai-bu-zai-location",
-            name: "S + 在不在 + Location？",
-            category: "A-not-A Location Question",
-            explanation: "在不在 is an A-not-A question pattern used to ask whether someone is at a particular location or not.",
-            examples: [
-                "你在不在家？",
-                "他在不在學校？",
-                "她在不在醫院？"
-            ]
-        },
-
-        {
-            id: "location-he-location",
-            name: "Location + 和 + Location",
-            category: "Connecting Locations",
-            explanation: "和 (hé) means 'and'. It can connect two nouns or locations.",
-            examples: [
-                "學校和公園。",
-                "家和辦公室。",
-                "醫院和教室。"
-            ]
-        },
-
-        {
-            id: "s-zai-location-he-location",
-            name: "S + 在 + Location + 和 + Location",
-            category: "Multiple Locations",
-            explanation: "和 can connect two locations when talking about places associated with the subject.",
-            examples: [
-                "我在學校和公園。",
-                "他在辦公室和醫院。",
-                "她在家和教室。"
-            ]
-        }
-    ],
-
-    vocabulary: [
-        { hanzi: "在", pinyin: "zài", meaning: "at / in / on", category: "Grammar" },
-        { hanzi: "家", pinyin: "jiā", meaning: "home / family", category: "Place" },
-        { hanzi: "日本", pinyin: "Rìběn", meaning: "Japan", category: "Place" },
-        { hanzi: "醫院", pinyin: "yīyuàn", meaning: "hospital", category: "Place" },
-        { hanzi: "辦公室", pinyin: "bàngōngshì", meaning: "office", category: "Place" },
-        { hanzi: "學校", pinyin: "xuéxiào", meaning: "school", category: "Place" },
-        { hanzi: "教室", pinyin: "jiàoshì", meaning: "classroom", category: "Place" },
-        { hanzi: "公園", pinyin: "gōngyuán", meaning: "park", category: "Place" },
-
-        { hanzi: "讀書", pinyin: "dúshū", meaning: "study / read", category: "Verb" },
-        { hanzi: "上班", pinyin: "shàngbān", meaning: "go to work / work", category: "Verb" },
-        { hanzi: "上課", pinyin: "shàngkè", meaning: "attend class / have class", category: "Verb" },
-        { hanzi: "運動", pinyin: "yùndòng", meaning: "exercise / play sports", category: "Verb" },
-        { hanzi: "玩", pinyin: "wán", meaning: "to play", category: "Verb" },
-        { hanzi: "遊戲", pinyin: "yóuxì", meaning: "game", category: "Noun" },
-        { hanzi: "蘋果", pinyin: "píngguǒ", meaning: "apple", category: "Food" },
-        { hanzi: "香蕉", pinyin: "xiāngjiāo", meaning: "banana", category: "Food" },
-        { hanzi: "教學", pinyin: "jiàoxué", meaning: "teaching", category: "Verb" },
-        { hanzi: "對", pinyin: "duì", meaning: "correct / right", category: "Adjective" },
-        { hanzi: "哪裡", pinyin: "nǎlǐ", meaning: "where", category: "Question Word" },
-        { hanzi: "和", pinyin: "hé", meaning: "and / with", category: "Conjunction" }
-    ],
-
-    reviewQuestions: [
-        {
-            meaning: "I am at home.",
-            answer: ["我", "在", "家"]
-        },
-        {
-            meaning: "I am not at home.",
-            answer: ["我", "不", "在", "家"]
-        },
-        {
-            meaning: "I study at school.",
-            answer: ["我", "在", "學", "校", "讀", "書"]
-        },
-        {
-            meaning: "He works at the office.",
-            answer: ["他", "在", "辦", "公", "室", "上", "班"]
-        },
-        {
-            meaning: "She exercises at the park.",
-            answer: ["她", "在", "公", "園", "運", "動"]
-        },
-        {
-            meaning: "I am studying right now.",
-            answer: ["我", "正", "在", "讀", "書"]
-        },
-        {
-            meaning: "He is playing a game right now.",
-            answer: ["他", "正", "在", "玩", "遊", "戲"]
-        },
-        {
-            meaning: "She is currently attending class.",
-            answer: ["她", "正", "在", "上", "課"]
-        },
-        {
-            meaning: "I am not currently studying.",
-            answer: ["我", "沒", "有", "在", "讀", "書"]
-        },
-        {
-            meaning: "Where are you?",
-            answer: ["你", "在", "哪", "裡"]
-        },
-        {
-            meaning: "Where do you study?",
-            answer: ["你", "在", "哪", "裡", "讀", "書"]
-        },
-        {
-            meaning: "Where do you work?",
-            answer: ["你", "在", "哪", "裡", "上", "班"]
-        },
-        {
-            meaning: "Are you at home?",
-            answer: ["你", "在", "家", "嗎"]
-        },
-        {
-            meaning: "Is he at school?",
-            answer: ["他", "在", "學", "校", "嗎"]
-        },
-        {
-            meaning: "Are you studying at school?",
-            answer: ["你", "在", "學", "校", "讀", "書", "嗎"]
-        },
-        {
-            meaning: "Is she exercising at the park?",
-            answer: ["她", "在", "公", "園", "運", "動", "嗎"]
-        },
-        {
-            meaning: "Are you at home or not?",
-            answer: ["你", "在", "不", "在", "家"]
-        },
-        {
-            meaning: "Is he at school or not?",
-            answer: ["他", "在", "不", "在", "學", "校"]
-        },
-        {
-            meaning: "School and park.",
-            answer: ["學", "校", "和", "公", "園"]
-        },
-        {
-            meaning: "I am at school and the park.",
-            answer: ["我", "在", "學", "校", "和", "公", "園"]
-        }
-    ]
-},
 // ============================================================
 // MAKE DATABASE AVAILABLE TO HTML
 // ============================================================
