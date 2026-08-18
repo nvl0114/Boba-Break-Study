@@ -454,7 +454,4 @@ const allLessonsData = {
             { meaning: "Are you at home?", answer: ["你", "在", "家", "嗎"] },
             { meaning: "Where do you study?", answer: ["你", "在", "哪", "裡", "讀", "書"] }
         ]
-    }
-
-
-    
+    },
