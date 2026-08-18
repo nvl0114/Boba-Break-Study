@@ -155,6 +155,7 @@ const allLessonsData = {
         vocabulary: [
             { hanzi: "男生", pinyin: "nánshēng", meaning: "boy / male student", category: "People" },
             { hanzi: "女生", pinyin: "nǚshēng", meaning: "girl / female student", category: "People" },
+{ hanzi: "學生", pinyin: "xuéshēng", meaning: "student", category: "People" },
             { hanzi: "孩子", pinyin: "háizi", meaning: "child", category: "Family" },
             { hanzi: "兒子", pinyin: "érzi", meaning: "son", category: "Family" },
             { hanzi: "女兒", pinyin: "nǚ'ér", meaning: "daughter", category: "Family" },
