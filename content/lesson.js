@@ -457,282 +457,58 @@ const allLessonsData = {
             { meaning: "Are you at home?", answer: ["你", "在", "家", "嗎"] },
             { meaning: "Where do you study?", answer: ["你", "在", "哪", "裡", "讀", "書"] }
         ]
-    }
-};
+    },
 
-    // ========================================================
+        // ========================================================
     // LESSON 8
     // ========================================================
     8: {
         grammar: [
             {
-                id: "s-you-o",
-                name: "S + 有 + O",
-                category: "Possession / Existence",
-                explanation: "有 (yǒu) means 'to have'. Use it after the subject to say that someone has something.",
-                examples: [
-                    "我有錢。", 
-                    "你有手機。", 
-                    "她有一台電腦。"
-                ]
+                id: "have-objects",
+                name: "S + 有 / 沒有 + O",
+                category: "Possession",
+                explanation: "Used to express having or not having something.",
+                examples: ["我有一本書。", "我沒有錢。", "你有原子筆嗎？", "你有沒有鉛筆？"]
             },
-
             {
-                id: "s-meiyou-o",
-                name: "S + 沒有 + O",
-                category: "Negative Possession",
-                explanation: "沒有 (méiyǒu) means 'do not have / there is not'. It is used to make 有 negative.",
-                examples: [
-                    "我沒有錢。", 
-                    "你沒有手機。", 
-                    "她沒有電腦。"
-                ]
+                id: "have-actions",
+                name: "S + 有 / 沒有 + V (+O)",
+                category: "Having Done / Experienced Actions",
+                explanation: "Used to express having or not having done an action. Can be answered with 有 or 沒有.",
+                examples: ["我有吃蛋糕。", "我沒有喝酒。", "你有記得嗎？", "有沒有學習英文？"]
             },
-
             {
-                id: "s-you-o-ma",
-                name: "S + 有 + O + 嗎",
-                category: "Yes / No Question",
-                explanation: "Add 嗎 (ma) at the end to ask whether someone has something.",
-                examples: [
-                    "你有錢嗎？",
-                    "你有手機嗎？",
-                    "她有電腦嗎？"
-                ]
-            },
-
-            {
-                id: "s-you-meiyou-o",
-                name: "S + 有沒有 + O",
-                category: "A-not-A Question",
-                explanation: "有沒有 (yǒu méiyǒu) is an A-not-A question pattern meaning 'Do you have...?' or 'Is there...?'",
-                examples: [
-                    "你有沒有錢？",
-                    "你有沒有手機？",
-                    "她有沒有電腦？"
-                ]
-            },
-
-            {
-                id: "you-meiyou-verb",
-                name: "有沒有 + Verb",
-                category: "Verb Question",
-                explanation: "有沒有 can also be used before a verb to ask whether an action has happened or whether someone has done something.",
-                examples: [
-                    "你有沒有吃飯？",
-                    "你有沒有喝水？",
-                    "你有沒有看書？"
-                ]
-            },
-
-            {
-                id: "answer-you",
-                name: "Answer with 有 / 沒有",
-                category: "Answer",
-                explanation: "Use 有 for a positive answer and 沒有 for a negative answer.",
-                examples: [
-                    "有。",
-                    "沒有。",
-                    "有，我有錢。",
-                    "沒有，我沒有錢。"
-                ]
+                id: "existential-location",
+                name: "Place + 有 + Thing / Person",
+                category: "Existence at Location",
+                explanation: "Used to indicate the existence of objects or people in a certain place.",
+                examples: ["桌子上有一台電腦。", "教室裡有學生。"]
             }
         ],
-
         vocabulary: [
-            { 
-                hanzi: "有", 
-                pinyin: "yǒu", 
-                meaning: "to have / there is / there are", 
-                category: "Verb" 
-            },
-
-            { 
-                hanzi: "沒有", 
-                pinyin: "méiyǒu", 
-                meaning: "do not have / there is not", 
-                category: "Negative Verb" 
-            },
-
-            { 
-                hanzi: "錢", 
-                pinyin: "qián", 
-                meaning: "money", 
-                category: "Noun" 
-            },
-
-            { 
-                hanzi: "手機", 
-                pinyin: "shǒujī", 
-                meaning: "mobile phone", 
-                category: "Object" 
-            },
-
-            { 
-                hanzi: "電腦", 
-                pinyin: "diànnǎo", 
-                meaning: "computer", 
-                category: "Object" 
-            },
-
-            { 
-                hanzi: "蛋糕", 
-                pinyin: "dàngāo", 
-                meaning: "cake", 
-                category: "Food" 
-            },
-
-            { 
-                hanzi: "包子", 
-                pinyin: "bāozi", 
-                meaning: "steamed bun", 
-                category: "Food" 
-            },
-
-            { 
-                hanzi: "湯", 
-                pinyin: "tāng", 
-                meaning: "soup", 
-                category: "Food" 
-            },
-
-            { 
-                hanzi: "牛肉麵", 
-                pinyin: "niúròumiàn", 
-                meaning: "beef noodle soup", 
-                category: "Food" 
-            },
-
-            { 
-                hanzi: "炸雞", 
-                pinyin: "zhájī", 
-                meaning: "fried chicken", 
-                category: "Food" 
-            },
-
-            { 
-                hanzi: "餃子", 
-                pinyin: "jiǎozi", 
-                meaning: "dumplings", 
-                category: "Food" 
-            },
-
-            { 
-                hanzi: "菜", 
-                pinyin: "cài", 
-                meaning: "vegetable / vegetables", 
-                category: "Food" 
-            },
-
-            { 
-                hanzi: "飯", 
-                pinyin: "fàn", 
-                meaning: "rice / meal", 
-                category: "Food" 
-            },
-
-            { 
-                hanzi: "水", 
-                pinyin: "shuǐ", 
-                meaning: "water", 
-                category: "Drink" 
-            },
-
-            { 
-                hanzi: "牛奶", 
-                pinyin: "niúnǎi", 
-                meaning: "milk", 
-                category: "Drink" 
-            },
-
-            { 
-                hanzi: "咖啡", 
-                pinyin: "kāfēi", 
-                meaning: "coffee", 
-                category: "Drink" 
-            },
-
-            { 
-                hanzi: "吃", 
-                pinyin: "chī", 
-                meaning: "to eat", 
-                category: "Verb" 
-            },
-
-            { 
-                hanzi: "喝", 
-                pinyin: "hē", 
-                meaning: "to drink", 
-                category: "Verb" 
-            },
-
-            { 
-                hanzi: "看", 
-                pinyin: "kàn", 
-                meaning: "to look / watch / read", 
-                category: "Verb" 
-            },
-
-            { 
-                hanzi: "買", 
-                pinyin: "mǎi", 
-                meaning: "to buy", 
-                category: "Verb" 
-            }
+            { hanzi: "錢", pinyin: "qián", meaning: "money", category: "Object" },
+            { hanzi: "本", pinyin: "běn", meaning: "measure word for books", category: "Measure Word" },
+            { hanzi: "台", pinyin: "tái", meaning: "measure word for machines/computers", category: "Measure Word" },
+            { hanzi: "原子筆", pinyin: "yuánzǐbǐ", meaning: "ballpoint pen", category: "Object" },
+            { hanzi: "鉛筆", pinyin: "qiānbǐ", meaning: "pencil", category: "Object" },
+            { hanzi: "蛋糕", pinyin: "dàngāo", meaning: "cake", category: "Food" },
+            { hanzi: "學習", pinyin: "xuéxí", meaning: "to study / learn", category: "Verb" },
+            { hanzi: "英文", pinyin: "yīngwén", meaning: "English language", category: "Language" },
+            { hanzi: "酒", pinyin: "jiǔ", meaning: "alcohol / wine", category: "Drink" },
+            { hanzi: "桌子", pinyin: "zhuōzi", meaning: "table / desk", category: "Object" },
+            { hanzi: "上", pinyin: "shàng", meaning: "on / above", category: "Direction" },
+            { hanzi: "記得", pinyin: "jìde", meaning: "to remember", category: "Verb" }
         ],
-
         reviewQuestions: [
-            {
-                meaning: "I have money.",
-                answer: ["我", "有", "錢"]
-            },
-
-            {
-                meaning: "I don't have money.",
-                answer: ["我", "沒", "有", "錢"]
-            },
-
-            {
-                meaning: "Do you have a mobile phone?",
-                answer: ["你", "有", "手", "機", "嗎"]
-            },
-
-            {
-                meaning: "Do you have cake?",
-                answer: ["你", "有", "蛋", "糕", "嗎"]
-            },
-
-            {
-                meaning: "Do you have dumplings?",
-                answer: ["你", "有", "沒有", "餃", "子"]
-            },
-
-            {
-                meaning: "Do you have beef noodle soup?",
-                answer: ["你", "有", "沒有", "牛", "肉", "麵"]
-            },
-
-            {
-                meaning: "Do you have fried chicken?",
-                answer: ["你", "有", "沒有", "炸", "雞"]
-            },
-
-            {
-                meaning: "Do you have vegetables?",
-                answer: ["你", "有", "沒有", "菜"]
-            },
-
-            {
-                meaning: "Did you eat?",
-                answer: ["你", "有", "沒有", "吃", "飯"]
-            },
-
-            {
-                meaning: "Did you drink water?",
-                answer: ["你", "有", "沒有", "喝", "水"]
-            }
+            { meaning: "I have a book.", answer: ["我", "有", "一", "本", "書"] },
+            { meaning: "I don't have money.", answer: ["我", "沒", "有", "錢"] },
+            { meaning: "Do you have a ballpoint pen?", answer: ["你", "有", "原", "子", "筆", "嗎"] },
+            { meaning: "Do you have a pencil or not?", answer: ["你", "有", "沒", "有", "鉛", "筆"] },
+            { meaning: "There is a computer on the desk.", answer: ["桌", "子", "上", "有", "一", "台", "電", "腦"] }
         ]
     }
+
 
 // ============================================================
 // MAKE DATABASE AVAILABLE TO HTML
