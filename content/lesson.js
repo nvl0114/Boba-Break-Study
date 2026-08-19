@@ -464,51 +464,105 @@ const allLessonsData = {
 // LESSON 8
 // 有 / 沒有
 // ========================================================
-8: {
-    grammar: [
-        {
-            id: "possession",
-            name: "S + 有 + O",
-            category: "Possession",
-            explanation: "Use 有 to say that someone has something or that something exists in a place.",
-            examples: [
-                "他有一本書。",
-                "媽媽有一盤菜。"
-            ]
-        },
-        {
-            id: "negative",
-            name: "S + 沒有 + O / V",
-            category: "Negative Sentence",
-            explanation: "Use 沒有 to say that someone does not have something or did not do something.",
-            examples: [
-                "我沒有錢。",
-                "他沒有五個包子。"
-            ]
-        },
-        {
-            id: "you-meiyou",
-            name: "S + 有沒有 + O / V",
-            category: "A-not-A Question",
-            explanation: "有沒有 is used to ask whether someone has something or whether an action happened.",
-            examples: [
-                "你有沒有錢？",
-                "你有沒有吃炸雞？",
-                "你有沒有喝湯？"
-            ]
-        },
-        {
-            id: "you-ma",
-            name: "S + 有 + O + 嗎",
-            category: "Yes / No Question",
-            explanation: "Use 嗎 after a sentence with 有 to form a yes / no question.",
-            examples: [
-                "你有錢嗎？",
-                "你有吃牛肉麵嗎？",
-                "他有包子嗎？"
-            ]
-        }
-    ],
+// ============================================================
+// Boba Break Study — Master Lesson Database (Lesson 8)
+// ============================================================
+
+const allLessonsData = {
+
+    // ========================================================
+    // LESSON 8: 有 (Yǒu) & 沒有 (Méiyǒu)
+    // ========================================================
+    8: {
+        title: "Expressing Possession & Actions with 有 / 沒有",
+        grammar: [
+            {
+                id: "possession",
+                name: "S + 有 / 沒有 + O",
+                category: "Possession & Noun Objects"
+            },
+            {
+                id: "action",
+                name: "S + 有 / 沒有 + V (+O)",
+                category: "Action Objects & Completion"
+            },
+            {
+                id: "short-answer",
+                name: "有 / 沒有",
+                category: "Short Answers"
+            },
+            {
+                id: "existence",
+                name: "Place + 有 + Thing / Person",
+                category: "Existence & Location"
+            }
+        ],
+        reviewQuestions: [
+            {
+                meaning: "I have a book",
+                answer: ["我", "有", "本", "書"]
+            },
+            {
+                meaning: "You do not have money",
+                answer: ["你", "沒", "有", "錢"]
+            },
+            {
+                meaning: "Do you have a steamed bun?",
+                answer: ["你", "有", "包", "子", "嗎"]
+            },
+            {
+                meaning: "Do you have fried chicken or not?",
+                answer: ["你", "有", "沒", "有", "炸", "雞"]
+            },
+            {
+                meaning: "There is soup on the table",
+                answer: ["桌", "子", "上", "有", "湯"]
+            },
+            {
+                meaning: "I study Chinese",
+                answer: ["我", "學", "習", "中", "文"]
+            },
+            {
+                meaning: "Open the door",
+                answer: ["開", "門"]
+            },
+            {
+                meaning: "Close the door",
+                answer: ["關", "門"]
+            },
+            {
+                meaning: "There are students inside the classroom",
+                answer: ["教", "室", "裡", "有", "學", "生"]
+            },
+            {
+                meaning: "Do you speak English?",
+                answer: ["你", "會", "說", "英", "文", "嗎"]
+            },
+            {
+                meaning: "He has beef noodles",
+                answer: ["他", "有", "牛", "肉", "麵"]
+            },
+            {
+                meaning: "Do you have dumplings?",
+                answer: ["你", "有", "餃", "子", "嗎"]
+            },
+            {
+                meaning: "I have practiced English",
+                answer: ["我", "有", "練", "習", "英", "文"]
+            },
+            {
+                meaning: "She does not have chicken",
+                answer: ["她", "沒", "有", "雞"]
+            },
+            {
+                meaning: "There are dumplings on the table",
+                answer: ["桌", "子", "上", "有", "餃", "子"]
+            }
+        ]
+    }
+
+};
+
 
     vocabulary: [
         { hanzi: "有", pinyin: "yǒu", meaning: "to have / there is / there are", category: "Grammar" },
@@ -542,22 +596,9 @@ const allLessonsData = {
         { hanzi: "講", pinyin: "jiǎng", meaning: "to speak / tell", category: "Verb" },
         { hanzi: "說", pinyin: "shuō", meaning: "to say / speak", category: "Verb" }
     ],
+    }
 
-    reviewQuestions: [
-        {
-            meaning: "He has a book",
-            answer: ["他", "有", "一", "本", "書"]
-        },
-        {
-            meaning: "I do not have money",
-            answer: ["我", "沒", "有", "錢"]
-        },
-        {
-            meaning: "Do you eat beef noodles?",
-            answer: ["你", "有", "吃", "牛", "肉", "麵", "嗎"]
-        }
-    ]
-},
+};
 
       
 // ============================================================
