@@ -460,6 +460,209 @@ const allLessonsData = {
     }
 };
 
+    // ========================================================
+    // LESSON 8
+    // ========================================================
+    8: {
+        grammar: [
+            {
+                id: "you-possession",
+                name: "S + 有 + O",
+                category: "Possession",
+                explanation: "Use 有 (yǒu) to say that someone has or possesses something.",
+                examples: [
+                    "我有一本書。",
+                    "他有牛肉麵。",
+                    "她有餃子。"
+                ]
+            },
+            {
+                id: "mei-you-possession",
+                name: "S + 沒有 + O",
+                category: "Negative Possession",
+                explanation: "Use 沒有 (méiyǒu) to say that someone does not have something.",
+                examples: [
+                    "我沒有錢。",
+                    "她沒有雞。",
+                    "你沒有餃子。"
+                ]
+            },
+            {
+                id: "you-o-ma",
+                name: "S + 有 + O + 嗎",
+                category: "Possession Question",
+                explanation: "Add 嗎 (ma) at the end of a sentence with 有 to ask whether someone has something.",
+                examples: [
+                    "你有書嗎？",
+                    "你有包子嗎？",
+                    "你有餃子嗎？"
+                ]
+            },
+            {
+                id: "you-mei-you-o",
+                name: "S + 有沒有 + O",
+                category: "A-not-A Question",
+                explanation: "Use 有沒有 (yǒu méiyǒu) to ask whether someone has something or not.",
+                examples: [
+                    "你有沒有錢？",
+                    "你有沒有炸雞？",
+                    "你有沒有餃子？"
+                ]
+            },
+            {
+                id: "you-mei-you-v-o",
+                name: "S + 有沒有 + V + O",
+                category: "Action Question",
+                explanation: "有沒有 can also be used before a verb-object phrase to ask whether someone has done or experienced an action.",
+                examples: [
+                    "你有沒有學習中文？",
+                    "你有沒有練習英文？",
+                    "你有沒有講中文？"
+                ]
+            },
+            {
+                id: "you-v-o",
+                name: "S + 有 + V + O",
+                category: "Action Completion",
+                explanation: "有 can be placed before a verb or verb-object phrase to indicate that an action has been done or experienced.",
+                examples: [
+                    "我有學習中文。",
+                    "我有練習英文。",
+                    "我有講中文。"
+                ]
+            },
+            {
+                id: "mei-you-v-o",
+                name: "S + 沒有 + V + O",
+                category: "Negative Action Completion",
+                explanation: "沒有 can be placed before a verb or verb-object phrase to indicate that an action has not been done or experienced.",
+                examples: [
+                    "我沒有學習中文。",
+                    "我沒有練習英文。",
+                    "我沒有講英文。"
+                ]
+            },
+            {
+                id: "answer-you-meiyou",
+                name: "Answer with 有 / 沒有",
+                category: "Answer",
+                explanation: "Questions using 有 or 有沒有 can be answered briefly with 有 for an affirmative answer or 沒有 for a negative answer.",
+                examples: [
+                    "有。",
+                    "沒有。",
+                    "有，我有書。",
+                    "沒有，我沒有錢。"
+                ]
+            },
+            {
+                id: "place-you-thing",
+                name: "Place + 有 + Thing / Person",
+                category: "Existence",
+                explanation: "Use 有 after a location to say that something or someone exists in that place.",
+                examples: [
+                    "桌子上有一個包子。",
+                    "教室裡有學生。",
+                    "桌子上有餃子。"
+                ]
+            }
+        ],
+
+        vocabulary: [
+            { hanzi: "有", pinyin: "yǒu", meaning: "to have / there is / there are", category: "Grammar" },
+            { hanzi: "沒有", pinyin: "méiyǒu", meaning: "not have / there is not / there are not", category: "Grammar" },
+            { hanzi: "本", pinyin: "běn", meaning: "measure word for books", category: "Measure Word" },
+            { hanzi: "書", pinyin: "shū", meaning: "book", category: "Object" },
+            { hanzi: "錢", pinyin: "qián", meaning: "money", category: "Object" },
+            { hanzi: "包子", pinyin: "bāozi", meaning: "steamed bun", category: "Food" },
+            { hanzi: "餃子", pinyin: "jiǎozi", meaning: "dumpling", category: "Food" },
+            { hanzi: "湯", pinyin: "tāng", meaning: "soup", category: "Food" },
+            { hanzi: "牛", pinyin: "niú", meaning: "cow / ox", category: "Food" },
+            { hanzi: "肉", pinyin: "ròu", meaning: "meat", category: "Food" },
+            { hanzi: "麵", pinyin: "miàn", meaning: "noodles", category: "Food" },
+            { hanzi: "牛肉麵", pinyin: "niúròu miàn", meaning: "beef noodles", category: "Food" },
+            { hanzi: "炸", pinyin: "zhá", meaning: "to deep-fry", category: "Cooking" },
+            { hanzi: "雞", pinyin: "jī", meaning: "chicken", category: "Food" },
+            { hanzi: "炸雞", pinyin: "zhájī", meaning: "fried chicken", category: "Food" },
+            { hanzi: "菜", pinyin: "cài", meaning: "dish / vegetable", category: "Food" },
+            { hanzi: "桌子", pinyin: "zhuōzi", meaning: "table / desk", category: "Object" },
+            { hanzi: "上", pinyin: "shàng", meaning: "on / above", category: "Location" },
+            { hanzi: "裡", pinyin: "lǐ", meaning: "inside", category: "Location" },
+            { hanzi: "碗", pinyin: "wǎn", meaning: "measure word for bowls", category: "Measure Word" },
+            { hanzi: "根", pinyin: "gēn", meaning: "measure word for long / slender objects", category: "Measure Word" },
+            { hanzi: "盤", pinyin: "pán", meaning: "measure word for plates / dishes", category: "Measure Word" },
+            { hanzi: "開", pinyin: "kāi", meaning: "to open", category: "Verb" },
+            { hanzi: "關", pinyin: "guān", meaning: "to close", category: "Verb" },
+            { hanzi: "門", pinyin: "mén", meaning: "door", category: "Object" },
+            { hanzi: "學習", pinyin: "xuéxí", meaning: "to study / learn", category: "Verb" },
+            { hanzi: "練習", pinyin: "liànxí", meaning: "to practice", category: "Verb" },
+            { hanzi: "英文", pinyin: "yīngwén", meaning: "English language", category: "Language" },
+            { hanzi: "講", pinyin: "jiǎng", meaning: "to speak / tell", category: "Verb" },
+            { hanzi: "說", pinyin: "shuō", meaning: "to say / speak", category: "Verb" }
+        ],
+
+        reviewQuestions: [
+            {
+                meaning: "I have a book.",
+                answer: ["我", "有", "本", "書"]
+            },
+            {
+                meaning: "You do not have money.",
+                answer: ["你", "沒", "有", "錢"]
+            },
+            {
+                meaning: "Do you have a steamed bun?",
+                answer: ["你", "有", "包", "子", "嗎"]
+            },
+            {
+                meaning: "Do you have fried chicken or not?",
+                answer: ["你", "有", "沒", "有", "炸", "雞"]
+            },
+            {
+                meaning: "There is soup on the table.",
+                answer: ["桌", "子", "上", "有", "湯"]
+            },
+            {
+                meaning: "I study Chinese.",
+                answer: ["我", "學", "習", "中", "文"]
+            },
+            {
+                meaning: "Open the door.",
+                answer: ["開", "門"]
+            },
+            {
+                meaning: "Close the door.",
+                answer: ["關", "門"]
+            },
+            {
+                meaning: "There are students inside the classroom.",
+                answer: ["教", "室", "裡", "有", "學", "生"]
+            },
+            {
+                meaning: "Do you speak English?",
+                answer: ["你", "會", "說", "英", "文", "嗎"]
+            },
+            {
+                meaning: "He has beef noodles.",
+                answer: ["他", "有", "牛", "肉", "麵"]
+            },
+            {
+                meaning: "Do you have dumplings?",
+                answer: ["你", "有", "餃", "子", "嗎"]
+            },
+            {
+                meaning: "I have practiced English.",
+                answer: ["我", "有", "練", "習", "英", "文"]
+            },
+            {
+                meaning: "She does not have chicken.",
+                answer: ["她", "沒", "有", "雞"]
+            },
+            {
+                meaning: "There are dumplings on the table.",
+                answer: ["桌", "子", "上", "有", "餃", "子"]
+            }
+        ]
+    },
 
 // ============================================================
 // MAKE DATABASE AVAILABLE TO HTML
