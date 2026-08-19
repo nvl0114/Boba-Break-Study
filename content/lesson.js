@@ -8,6 +8,7 @@ const allLessonsData = {
     // LESSON 1
     // ========================================================
     1: {
+        title: "Basic Sentence Structure & Simple Actions",
         grammar: [
             {
                 id: "svo",
@@ -72,6 +73,7 @@ const allLessonsData = {
     // LESSON 2
     // ========================================================
     2: {
+        title: "Possession with 的 (De)",
         grammar: [
             {
                 id: "de",
@@ -114,6 +116,7 @@ const allLessonsData = {
     // LESSON 3
     // ========================================================
     3: {
+        title: "Identity & Roles with 是 (Shì)",
         grammar: [
             {
                 id: "shi",
@@ -185,6 +188,7 @@ const allLessonsData = {
     // LESSON 4
     // ========================================================
     4: {
+        title: "Adjectives & States with 很 (Hěn)",
         grammar: [
             {
                 id: "s-hen-adj",
@@ -250,6 +254,7 @@ const allLessonsData = {
     // LESSON 5
     // ========================================================
     5: {
+        title: "Measure Words & Demonstratives (個)",
         grammar: [
             {
                 id: "measure-word-ge",
@@ -298,6 +303,7 @@ const allLessonsData = {
     // LESSON 6
     // ========================================================
     6: {
+        title: "Self-Introductions, Names & Age",
         grammar: [
             {
                 id: "jiao-what-name",
@@ -395,6 +401,7 @@ const allLessonsData = {
     // LESSON 7
     // ========================================================
     7: {
+        title: "Locations, Actions & Ongoing States (在)",
         grammar: [
             {
                 id: "zài-location",
@@ -457,11 +464,12 @@ const allLessonsData = {
             { meaning: "Where do you study?", answer: ["你", "在", "哪", "裡", "讀", "書"] }
         ]
     },
-// ========================================================  
+
+
+    // ========================================================  
     // LESSON 8: 有 (Yǒu) & 沒有 (Méiyǒu)  
     // ========================================================  
-
-8: {  
+    8: {  
         title: "Expressing Possession & Actions with 有 / 沒有",  
         grammar: [  
             {  
@@ -528,20 +536,17 @@ const allLessonsData = {
             { meaning: "Close the door", answer: ["關", "門"] },  
             { meaning: "There are students inside the classroom", answer: ["教", "室", "裡", "有", "學", "生"] },  
             { meaning: "Do you speak English?", answer: ["你", "會", "說", "英", "文", "嗎"] },  
-            { meaning: "He has beef noodles", answer: ["他", "有", "牛", "肉", "麵"] },  
+            { meaning: "He has beef noodles", answer: ["tā", "有", "牛", "肉", "麵"] },  
             { meaning: "Do you have dumplings?", answer: ["你", "有", "餃", "子", "嗎"] },  
             { meaning: "I have practiced English", answer: ["我", "有", "練", "習", "英", "文"] },  
             { meaning: "She does not have chicken", answer: ["她", "沒", "有", "雞"] },  
             { meaning: "There are dumplings on the table", answer: ["桌", "子", "上", "有", "餃", "子"] }  
         ]  
     }  
-  
+
 };  
-  
-    
 
 // ============================================================
 // MAKE DATABASE AVAILABLE TO HTML
 // ============================================================
-
 window.allLessonsData = allLessonsData;
