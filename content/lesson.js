@@ -509,6 +509,7 @@ const allLessonsData = {
         ]
     }
 
+};
 
 // ============================================================
 // MAKE DATABASE AVAILABLE TO HTML
