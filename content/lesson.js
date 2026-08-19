@@ -463,109 +463,54 @@ const allLessonsData = {
     // ========================================================
     // LESSON 8
     // ========================================================
+    // ============================================================
+// Boba Break Study — Lesson 8 Data (有 & 沒有)
+// ============================================================
+
+const allLessonsData = {
     8: {
+        title: "Expressing Possession & Actions with 有 / 沒有",
         grammar: [
             {
-                id: "you-possession",
-                name: "S + 有 + O",
-                category: "Possession",
-                explanation: "Use 有 (yǒu) to say that someone has or possesses something.",
+                id: "possession",
+                title: "Positive Sentences",
+                pattern: "S + 有 + O",
+                explanation: "Use 有 to state what someone or a location has.",
                 examples: [
-                    "我有一本書。",
-                    "他有牛肉麵。",
-                    "她有餃子。"
+                    { hanzi: "他有一本書", pinyin: "Tā yǒu yī běn shū", meaning: "He has a book" },
+                    { hanzi: "媽媽有一盤菜", pinyin: "Māma yǒu yī pán cài", meaning: "Mom has a plate of dishes" }
                 ]
             },
             {
-                id: "mei-you-possession",
-                name: "S + 沒有 + O",
-                category: "Negative Possession",
-                explanation: "Use 沒有 (méiyǒu) to say that someone does not have something.",
+                id: "negative",
+                title: "Negative Sentences",
+                pattern: "S + 沒有 + O / V",
+                explanation: "Use 沒有 to state what someone does not have or has not done.",
                 examples: [
-                    "我沒有錢。",
-                    "她沒有雞。",
-                    "你沒有餃子。"
+                    { hanzi: "我沒有錢", pinyin: "Wǒ méiyǒu qián", meaning: "I do not have money" },
+                    { hanzi: "他沒有五個包子", pinyin: "Tā méiyǒu wǔ gè bāozi", meaning: "He does not have five steamed buns" }
                 ]
             },
             {
-                id: "you-o-ma",
-                name: "S + 有 + O + 嗎",
-                category: "Possession Question",
-                explanation: "Add 嗎 (ma) at the end of a sentence with 有 to ask whether someone has something.",
+                id: "interrogative",
+                title: "Interrogative Questions",
+                pattern: "Questions with 嗎 or 有沒有",
+                explanation: "Form questions using 嗎 or the A-not-A format.",
                 examples: [
-                    "你有書嗎？",
-                    "你有包子嗎？",
-                    "你有餃子嗎？"
-                ]
-            },
-            {
-                id: "you-mei-you-o",
-                name: "S + 有沒有 + O",
-                category: "A-not-A Question",
-                explanation: "Use 有沒有 (yǒu méiyǒu) to ask whether someone has something or not.",
-                examples: [
-                    "你有沒有錢？",
-                    "你有沒有炸雞？",
-                    "你有沒有餃子？"
-                ]
-            },
-            {
-                id: "you-mei-you-v-o",
-                name: "S + 有沒有 + V + O",
-                category: "Action Question",
-                explanation: "有沒有 can also be used before a verb-object phrase to ask whether someone has done or experienced an action.",
-                examples: [
-                    "你有沒有學習中文？",
-                    "你有沒有練習英文？",
-                    "你有沒有講中文？"
-                ]
-            },
-            {
-                id: "you-v-o",
-                name: "S + 有 + V + O",
-                category: "Action Completion",
-                explanation: "有 can be placed before a verb or verb-object phrase to indicate that an action has been done or experienced.",
-                examples: [
-                    "我有學習中文。",
-                    "我有練習英文。",
-                    "我有講中文。"
-                ]
-            },
-            {
-                id: "mei-you-v-o",
-                name: "S + 沒有 + V + O",
-                category: "Negative Action Completion",
-                explanation: "沒有 can be placed before a verb or verb-object phrase to indicate that an action has not been done or experienced.",
-                examples: [
-                    "我沒有學習中文。",
-                    "我沒有練習英文。",
-                    "我沒有講英文。"
-                ]
-            },
-            {
-                id: "answer-you-meiyou",
-                name: "Answer with 有 / 沒有",
-                category: "Answer",
-                explanation: "Questions using 有 or 有沒有 can be answered briefly with 有 for an affirmative answer or 沒有 for a negative answer.",
-                examples: [
-                    "有。",
-                    "沒有。",
-                    "有，我有書。",
-                    "沒有，我沒有錢。"
-                ]
-            },
-            {
-                id: "place-you-thing",
-                name: "Place + 有 + Thing / Person",
-                category: "Existence",
-                explanation: "Use 有 after a location to say that something or someone exists in that place.",
-                examples: [
-                    "桌子上有一個包子。",
-                    "教室裡有學生。",
-                    "桌子上有餃子。"
+                    { hanzi: "你有吃牛肉麵嗎？", pinyin: "Nǐ yǒu chī niúròu miàn ma?", meaning: "Do you eat beef noodles?" },
+                    { hanzi: "你有沒有吃炸雞？", pinyin: "Nǐ yǒu méiyǒu chī zhájī?", meaning: "Did you eat fried chicken or not?" }
                 ]
             }
         ],
+        // 3 Pertanyaan untuk Grammar Master Challenge di HTML
+        reviewQuestions: [
+            { meaning: "He has a book", answer: ["他", "有", "一", "本", "書"] },
+            { meaning: "I do not have money", answer: ["我", "沒", "有", "錢"] },
+            { meaning: "Do you eat beef noodles?", answer: ["你", "有", "吃", "牛", "肉", "麵", "嗎"] }
+        ]
+    }
+};
+
 
         vocabulary: [
             { hanzi: "有", pinyin: "yǒu", meaning: "to have / there is / there are", category: "Grammar" },
@@ -600,27 +545,7 @@ const allLessonsData = {
             { hanzi: "說", pinyin: "shuō", meaning: "to say / speak", category: "Verb" }
         ],
 
-        reviewQuestions: [
-            
-            {
-                meaning: "You do not have money.",
-                answer: ["你", "沒", "有", "錢"]
-            },
-            
-       
-            {
-                meaning: "Do you have fried chicken or not?",
-                answer: ["你", "有", "沒", "有", "炸", "雞"]
-            },
-            {
-                meaning: "There is soup on the table.",
-                answer: ["桌", "子", "上", "有", "湯"]
-            },
-            
-            
-        ]
-    },
-
+      
 // ============================================================
 // MAKE DATABASE AVAILABLE TO HTML
 // ============================================================
