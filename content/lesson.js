@@ -461,89 +461,103 @@ const allLessonsData = {
 };
 
     // ========================================================
-    // LESSON 8
-    // ========================================================
-    // ============================================================
-// Boba Break Study — Lesson 8 Data (有 & 沒有)
-// ============================================================
+// LESSON 8
+// 有 / 沒有
+// ========================================================
+8: {
+    grammar: [
+        {
+            id: "possession",
+            name: "S + 有 + O",
+            category: "Possession",
+            explanation: "Use 有 to say that someone has something or that something exists in a place.",
+            examples: [
+                "他有一本書。",
+                "媽媽有一盤菜。"
+            ]
+        },
+        {
+            id: "negative",
+            name: "S + 沒有 + O / V",
+            category: "Negative Sentence",
+            explanation: "Use 沒有 to say that someone does not have something or did not do something.",
+            examples: [
+                "我沒有錢。",
+                "他沒有五個包子。"
+            ]
+        },
+        {
+            id: "you-meiyou",
+            name: "S + 有沒有 + O / V",
+            category: "A-not-A Question",
+            explanation: "有沒有 is used to ask whether someone has something or whether an action happened.",
+            examples: [
+                "你有沒有錢？",
+                "你有沒有吃炸雞？",
+                "你有沒有喝湯？"
+            ]
+        },
+        {
+            id: "you-ma",
+            name: "S + 有 + O + 嗎",
+            category: "Yes / No Question",
+            explanation: "Use 嗎 after a sentence with 有 to form a yes / no question.",
+            examples: [
+                "你有錢嗎？",
+                "你有吃牛肉麵嗎？",
+                "他有包子嗎？"
+            ]
+        }
+    ],
 
-const allLessonsData = {
-    8: {
-        title: "Expressing Possession & Actions with 有 / 沒有",
-        grammar: [
-            {
-                id: "possession",
-                title: "Positive Sentences",
-                pattern: "S + 有 + O",
-                explanation: "Use 有 to state what someone or a location has.",
-                examples: [
-                    { hanzi: "他有一本書", pinyin: "Tā yǒu yī běn shū", meaning: "He has a book" },
-                    { hanzi: "媽媽有一盤菜", pinyin: "Māma yǒu yī pán cài", meaning: "Mom has a plate of dishes" }
-                ]
-            },
-            {
-                id: "negative",
-                title: "Negative Sentences",
-                pattern: "S + 沒有 + O / V",
-                explanation: "Use 沒有 to state what someone does not have or has not done.",
-                examples: [
-                    { hanzi: "我沒有錢", pinyin: "Wǒ méiyǒu qián", meaning: "I do not have money" },
-                    { hanzi: "他沒有五個包子", pinyin: "Tā méiyǒu wǔ gè bāozi", meaning: "He does not have five steamed buns" }
-                ]
-            },
-            {
-                id: "interrogative",
-                title: "Interrogative Questions",
-                pattern: "Questions with 嗎 or 有沒有",
-                explanation: "Form questions using 嗎 or the A-not-A format.",
-                examples: [
-                    { hanzi: "你有吃牛肉麵嗎？", pinyin: "Nǐ yǒu chī niúròu miàn ma?", meaning: "Do you eat beef noodles?" },
-                    { hanzi: "你有沒有吃炸雞？", pinyin: "Nǐ yǒu méiyǒu chī zhájī?", meaning: "Did you eat fried chicken or not?" }
-                ]
-            }
-        ],
-        // 3 Pertanyaan untuk Grammar Master Challenge di HTML
-        reviewQuestions: [
-            { meaning: "He has a book", answer: ["他", "有", "一", "本", "書"] },
-            { meaning: "I do not have money", answer: ["我", "沒", "有", "錢"] },
-            { meaning: "Do you eat beef noodles?", answer: ["你", "有", "吃", "牛", "肉", "麵", "嗎"] }
-        ]
-    }
-};
+    vocabulary: [
+        { hanzi: "有", pinyin: "yǒu", meaning: "to have / there is / there are", category: "Grammar" },
+        { hanzi: "沒有", pinyin: "méiyǒu", meaning: "not have / there is not / there are not", category: "Grammar" },
+        { hanzi: "本", pinyin: "běn", meaning: "measure word for books", category: "Measure Word" },
+        { hanzi: "書", pinyin: "shū", meaning: "book", category: "Object" },
+        { hanzi: "錢", pinyin: "qián", meaning: "money", category: "Object" },
+        { hanzi: "包子", pinyin: "bāozi", meaning: "steamed bun", category: "Food" },
+        { hanzi: "餃子", pinyin: "jiǎozi", meaning: "dumpling", category: "Food" },
+        { hanzi: "湯", pinyin: "tāng", meaning: "soup", category: "Food" },
+        { hanzi: "牛", pinyin: "niú", meaning: "cow / ox", category: "Food" },
+        { hanzi: "肉", pinyin: "ròu", meaning: "meat", category: "Food" },
+        { hanzi: "麵", pinyin: "miàn", meaning: "noodles", category: "Food" },
+        { hanzi: "牛肉麵", pinyin: "niúròu miàn", meaning: "beef noodles", category: "Food" },
+        { hanzi: "炸", pinyin: "zhá", meaning: "to deep-fry", category: "Cooking" },
+        { hanzi: "雞", pinyin: "jī", meaning: "chicken", category: "Food" },
+        { hanzi: "炸雞", pinyin: "zhájī", meaning: "fried chicken", category: "Food" },
+        { hanzi: "菜", pinyin: "cài", meaning: "dish / vegetable", category: "Food" },
+        { hanzi: "桌子", pinyin: "zhuōzi", meaning: "table / desk", category: "Object" },
+        { hanzi: "上", pinyin: "shàng", meaning: "on / above", category: "Location" },
+        { hanzi: "裡", pinyin: "lǐ", meaning: "inside", category: "Location" },
+        { hanzi: "碗", pinyin: "wǎn", meaning: "measure word for bowls", category: "Measure Word" },
+        { hanzi: "根", pinyin: "gēn", meaning: "measure word for long / slender objects", category: "Measure Word" },
+        { hanzi: "盤", pinyin: "pán", meaning: "measure word for plates / dishes", category: "Measure Word" },
+        { hanzi: "開", pinyin: "kāi", meaning: "to open", category: "Verb" },
+        { hanzi: "關", pinyin: "guān", meaning: "to close", category: "Verb" },
+        { hanzi: "門", pinyin: "mén", meaning: "door", category: "Object" },
+        { hanzi: "學習", pinyin: "xuéxí", meaning: "to study / learn", category: "Verb" },
+        { hanzi: "練習", pinyin: "liànxí", meaning: "to practice", category: "Verb" },
+        { hanzi: "英文", pinyin: "yīngwén", meaning: "English language", category: "Language" },
+        { hanzi: "講", pinyin: "jiǎng", meaning: "to speak / tell", category: "Verb" },
+        { hanzi: "說", pinyin: "shuō", meaning: "to say / speak", category: "Verb" }
+    ],
 
-
-        vocabulary: [
-            { hanzi: "有", pinyin: "yǒu", meaning: "to have / there is / there are", category: "Grammar" },
-            { hanzi: "沒有", pinyin: "méiyǒu", meaning: "not have / there is not / there are not", category: "Grammar" },
-            { hanzi: "本", pinyin: "běn", meaning: "measure word for books", category: "Measure Word" },
-            { hanzi: "書", pinyin: "shū", meaning: "book", category: "Object" },
-            { hanzi: "錢", pinyin: "qián", meaning: "money", category: "Object" },
-            { hanzi: "包子", pinyin: "bāozi", meaning: "steamed bun", category: "Food" },
-            { hanzi: "餃子", pinyin: "jiǎozi", meaning: "dumpling", category: "Food" },
-            { hanzi: "湯", pinyin: "tāng", meaning: "soup", category: "Food" },
-            { hanzi: "牛", pinyin: "niú", meaning: "cow / ox", category: "Food" },
-            { hanzi: "肉", pinyin: "ròu", meaning: "meat", category: "Food" },
-            { hanzi: "麵", pinyin: "miàn", meaning: "noodles", category: "Food" },
-            { hanzi: "牛肉麵", pinyin: "niúròu miàn", meaning: "beef noodles", category: "Food" },
-            { hanzi: "炸", pinyin: "zhá", meaning: "to deep-fry", category: "Cooking" },
-            { hanzi: "雞", pinyin: "jī", meaning: "chicken", category: "Food" },
-            { hanzi: "炸雞", pinyin: "zhájī", meaning: "fried chicken", category: "Food" },
-            { hanzi: "菜", pinyin: "cài", meaning: "dish / vegetable", category: "Food" },
-            { hanzi: "桌子", pinyin: "zhuōzi", meaning: "table / desk", category: "Object" },
-            { hanzi: "上", pinyin: "shàng", meaning: "on / above", category: "Location" },
-            { hanzi: "裡", pinyin: "lǐ", meaning: "inside", category: "Location" },
-            { hanzi: "碗", pinyin: "wǎn", meaning: "measure word for bowls", category: "Measure Word" },
-            { hanzi: "根", pinyin: "gēn", meaning: "measure word for long / slender objects", category: "Measure Word" },
-            { hanzi: "盤", pinyin: "pán", meaning: "measure word for plates / dishes", category: "Measure Word" },
-            { hanzi: "開", pinyin: "kāi", meaning: "to open", category: "Verb" },
-            { hanzi: "關", pinyin: "guān", meaning: "to close", category: "Verb" },
-            { hanzi: "門", pinyin: "mén", meaning: "door", category: "Object" },
-            { hanzi: "學習", pinyin: "xuéxí", meaning: "to study / learn", category: "Verb" },
-            { hanzi: "練習", pinyin: "liànxí", meaning: "to practice", category: "Verb" },
-            { hanzi: "英文", pinyin: "yīngwén", meaning: "English language", category: "Language" },
-            { hanzi: "講", pinyin: "jiǎng", meaning: "to speak / tell", category: "Verb" },
-            { hanzi: "說", pinyin: "shuō", meaning: "to say / speak", category: "Verb" }
-        ],
+    reviewQuestions: [
+        {
+            meaning: "He has a book",
+            answer: ["他", "有", "一", "本", "書"]
+        },
+        {
+            meaning: "I do not have money",
+            answer: ["我", "沒", "有", "錢"]
+        },
+        {
+            meaning: "Do you eat beef noodles?",
+            answer: ["你", "有", "吃", "牛", "肉", "麵", "嗎"]
+        }
+    ]
+},
 
       
 // ============================================================
