@@ -460,6 +460,279 @@ const allLessonsData = {
     }
 };
 
+    // ========================================================
+    // LESSON 8
+    // ========================================================
+    8: {
+        grammar: [
+            {
+                id: "s-you-o",
+                name: "S + 有 + O",
+                category: "Possession / Existence",
+                explanation: "有 (yǒu) means 'to have'. Use it after the subject to say that someone has something.",
+                examples: [
+                    "我有錢。", 
+                    "你有手機。", 
+                    "她有一台電腦。"
+                ]
+            },
+
+            {
+                id: "s-meiyou-o",
+                name: "S + 沒有 + O",
+                category: "Negative Possession",
+                explanation: "沒有 (méiyǒu) means 'do not have / there is not'. It is used to make 有 negative.",
+                examples: [
+                    "我沒有錢。", 
+                    "你沒有手機。", 
+                    "她沒有電腦。"
+                ]
+            },
+
+            {
+                id: "s-you-o-ma",
+                name: "S + 有 + O + 嗎",
+                category: "Yes / No Question",
+                explanation: "Add 嗎 (ma) at the end to ask whether someone has something.",
+                examples: [
+                    "你有錢嗎？",
+                    "你有手機嗎？",
+                    "她有電腦嗎？"
+                ]
+            },
+
+            {
+                id: "s-you-meiyou-o",
+                name: "S + 有沒有 + O",
+                category: "A-not-A Question",
+                explanation: "有沒有 (yǒu méiyǒu) is an A-not-A question pattern meaning 'Do you have...?' or 'Is there...?'",
+                examples: [
+                    "你有沒有錢？",
+                    "你有沒有手機？",
+                    "她有沒有電腦？"
+                ]
+            },
+
+            {
+                id: "you-meiyou-verb",
+                name: "有沒有 + Verb",
+                category: "Verb Question",
+                explanation: "有沒有 can also be used before a verb to ask whether an action has happened or whether someone has done something.",
+                examples: [
+                    "你有沒有吃飯？",
+                    "你有沒有喝水？",
+                    "你有沒有看書？"
+                ]
+            },
+
+            {
+                id: "answer-you",
+                name: "Answer with 有 / 沒有",
+                category: "Answer",
+                explanation: "Use 有 for a positive answer and 沒有 for a negative answer.",
+                examples: [
+                    "有。",
+                    "沒有。",
+                    "有，我有錢。",
+                    "沒有，我沒有錢。"
+                ]
+            }
+        ],
+
+        vocabulary: [
+            { 
+                hanzi: "有", 
+                pinyin: "yǒu", 
+                meaning: "to have / there is / there are", 
+                category: "Verb" 
+            },
+
+            { 
+                hanzi: "沒有", 
+                pinyin: "méiyǒu", 
+                meaning: "do not have / there is not", 
+                category: "Negative Verb" 
+            },
+
+            { 
+                hanzi: "錢", 
+                pinyin: "qián", 
+                meaning: "money", 
+                category: "Noun" 
+            },
+
+            { 
+                hanzi: "手機", 
+                pinyin: "shǒujī", 
+                meaning: "mobile phone", 
+                category: "Object" 
+            },
+
+            { 
+                hanzi: "電腦", 
+                pinyin: "diànnǎo", 
+                meaning: "computer", 
+                category: "Object" 
+            },
+
+            { 
+                hanzi: "蛋糕", 
+                pinyin: "dàngāo", 
+                meaning: "cake", 
+                category: "Food" 
+            },
+
+            { 
+                hanzi: "包子", 
+                pinyin: "bāozi", 
+                meaning: "steamed bun", 
+                category: "Food" 
+            },
+
+            { 
+                hanzi: "湯", 
+                pinyin: "tāng", 
+                meaning: "soup", 
+                category: "Food" 
+            },
+
+            { 
+                hanzi: "牛肉麵", 
+                pinyin: "niúròumiàn", 
+                meaning: "beef noodle soup", 
+                category: "Food" 
+            },
+
+            { 
+                hanzi: "炸雞", 
+                pinyin: "zhájī", 
+                meaning: "fried chicken", 
+                category: "Food" 
+            },
+
+            { 
+                hanzi: "餃子", 
+                pinyin: "jiǎozi", 
+                meaning: "dumplings", 
+                category: "Food" 
+            },
+
+            { 
+                hanzi: "菜", 
+                pinyin: "cài", 
+                meaning: "vegetable / vegetables", 
+                category: "Food" 
+            },
+
+            { 
+                hanzi: "飯", 
+                pinyin: "fàn", 
+                meaning: "rice / meal", 
+                category: "Food" 
+            },
+
+            { 
+                hanzi: "水", 
+                pinyin: "shuǐ", 
+                meaning: "water", 
+                category: "Drink" 
+            },
+
+            { 
+                hanzi: "牛奶", 
+                pinyin: "niúnǎi", 
+                meaning: "milk", 
+                category: "Drink" 
+            },
+
+            { 
+                hanzi: "咖啡", 
+                pinyin: "kāfēi", 
+                meaning: "coffee", 
+                category: "Drink" 
+            },
+
+            { 
+                hanzi: "吃", 
+                pinyin: "chī", 
+                meaning: "to eat", 
+                category: "Verb" 
+            },
+
+            { 
+                hanzi: "喝", 
+                pinyin: "hē", 
+                meaning: "to drink", 
+                category: "Verb" 
+            },
+
+            { 
+                hanzi: "看", 
+                pinyin: "kàn", 
+                meaning: "to look / watch / read", 
+                category: "Verb" 
+            },
+
+            { 
+                hanzi: "買", 
+                pinyin: "mǎi", 
+                meaning: "to buy", 
+                category: "Verb" 
+            }
+        ],
+
+        reviewQuestions: [
+            {
+                meaning: "I have money.",
+                answer: ["我", "有", "錢"]
+            },
+
+            {
+                meaning: "I don't have money.",
+                answer: ["我", "沒", "有", "錢"]
+            },
+
+            {
+                meaning: "Do you have a mobile phone?",
+                answer: ["你", "有", "手", "機", "嗎"]
+            },
+
+            {
+                meaning: "Do you have cake?",
+                answer: ["你", "有", "蛋", "糕", "嗎"]
+            },
+
+            {
+                meaning: "Do you have dumplings?",
+                answer: ["你", "有", "沒有", "餃", "子"]
+            },
+
+            {
+                meaning: "Do you have beef noodle soup?",
+                answer: ["你", "有", "沒有", "牛", "肉", "麵"]
+            },
+
+            {
+                meaning: "Do you have fried chicken?",
+                answer: ["你", "有", "沒有", "炸", "雞"]
+            },
+
+            {
+                meaning: "Do you have vegetables?",
+                answer: ["你", "有", "沒有", "菜"]
+            },
+
+            {
+                meaning: "Did you eat?",
+                answer: ["你", "有", "沒有", "吃", "飯"]
+            },
+
+            {
+                meaning: "Did you drink water?",
+                answer: ["你", "有", "沒有", "喝", "水"]
+            }
+        ]
+    }
 
 // ============================================================
 // MAKE DATABASE AVAILABLE TO HTML
