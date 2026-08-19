@@ -1,5 +1,5 @@
 // ============================================================
-// Boba Break Study — Master Lesson Database (Lessons 1 - 7)
+// Boba Break Study — Master Lesson Database (Lessons 1 - 8)
 // ============================================================
 
 const allLessonsData = {
@@ -155,7 +155,7 @@ const allLessonsData = {
         vocabulary: [
             { hanzi: "男生", pinyin: "nánshēng", meaning: "boy / male student", category: "People" },
             { hanzi: "女生", pinyin: "nǚshēng", meaning: "girl / female student", category: "People" },
-{ hanzi: "學生", pinyin: "xuéshēng", meaning: "student", category: "People" },
+            { hanzi: "學生", pinyin: "xuéshēng", meaning: "student", category: "People" },
             { hanzi: "孩子", pinyin: "háizi", meaning: "child", category: "Family" },
             { hanzi: "兒子", pinyin: "érzi", meaning: "son", category: "Family" },
             { hanzi: "女兒", pinyin: "nǚ'ér", meaning: "daughter", category: "Family" },
@@ -389,7 +389,8 @@ const allLessonsData = {
             { meaning: "May I ask your honorable surname?", answer: ["請", "問", "您", "貴", "姓"] }
         ]
     },
-     
+
+
     // ========================================================
     // LESSON 7
     // ========================================================
@@ -424,7 +425,6 @@ const allLessonsData = {
                 examples: ["你在哪裡？", "我在公園。", "你在哪裡上班？"]
             }
         ],
-
         vocabulary: [
             { hanzi: "在", pinyin: "zài", meaning: "at / in / on", category: "Preposition" },
             { hanzi: "家", pinyin: "jiā", meaning: "home / family", category: "Place" },
@@ -447,7 +447,6 @@ const allLessonsData = {
             { hanzi: "對", pinyin: "duì", meaning: "correct / right", category: "Adjective" },
             { hanzi: "和", pinyin: "hé", meaning: "and / with", category: "Conjunction" }
         ],
-
         reviewQuestions: [
             { meaning: "Where are you?", answer: ["你", "在", "哪", "裡"] },
             { meaning: "I study at school.", answer: ["我", "在", "學", "校", "讀", "書"] },
@@ -457,16 +456,8 @@ const allLessonsData = {
             { meaning: "Are you at home?", answer: ["你", "在", "家", "嗎"] },
             { meaning: "Where do you study?", answer: ["你", "在", "哪", "裡", "讀", "書"] }
         ]
-    }
-};
+    },
 
-    // ========================================================
-// LESSON 8
-// 有 / 沒有
-// ========================================================
-// ============================================================
-// Boba Break Study — Master Lesson Database (Lesson 8)
-// ============================================================
 
     // ========================================================
     // LESSON 8: 有 (Yǒu) & 沒有 (Méiyǒu)
@@ -495,107 +486,60 @@ const allLessonsData = {
                 category: "Existence & Location"
             }
         ],
+        vocabulary: [
+            { hanzi: "有", pinyin: "yǒu", meaning: "to have / there is / there are", category: "Grammar" },
+            { hanzi: "沒有", pinyin: "méiyǒu", meaning: "not have / there is not / there are not", category: "Grammar" },
+            { hanzi: "本", pinyin: "běn", meaning: "measure word for books", category: "Measure Word" },
+            { hanzi: "書", pinyin: "shū", meaning: "book", category: "Object" },
+            { hanzi: "錢", pinyin: "qián", meaning: "money", category: "Object" },
+            { hanzi: "包子", pinyin: "bāozi", meaning: "steamed bun", category: "Food" },
+            { hanzi: "餃子", pinyin: "jiǎozi", meaning: "dumpling", category: "Food" },
+            { hanzi: "湯", pinyin: "tāng", meaning: "soup", category: "Food" },
+            { hanzi: "牛", pinyin: "niú", meaning: "cow / ox", category: "Food" },
+            { hanzi: "肉", pinyin: "ròu", meaning: "meat", category: "Food" },
+            { hanzi: "麵", pinyin: "miàn", meaning: "noodles", category: "Food" },
+            { hanzi: "牛肉麵", pinyin: "niúròu miàn", meaning: "beef noodles", category: "Food" },
+            { hanzi: "炸", pinyin: "zhá", meaning: "to deep-fry", category: "Cooking" },
+            { hanzi: "雞", pinyin: "jī", meaning: "chicken", category: "Food" },
+            { hanzi: "炸雞", pinyin: "zhájī", meaning: "fried chicken", category: "Food" },
+            { hanzi: "菜", pinyin: "cài", meaning: "dish / vegetable", category: "Food" },
+            { hanzi: "桌子", pinyin: "zhuōzi", meaning: "table / desk", category: "Object" },
+            { hanzi: "上", pinyin: "shàng", meaning: "on / above", category: "Location" },
+            { hanzi: "裡", pinyin: "lǐ", meaning: "inside", category: "Location" },
+            { hanzi: "碗", pinyin: "wǎn", meaning: "measure word for bowls", category: "Measure Word" },
+            { hanzi: "根", pinyin: "gēn", meaning: "measure word for long / slender objects", category: "Measure Word" },
+            { hanzi: "盤", pinyin: "pán", meaning: "measure word for plates / dishes", category: "Measure Word" },
+            { hanzi: "開", pinyin: "kāi", meaning: "to open", category: "Verb" },
+            { hanzi: "關", pinyin: "guān", meaning: "to close", category: "Verb" },
+            { hanzi: "門", pinyin: "mén", meaning: "door", category: "Object" },
+            { hanzi: "學習", pinyin: "xuéxí", meaning: "to study / learn", category: "Verb" },
+            { hanzi: "練習", pinyin: "liànxí", meaning: "to practice", category: "Verb" },
+            { hanzi: "英文", pinyin: "yīngwén", meaning: "English language", category: "Language" },
+            { hanzi: "講", pinyin: "jiǎng", meaning: "to speak / tell", category: "Verb" },
+            { hanzi: "說", pinyin: "shuō", meaning: "to say / speak", category: "Verb" }
+        ],
         reviewQuestions: [
-            {
-                meaning: "I have a book",
-                answer: ["我", "有", "本", "書"]
-            },
-            {
-                meaning: "You do not have money",
-                answer: ["你", "沒", "有", "錢"]
-            },
-            {
-                meaning: "Do you have a steamed bun?",
-                answer: ["你", "有", "包", "子", "嗎"]
-            },
-            {
-                meaning: "Do you have fried chicken or not?",
-                answer: ["你", "有", "沒", "有", "炸", "雞"]
-            },
-            {
-                meaning: "There is soup on the table",
-                answer: ["桌", "子", "上", "有", "湯"]
-            },
-            {
-                meaning: "I study Chinese",
-                answer: ["我", "學", "習", "中", "文"]
-            },
-            {
-                meaning: "Open the door",
-                answer: ["開", "門"]
-            },
-            {
-                meaning: "Close the door",
-                answer: ["關", "門"]
-            },
-            {
-                meaning: "There are students inside the classroom",
-                answer: ["教", "室", "裡", "有", "學", "生"]
-            },
-            {
-                meaning: "Do you speak English?",
-                answer: ["你", "會", "說", "英", "文", "嗎"]
-            },
-            {
-                meaning: "He has beef noodles",
-                answer: ["他", "有", "牛", "肉", "麵"]
-            },
-            {
-                meaning: "Do you have dumplings?",
-                answer: ["你", "有", "餃", "子", "嗎"]
-            },
-            {
-                meaning: "I have practiced English",
-                answer: ["我", "有", "練", "習", "英", "文"]
-            },
-            {
-                meaning: "She does not have chicken",
-                answer: ["她", "沒", "有", "雞"]
-            },
-            {
-                meaning: "There are dumplings on the table",
-                answer: ["桌", "子", "上", "有", "餃", "子"]
-            }
- 
-
-
-    vocabulary: [
-        { hanzi: "有", pinyin: "yǒu", meaning: "to have / there is / there are", category: "Grammar" },
-        { hanzi: "沒有", pinyin: "méiyǒu", meaning: "not have / there is not / there are not", category: "Grammar" },
-        { hanzi: "本", pinyin: "běn", meaning: "measure word for books", category: "Measure Word" },
-        { hanzi: "書", pinyin: "shū", meaning: "book", category: "Object" },
-        { hanzi: "錢", pinyin: "qián", meaning: "money", category: "Object" },
-        { hanzi: "包子", pinyin: "bāozi", meaning: "steamed bun", category: "Food" },
-        { hanzi: "餃子", pinyin: "jiǎozi", meaning: "dumpling", category: "Food" },
-        { hanzi: "湯", pinyin: "tāng", meaning: "soup", category: "Food" },
-        { hanzi: "牛", pinyin: "niú", meaning: "cow / ox", category: "Food" },
-        { hanzi: "肉", pinyin: "ròu", meaning: "meat", category: "Food" },
-        { hanzi: "麵", pinyin: "miàn", meaning: "noodles", category: "Food" },
-        { hanzi: "牛肉麵", pinyin: "niúròu miàn", meaning: "beef noodles", category: "Food" },
-        { hanzi: "炸", pinyin: "zhá", meaning: "to deep-fry", category: "Cooking" },
-        { hanzi: "雞", pinyin: "jī", meaning: "chicken", category: "Food" },
-        { hanzi: "炸雞", pinyin: "zhájī", meaning: "fried chicken", category: "Food" },
-        { hanzi: "菜", pinyin: "cài", meaning: "dish / vegetable", category: "Food" },
-        { hanzi: "桌子", pinyin: "zhuōzi", meaning: "table / desk", category: "Object" },
-        { hanzi: "上", pinyin: "shàng", meaning: "on / above", category: "Location" },
-        { hanzi: "裡", pinyin: "lǐ", meaning: "inside", category: "Location" },
-        { hanzi: "碗", pinyin: "wǎn", meaning: "measure word for bowls", category: "Measure Word" },
-        { hanzi: "根", pinyin: "gēn", meaning: "measure word for long / slender objects", category: "Measure Word" },
-        { hanzi: "盤", pinyin: "pán", meaning: "measure word for plates / dishes", category: "Measure Word" },
-        { hanzi: "開", pinyin: "kāi", meaning: "to open", category: "Verb" },
-        { hanzi: "關", pinyin: "guān", meaning: "to close", category: "Verb" },
-        { hanzi: "門", pinyin: "mén", meaning: "door", category: "Object" },
-        { hanzi: "學習", pinyin: "xuéxí", meaning: "to study / learn", category: "Verb" },
-        { hanzi: "練習", pinyin: "liànxí", meaning: "to practice", category: "Verb" },
-        { hanzi: "英文", pinyin: "yīngwén", meaning: "English language", category: "Language" },
-        { hanzi: "講", pinyin: "jiǎng", meaning: "to speak / tell", category: "Verb" },
-        { hanzi: "說", pinyin: "shuō", meaning: "to say / speak", category: "Verb" }
-    ],
+            { meaning: "I have a book", answer: ["我", "有", "本", "書"] },
+            { meaning: "You do not have money", answer: ["你", "沒", "有", "錢"] },
+            { meaning: "Do you have a steamed bun?", answer: ["你", "有", "包", "子", "嗎"] },
+            { meaning: "Do you have fried chicken or not?", answer: ["你", "有", "沒", "有", "炸", "雞"] },
+            { meaning: "There is soup on the table", answer: ["桌", "子", "上", "有", "湯"] },
+            { meaning: "I study Chinese", answer: ["我", "學", "習", "中", "文"] },
+            { meaning: "Open the door", answer: ["開", "門"] },
+            { meaning: "Close the door", answer: ["關", "門"] },
+            { meaning: "There are students inside the classroom", answer: ["教", "室", "裡", "有", "學", "生"] },
+            { meaning: "Do you speak English?", answer: ["你", "會", "說", "英", "文", "嗎"] },
+            { meaning: "He has beef noodles", answer: ["他", "有", "牛", "肉", "麵"] },
+            { meaning: "Do you have dumplings?", answer: ["你", "有", "餃", "子", "嗎"] },
+            { meaning: "I have practiced English", answer: ["我", "有", "練", "習", "英", "文"] },
+            { meaning: "She does not have chicken", answer: ["她", "沒", "有", "雞"] },
+            { meaning: "There are dumplings on the table", answer: ["桌", "子", "上", "有", "餃", "子"] }
+        ]
     }
 
 };
 
-      
+
 // ============================================================
 // MAKE DATABASE AVAILABLE TO HTML
 // ============================================================
