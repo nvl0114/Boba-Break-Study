@@ -2639,43 +2639,51 @@ function playCurrentWriting(){
 
 
 /* =====================================================
-   FINAL CHALLENGE (Grammar Master - Lessons 1-7 Review)
+   FINAL CHALLENGE
+   5 QUESTIONS FROM HTML
+   + 5 RANDOM QUESTIONS FROM lesson.js
+===================================================== */
+
+
+/* =====================================================
+   1. QUESTIONS CREATED DIRECTLY IN HTML
+===================================================== */
+
+const htmlFinalQuestions = [
+
+    {
+        meaning: "I have a book.",
+        answer: ["我", "有", "一", "本", "書"]
+    },
+
+    {
+        meaning: "I don't have money.",
+        answer: ["我", "沒有", "錢"]
+    },
+
+    {
+        meaning: "Do you have a ballpoint pen?",
+        answer: ["你", "有", "原子筆", "嗎"]
+    },
+
+    {
+        meaning: "Do you have a pencil or not?",
+        answer: ["你", "有", "沒有", "鉛筆"]
+    },
+
+    {
+        meaning: "There is a computer on the table.",
+        answer: ["桌子", "上", "有", "一", "台", "電腦"]
+    }
+
+];
+
+
+/* =====================================================
+   2. FINAL QUESTION STATE
 ===================================================== */
 
 let finalQuestions = [];
-
-
-function initFinalQuestions(){
-
-    try {
-        if (
-            typeof allLessonsData !== "undefined" &&
-            allLessonsData
-        ) {
-            // Aggregate reviewQuestions from Lesson 1 through Lesson 7
-            let aggregatedQuestions = [];
-            for (let i = 1; i <= 7; i++) {
-                if (allLessonsData[i] && allLessonsData[i].reviewQuestions) {
-                    aggregatedQuestions = aggregatedQuestions.concat(allLessonsData[i].reviewQuestions);
-                }
-            }
-            if (aggregatedQuestions.length > 0) {
-                finalQuestions = aggregatedQuestions;
-                return;
-            }
-        }
-    } catch(e) {
-        console.error("Error loading lesson.js review questions:", e);
-    }
-
-    // Display error message if lesson.js data fails to load or provide review questions
-    const finalMeaningEl = document.getElementById("finalMeaning");
-    if (finalMeaningEl) {
-        finalMeaningEl.textContent = "Error: Failed to load review questions from lesson.js for Lessons 1–7.";
-    }
-    finalQuestions = [];
-}
-
 
 let finalIndex = 0;
 
@@ -2684,15 +2692,123 @@ let finalScore = 0;
 let finalSelected = [];
 
 
-function loadFinal(){
+/* =====================================================
+   3. GET RANDOM QUESTIONS FROM lesson.js
+===================================================== */
 
-    if(finalQuestions.length === 0){
+function getRandomLessonQuestions(){
 
-        initFinalQuestions();
+    let lessonQuestions = [];
+
+
+    /*
+       Take reviewQuestions
+       from Lesson 1 → Lesson 7
+    */
+
+    for(let i = 1; i <= 7; i++){
+
+        if(
+            typeof allLessonsData !== "undefined" &&
+            allLessonsData[i] &&
+            Array.isArray(
+                allLessonsData[i].reviewQuestions
+            )
+        ){
+
+            lessonQuestions =
+                lessonQuestions.concat(
+                    allLessonsData[i].reviewQuestions
+                );
+
+        }
 
     }
 
-    if(finalQuestions.length === 0) return;
+
+    /*
+       Randomize all lesson questions
+       and take ONLY 5
+    */
+
+    return shuffle(
+        lessonQuestions
+    ).slice(0,5);
+
+}
+
+
+/* =====================================================
+   4. CREATE FINAL 10 QUESTIONS
+===================================================== */
+
+function initFinalQuestions(){
+
+    /*
+       Get 5 random questions
+       from lesson.js
+    */
+
+    const randomLessonQuestions =
+        getRandomLessonQuestions();
+
+
+    /*
+       Combine:
+
+       5 HTML questions
+       +
+       5 lesson.js questions
+    */
+
+    finalQuestions = [
+
+        ...htmlFinalQuestions,
+
+        ...randomLessonQuestions
+
+    ];
+
+
+    /*
+       Randomize the order
+       of all 10 questions
+    */
+
+    finalQuestions =
+        shuffle(finalQuestions);
+
+
+    /*
+       Safety check
+    */
+
+    if(finalQuestions.length < 10){
+
+        console.error(
+            "Final Challenge requires 10 questions."
+        );
+
+        document
+            .getElementById("finalMeaning")
+            .textContent =
+            "Error: Not enough questions in lesson.js.";
+
+        return false;
+
+    }
+
+
+    return true;
+
+}
+
+
+/* =====================================================
+   5. LOAD FINAL QUESTION
+===================================================== */
+
+function loadFinal(){
 
     if(
         finalIndex >=
@@ -2709,17 +2825,13 @@ function loadFinal(){
 
 
     document
-        .getElementById(
-            "finalNum"
-        )
+        .getElementById("finalNum")
         .textContent =
         finalIndex + 1;
 
 
     document
-        .getElementById(
-            "finalMeaning"
-        )
+        .getElementById("finalMeaning")
         .textContent =
         q.meaning;
 
@@ -2728,23 +2840,23 @@ function loadFinal(){
 
 
     document
-        .getElementById(
-            "finalAnswer"
-        )
+        .getElementById("finalAnswer")
         .innerHTML =
         '<span class="answer-placeholder">Build your answer</span>';
 
 
     const bank =
-        document.getElementById(
-            "finalBank"
-        );
+        document.getElementById("finalBank");
 
     bank.innerHTML = "";
 
 
+    /*
+       Randomize answer words
+    */
+
     shuffle(q.answer)
-        .forEach(word=>{
+        .forEach(word => {
 
             const button =
                 document.createElement("button");
@@ -2756,17 +2868,21 @@ function loadFinal(){
                 word;
 
 
-            button.onclick = ()=>{
+            button.onclick = function(){
 
                 if(button.disabled) return;
 
+
                 finalSelected.push(word);
+
 
                 button.disabled = true;
 
                 button.classList.add("selected");
 
+
                 playAudio(word);
+
 
                 renderFinal();
 
@@ -2779,13 +2895,24 @@ function loadFinal(){
 
 
     document
-        .getElementById(
-            "finalFeedback"
-        )
+        .getElementById("finalFeedback")
         .textContent = "";
+
+
+    document
+        .getElementById("finalNextBtn")
+        ?.style
+        .setProperty(
+            "display",
+            "none"
+        );
 
 }
 
+
+/* =====================================================
+   6. RENDER SELECTED WORDS
+===================================================== */
 
 function renderFinal(){
 
@@ -2794,11 +2921,12 @@ function renderFinal(){
             "finalAnswer"
         );
 
+
     area.innerHTML = "";
 
 
     finalSelected
-        .forEach(word=>{
+        .forEach(word => {
 
             const span =
                 document.createElement("span");
@@ -2810,7 +2938,7 @@ function renderFinal(){
                 word;
 
 
-            span.onclick = ()=>{
+            span.onclick = function(){
 
                 playAudio(word);
 
@@ -2824,6 +2952,10 @@ function renderFinal(){
 }
 
 
+/* =====================================================
+   7. RESET FINAL QUESTION
+===================================================== */
+
 function resetFinal(){
 
     loadFinal();
@@ -2831,14 +2963,26 @@ function resetFinal(){
 }
 
 
+/* =====================================================
+   8. CHECK FINAL ANSWER
+===================================================== */
+
 function checkFinal(){
 
-    if(finalQuestions.length === 0) return;
+    if(
+        finalQuestions.length !== 10
+    ){
+
+        return;
+
+    }
+
 
     const correct =
         finalQuestions
         [finalIndex]
         .answer;
+
 
     const feedback =
         document.getElementById(
@@ -2846,10 +2990,20 @@ function checkFinal(){
         );
 
 
+    /*
+       Check length
+       and word order
+    */
+
     const isCorrect =
-        finalSelected.length === correct.length &&
+
+        finalSelected.length ===
+        correct.length
+
+        &&
+
         finalSelected.every(
-            (word,index)=>
+            (word,index) =>
                 word === correct[index]
         );
 
@@ -2871,17 +3025,18 @@ function checkFinal(){
                 "finalScore"
             )
             .textContent =
-            finalScore +
-            " / " +
-            finalQuestions.length;
+            finalScore + " / 10";
 
 
         finalIndex++;
 
 
+        /*
+           There are still questions
+        */
+
         if(
-            finalIndex <
-            finalQuestions.length
+            finalIndex < 10
         ){
 
             setTimeout(
@@ -2891,6 +3046,11 @@ function checkFinal(){
 
         }
 
+
+        /*
+           Finished all 10
+        */
+
         else{
 
             document
@@ -2899,6 +3059,7 @@ function checkFinal(){
                 )
                 .style.display =
                 "block";
+
 
             playAudio("太棒了");
 
@@ -2918,6 +3079,14 @@ function checkFinal(){
 
 }
 
+
+/* =====================================================
+   9. INITIALIZE FINAL CHALLENGE
+===================================================== */
+
+initFinalQuestions();
+
+loadFinal();
 
 /* =====================================================
    INITIALIZE
