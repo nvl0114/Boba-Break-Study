@@ -601,10 +601,7 @@ const allLessonsData = {
         ],
 
         reviewQuestions: [
-            {
-                meaning: "I have a book.",
-                answer: ["我", "有", "本", "書"]
-            },
+            
             {
                 meaning: "You do not have money.",
                 answer: ["你", "沒", "有", "錢"]
@@ -625,14 +622,7 @@ const allLessonsData = {
                 meaning: "I study Chinese.",
                 answer: ["我", "學", "習", "中", "文"]
             },
-            {
-                meaning: "Open the door.",
-                answer: ["開", "門"]
-            },
-            {
-                meaning: "Close the door.",
-                answer: ["關", "門"]
-            },
+           
             {
                 meaning: "There are students inside the classroom.",
                 answer: ["教", "室", "裡", "有", "學", "生"]
@@ -657,10 +647,7 @@ const allLessonsData = {
                 meaning: "She does not have chicken.",
                 answer: ["她", "沒", "有", "雞"]
             },
-            {
-                meaning: "There are dumplings on the table.",
-                answer: ["桌", "子", "上", "有", "餃", "子"]
-            }
+            
         ]
     },
 
