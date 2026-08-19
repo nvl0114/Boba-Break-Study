@@ -468,8 +468,6 @@ const allLessonsData = {
 // Boba Break Study — Master Lesson Database (Lesson 8)
 // ============================================================
 
-const allLessonsData = {
-
     // ========================================================
     // LESSON 8: 有 (Yǒu) & 沒有 (Méiyǒu)
     // ========================================================
@@ -558,10 +556,7 @@ const allLessonsData = {
                 meaning: "There are dumplings on the table",
                 answer: ["桌", "子", "上", "有", "餃", "子"]
             }
-        ]
-    }
-
-};
+ 
 
 
     vocabulary: [
