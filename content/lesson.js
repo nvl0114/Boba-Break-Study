@@ -606,10 +606,8 @@ const allLessonsData = {
                 meaning: "You do not have money.",
                 answer: ["你", "沒", "有", "錢"]
             },
-            {
-                meaning: "Do you have a steamed bun?",
-                answer: ["你", "有", "包", "子", "嗎"]
-            },
+            
+       
             {
                 meaning: "Do you have fried chicken or not?",
                 answer: ["你", "有", "沒", "有", "炸", "雞"]
@@ -618,35 +616,7 @@ const allLessonsData = {
                 meaning: "There is soup on the table.",
                 answer: ["桌", "子", "上", "有", "湯"]
             },
-            {
-                meaning: "I study Chinese.",
-                answer: ["我", "學", "習", "中", "文"]
-            },
-           
-            {
-                meaning: "There are students inside the classroom.",
-                answer: ["教", "室", "裡", "有", "學", "生"]
-            },
-            {
-                meaning: "Do you speak English?",
-                answer: ["你", "會", "說", "英", "文", "嗎"]
-            },
-            {
-                meaning: "He has beef noodles.",
-                answer: ["他", "有", "牛", "肉", "麵"]
-            },
-            {
-                meaning: "Do you have dumplings?",
-                answer: ["你", "有", "餃", "子", "嗎"]
-            },
-            {
-                meaning: "I have practiced English.",
-                answer: ["我", "有", "練", "習", "英", "文"]
-            },
-            {
-                meaning: "She does not have chicken.",
-                answer: ["她", "沒", "有", "雞"]
-            },
+            
             
         ]
     },
