@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,42 +14,69 @@
 
         body {
             margin: 0;
-            font-family: Arial, sans-serif;
+            font-family: Arial, Helvetica, sans-serif;
             background: #fff8f0;
             color: #333;
         }
 
+        /* =====================================================
+           HEADER
+        ===================================================== */
+
         header {
             background: #8b5e3c;
             color: white;
-            padding: 20px;
+            padding: 25px 20px;
             text-align: center;
         }
 
         header h1 {
             margin: 0;
+            font-size: 30px;
         }
 
-        .container {
-            max-width: 1000px;
-            margin: auto;
-            padding: 20px;
+        header p {
+            margin: 8px 0 0;
+            opacity: 0.9;
         }
+
+
+        /* =====================================================
+           MAIN CONTAINER
+        ===================================================== */
+
+        .container {
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 25px 20px 50px;
+        }
+
+
+        /* =====================================================
+           LESSON NAVIGATION
+        ===================================================== */
 
         .lesson-selector {
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
         }
 
         .lesson-btn {
             border: none;
-            padding: 10px 16px;
-            border-radius: 10px;
             background: #ead7c5;
+            color: #5f3d28;
+            padding: 11px 17px;
+            border-radius: 10px;
             cursor: pointer;
             font-size: 15px;
+            transition: 0.2s;
+        }
+
+        .lesson-btn:hover {
+            transform: translateY(-1px);
         }
 
         .lesson-btn.active {
@@ -56,53 +84,88 @@
             color: white;
         }
 
+
+        /* =====================================================
+           LESSON TITLE
+        ===================================================== */
+
         .lesson-title {
             margin-bottom: 25px;
         }
 
+        .lesson-title h1 {
+            margin: 0;
+            font-size: 28px;
+            color: #6d452b;
+        }
+
+
+        /* =====================================================
+           SECTION
+        ===================================================== */
+
         .section {
             background: white;
-            border-radius: 15px;
-            padding: 20px;
+            border-radius: 16px;
+            padding: 22px;
             margin-bottom: 25px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.07);
         }
 
         .section h2 {
             margin-top: 0;
+            margin-bottom: 20px;
             color: #8b5e3c;
         }
 
+
+        /* =====================================================
+           GRAMMAR
+        ===================================================== */
+
         .grammar-card {
             border: 1px solid #ead7c5;
-            border-radius: 12px;
-            padding: 15px;
+            border-radius: 13px;
+            padding: 18px;
             margin-bottom: 15px;
+            background: #fffdfb;
+        }
+
+        .grammar-card:last-child {
+            margin-bottom: 0;
         }
 
         .grammar-card h3 {
-            margin-top: 0;
+            margin: 0 0 8px;
+            color: #5f3d28;
+            font-size: 20px;
         }
 
         .category {
             display: inline-block;
             background: #f3e4d5;
             color: #6d452b;
-            padding: 4px 9px;
+            padding: 5px 9px;
             border-radius: 8px;
             font-size: 12px;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
 
         .explanation {
-            line-height: 1.6;
+            line-height: 1.7;
+            margin-bottom: 12px;
         }
 
         .examples {
             background: #faf5ef;
-            padding: 12px;
             border-radius: 10px;
-            margin-top: 10px;
+            padding: 13px 15px;
+        }
+
+        .examples-title {
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #6d452b;
         }
 
         .example {
@@ -110,385 +173,638 @@
             font-size: 18px;
         }
 
+
+        /* =====================================================
+           VOCABULARY
+        ===================================================== */
+
         .vocabulary-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 12px;
+            grid-template-columns: repeat(
+                auto-fill,
+                minmax(210px, 1fr)
+            );
+            gap: 13px;
         }
 
         .vocab-card {
             border: 1px solid #ead7c5;
-            border-radius: 12px;
-            padding: 15px;
+            border-radius: 13px;
+            padding: 16px;
+            background: #fffdfb;
         }
 
         .hanzi {
-            font-size: 28px;
+            font-size: 30px;
             font-weight: bold;
+            color: #333;
         }
 
         .pinyin {
-            color: #8b5e3c;
             margin-top: 5px;
+            color: #8b5e3c;
+            font-size: 15px;
         }
 
         .meaning {
-            margin-top: 5px;
+            margin-top: 7px;
+            line-height: 1.4;
         }
 
         .vocab-category {
+            margin-top: 9px;
             font-size: 12px;
             color: #777;
-            margin-top: 8px;
         }
+
+
+        /* =====================================================
+           REVIEW
+        ===================================================== */
 
         .review-card {
             background: #faf5ef;
-            padding: 15px;
             border-radius: 12px;
+            padding: 16px;
             margin-bottom: 12px;
+        }
+
+        .review-card:last-child {
+            margin-bottom: 0;
         }
 
         .meaning-text {
             font-weight: bold;
             margin-bottom: 10px;
+            line-height: 1.5;
         }
 
         .answer {
-            font-size: 20px;
-            letter-spacing: 3px;
+            font-size: 21px;
+            letter-spacing: 2px;
+            color: #5f3d28;
         }
+
+
+        /* =====================================================
+           EMPTY STATE
+        ===================================================== */
 
         .empty {
             color: #777;
             font-style: italic;
         }
+
+
+        /* =====================================================
+           MOBILE
+        ===================================================== */
+
+        @media (max-width: 600px) {
+
+            header h1 {
+                font-size: 25px;
+            }
+
+            .container {
+                padding: 18px 12px 40px;
+            }
+
+            .section {
+                padding: 17px;
+            }
+
+            .lesson-selector {
+                gap: 7px;
+            }
+
+            .lesson-btn {
+                padding: 9px 13px;
+                font-size: 14px;
+            }
+
+            .vocabulary-grid {
+                grid-template-columns: repeat(
+                    2,
+                    minmax(0, 1fr)
+                );
+            }
+
+            .hanzi {
+                font-size: 25px;
+            }
+
+            .example {
+                font-size: 17px;
+            }
+        }
+
+        @media (max-width: 380px) {
+
+            .vocabulary-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
     </style>
 </head>
 
+
 <body>
 
-<header>
-    <h1>🥤 Boba Break Study</h1>
-    <p>Mandarin Chinese Study Lessons</p>
-</header>
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
 
-<div class="container">
+    <header>
 
-    <!-- LESSON BUTTONS -->
-    <div id="lessonSelector" class="lesson-selector"></div>
+        <h1>🥤 Boba Break Study</h1>
 
-    <!-- LESSON CONTENT -->
-    <div id="lessonContent"></div>
+        <p>
+            Mandarin Chinese Study Lessons
+        </p>
 
-</div>
-
-<!-- =========================================================
-     LOAD DATABASE FIRST
-     ========================================================= -->
-
-<script src="lesson.js"></script>
-
-<!-- =========================================================
-     HTML LOGIC
-     ========================================================= -->
-
-<script>
-
-    const lessonSelector = document.getElementById("lessonSelector");
-    const lessonContent = document.getElementById("lessonContent");
-
-    let currentLesson = 1;
+    </header>
 
 
-    // ========================================================
-    // CREATE LESSON BUTTONS
-    // ========================================================
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
 
-    function createLessonButtons() {
+    <main class="container">
 
-        lessonSelector.innerHTML = "";
 
-        Object.keys(allLessonsData).forEach(lessonNumber => {
+        <!-- =================================================
+             LESSON SELECTOR
+        ================================================== -->
 
-            const button = document.createElement("button");
+        <div
+            id="lessonSelector"
+            class="lesson-selector">
+        </div>
 
-            button.className = "lesson-btn";
-            button.textContent = `Lesson ${lessonNumber}`;
 
-            button.addEventListener("click", () => {
-                currentLesson = Number(lessonNumber);
+        <!-- =================================================
+             LESSON CONTENT
+        ================================================== -->
 
-                updateActiveButton();
-                renderLesson(currentLesson);
+        <div id="lessonContent"></div>
+
+
+    </main>
+
+
+    <!-- =====================================================
+         LOAD LESSON DATABASE
+         
+         IMPORTANT:
+         lesson.js must be in the same folder as this HTML.
+    ====================================================== -->
+
+    <script src="lesson.js"></script>
+
+
+    <!-- =====================================================
+         MAIN JAVASCRIPT
+    ====================================================== -->
+
+    <script>
+
+        // ====================================================
+        // ELEMENTS
+        // ====================================================
+
+        const lessonSelector =
+            document.getElementById("lessonSelector");
+
+        const lessonContent =
+            document.getElementById("lessonContent");
+
+
+        // ====================================================
+        // CURRENT LESSON
+        // ====================================================
+
+        let currentLesson = 1;
+
+
+        // ====================================================
+        // CREATE LESSON BUTTONS
+        // ====================================================
+
+        function createLessonButtons() {
+
+            lessonSelector.innerHTML = "";
+
+            const lessonNumbers =
+                Object.keys(allLessonsData)
+                    .sort((a, b) => Number(a) - Number(b));
+
+
+            lessonNumbers.forEach(lessonNumber => {
+
+                const button =
+                    document.createElement("button");
+
+                button.className = "lesson-btn";
+
+                button.textContent =
+                    `Lesson ${lessonNumber}`;
+
+
+                button.addEventListener(
+                    "click",
+                    function () {
+
+                        currentLesson =
+                            Number(lessonNumber);
+
+                        updateActiveButton();
+
+                        renderLesson(currentLesson);
+
+                    }
+                );
+
+
+                lessonSelector.appendChild(button);
+
             });
 
-            lessonSelector.appendChild(button);
-        });
 
-        updateActiveButton();
-    }
+            updateActiveButton();
 
-
-    // ========================================================
-    // ACTIVE LESSON BUTTON
-    // ========================================================
-
-    function updateActiveButton() {
-
-        const buttons = document.querySelectorAll(".lesson-btn");
-
-        buttons.forEach((button, index) => {
-
-            const lessonNumber = index + 1;
-
-            button.classList.toggle(
-                "active",
-                lessonNumber === currentLesson
-            );
-
-        });
-    }
-
-
-    // ========================================================
-    // RENDER LESSON
-    // ========================================================
-
-    function renderLesson(lessonNumber) {
-
-        const lesson = allLessonsData[lessonNumber];
-
-        if (!lesson) {
-            lessonContent.innerHTML = `
-                <div class="section">
-                    <p class="empty">
-                        This lesson does not exist.
-                    </p>
-                </div>
-            `;
-
-            return;
         }
 
 
-        let html = `
-
-            <div class="lesson-title">
-                <h1>Lesson ${lessonNumber}</h1>
-            </div>
-
-        `;
-
-
         // ====================================================
-        // GRAMMAR
+        // UPDATE ACTIVE BUTTON
         // ====================================================
 
-        html += `
-            <div class="section">
+        function updateActiveButton() {
 
-                <h2>📚 Grammar</h2>
-        `;
-
-        if (lesson.grammar && lesson.grammar.length > 0) {
-
-            lesson.grammar.forEach(grammar => {
-
-                html += `
-
-                    <div class="grammar-card">
-
-                        <h3>${grammar.name}</h3>
-
-                        <div class="category">
-                            ${grammar.category}
-                        </div>
-                `;
+            const buttons =
+                document.querySelectorAll(".lesson-btn");
 
 
-                if (grammar.explanation) {
+            buttons.forEach(button => {
 
-                    html += `
-                        <div class="explanation">
-                            ${grammar.explanation}
-                        </div>
-                    `;
+                const lessonNumber =
+                    Number(
+                        button.textContent
+                            .replace("Lesson ", "")
+                    );
+
+
+                if (lessonNumber === currentLesson) {
+
+                    button.classList.add("active");
+
+                } else {
+
+                    button.classList.remove("active");
 
                 }
 
+            });
 
-                if (grammar.examples && grammar.examples.length > 0) {
+        }
+
+
+        // ====================================================
+        // RENDER LESSON
+        // ====================================================
+
+        function renderLesson(lessonNumber) {
+
+            const lesson =
+                allLessonsData[lessonNumber];
+
+
+            // ------------------------------------------------
+            // LESSON NOT FOUND
+            // ------------------------------------------------
+
+            if (!lesson) {
+
+                lessonContent.innerHTML = `
+
+                    <div class="section">
+
+                        <p class="empty">
+                            This lesson does not exist.
+                        </p>
+
+                    </div>
+
+                `;
+
+                return;
+            }
+
+
+            // ------------------------------------------------
+            // START HTML
+            // ------------------------------------------------
+
+            let html = `
+
+                <div class="lesson-title">
+
+                    <h1>
+                        Lesson ${lessonNumber}
+                    </h1>
+
+                </div>
+
+            `;
+
+
+            // =================================================
+            // GRAMMAR SECTION
+            // =================================================
+
+            html += `
+
+                <section class="section">
+
+                    <h2>
+                        📚 Grammar
+                    </h2>
+
+            `;
+
+
+            if (
+                lesson.grammar &&
+                lesson.grammar.length > 0
+            ) {
+
+
+                lesson.grammar.forEach(grammar => {
 
                     html += `
-                        <div class="examples">
 
-                            <strong>Examples:</strong>
+                        <div class="grammar-card">
+
+                            <h3>
+                                ${grammar.name}
+                            </h3>
+
+                            <div class="category">
+                                ${grammar.category}
+                            </div>
+
                     `;
 
-                    grammar.examples.forEach(example => {
+
+                    // -----------------------------------------
+                    // EXPLANATION
+                    // -----------------------------------------
+
+                    if (grammar.explanation) {
 
                         html += `
-                            <div class="example">
-                                ${example}
+
+                            <div class="explanation">
+                                ${grammar.explanation}
                             </div>
+
                         `;
 
-                    });
+                    }
+
+
+                    // -----------------------------------------
+                    // EXAMPLES
+                    // -----------------------------------------
+
+                    if (
+                        grammar.examples &&
+                        grammar.examples.length > 0
+                    ) {
+
+                        html += `
+
+                            <div class="examples">
+
+                                <div class="examples-title">
+                                    Examples:
+                                </div>
+
+                        `;
+
+
+                        grammar.examples.forEach(example => {
+
+                            html += `
+
+                                <div class="example">
+                                    ${example}
+                                </div>
+
+                            `;
+
+                        });
+
+
+                        html += `
+
+                            </div>
+
+                        `;
+
+                    }
+
 
                     html += `
+
                         </div>
+
                     `;
-                }
+
+                });
 
 
-                html += `
-                    </div>
-                `;
-
-            });
-
-        } else {
-
-            html += `
-                <p class="empty">
-                    No grammar available.
-                </p>
-            `;
-        }
-
-
-        html += `
-            </div>
-        `;
-
-
-        // ====================================================
-        // VOCABULARY
-        // ====================================================
-
-        html += `
-            <div class="section">
-
-                <h2>📝 Vocabulary</h2>
-
-                <div class="vocabulary-grid">
-        `;
-
-
-        if (lesson.vocabulary && lesson.vocabulary.length > 0) {
-
-            lesson.vocabulary.forEach(word => {
+            } else {
 
                 html += `
 
-                    <div class="vocab-card">
-
-                        <div class="hanzi">
-                            ${word.hanzi}
-                        </div>
-
-                        <div class="pinyin">
-                            ${word.pinyin}
-                        </div>
-
-                        <div class="meaning">
-                            ${word.meaning}
-                        </div>
-
-                        <div class="vocab-category">
-                            ${word.category}
-                        </div>
-
-                    </div>
+                    <p class="empty">
+                        No grammar available.
+                    </p>
 
                 `;
 
-            });
+            }
 
-        } else {
 
             html += `
-                <p class="empty">
-                    No vocabulary available.
-                </p>
+
+                </section>
+
             `;
-        }
 
 
-        html += `
-                </div>
-            </div>
-        `;
+            // =================================================
+            // VOCABULARY SECTION
+            // =================================================
+
+            html += `
+
+                <section class="section">
+
+                    <h2>
+                        📝 Vocabulary
+                    </h2>
+
+                    <div class="vocabulary-grid">
+
+            `;
 
 
-        // ====================================================
-        // REVIEW QUESTIONS
-        // ====================================================
-
-        html += `
-            <div class="section">
-
-                <h2>🔄 Review</h2>
-        `;
+            if (
+                lesson.vocabulary &&
+                lesson.vocabulary.length > 0
+            ) {
 
 
-        if (
-            lesson.reviewQuestions &&
-            lesson.reviewQuestions.length > 0
-        ) {
+                lesson.vocabulary.forEach(word => {
 
-            lesson.reviewQuestions.forEach((question, index) => {
+                    html += `
+
+                        <div class="vocab-card">
+
+                            <div class="hanzi">
+                                ${word.hanzi}
+                            </div>
+
+                            <div class="pinyin">
+                                ${word.pinyin}
+                            </div>
+
+                            <div class="meaning">
+                                ${word.meaning}
+                            </div>
+
+                            <div class="vocab-category">
+                                ${word.category}
+                            </div>
+
+                        </div>
+
+                    `;
+
+                });
+
+
+            } else {
 
                 html += `
 
-                    <div class="review-card">
-
-                        <div class="meaning-text">
-                            ${index + 1}. ${question.meaning}
-                        </div>
-
-                        <div class="answer">
-                            ${question.answer.join("")}
-                        </div>
-
-                    </div>
+                    <p class="empty">
+                        No vocabulary available.
+                    </p>
 
                 `;
 
-            });
+            }
 
-        } else {
 
             html += `
-                <p class="empty">
-                    No review questions available.
-                </p>
+
+                    </div>
+
+                </section>
+
             `;
+
+
+            // =================================================
+            // REVIEW SECTION
+            // =================================================
+
+            html += `
+
+                <section class="section">
+
+                    <h2>
+                        🔄 Review
+                    </h2>
+
+            `;
+
+
+            if (
+                lesson.reviewQuestions &&
+                lesson.reviewQuestions.length > 0
+            ) {
+
+
+                lesson.reviewQuestions.forEach(
+                    (question, index) => {
+
+                        html += `
+
+                            <div class="review-card">
+
+                                <div class="meaning-text">
+                                    ${index + 1}.
+                                    ${question.meaning}
+                                </div>
+
+                                <div class="answer">
+                                    ${question.answer.join("")}
+                                </div>
+
+                            </div>
+
+                        `;
+
+                    }
+                );
+
+
+            } else {
+
+                html += `
+
+                    <p class="empty">
+                        No review questions available.
+                    </p>
+
+                `;
+
+            }
+
+
+            html += `
+
+                </section>
+
+            `;
+
+
+            // =================================================
+            // DISPLAY
+            // =================================================
+
+            lessonContent.innerHTML = html;
+
         }
 
 
-        html += `
-            </div>
-        `;
-
-
         // ====================================================
-        // DISPLAY
+        // INITIALIZE APPLICATION
         // ====================================================
 
-        lessonContent.innerHTML = html;
-    }
+        createLessonButtons();
 
+        renderLesson(currentLesson);
 
-    // ========================================================
-    // INITIALIZE
-    // ========================================================
+    </script>
 
-    createLessonButtons();
-    renderLesson(currentLesson);
-
-</script>
 
 </body>
+
 </html>
