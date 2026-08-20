@@ -1,5 +1,5 @@
 // ============================================================
-// Boba Break Study — Master Lesson Database (Lessons 1 - 7)
+// Boba Break Study — Master Lesson Database (Lessons 1 - 9)
 // ============================================================
 
 const allLessonsData = {
@@ -507,10 +507,309 @@ const allLessonsData = {
             { meaning: "Do you have a pencil or not?", answer: ["你", "有", "沒", "有", "鉛", "筆"] },
             { meaning: "There is a computer on the desk.", answer: ["桌", "子", "上", "有", "一", "台", "電", "腦"] }
         ]
-    }
+    },
+
+
+// ========================================================
+// LESSON 9
+// ========================================================
+9: {
+    grammar: [
+        {
+            id: "price-asking",
+            name: "多少錢？",
+            category: "Asking Price",
+            explanation: "Used to ask how much something costs.",
+            examples: [
+                "這個多少錢？",
+                "那個多少錢？",
+                "一杯咖啡多少錢？"
+            ]
+        },
+        {
+            id: "price-answer",
+            name: "Number + 元 / 塊",
+            category: "Price",
+            explanation: "Use 元 (yuán) or 塊 (kuài) to state prices. 元 is more formal, while 塊 is very common in everyday spoken Mandarin in Taiwan.",
+            examples: [
+                "十元。",
+                "五十塊。",
+                "這個一百塊。"
+            ]
+        },
+        {
+            id: "give",
+            name: "給 + Person + Thing",
+            category: "Giving",
+            explanation: "給 (gěi) means 'to give'. It can be used to tell someone to give something to someone.",
+            examples: [
+                "給我一杯咖啡。",
+                "請給我一個。",
+                "給你。"
+            ]
+        },
+        {
+            id: "please",
+            name: "請 + Verb",
+            category: "Polite Expression",
+            explanation: "請 (qǐng) is used to make a request more polite. It can mean 'please' or 'please do...'.",
+            examples: [
+                "請給我一個。",
+                "請問，這個多少錢？",
+                "請看一下。"
+            ]
+        },
+        {
+            id: "finished",
+            name: "V + 完了",
+            category: "Completed / Sold Out",
+            explanation: "完了 can be used after a verb to show that an action has been completed. For example, 賣完了 means 'sold out' or 'has all been sold'.",
+            examples: [
+                "賣完了。",
+                "咖啡賣完了。",
+                "麵包賣完了。"
+            ]
+        },
+        {
+            id: "buhaoyisi",
+            name: "不好意思",
+            category: "Polite Expression",
+            explanation: "不好意思 is commonly used in Taiwan to politely apologize, interrupt, or get someone's attention. It is often more casual and versatile than 對不起.",
+            examples: [
+                "不好意思，請問這個多少錢？",
+                "不好意思，沒有了。",
+                "不好意思，讓你等了。"
+            ]
+        },
+        {
+            id: "duibuqi",
+            name: "對不起",
+            category: "Apology",
+            explanation: "對不起 means 'sorry' and is generally used for a more direct or serious apology.",
+            examples: [
+                "對不起。",
+                "對不起，我不知道。",
+                "對不起，賣完了。"
+            ]
+        },
+        {
+            id: "meiguanxi",
+            name: "沒關係 / 沒問題",
+            category: "Response",
+            explanation: "沒關係 means 'it's okay / no problem'. 沒問題 also means 'no problem' and is commonly used in everyday conversation.",
+            examples: [
+                "對不起。— 沒關係。",
+                "不好意思。— 沒問題。",
+                "沒關係，沒問題。"
+            ]
+        },
+        {
+            id: "thanks-response",
+            name: "謝謝 → 不客氣 / 不會",
+            category: "Polite Response",
+            explanation: "謝謝 means 'thank you'. 不客氣 means 'you're welcome'. In Taiwan, 不會 is also commonly heard as a casual response to 謝謝.",
+            examples: [
+                "謝謝。— 不客氣。",
+                "謝謝。— 不會。",
+                "謝謝你的幫忙。— 不會。"
+            ]
+        }
+    ],
+
+    vocabulary: [
+        {
+            hanzi: "歡迎光臨",
+            pinyin: "huānyíng guānglín",
+            meaning: "welcome (used when welcoming customers)",
+            category: "Transaction"
+        },
+        {
+            hanzi: "謝謝",
+            pinyin: "xièxie",
+            meaning: "thank you",
+            category: "Polite Expression"
+        },
+        {
+            hanzi: "不客氣",
+            pinyin: "bú kèqi",
+            meaning: "you're welcome",
+            category: "Polite Expression"
+        },
+        {
+            hanzi: "不會",
+            pinyin: "bú huì",
+            meaning: "you're welcome / no problem",
+            category: "Polite Expression"
+        },
+        {
+            hanzi: "對不起",
+            pinyin: "duìbuqǐ",
+            meaning: "sorry",
+            category: "Apology"
+        },
+        {
+            hanzi: "不好意思",
+            pinyin: "bù hǎoyìsi",
+            meaning: "excuse me / sorry",
+            category: "Polite Expression"
+        },
+        {
+            hanzi: "沒關係",
+            pinyin: "méi guānxi",
+            meaning: "it's okay / no problem",
+            category: "Response"
+        },
+        {
+            hanzi: "沒問題",
+            pinyin: "méi wèntí",
+            meaning: "no problem",
+            category: "Response"
+        },
+        {
+            hanzi: "請",
+            pinyin: "qǐng",
+            meaning: "please",
+            category: "Polite Expression"
+        },
+        {
+            hanzi: "問",
+            pinyin: "wèn",
+            meaning: "to ask",
+            category: "Verb"
+        },
+        {
+            hanzi: "多少",
+            pinyin: "duōshao",
+            meaning: "how much / how many",
+            category: "Question Word"
+        },
+        {
+            hanzi: "錢",
+            pinyin: "qián",
+            meaning: "money",
+            category: "Object"
+        },
+        {
+            hanzi: "多少錢",
+            pinyin: "duōshao qián",
+            meaning: "how much does it cost",
+            category: "Question"
+        },
+        {
+            hanzi: "元",
+            pinyin: "yuán",
+            meaning: "dollar / NT dollar (formal)",
+            category: "Money"
+        },
+        {
+            hanzi: "塊",
+            pinyin: "kuài",
+            meaning: "dollar / NT dollar (common spoken form)",
+            category: "Money"
+        },
+        {
+            hanzi: "買",
+            pinyin: "mǎi",
+            meaning: "to buy",
+            category: "Verb"
+        },
+        {
+            hanzi: "賣",
+            pinyin: "mài",
+            meaning: "to sell",
+            category: "Verb"
+        },
+        {
+            hanzi: "給",
+            pinyin: "gěi",
+            meaning: "to give / for",
+            category: "Verb"
+        },
+        {
+            hanzi: "有",
+            pinyin: "yǒu",
+            meaning: "to have / there is",
+            category: "Verb"
+        },
+        {
+            hanzi: "沒有",
+            pinyin: "méiyǒu",
+            meaning: "not have / there isn't",
+            category: "Verb"
+        },
+        {
+            hanzi: "完了",
+            pinyin: "wán le",
+            meaning: "finished / completed",
+            category: "Grammar"
+        },
+        {
+            hanzi: "了",
+            pinyin: "le",
+            meaning: "completed-action particle",
+            category: "Grammar"
+        },
+        {
+            hanzi: "這個",
+            pinyin: "zhège",
+            meaning: "this one",
+            category: "Demonstrative"
+        },
+        {
+            hanzi: "那個",
+            pinyin: "nàge",
+            meaning: "that one",
+            category: "Demonstrative"
+        },
+        {
+            hanzi: "東西",
+            pinyin: "dōngxi",
+            meaning: "thing / things",
+            category: "Object"
+        }
+    ],
+
+    reviewQuestions: [
+        {
+            meaning: "How much is this?",
+            answer: ["這", "個", "多", "少", "錢"]
+        },
+        {
+            meaning: "How much is that?",
+            answer: ["那", "個", "多", "少", "錢"]
+        },
+        {
+            meaning: "It's 50 dollars.",
+            answer: ["五", "十", "塊"]
+        },
+        {
+            meaning: "Please give me one.",
+            answer: ["請", "給", "我", "一", "個"]
+        },
+        {
+            meaning: "Sorry, it's sold out.",
+            answer: ["對", "不", "起", "賣", "完", "了"]
+        },
+        {
+            meaning: "Excuse me, do you have this?",
+            answer: ["不", "好", "意", "思", "你", "有", "這", "個", "嗎"]
+        },
+        {
+            meaning: "Thank you. — You're welcome.",
+            answer: ["謝", "謝", "不", "客", "氣"]
+        },
+        {
+            meaning: "Sorry. — It's okay.",
+            answer: ["對", "不", "起", "沒", "關", "係"]
+        },
+        {
+            meaning: "Do you have another one?",
+            answer: ["你", "有", "另", "外", "一", "個", "嗎"]
+        }
+    ]
+},
 
 };
-
 // ============================================================
 // MAKE DATABASE AVAILABLE TO HTML
 // ============================================================
