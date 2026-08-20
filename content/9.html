@@ -85,6 +85,187 @@ p {
 
 
 /* =====================================================
+   SHOPEE-STYLE CHAT ROOM (NEW)
+===================================================== */
+
+.shopee-chat-container {
+    background: #f7f5f0;
+    border: 1.5px solid #d7b89c;
+    border-radius: 16px;
+    overflow: hidden;
+    margin-top: 15px;
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.03);
+}
+
+.shopee-chat-header {
+    background: linear-gradient(135deg, #ee4d2d, #ff7337);
+    color: white;
+    padding: 12px 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.shopee-chat-header span {
+    font-size: 12px;
+    background: rgba(255,255,255,0.2);
+    padding: 3px 8px;
+    border-radius: 10px;
+}
+
+.shopee-messages-scroll {
+    height: 340px;
+    overflow-y: auto;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    scroll-behavior: smooth;
+}
+
+.chat-bubble-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    max-width: 80%;
+}
+
+.chat-bubble-row.clerk {
+    align-self: flex-start;
+}
+
+.chat-bubble-row.customer {
+    align-self: flex-end;
+    flex-direction: row-reverse;
+}
+
+.chat-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #d7b89c;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+}
+
+.chat-bubble-row.clerk .chat-avatar {
+    background: #ee4d2d;
+}
+
+.chat-bubble-row.customer .chat-avatar {
+    background: #b8865c;
+}
+
+.chat-bubble-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-bubble-row.customer .chat-bubble-content {
+    align-items: flex-end;
+}
+
+.chat-bubble {
+    background: white;
+    padding: 10px 14px;
+    border-radius: 12px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    border: 1px solid #eadac7;
+    position: relative;
+}
+
+.chat-bubble-row.customer .chat-bubble {
+    background: #fff3ec;
+    border-color: #fbd3c3;
+}
+
+.chat-hanzi {
+    font-size: 16px;
+    font-weight: bold;
+    color: #5c4033;
+}
+
+.chat-pinyin {
+    font-size: 12px;
+    color: #666;
+    margin-top: 2px;
+}
+
+.chat-english {
+    font-size: 11px;
+    color: #888;
+    font-style: italic;
+}
+
+.chat-bubble-footer {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 4px;
+}
+
+.chat-sound-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 13px;
+    padding: 0;
+    opacity: 0.7;
+    transition: 0.2s;
+}
+
+.chat-sound-btn:hover {
+    opacity: 1;
+}
+
+.shopee-reply-bar {
+    background: white;
+    padding: 10px 15px;
+    border-top: 1px solid #d7b89c;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.reply-chips-label {
+    font-size: 11px;
+    color: #999;
+    font-weight: bold;
+}
+
+.reply-chips {
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+}
+
+.reply-chip {
+    background: #fff8ef;
+    border: 1.5px solid #d7b89c;
+    color: #8c7355;
+    padding: 6px 12px;
+    border-radius: 15px;
+    font-size: 12px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: 0.2s;
+}
+
+.reply-chip:hover {
+    background: #faedcd;
+    border-color: #b8865c;
+    color: #5c4033;
+}
+
+
+/* =====================================================
    GRAMMAR CAROUSEL
 ===================================================== */
 
@@ -187,7 +368,7 @@ p {
 
 
 /* =====================================================
-   DIALOGUE CONTAINER
+   DIALOGUE CONTAINER (Legacy fallback or kept list)
 ===================================================== */
 
 .dialogue-box {
@@ -734,85 +915,33 @@ p {
 
 
 <!-- =====================================================
-     DIALOGUE SECTION
+     SHOPEE-STYLE CHAT ROOM (對話聊天室)
 ===================================================== -->
 
 <div class="lesson-card">
 
-    <h2>🛍️ 對話：買東西</h2>
+    <h2>🛍️ Live Chat: 買東西</h2>
+    <p>Simulate a live merchant chat session. Scroll through the conversation and click reply chips to chat with the store clerk!</p>
 
-    <div class="dialogue-box">
-
-        <div class="dialogue-line">
-            <div class="speaker">🛒 店員 (Store Clerk):</div>
-            <div class="dialogue-hanzi">歡迎光臨！</div>
-            <div class="dialogue-pinyin">Huānyíng guānglín!</div>
-            <div class="dialogue-english">Welcome!</div>
-            <button class="sound-btn" onclick="playAudio('歡迎光臨！')" style="margin-top:5px;">🔊</button>
+    <div class="shopee-chat-container">
+        
+        <!-- Chat Header -->
+        <div class="shopee-chat-header">
+            <div>🛒 Boba Break Official Store (店員)</div>
+            <span>Online</span>
         </div>
 
-        <div class="dialogue-line">
-            <div class="speaker">👤 客人 (Customer):</div>
-            <div class="dialogue-hanzi">你好，我要買這個。多少錢？</div>
-            <div class="dialogue-pinyin">Nǐ hǎo, wǒ yào mǎi zhège. Duōshǎo qián?</div>
-            <div class="dialogue-english">Hello, I want to buy this. How much is it?</div>
-            <button class="sound-btn" onclick="playAudio('你好，我要買這個。多少錢？')" style="margin-top:5px;">🔊</button>
+        <!-- Scrollable Messages Area -->
+        <div class="shopee-messages-scroll" id="chatMessagesScroll">
+            <!-- Dynamically populated or initial chat items inserted via script -->
         </div>
 
-        <div class="dialogue-line">
-            <div class="speaker">🛒 店員 (Store Clerk):</div>
-            <div class="dialogue-hanzi">這個一百塊。</div>
-            <div class="dialogue-pinyin">Zhège yì bǎi kuài.</div>
-            <div class="dialogue-english">This one is 100 dollars.</div>
-            <button class="sound-btn" onclick="playAudio('這個一百塊。')" style="margin-top:5px;">🔊</button>
-        </div>
-
-        <div class="dialogue-line">
-            <div class="speaker">👤 客人 (Customer):</div>
-            <div class="dialogue-hanzi">好，給你。謝謝。</div>
-            <div class="dialogue-pinyin">Hǎo, gěi nǐ. Xièxie.</div>
-            <div class="dialogue-english">Okay, here you go. Thank you.</div>
-            <button class="sound-btn" onclick="playAudio('好，給你。謝謝。')" style="margin-top:5px;">🔊</button>
-        </div>
-
-        <div class="dialogue-line">
-            <div class="speaker">🛒 店員 (Store Clerk):</div>
-            <div class="dialogue-hanzi">不客氣。</div>
-            <div class="dialogue-pinyin">Bú kèqì.</div>
-            <div class="dialogue-english">You're welcome.</div>
-            <button class="sound-btn" onclick="playAudio('不客氣。')" style="margin-top:5px;">🔊</button>
-        </div>
-
-        <div class="dialogue-line">
-            <div class="speaker">👤 客人 (Customer):</div>
-            <div class="dialogue-hanzi">不好意思，請問有沒有茶？</div>
-            <div class="dialogue-pinyin">Bù hǎoyìsi, qǐngwèn yǒu méiyǒu chá?</div>
-            <div class="dialogue-english">Excuse me, do you have tea?</div>
-            <button class="sound-btn" onclick="playAudio('不好意思，請問有沒有茶？')" style="margin-top:5px;">🔊</button>
-        </div>
-
-        <div class="dialogue-line">
-            <div class="speaker">🛒 店員 (Store Clerk):</div>
-            <div class="dialogue-hanzi">對不起，茶賣完了。</div>
-            <div class="dialogue-pinyin">Duìbuqǐ, chá mài wán le.</div>
-            <div class="dialogue-english">Sorry, we're out of tea.</div>
-            <button class="sound-btn" onclick="playAudio('對不起，茶賣完了。')" style="margin-top:5px;">🔊</button>
-        </div>
-
-        <div class="dialogue-line">
-            <div class="speaker">👤 客人 (Customer):</div>
-            <div class="dialogue-hanzi">沒關係。</div>
-            <div class="dialogue-pinyin">Méi guānxi.</div>
-            <div class="dialogue-english">That's okay.</div>
-            <button class="sound-btn" onclick="playAudio('沒關係。')" style="margin-top:5px;">🔊</button>
-        </div>
-
-        <div class="dialogue-line">
-            <div class="speaker">🛒 店員 (Store Clerk):</div>
-            <div class="dialogue-hanzi">謝謝，歡迎下次再來！</div>
-            <div class="dialogue-pinyin">Xièxie, huānyíng xià cì zài lái!</div>
-            <div class="dialogue-english">Thank you. Welcome to come again!</div>
-            <button class="sound-btn" onclick="playAudio('謝謝，歡迎下次再來！')" style="margin-top:5px;">🔊</button>
+        <!-- Reply Bar & Chips -->
+        <div class="shopee-reply-bar">
+            <div class="reply-chips-label">Quick Reply / Tap to continue:</div>
+            <div class="reply-chips" id="replyChipsContainer">
+                <!-- Dynamically populated options -->
+            </div>
         </div>
 
     </div>
@@ -1763,6 +1892,154 @@ function playAudio(text){
     utterance.pitch = 1;
 
     window.speechSynthesis.speak(utterance);
+}
+
+
+/* =====================================================
+   SHOPEE-STYLE LIVE CHAT SIMULATOR
+===================================================== */
+
+const chatFlow = [
+    {
+        sender: "clerk",
+        name: "🛒 店員 (Store Clerk)",
+        hanzi: "歡迎光臨！",
+        pinyin: "Huānyíng guānglín!",
+        english: "Welcome!",
+        options: [
+            { text: "你好，我要買這個。多少錢？", pinyin: "Nǐ hǎo, wǒ yào mǎi zhège. Duōshǎo qián?", english: "Hello, I want to buy this. How much is it?" }
+        ]
+    },
+    {
+        sender: "clerk",
+        name: "🛒 店員 (Store Clerk)",
+        hanzi: "這個一百塊。",
+        pinyin: "Zhège yì bǎi kuài.",
+        english: "This one is 100 dollars.",
+        options: [
+            { text: "好，給你。謝謝。", pinyin: "Hǎo, gěi nǐ. Xièxie.", english: "Okay, here you go. Thank you." }
+        ]
+    },
+    {
+        sender: "clerk",
+        name: "🛒 店員 (Store Clerk)",
+        hanzi: "不客氣。",
+        pinyin: "Bú kèqì.",
+        english: "You're welcome.",
+        options: [
+            { text: "不好意思，請問有沒有茶？", pinyin: "Bù hǎoyìsi, qǐngwèn yǒu méiyǒu chá?", english: "Excuse me, do you have tea?" }
+        ]
+    },
+    {
+        sender: "clerk",
+        name: "🛒 店員 (Store Clerk)",
+        hanzi: "對不起，茶賣完了。",
+        pinyin: "Duìbuqǐ, chá mài wán le.",
+        english: "Sorry, we're out of tea.",
+        options: [
+            { text: "沒關係。", pinyin: "Méi guānxi.", english: "That's okay." }
+        ]
+    },
+    {
+        sender: "clerk",
+        name: "🛒 店員 (Store Clerk)",
+        hanzi: "謝謝，歡迎下次再來！",
+        pinyin: "Xièxie, huānyíng xià cì zài lái!",
+        english: "Thank you. Welcome to come again!",
+        options: [] // End of chat loop
+    }
+];
+
+let chatStep = 0;
+
+function initChatRoom() {
+    const scrollArea = document.getElementById("chatMessagesScroll");
+    scrollArea.innerHTML = "";
+    chatStep = 0;
+    appendChatMessage(chatFlow[0]);
+    renderReplyChips(chatFlow[0].options);
+}
+
+function appendChatMessage(item) {
+    const scrollArea = document.getElementById("chatMessagesScroll");
+    
+    // If clerk speaks first
+    const row = document.createElement("div");
+    row.className = `chat-bubble-row ${item.sender}`;
+    
+    row.innerHTML = `
+        <div class="chat-avatar">${item.sender === 'clerk' ? '店' : '客'}</div>
+        <div class="chat-bubble-content">
+            <div class="chat-bubble">
+                <div class="chat-hanzi">${item.hanzi}</div>
+                <div class="chat-pinyin">${item.pinyin}</div>
+                <div class="chat-english">${item.english}</div>
+            </div>
+            <div class="chat-bubble-footer">
+                <button class="chat-sound-btn" onclick="playAudio('${item.hanzi}')">🔊 Listen</button>
+            </div>
+        </div>
+    `;
+    
+    scrollArea.appendChild(row);
+    scrollArea.scrollTop = scrollArea.scrollHeight;
+    playAudio(item.hanzi);
+}
+
+function handleUserReply(option) {
+    const scrollArea = document.getElementById("chatMessagesScroll");
+    
+    // Append Customer message bubble
+    const userRow = document.createElement("div");
+    userRow.className = "chat-bubble-row customer";
+    userRow.innerHTML = `
+        <div class="chat-avatar">客</div>
+        <div class="chat-bubble-content">
+            <div class="chat-bubble">
+                <div class="chat-hanzi">${option.text}</div>
+                <div class="chat-pinyin">${option.pinyin}</div>
+                <div class="chat-english">${option.english}</div>
+            </div>
+            <div class="chat-bubble-footer">
+                <button class="chat-sound-btn" onclick="playAudio('${option.text}')">🔊 Listen</button>
+            </div>
+        </div>
+    `;
+    scrollArea.appendChild(userRow);
+    scrollArea.scrollTop = scrollArea.scrollHeight;
+    playAudio(option.text);
+
+    chatStep++;
+
+    // Clear chips temporarily
+    document.getElementById("replyChipsContainer").innerHTML = '<span class="reply-chips-label">Store clerk is typing...</span>';
+
+    setTimeout(() => {
+        if(chatStep < chatFlow.length) {
+            appendChatMessage(chatFlow[chatStep]);
+            renderReplyChips(chatFlow[chatStep].options);
+        } else {
+            document.getElementById("replyChipsContainer").innerHTML = '<span class="reply-chips-label">🎉 Transaction completed! <a href="#" onclick="initChatRoom(); return false;" style="color:#ee4d2d;">Restart Chat</a></span>';
+        }
+    }, 1200);
+}
+
+function renderReplyChips(options) {
+    const container = document.getElementById("replyChipsContainer");
+    container.innerHTML = "";
+    
+    if(!options || options.length === 0) {
+        container.innerHTML = '<span class="reply-chips-label">🎉 Conversation finished! <a href="#" onclick="initChatRoom(); return false;" style="color:#ee4d2d;">Restart Chat</a></span>';
+        return;
+    }
+
+    options.forEach(opt => {
+        const chip = document.createElement("button");
+        chip.className = "reply-chip";
+        chip.textContent = opt.text;
+        chip.onclick = () => handleUserReply(opt);
+        container.appendChild(chip);
+    });
 }
 
 
@@ -3092,6 +3369,9 @@ initWriter();
 if (initFinalQuestions()) {
     loadFinal();
 }
+
+// Initialize Shopee Live Chat Room
+initChatRoom();
 
 </script>
 
