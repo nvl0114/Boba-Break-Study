@@ -87,6 +87,10 @@ p {
    READING TEXT CONTAINER
 ===================================================== */
 
+/* =====================================================
+   READING TEXT CONTAINER (Perbaikan Posisi Pinyin)
+===================================================== */
+
 .reading-content {
     background: #fff8ef;
     border: 1.5px solid #d7b89c;
@@ -94,38 +98,38 @@ p {
     border-radius: 15px;
     margin-top: 15px;
     font-size: 19px;
-    line-height: 2.5;
+    line-height: 2.8; /* Sedikit ditambah agar ada ruang antar baris */
     color: #5c4033;
 }
 
 .char-group {
-    display: inline-block;
-    position: relative;
+    display: inline-flex;
+    flex-direction: column-reverse; /* Posisikan pinyin di bawah, lalu dibalik ke atas secara visual */
+    align-items: center;
     vertical-align: baseline;
     margin: 0 2px;
-    height: auto;
+    line-height: 1;
 }
 
 .char-group .pinyin-sub {
-    position: absolute;
-    bottom: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    
-    font-size: 10.5px;
+    position: static; /* Hapus absolute positioning */
+    transform: none;
+    font-size: 10px;
     font-weight: normal;
     color: #8c7355;
     line-height: 1;
     white-space: nowrap;
+    margin-top: 2px; /* Jarak sangat tipis antara pinyin dan kanji di bawahnya */
 }
 
 .char-group .hanzi-main {
     display: inline;
     font-weight: bold;
     font-size: 21px;
-    line-height: inherit;
+    line-height: 1;
     white-space: nowrap;
 }
+
 /* =====================================================
    GRAMMAR CAROUSEL
 ===================================================== */
