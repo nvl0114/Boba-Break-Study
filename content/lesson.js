@@ -808,6 +808,30 @@ const allLessonsData = {
         }
     ]
 },
+// ==================== LESSON 10 ====================
+
+10: {
+    vocabulary: [
+        { chinese: "爺爺", pinyin: "yéye", meaning: "paternal grandfather" },
+        { chinese: "奶奶", pinyin: "nǎinai", meaning: "paternal grandmother" },
+        { chinese: "伯伯", pinyin: "bóbo", meaning: "father's older brother" },
+        { chinese: "伯母", pinyin: "bómǔ", meaning: "wife of father's older brother" },
+        { chinese: "叔叔", pinyin: "shūshu", meaning: "father's younger brother" },
+        { chinese: "嬸嬸", pinyin: "shěnshen", meaning: "wife of father's younger brother" },
+        { chinese: "姑姑", pinyin: "gūgu", meaning: "father's sister" },
+        { chinese: "姑丈", pinyin: "gūzhàng", meaning: "husband of father's sister" },
+        { chinese: "舅舅", pinyin: "jiùjiu", meaning: "mother's brother" },
+        { chinese: "舅媽", pinyin: "jiùmā", meaning: "wife of mother's brother" },
+        { chinese: "阿姨", pinyin: "āyí", meaning: "mother's sister" },
+        { chinese: "姨丈", pinyin: "yízhàng", meaning: "husband of mother's sister" },
+        { chinese: "堂", pinyin: "táng", meaning: "paternal-side cousin" },
+        { chinese: "表", pinyin: "biǎo", meaning: "maternal-side cousin / cousin from certain family relationships" },
+        { chinese: "兄弟姐妹", pinyin: "xiōngdì jiěmèi", meaning: "siblings" },
+        { chinese: "兄弟", pinyin: "xiōngdì", meaning: "brothers / male siblings" },
+        { chinese: "姐妹", pinyin: "jiěmèi", meaning: "sisters / female siblings" },
+        { chinese: "家人", pinyin: "jiārén", meaning: "family members" }
+    ]
+},
 
 };
 // ============================================================
