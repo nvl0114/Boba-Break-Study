@@ -830,6 +830,12 @@ const allLessonsData = {
         { chinese: "兄弟", pinyin: "xiōngdì", meaning: "brothers / male siblings" },
         { chinese: "姐妹", pinyin: "jiěmèi", meaning: "sisters / female siblings" },
         { chinese: "家人", pinyin: "jiārén", meaning: "family members" }
+{ chinese: "爺爺", pinyin: "yéye", meaning: "paternal grandfather" },
+{ chinese: "外公", pinyin: "wàigōng", meaning: "maternal grandfather" },
+{ chinese: "外婆", pinyin: "wàipó", meaning: "maternal grandmother" },
+{ chinese: "阿公", pinyin: "āgōng", meaning: "grandfather (Taiwanese style)" },
+{ chinese: "阿嬤", pinyin: "āmā", meaning: "grandmother (Taiwanese style)" },
+
     ]
 },
 
