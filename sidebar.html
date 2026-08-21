@@ -1,3 +1,606 @@
+<style>
+
+/* =========================================================
+   BOBA BREAK STUDY — BOBA SIDEBAR ANIMATION
+   ========================================================= */
+
+.boba-animation {
+    position: relative;
+    width: 100%;
+    margin-top: 30px;
+    padding: 10px 0 20px;
+    text-align: center;
+    overflow: hidden;
+    user-select: none;
+}
+
+/* ---------------------------------------------------------
+   TITLE
+   --------------------------------------------------------- */
+
+.boba-title {
+    font-size: 13px;
+    font-weight: 600;
+    opacity: 0.75;
+    margin-bottom: 12px;
+    letter-spacing: 0.3px;
+}
+
+/* ---------------------------------------------------------
+   SCENE
+   --------------------------------------------------------- */
+
+.boba-scene {
+    position: relative;
+    width: 150px;
+    height: 205px;
+    margin: 0 auto;
+}
+
+/* ---------------------------------------------------------
+   CUP
+   --------------------------------------------------------- */
+
+.cup {
+    position: absolute;
+    width: 92px;
+    height: 118px;
+    left: 50%;
+    bottom: 8px;
+    transform: translateX(-50%);
+    border-radius: 8px 8px 20px 20px;
+    background: rgba(255, 255, 255, 0.22);
+    border: 2px solid rgba(255, 255, 255, 0.55);
+    overflow: hidden;
+    box-sizing: border-box;
+
+    /* cup animation */
+    animation: cupBounce 3.8s ease-in-out infinite;
+}
+
+/* ---------------------------------------------------------
+   TEA
+   --------------------------------------------------------- */
+
+.tea {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 78%;
+    border-radius: 0 0 18px 18px;
+
+    background: linear-gradient(
+        to bottom,
+        #d99a68 0%,
+        #b86f43 100%
+    );
+
+    transform-origin: bottom;
+    animation: teaFill 3.8s ease-in-out infinite;
+}
+
+/* subtle shine on tea */
+
+.tea::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 12px;
+    width: 8px;
+    height: 80%;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.16);
+}
+
+/* ---------------------------------------------------------
+   CUP LID
+   --------------------------------------------------------- */
+
+.cup-lid {
+    position: absolute;
+    z-index: 5;
+
+    width: 98px;
+    height: 14px;
+
+    left: 50%;
+    top: -7px;
+
+    transform: translateX(-50%);
+
+    border-radius: 50%;
+    background: #f0c9a5;
+    border: 2px solid rgba(255, 255, 255, 0.55);
+}
+
+/* ---------------------------------------------------------
+   STRAW
+   --------------------------------------------------------- */
+
+.straw {
+    position: absolute;
+    z-index: 6;
+
+    width: 9px;
+    height: 90px;
+
+    left: 58%;
+    top: -72px;
+
+    transform: rotate(8deg);
+
+    border-radius: 8px;
+
+    background: #f3a6a6;
+
+    transform-origin: bottom center;
+
+    animation: strawMove 3.8s ease-in-out infinite;
+}
+
+/* straw highlight */
+
+.straw::after {
+    content: "";
+    position: absolute;
+
+    width: 3px;
+    height: 70%;
+
+    left: 2px;
+    top: 8px;
+
+    border-radius: 10px;
+
+    background: rgba(255, 255, 255, 0.4);
+}
+
+/* ---------------------------------------------------------
+   BOBA PEARLS INSIDE CUP
+   --------------------------------------------------------- */
+
+.pearls {
+    position: absolute;
+    z-index: 4;
+
+    left: 0;
+    bottom: 7px;
+
+    width: 100%;
+    height: 52px;
+}
+
+.pearls span {
+    position: absolute;
+
+    width: 14px;
+    height: 14px;
+
+    border-radius: 50%;
+
+    background: #493025;
+
+    box-shadow:
+        inset 2px 2px 3px rgba(255, 255, 255, 0.12),
+        0 2px 3px rgba(0, 0, 0, 0.18);
+
+    animation: pearlFloat 2.8s ease-in-out infinite;
+}
+
+/* pearl positions */
+
+.pearls span:nth-child(1) {
+    left: 12px;
+    bottom: 4px;
+    animation-delay: 0s;
+}
+
+.pearls span:nth-child(2) {
+    left: 32px;
+    bottom: 3px;
+    animation-delay: 0.3s;
+}
+
+.pearls span:nth-child(3) {
+    left: 54px;
+    bottom: 5px;
+    animation-delay: 0.6s;
+}
+
+.pearls span:nth-child(4) {
+    left: 72px;
+    bottom: 3px;
+    animation-delay: 0.9s;
+}
+
+.pearls span:nth-child(5) {
+    left: 23px;
+    bottom: 20px;
+    animation-delay: 1.2s;
+}
+
+.pearls span:nth-child(6) {
+    left: 48px;
+    bottom: 21px;
+    animation-delay: 1.5s;
+}
+
+/* ---------------------------------------------------------
+   FALLING BOBA
+   --------------------------------------------------------- */
+
+.falling-boba {
+    position: absolute;
+    z-index: 10;
+
+    width: 15px;
+    height: 15px;
+
+    border-radius: 50%;
+
+    background: #493025;
+
+    box-shadow:
+        inset 2px 2px 3px rgba(255, 255, 255, 0.15),
+        0 2px 4px rgba(0, 0, 0, 0.2);
+
+    opacity: 0;
+}
+
+/* boba 1 */
+
+.boba-1 {
+    left: 59px;
+    top: -5px;
+
+    animation: bobaDrop1 3.8s ease-in infinite;
+}
+
+/* boba 2 */
+
+.boba-2 {
+    left: 78px;
+    top: -5px;
+
+    animation: bobaDrop2 3.8s ease-in infinite;
+
+    animation-delay: 1.25s;
+}
+
+/* boba 3 */
+
+.boba-3 {
+    left: 43px;
+    top: -5px;
+
+    animation: bobaDrop3 3.8s ease-in infinite;
+
+    animation-delay: 2.45s;
+}
+
+/* ---------------------------------------------------------
+   BOBA DROP ANIMATION 1
+   --------------------------------------------------------- */
+
+@keyframes bobaDrop1 {
+
+    0% {
+        opacity: 0;
+        transform: translateY(-10px) scale(0.8);
+    }
+
+    8% {
+        opacity: 1;
+    }
+
+    45% {
+        opacity: 1;
+        transform: translateY(105px) scale(1);
+    }
+
+    52% {
+        transform: translateY(126px) scale(0.85);
+    }
+
+    57% {
+        transform: translateY(117px) scale(1.05);
+    }
+
+    62% {
+        transform: translateY(123px) scale(1);
+    }
+
+    70% {
+        opacity: 0;
+        transform: translateY(123px);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(123px);
+    }
+}
+
+/* ---------------------------------------------------------
+   BOBA DROP ANIMATION 2
+   --------------------------------------------------------- */
+
+@keyframes bobaDrop2 {
+
+    0%,
+    30% {
+        opacity: 0;
+        transform: translateY(-10px) scale(0.8);
+    }
+
+    36% {
+        opacity: 1;
+    }
+
+    65% {
+        opacity: 1;
+        transform: translateY(105px) scale(1);
+    }
+
+    72% {
+        transform: translateY(126px) scale(0.85);
+    }
+
+    77% {
+        transform: translateY(117px) scale(1.05);
+    }
+
+    82% {
+        transform: translateY(123px) scale(1);
+    }
+
+    88% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+/* ---------------------------------------------------------
+   BOBA DROP ANIMATION 3
+   --------------------------------------------------------- */
+
+@keyframes bobaDrop3 {
+
+    0%,
+    58% {
+        opacity: 0;
+        transform: translateY(-10px) scale(0.8);
+    }
+
+    64% {
+        opacity: 1;
+    }
+
+    91% {
+        opacity: 1;
+        transform: translateY(105px) scale(1);
+    }
+
+    95% {
+        transform: translateY(126px) scale(0.85);
+    }
+
+    97% {
+        transform: translateY(117px) scale(1.05);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(123px);
+    }
+}
+
+/* ---------------------------------------------------------
+   CUP BOUNCE
+   --------------------------------------------------------- */
+
+@keyframes cupBounce {
+
+    0%,
+    45%,
+    100% {
+        transform: translateX(-50%) rotate(0deg);
+    }
+
+    48% {
+        transform: translateX(-50%) rotate(-1.5deg);
+    }
+
+    51% {
+        transform: translateX(-50%) rotate(1.5deg);
+    }
+
+    54% {
+        transform: translateX(-50%) rotate(-0.7deg);
+    }
+
+    57% {
+        transform: translateX(-50%) rotate(0deg);
+    }
+}
+
+/* ---------------------------------------------------------
+   STRAW MOVEMENT
+   --------------------------------------------------------- */
+
+@keyframes strawMove {
+
+    0%,
+    45%,
+    100% {
+        transform: rotate(8deg);
+    }
+
+    48% {
+        transform: rotate(5deg);
+    }
+
+    51% {
+        transform: rotate(11deg);
+    }
+
+    54% {
+        transform: rotate(6deg);
+    }
+
+    57% {
+        transform: rotate(8deg);
+    }
+}
+
+/* ---------------------------------------------------------
+   TEA MOVEMENT
+   --------------------------------------------------------- */
+
+@keyframes teaFill {
+
+    0%,
+    25% {
+        height: 72%;
+    }
+
+    45% {
+        height: 76%;
+    }
+
+    50% {
+        height: 78%;
+    }
+
+    55% {
+        height: 76%;
+    }
+
+    100% {
+        height: 72%;
+    }
+}
+
+/* ---------------------------------------------------------
+   PEARLS FLOAT
+   --------------------------------------------------------- */
+
+@keyframes pearlFloat {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-3px);
+    }
+}
+
+/* ---------------------------------------------------------
+   SMALL DECORATIVE BUBBLES
+   --------------------------------------------------------- */
+
+.boba-scene::before,
+.boba-scene::after {
+    content: "";
+
+    position: absolute;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.25);
+
+    opacity: 0;
+
+    animation: littleBubble 3.8s ease-out infinite;
+}
+
+.boba-scene::before {
+    width: 6px;
+    height: 6px;
+
+    left: 35px;
+    bottom: 88px;
+
+    animation-delay: 0.8s;
+}
+
+.boba-scene::after {
+    width: 4px;
+    height: 4px;
+
+    right: 34px;
+    bottom: 98px;
+
+    animation-delay: 1.8s;
+}
+
+@keyframes littleBubble {
+
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    30% {
+        opacity: 0.7;
+    }
+
+    70% {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+/* ---------------------------------------------------------
+   RESPONSIVE — SMALL SIDEBAR
+   --------------------------------------------------------- */
+
+@media (max-width: 900px) {
+
+    .boba-animation {
+        margin-top: 20px;
+    }
+
+    .boba-scene {
+        transform: scale(0.9);
+        transform-origin: top center;
+        margin-bottom: -18px;
+    }
+
+    .boba-title {
+        font-size: 12px;
+    }
+}
+
+/* ---------------------------------------------------------
+   REDUCE MOTION
+   --------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .falling-boba,
+    .cup,
+    .straw,
+    .tea,
+    .pearls span,
+    .boba-scene::before,
+    .boba-scene::after {
+        animation: none !important;
+    }
+}
+
+</style>
+
 <aside class="sidebar">
 
     <div class="logo-area">
@@ -57,5 +660,39 @@
 
         </ul>
     </nav>
+
+<div class="boba-animation">
+
+    <div class="boba-title">
+        Take a Boba Break 🧋
+    </div>
+
+    <div class="boba-scene">
+
+        <div class="falling-boba boba-1"></div>
+        <div class="falling-boba boba-2"></div>
+        <div class="falling-boba boba-3"></div>
+
+        <div class="cup">
+
+            <div class="tea"></div>
+
+            <div class="pearls">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <div class="cup-lid"></div>
+            <div class="straw"></div>
+
+        </div>
+
+    </div>
+
+</div>
 
 </aside>
