@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>My Family (我的家人) | Boba Break Study</title>
+
+<link rel="stylesheet" href="../style.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<!-- Hanzi Writer CDN -->
+<script src="https://cdn.jsdelivr.net/npm/hanzi-writer@3.5.0/dist/hanzi-writer.min.js"></script>
+
+<style>
+
+/* =====================================================
+   GENERAL
+===================================================== */
+
+.lesson-card,
+.video-card,
+.vocab-card,
+.game-card,
+.writing-card,
+.final-card {
+    background: white;
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.06);
+    margin: 25px auto;
+    max-width: 750px;
+}
+
+h2 {
+    color: #b8865c;
+    font-size: 24px;
+    margin-bottom: 12px;
+}
+
+h3 {
+    color: #5c4033;
+}
+
+p {
+    color: #666;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+
+/* =====================================================
+   LESSON HEADER
+===================================================== */
+
+.lesson-title {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.lesson-title .badge {
+    display: inline-block;
+    background: #fff8ef;
+    color: #b8865c;
+    border: 1px solid #d7b89c;
+    padding: 6px 13px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.lesson-title h1 {
+    color: #5c4033;
+    font-size: 28px;
+    margin: 12px 0 5px;
+}
+
+.lesson-title p {
+    margin: 0;
+}
+
+
+/* =====================================================
+   VIDEO SECTION
+===================================================== */
+
+.video-wrapper {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+    height: 0;
+    margin-top: 15px;
+    border-radius: 15px;
+    overflow: hidden;
+    border: 2px solid #d7b89c;
+    background: #000;
+}
+
+.video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.video-explanation {
+    background: #fff8ef;
+    border: 1.5px solid #d7b89c;
+    padding: 15px;
+    border-radius: 15px;
+    margin-top: 15px;
+}
+
+.video-explanation strong {
+    color: #b8865c;
+}
+
+
+/* =====================================================
+   VOCABULARY
+===================================================== */
+
+.vocab-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.vocab-pill {
+    position: relative;
+    background: #fff8ef;
+    border-radius: 14px;
+    padding: 12px 14px;
+    width: 130px;
+    text-align: center;
+    border: 1.5px solid #d7b89c;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.vocab-pill:hover {
+    transform: translateY(-2px);
+    background: #faedcd;
+}
+
+.vocab-pill:active {
+    transform: scale(0.95);
+}
+
+.vocab-pill .hanzi {
+    font-size: 18px;
+    font-weight: bold;
+    color: #b8865c;
+}
+
+.vocab-pill .pinyin {
+    font-size: 11px;
+    color: #555;
+    margin-top: 2px;
+}
+
+.vocab-pill .meaning {
+    font-size: 10px;
+    color: #777;
+    margin-top: 2px;
+}
+
+
+/* =====================================================
+   GAME (MULTIPLE CHOICE)
+===================================================== */
+
+.game-card {
+    position: relative;
+}
+
+.game-number {
+    display: inline-block;
+    background: #fff8ef;
+    color: #b8865c;
+    border: 1px solid #d7b89c;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.game-description {
+    margin-bottom: 15px;
+}
+
+.game-progress {
+    font-size: 12px;
+    color: #8c7355;
+    text-align: right;
+    margin-bottom: 8px;
+}
+
+.question-box {
+    text-align: center;
+    background: #fff8ef;
+    border: 1.5px dashed #d7b89c;
+    padding: 18px;
+    border-radius: 15px;
+    margin-bottom: 15px;
+}
+
+.question-label {
+    font-size: 11px;
+    color: #999;
+    margin-bottom: 5px;
+}
+
+.question-target {
+    font-size: 26px;
+    color: #5c4033;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.options-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.option-btn {
+    border: 1.5px solid #d7b89c;
+    background: white;
+    color: #5c4033;
+    padding: 12px 15px;
+    border-radius: 12px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: left;
+    transition: 0.2s;
+    font-weight: 500;
+}
+
+.option-btn:hover {
+    background: #fff8ef;
+    transform: translateY(-2px);
+}
+
+.option-btn.correct-choice {
+    background: #d8f3dc;
+    border-color: #52b788;
+    color: #2d6a4f;
+}
+
+.option-btn.incorrect-choice {
+    background: #ffe5d9;
+    border-color: #f28482;
+    color: #9b2226;
+}
+
+.game-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.next-game-btn {
+    flex: 1;
+    border: none;
+    border-radius: 12px;
+    padding: 11px;
+    cursor: pointer;
+    font-weight: bold;
+    background: #5c4033;
+    color: white;
+    display: none;
+    margin-top: 12px;
+    transition: 0.2s;
+}
+
+.next-game-btn:hover {
+    background: #4a3227;
+}
+
+.feedback {
+    text-align: center;
+    min-height: 30px;
+    margin-top: 12px;
+    font-weight: bold;
+}
+
+.correct {
+    color: #2d6a4f;
+}
+
+.incorrect {
+    color: #9b2226;
+}
+
+
+/* =====================================================
+   WRITING PRACTICE
+===================================================== */
+
+.writing-card {
+    text-align: center;
+}
+
+.writing-mode-buttons {
+    display: flex;
+    gap: 8px;
+    margin: 15px 0;
+}
+
+.mode-btn {
+    flex: 1;
+    border: 1.5px solid #d7b89c;
+    background: #fff8ef;
+    color: #8c7355;
+    padding: 10px 5px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+.mode-btn.active {
+    background: #b8865c;
+    color: white;
+    border-color: #b8865c;
+}
+
+.writing-info {
+    color: #777;
+    font-size: 13px;
+    margin-bottom: 15px;
+}
+
+.canvas-wrapper {
+    margin: 15px auto;
+    width: 280px;
+    max-width: 100%;
+    height: 280px;
+    background:
+        linear-gradient(#eadac7 1px, transparent 1px),
+        linear-gradient(90deg, #eadac7 1px, transparent 1px),
+        linear-gradient(#eadac7 1px, transparent 1px),
+        linear-gradient(90deg, #eadac7 1px, transparent 1px);
+    background-size: 70px 70px;
+    background-position: center;
+    border: 2px solid #d7b89c;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+    touch-action: none;
+}
+
+#target-div {
+    width: 260px;
+    height: 260px;
+}
+
+.writing-buttons {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.write-btn {
+    border: none;
+    padding: 10px 15px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.clear-btn {
+    background: #fff8ef;
+    color: #8c7355;
+    border: 1px solid #d7b89c;
+}
+
+.next-write-btn {
+    background: #b8865c;
+    color: white;
+}
+
+
+/* =====================================================
+   SOUND
+===================================================== */
+
+.sound-btn {
+    background: #b8865c;
+    color: white;
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+    margin-left: 5px;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:700px){
+
+    .lesson-card,
+    .video-card,
+    .vocab-card,
+    .game-card,
+    .writing-card,
+    .final-card {
+        padding: 15px;
+        margin: 15px;
+    }
+
+    .lesson-title h1 {
+        font-size: 23px;
+    }
+
+    .vocab-pill {
+        width: 105px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="app-container">
+
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
+
+<div id="sidebar-container"></div>
+
+
+<main class="main-content">
+
+
+<!-- =====================================================
+     TITLE
+===================================================== -->
+
+<div class="lesson-title">
+
+    <span class="badge">
+        VOCABULARY LESSON • CULTURE & FAMILY
+    </span>
+
+    <h1>My Family (我的家人)</h1>
+
+    <p>
+        Explore Chinese family terms, traditional addressing, and relationship connections.
+    </p>
+
+</div>
+
+
+<!-- =====================================================
+     VIDEO SECTION
+===================================================== -->
+
+<div class="video-card">
+
+    <h2>🎥 Video Explanation: Taiwanese Family Traditions</h2>
+
+    <p>
+        Watch this video to understand how family relationship structures and traditional titles work in Chinese and Taiwanese culture.
+    </p>
+
+    <div class="video-wrapper">
+        <iframe src="https://drive.google.com/file/d/1_PlyimaiURaR0a8mmIzV0QbVPNdj9BKY/preview" allow="autoplay"></iframe>
+    </div>
+
+    <div class="video-explanation">
+        <p>
+            Chinese family terms can be quite extensive, and if you’re not familiar with Chinese family traditions, they may feel a little confusing to memorize. One of the easiest ways to remember them is through real-life connections. If you have a Taiwanese or Chinese partner or friends, learning how they address their family members can make these terms much easier to understand and remember. The video is the explanation of how family members are addressed in Taiwanese tradition.
+        </p>
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     VOCABULARY
+===================================================== -->
+
+<div class="vocab-card">
+
+    <h2>📚 Family Vocabulary List</h2>
+
+    <p>
+        Tap any word card to hear its native pronunciation.
+    </p>
+
+    <div class="vocab-container" id="vocabContainer">
+        <!-- Dynamically or statically rendered vocab pills -->
+        <div class="vocab-pill" onclick="playAudio('爺爺奶奶')">
+            <div class="hanzi">爺爺 奶奶</div>
+            <div class="pinyin">yéye / nǎinai</div>
+            <div class="meaning">Paternal Grandparents</div>
+        </div>
+
+        <div class="vocab-pill" onclick="playAudio('伯伯伯母')">
+            <div class="hanzi">伯伯 伯母</div>
+            <div class="pinyin">bóbo / bómǔ</div>
+            <div class="meaning">Uncle (Dad's older) & Aunt</div>
+        </div>
+
+        <div class="vocab-pill" onclick="playAudio('叔叔嬸嬸')">
+            <div class="hanzi">叔叔 嬸嬸</div>
+            <div class="pinyin">shūshu / shěnshen</div>
+            <div class="meaning">Uncle (Dad's younger) & Aunt</div>
+        </div>
+
+        <div class="vocab-pill" onclick="playAudio('姑姑姑丈')">
+            <div class="hanzi">姑姑 姑丈</div>
+            <div class="pinyin">gūgu / gūzhang</div>
+            <div class="meaning">Dad's Sister & Husband</div>
+        </div>
+
+        <div class="vocab-pill" onclick="playAudio('舅舅舅媽')">
+            <div class="hanzi">舅舅 舅媽</div>
+            <div class="pinyin">jiùjiu / jiùmā</div>
+            <div class="meaning">Mom's Brother & Wife</div>
+        </div>
+
+        <div class="vocab-pill" onclick="playAudio('阿姨姨丈')">
+            <div class="hanzi">阿姨 姨丈</div>
+            <div class="pinyin">āyí / yízhàng</div>
+            <div class="meaning">Mom's Sister & Husband</div>
+        </div>
+
+        <div class="vocab-pill" onclick="playAudio('堂表')">
+            <div class="hanzi">堂。。。 表。。。</div>
+            <div class="pinyin">táng... / biǎo...</div>
+            <div class="meaning">Cousins (Paternal / Maternal)</div>
+        </div>
+
+        <div class="vocab-pill" onclick="playAudio('兄弟姐妹')">
+            <div class="hanzi">兄弟姐妹</div>
+            <div class="pinyin">xiōngdì jiěmèi</div>
+            <div class="meaning">Siblings</div>
+        </div>
+
+        <div class="vocab-pill" onclick="playAudio('兄弟')">
+            <div class="hanzi">兄弟</div>
+            <div class="pinyin">xiōngdì</div>
+            <div class="meaning">Brothers</div>
+        </div>
+
+        <div class="vocab-pill" onclick="playAudio('姊妹')">
+            <div class="hanzi">姊妹</div>
+            <div class="pinyin">zǐmèi</div>
+            <div class="meaning">Sisters</div>
+        </div>
+
+        <div class="vocab-pill" onclick="playAudio('家人')">
+            <div class="hanzi">家人</div>
+            <div class="pinyin">jiārén</div>
+            <div class="meaning">Family members</div>
+        </div>
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     GAME: MULTIPLE CHOICE (FAMILY TERMS)
+===================================================== -->
+
+<div class="game-card">
+
+    <span class="game-number">GAME</span>
+
+    <h2>🧩 Family Terms Quiz</h2>
+
+    <p class="game-description">
+        Test your knowledge of Chinese family terms with English definitions!
+    </p>
+
+    <div class="game-progress">
+        Question <span id="quizNum">1</span> / 10
+    </div>
+
+    <div class="question-box">
+        <div class="question-label">What is the Chinese term for:</div>
+        <div class="question-target" id="quizQuestion">Target Meaning</div>
+        <button class="sound-btn" onclick="playAudio(currentQuizHanzi())" title="Listen">🔊</button>
+    </div>
+
+    <div class="options-container" id="optionsContainer">
+        <!-- Options generated via JS -->
+    </div>
+
+    <div class="feedback" id="quizFeedback"></div>
+
+    <button class="next-game-btn" id="quizNextBtn" onclick="nextQuizQuestion()">
+        Next Question →
+    </button>
+
+</div>
+
+
+<!-- =====================================================
+     WRITING PRACTICE
+===================================================== -->
+
+<div class="writing-card">
+
+    <h2>✍️ Hanzi Writing Practice</h2>
+
+    <p>
+        Practice correct stroke orders by hand for key family vocabulary characters.
+    </p>
+
+    <div class="writing-mode-buttons">
+        <button class="mode-btn active" onclick="setWritingMode('quiz',this)">
+            ✍️ Quiz (Stroke Order)
+        </button>
+        <button class="mode-btn" onclick="setWritingMode('animate',this)">
+            👀 Animate
+        </button>
+    </div>
+
+    <div class="writing-info" id="writingInfo">
+        Write the character following the correct stroke order!
+    </div>
+
+    <div class="canvas-wrapper">
+        <div id="target-div"></div>
+    </div>
+
+    <div class="feedback" id="writingFeedback"></div>
+
+    <div class="writing-buttons">
+        <button class="write-btn clear-btn" onclick="resetWritingQuiz()">
+            ↻ Retry
+        </button>
+        <button class="write-btn" style="background:#f0f7f4;color:#2d6a4f;" onclick="playCurrentWriting()">
+            🔊 Listen
+        </button>
+        <button class="write-btn next-write-btn" onclick="nextWritingCharacter()">
+            Next →
+        </button>
+    </div>
+
+</div>
+
+
+</main>
+</div>
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script>
+
+/* =====================================================
+   AUDIO
+===================================================== */
+
+function playAudio(text){
+    if(!('speechSynthesis' in window)) return;
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = "zh-TW";
+    utterance.rate = 0.82;
+    utterance.pitch = 1;
+    window.speechSynthesis.speak(utterance);
+}
+
+
+/* =====================================================
+   QUIZ DATA & LOGIC (MULTIPLE CHOICE IN ENGLISH)
+===================================================== */
+
+const quizData = [
+    { hanzi: "爺爺", pinyin: "yéye", meaning: "Paternal grandfather" },
+    { hanzi: "奶奶", pinyin: "nǎinai", meaning: "Paternal grandmother" },
+    { hanzi: "伯伯", pinyin: "bóbo", meaning: "Father's older brother (Uncle)" },
+    { hanzi: "伯母", pinyin: "bómǔ", meaning: "Father's older brother's wife (Aunt)" },
+    { hanzi: "叔叔", pinyin: "shūshu", meaning: "Father's younger brother (Uncle)" },
+    { hanzi: "嬸嬸", pinyin: "shěnshen", meaning: "Father's younger brother's wife (Aunt)" },
+    { hanzi: "姑姑", pinyin: "gūgu", meaning: "Father's sister (Aunt)" },
+    { hanzi: "舅舅", pinyin: "jiùjiu", meaning: "Mother's brother (Uncle)" },
+    { hanzi: "阿姨", pinyin: "āyí", meaning: "Mother's sister (Aunt)" },
+    { hanzi: "兄弟姐妹", pinyin: "xiōngdì jiěmèi", meaning: "Siblings" },
+    { hanzi: "家人", pinyin: "jiārén", meaning: "Family members" }
+];
+
+let currentQuizIndex = 0;
+let answeredCurrent = false;
+
+function shuffle(array) {
+    return [...array].sort(() => Math.random() - 0.5);
+}
+
+function currentQuizHanzi() {
+    return quizData[currentQuizIndex].hanzi;
+}
+
+function loadQuizQuestion() {
+    answeredCurrent = false;
+    const current = quizData[currentQuizIndex];
+
+    document.getElementById("quizNum").textContent = currentQuizIndex + 1;
+    document.getElementById("quizQuestion").textContent = `${current.hanzi} (${current.pinyin})`;
+    document.getElementById("quizFeedback").textContent = "";
+    document.getElementById("quizNextBtn").style.display = "none";
+
+    // Generate options: correct meaning + 3 random incorrect meanings
+    const incorrectOptions = quizData
+        .filter(item => item.meaning !== current.meaning)
+        .map(item => item.meaning);
+    
+    const selectedIncorrect = shuffle(incorrectOptions).slice(0, 3);
+    const options = shuffle([current.meaning, ...selectedIncorrect]);
+
+    const container = document.getElementById("optionsContainer");
+    container.innerHTML = "";
+
+    options.forEach(optionText => {
+        const btn = document.createElement("button");
+        btn.className = "option-btn";
+        btn.textContent = optionText;
+        btn.onclick = () => checkQuizAnswer(btn, optionText, current.meaning);
+        container.appendChild(btn);
+    });
+}
+
+function checkQuizAnswer(button, selected, correct) {
+    if (answeredCurrent) return;
+    answeredCurrent = true;
+
+    const allButtons = document.querySelectorAll(".options-container .option-btn");
+    allButtons.forEach(btn => {
+        btn.disabled = true;
+        if (btn.textContent === correct) {
+            btn.classList.add("correct-choice");
+        }
+    });
+
+    const feedback = document.getElementById("quizFeedback");
+
+    if (selected === correct) {
+        feedback.textContent = "🎉 Correct!";
+        feedback.className = "feedback correct";
+        playAudio("答對了");
+    } else {
+        button.classList.add("incorrect-choice");
+        feedback.textContent = `❌ Incorrect. The correct answer is: ${correct}`;
+        feedback.className = "feedback incorrect";
+    }
+
+    document.getElementById("quizNextBtn").style.display = "block";
+}
+
+function nextQuizQuestion() {
+    currentQuizIndex++;
+    if (currentQuizIndex >= quizData.length) {
+        currentQuizIndex = 0;
+    }
+    loadQuizQuestion();
+}
+
+
+/* =====================================================
+   WRITING PRACTICE
+===================================================== */
+
+const writingCharacters = [
+    { hanzi: "爺", pinyin: "yé", meaning: "grandfather" },
+    { hanzi: "奶", pinyin: "nǎi", meaning: "milk / grandmother" },
+    { hanzi: "伯", pinyin: "bó", meaning: "father's older brother" },
+    { hanzi: "叔", pinyin: "shū", meaning: "father's younger brother" },
+    { hanzi: "姑", pinyin: "gū", meaning: "paternal aunt" },
+    { hanzi: "舅", pinyin: "jiù", meaning: "maternal uncle" },
+    { hanzi: "姨", pinyin: "yí", meaning: "maternal aunt" },
+    { hanzi: "兄", pinyin: "xiōng", meaning: "older brother" },
+    { hanzi: "弟", pinyin: "dì", meaning: "younger brother" },
+    { hanzi: "姐", pinyin: "jiě", meaning: "older sister" },
+    { hanzi: "妹", pinyin: "mèi", meaning: "younger sister" },
+    { hanzi: "家", pinyin: "jiā", meaning: "family / home" },
+    { hanzi: "人", pinyin: "rén", meaning: "person" }
+];
+
+let writingIndex = 0;
+let writingMode = "quiz";
+let writer = null;
+
+function initWriter(){
+    const item = writingCharacters[writingIndex];
+    const container = document.getElementById("target-div");
+    container.innerHTML = "";
+
+    const info = document.getElementById("writingInfo");
+
+    if(writingMode === "quiz"){
+        info.innerHTML = `Write <strong>${item.hanzi}</strong> (${item.pinyin} - ${item.meaning}) following correct stroke order! (${writingIndex + 1}/${writingCharacters.length})`;
+    } else {
+        info.innerHTML = `Watch animated stroke order for <strong>${item.hanzi}</strong> (${item.pinyin} - ${item.meaning}). (${writingIndex + 1}/${writingCharacters.length})`;
+    }
+
+    writer = HanziWriter.create(
+        "target-div",
+        item.hanzi,
+        {
+            width: 260,
+            height: 260,
+            padding: 10,
+            showOutline: true,
+            strokeAnimationSpeed: 1,
+            drawingColor: "#5c4033",
+            strokeHighlightColor: "#b8865c",
+            showCharacter: writingMode === "animate"
+        }
+    );
+
+    if(writingMode === "quiz"){
+        startQuiz();
+    } else {
+        writer.animateCharacter();
+    }
+}
+
+function startQuiz(){
+    const feedback = document.getElementById("writingFeedback");
+    feedback.textContent = "";
+
+    writer.quiz({
+        onMistake: function(strokeData){
+            feedback.textContent = "❌ Incorrect stroke order! Try again.";
+            feedback.className = "feedback incorrect";
+        },
+        onCorrectStroke: function(strokeData){
+            feedback.textContent = "✨ Great! Continue with the next stroke.";
+            feedback.className = "feedback correct";
+        },
+        onComplete: function(summaryData){
+            feedback.textContent = "🎉 Perfect! Correct stroke order.";
+            feedback.className = "feedback correct";
+        }
+    });
+}
+
+function setWritingMode(mode, button){
+    writingMode = mode;
+    document.querySelectorAll(".writing-card .mode-btn").forEach(btn => btn.classList.remove("active"));
+    button.classList.add("active");
+    initWriter();
+}
+
+function resetWritingQuiz(){
+    initWriter();
+}
+
+function nextWritingCharacter(){
+    writingIndex++;
+    if(writingIndex >= writingCharacters.length){
+        writingIndex = 0;
+    }
+    initWriter();
+}
+
+function playCurrentWriting(){
+    playAudio(writingCharacters[writingIndex].hanzi);
+}
+
+
+/* =====================================================
+   INITIALIZE ON LOAD
+===================================================== */
+
+loadQuizQuestion();
+initWriter();
+
+</script>
+
+<!-- EXISTING SIDEBAR SCRIPT -->
+<script src="../script.js"></script>
+
+</body>
+</html>
