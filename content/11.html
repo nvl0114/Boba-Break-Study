@@ -690,7 +690,7 @@ p {
 
     <div style="display: flex; align-items: center; margin-top: 20px;">
         <h3 style="margin-top: 0;">Reading Text</h3>
-        <button class="sound-btn" onclick="playAudio('我叫小美。我有個哥哥和妹妹。我跟哥哥住在一起，妹妹也住在家裡。我們都喜歡吃飯和看電影。哥哥還喜歡聽唱歌，但是妹妹不喜歡。妹妹喜歡自拍，可是哥哥不喜歡。今天是星期六，所以我們都有多時間。因為天氣很好，我們想出去玩。然後我們一起去公園。如果下雨，我們就回家。晚上我們可以吃麵或者吃飯。你要吃麵還是吃飯？')"><i class="fas fa-volume-up"></i></button>
+        <button class="sound-btn" onclick="playReadingAudio()"><i class="fas fa-volume-up"></i></button>
     </div>
     <p style="font-size:12px; color:#888; margin-top: 5px;">Pinyin indicators appear only on target new vocabulary items:</p>
 
@@ -1040,6 +1040,14 @@ function playAudio(text){
     utterance.rate = 0.82;
     utterance.pitch = 1;
     window.speechSynthesis.speak(utterance);
+}
+
+function playReadingAudio(){
+    const audioUrl = "https://res.cloudinary.com/xlgnlgrn/video/upload/v1787369765/%E6%88%91%E5%8F%AB%E5%B0%8F%E7%BE%8E_%E6%88%91%E6%9C%89%E5%80%8B%E5%93%A5%E5%93%A5%E5%92%8C%E5%A6%B9%E5%A6%B9_%E6%88%91%E8%B7%9F%E5%93%A5%E5%93%A5_%E4%BD%8F.m4a";
+    const audio = new Audio(audioUrl);
+    audio.play().catch(error => {
+        console.log("Audio playback failed:", error);
+    });
 }
 
 let currentSlideIndex = 0;
