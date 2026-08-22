@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Numbers & Money (数字与货币) | Boba Break Study</title>
+
+<link rel="stylesheet" href="../style.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<!-- Hanzi Writer CDN -->
+<script src="https://cdn.jsdelivr.net/npm/hanzi-writer@3.5.0/dist/hanzi-writer.min.js"></script>
+
+<style>
+
+/* =====================================================
+   GENERAL
+===================================================== */
+
+.lesson-card,
+.video-card,
+.vocab-card,
+.game-card,
+.writing-card,
+.final-card {
+    background: white;
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.06);
+    margin: 25px auto;
+    max-width: 750px;
+}
+
+h2 {
+    color: #b8865c;
+    font-size: 24px;
+    margin-bottom: 12px;
+}
+
+h3 {
+    color: #5c4033;
+}
+
+p {
+    color: #666;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+
+/* =====================================================
+   LESSON HEADER
+===================================================== */
+
+.lesson-title {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.lesson-title .badge {
+    display: inline-block;
+    background: #fff8ef;
+    color: #b8865c;
+    border: 1px solid #d7b89c;
+    padding: 6px 13px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.lesson-title h1 {
+    color: #5c4033;
+    font-size: 28px;
+    margin: 12px 0 5px;
+}
+
+.lesson-title p {
+    margin: 0;
+}
+
+
+/* =====================================================
+   CONTENT SECTIONS & EXPLANATIONS
+===================================================== */
+
+.content-section {
+    background: #fff8ef;
+    border: 1.5px solid #d7b89c;
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+}
+
+.content-section h3 {
+    margin-top: 0;
+    color: #b8865c;
+}
+
+.content-section ul {
+    margin: 10px 0 0 20px;
+    color: #666;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+
+/* =====================================================
+   VOCABULARY
+===================================================== */
+
+.vocab-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.vocab-pill {
+    position: relative;
+    background: #fff8ef;
+    border-radius: 14px;
+    padding: 12px 10px;
+    width: 115px;
+    text-align: center;
+    border: 1.5px solid #d7b89c;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.vocab-pill:hover {
+    transform: translateY(-2px);
+    background: #faedcd;
+}
+
+.vocab-pill:active {
+    transform: scale(0.95);
+}
+
+.vocab-pill .hanzi {
+    font-size: 18px;
+    font-weight: bold;
+    color: #b8865c;
+}
+
+.vocab-pill .pinyin {
+    font-size: 11px;
+    color: #555;
+    margin-top: 2px;
+}
+
+.vocab-pill .meaning {
+    font-size: 10px;
+    color: #777;
+    margin-top: 2px;
+}
+
+
+/* =====================================================
+   GAME (MULTIPLE CHOICE)
+===================================================== */
+
+.game-card {
+    position: relative;
+}
+
+.game-number {
+    display: inline-block;
+    background: #fff8ef;
+    color: #b8865c;
+    border: 1px solid #d7b89c;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.game-description {
+    margin-bottom: 15px;
+}
+
+.game-progress {
+    font-size: 12px;
+    color: #8c7355;
+    text-align: right;
+    margin-bottom: 8px;
+}
+
+.question-box {
+    text-align: center;
+    background: #fff8ef;
+    border: 1.5px dashed #d7b89c;
+    padding: 18px;
+    border-radius: 15px;
+    margin-bottom: 15px;
+}
+
+.question-label {
+    font-size: 11px;
+    color: #999;
+    margin-bottom: 5px;
+}
+
+.question-target {
+    font-size: 26px;
+    color: #5c4033;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.options-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.option-btn {
+    border: 1.5px solid #d7b89c;
+    background: white;
+    color: #5c4033;
+    padding: 12px 15px;
+    border-radius: 12px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: left;
+    transition: 0.2s;
+    font-weight: 500;
+}
+
+.option-btn:hover {
+    background: #fff8ef;
+    transform: translateY(-2px);
+}
+
+.option-btn.correct-choice {
+    background: #d8f3dc;
+    border-color: #52b788;
+    color: #2d6a4f;
+}
+
+.option-btn.incorrect-choice {
+    background: #ffe5d9;
+    border-color: #f28482;
+    color: #9b2226;
+}
+
+.game-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.next-game-btn {
+    flex: 1;
+    border: none;
+    border-radius: 12px;
+    padding: 11px;
+    cursor: pointer;
+    font-weight: bold;
+    background: #5c4033;
+    color: white;
+    display: none;
+    margin-top: 12px;
+    transition: 0.2s;
+}
+
+.next-game-btn:hover {
+    background: #4a3227;
+}
+
+.feedback {
+    text-align: center;
+    min-height: 30px;
+    margin-top: 12px;
+    font-weight: bold;
+}
+
+.correct {
+    color: #2d6a4f;
+}
+
+.incorrect {
+    color: #9b2226;
+}
+
+
+/* =====================================================
+   WRITING PRACTICE
+===================================================== */
+
+.writing-card {
+    text-align: center;
+}
+
+.writing-mode-buttons {
+    display: flex;
+    gap: 8px;
+    margin: 15px 0;
+}
+
+.mode-btn {
+    flex: 1;
+    border: 1.5px solid #d7b89c;
+    background: #fff8ef;
+    color: #8c7355;
+    padding: 10px 5px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+.mode-btn.active {
+    background: #b8865c;
+    color: white;
+    border-color: #b8865c;
+}
+
+.writing-info {
+    color: #777;
+    font-size: 13px;
+    margin-bottom: 15px;
+}
+
+.canvas-wrapper {
+    margin: 15px auto;
+    width: 280px;
+    max-width: 100%;
+    height: 280px;
+    background:
+        linear-gradient(#eadac7 1px, transparent 1px),
+        linear-gradient(90deg, #eadac7 1px, transparent 1px),
+        linear-gradient(#eadac7 1px, transparent 1px),
+        linear-gradient(90deg, #eadac7 1px, transparent 1px);
+    background-size: 70px 70px;
+    background-position: center;
+    border: 2px solid #d7b89c;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+    touch-action: none;
+}
+
+#target-div {
+    width: 260px;
+    height: 260px;
+}
+
+.writing-buttons {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.write-btn {
+    border: none;
+    padding: 10px 15px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.clear-btn {
+    background: #fff8ef;
+    color: #8c7355;
+    border: 1px solid #d7b89c;
+}
+
+.next-write-btn {
+    background: #b8865c;
+    color: white;
+}
+
+
+/* =====================================================
+   SOUND
+===================================================== */
+
+.sound-btn {
+    background: #b8865c;
+    color: white;
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+    margin-left: 5px;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:700px){
+
+    .lesson-card,
+    .video-card,
+    .vocab-card,
+    .game-card,
+    .writing-card,
+    .final-card {
+        padding: 15px;
+        margin: 15px;
+    }
+
+    .lesson-title h1 {
+        font-size: 23px;
+    }
+
+    .vocab-pill {
+        width: 105px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="app-container">
+
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
+
+<div id="sidebar-container"></div>
+
+
+<main class="main-content">
+
+
+<!-- =====================================================
+     TITLE
+===================================================== -->
+
+<div class="lesson-title">
+
+    <span class="badge">
+        VOCABULARY LESSON • NUMBERS & MONEY
+    </span>
+
+    <h1>Numbers & Money (数字与货币)</h1>
+
+    <p>
+        Learn numbers beyond 10, large scale counting units, and currency expressions in Chinese.
+    </p>
+
+</div>
+
+
+<!-- =====================================================
+     LESSON CONTENT SECTION
+===================================================== -->
+
+<div class="lesson-card">
+
+    <h2>📖 Lesson Breakdown</h2>
+
+    <p>
+        We have already learned numbers 1-10 and teens in previous lessons. Let's learn more:
+    </p>
+
+    <div class="content-section">
+        <h3>11–19</h3>
+        <p>十 (shí) + number</p>
+        <p><strong>Example:</strong> 十二 (shí èr = 12), 十八 (shí bā = 18)</p>
+    </div>
+
+    <div class="content-section">
+        <h3>20–99</h3>
+        <p>number + 十 (shí) + number</p>
+        <p><strong>Example:</strong> 二十 (èr shí = 20), 八十五 (bā shí wǔ = 85)</p>
+    </div>
+
+    <div class="content-section">
+        <h3>Hundred (百 bǎi)</h3>
+        <p><strong>Example:</strong></p>
+        <p>兩百 (liǎng bǎi = 200)</p>
+        <p>五百三十五 (wǔ bǎi sān shí wǔ = 535)</p>
+        <p><em>Notice this:</em> 五百 (wǔ bǎi = 500), 三十 (sān shí = 30), 五 (wǔ = 5)</p>
+    </div>
+
+    <div class="content-section">
+        <h3>Thousand (千 qiān)</h3>
+        <p><strong>Example:</strong></p>
+        <p>兩千 (liǎng qiān = 2000)</p>
+        <p>八千三百五十六 (bā qiān sān bǎi wǔ shí liù = 8356)</p>
+        <p><em>Notice this:</em> 八千 (bā qiān = 8000) + 三百 (sān bǎi = 300) + 五十 (wǔ shí = 50) + 六 (liù = 6)</p>
+    </div>
+
+    <div class="content-section">
+        <h3>Tens of Thousands (萬 wàn)</h3>
+        <p>
+            In Chinese culture, numbers are not grouped by thousands (groups of 3 zeros) like in the West, but rather grouped in units of 4 zeros.
+        </p>
+        <p><strong>Explanation:</strong></p>
+        <ul>
+            <li>When looking at a number like 100,000 (4 zeros after 10), we group it as 10.000. For 1,000,000 (6 zeros), we split it as 1.000.000.</li>
+            <li>In Chinese culture, they have a dedicated unit for 4 zeros, which is <strong>萬 (wàn)</strong>.</li>
+        </ul>
+        <p><strong>Examples:</strong></p>
+        <p>20,000 = 20000 = 兩萬 (liǎng wàn)</p>
+        <p>21,517 = 二萬一千五百一十七 (èr wàn yī qiān wǔ bǎi yī shí qī)</p>
+        <ul>
+            <li><strong>兩萬 (èr wàn):</strong> 20,000</li>
+            <li><strong>一千 (yī qiān):</strong> 1,000</li>
+            <li><strong>五百 (wǔ bǎi):</strong> 500</li>
+            <li><strong>一十 (yī shí):</strong> 10 (Here 一十 appears because it sits right after 五百: 五百 + 一十 + 七 = 500 + 10 + 7. However, if standing alone, 10 is usually just 十, not 一十)</li>
+            <li><strong>七 (qī):</strong> 7</li>
+        </ul>
+    </div>
+
+    <div class="content-section">
+        <h3>For 1 Million</h3>
+        <p>1,000,000 = 100.0000 = 一百萬 (yī bǎi wàn)</p>
+        <ul>
+            <li><strong>一百 (yī bǎi):</strong> 100</li>
+            <li><strong>萬 (wàn):</strong> 10,000 (0000)</li>
+        </ul>
+    </div>
+
+    <div class="content-section">
+        <h3>Currency Units (Satuan Uang)</h3>
+        <p><strong>塊 (kuài):</strong> Colloquial measure word for currency units (like "bucks" or "dollars").</p>
+        <p><strong>元 (yuán):</strong> Formal written unit for currency (RMB / Yuan / Dollars).</p>
+        <p><strong>臺幣 / 台幣 (táibì):</strong> New Taiwan Dollar (NTD).</p>
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     VOCABULARY
+===================================================== -->
+
+<div class="vocab-card">
+
+    <h2>📚 Numbers & Money Vocabulary List</h2>
+
+    <p>
+        Tap any word card to hear its native pronunciation.
+    </p>
+
+    <div class="vocab-container" id="vocabContainer">
+        <!-- Separated Individual Vocabulary Cards -->
+        <div class="vocab-pill" onclick="playAudio('百')">
+            <div class="hanzi">百</div>
+            <div class="pinyin">bǎi</div>
+            <div class="meaning">Hundred</div>
+        </div>
+
+        <div class="vocab-pill" onclick="playAudio('千')">
+            <div class="hanzi">千</div>
+            <div class="pinyin">qiān</div>
+            <div class="meaning">Thousand</div>
+        </div>
+
+        <div class="vocab-pill" onclick="playAudio('萬')">
+            <div class="hanzi">萬</div>
+            <div class="pinyin">wàn</div>
+            <div class="meaning">Ten thousand</div>
+        </div>
+
+        <div class="vocab-pill" onclick="playAudio('臺幣')">
+            <div class="hanzi">臺幣</div>
+            <div class="pinyin">táibì</div>
+            <div class="meaning">Taiwan Dollar (NTD)</div>
+        </div>
+
+        <div class="vocab-pill" onclick="playAudio('台幣')">
+            <div class="hanzi">台幣</div>
+            <div class="pinyin">táibì</div>
+            <div class="meaning">Taiwan Dollar (Simplified)</div>
+        </div>
+
+        <div class="vocab-pill" onclick="playAudio('塊')">
+            <div class="hanzi">塊</div>
+            <div class="pinyin">kuài</div>
+            <div class="meaning">Bucks / Measure word for money</div>
+        </div>
+
+        <div class="vocab-pill" onclick="playAudio('元')">
+            <div class="hanzi">元</div>
+            <div class="pinyin">yuán</div>
+            <div class="meaning">Formal currency unit</div>
+        </div>
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     GAME: MULTIPLE CHOICE (NUMBERS & MONEY)
+===================================================== -->
+
+<div class="game-card">
+
+    <span class="game-number">GAME</span>
+
+    <h2>🧩 Number Guessing Quiz</h2>
+
+    <p class="game-description">
+        Test your ability to recognize Chinese numbers and monetary values!
+    </p>
+
+    <div class="game-progress">
+        Question <span id="quizNum">1</span> / 10
+    </div>
+
+    <div class="question-box">
+        <div class="question-label">What is the Chinese expression or value for:</div>
+        <div class="question-target" id="quizQuestion">Target Meaning</div>
+        <button class="sound-btn" onclick="playAudio(currentQuizHanzi())" title="Listen">🔊</button>
+    </div>
+
+    <div class="options-container" id="optionsContainer">
+        <!-- Options generated via JS -->
+    </div>
+
+    <div class="feedback" id="quizFeedback"></div>
+
+    <button class="next-game-btn" id="quizNextBtn" onclick="nextQuizQuestion()">
+        Next Question →
+    </button>
+
+</div>
+
+
+<!-- =====================================================
+     WRITING PRACTICE
+===================================================== -->
+
+<div class="writing-card">
+
+    <h2>✍️ Hanzi Writing Practice</h2>
+
+    <p>
+        Practice correct stroke orders by hand for key number and money vocabulary characters.
+    </p>
+
+    <div class="writing-mode-buttons">
+        <button class="mode-btn active" onclick="setWritingMode('quiz',this)">
+            ✍️ Quiz (Stroke Order)
+        </button>
+        <button class="mode-btn" onclick="setWritingMode('animate',this)">
+            👀 Animate
+        </button>
+    </div>
+
+    <div class="writing-info" id="writingInfo">
+        Write the character following the correct stroke order!
+    </div>
+
+    <div class="canvas-wrapper">
+        <div id="target-div"></div>
+    </div>
+
+    <div class="feedback" id="writingFeedback"></div>
+
+    <div class="writing-buttons">
+        <button class="write-btn clear-btn" onclick="resetWritingQuiz()">
+            ↻ Retry
+        </button>
+        <button class="write-btn" style="background:#f0f7f4;color:#2d6a4f;" onclick="playCurrentWriting()">
+            🔊 Listen
+        </button>
+        <button class="write-btn next-write-btn" onclick="nextWritingCharacter()">
+            Next →
+        </button>
+    </div>
+
+</div>
+
+
+</main>
+</div>
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script>
+
+/* =====================================================
+   AUDIO (Custom Cloudinary Audio Support included)
+===================================================== */
+
+function playAudio(text){
+    if (text === '爺爺') {
+        const audio = new Audio('https://res.cloudinary.com/xlgnlgrn/video/upload/v1787369765/%E6%88%91%E5%8F%AB%E5%B0%8F%E7%BE%8E_%E6%88%91%E6%9C%89%E5%80%8B%E5%93%A5%E5%93%A5%E5%92%8C%E5%A6%B9%E5%A6%B9_%E6%88%91%E8%B7%9F%E5%93%A5%E5%93%A5_%E4%BD%8F.m4a');
+        audio.play().catch(e => console.log("Audio playback error:", e));
+        return;
+    }
+    if(!('speechSynthesis' in window)) return;
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = "zh-TW";
+    utterance.rate = 0.82;
+    utterance.pitch = 1;
+    window.speechSynthesis.speak(utterance);
+}
+
+
+/* =====================================================
+   QUIZ DATA & LOGIC (MULTIPLE CHOICE FOR NUMBERS & MONEY)
+===================================================== */
+
+const quizData = [
+    { hanzi: "十二", pinyin: "shí èr", meaning: "12" },
+    { hanzi: "十八", pinyin: "shí bā", meaning: "18" },
+    { hanzi: "二十", pinyin: "èr shí", meaning: "20" },
+    { hanzi: "八十五", pinyin: "bā shí wǔ", meaning: "85" },
+    { hanzi: "兩百", pinyin: "liǎng bǎi", meaning: "200" },
+    { hanzi: "五百三十五", pinyin: "wǔ bǎi sān shí wǔ", meaning: "535" },
+    { hanzi: "兩千", pinyin: "liǎng qiān", meaning: "2000" },
+    { hanzi: "八千三百五十六", pinyin: "bā qiān sān bǎi wǔ shí liù", meaning: "8356" },
+    { hanzi: "兩萬", pinyin: "liǎng wàn", meaning: "20000" },
+    { hanzi: "一百萬", pinyin: "yī bǎi wàn", meaning: "1,000,000" }
+];
+
+let currentQuizIndex = 0;
+let answeredCurrent = false;
+
+function shuffle(array) {
+    return [...array].sort(() => Math.random() - 0.5);
+}
+
+function currentQuizHanzi() {
+    return quizData[currentQuizIndex].hanzi;
+}
+
+function loadQuizQuestion() {
+    answeredCurrent = false;
+    const current = quizData[currentQuizIndex];
+
+    document.getElementById("quizNum").textContent = currentQuizIndex + 1;
+    document.getElementById("quizQuestion").textContent = `${current.hanzi} (${current.pinyin})`;
+    document.getElementById("quizFeedback").textContent = "";
+    document.getElementById("quizNextBtn").style.display = "none";
+
+    // Generate options: correct meaning + 3 random incorrect meanings
+    const incorrectOptions = quizData
+        .filter(item => item.meaning !== current.meaning)
+        .map(item => item.meaning);
+
+    const selectedIncorrect = shuffle(incorrectOptions).slice(0, 3);
+    const options = shuffle([current.meaning, ...selectedIncorrect]);
+
+    const container = document.getElementById("optionsContainer");
+    container.innerHTML = "";
+
+    options.forEach(optionText => {
+        const btn = document.createElement("button");
+        btn.className = "option-btn";
+        btn.textContent = optionText;
+        btn.onclick = () => checkQuizAnswer(btn, optionText, current.meaning);
+        container.appendChild(btn);
+    });
+}
+
+function checkQuizAnswer(button, selected, correct) {
+    if (answeredCurrent) return;
+    answeredCurrent = true;
+
+    const allButtons = document.querySelectorAll(".options-container .option-btn");
+    allButtons.forEach(btn => {
+        btn.disabled = true;
+        if (btn.textContent === correct) {
+            btn.classList.add("correct-choice");
+        }
+    });
+
+    const feedback = document.getElementById("quizFeedback");
+
+    if (selected === correct) {
+        feedback.textContent = "🎉 Correct!";
+        feedback.className = "feedback correct";
+        playAudio("答對了");
+    } else {
+        button.classList.add("incorrect-choice");
+        feedback.textContent = `❌ Incorrect. The correct answer is: ${correct}`;
+        feedback.className = "feedback incorrect";
+    }
+
+    document.getElementById("quizNextBtn").style.display = "block";
+}
+
+function nextQuizQuestion() {
+    currentQuizIndex++;
+    if (currentQuizIndex >= quizData.length) {
+        currentQuizIndex = 0;
+    }
+    loadQuizQuestion();
+}
+
+
+/* =====================================================
+   WRITING PRACTICE (Vocabulary Characters)
+===================================================== */
+
+const writingCharacters = [
+    { hanzi: "百", pinyin: "bǎi", meaning: "hundred" },
+    { hanzi: "千", pinyin: "qiān", meaning: "thousand" },
+    { hanzi: "萬", pinyin: "wàn", meaning: "ten thousand" },
+    { hanzi: "臺", pinyin: "tái", meaning: "tai (platform/Taiwan)" },
+    { hanzi: "台", pinyin: "tái", meaning: "tai (simplified)" },
+    { hanzi: "幣", pinyin: "bì", meaning: "currency / money" },
+    { hanzi: "塊", pinyin: "kuài", meaning: "piece / colloquial currency" },
+    { hanzi: "元", pinyin: "yuán", meaning: "formal monetary unit" }
+];
+
+let writingIndex = 0;
+let writingMode = "quiz";
+let writer = null;
+
+function initWriter(){
+    const item = writingCharacters[writingIndex];
+    const container = document.getElementById("target-div");
+    container.innerHTML = "";
+
+    const info = document.getElementById("writingInfo");
+
+    if(writingMode === "quiz"){
+        info.innerHTML = `Write <strong>${item.hanzi}</strong> (${item.pinyin} - ${item.meaning}) following correct stroke order! (${writingIndex + 1}/${writingCharacters.length})`;
+    } else {
+        info.innerHTML = `Watch animated stroke order for <strong>${item.hanzi}</strong> (${item.pinyin} - ${item.meaning}). (${writingIndex + 1}/${writingCharacters.length})`;
+    }
+
+    writer = HanziWriter.create(
+        "target-div",
+        item.hanzi,
+        {
+            width: 260,
+            height: 260,
+            padding: 10,
+            showOutline: true,
+            strokeAnimationSpeed: 1,
+            drawingColor: "#5c4033",
+            strokeHighlightColor: "#b8865c",
+            showCharacter: writingMode === "animate"
+        }
+    );
+
+    if(writingMode === "quiz"){
+        startQuiz();
+    } else {
+        writer.animateCharacter();
+    }
+}
+
+function startQuiz(){
+    const feedback = document.getElementById("writingFeedback");
+    feedback.textContent = "";
+
+    writer.quiz({
+        onMistake: function(strokeData){
+            feedback.textContent = "❌ Incorrect stroke order! Try again.";
+            feedback.className = "feedback incorrect";
+        },
+        onCorrectStroke: function(strokeData){
+            feedback.textContent = "✨ Great! Continue with the next stroke.";
+            feedback.className = "feedback correct";
+        },
+        onComplete: function(summaryData){
+            feedback.textContent = "🎉 Perfect! Correct stroke order.";
+            feedback.className = "feedback correct";
+        }
+    });
+}
+
+function setWritingMode(mode, button){
+    writingMode = mode;
+    document.querySelectorAll(".writing-card .mode-btn").forEach(btn => btn.classList.remove("active"));
+    button.classList.add("active");
+    initWriter();
+}
+
+function resetWritingQuiz(){
+    initWriter();
+}
+
+function nextWritingCharacter(){
+    writingIndex++;
+    if(writingIndex >= writingCharacters.length){
+        writingIndex = 0;
+    }
+    initWriter();
+}
+
+function playCurrentWriting(){
+    playAudio(writingCharacters[writingIndex].hanzi);
+}
+
+
+/* =====================================================
+   INITIALIZE ON LOAD
+===================================================== */
+
+loadQuizQuestion();
+initWriter();
+
+</script>
+
+<!-- EXISTING SIDEBAR SCRIPT -->
+<script src="../script.js"></script>
+
+</body>
+</html>
