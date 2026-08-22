@@ -877,6 +877,330 @@ const allLessonsData = {
     ]
 },
 
+// ========================================================
+// LESSON 11
+// ========================================================
+11: {
+    grammar: [
+        {
+            id: "he",
+            name: "A + 和 + B",
+            category: "Conjunction",
+            explanation: "和 (hé) means 'and' and is used to connect two nouns, people, or things.",
+            examples: [
+                "我有哥哥和妹妹。",
+                "我喜歡吃飯和看電影。",
+                "我和朋友一起去公園。"
+            ]
+        },
+        {
+            id: "gen",
+            name: "A + 跟 + B + Verb",
+            category: "Conjunction",
+            explanation: "跟 (gēn) means 'with' or 'and'. It is commonly used when doing something together with another person.",
+            examples: [
+                "我跟哥哥住在一起。",
+                "我跟朋友吃飯。",
+                "我跟妹妹一起去公園。"
+            ]
+        },
+        {
+            id: "ye",
+            name: "Subject + 也 + Verb",
+            category: "Adverb",
+            explanation: "也 (yě) means 'also' or 'too'. It usually comes before the verb or adjective.",
+            examples: [
+                "妹妹也住在家裡。",
+                "我也喜歡中文。",
+                "哥哥也喜歡唱歌。"
+            ]
+        },
+        {
+            id: "dou",
+            name: "Subject + 都 + Verb",
+            category: "Adverb",
+            explanation: "都 (dōu) means 'all' or 'both'. It shows that everyone or everything in the group does something.",
+            examples: [
+                "我們都喜歡吃飯。",
+                "我們都喜歡看電影。",
+                "哥哥和妹妹都在家。"
+            ]
+        },
+        {
+            id: "hai",
+            name: "S + 還 + Verb / Adj",
+            category: "Adverb",
+            explanation: "還 (hái) can mean 'still' or 'also'. It can show that something continues or that there is an additional action or characteristic.",
+            examples: [
+                "我還在家。",
+                "哥哥還喜歡唱歌。",
+                "我還有很多時間。"
+            ]
+        },
+        {
+            id: "haishi",
+            name: "A + 還是 + B？",
+            category: "Choice Question",
+            explanation: "還是 (háishì) means 'or' when asking someone to choose between two alternatives.",
+            examples: [
+                "你要吃麵還是吃飯？",
+                "你要喝茶還是咖啡？",
+                "你喜歡哥哥還是妹妹？"
+            ]
+        },
+        {
+            id: "huozhe",
+            name: "A + 或者 + B",
+            category: "Choice",
+            explanation: "或者 (huòzhě) means 'or' and is commonly used to give alternatives in statements.",
+            examples: [
+                "晚上我們可以吃麵或者吃飯。",
+                "我可以喝茶或者咖啡。",
+                "你可以吃麵或者吃飯。"
+            ]
+        },
+        {
+            id: "danshi",
+            name: "Sentence A + 但是 + Sentence B",
+            category: "Contrast",
+            explanation: "但是 (dànshì) means 'but' and is used to connect two contrasting ideas.",
+            examples: [
+                "我喜歡吃麵，但是我不喜歡吃飯。",
+                "哥哥喜歡唱歌，但是妹妹不喜歡。",
+                "我想出去，但是今天下雨。"
+            ]
+        },
+        {
+            id: "keshi",
+            name: "Sentence A + 可是 + Sentence B",
+            category: "Contrast",
+            explanation: "可是 (kěshì) also means 'but' or 'however'. It is commonly used in everyday spoken Mandarin.",
+            examples: [
+                "妹妹喜歡自拍，可是哥哥不喜歡。",
+                "我想出去，可是今天下雨。",
+                "我喜歡咖啡，可是妹妹喜歡茶。"
+            ]
+        },
+        {
+            id: "yinwei-suoyi",
+            name: "因為 + Reason，所以 + Result",
+            category: "Cause and Effect",
+            explanation: "因為 (yīnwèi) means 'because' and 所以 (suǒyǐ) means 'so / therefore'. Together they express a cause and its result.",
+            examples: [
+                "因為天氣很好，所以我們想出去。",
+                "因為今天是星期六，所以我們有時間。",
+                "因為下雨，所以我回家。"
+            ]
+        },
+        {
+            id: "ranhou",
+            name: "A，然後 B",
+            category: "Sequence",
+            explanation: "然後 (ránhòu) means 'then' or 'afterwards'. It connects actions that happen one after another.",
+            examples: [
+                "我先吃飯，然後看電視。",
+                "我們去公園，然後回家。",
+                "我先喝咖啡，然後吃飯。"
+            ]
+        },
+        {
+            id: "ruguo-jiu",
+            name: "如果 + Condition，(就) + Result",
+            category: "Conditional Sentence",
+            explanation: "如果 (rúguǒ) means 'if'. It introduces a condition and is commonly paired with 就 (jiù) to introduce the result.",
+            examples: [
+                "如果下雨，我就回家。",
+                "如果天氣很好，我們就出去玩。",
+                "如果你喜歡，我們就一起去。"
+            ]
+        }
+    ],
+
+    vocabulary: [
+        {
+            hanzi: "跟",
+            pinyin: "gēn",
+            meaning: "with / and",
+            category: "Conjunction"
+        },
+        {
+            hanzi: "住在",
+            pinyin: "zhù zài",
+            meaning: "live in / at",
+            category: "Verb"
+        },
+        {
+            hanzi: "一起",
+            pinyin: "yīqǐ",
+            meaning: "together",
+            category: "Adverb"
+        },
+        {
+            hanzi: "時間",
+            pinyin: "shíjiān",
+            meaning: "time",
+            category: "Noun"
+        },
+        {
+            hanzi: "家裡",
+            pinyin: "jiālǐ",
+            meaning: "home / at home",
+            category: "Location"
+        },
+        {
+            hanzi: "但是",
+            pinyin: "dànshì",
+            meaning: "but",
+            category: "Conjunction"
+        },
+        {
+            hanzi: "可是",
+            pinyin: "kěshì",
+            meaning: "but / however",
+            category: "Conjunction"
+        },
+        {
+            hanzi: "唱歌",
+            pinyin: "chànggē",
+            meaning: "to sing / singing",
+            category: "Verb"
+        },
+        {
+            hanzi: "自拍",
+            pinyin: "zìpāi",
+            meaning: "to take a selfie",
+            category: "Verb"
+        },
+        {
+            hanzi: "今天",
+            pinyin: "jīntiān",
+            meaning: "today",
+            category: "Time"
+        },
+        {
+            hanzi: "星期六",
+            pinyin: "xīngqíliù",
+            meaning: "Saturday",
+            category: "Time"
+        },
+        {
+            hanzi: "多",
+            pinyin: "duō",
+            meaning: "many / much",
+            category: "Adjective"
+        },
+        {
+            hanzi: "天氣",
+            pinyin: "tiānqì",
+            meaning: "weather",
+            category: "Noun"
+        },
+        {
+            hanzi: "出去",
+            pinyin: "chūqù",
+            meaning: "go out",
+            category: "Verb"
+        },
+        {
+            hanzi: "都",
+            pinyin: "dōu",
+            meaning: "all / both",
+            category: "Adverb"
+        },
+        {
+            hanzi: "所以",
+            pinyin: "suǒyǐ",
+            meaning: "so / therefore",
+            category: "Conjunction"
+        },
+        {
+            hanzi: "因為",
+            pinyin: "yīnwèi",
+            meaning: "because",
+            category: "Conjunction"
+        },
+        {
+            hanzi: "然後",
+            pinyin: "ránhòu",
+            meaning: "then / afterwards",
+            category: "Conjunction"
+        },
+        {
+            hanzi: "如果",
+            pinyin: "rúguǒ",
+            meaning: "if",
+            category: "Conjunction"
+        },
+        {
+            hanzi: "或者",
+            pinyin: "huòzhě",
+            meaning: "or (statements)",
+            category: "Conjunction"
+        },
+        {
+            hanzi: "還是",
+            pinyin: "háishì",
+            meaning: "or (questions)",
+            category: "Conjunction"
+        },
+        {
+            hanzi: "還",
+            pinyin: "hái",
+            meaning: "still / also",
+            category: "Adverb"
+        },
+        {
+            hanzi: "麵",
+            pinyin: "miàn",
+            meaning: "noodles",
+            category: "Food"
+        }
+    ],
+
+    reviewQuestions: [
+        {
+            meaning: "I live together with my older brother.",
+            answer: ["我", "跟", "哥哥", "住", "在", "一", "起"]
+        },
+        {
+            meaning: "My younger sister also lives at home.",
+            answer: ["妹", "妹", "也", "住", "在", "家", "裡"]
+        },
+        {
+            meaning: "We all like eating meals and watching movies.",
+            answer: ["我", "們", "都", "喜", "歡", "吃", "飯", "和", "看", "電", "影"]
+        },
+        {
+            meaning: "My older brother also likes singing.",
+            answer: ["哥", "哥", "還", "喜", "歡", "唱", "歌"]
+        },
+        {
+            meaning: "My younger sister likes taking selfies, but my older brother doesn't.",
+            answer: ["妹", "妹", "喜", "歡", "自", "拍", "可", "是", "哥", "哥", "不", "喜", "歡"]
+        },
+        {
+            meaning: "Because the weather is good, we want to go out.",
+            answer: ["因", "為", "天", "氣", "很", "好", "所", "以", "我", "們", "想", "出", "去"]
+        },
+        {
+            meaning: "Then we go to the park together.",
+            answer: ["然", "後", "我", "們", "一", "起", "去", "公", "園"]
+        },
+        {
+            meaning: "If it rains, we will go home.",
+            answer: ["如", "果", "下", "雨", "我", "們", "就", "回", "家"]
+        },
+        {
+            meaning: "We can eat noodles or rice tonight.",
+            answer: ["晚", "上", "我", "們", "可", "以", "吃", "麵", "或", "者", "吃", "飯"]
+        },
+        {
+            meaning: "Do you want noodles or rice?",
+            answer: ["你", "要", "吃", "麵", "還", "是", "吃", "飯"]
+        }
+    ]
+},
+
 };
 // ============================================================
 // MAKE DATABASE AVAILABLE TO HTML
