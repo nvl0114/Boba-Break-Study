@@ -1201,6 +1201,72 @@ const allLessonsData = {
     ]
 },
 
+    // ========================================================
+    // LESSON 12
+    // ========================================================
+    12: {
+        grammar: [
+            {
+                id: "numbers-11-19",
+                name: "十 (shí) + number",
+                category: "Numbers (11–19)",
+                examples: ["十二 (shí èr = 12)", "十八 (shí bā = 18)"]
+            },
+            {
+                id: "numbers-20-99",
+                name: "number + 十 (shí) + number",
+                category: "Numbers (20–99)",
+                examples: ["二十 (èr shí = 20)", "八十五 (bā shí wǔ = 85)"]
+            },
+            {
+                id: "hundred-scale",
+                name: "百 (bǎi) - Hundred",
+                category: "Large Scale Numbers",
+                examples: ["兩百 (liǎng bǎi = 200)", "五百三十五 (wǔ bǎi sān shí wǔ = 535)"]
+            },
+            {
+                id: "thousand-scale",
+                name: "千 (qiān) - Thousand",
+                category: "Large Scale Numbers",
+                examples: ["兩千 (liǎng qiān = 2000)", "八千三百五十六 (bā qiān sān bǎi wǔ shí liù = 8356)"]
+            },
+            {
+                id: "wan-scale",
+                name: "萬 (wàn) - Ten Thousand (Groups of 4 zeros)",
+                category: "Large Scale Numbers",
+                examples: ["兩萬 (liǎng wàn = 20000)", "一百萬 (yī bǎi wàn = 1,000,000)"]
+            },
+            {
+                id: "currency-units",
+                name: "塊 (kuài) / 元 (yuán) / 臺幣 (táibì)",
+                category: "Currency Expressions",
+                examples: ["臺幣 (táibì = NTD)", "五百塊 (wǔ bǎi kuài = 500 bucks)", "一百元 (yī bǎi yuán = 100 yuan)"]
+            }
+        ],
+        vocabulary: [
+            { hanzi: "百", pinyin: "bǎi", meaning: "Hundred", category: "Numbers" },
+            { hanzi: "千", pinyin: "qiān", meaning: "Thousand", category: "Numbers" },
+            { hanzi: "萬", pinyin: "wàn", meaning: "Ten thousand", category: "Numbers" },
+            { hanzi: "臺幣", pinyin: "táibì", meaning: "Taiwan Dollar (NTD)", category: "Currency" },
+            { hanzi: "台幣", pinyin: "táibì", meaning: "Taiwan Dollar (Simplified)", category: "Currency" },
+            { hanzi: "塊", pinyin: "kuài", meaning: "Bucks / Measure word for money", category: "Currency" },
+            { hanzi: "元", pinyin: "yuán", meaning: "Formal currency unit", category: "Currency" }
+        ],
+        reviewQuestions: [
+            { meaning: "12", answer: ["十", "二"] },
+            { meaning: "18", answer: ["十", "八"] },
+            { meaning: "20", answer: ["二", "十"] },
+            { meaning: "85", answer: ["八", "十", "五"] },
+            { meaning: "200", answer: ["兩", "百"] },
+            { meaning: "535", answer: ["五", "百", "三", "十", "五"] },
+            { meaning: "2000", answer: ["兩", "千"] },
+            { meaning: "8356", answer: ["八", "千", "三", "百", "五", "十", "六"] },
+            { meaning: "20000", answer: ["兩", "萬"] },
+            { meaning: "1,000,000", answer: ["一", "百", "萬"] }
+        ]
+    },
+
+
 };
 // ============================================================
 // MAKE DATABASE AVAILABLE TO HTML
