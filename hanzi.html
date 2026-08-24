@@ -2,35 +2,47 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Boba Break Study - Stroke Order</title>
-    <!-- Include Hanzi Writer Library for stroke animations -->
+
+    <!-- Hanzi Writer -->
     <script src="https://cdn.jsdelivr.net/npm/hanzi-writer@3.5/dist/hanzi-writer.min.js"></script>
-    <!-- Include pinyin-pro Library for automatic pinyin generation -->
+
+    <!-- Pinyin Pro -->
     <script src="https://cdn.jsdelivr.net/npm/pinyin-pro@3.16.0/dist/index.js"></script>
-    <!-- Include Pinyin to Zhuyin converter library -->
+
+    <!-- Pinyin to Zhuyin -->
     <script src="https://cdn.jsdelivr.net/npm/pinyin-to-bopomofo@latest/dist/index.umd.js"></script>
 
     <style>
+
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
             font-family: Arial, sans-serif;
         }
+
         body {
             background-color: #f8f9fa;
             display: flex;
             min-height: 100vh;
         }
 
-        /* Main Content Layout */
+        /* =========================
+           MAIN CONTENT
+        ========================= */
+
         .main-content {
             flex: 1;
             padding: 20px;
         }
+
         .card {
             width: 100%;
             background: #ffffff;
@@ -40,13 +52,17 @@
             box-shadow: 0 2px 5px rgba(0,0,0,0.03);
             border: 1px solid #eaeaea;
         }
+
         .card h2 {
             font-size: 20px;
             margin-bottom: 15px;
             color: #111;
         }
-        
-        /* Search Box */
+
+        /* =========================
+           SEARCH
+        ========================= */
+
         .search-box {
             display: flex;
             border: 1px solid #ddd;
@@ -54,6 +70,7 @@
             overflow: hidden;
             margin-bottom: 8px;
         }
+
         .search-box input {
             flex: 1;
             padding: 10px 14px;
@@ -61,6 +78,7 @@
             outline: none;
             font-size: 14px;
         }
+
         .search-box button {
             background-color: #b5835a;
             color: white;
@@ -69,12 +87,20 @@
             cursor: pointer;
             font-weight: bold;
         }
+
+        .search-box button:hover {
+            background-color: #9f704a;
+        }
+
         .search-hint {
             font-size: 12px;
             color: #666;
         }
 
-        /* Stroke Display Section */
+        /* =========================
+           STROKE DISPLAY
+        ========================= */
+
         .stroke-display {
             width: 100%;
             text-align: center;
@@ -83,307 +109,1170 @@
             padding: 20px;
             margin-bottom: 15px;
             background: #fff;
+
             display: flex;
             justify-content: center;
+            align-items: center;
         }
+
         #character-target {
             width: 600px;
             height: 300px;
         }
+
+        /* =========================
+           CHARACTER INFO
+        ========================= */
+
         .character-info {
-    text-align: center;
-    font-family: "Comic Sans MS", "Segoe UI", sans-serif;
-    margin-top: 15px;
-}
+            text-align: center;
+            font-family: "Comic Sans MS", "Segoe UI", sans-serif;
+            margin-top: 15px;
+        }
 
-.character-info p {
-    font-size: 20px;
-    color: #333;
-    margin-bottom: 10px;
-    font-weight: 500;
-}
+        .character-info p {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
 
-.character-info strong {
-    color: #b87333;
-}
+        .character-info strong {
+            color: #b87333;
+        }
 
-        
-/* 2. Responsive Media Query for Mobile (Automatically adjusts to 300x300 and centers) */
+        /* =========================
+           SOUND BUTTON
+        ========================= */
+
+        .sound-btn {
+            margin-top: 8px;
+
+            padding: 9px 18px;
+
+            border: none;
+            border-radius: 25px;
+
+            background-color: #b5835a;
+            color: white;
+
+            cursor: pointer;
+
+            font-size: 14px;
+            font-weight: bold;
+
+            transition:
+                transform 0.15s ease,
+                background-color 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+        .sound-btn:hover {
+            background-color: #9f704a;
+            transform: translateY(-1px);
+        }
+
+        .sound-btn:active {
+            transform: scale(0.96);
+        }
+
+        /* =========================
+           SOUND PLAYING EFFECT
+        ========================= */
+
+        .sound-btn.speaking {
+            background-color: #7d5a3d;
+
+            box-shadow:
+                0 0 0 0 rgba(181,131,90,0.5);
+
+            animation: soundPulse 1.2s infinite;
+        }
+
+        @keyframes soundPulse {
+
+            0% {
+                box-shadow:
+                    0 0 0 0 rgba(181,131,90,0.5);
+            }
+
+            70% {
+                box-shadow:
+                    0 0 0 12px rgba(181,131,90,0);
+            }
+
+            100% {
+                box-shadow:
+                    0 0 0 0 rgba(181,131,90,0);
+            }
+        }
+
+        /* =========================
+           SPEAKER ICON
+        ========================= */
+
+        .sound-icon {
+            margin-right: 6px;
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
         @media screen and (max-width: 768px) {
+
             .stroke-display {
                 max-width: 300px;
                 margin-left: auto;
                 margin-right: auto;
+
+                padding: 5px;
             }
+
             #character-target {
                 width: 300px;
                 height: 300px;
             }
+
+            .character-info p {
+                font-size: 18px;
+            }
         }
-        /* Custom Data / Backup Section */
-        .backup-grid {
-            display: flex;
-            gap: 10px;
-            margin-top: 10px;
-            overflow-x: auto;
-        }
-        .backup-item {
-            width: 65px;
-            height: 65px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-            color: #aaa;
-            background: #fafafa;
-            flex-shrink: 0;
-        }
-        
+
     </style>
 </head>
+
+
 <body>
+
     <div class="app-container">
 
-    <!-- Sidebar -->
-    <div id="sidebar-container"></div>
-        
-    <!-- Main Content Area -->
-    <div class="main-content">
-        
-        <!-- Search Card -->
-        <div class="card">
-            <h2>Hanzi Stroke Order Finder</h2>
-            <div class="search-box">
-                <input type="text" id="char-input" placeholder="Enter a traditional Hanzi character (e.g. 學)">
-                <button id="search-btn">Search</button>
+        <!-- Sidebar -->
+        <div id="sidebar-container"></div>
+
+
+        <!-- Main Content -->
+        <div class="main-content">
+
+
+            <!-- =========================
+                 SEARCH CARD
+            ========================= -->
+
+            <div class="card">
+
+                <h2>Hanzi Stroke Order Finder</h2>
+
+                <div class="search-box">
+
+                    <input
+                        type="text"
+                        id="char-input"
+                        placeholder="Enter a traditional Hanzi character (e.g. 學)"
+                        maxlength="1"
+                    >
+
+                    <button id="search-btn">
+                        Search
+                    </button>
+
+                </div>
+
+                <p class="search-hint">
+                    Enter a traditional Hanzi character.
+                </p>
+
             </div>
-            <p class="search-hint">Enter a traditional Hanzi character.</p>
+
+
+
+            <!-- =========================
+                 RESULT CARD
+            ========================= -->
+
+            <div class="card">
+
+                <div class="stroke-display">
+
+                    <div id="character-target"></div>
+
+                </div>
+
+
+                <!-- Character Information -->
+
+                <div
+                    class="character-info"
+                    id="char-info"
+                >
+
+                    <p>
+                        <strong>Hanzi:</strong> 學
+                    </p>
+
+                    <p>
+                        <strong>Pinyin:</strong> xué
+                    </p>
+
+                    <p>
+                        <strong>Zhuyin:</strong> ㄒㄩㄝˊ
+                    </p>
+
+
+                    <!-- SOUND BUTTON -->
+
+                    <button
+                        class="sound-btn"
+                        id="sound-btn"
+                        onclick="speakChinese()"
+                    >
+
+                        <span class="sound-icon">
+                            🔊
+                        </span>
+
+                        <span id="sound-text">
+                            Listen
+                        </span>
+
+                    </button>
+
+                </div>
+
+            </div>
+
         </div>
 
-        <!-- Result Card -->
-        <div class="card">
-            <div class="stroke-display">
-                <!-- Hanzi Writer Target Container -->
-                <div id="character-target"></div>
-            </div>
-            <div class="character-info" id="char-info">
-    <p><strong>Hanzi:</strong> 學</p>
-    <p><strong>Pinyin:</strong> xué</p>
-    <p><strong>Zhuyin:</strong> ㄒㄩㄝˊ</p>
-</div>
-        <!-- Custom Data / Backup Card -->
-        
-    <!-- JavaScript Implementation -->
+    </div>
+
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================= -->
 
     <script>
-        // 1. Deteksi ukuran layar otomatis saat pertama kali halaman dibuka
-        let initialWidth = window.innerWidth <= 768 ? 300 : 600;
 
-        let writer = HanziWriter.create('character-target', '學', {
-            width: initialWidth,
-            height: 300,
-            padding: 5,
-            showOutline: true,
-            showCharacter: true,
-            strokeAnimationSpeed: 1,
-            strokeColor: '#333333'
-        });
+        /* ==========================================
+           HANZI WRITER
+        ========================================== */
+
+        let initialWidth =
+            window.innerWidth <= 768
+            ? 300
+            : 600;
+
+
+        let currentCharacter = "學";
+
+
+        let writer = HanziWriter.create(
+            "character-target",
+            "學",
+            {
+
+                width: initialWidth,
+
+                height: 300,
+
+                padding: 5,
+
+                showOutline: true,
+
+                showCharacter: true,
+
+                strokeAnimationSpeed: 1,
+
+                strokeColor: "#333333"
+
+            }
+        );
+
 
         writer.animateCharacter();
 
-        const inputField = document.getElementById('char-input');
-        const searchButton = document.getElementById('search-btn');
-        const infoBox = document.getElementById('char-info');
+
+
+        /* ==========================================
+           ELEMENTS
+        ========================================== */
+
+        const inputField =
+            document.getElementById("char-input");
+
+        const searchButton =
+            document.getElementById("search-btn");
+
+        const infoBox =
+            document.getElementById("char-info");
+
+        const soundButton =
+            document.getElementById("sound-btn");
+
+        const soundText =
+            document.getElementById("sound-text");
+
+
+
+        /* ==========================================
+           SEARCH
+        ========================================== */
 
         function handleSearch() {
-            const val = inputField.value.trim();
 
-            if (val.length > 0) {
-                const targetChar = val[0];
-                writer = null;
-                document.getElementById('character-target').innerHTML = "";
+            const val =
+                inputField.value.trim();
 
-                // 2. Deteksi ukuran layar otomatis saat tombol search diklik
-                let renderWidth = window.innerWidth <= 768 ? 300 : 600;
 
-                try {
-                    writer = HanziWriter.create(
-                        'character-target',
+            if (val.length === 0) {
+                return;
+            }
+
+
+            const targetChar =
+                val[0];
+
+
+            currentCharacter =
+                targetChar;
+
+
+            /*
+             * Stop current speech
+             */
+
+            speechSynthesis.cancel();
+
+
+            resetSoundButton();
+
+
+
+            /*
+             * Clear old Hanzi Writer
+             */
+
+            writer = null;
+
+            document.getElementById(
+                "character-target"
+            ).innerHTML = "";
+
+
+
+            /*
+             * Responsive width
+             */
+
+            let renderWidth =
+                window.innerWidth <= 768
+                ? 300
+                : 600;
+
+
+
+            try {
+
+                /*
+                 * Create Hanzi Writer
+                 */
+
+                writer =
+                    HanziWriter.create(
+                        "character-target",
                         targetChar,
                         {
-                            width: renderWidth,
-                            height: 300,
-                            padding: 5,
-                            showOutline: true,
-                            showCharacter: true,
-                            strokeAnimationSpeed: 1,
-                            strokeColor: '#333333',
 
-                            onLoadCharDataError: function() {
-                                document.getElementById('character-target').innerHTML =
-                                '<p style="color:red;font-size:12px;margin-top:80px;">Character not found.</p>';
-                            }
+                            width: renderWidth,
+
+                            height: 300,
+
+                            padding: 5,
+
+                            showOutline: true,
+
+                            showCharacter: true,
+
+                            strokeAnimationSpeed: 1,
+
+                            strokeColor: "#333333",
+
+
+                            onLoadCharDataError:
+                                function() {
+
+                                    document
+                                        .getElementById(
+                                            "character-target"
+                                        )
+                                        .innerHTML = `
+                                            <p style="
+                                                color:red;
+                                                font-size:12px;
+                                                margin-top:80px;
+                                            ">
+                                                Character not found.
+                                            </p>
+                                        `;
+                                }
+
                         }
                     );
 
-                    writer.animateCharacter();
 
-                    let pinyinResult = "-";
-                    let zhuyinResult = "-";
-                    
-                    try {
-                        pinyinResult = pinyinPro.pinyin(
+                /*
+                 * Animate stroke
+                 */
+
+                writer.animateCharacter();
+
+
+
+                /* ==================================
+                   PINYIN + ZHUYIN
+                ================================== */
+
+                let pinyinResult = "-";
+
+                let zhuyinResult = "-";
+
+
+                try {
+
+                    /*
+                     * Pinyin with tone symbol
+                     */
+
+                    pinyinResult =
+                        pinyinPro.pinyin(
                             targetChar,
-                            { toneType: 'symbol' }
-                        );
- 
-                        let numPinyin = pinyinPro.pinyin(
-                            targetChar,
-                            { 
-                                toneType: 'number',
-                                type: 'array'
+                            {
+                                toneType: "symbol"
                             }
-                                
                         );
 
-                        numPinyin = numPinyin[0];
 
-                        zhuyinResult = convertPinyinToZhuyin(numPinyin);
-                        
-                    } catch(error) {
-                        console.log(error);
-                        pinyinResult = "-";
-                        zhuyinResult = "-";
-                    }
+                    /*
+                     * Pinyin with tone number
+                     */
 
-                    infoBox.innerHTML = `
-                        <p><strong>Hanzi:</strong> ${targetChar}</p>
-                        <p><strong>Pinyin:</strong> ${pinyinResult}</p>
-                        <p><strong>Zhuyin:</strong> ${zhuyinResult}</p>
-                    `;
+                    let numPinyin =
+                        pinyinPro.pinyin(
+                            targetChar,
+                            {
+
+                                toneType: "number",
+
+                                type: "array"
+
+                            }
+                        );
+
+
+                    numPinyin =
+                        numPinyin[0];
+
+
+                    /*
+                     * Convert to Zhuyin
+                     */
+
+                    zhuyinResult =
+                        convertPinyinToZhuyin(
+                            numPinyin
+                        );
+
 
                 } catch(error) {
+
                     console.log(error);
-                    infoBox.innerHTML = `
-                        <p><strong>Hanzi:</strong> ${targetChar}</p>
-                        <p><strong>Pinyin:</strong> -</p>
-                        <p><strong>Zhuyin:</strong> -</p>
-                    `;
+
+                    pinyinResult = "-";
+
+                    zhuyinResult = "-";
+
                 }
+
+
+
+                /* ==================================
+                   UPDATE INFORMATION
+                ================================== */
+
+                infoBox.innerHTML = `
+
+                    <p>
+                        <strong>Hanzi:</strong>
+                        ${targetChar}
+                    </p>
+
+                    <p>
+                        <strong>Pinyin:</strong>
+                        ${pinyinResult}
+                    </p>
+
+                    <p>
+                        <strong>Zhuyin:</strong>
+                        ${zhuyinResult}
+                    </p>
+
+
+                    <button
+                        class="sound-btn"
+                        id="sound-btn"
+                        onclick="speakChinese()"
+                    >
+
+                        <span class="sound-icon">
+                            🔊
+                        </span>
+
+                        <span id="sound-text">
+                            Listen
+                        </span>
+
+                    </button>
+
+                `;
+
+
+                /*
+                 * Reconnect button references
+                 */
+
+                soundButton =
+                    document.getElementById(
+                        "sound-btn"
+                    );
+
+                soundText =
+                    document.getElementById(
+                        "sound-text"
+                    );
+
+
+            } catch(error) {
+
+                console.log(error);
+
+
+                infoBox.innerHTML = `
+
+                    <p>
+                        <strong>Hanzi:</strong>
+                        ${targetChar}
+                    </p>
+
+                    <p>
+                        <strong>Pinyin:</strong>
+                        -
+                    </p>
+
+                    <p>
+                        <strong>Zhuyin:</strong>
+                        -
+                    </p>
+
+
+                    <button
+                        class="sound-btn"
+                        id="sound-btn"
+                        onclick="speakChinese()"
+                    >
+
+                        🔊 Listen
+
+                    </button>
+
+                `;
+
             }
+
         }
 
-        searchButton.addEventListener('click', handleSearch);
 
-        inputField.addEventListener('keypress', function(e) {
-            if (e.key === "Enter") {
-                handleSearch();
+
+        /* ==========================================
+           SEARCH BUTTON
+        ========================================== */
+
+        searchButton.addEventListener(
+            "click",
+            handleSearch
+        );
+
+
+
+        /* ==========================================
+           ENTER KEY
+        ========================================== */
+
+        inputField.addEventListener(
+            "keypress",
+            function(e) {
+
+                if (e.key === "Enter") {
+
+                    handleSearch();
+
+                }
+
             }
-        });
+        );
 
-        // Fungsi helper untuk menerjemahkan teks Pinyin ke Zhuyin secara akurat
-        function convertPinyinToZhuyin(pinyinStr) {
-    if (!pinyinStr) return '';
-    pinyinStr = pinyinStr.toLowerCase().trim();
 
-    // Map accented pinyin vowels to base vowel + tone number
-    const toneMap = {
-        'ā':'a1','á':'a2','ǎ':'a3','à':'a4',
-        'ē':'e1','é':'e2','ě':'e3','è':'e4',
-        'ī':'i1','í':'i2','ǐ':'i3','ì':'i4',
-        'ō':'o1','ó':'o2','ǒ':'o3','ò':'o4',
-        'ū':'u1','ú':'u2','ǔ':'u3','ù':'u4',
-        'ǖ':'ü1','ǘ':'ü2','ǚ':'ü3','ǜ':'ü4'
-    };
 
-    // Map tone numbers to Zhuyin tone symbols
-    const zhuyinTones = {
-        '1': '',   
-        '2': 'ˊ',  
-        '3': 'ˇ',  
-        '4': 'ˋ',  
-        '5': '˙'   
-    };
+        /* ==========================================
+           TEXT TO SPEECH
+        ========================================== */
 
-    let toneNum = '1';
+        function speakChinese() {
 
-    // Check if input ends with a tone number (e.g., lai2)
-    if (/[1-5]$/.test(pinyinStr)) {
-        toneNum = pinyinStr.slice(-1);
-        pinyinStr = pinyinStr.slice(0, -1);
-    } 
-    // Otherwise, check for tone symbols on vowels (e.g., lái)
-    else {
-        for (let char of pinyinStr) {
-            if (toneMap[char]) {
-                let converted = toneMap[char];
-                pinyinStr = pinyinStr.replace(char, converted[0]);
-                toneNum = converted[1];
-                break;
+            /*
+             * Check browser support
+             */
+
+            if (
+                !("speechSynthesis" in window)
+            ) {
+
+                alert(
+                    "Your browser does not support text-to-speech."
+                );
+
+                return;
+
             }
+
+
+            /*
+             * If currently speaking,
+             * stop it.
+             */
+
+            if (
+                speechSynthesis.speaking
+            ) {
+
+                speechSynthesis.cancel();
+
+                resetSoundButton();
+
+                return;
+
+            }
+
+
+            /*
+             * Create speech
+             */
+
+            const utterance =
+                new SpeechSynthesisUtterance(
+                    currentCharacter
+                );
+
+
+            /*
+             * Taiwan Mandarin
+             */
+
+            utterance.lang =
+                "zh-TW";
+
+
+            /*
+             * Natural learning speed
+             */
+
+            utterance.rate =
+                0.75;
+
+            utterance.pitch =
+                1;
+
+
+            /*
+             * Start visual effect
+             */
+
+            setSpeakingButton();
+
+
+
+            /*
+             * When speech starts
+             */
+
+            utterance.onstart =
+                function() {
+
+                    setSpeakingButton();
+
+                };
+
+
+            /*
+             * When speech ends
+             */
+
+            utterance.onend =
+                function() {
+
+                    resetSoundButton();
+
+                };
+
+
+            /*
+             * If speech error occurs
+             */
+
+            utterance.onerror =
+                function() {
+
+                    resetSoundButton();
+
+                };
+
+
+            /*
+             * Cancel previous speech
+
+             */
+
+            speechSynthesis.cancel();
+
+
+            /*
+             * Speak
+
+             */
+
+            speechSynthesis.speak(
+                utterance
+            );
+
         }
-    }
 
-    // Get the correct Zhuyin tone symbol
-    let toneSymbol = zhuyinTones[toneNum] || '';
 
-    const initials = {
-        'zh':'ㄓ', 'ch':'ㄔ', 'sh':'ㄕ',
-        'b':'ㄅ', 'p':'ㄆ', 'm':'ㄇ', 'f':'ㄈ',
-        'd':'ㄉ', 't':'ㄊ', 'n':'ㄋ', 'l':'ㄌ',
-        'g':'ㄍ', 'k':'ㄎ', 'h':'ㄏ',
-        'j':'ㄐ', 'q':'ㄑ', 'x':'ㄒ',
-        'r':'ㄖ', 'z':'ㄗ', 'c':'ㄘ', 's':'ㄙ'
-    };
 
-    const finals = {
-        'a':'ㄚ', 'o':'ㄛ', 'e':'ㄜ', 'er':'ㄦ',
-        'ai':'ㄞ', 'ei':'ㄟ', 'ao':'ㄠ', 'ou':'ㄡ',
-        'an':'ㄢ', 'en':'ㄣ', 'ang':'ㄤ', 'eng':'ㄥ',
-        'i':'ㄧ', 'u':'ㄨ', 'ü':'ㄩ',
-        'wa':'ㄨㄚ', 'wo':'ㄨㄛ', 'wai':'ㄨㄞ', 'wei':'ㄨㄟ',
-        'wan':'ㄨㄢ', 'wen':'ㄨㄣ', 'wang':'ㄨㄤ', 'weng':'ㄨㄥ',
-        'ya':'ㄧㄚ', 'yo':'ㄧㄛ', 'ye':'ㄧㄝ', 'yao':'ㄧㄠ', 'you':'ㄧㄡ',
-        'yan':'ㄧㄢ', 'yin':'ㄧㄣ', 'yang':'ㄧㄤ', 'ying':'ㄧㄥ',
-        'wu':'ㄨ', 'yi':'ㄧ', 'yu':'ㄩ',
-        'ia':'ㄧㄚ', 'io':'ㄧㄛ', 'ie':'ㄧㄝ', 'iao':'ㄧㄠ', 'iu':'ㄧㄡ',
-        'ian':'ㄧㄢ', 'in':'ㄧㄣ', 'iang':'ㄧㄤ', 'ing':'ㄧㄥ',
-        'ua':'ㄨㄚ', 'uo':'ㄨㄛ', 'uai':'ㄨㄞ', 'ui':'ㄨㄟ',
-        'uan':'ㄨㄢ', 'un':'ㄨㄣ', 'uang':'ㄨㄤ', 'ong':'ㄨㄥ',
-        'üe':'ㄩㄝ', 'üan':'ㄩㄢ', 'ün':'ㄩㄣ', 'iong':'ㄩㄥ'
-   };   
+        /* ==========================================
+           SOUND BUTTON - SPEAKING
+        ========================================== */
 
-    let result = '';
+        function setSpeakingButton() {
 
-    // Check initial consonant
-    let initial = '';
-    for (let key of Object.keys(initials)) {
-        if (pinyinStr.startsWith(key)) {
-            initial = key;
-            break;
+            const btn =
+                document.getElementById(
+                    "sound-btn"
+                );
+
+            const text =
+                document.getElementById(
+                    "sound-text"
+                );
+
+
+            if (!btn) return;
+
+
+            btn.classList.add(
+                "speaking"
+            );
+
+
+            if (text) {
+
+                text.textContent =
+                    "Speaking...";
+
+            }
+
         }
-    }
 
-    if (initial) {
-        result += initials[initial];
-        pinyinStr = pinyinStr.slice(initial.length);
-    }
 
-    // Check final vowel
-    if (finals[pinyinStr]) {
-        result += finals[pinyinStr];
-    } else {
-        result += pinyinStr;
-    }
 
-    // Return combined result with the correct Zhuyin tone symbol
-    return result + toneSymbol;
-}
+        /* ==========================================
+           SOUND BUTTON - RESET
+        ========================================== */
+
+        function resetSoundButton() {
+
+            const btn =
+                document.getElementById(
+                    "sound-btn"
+                );
+
+            const text =
+                document.getElementById(
+                    "sound-text"
+                );
+
+
+            if (!btn) return;
+
+
+            btn.classList.remove(
+                "speaking"
+            );
+
+
+            if (text) {
+
+                text.textContent =
+                    "Listen";
+
+            }
+
+        }
+
+
+
+        /* ==========================================
+           PINYIN → ZHUYIN
+        ========================================== */
+
+        function convertPinyinToZhuyin(
+            pinyinStr
+        ) {
+
+            if (!pinyinStr) {
+                return "";
+            }
+
+
+            pinyinStr =
+                pinyinStr
+                    .toLowerCase()
+                    .trim();
+
+
+
+            /* ================================
+               ACCENT MAP
+            ================================= */
+
+            const toneMap = {
+
+                "ā": "a1",
+                "á": "a2",
+                "ǎ": "a3",
+                "à": "a4",
+
+                "ē": "e1",
+                "é": "e2",
+                "ě": "e3",
+                "è": "e4",
+
+                "ī": "i1",
+                "í": "i2",
+                "ǐ": "i3",
+                "ì": "i4",
+
+                "ō": "o1",
+                "ó": "o2",
+                "ǒ": "o3",
+                "ò": "o4",
+
+                "ū": "u1",
+                "ú": "u2",
+                "ǔ": "u3",
+                "ù": "u4",
+
+                "ǖ": "ü1",
+                "ǘ": "ü2",
+                "ǚ": "ü3",
+                "ǜ": "ü4"
+
+            };
+
+
+
+            /* ================================
+               ZHUYIN TONES
+            ================================= */
+
+            const zhuyinTones = {
+
+                "1": "",
+
+                "2": "ˊ",
+
+                "3": "ˇ",
+
+                "4": "ˋ",
+
+                "5": "˙"
+
+            };
+
+
+            let toneNum = "1";
+
+
+
+            /*
+             * Tone number
+             */
+
+            if (
+                /[1-5]$/.test(
+                    pinyinStr
+                )
+            ) {
+
+                toneNum =
+                    pinyinStr.slice(-1);
+
+                pinyinStr =
+                    pinyinStr.slice(
+                        0,
+                        -1
+                    );
+
+            }
+
+            /*
+             * Tone mark
+             */
+
+            else {
+
+                for (
+                    let char of pinyinStr
+                ) {
+
+                    if (
+                        toneMap[char]
+                    ) {
+
+                        let converted =
+                            toneMap[char];
+
+
+                        pinyinStr =
+                            pinyinStr.replace(
+                                char,
+                                converted[0]
+                            );
+
+
+                        toneNum =
+                            converted[1];
+
+
+                        break;
+
+                    }
+
+                }
+
+            }
+
+
+
+            const toneSymbol =
+                zhuyinTones[toneNum] || "";
+
+
+
+            /* ================================
+               INITIALS
+            ================================= */
+
+            const initials = {
+
+                "zh": "ㄓ",
+                "ch": "ㄔ",
+                "sh": "ㄕ",
+
+                "b": "ㄅ",
+                "p": "ㄆ",
+                "m": "ㄇ",
+                "f": "ㄈ",
+
+                "d": "ㄉ",
+                "t": "ㄊ",
+                "n": "ㄋ",
+                "l": "ㄌ",
+
+                "g": "ㄍ",
+                "k": "ㄎ",
+                "h": "ㄏ",
+
+                "j": "ㄐ",
+                "q": "ㄑ",
+                "x": "ㄒ",
+
+                "r": "ㄖ",
+                "z": "ㄗ",
+                "c": "ㄘ",
+                "s": "ㄙ"
+
+            };
+
+
+
+            /* ================================
+               FINALS
+            ================================= */
+
+            const finals = {
+
+                "a": "ㄚ",
+                "o": "ㄛ",
+                "e": "ㄜ",
+                "er": "ㄦ",
+
+                "ai": "ㄞ",
+                "ei": "ㄟ",
+                "ao": "ㄠ",
+                "ou": "ㄡ",
+
+                "an": "ㄢ",
+                "en": "ㄣ",
+
+                "ang": "ㄤ",
+                "eng": "ㄥ",
+
+                "i": "ㄧ",
+                "u": "ㄨ",
+                "ü": "ㄩ",
+
+                "wa": "ㄨㄚ",
+                "wo": "ㄨㄛ",
+                "wai": "ㄨㄞ",
+                "wei": "ㄨㄟ",
+
+                "wan": "ㄨㄢ",
+                "wen": "ㄨㄣ",
+                "wang": "ㄨㄤ",
+                "weng": "ㄨㄥ",
+
+                "ya": "ㄧㄚ",
+                "yo": "ㄧㄛ",
+                "ye": "ㄧㄝ",
+
+                "yao": "ㄧㄠ",
+                "you": "ㄧㄡ",
+
+                "yan": "ㄧㄢ",
+                "yin": "ㄧㄣ",
+
+                "yang": "ㄧㄤ",
+                "ying": "ㄧㄥ",
+
+                "wu": "ㄨ",
+                "yi": "ㄧ",
+                "yu": "ㄩ",
+
+                "ia": "ㄧㄚ",
+                "io": "ㄧㄛ",
+                "ie": "ㄧㄝ",
+
+                "iao": "ㄧㄠ",
+                "iu": "ㄧㄡ",
+
+                "ian": "ㄧㄢ",
+                "in": "ㄧㄣ",
+
+                "iang": "ㄧㄤ",
+                "ing": "ㄧㄥ",
+
+                "ua": "ㄨㄚ",
+                "uo": "ㄨㄛ",
+
+                "uai": "ㄨㄞ",
+                "ui": "ㄨㄟ",
+
+                "uan": "ㄨㄢ",
+                "un": "ㄨㄣ",
+
+                "uang": "ㄨㄤ",
+                "ong": "ㄨㄥ",
+
+                "üe": "ㄩㄝ",
+                "üan": "ㄩㄢ",
+                "ün": "ㄩㄣ",
+                "iong": "ㄩㄥ"
+
+            };
+
+
+
+            let result = "";
+
+            let initial = "";
+
+
+
+            /*
+             * Find initial
+             */
+
+            for (
+                let key of Object.keys(initials)
+            ) {
+
+                if (
+                    pinyinStr.startsWith(key)
+                ) {
+
+                    initial = key;
+
+                    break;
+
+                }
+
+            }
+
+
+
+            if (initial) {
+
+                result +=
+                    initials[initial];
+
+                pinyinStr =
+                    pinyinStr.slice(
+                        initial.length
+                    );
+
+            }
+
+
+
+            /*
+             * Find final
+             */
+
+            if (
+                finals[pinyinStr]
+            ) {
+
+                result +=
+                    finals[pinyinStr];
+
+            } else {
+
+                result +=
+                    pinyinStr;
+
+            }
+
+
+
+            return result +
+                   toneSymbol;
+
+        }
 
     </script>
-  </div> 
-        <script src="script.js"></script>
-    </body>
- </html>
+
+
+    <!-- Your existing script -->
+    <script src="script.js"></script>
+
+</body>
+</html>
