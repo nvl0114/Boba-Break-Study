@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
     <link rel="stylesheet" href="style.css">
@@ -21,7 +22,7 @@
     <!-- Pinyin Pro -->
     <script src="https://cdn.jsdelivr.net/npm/pinyin-pro@3.16.0/dist/index.js"></script>
 
-    <!-- Pinyin → Zhuyin -->
+    <!-- Pinyin to Zhuyin -->
     <script src="https://cdn.jsdelivr.net/npm/pinyin-to-bopomofo@latest/dist/index.umd.js"></script>
 
 
@@ -192,6 +193,42 @@
 
 
         /* ================================
+           MEANING
+        ================================= */
+
+        .meaning-text {
+            max-width: 600px;
+
+            margin: 0 auto 12px auto;
+
+            line-height: 1.5;
+        }
+
+
+        .meaning-label {
+            color: #b87333;
+            font-weight: bold;
+        }
+
+
+        .meaning-value {
+            color: #333;
+        }
+
+
+        .meaning-loading {
+            color: #888;
+            font-size: 15px;
+        }
+
+
+        .meaning-unavailable {
+            color: #999;
+            font-size: 15px;
+        }
+
+
+        /* ================================
            SOUND BUTTON
         ================================= */
 
@@ -234,7 +271,7 @@
 
 
         /* ================================
-           SPEAKING EFFECT
+           SOUND PLAYING EFFECT
         ================================= */
 
         .sound-btn.speaking {
@@ -311,16 +348,12 @@
 <div class="app-container">
 
 
-    <!-- ================================
-         SIDEBAR
-    ================================= -->
+    <!-- SIDEBAR -->
 
     <div id="sidebar-container"></div>
 
 
-    <!-- ================================
-         MAIN CONTENT
-    ================================= -->
+    <!-- MAIN CONTENT -->
 
     <div class="main-content">
 
@@ -368,7 +401,7 @@
         <div class="card">
 
 
-            <!-- Stroke Animation -->
+            <!-- STROKE ORDER -->
 
             <div class="stroke-display">
 
@@ -378,7 +411,7 @@
 
 
 
-            <!-- Character Information -->
+            <!-- CHARACTER INFORMATION -->
 
             <div
                 class="character-info"
@@ -403,7 +436,18 @@
                 </p>
 
 
-                <!-- Sound -->
+                <p class="meaning-text">
+
+                    <span class="meaning-label">
+                        Meaning:
+                    </span>
+
+                    <span class="meaning-value">
+                        to study; to learn
+                    </span>
+
+                </p>
+
 
                 <button
                     class="sound-btn"
@@ -412,6 +456,7 @@
                 >
 
                     🔊
+
                     <span id="sound-text">
                         Listen
                     </span>
@@ -430,10 +475,6 @@
 
 
 
-<!-- ================================
-     JAVASCRIPT
-================================= -->
-
 <script>
 
 
@@ -446,7 +487,7 @@ let currentCharacter = "學";
 
 
 /* =========================================
-   CREATE INITIAL HANZI WRITER
+   HANZI WRITER
 ========================================= */
 
 let initialWidth =
@@ -507,10 +548,10 @@ const infoBox =
 
 
 /* =========================================
-   SEARCH FUNCTION
+   SEARCH
 ========================================= */
 
-function handleSearch() {
+async function handleSearch() {
 
     const val =
         inputField.value.trim();
@@ -529,20 +570,17 @@ function handleSearch() {
         val[0];
 
 
-    /*
-     * Update current character
-     * for sound
-     */
-
     currentCharacter =
         targetChar;
 
 
     /*
-     * Stop any current speech
+     * Stop current speech
      */
 
-    if ("speechSynthesis" in window) {
+    if (
+        "speechSynthesis" in window
+    ) {
 
         speechSynthesis.cancel();
 
@@ -554,7 +592,7 @@ function handleSearch() {
 
 
     /*
-     * Clear old Hanzi Writer
+     * Clear previous Hanzi Writer
      */
 
     writer = null;
@@ -567,22 +605,21 @@ function handleSearch() {
 
 
     /*
-     * Responsive size
+     * Responsive width
      */
 
-    let renderWidth =
+    const renderWidth =
         window.innerWidth <= 768
             ? 300
             : 600;
 
 
 
+    /* =====================================
+       CREATE HANZI WRITER
+    ===================================== */
+
     try {
-
-
-        /* =================================
-           CREATE HANZI WRITER
-        ================================= */
 
         writer =
             HanziWriter.create(
@@ -603,7 +640,6 @@ function handleSearch() {
                     strokeAnimationSpeed: 1,
 
                     strokeColor: "#333333",
-
 
                     onLoadCharDataError:
                         function() {
@@ -632,29 +668,259 @@ function handleSearch() {
 
         writer.animateCharacter();
 
+    }
+
+    catch(error) {
+
+        console.log(
+            "Hanzi Writer error:",
+            error
+        );
+
+    }
+
+
+
+    /* =====================================
+       SHOW LOADING INFO
+    ===================================== */
+
+    infoBox.innerHTML = `
+
+        <p>
+            <strong>Hanzi:</strong>
+            ${targetChar}
+        </p>
+
+
+        <p>
+            <strong>Pinyin:</strong>
+            <span id="pinyin-value">
+                Loading...
+            </span>
+        </p>
+
+
+        <p>
+            <strong>Zhuyin:</strong>
+            <span id="zhuyin-value">
+                Loading...
+            </span>
+        </p>
+
+
+        <p class="meaning-text">
+
+            <span class="meaning-label">
+                Meaning:
+            </span>
+
+            <span
+                class="meaning-loading"
+                id="meaning-value"
+            >
+                Looking up...
+            </span>
+
+        </p>
+
+
+        <button
+            class="sound-btn"
+            id="sound-btn"
+            onclick="speakChinese()"
+        >
+
+            🔊
+
+            <span id="sound-text">
+                Listen
+            </span>
+
+        </button>
+
+    `;
+
+
+
+    /* =====================================
+       GET DICTIONARY DATA
+    ===================================== */
+
+    await loadDictionaryData(
+        targetChar
+    );
+
+}
+
+
+
+/* =========================================
+   TAIWAN MANDARIN API
+========================================= */
+
+async function loadDictionaryData(
+    targetChar
+) {
+
+    const encodedChar =
+        encodeURIComponent(
+            targetChar
+        );
+
+
+    const apiUrl =
+        `https://api.taiwanmandarin.com/characters/${encodedChar}`;
+
+
+    try {
+
+        const response =
+            await fetch(apiUrl);
+
+
+        /*
+         * Character not found
+         */
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Character not found"
+            );
+
+        }
+
+
+        const data =
+            await response.json();
+
 
 
         /* =================================
            PINYIN
         ================================= */
 
-        let pinyinResult = "-";
+        let pinyinResult =
+            data.pinyin || "-";
+
 
 
         /* =================================
            ZHUYIN
         ================================= */
 
-        let zhuyinResult = "-";
+        let zhuyinResult =
+            data.bopomofo || "-";
 
+
+
+        /* =================================
+           ENGLISH MEANING
+        ================================= */
+
+        let meaningResult =
+            data.english || "";
+
+
+
+        /*
+         * Update Pinyin
+         */
+
+        const pinyinElement =
+            document.getElementById(
+                "pinyin-value"
+            );
+
+
+        if (pinyinElement) {
+
+            pinyinElement.textContent =
+                pinyinResult;
+
+        }
+
+
+
+        /*
+         * Update Zhuyin
+         */
+
+        const zhuyinElement =
+            document.getElementById(
+                "zhuyin-value"
+            );
+
+
+        if (zhuyinElement) {
+
+            zhuyinElement.textContent =
+                zhuyinResult;
+
+        }
+
+
+
+        /*
+         * Update Meaning
+         */
+
+        const meaningElement =
+            document.getElementById(
+                "meaning-value"
+            );
+
+
+        if (meaningElement) {
+
+            if (meaningResult) {
+
+                meaningElement.textContent =
+                    meaningResult;
+
+                meaningElement.className =
+                    "meaning-value";
+
+            }
+
+            else {
+
+                meaningElement.textContent =
+                    "Meaning not available yet.";
+
+                meaningElement.className =
+                    "meaning-unavailable";
+
+            }
+
+        }
+
+
+    }
+
+    catch(error) {
+
+        console.log(
+            "Dictionary API error:",
+            error
+        );
+
+
+
+        /*
+         * API failed
+         *
+         * Keep Pinyin Pro as fallback
+         */
+
+        let pinyinResult = "-";
+
+        let zhuyinResult = "-";
 
 
         try {
 
-
-            /*
-             * Pinyin with tone marks
-             */
 
             pinyinResult =
                 pinyinPro.pinyin(
@@ -664,11 +930,6 @@ function handleSearch() {
                     }
                 );
 
-
-
-            /*
-             * Pinyin with tone number
-             */
 
             let numPinyin =
                 pinyinPro.pinyin(
@@ -683,131 +944,85 @@ function handleSearch() {
                 );
 
 
-            /*
-             * Get first character's
-             * pronunciation
-             */
-
             numPinyin =
                 numPinyin[0];
 
-
-
-            /*
-             * Convert Pinyin
-             * to Zhuyin
-             */
 
             zhuyinResult =
                 convertPinyinToZhuyin(
                     numPinyin
                 );
 
+        }
+
+        catch(fallbackError) {
+
+            console.log(
+                "Pinyin fallback error:",
+                fallbackError
+            );
 
         }
 
-        catch(error) {
 
-            console.log(
-                "Pinyin error:",
-                error
+
+        /*
+         * Update fallback Pinyin
+         */
+
+        const pinyinElement =
+            document.getElementById(
+                "pinyin-value"
             );
 
 
-            pinyinResult = "-";
+        if (pinyinElement) {
 
-            zhuyinResult = "-";
+            pinyinElement.textContent =
+                pinyinResult;
 
         }
 
 
 
-        /* =================================
-           UPDATE CHARACTER INFO
-        ================================= */
+        /*
+         * Update fallback Zhuyin
+         */
 
-        infoBox.innerHTML = `
-
-            <p>
-                <strong>Hanzi:</strong>
-                ${targetChar}
-            </p>
+        const zhuyinElement =
+            document.getElementById(
+                "zhuyin-value"
+            );
 
 
-            <p>
-                <strong>Pinyin:</strong>
-                ${pinyinResult}
-            </p>
+        if (zhuyinElement) {
+
+            zhuyinElement.textContent =
+                zhuyinResult;
+
+        }
 
 
-            <p>
-                <strong>Zhuyin:</strong>
-                ${zhuyinResult}
-            </p>
+
+        /*
+         * Meaning unavailable
+         */
+
+        const meaningElement =
+            document.getElementById(
+                "meaning-value"
+            );
 
 
-            <button
-                class="sound-btn"
-                id="sound-btn"
-                onclick="speakChinese()"
-            >
+        if (meaningElement) {
 
-                🔊
+            meaningElement.textContent =
+                "Meaning not available yet.";
 
-                <span id="sound-text">
-                    Listen
-                </span>
+            meaningElement.className =
+                "meaning-unavailable";
 
-            </button>
-
-        `;
-
-
-    }
-
-    catch(error) {
-
-
-        console.log(
-            "Hanzi Writer error:",
-            error
-        );
-
-
-        infoBox.innerHTML = `
-
-            <p>
-                <strong>Hanzi:</strong>
-                ${targetChar}
-            </p>
-
-
-            <p>
-                <strong>Pinyin:</strong>
-                -
-            </p>
-
-
-            <p>
-                <strong>Zhuyin:</strong>
-                -
-            </p>
-
-
-            <button
-                class="sound-btn"
-                id="sound-btn"
-                onclick="speakChinese()"
-            >
-
-                🔊
-                <span id="sound-text">
-                    Listen
-                </span>
-
-            </button>
-
-        `;
+        }
 
     }
 
@@ -851,11 +1066,6 @@ inputField.addEventListener(
 
 function speakChinese() {
 
-
-    /*
-     * Check browser support
-     */
-
     if (
         !("speechSynthesis" in window)
     ) {
@@ -871,8 +1081,7 @@ function speakChinese() {
 
 
     /*
-     * If already speaking,
-     * stop speech
+     * Stop if currently speaking
      */
 
     if (
@@ -899,7 +1108,6 @@ function speakChinese() {
         );
 
 
-
     /*
      * Taiwan Mandarin
      */
@@ -908,10 +1116,8 @@ function speakChinese() {
         "zh-TW";
 
 
-
     /*
-     * Slower speed
-     * for language learners
+     * Slower pronunciation
      */
 
     utterance.rate =
@@ -924,7 +1130,7 @@ function speakChinese() {
 
 
     /*
-     * Speech starts
+     * Start
      */
 
     utterance.onstart =
@@ -937,7 +1143,7 @@ function speakChinese() {
 
 
     /*
-     * Speech ends
+     * Finish
      */
 
     utterance.onend =
@@ -950,7 +1156,7 @@ function speakChinese() {
 
 
     /*
-     * Speech error
+     * Error
      */
 
     utterance.onerror =
@@ -962,17 +1168,8 @@ function speakChinese() {
 
 
 
-    /*
-     * Stop previous speech
-     */
-
     speechSynthesis.cancel();
 
-
-
-    /*
-     * Play
-     */
 
     speechSynthesis.speak(
         utterance
@@ -1061,13 +1258,12 @@ function resetSoundButton() {
 
 
 /* =========================================
-   PINYIN → ZHUYIN
+   PINYIN → ZHUYIN FALLBACK
 ========================================= */
 
 function convertPinyinToZhuyin(
     pinyinStr
 ) {
-
 
     if (!pinyinStr) {
         return "";
@@ -1281,7 +1477,6 @@ function convertPinyinToZhuyin(
 
         "wan": "ㄨㄢ",
         "wen": "ㄨㄣ",
-
         "wang": "ㄨㄤ",
         "weng": "ㄨㄥ",
 
