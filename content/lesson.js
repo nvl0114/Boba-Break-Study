@@ -1341,6 +1341,190 @@ const allLessonsData = {
             { meaning: "The day after tomorrow she has an exam.", answer: ["後天", "她", "考試"] }
         ]
     },
+// ========================================================
+    // LESSON 14
+    // ========================================================
+
+14: {
+  title: "Days, Dates & Asking When",
+  subtitle: "星期、禮拜、日期與什麼時候",
+  
+  grammar: [
+    {
+      title: "1. Asking What Day It Is",
+      explanation: "Use 星期 or 禮拜 + number to talk about the day of the week.",
+      patterns: [
+        {
+          pattern: "星期 + Number",
+          examples: [
+            "星期一 — Monday",
+            "星期二 — Tuesday",
+            "星期三 — Wednesday",
+            "星期四 — Thursday",
+            "星期五 — Friday",
+            "星期六 — Saturday",
+            "星期日 — Sunday"
+          ]
+        },
+        {
+          pattern: "禮拜 + Number",
+          examples: [
+            "禮拜一 — Monday",
+            "禮拜二 — Tuesday",
+            "禮拜三 — Wednesday",
+            "禮拜四 — Thursday",
+            "禮拜五 — Friday",
+            "禮拜六 — Saturday",
+            "禮拜日 — Sunday"
+          ]
+        }
+      ]
+    },
+
+    {
+      title: "2. Asking the Date",
+      explanation: "Use 幾 to ask for a specific number, such as the day of the month.",
+      patterns: [
+        {
+          pattern: "今天幾月幾號？",
+          examples: [
+            "今天幾月幾號？",
+            "今天是八月二十四號。"
+          ]
+        },
+        {
+          pattern: "你的生日是幾月幾號？",
+          examples: [
+            "你的生日是幾月幾號？",
+            "我的生日是六月十五號。"
+          ]
+        }
+      ]
+    },
+
+    {
+      title: "3. Asking When",
+      explanation: "什麼時候 means 'when' and can be used to ask when an event happens.",
+      patterns: [
+        {
+          pattern: "什麼時候 + Verb",
+          examples: [
+            "你什麼時候考試？",
+            "你什麼時候回家？",
+            "你什麼時候去學校？"
+          ]
+        },
+        {
+          pattern: "Subject + 什麼時候 + Verb",
+          examples: [
+            "你什麼時候去圖書館？",
+            "你什麼時候游泳？"
+          ]
+        }
+      ]
+    },
+
+    {
+      title: "4. 可能",
+      explanation: "可能 means 'maybe', 'possibly', or 'might'. It is commonly used before a verb or adjective.",
+      patterns: [
+        {
+          pattern: "可能 + Verb",
+          examples: [
+            "我可能去圖書館。",
+            "他可能回家。"
+          ]
+        },
+        {
+          pattern: "可能 + Adjective",
+          examples: [
+            "明天可能很冷。",
+            "明天可能下雨。"
+          ]
+        }
+      ]
+    },
+
+    {
+      title: "5. 吧",
+      explanation: "吧 is a sentence-final particle. It can make a suggestion sound softer or show uncertainty.",
+      patterns: [
+        {
+          pattern: "Verb + 吧",
+          examples: [
+            "我們走吧。",
+            "一起吃飯吧。",
+            "明天去吧。"
+          ]
+        },
+        {
+          pattern: "可能 + Verb + 吧",
+          examples: [
+            "他可能明天來吧。",
+            "她可能不知道吧。"
+          ]
+        }
+      ]
+    }
+  ],
+
+  vocabulary: [
+    {
+      word: "星期",
+      pinyin: "xīngqí",
+      meaning: "week; day of the week"
+    },
+    {
+      word: "禮拜",
+      pinyin: "lǐbài",
+      meaning: "week; day of the week"
+    },
+    {
+      word: "幾",
+      pinyin: "jǐ",
+      meaning: "how many; what number"
+    },
+    {
+      word: "什麼時候",
+      pinyin: "shénme shíhou",
+      meaning: "when"
+    },
+    {
+      word: "對了",
+      pinyin: "duì le",
+      meaning: "oh, by the way; that's right"
+    },
+    {
+      word: "可能",
+      pinyin: "kěnéng",
+      meaning: "maybe; possibly; possible"
+    },
+    {
+      word: "吧",
+      pinyin: "ba",
+      meaning: "sentence-final particle; used for suggestions, softening statements, or uncertainty"
+    }
+  ],
+
+  reviewQuestions: [
+    {
+      question: "今天是星期幾？",
+      answer: "今天是星期一。"
+    },
+    {
+      question: "今天幾月幾號？",
+      answer: "今天是八月二十四號。"
+    },
+    {
+      question: "你的生日是幾月幾號？",
+      answer: "我的生日是六月十五號。"
+    },
+    {
+      question: "你什麼時候去圖書館？",
+      answer: "我明天去圖書館。"
+    }
+  ]
+},
 
 };
 // ============================================================
