@@ -1,5 +1,5 @@
 // ============================================================
-// Boba Break Study — Master Lesson Database (Lessons 1 - 9)
+// Boba Break Study — Master Lesson Database
 // ============================================================
 
 const allLessonsData = {
@@ -1265,7 +1265,82 @@ const allLessonsData = {
             { meaning: "1,000,000", answer: ["一", "百", "萬"] }
         ]
     },
-
+    // ========================================================
+    // LESSON 13
+    // ========================================================
+    13: {
+        grammar: [
+            {
+                id: "time-svo",
+                name: "Time + Subject + Verb + Object",
+                category: "Time Expressions & Word Order",
+                examples: [
+                    "今天我打電話 (jīntiān wǒ dǎ diànhuà = Today I am making a phone call)",
+                    "昨天我練習游泳 (zuótiān wǒ liànxí yóuyǒng = Yesterday I practiced swimming)"
+                ]
+            },
+            {
+                id: "s-time-vo",
+                name: "Subject + Time + Verb + Object",
+                category: "Time Expressions & Word Order",
+                examples: [
+                    "我明天考試 (wǒ míngtiān kǎoshì = I have an exam tomorrow)",
+                    "我後天游泳 (wǒ hòutiān yóuyǒng = I will swim the day after tomorrow)"
+                ]
+            },
+            {
+                id: "s-time-place-vo",
+                name: "Subject + Time + Place + Verb + Object",
+                category: "Time & Place Word Order",
+                examples: [
+                    "我昨天在圖書館練習中文 (wǒ zuótiān zài túshūguǎn liànxí zhōngwén = Yesterday I practiced Chinese at the library)",
+                    "我今天在圖書館考試 (wǒ jīntiān zài túshūguǎn kǎoshì = Today I have an exam at the library)"
+                ]
+            },
+            {
+                id: "time-place-svo",
+                name: "Time + Subject + Place + Verb + Object",
+                category: "Time & Place Word Order",
+                examples: [
+                    "昨天我在圖書館練習中文 (zuótiān wǒ zài túshūguǎn liànxí zhōngwén = Yesterday I practiced Chinese at the library)",
+                    "明天我在圖書館練習 (míngtiān wǒ zài túshūguǎn liànxí = Tomorrow I will practice at the library)"
+                ]
+            },
+            {
+                id: "time-expressions",
+                name: "前天 / 昨天 / 今天 / 明天 / 後天",
+                category: "Time Expressions",
+                examples: [
+                    "前天我去圖書館 (qiántiān wǒ qù túshūguǎn = I went to the library the day before yesterday)",
+                    "明天我考試 (míngtiān wǒ kǎoshì = I have an exam tomorrow)"
+                ]
+            }
+        ],
+        vocabulary: [
+            { hanzi: "今天", pinyin: "jīntiān", meaning: "Today", category: "Time" },
+            { hanzi: "昨天", pinyin: "zuótiān", meaning: "Yesterday", category: "Time" },
+            { hanzi: "前天", pinyin: "qiántiān", meaning: "The day before yesterday", category: "Time" },
+            { hanzi: "明天", pinyin: "míngtiān", meaning: "Tomorrow", category: "Time" },
+            { hanzi: "後天", pinyin: "hòutiān", meaning: "The day after tomorrow", category: "Time" },
+            { hanzi: "圖書館", pinyin: "túshūguǎn", meaning: "Library", category: "Places" },
+            { hanzi: "打電話", pinyin: "dǎ diànhuà", meaning: "To make a phone call", category: "Actions" },
+            { hanzi: "考試", pinyin: "kǎoshì", meaning: "Exam / test", category: "Actions" },
+            { hanzi: "練習", pinyin: "liànxí", meaning: "To practice", category: "Actions" },
+            { hanzi: "游泳", pinyin: "yóuyǒng", meaning: "To swim", category: "Actions" }
+        ],
+        reviewQuestions: [
+            { meaning: "Today I am making a phone call.", answer: ["今天", "我", "打", "電話"] },
+            { meaning: "Yesterday I practiced swimming.", answer: ["昨天", "我", "練習", "游泳"] },
+            { meaning: "The day before yesterday I went to the library.", answer: ["前天", "我", "去", "圖書館"] },
+            { meaning: "I have an exam tomorrow.", answer: ["我", "明天", "考試"] },
+            { meaning: "I will swim the day after tomorrow.", answer: ["我", "後天", "游泳"] },
+            { meaning: "She makes a phone call today.", answer: ["她", "今天", "打", "電話"] },
+            { meaning: "Yesterday I practiced Chinese at the library.", answer: ["昨天", "我", "在", "圖書館", "練習", "中文"] },
+            { meaning: "Today I have an exam at the library.", answer: ["今天", "我", "在", "圖書館", "考試"] },
+            { meaning: "Tomorrow I will practice at the library.", answer: ["明天", "我", "在", "圖書館", "練習"] },
+            { meaning: "The day after tomorrow she has an exam.", answer: ["後天", "她", "考試"] }
+        ]
+    },
 
 };
 // ============================================================
