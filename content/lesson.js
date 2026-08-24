@@ -1342,13 +1342,13 @@ const allLessonsData = {
         ]
     },
 // ========================================================
-    // LESSON 14
-    // ========================================================
+// LESSON 14
+// ========================================================
 
 14: {
   title: "Days, Dates & Asking When",
   subtitle: "星期、禮拜、日期與什麼時候",
-  
+
   grammar: [
     {
       title: "1. Asking What Day It Is",
@@ -1383,7 +1383,7 @@ const allLessonsData = {
 
     {
       title: "2. Asking the Date",
-      explanation: "Use 幾 to ask for a specific number, such as the day of the month.",
+      explanation: "Use 幾 to ask for a specific number, such as the month or day of the month.",
       patterns: [
         {
           pattern: "今天幾月幾號？",
@@ -1404,64 +1404,16 @@ const allLessonsData = {
 
     {
       title: "3. Asking When",
-      explanation: "什麼時候 means 'when' and can be used to ask when an event happens.",
+      explanation: "什麼時候 means 'when' and is used to ask when an event happens.",
       patterns: [
-        {
-          pattern: "什麼時候 + Verb",
-          examples: [
-            "你什麼時候考試？",
-            "你什麼時候回家？",
-            "你什麼時候去學校？"
-          ]
-        },
         {
           pattern: "Subject + 什麼時候 + Verb",
           examples: [
+            "你什麼時候考試？",
+            "你什麼時候回家？",
+            "你什麼時候去學校？",
             "你什麼時候去圖書館？",
             "你什麼時候游泳？"
-          ]
-        }
-      ]
-    },
-
-    {
-      title: "4. 可能",
-      explanation: "可能 means 'maybe', 'possibly', or 'might'. It is commonly used before a verb or adjective.",
-      patterns: [
-        {
-          pattern: "可能 + Verb",
-          examples: [
-            "我可能去圖書館。",
-            "他可能回家。"
-          ]
-        },
-        {
-          pattern: "可能 + Adjective",
-          examples: [
-            "明天可能很冷。",
-            "明天可能下雨。"
-          ]
-        }
-      ]
-    },
-
-    {
-      title: "5. 吧",
-      explanation: "吧 is a sentence-final particle. It can make a suggestion sound softer or show uncertainty.",
-      patterns: [
-        {
-          pattern: "Verb + 吧",
-          examples: [
-            "我們走吧。",
-            "一起吃飯吧。",
-            "明天去吧。"
-          ]
-        },
-        {
-          pattern: "可能 + Verb + 吧",
-          examples: [
-            "他可能明天來吧。",
-            "她可能不知道吧。"
           ]
         }
       ]
@@ -1478,6 +1430,16 @@ const allLessonsData = {
       word: "禮拜",
       pinyin: "lǐbài",
       meaning: "week; day of the week"
+    },
+    {
+      word: "週末",
+      pinyin: "zhōumò",
+      meaning: "weekend"
+    },
+    {
+      word: "週日",
+      pinyin: "zhōurì",
+      meaning: "Sunday"
     },
     {
       word: "幾",
@@ -1502,26 +1464,50 @@ const allLessonsData = {
     {
       word: "吧",
       pinyin: "ba",
-      meaning: "sentence-final particle; used for suggestions, softening statements, or uncertainty"
+      meaning: "sentence-final particle; used for suggestions or uncertainty"
     }
   ],
 
   reviewQuestions: [
     {
-      question: "今天是星期幾？",
-      answer: "今天是星期一。"
+      meaning: "What day is it today?",
+      answer: ["今天", "是", "星期幾"]
     },
     {
-      question: "今天幾月幾號？",
-      answer: "今天是八月二十四號。"
+      meaning: "Today is Monday.",
+      answer: ["今天", "是", "星期一"]
     },
     {
-      question: "你的生日是幾月幾號？",
-      answer: "我的生日是六月十五號。"
+      meaning: "What is today's date?",
+      answer: ["今天", "幾月", "幾號"]
     },
     {
-      question: "你什麼時候去圖書館？",
-      answer: "我明天去圖書館。"
+      meaning: "Today is August 24th.",
+      answer: ["今天", "是", "八月", "二十四號"]
+    },
+    {
+      meaning: "What is your birthday?",
+      answer: ["你的", "生日", "是", "幾月", "幾號"]
+    },
+    {
+      meaning: "My birthday is June 15th.",
+      answer: ["我的", "生日", "是", "六月", "十五號"]
+    },
+    {
+      meaning: "When do you go to the library?",
+      answer: ["你", "什麼時候", "去", "圖書館"]
+    },
+    {
+      meaning: "When do you take the exam?",
+      answer: ["你", "什麼時候", "考試"]
+    },
+    {
+      meaning: "When do you go home?",
+      answer: ["你", "什麼時候", "回家"]
+    },
+    {
+      meaning: "When do you swim?",
+      answer: ["你", "什麼時候", "游泳"]
     }
   ]
 },
