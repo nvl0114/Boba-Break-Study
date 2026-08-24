@@ -1511,6 +1511,319 @@ const allLessonsData = {
     }
   ]
 },
+// ========================================================
+// LESSON 15
+// ========================================================
+
+15: {
+  title: "Telling Time",
+  subtitle: "時間、幾點、幾分與時間段",
+
+  grammar: [
+    {
+      title: "1. Asking What Time It Is",
+      explanation: "Use 幾點 to ask what time it is. 現在 means 'now' and is often used when asking or telling the current time.",
+      patterns: [
+        {
+          pattern: "現在 + 幾點？",
+          examples: [
+            "現在幾點？",
+            "現在三點。"
+          ]
+        },
+        {
+          pattern: "現在 + 幾點 + 幾分？",
+          examples: [
+            "現在三點五分。",
+            "現在八點二十分。"
+          ]
+        }
+      ]
+    },
+
+    {
+      title: "2. Saying the Hour",
+      explanation: "Use 點 after a number to say the hour.",
+      patterns: [
+        {
+          pattern: "Number + 點",
+          examples: [
+            "一點 — one o'clock",
+            "三點 — three o'clock",
+            "八點 — eight o'clock",
+            "十二點 — twelve o'clock"
+          ]
+        }
+      ]
+    },
+
+    {
+      title: "3. Saying the Minutes",
+      explanation: "Use 分 after a number to say the minutes. In everyday Mandarin, you can simply say the number + 分. Do not use 分鐘 when telling the exact time on a clock.",
+      patterns: [
+        {
+          pattern: "Number + 點 + Number + 分",
+          examples: [
+            "三點五分 — 3:05",
+            "三點十分 — 3:10",
+            "八點二十分 — 8:20",
+            "九點四十五分 — 9:45"
+          ]
+        }
+      ]
+    },
+
+    {
+      title: "4. Half Past",
+      explanation: "半 means 'half'. 點 + 半 means half past the hour.",
+      patterns: [
+        {
+          pattern: "Number + 點 + 半",
+          examples: [
+            "三點半 — 3:30",
+            "六點半 — 6:30",
+            "九點半 — 9:30"
+          ]
+        }
+      ]
+    },
+
+    {
+      title: "5. A Quarter Past / Quarter To",
+      explanation: "一刻 means 15 minutes. 三刻 means 45 minutes. These expressions are common in spoken Mandarin, especially in Taiwan.",
+      patterns: [
+        {
+          pattern: "Number + 點 + 一刻",
+          examples: [
+            "三點一刻 — 3:15",
+            "八點一刻 — 8:15"
+          ]
+        },
+        {
+          pattern: "Number + 點 + 三刻",
+          examples: [
+            "三點三刻 — 3:45",
+            "八點三刻 — 8:45"
+          ]
+        }
+      ]
+    },
+
+    {
+      title: "6. Seconds",
+      explanation: "秒 means 'second'. It is used when you need to talk about seconds specifically.",
+      patterns: [
+        {
+          pattern: "Number + 秒",
+          examples: [
+            "五秒 — five seconds",
+            "十秒 — ten seconds",
+            "三十秒 — thirty seconds"
+          ]
+        },
+        {
+          pattern: "Number + 點 + Number + 分 + Number + 秒",
+          examples: [
+            "三點五分十秒 — 3:05:10",
+            "八點二十分三十秒 — 8:20:30"
+          ]
+        }
+      ]
+    },
+
+    {
+      title: "7. Time of Day",
+      explanation: "Mandarin uses different words to describe parts of the day. These words usually come before the time.",
+      patterns: [
+        {
+          pattern: "Time of day + Time",
+          examples: [
+            "早上八點 — 8 a.m.",
+            "上午十點 — 10 a.m.",
+            "中午十二點 — 12 p.m.",
+            "下午三點 — 3 p.m.",
+            "傍晚六點 — 6 p.m.",
+            "晚上八點 — 8 p.m.",
+            "凌晨一點 — 1 a.m."
+          ]
+        }
+      ]
+    },
+
+    {
+      title: "8. Asking When Something Happens",
+      explanation: "Use 什麼時候 to ask when something happens. You can answer with a specific time.",
+      patterns: [
+        {
+          pattern: "Subject + 什麼時候 + Verb？",
+          examples: [
+            "你什麼時候上課？",
+            "你什麼時候吃飯？",
+            "你什麼時候回家？"
+          ]
+        },
+        {
+          pattern: "Subject + Time + Verb",
+          examples: [
+            "我早上八點上課。",
+            "我中午十二點吃飯。",
+            "我晚上九點回家。"
+          ]
+        }
+      ]
+    }
+  ],
+
+  vocabulary: [
+    {
+      word: "現在",
+      pinyin: "xiànzài",
+      meaning: "now"
+    },
+    {
+      word: "時間",
+      pinyin: "shíjiān",
+      meaning: "time"
+    },
+    {
+      word: "點",
+      pinyin: "diǎn",
+      meaning: "o'clock; hour"
+    },
+    {
+      word: "分",
+      pinyin: "fēn",
+      meaning: "minute"
+    },
+    {
+      word: "半",
+      pinyin: "bàn",
+      meaning: "half"
+    },
+    {
+      word: "刻",
+      pinyin: "kè",
+      meaning: "quarter of an hour; 15 minutes"
+    },
+    {
+      word: "一刻",
+      pinyin: "yí kè",
+      meaning: "a quarter of an hour; 15 minutes"
+    },
+    {
+      word: "三刻",
+      pinyin: "sān kè",
+      meaning: "three quarters of an hour; 45 minutes"
+    },
+    {
+      word: "秒",
+      pinyin: "miǎo",
+      meaning: "second"
+    },
+    {
+      word: "清晨",
+      pinyin: "qīngchén",
+      meaning: "early morning; dawn"
+    },
+    {
+      word: "早晨",
+      pinyin: "zǎochén",
+      meaning: "early morning"
+    },
+    {
+      word: "早上",
+      pinyin: "zǎoshang",
+      meaning: "morning"
+    },
+    {
+      word: "上午",
+      pinyin: "shàngwǔ",
+      meaning: "morning; a.m."
+    },
+    {
+      word: "中午",
+      pinyin: "zhōngwǔ",
+      meaning: "noon"
+    },
+    {
+      word: "下午",
+      pinyin: "xiàwǔ",
+      meaning: "afternoon; p.m."
+    },
+    {
+      word: "傍晚",
+      pinyin: "bàngwǎn",
+      meaning: "early evening; around sunset"
+    },
+    {
+      word: "晚上",
+      pinyin: "wǎnshang",
+      meaning: "evening; night"
+    },
+    {
+      word: "夜裡",
+      pinyin: "yèlǐ",
+      meaning: "at night; during the night"
+    },
+    {
+      word: "凌晨",
+      pinyin: "língchén",
+      meaning: "early morning; after midnight"
+    }
+  ],
+
+  reviewQuestions: [
+    {
+      meaning: "What time is it now?",
+      answer: ["現在", "幾點"]
+    },
+    {
+      meaning: "It is three o'clock now.",
+      answer: ["現在", "三點"]
+    },
+    {
+      meaning: "It is 3:05 now.",
+      answer: ["現在", "三點", "五分"]
+    },
+    {
+      meaning: "It is 8:20 now.",
+      answer: ["現在", "八點", "二十分"]
+    },
+    {
+      meaning: "It is 3:30 now.",
+      answer: ["現在", "三點", "半"]
+    },
+    {
+      meaning: "It is 3:15 now.",
+      answer: ["現在", "三點", "一刻"]
+    },
+    {
+      meaning: "It is 3:45 now.",
+      answer: ["現在", "三點", "三刻"]
+    },
+    {
+      meaning: "It is 10 a.m.",
+      answer: ["上午", "十點"]
+    },
+    {
+      meaning: "It is 3 p.m.",
+      answer: ["下午", "三點"]
+    },
+    {
+      meaning: "It is 8 p.m.",
+      answer: ["晚上", "八點"]
+    },
+    {
+      meaning: "I have class at 8 in the morning.",
+      answer: ["我", "早上", "八點", "上課"]
+    },
+    {
+      meaning: "I eat lunch at 12 noon.",
+      answer: ["我", "中午", "十二點", "吃飯"]
+    }，
+  ]
+},
+
 
 };
 // ============================================================
