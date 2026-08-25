@@ -1806,6 +1806,373 @@ const allLessonsData = {
     ]
 },
 
+// ========================================================
+// LESSON 16
+// ========================================================
+16: {
+    grammar: [
+        {
+            id: "past-time-expressions",
+            name: "去年 — 今年 — 明年",
+            category: "Time Expressions",
+            explanation: "去年 means last year, 今年 means this year, and 明年 means next year. These expressions tell us when something happens in relation to the current year.",
+            examples: [
+                "去年我去中國。 — Last year I went to China.",
+                "今年我去韓國。 — This year I went to Korea.",
+                "明年我去泰國。 — Next year I will go to Thailand."
+            ]
+        },
+        {
+            id: "last-next-week",
+            name: "上個星期 — 下個星期",
+            category: "Time Expressions",
+            explanation: "上個星期 means last week and 下個星期 means next week. 上 means up/previous and 下 means down/following.",
+            examples: [
+                "上個星期我準備課程。 — Last week I prepared for the course.",
+                "下個星期我要練習。 — Next week I need to practice."
+            ]
+        },
+        {
+            id: "le-completed-action",
+            name: "了 — Completed Action",
+            category: "Completed Actions",
+            explanation: "了 is commonly used after a verb to show that an action has been completed or that a situation has changed. It is not simply an English past-tense marker.",
+            examples: [
+                "我去了中國。 — I went to China.",
+                "我們吃了很多東西。 — We ate a lot of things."
+            ]
+        },
+        {
+            id: "already-le",
+            name: "已經……了 — Already",
+            category: "Completed Actions",
+            explanation: "已經 means already. The structure 已經 + Verb + 了 emphasizes that an action or change has already happened.",
+            examples: [
+                "我已經回台灣了。 — I have already returned to Taiwan.",
+                "我已經開始上課了。 — I have already started attending classes."
+            ]
+        },
+        {
+            id: "time-expression-le",
+            name: "Time Expressions + 了",
+            category: "Time Expressions",
+            explanation: "When a sentence contains a clear time expression such as 去年, 今年, or 明年, Mandarin does not need an English-style past or future tense marker. 了 can still be used when the speaker wants to emphasize completion or a change of situation.",
+            examples: [
+                "去年我去中國。 — Last year I went to China.",
+                "去年我去了中國。 — Last year I went to China. (completion emphasized)"
+            ]
+        },
+        {
+            id: "mandarin-no-tense",
+            name: "Time + Verb: No English-Style Tense Needed",
+            category: "Time Expressions",
+            explanation: "Mandarin verbs do not change according to past, present, or future tense. Time expressions such as 去年, 今年, 明年, 上個星期, and 下個星期 establish when the action happens.",
+            examples: [
+                "去年我去北京。 — Last year I went to Beijing.",
+                "今年我去韓國。 — This year I went to Korea.",
+                "明年我去泰國。 — Next year I will go to Thailand."
+            ]
+        }
+    ],
+
+    vocabulary: [
+        {
+            hanzi: "去年",
+            pinyin: "qùnián",
+            meaning: "last year",
+            category: "Time"
+        },
+        {
+            hanzi: "暑假",
+            pinyin: "shǔjià",
+            meaning: "summer vacation",
+            category: "Time"
+        },
+        {
+            hanzi: "去",
+            pinyin: "qù",
+            meaning: "to go",
+            category: "Actions"
+        },
+        {
+            hanzi: "中國",
+            pinyin: "Zhōngguó",
+            meaning: "China",
+            category: "Places"
+        },
+        {
+            hanzi: "了",
+            pinyin: "le",
+            meaning: "completed action / change",
+            category: "Grammar"
+        },
+        {
+            hanzi: "北京",
+            pinyin: "Běijīng",
+            meaning: "Beijing",
+            category: "Places"
+        },
+        {
+            hanzi: "上海",
+            pinyin: "Shànghǎi",
+            meaning: "Shanghai",
+            category: "Places"
+        },
+        {
+            hanzi: "好吃",
+            pinyin: "hǎochī",
+            meaning: "delicious",
+            category: "Descriptions"
+        },
+        {
+            hanzi: "漂亮",
+            pinyin: "piàoliang",
+            meaning: "beautiful",
+            category: "Descriptions"
+        },
+        {
+            hanzi: "地方",
+            pinyin: "dìfāng",
+            meaning: "place",
+            category: "Places"
+        },
+        {
+            hanzi: "每天",
+            pinyin: "měitiān",
+            meaning: "every day",
+            category: "Time"
+        },
+        {
+            hanzi: "開心",
+            pinyin: "kāixīn",
+            meaning: "happy",
+            category: "Feelings"
+        },
+        {
+            hanzi: "回",
+            pinyin: "huí",
+            meaning: "to return",
+            category: "Actions"
+        },
+        {
+            hanzi: "到",
+            pinyin: "dào",
+            meaning: "to arrive / reach",
+            category: "Actions"
+        },
+        {
+            hanzi: "以後",
+            pinyin: "yǐhòu",
+            meaning: "after / afterwards",
+            category: "Time"
+        },
+        {
+            hanzi: "已經",
+            pinyin: "yǐjīng",
+            meaning: "already",
+            category: "Time"
+        },
+        {
+            hanzi: "開始",
+            pinyin: "kāishǐ",
+            meaning: "to start / begin",
+            category: "Actions"
+        },
+        {
+            hanzi: "今年",
+            pinyin: "jīnnián",
+            meaning: "this year",
+            category: "Time"
+        },
+        {
+            hanzi: "又",
+            pinyin: "yòu",
+            meaning: "again",
+            category: "Adverbs"
+        },
+        {
+            hanzi: "韓國",
+            pinyin: "Hánguó",
+            meaning: "Korea",
+            category: "Places"
+        },
+        {
+            hanzi: "最",
+            pinyin: "zuì",
+            meaning: "most",
+            category: "Adverbs"
+        },
+        {
+            hanzi: "餐廳",
+            pinyin: "cāntīng",
+            meaning: "restaurant",
+            category: "Places"
+        },
+        {
+            hanzi: "那裡",
+            pinyin: "nàlǐ",
+            meaning: "there",
+            category: "Places"
+        },
+        {
+            hanzi: "食物",
+            pinyin: "shíwù",
+            meaning: "food",
+            category: "Food"
+        },
+        {
+            hanzi: "準備",
+            pinyin: "zhǔnbèi",
+            meaning: "to prepare",
+            category: "Actions"
+        },
+        {
+            hanzi: "課程",
+            pinyin: "kèchéng",
+            meaning: "course",
+            category: "School"
+        },
+        {
+            hanzi: "雖然",
+            pinyin: "suīrán",
+            meaning: "although",
+            category: "Connectors"
+        },
+        {
+            hanzi: "想念",
+            pinyin: "xiǎngniàn",
+            meaning: "to miss",
+            category: "Feelings"
+        },
+        {
+            hanzi: "明年",
+            pinyin: "míngnián",
+            meaning: "next year",
+            category: "Time"
+        },
+        {
+            hanzi: "泰國",
+            pinyin: "Tàiguó",
+            meaning: "Thailand",
+            category: "Places"
+        },
+        {
+            hanzi: "聽說",
+            pinyin: "tīngshuō",
+            meaning: "I heard / reportedly",
+            category: "Expressions"
+        },
+        {
+            hanzi: "期待",
+            pinyin: "qīdài",
+            meaning: "to look forward to",
+            category: "Feelings"
+        },
+        {
+            hanzi: "次",
+            pinyin: "cì",
+            meaning: "time / occurrence",
+            category: "Measure Words"
+        },
+        {
+            hanzi: "旅行",
+            pinyin: "lǚxíng",
+            meaning: "travel / trip",
+            category: "Activities"
+        },
+        {
+            hanzi: "這裡",
+            pinyin: "zhèlǐ",
+            meaning: "here",
+            category: "Places"
+        },
+        {
+            hanzi: "要",
+            pinyin: "yào",
+            meaning: "to want / need",
+            category: "Actions"
+        },
+        {
+            hanzi: "上",
+            pinyin: "shàng",
+            meaning: "up / previous",
+            category: "Time"
+        },
+        {
+            hanzi: "下",
+            pinyin: "xià",
+            meaning: "down / following",
+            category: "Time"
+        },
+        {
+            hanzi: "上個星期",
+            pinyin: "shàng ge xīngqí",
+            meaning: "last week",
+            category: "Time"
+        },
+        {
+            hanzi: "下個星期",
+            pinyin: "xià ge xīngqí",
+            meaning: "next week",
+            category: "Time"
+        }
+    ],
+
+    reviewQuestions: [
+        {
+            meaning: "Last year I went to China.",
+            answer: ["去年", "我", "去", "中國"]
+        },
+        {
+            meaning: "This year I went to Korea.",
+            answer: ["今年", "我", "去", "韓國"]
+        },
+        {
+            meaning: "Next year I will go to Thailand.",
+            answer: ["明年", "我", "去", "泰國"]
+        },
+        {
+            meaning: "I went to Beijing.",
+            answer: ["我", "去", "了", "北京"]
+        },
+        {
+            meaning: "We ate delicious food.",
+            answer: ["我們", "吃", "了", "好吃", "的", "東西"]
+        },
+        {
+            meaning: "I have already returned to Taiwan.",
+            answer: ["我", "已經", "回", "台灣", "了"]
+        },
+        {
+            meaning: "I have already started the course.",
+            answer: ["我", "已經", "開始", "課程", "了"]
+        },
+        {
+            meaning: "Beijing has many beautiful places.",
+            answer: ["北京", "有", "很多", "漂亮", "的", "地方"]
+        },
+        {
+            meaning: "I miss China and Korea.",
+            answer: ["我", "很", "想念", "中國", "和", "韓國"]
+        },
+        {
+            meaning: "I heard that Thailand has many beautiful places.",
+            answer: ["我", "聽說", "泰國", "有", "很多", "漂亮", "的", "地方"]
+        },
+        {
+            meaning: "I am looking forward to this trip.",
+            answer: ["我", "很", "期待", "這", "次", "旅行"]
+        },
+        {
+            meaning: "Last week I prepared for the course.",
+            answer: ["上個星期", "我", "準備", "課程"]
+        },
+        {
+            meaning: "Next week I need to practice.",
+            answer: ["下個星期", "我", "要", "練習"]
+        }
+    ]
+},
 
 };
 // ============================================================
