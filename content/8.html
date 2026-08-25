@@ -11,10 +11,8 @@
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-<!-- Hanzi Writer CDN -->
 <script src="https://cdn.jsdelivr.net/npm/hanzi-writer@3.5.0/dist/hanzi-writer.min.js"></script>
 
-<!-- Lesson Data Script -->
 <script src="lesson.js"></script>
 
 <style>
@@ -554,6 +552,7 @@ p {
     font-size: 20px;
     text-align: center;
     outline: none;
+    box-sizing: border-box;
 }
 
 #sentenceInput:focus {
@@ -656,10 +655,6 @@ p {
 
 <div class="app-container">
 
-<!-- =====================================================
-     SIDEBAR
-===================================================== -->
-
 <div id="sidebar-container"></div>
 
 <main class="main-content">
@@ -685,7 +680,7 @@ p {
 
 
 <!-- =====================================================
-     GRAMMAR CAROUSEL EXPLANATION
+     GRAMMAR
 ===================================================== -->
 
 <div class="grammar-card">
@@ -694,7 +689,9 @@ p {
 
     <div class="grammar-slider-container">
 
+
         <!-- SLIDE 1 -->
+
         <div class="grammar-slide active-slide" id="slide-1">
 
             <h3>1. Positive Possession Pattern</h3>
@@ -741,6 +738,7 @@ p {
 
 
         <!-- SLIDE 2 -->
+
         <div class="grammar-slide" id="slide-2">
 
             <h3>2. Negative Possession Pattern</h3>
@@ -787,14 +785,17 @@ p {
 
 
         <!-- SLIDE 3 -->
+
         <div class="grammar-slide" id="slide-3">
 
             <h3>3. Possession Question Pattern (嗎)</h3>
 
             <div class="pattern-display">
+
                 <div class="pattern-code">
                     S + 有 + O + 嗎？
                 </div>
+
             </div>
 
             <div class="grammar-explanation">
@@ -836,14 +837,17 @@ p {
 
 
         <!-- SLIDE 4 -->
+
         <div class="grammar-slide" id="slide-4">
 
             <h3>4. Possession A-not-A Question Pattern</h3>
 
             <div class="pattern-display">
+
                 <div class="pattern-code">
                     S + 有沒有 + O
                 </div>
+
             </div>
 
             <div class="grammar-explanation">
@@ -885,14 +889,17 @@ p {
 
 
         <!-- SLIDE 5 -->
+
         <div class="grammar-slide" id="slide-5">
 
             <h3>5. Experiential / Action Possession Pattern</h3>
 
             <div class="pattern-display">
+
                 <div class="pattern-code">
                     S + 有 + V (+O)
                 </div>
+
             </div>
 
             <div class="grammar-explanation">
@@ -903,7 +910,8 @@ p {
                 </p>
 
                 <p style="margin-top:8px;">
-                    <strong>Answering:</strong> 有 + V (+O)
+                    <strong>Answering:</strong>
+                    有 + V (+O)
                 </p>
 
             </div>
@@ -933,25 +941,29 @@ p {
 
 
         <!-- SLIDE 6 -->
+
         <div class="grammar-slide" id="slide-6">
 
             <h3>6. Negative Experiential Action Pattern</h3>
 
             <div class="pattern-display">
+
                 <div class="pattern-code">
                     S + 沒有 + V (+O)
                 </div>
+
             </div>
 
             <div class="grammar-explanation">
 
                 <p>
                     <strong>Explanation:</strong>
-                    Used to indicate that an action has not been done or experienced. Answer replies typically use 有 or 沒有.
+                    Used to indicate that an action has not been done or experienced.
                 </p>
 
                 <p style="margin-top:8px;">
-                    <strong>Answering:</strong> 沒有 + V (+O)
+                    <strong>Answering:</strong>
+                    沒有 + V (+O)
                 </p>
 
             </div>
@@ -981,14 +993,17 @@ p {
 
 
         <!-- SLIDE 7 -->
+
         <div class="grammar-slide" id="slide-7">
 
             <h3>7. Action Question with 有 (嗎 / 有沒有)</h3>
 
             <div class="pattern-display">
+
                 <div class="pattern-code">
                     S + 有 + V (+O) + 嗎 / S + 有沒有 + V (+O)
                 </div>
+
             </div>
 
             <div class="grammar-explanation">
@@ -999,7 +1014,8 @@ p {
                 </p>
 
                 <p style="margin-top:8px;">
-                    <strong>Answering:</strong> 有 / 沒有
+                    <strong>Answering:</strong>
+                    有 / 沒有
                 </p>
 
             </div>
@@ -1007,7 +1023,7 @@ p {
             <div class="example-sentence">
 
                 <div class="example-hanzi">
-                    你有没有學習英文？
+                    你有沒有學習英文？
                 </div>
 
                 <div>
@@ -1019,7 +1035,7 @@ p {
                 </div>
 
                 <button class="sound-btn"
-                        onclick="playAudio('你有没有学习英文')">
+                        onclick="playAudio('你有沒有學習英文')">
                     🔊
                 </button>
 
@@ -1029,14 +1045,17 @@ p {
 
 
         <!-- SLIDE 8 -->
+
         <div class="grammar-slide" id="slide-8">
 
             <h3>8. Existential Locative Pattern</h3>
 
             <div class="pattern-display">
+
                 <div class="pattern-code">
                     Place + 有 + Thing / Person
                 </div>
+
             </div>
 
             <div class="grammar-explanation">
@@ -1047,7 +1066,8 @@ p {
                 </p>
 
                 <p style="margin-top:8px;">
-                    <strong>Answering:</strong> Place + 有 + Thing / Person
+                    <strong>Answering:</strong>
+                    Place + 有 + Thing / Person
                 </p>
 
             </div>
@@ -1089,36 +1109,28 @@ p {
              id="sliderIndicators">
 
             <span class="indicator active"
-                  onclick="currentSlide(1)">
-            </span>
+                  onclick="currentSlide(1)"></span>
 
             <span class="indicator"
-                  onclick="currentSlide(2)">
-            </span>
+                  onclick="currentSlide(2)"></span>
 
             <span class="indicator"
-                  onclick="currentSlide(3)">
-            </span>
+                  onclick="currentSlide(3)"></span>
 
             <span class="indicator"
-                  onclick="currentSlide(4)">
-            </span>
+                  onclick="currentSlide(4)"></span>
 
             <span class="indicator"
-                  onclick="currentSlide(5)">
-            </span>
+                  onclick="currentSlide(5)"></span>
 
             <span class="indicator"
-                  onclick="currentSlide(6)">
-            </span>
+                  onclick="currentSlide(6)"></span>
 
             <span class="indicator"
-                  onclick="currentSlide(7)">
-            </span>
+                  onclick="currentSlide(7)"></span>
 
             <span class="indicator"
-                  onclick="currentSlide(8)">
-            </span>
+                  onclick="currentSlide(8)"></span>
 
         </div>
 
@@ -1146,76 +1158,188 @@ p {
 
 <div class="vocab-container">
 
-<div class="vocab-pill" onclick="playAudio('錢')">
-    <div class="hanzi">錢</div>
-    <div class="pinyin">qián</div>
-    <div class="meaning">money</div>
+
+<!-- NEW: 有 -->
+
+<div class="vocab-pill" onclick="playAudio('有')">
+
+    <div class="hanzi">有</div>
+
+    <div class="pinyin">yǒu</div>
+
+    <div class="meaning">
+        have / there is / exist
+    </div>
+
 </div>
+
+
+<!-- NEW: 沒有 -->
+
+<div class="vocab-pill" onclick="playAudio('沒有')">
+
+    <div class="hanzi">沒有</div>
+
+    <div class="pinyin">méiyǒu</div>
+
+    <div class="meaning">
+        not have / there isn't
+    </div>
+
+</div>
+
+
+<div class="vocab-pill" onclick="playAudio('錢')">
+
+    <div class="hanzi">錢</div>
+
+    <div class="pinyin">qián</div>
+
+    <div class="meaning">money</div>
+
+</div>
+
 
 <div class="vocab-pill" onclick="playAudio('本')">
+
     <div class="hanzi">本</div>
+
     <div class="pinyin">běn</div>
-    <div class="meaning">measure word for books</div>
+
+    <div class="meaning">
+        measure word for books
+    </div>
+
 </div>
+
 
 <div class="vocab-pill" onclick="playAudio('台')">
+
     <div class="hanzi">台</div>
+
     <div class="pinyin">tái</div>
-    <div class="meaning">measure word for machines</div>
+
+    <div class="meaning">
+        measure word for machines
+    </div>
+
 </div>
+
 
 <div class="vocab-pill" onclick="playAudio('原子筆')">
+
     <div class="hanzi">原子筆</div>
+
     <div class="pinyin">yuánzǐbǐ</div>
-    <div class="meaning">ballpoint pen</div>
+
+    <div class="meaning">
+        ballpoint pen
+    </div>
+
 </div>
+
 
 <div class="vocab-pill" onclick="playAudio('鉛筆')">
+
     <div class="hanzi">鉛筆</div>
+
     <div class="pinyin">qiānbǐ</div>
-    <div class="meaning">pencil</div>
+
+    <div class="meaning">
+        pencil
+    </div>
+
 </div>
+
 
 <div class="vocab-pill" onclick="playAudio('蛋糕')">
+
     <div class="hanzi">蛋糕</div>
+
     <div class="pinyin">dàngāo</div>
-    <div class="meaning">cake</div>
+
+    <div class="meaning">
+        cake
+    </div>
+
 </div>
+
 
 <div class="vocab-pill" onclick="playAudio('學習')">
+
     <div class="hanzi">學習</div>
+
     <div class="pinyin">xuéxí</div>
-    <div class="meaning">study / learn</div>
+
+    <div class="meaning">
+        study / learn
+    </div>
+
 </div>
+
 
 <div class="vocab-pill" onclick="playAudio('英文')">
+
     <div class="hanzi">英文</div>
+
     <div class="pinyin">yīngwén</div>
-    <div class="meaning">English language</div>
+
+    <div class="meaning">
+        English language
+    </div>
+
 </div>
+
 
 <div class="vocab-pill" onclick="playAudio('酒')">
+
     <div class="hanzi">酒</div>
+
     <div class="pinyin">jiǔ</div>
-    <div class="meaning">alcohol / liquor</div>
+
+    <div class="meaning">
+        alcohol / liquor
+    </div>
+
 </div>
+
 
 <div class="vocab-pill" onclick="playAudio('桌子')">
+
     <div class="hanzi">桌子</div>
+
     <div class="pinyin">zhuōzi</div>
-    <div class="meaning">table / desk</div>
+
+    <div class="meaning">
+        table / desk
+    </div>
+
 </div>
+
 
 <div class="vocab-pill" onclick="playAudio('上')">
+
     <div class="hanzi">上</div>
+
     <div class="pinyin">shàng</div>
-    <div class="meaning">on / above</div>
+
+    <div class="meaning">
+        on / above
+    </div>
+
 </div>
 
+
 <div class="vocab-pill" onclick="playAudio('裡')">
+
     <div class="hanzi">裡</div>
+
     <div class="pinyin">lǐ</div>
-    <div class="meaning">inside</div>
+
+    <div class="meaning">
+        inside
+    </div>
+
 </div>
 
 </div>
@@ -1509,7 +1633,7 @@ p {
 <h2>✍️ Writing Practice</h2>
 
 <p>
-    Practice correct Hanzi stroke orders by hand for all Lesson 8 vocabulary items.
+    Practice correct Hanzi stroke orders for Lesson 8 vocabulary items.
 </p>
 
 <div class="writing-mode-buttons">
@@ -1588,7 +1712,7 @@ p {
 
 <p>
     <strong>Review Mode:</strong>
-    Let's see how much you remember!"
+    Let's see how much you remember!
 </p>
 
 </div>
@@ -1743,26 +1867,20 @@ function showSlide(index){
 }
 
 function nextSlide(){
-
     showSlide(currentSlideIndex + 1);
-
 }
 
 function prevSlide(){
-
     showSlide(currentSlideIndex - 1);
-
 }
 
 function currentSlide(n){
-
     showSlide(n - 1);
-
 }
 
 
 /* =====================================================
-   GAME DATA (Lesson 8 Specific)
+   GAME DATA
 ===================================================== */
 
 const games = {
@@ -2324,7 +2442,25 @@ function nextSentenceWriting(){
    HANZI WRITING
 ===================================================== */
 
+/*
+   有 / 沒 are included as individual characters.
+   沒有 consists of two Hanzi:
+   沒 + 有
+*/
+
 const writingCharacters = [
+
+{
+    hanzi:"有",
+    pinyin:"yǒu",
+    meaning:"have / there is"
+},
+
+{
+    hanzi:"沒",
+    pinyin:"méi",
+    meaning:"not / without"
+},
 
 {
     hanzi:"錢",
@@ -2353,7 +2489,7 @@ const writingCharacters = [
 {
     hanzi:"子",
     pinyin:"zǐ",
-    meaning:"child/suffix"
+    meaning:"child / suffix"
 },
 
 {
@@ -2395,13 +2531,13 @@ const writingCharacters = [
 {
     hanzi:"英",
     pinyin:"yīng",
-    meaning:"brave/English"
+    meaning:"English"
 },
 
 {
     hanzi:"文",
     pinyin:"wén",
-    meaning:"language"
+    meaning:"language / writing"
 },
 
 {
@@ -2417,15 +2553,9 @@ const writingCharacters = [
 },
 
 {
-    hanzi:"子",
-    pinyin:"zi",
-    meaning:"noun suffix"
-},
-
-{
     hanzi:"上",
     pinyin:"shàng",
-    meaning:"on/above"
+    meaning:"on / above"
 },
 
 {
@@ -2634,48 +2764,37 @@ function playCurrentWriting(){
 
 /* =====================================================
    FINAL CHALLENGE
-   5 QUESTIONS FROM HTML
-   + 5 RANDOM QUESTIONS FROM lesson.js
-===================================================== */
-
-
-/* =====================================================
-   1. QUESTIONS CREATED DIRECTLY IN HTML
 ===================================================== */
 
 const htmlFinalQuestions = [
 
-    {
-        meaning: "I have a book.",
-        answer: ["我", "有", "一", "本", "書"]
-    },
+{
+    meaning: "I have a book.",
+    answer: ["我", "有", "一", "本", "書"]
+},
 
-    {
-        meaning: "I don't have money.",
-        answer: ["我", "沒有", "錢"]
-    },
+{
+    meaning: "I don't have money.",
+    answer: ["我", "沒有", "錢"]
+},
 
-    {
-        meaning: "Do you have a ballpoint pen?",
-        answer: ["你", "有", "原子筆", "嗎"]
-    },
+{
+    meaning: "Do you have a ballpoint pen?",
+    answer: ["你", "有", "原子筆", "嗎"]
+},
 
-    {
-        meaning: "Do you have a pencil or not?",
-        answer: ["你", "有", "沒有", "鉛筆"]
-    },
+{
+    meaning: "Do you have a pencil or not?",
+    answer: ["你", "有", "沒有", "鉛筆"]
+},
 
-    {
-        meaning: "There is a computer on the table.",
-        answer: ["桌子", "上", "有", "一", "台", "電腦"]
-    }
+{
+    meaning: "There is a computer on the table.",
+    answer: ["桌子", "上", "有", "一", "台", "電腦"]
+}
 
 ];
 
-
-/* =====================================================
-   2. FINAL QUESTION STATE
-===================================================== */
 
 let finalQuestions = [];
 
@@ -2686,19 +2805,10 @@ let finalScore = 0;
 let finalSelected = [];
 
 
-/* =====================================================
-   3. GET RANDOM QUESTIONS FROM lesson.js
-===================================================== */
-
 function getRandomLessonQuestions(){
 
     let lessonQuestions = [];
 
-
-    /*
-       Take reviewQuestions
-       from Lesson 1 → Lesson 7
-    */
 
     for(let i = 1; i <= 7; i++){
 
@@ -2720,11 +2830,6 @@ function getRandomLessonQuestions(){
     }
 
 
-    /*
-       Randomize all lesson questions
-       and take ONLY 5
-    */
-
     return shuffle(
         lessonQuestions
     ).slice(0,5);
@@ -2732,28 +2837,11 @@ function getRandomLessonQuestions(){
 }
 
 
-/* =====================================================
-   4. CREATE FINAL 10 QUESTIONS
-===================================================== */
-
 function initFinalQuestions(){
-
-    /*
-       Get 5 random questions
-       from lesson.js
-    */
 
     const randomLessonQuestions =
         getRandomLessonQuestions();
 
-
-    /*
-       Combine:
-
-       5 HTML questions
-       +
-       5 lesson.js questions
-    */
 
     finalQuestions = [
 
@@ -2764,18 +2852,9 @@ function initFinalQuestions(){
     ];
 
 
-    /*
-       Randomize the order
-       of all 10 questions
-    */
-
     finalQuestions =
         shuffle(finalQuestions);
 
-
-    /*
-       Safety check
-    */
 
     if(finalQuestions.length < 10){
 
@@ -2797,10 +2876,6 @@ function initFinalQuestions(){
 
 }
 
-
-/* =====================================================
-   5. LOAD FINAL QUESTION
-===================================================== */
 
 function loadFinal(){
 
@@ -2845,10 +2920,6 @@ function loadFinal(){
     bank.innerHTML = "";
 
 
-    /*
-       Randomize answer words
-    */
-
     shuffle(q.answer)
         .forEach(word => {
 
@@ -2892,21 +2963,8 @@ function loadFinal(){
         .getElementById("finalFeedback")
         .textContent = "";
 
-
-    document
-        .getElementById("finalNextBtn")
-        ?.style
-        .setProperty(
-            "display",
-            "none"
-        );
-
 }
 
-
-/* =====================================================
-   6. RENDER SELECTED WORDS
-===================================================== */
 
 function renderFinal(){
 
@@ -2946,20 +3004,12 @@ function renderFinal(){
 }
 
 
-/* =====================================================
-   7. RESET FINAL QUESTION
-===================================================== */
-
 function resetFinal(){
 
     loadFinal();
 
 }
 
-
-/* =====================================================
-   8. CHECK FINAL ANSWER
-===================================================== */
 
 function checkFinal(){
 
@@ -2983,11 +3033,6 @@ function checkFinal(){
             "finalFeedback"
         );
 
-
-    /*
-       Check length
-       and word order
-    */
 
     const isCorrect =
 
@@ -3025,10 +3070,6 @@ function checkFinal(){
         finalIndex++;
 
 
-        /*
-           There are still questions
-        */
-
         if(
             finalIndex < 10
         ){
@@ -3040,10 +3081,6 @@ function checkFinal(){
 
         }
 
-
-        /*
-           Finished all 10
-        */
 
         else{
 
@@ -3072,30 +3109,32 @@ function checkFinal(){
     }
 
 }
+
+
 /* =====================================================
-   INITIALIZE (Hanya jalankan sekali di sini)
+   INITIALIZE
 ===================================================== */
 
 loadGame(1);
+
 loadGame(2);
+
 loadGame(3);
 
 loadSentenceWriting();
 
 initWriter();
 
-// Inisialisasi Final Challenge aman
-if (initFinalQuestions()) {
+if(initFinalQuestions()){
+
     loadFinal();
+
 }
 
-loadScriptSidebar(); // atau skrip bawaan Anda
-
+loadScriptSidebar();
 
 </script>
 
-
-<!-- EXISTING SIDEBAR SCRIPT -->
 
 <script src="../script.js"></script>
 
