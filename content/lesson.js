@@ -1344,484 +1344,466 @@ const allLessonsData = {
 // ========================================================
 // LESSON 14
 // ========================================================
-
 14: {
-  title: "Days, Dates & Asking When",
-  subtitle: "星期、禮拜、日期與什麼時候",
-
-  grammar: [
-    {
-      title: "1. Asking What Day It Is",
-      explanation: "Use 星期 or 禮拜 + number to talk about the day of the week.",
-      patterns: [
+    grammar: [
         {
-          pattern: "星期 + Number",
-          examples: [
-            "星期一 — Monday",
-            "星期二 — Tuesday",
-            "星期三 — Wednesday",
-            "星期四 — Thursday",
-            "星期五 — Friday",
-            "星期六 — Saturday",
-            "星期日 — Sunday"
-          ]
+            id: "weekday-xingqi",
+            name: "星期 + Number",
+            category: "Days of the Week",
+            explanation: "Use 星期 (xīngqí) + a number to talk about the day of the week. 星期一 is Monday and 星期日 is Sunday.",
+            examples: [
+                "星期一 — Monday",
+                "星期二 — Tuesday",
+                "星期三 — Wednesday",
+                "星期四 — Thursday",
+                "星期五 — Friday",
+                "星期六 — Saturday",
+                "星期日 — Sunday"
+            ]
         },
         {
-          pattern: "禮拜 + Number",
-          examples: [
-            "禮拜一 — Monday",
-            "禮拜二 — Tuesday",
-            "禮拜三 — Wednesday",
-            "禮拜四 — Thursday",
-            "禮拜五 — Friday",
-            "禮拜六 — Saturday",
-            "禮拜日 — Sunday"
-          ]
-        }
-      ]
-    },
-
-    {
-      title: "2. Asking the Date",
-      explanation: "Use 幾 to ask for a specific number, such as the month or day of the month.",
-      patterns: [
-        {
-          pattern: "今天幾月幾號？",
-          examples: [
-            "今天幾月幾號？",
-            "今天是八月二十四號。"
-          ]
+            id: "weekday-libai",
+            name: "禮拜 + Number",
+            category: "Days of the Week",
+            explanation: "禮拜 (lǐbài) can also be used to talk about the day of the week. It is very common in spoken Mandarin, especially in Taiwan.",
+            examples: [
+                "禮拜一 — Monday",
+                "禮拜二 — Tuesday",
+                "禮拜三 — Wednesday",
+                "禮拜四 — Thursday",
+                "禮拜五 — Friday",
+                "禮拜六 — Saturday",
+                "禮拜日 — Sunday"
+            ]
         },
         {
-          pattern: "你的生日是幾月幾號？",
-          examples: [
-            "你的生日是幾月幾號？",
-            "我的生日是六月十五號。"
-          ]
-        }
-      ]
-    },
-
-    {
-      title: "3. Asking When",
-      explanation: "什麼時候 means 'when' and is used to ask when an event happens.",
-      patterns: [
+            id: "asking-weekday",
+            name: "今天是星期幾？",
+            category: "Asking the Day",
+            explanation: "Use 星期幾 or 禮拜幾 to ask what day of the week it is.",
+            examples: [
+                "今天是星期幾？",
+                "今天是星期一。",
+                "今天是禮拜六。"
+            ]
+        },
         {
-          pattern: "Subject + 什麼時候 + Verb",
-          examples: [
-            "你什麼時候考試？",
-            "你什麼時候回家？",
-            "你什麼時候去學校？",
-            "你什麼時候去圖書館？",
-            "你什麼時候游泳？"
-          ]
+            id: "asking-date",
+            name: "幾月幾號",
+            category: "Asking the Date",
+            explanation: "Use 幾月幾號 to ask for the month and day of a date. 幾 means 'what number / how many'.",
+            examples: [
+                "今天幾月幾號？",
+                "今天是八月二十四號。",
+                "你的生日是幾月幾號？",
+                "我的生日是六月十五號。"
+            ]
+        },
+        {
+            id: "asking-when",
+            name: "Subject + 什麼時候 + Verb",
+            category: "Asking When",
+            explanation: "什麼時候 means 'when'. It is placed before the verb when asking when an action happens.",
+            examples: [
+                "你什麼時候考試？",
+                "你什麼時候回家？",
+                "你什麼時候去學校？",
+                "你什麼時候去圖書館？",
+                "你什麼時候游泳？"
+            ]
         }
-      ]
-    }
-  ],
+    ],
 
-  vocabulary: [
-    {
-      word: "星期",
-      pinyin: "xīngqí",
-      meaning: "week; day of the week"
-    },
-    {
-      word: "禮拜",
-      pinyin: "lǐbài",
-      meaning: "week; day of the week"
-    },
-    {
-      word: "週末",
-      pinyin: "zhōumò",
-      meaning: "weekend"
-    },
-    {
-      word: "週日",
-      pinyin: "zhōurì",
-      meaning: "Sunday"
-    },
-    {
-      word: "幾",
-      pinyin: "jǐ",
-      meaning: "how many; what number"
-    },
-    {
-      word: "什麼時候",
-      pinyin: "shénme shíhou",
-      meaning: "when"
-    },
-    {
-      word: "對了",
-      pinyin: "duì le",
-      meaning: "oh, by the way; that's right"
-    },
-    {
-      word: "可能",
-      pinyin: "kěnéng",
-      meaning: "maybe; possibly; possible"
-    },
-    {
-      word: "吧",
-      pinyin: "ba",
-      meaning: "sentence-final particle; used for suggestions or uncertainty"
-    }
-  ],
+    vocabulary: [
+        {
+            hanzi: "星期",
+            pinyin: "xīngqí",
+            meaning: "week; day of the week",
+            category: "Time"
+        },
+        {
+            hanzi: "禮拜",
+            pinyin: "lǐbài",
+            meaning: "week; day of the week",
+            category: "Time"
+        },
+        {
+            hanzi: "週末",
+            pinyin: "zhōumò",
+            meaning: "weekend",
+            category: "Time"
+        },
+        {
+            hanzi: "週日",
+            pinyin: "zhōurì",
+            meaning: "Sunday",
+            category: "Time"
+        },
+        {
+            hanzi: "幾",
+            pinyin: "jǐ",
+            meaning: "how many; what number",
+            category: "Question Word"
+        },
+        {
+            hanzi: "什麼時候",
+            pinyin: "shénme shíhou",
+            meaning: "when",
+            category: "Question Word"
+        },
+        {
+            hanzi: "生日",
+            pinyin: "shēngrì",
+            meaning: "birthday",
+            category: "Time"
+        },
+        {
+            hanzi: "對了",
+            pinyin: "duì le",
+            meaning: "oh, by the way; that's right",
+            category: "Expression"
+        },
+        {
+            hanzi: "可能",
+            pinyin: "kěnéng",
+            meaning: "maybe; possibly; possible",
+            category: "Adverb"
+        },
+        {
+            hanzi: "吧",
+            pinyin: "ba",
+            meaning: "sentence-final particle; used for suggestions or uncertainty",
+            category: "Grammar"
+        }
+    ],
 
-  reviewQuestions: [
-    {
-      meaning: "What day is it today?",
-      answer: ["今天", "是", "星期幾"]
-    },
-    {
-      meaning: "Today is Monday.",
-      answer: ["今天", "是", "星期一"]
-    },
-    {
-      meaning: "What is today's date?",
-      answer: ["今天", "幾月", "幾號"]
-    },
-    {
-      meaning: "Today is August 24th.",
-      answer: ["今天", "是", "八月", "二十四號"]
-    },
-    {
-      meaning: "What is your birthday?",
-      answer: ["你的", "生日", "是", "幾月", "幾號"]
-    },
-    {
-      meaning: "My birthday is June 15th.",
-      answer: ["我的", "生日", "是", "六月", "十五號"]
-    },
-    {
-      meaning: "When do you go to the library?",
-      answer: ["你", "什麼時候", "去", "圖書館"]
-    },
-    {
-      meaning: "When do you take the exam?",
-      answer: ["你", "什麼時候", "考試"]
-    },
-    {
-      meaning: "When do you go home?",
-      answer: ["你", "什麼時候", "回家"]
-    },
-    {
-      meaning: "When do you swim?",
-      answer: ["你", "什麼時候", "游泳"]
-    }
-  ]
+    reviewQuestions: [
+        {
+            meaning: "What day is it today?",
+            answer: ["今天", "是", "星期", "幾"]
+        },
+        {
+            meaning: "Today is Monday.",
+            answer: ["今天", "是", "星期", "一"]
+        },
+        {
+            meaning: "What is today's date?",
+            answer: ["今天", "幾", "月", "幾", "號"]
+        },
+        {
+            meaning: "Today is August 24th.",
+            answer: ["今天", "是", "八", "月", "二", "十", "四", "號"]
+        },
+        {
+            meaning: "What is your birthday?",
+            answer: ["你的", "生日", "是", "幾", "月", "幾", "號"]
+        },
+        {
+            meaning: "My birthday is June 15th.",
+            answer: ["我的", "生日", "是", "六", "月", "十", "五", "號"]
+        },
+        {
+            meaning: "When do you go to the library?",
+            answer: ["你", "什麼時候", "去", "圖書館"]
+        },
+        {
+            meaning: "When do you take the exam?",
+            answer: ["你", "什麼時候", "考試"]
+        },
+        {
+            meaning: "When do you go home?",
+            answer: ["你", "什麼時候", "回家"]
+        },
+        {
+            meaning: "When do you swim?",
+            answer: ["你", "什麼時候", "游泳"]
+        }
+    ]
 },
+
+
 // ========================================================
 // LESSON 15
 // ========================================================
-
 15: {
-  title: "Telling Time",
-  subtitle: "時間、幾點、幾分與時間段",
-
-  grammar: [
-    {
-      title: "1. Asking What Time It Is",
-      explanation: "Use 幾點 to ask what time it is. 現在 means 'now' and is often used when asking or telling the current time.",
-      patterns: [
+    grammar: [
         {
-          pattern: "現在 + 幾點？",
-          examples: [
-            "現在幾點？",
-            "現在三點。"
-          ]
+            id: "asking-time",
+            name: "現在 + 幾點？",
+            category: "Asking the Time",
+            explanation: "Use 幾點 to ask what time it is. 現在 means 'now' and is commonly used when asking or telling the current time.",
+            examples: [
+                "現在幾點？",
+                "現在三點。",
+                "現在八點。"
+            ]
         },
         {
-          pattern: "現在 + 幾點 + 幾分？",
-          examples: [
-            "現在三點五分。",
-            "現在八點二十分。"
-          ]
-        }
-      ]
-    },
-
-    {
-      title: "2. Saying the Hour",
-      explanation: "Use 點 after a number to say the hour.",
-      patterns: [
-        {
-          pattern: "Number + 點",
-          examples: [
-            "一點 — one o'clock",
-            "三點 — three o'clock",
-            "八點 — eight o'clock",
-            "十二點 — twelve o'clock"
-          ]
-        }
-      ]
-    },
-
-    {
-      title: "3. Saying the Minutes",
-      explanation: "Use 分 after a number to say the minutes. In everyday Mandarin, you can simply say the number + 分. Do not use 分鐘 when telling the exact time on a clock.",
-      patterns: [
-        {
-          pattern: "Number + 點 + Number + 分",
-          examples: [
-            "三點五分 — 3:05",
-            "三點十分 — 3:10",
-            "八點二十分 — 8:20",
-            "九點四十五分 — 9:45"
-          ]
-        }
-      ]
-    },
-
-    {
-      title: "4. Half Past",
-      explanation: "半 means 'half'. 點 + 半 means half past the hour.",
-      patterns: [
-        {
-          pattern: "Number + 點 + 半",
-          examples: [
-            "三點半 — 3:30",
-            "六點半 — 6:30",
-            "九點半 — 9:30"
-          ]
-        }
-      ]
-    },
-
-    {
-      title: "5. A Quarter Past / Quarter To",
-      explanation: "一刻 means 15 minutes. 三刻 means 45 minutes. These expressions are common in spoken Mandarin, especially in Taiwan.",
-      patterns: [
-        {
-          pattern: "Number + 點 + 一刻",
-          examples: [
-            "三點一刻 — 3:15",
-            "八點一刻 — 8:15"
-          ]
+            id: "hour",
+            name: "Number + 點",
+            category: "Telling the Hour",
+            explanation: "Use 點 after a number to say the hour.",
+            examples: [
+                "一點 — one o'clock",
+                "三點 — three o'clock",
+                "八點 — eight o'clock",
+                "十二點 — twelve o'clock"
+            ]
         },
         {
-          pattern: "Number + 點 + 三刻",
-          examples: [
-            "三點三刻 — 3:45",
-            "八點三刻 — 8:45"
-          ]
-        }
-      ]
-    },
-
-    {
-      title: "6. Seconds",
-      explanation: "秒 means 'second'. It is used when you need to talk about seconds specifically.",
-      patterns: [
-        {
-          pattern: "Number + 秒",
-          examples: [
-            "五秒 — five seconds",
-            "十秒 — ten seconds",
-            "三十秒 — thirty seconds"
-          ]
+            id: "minutes",
+            name: "Number + 點 + Number + 分",
+            category: "Telling the Minutes",
+            explanation: "Use 分 after a number to say the exact minutes on a clock. When telling the exact time, use 分 rather than 分鐘.",
+            examples: [
+                "三點五分 — 3:05",
+                "三點十分 — 3:10",
+                "八點二十分 — 8:20",
+                "九點四十五分 — 9:45"
+            ]
         },
         {
-          pattern: "Number + 點 + Number + 分 + Number + 秒",
-          examples: [
-            "三點五分十秒 — 3:05:10",
-            "八點二十分三十秒 — 8:20:30"
-          ]
-        }
-      ]
-    },
-
-    {
-      title: "7. Time of Day",
-      explanation: "Mandarin uses different words to describe parts of the day. These words usually come before the time.",
-      patterns: [
-        {
-          pattern: "Time of day + Time",
-          examples: [
-            "早上八點 — 8 a.m.",
-            "上午十點 — 10 a.m.",
-            "中午十二點 — 12 p.m.",
-            "下午三點 — 3 p.m.",
-            "傍晚六點 — 6 p.m.",
-            "晚上八點 — 8 p.m.",
-            "凌晨一點 — 1 a.m."
-          ]
-        }
-      ]
-    },
-
-    {
-      title: "8. Asking When Something Happens",
-      explanation: "Use 什麼時候 to ask when something happens. You can answer with a specific time.",
-      patterns: [
-        {
-          pattern: "Subject + 什麼時候 + Verb？",
-          examples: [
-            "你什麼時候上課？",
-            "你什麼時候吃飯？",
-            "你什麼時候回家？"
-          ]
+            id: "half-hour",
+            name: "Number + 點 + 半",
+            category: "Half Past",
+            explanation: "半 means 'half'. 點 + 半 means half past the hour.",
+            examples: [
+                "三點半 — 3:30",
+                "六點半 — 6:30",
+                "九點半 — 9:30"
+            ]
         },
         {
-          pattern: "Subject + Time + Verb",
-          examples: [
-            "我早上八點上課。",
-            "我中午十二點吃飯。",
-            "我晚上九點回家。"
-          ]
+            id: "quarter-hour",
+            name: "Number + 點 + 一刻 / 三刻",
+            category: "Quarter Hours",
+            explanation: "一刻 means 15 minutes and 三刻 means 45 minutes. These expressions are commonly heard in spoken Mandarin, especially in Taiwan.",
+            examples: [
+                "三點一刻 — 3:15",
+                "八點一刻 — 8:15",
+                "三點三刻 — 3:45",
+                "八點三刻 — 8:45"
+            ]
+        },
+        {
+            id: "seconds",
+            name: "Number + 秒",
+            category: "Seconds",
+            explanation: "秒 means 'second'. It is used when you need to talk about seconds specifically.",
+            examples: [
+                "五秒 — five seconds",
+                "十秒 — ten seconds",
+                "三十秒 — thirty seconds"
+            ]
+        },
+        {
+            id: "full-time",
+            name: "Number + 點 + Number + 分 + Number + 秒",
+            category: "Exact Time",
+            explanation: "You can combine 點, 分, and 秒 to give an exact time including seconds.",
+            examples: [
+                "三點五分十秒 — 3:05:10",
+                "八點二十分三十秒 — 8:20:30"
+            ]
+        },
+        {
+            id: "time-of-day",
+            name: "Time of Day + Time",
+            category: "Time of Day",
+            explanation: "Words describing parts of the day usually come before the clock time.",
+            examples: [
+                "早上八點 — 8 a.m.",
+                "上午十點 — 10 a.m.",
+                "中午十二點 — 12 p.m.",
+                "下午三點 — 3 p.m.",
+                "傍晚六點 — 6 p.m.",
+                "晚上八點 — 8 p.m.",
+                "凌晨一點 — 1 a.m."
+            ]
+        },
+        {
+            id: "asking-time-event",
+            name: "Subject + 什麼時候 + Verb",
+            category: "Asking When",
+            explanation: "什麼時候 means 'when'. You can ask when an action happens and answer with a specific time.",
+            examples: [
+                "你什麼時候上課？",
+                "你什麼時候吃飯？",
+                "你什麼時候回家？",
+                "我早上八點上課。",
+                "我中午十二點吃飯。",
+                "我晚上九點回家。"
+            ]
         }
-      ]
-    }
-  ],
+    ],
 
-  vocabulary: [
-    {
-      word: "現在",
-      pinyin: "xiànzài",
-      meaning: "now"
-    },
-    {
-      word: "時間",
-      pinyin: "shíjiān",
-      meaning: "time"
-    },
-    {
-      word: "點",
-      pinyin: "diǎn",
-      meaning: "o'clock; hour"
-    },
-    {
-      word: "分",
-      pinyin: "fēn",
-      meaning: "minute"
-    },
-    {
-      word: "半",
-      pinyin: "bàn",
-      meaning: "half"
-    },
-    {
-      word: "刻",
-      pinyin: "kè",
-      meaning: "quarter of an hour; 15 minutes"
-    },
-    {
-      word: "一刻",
-      pinyin: "yí kè",
-      meaning: "a quarter of an hour; 15 minutes"
-    },
-    {
-      word: "三刻",
-      pinyin: "sān kè",
-      meaning: "three quarters of an hour; 45 minutes"
-    },
-    {
-      word: "秒",
-      pinyin: "miǎo",
-      meaning: "second"
-    },
-    {
-      word: "清晨",
-      pinyin: "qīngchén",
-      meaning: "early morning; dawn"
-    },
-    {
-      word: "早晨",
-      pinyin: "zǎochén",
-      meaning: "early morning"
-    },
-    {
-      word: "早上",
-      pinyin: "zǎoshang",
-      meaning: "morning"
-    },
-    {
-      word: "上午",
-      pinyin: "shàngwǔ",
-      meaning: "morning; a.m."
-    },
-    {
-      word: "中午",
-      pinyin: "zhōngwǔ",
-      meaning: "noon"
-    },
-    {
-      word: "下午",
-      pinyin: "xiàwǔ",
-      meaning: "afternoon; p.m."
-    },
-    {
-      word: "傍晚",
-      pinyin: "bàngwǎn",
-      meaning: "early evening; around sunset"
-    },
-    {
-      word: "晚上",
-      pinyin: "wǎnshang",
-      meaning: "evening; night"
-    },
-    {
-      word: "夜裡",
-      pinyin: "yèlǐ",
-      meaning: "at night; during the night"
-    },
-    {
-      word: "凌晨",
-      pinyin: "língchén",
-      meaning: "early morning; after midnight"
-    }
-  ],
+    vocabulary: [
+        {
+            hanzi: "現在",
+            pinyin: "xiànzài",
+            meaning: "now",
+            category: "Time"
+        },
+        {
+            hanzi: "時間",
+            pinyin: "shíjiān",
+            meaning: "time",
+            category: "Time"
+        },
+        {
+            hanzi: "點",
+            pinyin: "diǎn",
+            meaning: "o'clock; hour",
+            category: "Time"
+        },
+        {
+            hanzi: "分",
+            pinyin: "fēn",
+            meaning: "minute",
+            category: "Time"
+        },
+        {
+            hanzi: "半",
+            pinyin: "bàn",
+            meaning: "half",
+            category: "Time"
+        },
+        {
+            hanzi: "刻",
+            pinyin: "kè",
+            meaning: "quarter of an hour; 15 minutes",
+            category: "Time"
+        },
+        {
+            hanzi: "一刻",
+            pinyin: "yí kè",
+            meaning: "a quarter of an hour; 15 minutes",
+            category: "Time"
+        },
+        {
+            hanzi: "三刻",
+            pinyin: "sān kè",
+            meaning: "three quarters of an hour; 45 minutes",
+            category: "Time"
+        },
+        {
+            hanzi: "秒",
+            pinyin: "miǎo",
+            meaning: "second",
+            category: "Time"
+        },
+        {
+            hanzi: "清晨",
+            pinyin: "qīngchén",
+            meaning: "early morning; dawn",
+            category: "Time"
+        },
+        {
+            hanzi: "早晨",
+            pinyin: "zǎochén",
+            meaning: "early morning",
+            category: "Time"
+        },
+        {
+            hanzi: "早上",
+            pinyin: "zǎoshang",
+            meaning: "morning",
+            category: "Time"
+        },
+        {
+            hanzi: "上午",
+            pinyin: "shàngwǔ",
+            meaning: "morning; a.m.",
+            category: "Time"
+        },
+        {
+            hanzi: "中午",
+            pinyin: "zhōngwǔ",
+            meaning: "noon",
+            category: "Time"
+        },
+        {
+            hanzi: "下午",
+            pinyin: "xiàwǔ",
+            meaning: "afternoon; p.m.",
+            category: "Time"
+        },
+        {
+            hanzi: "傍晚",
+            pinyin: "bàngwǎn",
+            meaning: "early evening; around sunset",
+            category: "Time"
+        },
+        {
+            hanzi: "晚上",
+            pinyin: "wǎnshang",
+            meaning: "evening; night",
+            category: "Time"
+        },
+        {
+            hanzi: "夜裡",
+            pinyin: "yèlǐ",
+            meaning: "at night; during the night",
+            category: "Time"
+        },
+        {
+            hanzi: "凌晨",
+            pinyin: "língchén",
+            meaning: "early morning; after midnight",
+            category: "Time"
+        }
+    ],
 
-  reviewQuestions: [
-    {
-      meaning: "What time is it now?",
-      answer: ["現在", "幾點"]
-    },
-    {
-      meaning: "It is three o'clock now.",
-      answer: ["現在", "三點"]
-    },
-    {
-      meaning: "It is 3:05 now.",
-      answer: ["現在", "三點", "五分"]
-    },
-    {
-      meaning: "It is 8:20 now.",
-      answer: ["現在", "八點", "二十分"]
-    },
-    {
-      meaning: "It is 3:30 now.",
-      answer: ["現在", "三點", "半"]
-    },
-    {
-      meaning: "It is 3:15 now.",
-      answer: ["現在", "三點", "一刻"]
-    },
-    {
-      meaning: "It is 3:45 now.",
-      answer: ["現在", "三點", "三刻"]
-    },
-    {
-      meaning: "It is 10 a.m.",
-      answer: ["上午", "十點"]
-    },
-    {
-      meaning: "It is 3 p.m.",
-      answer: ["下午", "三點"]
-    },
-    {
-      meaning: "It is 8 p.m.",
-      answer: ["晚上", "八點"]
-    },
-    {
-      meaning: "I have class at 8 in the morning.",
-      answer: ["我", "早上", "八點", "上課"]
-    },
-    {
-      meaning: "I eat lunch at 12 noon.",
-      answer: ["我", "中午", "十二點", "吃飯"]
-    }，
-  ]
+    reviewQuestions: [
+        {
+            meaning: "What time is it now?",
+            answer: ["現在", "幾", "點"]
+        },
+        {
+            meaning: "It is three o'clock now.",
+            answer: ["現在", "三", "點"]
+        },
+        {
+            meaning: "It is 3:05 now.",
+            answer: ["現在", "三", "點", "五", "分"]
+        },
+        {
+            meaning: "It is 8:20 now.",
+            answer: ["現在", "八", "點", "二", "十", "分"]
+        },
+        {
+            meaning: "It is 3:30 now.",
+            answer: ["現在", "三", "點", "半"]
+        },
+        {
+            meaning: "It is 3:15 now.",
+            answer: ["現在", "三", "點", "一刻"]
+        },
+        {
+            meaning: "It is 3:45 now.",
+            answer: ["現在", "三", "點", "三刻"]
+        },
+        {
+            meaning: "It is 10 a.m.",
+            answer: ["上午", "十", "點"]
+        },
+        {
+            meaning: "It is 3 p.m.",
+            answer: ["下午", "三", "點"]
+        },
+        {
+            meaning: "It is 8 p.m.",
+            answer: ["晚上", "八", "點"]
+        },
+        {
+            meaning: "I have class at 8 in the morning.",
+            answer: ["我", "早上", "八", "點", "上課"]
+        },
+        {
+            meaning: "I eat lunch at 12 noon.",
+            answer: ["我", "中午", "十", "二", "點", "吃飯"]
+        }
+    ]
 },
 
 
