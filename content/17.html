@@ -1,3067 +1,1900 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Lesson 17 — 5W + 1H | Boba Break Study</title><!-- ========================================================
-     EXTERNAL LIBRARIES
-======================================================== --><script src="https://cdn.jsdelivr.net/npm/hanzi-writer@3.7.2/dist/hanzi-writer-lib.min.js"></script><style>
-/* ========================================================
-   GLOBAL
-======================================================== */
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-* {
-    box-sizing: border-box;
+<title>Lesson 17 | Boba Break Study</title>
+
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/hanzi-writer@3.5.0/dist/hanzi-writer.min.js"></script>
+
+<script src="lesson.js"></script>
+
+<style>
+
+/* =====================================================
+   GENERAL
+===================================================== */
+
+.lesson-card,
+.grammar-card,
+.game-card,
+.writing-card,
+.final-card {
+    background:#fff;
+    padding:30px;
+    border-radius:20px;
+    box-shadow:0 6px 15px rgba(0,0,0,.06);
+    margin:25px auto;
+    max-width:750px;
 }
 
-body {
-    margin: 0;
-    font-family:
-        "Poppins",
-        "Noto Sans",
-        "Noto Sans CJK TC",
-        Arial,
-        sans-serif;
-    background: #fffaf5;
-    color: #4b3b32;
-    line-height: 1.7;
+h2 {
+    color:#b8865c;
+    font-size:24px;
+    margin-bottom:12px;
 }
 
-button {
-    font-family: inherit;
+h3 {
+    color:#5c4033;
+    margin-top:15px;
 }
 
-.hidden {
-    display: none !important;
+p {
+    color:#666;
+    font-size:14px;
+    line-height:1.65;
 }
 
-/* ========================================================
-   HEADER
-======================================================== */
 
-.lesson-header {
-    background: linear-gradient(135deg, #fff0e1, #ffe2ef);
-    padding: 45px 20px;
-    text-align: center;
-    border-bottom: 3px solid #f5d3c0;
+/* =====================================================
+   TITLE
+===================================================== */
+
+.lesson-title {
+    text-align:center;
+    margin-top:20px;
 }
 
-.lesson-header h1 {
-    margin: 0;
-    font-size: 2.4rem;
-    color: #6b4636;
+.lesson-title .badge {
+    display:inline-block;
+    background:#fff8ef;
+    color:#b8865c;
+    border:1px solid #d7b89c;
+    padding:6px 13px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:bold;
 }
 
-.lesson-header p {
-    margin: 10px 0 0;
-    font-size: 1rem;
-    color: #80695c;
+.lesson-title h1 {
+    color:#5c4033;
+    font-size:28px;
+    margin:12px 0 5px;
 }
 
-.lesson-badge {
-    display: inline-block;
-    margin-bottom: 12px;
-    padding: 6px 16px;
-    border-radius: 30px;
-    background: #fff;
-    color: #a75b5b;
-    font-weight: 700;
+.lesson-title p {
+    margin:0;
 }
 
-/* ========================================================
-   MAIN
-======================================================== */
 
-.lesson-container {
-    width: min(1100px, 94%);
-    margin: 35px auto 80px;
-}
-
-.section {
-    margin-bottom: 45px;
-}
-
-.section-title {
-    text-align: center;
-    margin-bottom: 25px;
-}
-
-.section-title h2 {
-    margin: 0;
-    color: #6b4636;
-    font-size: 1.8rem;
-}
-
-.section-title p {
-    margin-top: 5px;
-    color: #8a766a;
-}
-
-/* ========================================================
-   CARDS
-======================================================== */
-
-.card {
-    background: white;
-    border-radius: 22px;
-    padding: 25px;
-    margin-bottom: 20px;
-    box-shadow: 0 7px 25px rgba(90, 65, 50, 0.08);
-    border: 1px solid #f4e5dc;
-}
-
-.card h3 {
-    margin-top: 0;
-    color: #754d3b;
-}
-
-/* ========================================================
+/* =====================================================
    READING
-======================================================== */
+===================================================== */
 
-.reading-card {
-    max-width: 850px;
-    margin: auto;
+.reading-content {
+    background:#fff8ef;
+    border:1.5px solid #d7b89c;
+    padding:35px 22px 22px;
+    border-radius:15px;
+    margin-top:15px;
+    font-size:19px;
+    line-height:2.8;
+    color:#5c4033;
 }
 
-.reading-text {
-    font-size: 1.3rem;
-    line-height: 2.25;
-    background: #fffaf7;
-    padding: 25px;
-    border-radius: 18px;
+.char-group {
+    display:inline-flex;
+    flex-direction:column-reverse;
+    align-items:center;
+    vertical-align:baseline;
+    margin:0 2px;
+    line-height:1;
 }
 
-.pinyin {
-    display: block;
-    font-size: 0.78rem;
-    color: #a26f63;
-    line-height: 1.2;
-    margin-bottom: -2px;
+.char-group .pinyin-sub {
+    position:static;
+    font-size:10px;
+    font-weight:normal;
+    color:#8c7355;
+    line-height:1;
+    white-space:nowrap;
+    margin-top:2px;
 }
 
-.reading-line {
-    margin-bottom: 12px;
+.char-group .hanzi-main {
+    display:inline;
+    font-weight:bold;
+    font-size:21px;
+    line-height:1;
+    white-space:nowrap;
 }
 
-.audio-btn {
-    display: block;
-    margin: 20px auto 0;
-    border: none;
-    background: #8c5a46;
-    color: white;
-    padding: 11px 22px;
-    border-radius: 30px;
-    cursor: pointer;
-    font-weight: 600;
+.reading-note {
+    background:#fdfbf7;
+    border-left:4px solid #b8865c;
+    padding:12px 15px;
+    border-radius:10px;
+    margin-top:15px;
 }
 
-.audio-btn:hover {
-    opacity: 0.88;
+
+/* =====================================================
+   AUDIO
+===================================================== */
+
+.sound-btn {
+    background:#b8865c;
+    color:#fff;
+    border:none;
+    width:32px;
+    height:32px;
+    border-radius:50%;
+    cursor:pointer;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    margin-left:8px;
 }
 
-/* ========================================================
-   INFORMATION QUESTIONS
-======================================================== */
 
-.question-info {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
-    gap: 18px;
+/* =====================================================
+   GRAMMAR CAROUSEL
+===================================================== */
+
+.grammar-slider-container {
+    position:relative;
 }
 
-.info-box {
-    background: #fffdfb;
-    border: 1px solid #f0ddd2;
-    border-radius: 18px;
-    padding: 20px;
+.grammar-slide {
+    display:none;
 }
 
-.question-word {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #7d5140;
+.grammar-slide.active-slide {
+    display:block;
 }
 
-.answer {
-    background: #f9eee8;
-    border-radius: 12px;
-    padding: 10px 14px;
-    margin-top: 10px;
+.pattern-display {
+    background:#fff8ef;
+    padding:15px;
+    border-radius:14px;
+    border:1.5px solid #d7b89c;
+    margin:15px 0;
+    text-align:center;
 }
 
-/* ========================================================
-   GRAMMAR
-======================================================== */
-
-.grammar-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
+.pattern-code {
+    font-weight:bold;
+    color:#b8865c;
+    font-size:18px;
 }
 
-.pattern {
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: #8c5744;
-    background: #fff1e9;
-    padding: 12px 16px;
-    border-radius: 13px;
-    margin-bottom: 15px;
+.grammar-explanation {
+    background:#fff8ef;
+    border:1.5px solid #d7b89c;
+    padding:15px;
+    border-radius:15px;
+    margin-top:15px;
 }
 
-.example {
-    background: #faf7f5;
-    padding: 13px;
-    border-left: 4px solid #d69c7f;
-    margin-top: 10px;
-    border-radius: 8px;
+.grammar-explanation strong {
+    color:#b8865c;
 }
 
-/* ========================================================
-   5W1H TABLE
-======================================================== */
-
-.table-wrapper {
-    overflow-x: auto;
+.example-sentence {
+    text-align:center;
+    margin-top:18px;
+    padding:15px;
+    background:#fff;
+    border-radius:15px;
+    border:1px dashed #d7b89c;
 }
 
-.w-question-table {
-    width: 100%;
-    border-collapse: collapse;
-    background: white;
-    border-radius: 15px;
-    overflow: hidden;
+.example-hanzi {
+    font-size:26px;
+    font-weight:bold;
+    color:#5c4033;
+    margin-bottom:5px;
 }
 
-.w-question-table th,
-.w-question-table td {
-    padding: 14px;
-    border-bottom: 1px solid #f0e2da;
-    text-align: left;
+.example-english {
+    color:#666;
+    font-size:14px;
 }
 
-.w-question-table th {
-    background: #f8e8df;
-    color: #684737;
+.slider-nav {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-top:20px;
 }
 
-/* ========================================================
+.slider-btn {
+    background:#fff8ef;
+    border:1.5px solid #d7b89c;
+    color:#8c7355;
+    padding:8px 16px;
+    border-radius:12px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.slider-indicators {
+    display:flex;
+    gap:6px;
+    flex-wrap:wrap;
+    justify-content:center;
+    max-width:400px;
+}
+
+.indicator {
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:#f0e4d5;
+    cursor:pointer;
+}
+
+.indicator.active {
+    background:#b8865c;
+}
+
+
+/* =====================================================
    VOCABULARY
-======================================================== */
+===================================================== */
 
-.vocab-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-    gap: 15px;
+.vocab-container {
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    justify-content:center;
+    margin-top:15px;
 }
 
-.vocab-card {
-    background: white;
-    border: 1px solid #f1dfd5;
-    border-radius: 18px;
-    padding: 20px;
-    text-align: center;
-    transition: 0.2s;
+.vocab-pill {
+    background:#fff8ef;
+    border-radius:14px;
+    padding:10px 12px;
+    width:110px;
+    text-align:center;
+    border:1.5px solid #d7b89c;
+    cursor:pointer;
+    transition:.2s;
 }
 
-.vocab-card:hover {
-    transform: translateY(-3px);
+.vocab-pill:hover {
+    transform:translateY(-2px);
+    background:#faedcd;
 }
 
-.vocab-hanzi {
-    font-size: 2rem;
-    font-weight: 700;
-    color: #704b3a;
+.vocab-pill .hanzi {
+    font-size:20px;
+    font-weight:bold;
+    color:#b8865c;
 }
 
-.vocab-pinyin {
-    color: #a66d60;
-    font-size: 0.95rem;
+.vocab-pill .pinyin {
+    font-size:11px;
+    color:#555;
 }
 
-.vocab-meaning {
-    color: #75645a;
+.vocab-pill .meaning {
+    font-size:10px;
+    color:#777;
+    margin-top:2px;
 }
 
-/* ========================================================
+
+/* =====================================================
    GAMES
-======================================================== */
+===================================================== */
 
 .game-card {
-    max-width: 800px;
-    margin: 0 auto 25px;
+    position:relative;
 }
 
-.game-question {
-    font-size: 1.35rem;
-    text-align: center;
-    margin-bottom: 20px;
+.game-number {
+    display:inline-block;
+    background:#fff8ef;
+    color:#b8865c;
+    border:1px solid #d7b89c;
+    padding:5px 12px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:bold;
 }
 
-.game-options {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 12px;
+.game-description {
+    margin-bottom:15px;
 }
 
-.game-option {
-    border: 2px solid #efdcd1;
-    background: white;
-    padding: 13px;
-    border-radius: 14px;
-    cursor: pointer;
-    transition: 0.2s;
+.game-progress {
+    font-size:12px;
+    color:#8c7355;
+    text-align:right;
+    margin-bottom:8px;
 }
 
-.game-option:hover {
-    background: #fff4ed;
+.question-box {
+    text-align:center;
+    background:#fff8ef;
+    border:1.5px dashed #d7b89c;
+    padding:16px;
+    border-radius:15px;
+    margin-bottom:15px;
 }
 
-.game-option.correct {
-    background: #e6f5e9;
-    border-color: #74b883;
+.question-label {
+    font-size:11px;
+    color:#999;
+    margin-bottom:5px;
 }
 
-.game-option.wrong {
-    background: #fde9e7;
-    border-color: #d77b73;
+.question-meaning {
+    font-size:17px;
+    color:#5c4033;
+    font-weight:bold;
 }
 
-.game-feedback {
-    margin-top: 15px;
-    text-align: center;
-    font-weight: 600;
+.answer-area {
+    min-height:65px;
+    padding:12px;
+    border:2px dashed #d7b89c;
+    border-radius:15px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:7px;
+    background:#fdfbf7;
+    margin-bottom:12px;
 }
 
-/* ========================================================
-   SENTENCE WRITING
-======================================================== */
-
-.sentence-box {
-    max-width: 800px;
-    margin: auto;
+.answer-placeholder {
+    color:#aaa;
+    font-size:13px;
 }
 
-.sentence-prompt {
-    background: #fff3ea;
-    padding: 15px;
-    border-radius: 14px;
-    margin-bottom: 12px;
+.word-bank {
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-bottom:15px;
 }
 
-.sentence-input {
-    width: 100%;
-    min-height: 90px;
-    resize: vertical;
-    border: 2px solid #efdcd1;
-    border-radius: 15px;
-    padding: 15px;
-    font-size: 1.1rem;
-    font-family: inherit;
+.word-btn {
+    border:1.5px solid #d7b89c;
+    background:#fff;
+    color:#5c4033;
+    padding:9px 14px;
+    border-radius:12px;
+    font-size:17px;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.word-btn:hover {
+    background:#fff8ef;
+    transform:translateY(-2px);
+}
+
+.word-btn.selected {
+    background:#faedcd;
+    border-color:#b8865c;
+    color:#8c5d35;
+}
+
+.word-btn:disabled {
+    opacity:.4;
+    cursor:default;
+}
+
+.selected-word {
+    background:#b8865c;
+    color:#fff;
+    padding:8px 13px;
+    border-radius:10px;
+    font-size:17px;
+    cursor:pointer;
+}
+
+.game-buttons {
+    display:flex;
+    gap:8px;
+}
+
+.check-btn,
+.reset-btn,
+.listen-btn,
+.next-game-btn {
+    flex:1;
+    border:none;
+    border-radius:12px;
+    padding:11px;
+    cursor:pointer;
+    font-weight:bold;
 }
 
 .check-btn {
-    display: block;
-    margin: 15px auto 0;
-    border: none;
-    padding: 11px 22px;
-    border-radius: 30px;
-    background: #8c5a46;
-    color: white;
-    cursor: pointer;
-    font-weight: 600;
+    background:#b8865c;
+    color:#fff;
 }
 
-.writing-feedback {
-    text-align: center;
-    margin-top: 10px;
+.reset-btn {
+    background:#fff8ef;
+    color:#8c7355;
+    border:1px solid #d7b89c;
 }
 
-/* ========================================================
+.listen-btn {
+    background:#f0f7f4;
+    color:#2d6a4f;
+    border:1px solid #b7e4c7;
+}
+
+.next-game-btn {
+    background:#5c4033;
+    color:#fff;
+    display:none;
+    margin-top:12px;
+    width:100%;
+}
+
+.feedback {
+    text-align:center;
+    min-height:30px;
+    margin-top:12px;
+    font-weight:bold;
+}
+
+.correct {
+    color:#2d6a4f;
+}
+
+.incorrect {
+    color:#9b2226;
+}
+
+
+/* =====================================================
+   SENTENCE WRITING
+===================================================== */
+
+.writing-card {
+    text-align:center;
+}
+
+.sentence-writing {
+    background:#fff8ef;
+    border:1.5px solid #d7b89c;
+    padding:18px;
+    border-radius:15px;
+    margin-top:15px;
+    text-align:left;
+}
+
+.sentence-prompt {
+    font-size:18px;
+    font-weight:bold;
+    color:#5c4033;
+}
+
+.sentence-hint {
+    font-size:12px;
+    color:#888;
+    margin:8px 0;
+}
+
+#sentenceInput {
+    width:100%;
+    box-sizing:border-box;
+    padding:12px;
+    border-radius:12px;
+    border:1.5px solid #d7b89c;
+    font-size:20px;
+    text-align:center;
+    outline:none;
+}
+
+.check-writing {
+    width:100%;
+    margin-top:10px;
+    padding:11px;
+    background:#b8865c;
+    color:#fff;
+    border:none;
+    border-radius:12px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+
+/* =====================================================
    HANZI WRITING
-======================================================== */
+===================================================== */
 
-.hanzi-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 20px;
+.writing-mode-buttons {
+    display:flex;
+    gap:8px;
+    margin:15px 0;
 }
 
-.hanzi-card {
-    text-align: center;
-    background: #fffdfb;
-    border: 1px solid #f0ddd2;
-    border-radius: 18px;
-    padding: 18px;
+.mode-btn {
+    flex:1;
+    border:1.5px solid #d7b89c;
+    background:#fff8ef;
+    color:#8c7355;
+    padding:10px 5px;
+    border-radius:12px;
+    cursor:pointer;
+    font-size:12px;
+    font-weight:bold;
 }
 
-.hanzi-character {
-    font-size: 2rem;
-    color: #754d3b;
-    font-weight: 700;
+.mode-btn.active {
+    background:#b8865c;
+    color:#fff;
+    border-color:#b8865c;
 }
 
-.writer-box {
-    width: 150px;
-    height: 150px;
-    margin: 10px auto;
-    border: 1px solid #ead9d0;
-    border-radius: 12px;
-    background: white;
+.writing-info {
+    color:#777;
+    font-size:13px;
+    margin-bottom:15px;
 }
 
-/* ========================================================
-   GRAMMAR MASTER
-======================================================== */
-
-.final-section {
-    margin-top: 65px;
+.canvas-wrapper {
+    margin:15px auto;
+    width:280px;
+    max-width:100%;
+    height:280px;
+    background:
+        linear-gradient(#eadac7 1px,transparent 1px),
+        linear-gradient(90deg,#eadac7 1px,transparent 1px);
+    background-size:70px 70px;
+    background-position:center;
+    border:2px solid #d7b89c;
+    border-radius:15px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+    position:relative;
+    touch-action:none;
 }
 
-.master-container {
-    max-width: 850px;
-    margin: auto;
+#target-div {
+    width:260px;
+    height:260px;
 }
 
-.master-card {
-    background: white;
-    border-radius: 25px;
-    padding: 30px;
-    box-shadow: 0 8px 30px rgba(70, 50, 40, 0.1);
+.writing-buttons {
+    display:flex;
+    gap:8px;
+    justify-content:center;
+    margin-top:15px;
 }
 
-.master-counter {
-    text-align: center;
-    color: #9b6757;
-    font-weight: 700;
-    margin-bottom: 20px;
+.write-btn {
+    border:none;
+    padding:10px 15px;
+    border-radius:12px;
+    cursor:pointer;
+    font-weight:bold;
 }
 
-.master-question {
-    font-size: 1.35rem;
-    font-weight: 700;
-    text-align: center;
-    margin-bottom: 25px;
+.clear-btn {
+    background:#fff8ef;
+    color:#8c7355;
+    border:1px solid #d7b89c;
 }
 
-.master-options {
-    display: grid;
-    gap: 12px;
+.next-write-btn {
+    background:#b8865c;
+    color:#fff;
 }
 
-.master-option {
-    padding: 14px 18px;
-    border-radius: 14px;
-    border: 2px solid #eddcd2;
-    background: white;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: 0.2s;
+
+/* =====================================================
+   FINAL CHALLENGE
+===================================================== */
+
+.final-card {
+    text-align:center;
 }
 
-.master-option:hover {
-    background: #fff6f0;
-}
-
-.master-option.correct {
-    background: #e4f5e8;
-    border-color: #69a977;
-}
-
-.master-option.wrong {
-    background: #fde8e5;
-    border-color: #d6766e;
-}
-
-.master-feedback {
-    text-align: center;
-    margin-top: 20px;
-    min-height: 30px;
-    font-weight: 600;
-}
-
-.master-next {
-    display: block;
-    margin: 20px auto 0;
-    border: none;
-    background: #8c5a46;
-    color: white;
-    padding: 12px 26px;
-    border-radius: 30px;
-    cursor: pointer;
-    font-weight: 700;
-}
-
-.master-next:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-}
-
-.master-error {
-    background: #fff0ee;
-    border: 2px solid #d9786d;
-    color: #8c4038;
-    padding: 20px;
-    border-radius: 15px;
-    text-align: center;
+.final-card .question-box {
+    margin-top:20px;
 }
 
 .final-score {
-    text-align: center;
-    font-size: 2rem;
-    color: #754d3b;
-    margin: 20px 0;
+    font-size:36px;
+    font-weight:bold;
+    color:#b8865c;
+    margin-top:10px;
 }
 
-.score-message {
-    text-align: center;
+.final-progress-bar {
+    width:100%;
+    height:8px;
+    background:#f0e4d5;
+    border-radius:10px;
+    overflow:hidden;
+    margin:15px 0;
 }
 
-/* ========================================================
-   RESPONSIVE
-======================================================== */
-
-@media (max-width: 600px) {
-
-    .lesson-header h1 {
-        font-size: 1.9rem;
-    }
-
-    .reading-text {
-        font-size: 1.05rem;
-    }
-
-    .card {
-        padding: 18px;
-    }
-
-    .master-card {
-        padding: 20px;
-    }
+.final-progress-fill {
+    height:100%;
+    width:0%;
+    background:#b8865c;
+    transition:.3s;
 }
-</style></head><body><!-- ========================================================
-     HEADER
-======================================================== --><header class="lesson-header"><div class="lesson-badge">
-    Lesson 17
-</div>
 
-<h1>5W + 1H & Question Words</h1>
+.unlock {
+    background:#fff8ef;
+    padding:15px;
+    border-radius:15px;
+    border:1.5px solid #d7b89c;
+    margin-top:15px;
+}
 
-<p>
-    Learn how to ask for information using 誰、什麼、哪裡、什麼時候、
-    為什麼、怎麼 and more.
-</p>
+.final-error {
+    background:#fff1f1;
+    color:#9b2226;
+    border:1.5px solid #e5a5a5;
+    padding:15px;
+    border-radius:15px;
+    margin-top:15px;
+    display:none;
+}
 
-</header><main class="lesson-container"><!-- ========================================================
-     ① READING
-======================================================== --><section class="section"><div class="section-title">
-    <h2>① Reading — 我的朋友</h2>
-    <p>Read the passage and find important information.</p>
-</div>
 
-<div class="card reading-card">
+/* =====================================================
+   MOBILE
+===================================================== */
 
-    <div class="reading-text">
+@media(max-width:700px){
 
-        <div class="reading-line">
-            我有一個朋友。
-        </div>
+    .lesson-card,
+    .grammar-card,
+    .game-card,
+    .writing-card,
+    .final-card {
+        padding:18px;
+        margin:15px;
+    }
 
-        <div class="reading-line">
-            她叫小美。
-        </div>
+    .lesson-title h1 {
+        font-size:23px;
+    }
 
-        <div class="reading-line">
-            她是老師。
-        </div>
+    .word-btn {
+        padding:8px 12px;
+        font-size:16px;
+    }
 
-        <div class="reading-line">
-            她住在台北。
-        </div>
+    .game-buttons {
+        flex-wrap:wrap;
+    }
 
-        <div class="reading-line">
-            她每天早上七點去學校。
-        </div>
+    .writing-mode-buttons {
+        flex-wrap:wrap;
+    }
 
-        <div class="reading-line">
-            她坐公車去公司。
-            <span class="pinyin">zuò gōngchē</span>
-        </div>
+    .mode-btn {
+        min-width:45%;
+    }
 
-        <div class="reading-line">
-            她喜歡喝咖啡。
-            <span class="pinyin">kāfēi</span>
-        </div>
+    .reading-content {
+        font-size:17px;
+        line-height:2.7;
+        padding:30px 14px 18px;
+    }
 
-        <div class="reading-line">
-            因為她喜歡咖啡，所以她常常去咖啡店。
-            <span class="pinyin">yīnwèi kāfēi, suǒyǐ chángcháng qù kāfēidiàn</span>
-        </div>
+}
 
-        <div class="reading-line">
-            她有幾個朋友？
-        </div>
+</style>
+</head>
 
-        <div class="reading-line">
-            她有多少個朋友？
-        </div>
+<body>
 
-        <div class="reading-line">
-            哪一個朋友是老師？
-        </div>
+<div class="app-container">
 
-    </div>
+<div id="sidebar-container"></div>
 
-    <button class="audio-btn" onclick="speakReading()">
-        🔊 Listen to Reading
-    </button>
+<main class="main-content">
 
-</div>
 
-</section><!-- ========================================================
-     ② LET'S FIND THE INFORMATION
-======================================================== --><section class="section"><div class="section-title">
-    <h2>② Let's Find the Information 🔎</h2>
-    <p>Use question words to find information in the reading.</p>
-</div>
+<!-- =====================================================
+     TITLE
+===================================================== -->
 
-<div class="question-info">
+<div class="lesson-title">
 
-    <!-- WHO -->
+    <span class="badge">LESSON 17 • 5W + 1H & DAILY LIFE</span>
 
-    <div class="info-box">
-
-        <div class="question-word">
-            👤 誰？— Who?
-        </div>
-
-        <p>
-            誰叫小美？
-        </p>
-
-        <p>
-            Who is named Xiaomei?
-        </p>
-
-        <div class="answer">
-            → 她。
-        </div>
-
-        <p>
-            誰？= Who?
-        </p>
-
-        <strong>Example:</strong>
-
-        <p>
-            誰是老師？
-        </p>
-
-        <div class="answer">
-            → 小美是老師。
-        </div>
-
-    </div>
-
-
-    <!-- WHAT -->
-
-    <div class="info-box">
-
-        <div class="question-word">
-            📦 什麼？— What?
-        </div>
-
-        <p>
-            她喜歡喝什麼？
-        </p>
-
-        <p>
-            What does she like to drink?
-        </p>
-
-        <div class="answer">
-            → 咖啡。
-        </div>
-
-        <p>
-            什麼？= What?
-        </p>
-
-        <strong>Example:</strong>
-
-        <p>
-            你喜歡吃什麼？
-        </p>
-
-        <div class="answer">
-            → 我喜歡吃麵包。
-        </div>
-
-    </div>
-
-
-    <!-- WHERE -->
-
-    <div class="info-box">
-
-        <div class="question-word">
-            📍 哪裡？— Where?
-        </div>
-
-        <p>
-            她住在哪裡？
-        </p>
-
-        <p>
-            Where does she live?
-        </p>
-
-        <div class="answer">
-            → 台北。
-        </div>
-
-        <p>
-            哪裡？= Where?
-        </p>
-
-        <strong>Example:</strong>
-
-        <p>
-            你住在哪裡？
-        </p>
-
-        <div class="answer">
-            → 我住在台北。
-        </div>
-
-    </div>
-
-
-    <!-- WHEN -->
-
-    <div class="info-box">
-
-        <div class="question-word">
-            🕐 什麼時候？— When?
-        </div>
-
-        <p>
-            她什麼時候去學校？
-        </p>
-
-        <p>
-            When does she go to school?
-        </p>
-
-        <div class="answer">
-            → 每天早上七點。
-        </div>
-
-        <p>
-            什麼時候？= When?
-        </p>
-
-        <strong>Example:</strong>
-
-        <p>
-            你什麼時候去學校？
-        </p>
-
-        <div class="answer">
-            → 我早上八點去學校。
-        </div>
-
-    </div>
-
-
-    <!-- WHY -->
-
-    <div class="info-box">
-
-        <div class="question-word">
-            ❓ 為什麼？— Why?
-        </div>
-
-        <p>
-            為什麼她常常去咖啡店？
-        </p>
-
-        <p>
-            Why does she often go to the coffee shop?
-        </p>
-
-        <div class="answer">
-            → 因為她喜歡咖啡。
-        </div>
-
-        <p>
-            為什麼？= Why?
-        </p>
-
-        <strong>Example:</strong>
-
-        <p>
-            為什麼你喝咖啡？
-        </p>
-
-        <div class="answer">
-            → 因為我喜歡咖啡。
-        </div>
-
-    </div>
-
-
-    <!-- HOW -->
-
-    <div class="info-box">
-
-        <div class="question-word">
-            🚌 怎麼？— How?
-        </div>
-
-        <p>
-            她怎麼去公司？
-        </p>
-
-        <p>
-            How does she go to the company?
-        </p>
-
-        <div class="answer">
-            → 她坐公車去公司。
-        </div>
-
-        <p>
-            怎麼？= How? / In what way?
-        </p>
-
-        <strong>Example:</strong>
-
-        <p>
-            你怎麼去學校？
-        </p>
-
-        <div class="answer">
-            → 我坐公車去學校。
-        </div>
-
-    </div>
-
-</div>
-
-</section><!-- ========================================================
-     ③ 5W + 1H
-======================================================== --><section class="section"><div class="section-title">
-    <h2>③ 5W + 1H 🧠</h2>
-    <p>These question words help us find information.</p>
-</div>
-
-<div class="card table-wrapper">
-
-    <table class="w-question-table">
-
-        <thead>
-            <tr>
-                <th>English</th>
-                <th>Mandarin</th>
-                <th>Meaning</th>
-            </tr>
-        </thead>
-
-        <tbody>
-
-            <tr>
-                <td>Who</td>
-                <td>誰？</td>
-                <td>Siapa?</td>
-            </tr>
-
-            <tr>
-                <td>What</td>
-                <td>什麼？</td>
-                <td>Apa?</td>
-            </tr>
-
-            <tr>
-                <td>Where</td>
-                <td>哪裡？</td>
-                <td>Di mana?</td>
-            </tr>
-
-            <tr>
-                <td>When</td>
-                <td>什麼時候？</td>
-                <td>Kapan?</td>
-            </tr>
-
-            <tr>
-                <td>Why</td>
-                <td>為什麼？</td>
-                <td>Kenapa?</td>
-            </tr>
-
-            <tr>
-                <td>How</td>
-                <td>怎麼？</td>
-                <td>Bagaimana?</td>
-            </tr>
-
-        </tbody>
-
-    </table>
-
-</div>
-
-</section><!-- ========================================================
-     ④ EXTRA QUESTION PATTERNS
-======================================================== --><section class="section"><div class="section-title">
-    <h2>④ More Question Patterns</h2>
-    <p>Learn four useful question patterns.</p>
-</div>
-
-<div class="grammar-grid">
-
-
-    <!-- 怎麼辦 -->
-
-    <div class="card">
-
-        <h3>🆘 怎麼辦？— What should I do?</h3>
-
-        <div class="pattern">
-            怎麼辦？
-        </div>
-
-        <p>
-            Use <strong>怎麼辦</strong> when asking what to do about a problem or situation.
-        </p>
-
-        <div class="example">
-            下雨了，怎麼辦？
-            <br>
-            → It's raining. What should we do?
-        </div>
-
-        <div class="example">
-            我沒有錢，怎麼辦？
-            <br>
-            → I don't have money. What should I do?
-        </div>
-
-    </div>
-
-
-    <!-- 怎麼樣 -->
-
-    <div class="card">
-
-        <h3>💭 怎麼樣？— How is it? / What do you think?</h3>
-
-        <div class="pattern">
-            ……怎麼樣？
-        </div>
-
-        <p>
-            Use <strong>怎麼樣</strong> to ask about an opinion, condition, or experience.
-        </p>
-
-        <div class="example">
-            這家咖啡店怎麼樣？
-            <br>
-            → How is this coffee shop?
-        </div>
-
-        <div class="example">
-            今天怎麼樣？
-            <br>
-            → How is today? / How are things today?
-        </div>
-
-    </div>
-
-
-    <!-- 幾 -->
-
-    <div class="card">
-
-        <h3>🔢 幾？— How many?</h3>
-
-        <div class="pattern">
-            幾 + Measure Word + Noun
-        </div>
-
-        <p>
-            Use <strong>幾</strong> when asking about a small or unknown number.
-        </p>
-
-        <div class="example">
-            你有幾個朋友？
-            <br>
-            → How many friends do you have?
-        </div>
-
-        <div class="example">
-            現在幾點？
-            <br>
-            → What time is it?
-        </div>
-
-    </div>
-
-
-    <!-- 多 -->
-
-    <div class="card">
-
-        <h3>📏 多 + Adjective — How ...?</h3>
-
-        <div class="pattern">
-            多 + Adjective
-        </div>
-
-        <p>
-            Use <strong>多</strong> before an adjective to ask about degree or extent.
-        </p>
-
-        <div class="example">
-            台北多大？
-            <br>
-            → How big is Taipei?
-        </div>
-
-        <div class="example">
-            你多高？
-            <br>
-            → How tall are you?
-        </div>
-
-        <div class="example">
-            這家咖啡店多遠？
-            <br>
-            → How far is this coffee shop?
-        </div>
-
-    </div>
-
-
-    <!-- 哪一個 -->
-
-    <div class="card">
-
-        <h3>👉 哪一個？— Which one?</h3>
-
-        <div class="pattern">
-            哪一個 + Noun？
-        </div>
-
-        <p>
-            Use <strong>哪一個</strong> when choosing one item from several options.
-        </p>
-
-        <div class="example">
-            哪一個是小美？
-            <br>
-            → Which one is Xiaomei?
-        </div>
-
-        <div class="example">
-            你喜歡哪一個？
-            <br>
-            → Which one do you like?
-        </div>
-
-    </div>
-
-
-    <!-- 多少 -->
-
-    <div class="card">
-
-        <h3>🔢 多少？— How much / How many?</h3>
-
-        <div class="pattern">
-            多少 + Noun？
-        </div>
-
-        <p>
-            <strong>多少</strong> is commonly used when asking about an amount or number.
-        </p>
-
-        <div class="example">
-            你有多少個朋友？
-            <br>
-            → How many friends do you have?
-        </div>
-
-        <div class="example">
-            這杯咖啡多少錢？
-            <br>
-            → How much is this coffee?
-        </div>
-
-    </div>
-
-</div>
-
-</section><!-- ========================================================
-     ⑤ VOCABULARY
-======================================================== --><section class="section"><div class="section-title">
-    <h2>⑤ Lesson 17 Vocabulary</h2>
-    <p>Learn the key vocabulary for this lesson.</p>
-</div>
-
-<div class="vocab-grid">
-
-    <div class="vocab-card">
-        <div class="vocab-hanzi">坐</div>
-        <div class="vocab-pinyin">zuò</div>
-        <div class="vocab-meaning">to ride / to take</div>
-    </div>
-
-    <div class="vocab-card">
-        <div class="vocab-hanzi">公車</div>
-        <div class="vocab-pinyin">gōngchē</div>
-        <div class="vocab-meaning">bus</div>
-    </div>
-
-    <div class="vocab-card">
-        <div class="vocab-hanzi">咖啡店</div>
-        <div class="vocab-pinyin">kāfēidiàn</div>
-        <div class="vocab-meaning">coffee shop</div>
-    </div>
-
-    <div class="vocab-card">
-        <div class="vocab-hanzi">誰</div>
-        <div class="vocab-pinyin">shéi</div>
-        <div class="vocab-meaning">who</div>
-    </div>
-
-    <div class="vocab-card">
-        <div class="vocab-hanzi">為什麼</div>
-        <div class="vocab-pinyin">wèishéme</div>
-        <div class="vocab-meaning">why</div>
-    </div>
-
-    <div class="vocab-card">
-        <div class="vocab-hanzi">怎麼</div>
-        <div class="vocab-pinyin">zěnme</div>
-        <div class="vocab-meaning">how</div>
-    </div>
-
-    <div class="vocab-card">
-        <div class="vocab-hanzi">怎麼辦</div>
-        <div class="vocab-pinyin">zěnme bàn</div>
-        <div class="vocab-meaning">what should I do?</div>
-    </div>
-
-    <div class="vocab-card">
-        <div class="vocab-hanzi">怎麼樣</div>
-        <div class="vocab-pinyin">zěnmeyàng</div>
-        <div class="vocab-meaning">how is it? / what do you think?</div>
-    </div>
-
-    <div class="vocab-card">
-        <div class="vocab-hanzi">哪一個</div>
-        <div class="vocab-pinyin">nǎ yí ge</div>
-        <div class="vocab-meaning">which one</div>
-    </div>
-
-</div>
-
-</section><!-- ========================================================
-     GAME 1 — QUESTION WORD MATCH
-======================================================== --><section class="section"><div class="section-title">
-    <h2>⑥ Game 1 — Find the Question Word 🎯</h2>
-    <p>Choose the correct Mandarin question word.</p>
-</div>
-
-<div class="card game-card">
-
-    <div class="game-question">
-        "Who?" = ?
-    </div>
-
-    <div class="game-options">
-
-        <button class="game-option"
-            onclick="gameAnswer(this, true, 'game1-feedback')">
-            誰
-        </button>
-
-        <button class="game-option"
-            onclick="gameAnswer(this, false, 'game1-feedback')">
-            怎麼
-        </button>
-
-        <button class="game-option"
-            onclick="gameAnswer(this, false, 'game1-feedback')">
-            哪一個
-        </button>
-
-        <button class="game-option"
-            onclick="gameAnswer(this, false, 'game1-feedback')">
-            為什麼
-        </button>
-
-    </div>
-
-    <div id="game1-feedback" class="game-feedback"></div>
-
-</div>
-
-
-<div class="card game-card">
-
-    <div class="game-question">
-        "How?" = ?
-    </div>
-
-    <div class="game-options">
-
-        <button class="game-option"
-            onclick="gameAnswer(this, false, 'game1b-feedback')">
-            誰
-        </button>
-
-        <button class="game-option"
-            onclick="gameAnswer(this, true, 'game1b-feedback')">
-            怎麼
-        </button>
-
-        <button class="game-option"
-            onclick="gameAnswer(this, false, 'game1b-feedback')">
-            為什麼
-        </button>
-
-        <button class="game-option"
-            onclick="gameAnswer(this, false, 'game1b-feedback')">
-            哪一個
-        </button>
-
-    </div>
-
-    <div id="game1b-feedback" class="game-feedback"></div>
-
-</div>
-
-</section><!-- ========================================================
-     GAME 2 — READING DETECTIVE
-======================================================== --><section class="section"><div class="section-title">
-    <h2>⑦ Game 2 — Reading Detective 🔎</h2>
-    <p>Answer questions using the reading passage.</p>
-</div>
-
-<div class="card game-card">
-
-    <div class="game-question">
-        小美怎麼去公司？
-    </div>
-
-    <div class="game-options">
-
-        <button class="game-option"
-            onclick="gameAnswer(this, true, 'game2-feedback')">
-            她坐公車去公司。
-        </button>
-
-        <button class="game-option"
-            onclick="gameAnswer(this, false, 'game2-feedback')">
-            她走路去公司。
-        </button>
-
-        <button class="game-option"
-            onclick="gameAnswer(this, false, 'game2-feedback')">
-            她坐火車去公司。
-        </button>
-
-        <button class="game-option"
-            onclick="gameAnswer(this, false, 'game2-feedback')">
-            她坐計程車去公司。
-        </button>
-
-    </div>
-
-    <div id="game2-feedback" class="game-feedback"></div>
-
-</div>
-
-
-<div class="card game-card">
-
-    <div class="game-question">
-        為什麼小美常常去咖啡店？
-    </div>
-
-    <div class="game-options">
-
-        <button class="game-option"
-            onclick="gameAnswer(this, false, 'game2b-feedback')">
-            因為她喜歡公車。
-        </button>
-
-        <button class="game-option"
-            onclick="gameAnswer(this, true, 'game2b-feedback')">
-            因為她喜歡咖啡。
-        </button>
-
-        <button class="game-option"
-            onclick="gameAnswer(this, false, 'game2b-feedback')">
-            因為她是學生。
-        </button>
-
-        <button class="game-option"
-            onclick="gameAnswer(this, false, 'game2b-feedback')">
-            因為她住在台中。
-        </button>
-
-    </div>
-
-    <div id="game2b-feedback" class="game-feedback"></div>
-
-</div>
-
-</section><!-- ========================================================
-     GAME 3 — COMPLETE THE QUESTION
-======================================================== --><section class="section"><div class="section-title">
-    <h2>⑧ Game 3 — Complete the Question 🧩</h2>
-    <p>Choose the correct word to complete each question.</p>
-</div>
-
-
-<div class="card game-card">
-
-    <div class="game-question">
-        你喜歡喝 ______？
-    </div>
-
-    <div class="game-options">
-
-        <button class="game-option"
-            onclick="gameAnswer(this, true, 'game3-feedback')">
-            什麼
-        </button>
-
-        <button class="game-option"
-            onclick="gameAnswer(this, false, 'game3-feedback')">
-            誰
-        </button>
-
-        <button class="game-option"
-            onclick="gameAnswer(this, false, 'game3-feedback')">
-            哪裡
-        </button>
-
-        <button class="game-option"
-            onclick="gameAnswer(this, false, 'game3-feedback')">
-            怎麼辦
-        </button>
-
-    </div>
-
-    <div id="game3-feedback" class="game-feedback"></div>
-
-</div>
-
-
-<div class="card game-card">
-
-    <div class="game-question">
-        這家咖啡店 ______？
-    </div>
-
-    <div class="game-options">
-
-        <button class="game-option"
-            onclick="gameAnswer(this, false, 'game3b-feedback')">
-            誰
-        </button>
-
-        <button class="game-option"
-            onclick="gameAnswer(this, false, 'game3b-feedback')">
-            為什麼
-        </button>
-
-        <button class="game-option"
-            onclick="gameAnswer(this, true, 'game3b-feedback')">
-            怎麼樣
-        </button>
-
-        <button class="game-option"
-            onclick="gameAnswer(this, false, 'game3b-feedback')">
-            哪裡
-        </button>
-
-    </div>
-
-    <div id="game3b-feedback" class="game-feedback"></div>
-
-</div>
-
-
-<div class="card game-card">
-
-    <div class="game-question">
-        你有 ______ 個朋友？
-    </div>
-
-    <div class="game-options">
-
-        <button class="game-option"
-            onclick="gameAnswer(this, false, 'game3c-feedback')">
-            誰
-        </button>
-
-        <button class="game-option"
-            onclick="gameAnswer(this, true, 'game3c-feedback')">
-            幾
-        </button>
-
-        <button class="game-option"
-            onclick="gameAnswer(this, false, 'game3c-feedback')">
-            怎麼
-        </button>
-
-        <button class="game-option"
-            onclick="gameAnswer(this, false, 'game3c-feedback')">
-            哪裡
-        </button>
-
-    </div>
-
-    <div id="game3c-feedback" class="game-feedback"></div>
-
-</div>
-
-</section><!-- ========================================================
-     SENTENCE WRITING
-======================================================== --><section class="section"><div class="section-title">
-    <h2>⑨ Sentence Writing ✍️</h2>
-    <p>Write your own Mandarin sentences using Lesson 17.</p>
-</div>
-
-<div class="card sentence-box">
-
-    <div class="sentence-prompt">
-        <strong>1.</strong>
-        Write a sentence using <strong>坐</strong>.
-        <br>
-        Example idea: How do you go to school?
-    </div>
-
-    <textarea
-        class="sentence-input"
-        placeholder="Write your Mandarin sentence here..."></textarea>
-
-    <div class="sentence-prompt">
-        <strong>2.</strong>
-        Write a question using <strong>誰</strong>.
-    </div>
-
-    <textarea
-        class="sentence-input"
-        placeholder="Write your Mandarin sentence here..."></textarea>
-
-    <div class="sentence-prompt">
-        <strong>3.</strong>
-        Write a question using <strong>為什麼</strong>.
-    </div>
-
-    <textarea
-        class="sentence-input"
-        placeholder="Write your Mandarin sentence here..."></textarea>
-
-    <div class="sentence-prompt">
-        <strong>4.</strong>
-        Write a question using <strong>怎麼</strong>.
-    </div>
-
-    <textarea
-        class="sentence-input"
-        placeholder="Write your Mandarin sentence here..."></textarea>
-
-    <div class="sentence-prompt">
-        <strong>5.</strong>
-        Write a question using <strong>怎麼辦</strong>.
-    </div>
-
-    <textarea
-        class="sentence-input"
-        placeholder="Write your Mandarin sentence here..."></textarea>
-
-    <div class="sentence-prompt">
-        <strong>6.</strong>
-        Ask someone's opinion using <strong>怎麼樣</strong>.
-    </div>
-
-    <textarea
-        class="sentence-input"
-        placeholder="Write your Mandarin sentence here..."></textarea>
-
-    <div class="sentence-prompt">
-        <strong>7.</strong>
-        Ask someone to choose using <strong>哪一個</strong>.
-    </div>
-
-    <textarea
-        class="sentence-input"
-        placeholder="Write your Mandarin sentence here..."></textarea>
-
-    <button class="check-btn" onclick="showWritingMessage()">
-        ✓ Finish Writing
-    </button>
-
-    <div id="writing-feedback" class="writing-feedback"></div>
-
-</div>
-
-</section><!-- ========================================================
-     HANZI WRITING PRACTICE
-======================================================== --><section class="section"><div class="section-title">
-    <h2>⑩ Hanzi Writing Practice ✍️</h2>
-    <p>Practice every Lesson 17 vocabulary character.</p>
-</div>
-
-<div class="hanzi-grid">
-
-
-    <div class="hanzi-card">
-        <div class="hanzi-character">坐</div>
-        <div class="writer-box" id="writer-坐"></div>
-        <button class="check-btn" onclick="animateCharacter('坐')">
-            ▶ Show Stroke Order
-        </button>
-    </div>
-
-
-    <div class="hanzi-card">
-        <div class="hanzi-character">公</div>
-        <div class="writer-box" id="writer-公"></div>
-        <button class="check-btn" onclick="animateCharacter('公')">
-            ▶ Show Stroke Order
-        </button>
-    </div>
-
-
-    <div class="hanzi-card">
-        <div class="hanzi-character">車</div>
-        <div class="writer-box" id="writer-車"></div>
-        <button class="check-btn" onclick="animateCharacter('車')">
-            ▶ Show Stroke Order
-        </button>
-    </div>
-
-
-    <div class="hanzi-card">
-        <div class="hanzi-character">咖</div>
-        <div class="writer-box" id="writer-咖"></div>
-        <button class="check-btn" onclick="animateCharacter('咖')">
-            ▶ Show Stroke Order
-        </button>
-    </div>
-
-
-    <div class="hanzi-card">
-        <div class="hanzi-character">啡</div>
-        <div class="writer-box" id="writer-啡"></div>
-        <button class="check-btn" onclick="animateCharacter('啡')">
-            ▶ Show Stroke Order
-        </button>
-    </div>
-
-
-    <div class="hanzi-card">
-        <div class="hanzi-character">店</div>
-        <div class="writer-box" id="writer-店"></div>
-        <button class="check-btn" onclick="animateCharacter('店')">
-            ▶ Show Stroke Order
-        </button>
-    </div>
-
-
-    <div class="hanzi-card">
-        <div class="hanzi-character">誰</div>
-        <div class="writer-box" id="writer-誰"></div>
-        <button class="check-btn" onclick="animateCharacter('誰')">
-            ▶ Show Stroke Order
-        </button>
-    </div>
-
-
-    <div class="hanzi-card">
-        <div class="hanzi-character">為</div>
-        <div class="writer-box" id="writer-為"></div>
-        <button class="check-btn" onclick="animateCharacter('為')">
-            ▶ Show Stroke Order
-        </button>
-    </div>
-
-
-    <div class="hanzi-card">
-        <div class="hanzi-character">什</div>
-        <div class="writer-box" id="writer-什"></div>
-        <button class="check-btn" onclick="animateCharacter('什')">
-            ▶ Show Stroke Order
-        </button>
-    </div>
-
-
-    <div class="hanzi-card">
-        <div class="hanzi-character">麼</div>
-        <div class="writer-box" id="writer-麼"></div>
-        <button class="check-btn" onclick="animateCharacter('麼')">
-            ▶ Show Stroke Order
-        </button>
-    </div>
-
-
-    <div class="hanzi-card">
-        <div class="hanzi-character">怎</div>
-        <div class="writer-box" id="writer-怎"></div>
-        <button class="check-btn" onclick="animateCharacter('怎')">
-            ▶ Show Stroke Order
-        </button>
-    </div>
-
-
-    <div class="hanzi-card">
-        <div class="hanzi-character">麼</div>
-        <div class="writer-box" id="writer-怎麼"></div>
-        <button class="check-btn" onclick="animateCharacter('怎麼')">
-            ▶ Show Stroke Order
-        </button>
-    </div>
-
-
-    <div class="hanzi-card">
-        <div class="hanzi-character">辦</div>
-        <div class="writer-box" id="writer-辦"></div>
-        <button class="check-btn" onclick="animateCharacter('辦')">
-            ▶ Show Stroke Order
-        </button>
-    </div>
-
-
-    <div class="hanzi-card">
-        <div class="hanzi-character">樣</div>
-        <div class="writer-box" id="writer-樣"></div>
-        <button class="check-btn" onclick="animateCharacter('樣')">
-            ▶ Show Stroke Order
-        </button>
-    </div>
-
-
-    <div class="hanzi-card">
-        <div class="hanzi-character">哪</div>
-        <div class="writer-box" id="writer-哪"></div>
-        <button class="check-btn" onclick="animateCharacter('哪')">
-            ▶ Show Stroke Order
-        </button>
-    </div>
-
-
-    <div class="hanzi-card">
-        <div class="hanzi-character">一</div>
-        <div class="writer-box" id="writer-一"></div>
-        <button class="check-btn" onclick="animateCharacter('一')">
-            ▶ Show Stroke Order
-        </button>
-    </div>
-
-</div>
-
-</section><!-- ========================================================
-     GRAMMAR MASTER
-======================================================== --><section class="section final-section"><div class="section-title">
-
-    <h2>⑪ Grammar Master — Final Challenge 🏆</h2>
+    <h1>My Friend Xiaomei</h1>
 
     <p>
-        10 questions: 5 Lesson 17 questions + 5 random review questions
-        from Lessons 1–16.
+        Learn how to ask detailed questions using 5W+1H, 怎麼辦, 怎麼樣, 多, 幾, and 哪一個.
     </p>
 
 </div>
 
-<div class="master-container">
 
-    <div id="grammar-master">
+<!-- =====================================================
+     READING
+===================================================== -->
 
-        <div class="master-card">
+<div class="lesson-card">
 
-            <div id="master-loading" class="master-counter">
-                Preparing Grammar Master...
+    <h2>📖 Reading — 我的朋友</h2>
+
+    <p>
+        Read the short story about Xiaomei. Pinyin is shown for vocabulary items.
+    </p>
+
+    <div style="display:flex;align-items:center;margin-top:20px;">
+
+        <h3 style="margin-top:0;">Reading Text</h3>
+
+        <button class="sound-btn" onclick="playReadingAudio()">
+            <i class="fas fa-volume-up"></i>
+        </button>
+
+    </div>
+
+    <div class="reading-content">
+
+        我 有 一 個 朋 友。
+        <br>
+        她 叫 
+
+        <span class="char-group">
+            <span class="pinyin-sub">xiǎoměi</span>
+            <span class="hanzi-main">小美</span>
+        </span>。
+
+        <br>
+        她 是 老 師。
+        <br>
+        她 住 在 
+
+        <span class="char-group">
+            <span class="pinyin-sub">táiběi</span>
+            <span class="hanzi-main">台北</span>
+        </span>。
+
+        <br>
+        她 每 天 早 上 七 點 去 學 校。
+        <br>
+        她 
+
+        <span class="char-group">
+            <span class="pinyin-sub">zuò</span>
+            <span class="hanzi-main">坐</span>
+        </span>
+
+        <span class="char-group">
+            <span class="pinyin-sub">gōngchē</span>
+            <span class="hanzi-main">公車</span>
+        </span>
+
+        去 公 司。
+        <br>
+        她 喜 歡 喝 
+
+        <span class="char-group">
+            <span class="pinyin-sub">kāfēi</span>
+            <span class="hanzi-main">咖啡</span>
+        </span>。
+
+        <br>
+        因 為 她 喜 歡 咖啡，
+        所 以 她 
+
+        <span class="char-group">
+            <span class="pinyin-sub">chángcháng</span>
+            <span class="hanzi-main">常常</span>
+        </span>
+
+        去 
+
+        <span class="char-group">
+            <span class="pinyin-sub">kāfēidiàn</span>
+            <span class="hanzi-main">咖啡店</span>
+        </span>。
+
+    </div>
+
+    <div class="reading-note">
+
+        <strong>English Meaning:</strong><br>
+        I have a friend. Her name is Xiaomei. She is a teacher. She lives in Taipei. Every day at 7:00 AM she goes to school. She takes a bus to the company. She likes to drink coffee. Because she likes coffee, she often goes to the coffee shop.
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     LET'S FIND THE INFORMATION
+===================================================== -->
+
+<div class="lesson-card">
+
+    <h2>🔍 Let's Find the Information</h2>
+
+    <p>Based on the reading text, let's explore questions and answers using 5W + 1H:</p>
+
+    <div class="grammar-explanation" style="margin-top:15px;">
+        <p>👤 <strong>誰？— Who?</strong><br>
+        誰叫小美？ → 她。<br>
+        <em>Contoh:</em> 誰是老師？ → 小美是老師。</p>
+
+        <p>📦 <strong>什麼？— What?</strong><br>
+        她喜歡喝什麼？ → 咖啡。<br>
+        <em>Contoh:</em> 你喜歡吃什麼？ → 我喜歡吃麵包。</p>
+
+        <p>📍 <strong>哪裡？— Where?</strong><br>
+        她住在哪裡？ → 台北。<br>
+        <em>Contoh:</em> 你住在哪裡？ → 我住在台北。</p>
+
+        <p>🕐 <strong>什麼時候？— When?</strong><br>
+        她什麼時候去學校？ → 每天早上七點。<br>
+        <em>Contoh:</em> 你什麼時候去學校？ → 我早上八點去學校。</p>
+
+        <p>❓ <strong>為什麼？— Why?</strong><br>
+        為什麼她常常去咖啡店？ → 因為她想喝咖啡。<br>
+        <em>Contoh:</em> 為什麼你喝咖啡？ → 因為我喜歡咖啡。</p>
+
+        <p>🚌 <strong>怎麼？— How?</strong><br>
+        她怎麼去公司？ → 她坐公車去公司。<br>
+        <em>Contoh:</em> 你怎麼去學校？ → 我坐公車去學校。</p>
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     GRAMMAR CAROUSEL
+===================================================== -->
+
+<div class="grammar-card">
+
+    <h2>🧠 Grammar Patterns & 5W + 1H</h2>
+
+    <div class="grammar-slider-container">
+
+        <div class="grammar-slide active-slide" id="slide-1">
+            <h3>1. 誰 (Shuí) — Who</h3>
+            <div class="pattern-display">
+                <div class="pattern-code">誰 + Verb / Noun?</div>
             </div>
-
-            <div id="master-content" class="hidden">
-
-                <div id="master-counter"
-                     class="master-counter">
-                </div>
-
-                <div id="master-question"
-                     class="master-question">
-                </div>
-
-                <div id="master-options"
-                     class="master-options">
-                </div>
-
-                <div id="master-feedback"
-                     class="master-feedback">
-                </div>
-
-                <button id="master-next"
-                        class="master-next"
-                        disabled>
-                    Next Question
-                </button>
-
+            <div class="grammar-explanation">
+                <p>Used to ask about persons.</p>
             </div>
-
-            <div id="master-error"
-                 class="master-error hidden">
+            <div class="example-sentence">
+                <div class="example-hanzi">誰是老師？</div>
+                <div>Who is the teacher?</div>
             </div>
+        </div>
 
+        <div class="grammar-slide" id="slide-2">
+            <h3>2. 什麼 (Shénme) — What</h3>
+            <div class="pattern-display">
+                <div class="pattern-code">Verb + 什麼? / 什麼 + Noun?</div>
+            </div>
+            <div class="grammar-explanation">
+                <p>Used to ask about objects or things.</p>
+            </div>
+            <div class="example-sentence">
+                <div class="example-hanzi">你喜歡喝什麼？</div>
+                <div>What do you like to drink?</div>
+            </div>
+        </div>
+
+        <div class="grammar-slide" id="slide-3">
+            <h3>3. 哪裡 (Nǎlǐ) — Where</h3>
+            <div class="pattern-display">
+                <div class="pattern-code">Subject + 住/去 + 在 + 哪裡?</div>
+            </div>
+            <div class="grammar-explanation">
+                <p>Used to inquire about locations.</p>
+            </div>
+            <div class="example-sentence">
+                <div class="example-hanzi">你住在哪裡？</div>
+                <div>Where do you live?</div>
+            </div>
+        </div>
+
+        <div class="grammar-slide" id="slide-4">
+            <h3>4. 什麼時候 (Shénme shíhòu) — When</h3>
+            <div class="pattern-display">
+                <div class="pattern-code">什麼時候 + Verb?</div>
+            </div>
+            <div class="grammar-explanation">
+                <p>Used to inquire about time.</p>
+            </div>
+            <div class="example-sentence">
+                <div class="example-hanzi">你什麼時候去學校？</div>
+                <div>When do you go to school?</div>
+            </div>
+        </div>
+
+        <div class="grammar-slide" id="slide-5">
+            <h3>5. 為什麼 / 因為 (Wèishéme / Yīnwèi) — Why / Because</h3>
+            <div class="pattern-display">
+                <div class="pattern-code">為什麼...？ 因爲...，所以...。</div>
+            </div>
+            <div class="grammar-explanation">
+                <p>Asking for reasons and responding with causes.</p>
+            </div>
+            <div class="example-sentence">
+                <div class="example-hanzi">為什麼你常常去咖啡店？</div>
+                <div>Why do you often go to the coffee shop?</div>
+            </div>
+        </div>
+
+        <div class="grammar-slide" id="slide-6">
+            <h3>6. 怎麼 (Zěnme) — How / By what means</h3>
+            <div class="pattern-display">
+                <div class="pattern-code">怎麼 + Verb?</div>
+            </div>
+            <div class="grammar-explanation">
+                <p>Asking about the manner or method of doing something.</p>
+            </div>
+            <div class="example-sentence">
+                <div class="example-hanzi">你怎麼去公司？</div>
+                <div>How do you go to the company?</div>
+            </div>
+        </div>
+
+        <div class="grammar-slide" id="slide-7">
+            <h3>7. 怎麼辦 (Zěnbàn) — What to do?</h3>
+            <div class="pattern-display">
+                <div class="pattern-code">...，怎麼辦？</div>
+            </div>
+            <div class="grammar-explanation">
+                <p>Used when facing a problem or dilemma and asking for a solution.</p>
+            </div>
+            <div class="example-sentence">
+                <div class="example-hanzi">下雨了，怎麼辦？</div>
+                <div>It's raining, what should we do?</div>
+            </div>
+        </div>
+
+        <div class="grammar-slide" id="slide-8">
+            <h3>8. 怎麼樣 (Zěnyàng) — How about / How is it?</h3>
+            <div class="pattern-display">
+                <div class="pattern-code">Noun + 怎麼樣？</div>
+            </div>
+            <div class="grammar-explanation">
+                <p>Asking for opinions, conditions, or making suggestions.</p>
+            </div>
+            <div class="example-sentence">
+                <div class="example-hanzi">這家咖啡店怎麼樣？</div>
+                <div>How is this coffee shop?</div>
+            </div>
+        </div>
+
+        <div class="grammar-slide" id="slide-9">
+            <h3>9. 多 (Duō) — How (degree/extent)</h3>
+            <div class="pattern-display">
+                <div class="pattern-code">多 + Adjective?</div>
+            </div>
+            <div class="grammar-explanation">
+                <p>Used to ask about degree, height, distance, or intensity.</p>
+            </div>
+            <div class="example-sentence">
+                <div class="example-hanzi">你有多高？</div>
+                <div>How tall are you?</div>
+            </div>
+        </div>
+
+        <div class="grammar-slide" id="slide-10">
+            <h3>10. 幾 (Jǐ) — How many (under 10)</h3>
+            <div class="pattern-display">
+                <div class="pattern-code">幾 + Measure Word + Noun?</div>
+            </div>
+            <div class="grammar-explanation">
+                <p>Asking for quantities generally expected to be less than 10.</p>
+            </div>
+            <div class="example-sentence">
+                <div class="example-hanzi">你有幾個朋友？</div>
+                <div>How many friends do you have?</div>
+            </div>
+        </div>
+
+        <div class="grammar-slide" id="slide-11">
+            <h3>11. 哪一個 (Nǎ yī ge) — Which one</h3>
+            <div class="pattern-display">
+                <div class="pattern-code">哪一個 + Noun?</div>
+            </div>
+            <div class="grammar-explanation">
+                <p>Used to select a specific item out of options.</p>
+            </div>
+            <div class="example-sentence">
+                <div class="example-hanzi">你喜歡哪一個杯子？</div>
+                <div>Which cup do you like?</div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="slider-nav">
+        <button class="slider-btn" onclick="prevSlide()">← Prev</button>
+        <div class="slider-indicators">
+            <span class="indicator active" onclick="currentSlide(1)"></span>
+            <span class="indicator" onclick="currentSlide(2)"></span>
+            <span class="indicator" onclick="currentSlide(3)"></span>
+            <span class="indicator" onclick="currentSlide(4)"></span>
+            <span class="indicator" onclick="currentSlide(5)"></span>
+            <span class="indicator" onclick="currentSlide(6)"></span>
+            <span class="indicator" onclick="currentSlide(7)"></span>
+            <span class="indicator" onclick="currentSlide(8)"></span>
+            <span class="indicator" onclick="currentSlide(9)"></span>
+            <span class="indicator" onclick="currentSlide(10)"></span>
+            <span class="indicator" onclick="currentSlide(11)"></span>
+        </div>
+        <button class="slider-btn" onclick="nextSlide()">Next →</button>
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     VOCABULARY
+===================================================== -->
+
+<div class="lesson-card">
+
+    <h2>📚 Lesson 17 Vocabulary</h2>
+
+    <p>Tap any word to hear its pronunciation in Mandarin.</p>
+
+    <div class="vocab-container">
+
+        <div class="vocab-pill" onclick="playAudio('坐')">
+            <div class="hanzi">坐</div>
+            <div class="pinyin">zuò</div>
+            <div class="meaning">to sit / ride</div>
+        </div>
+
+        <div class="vocab-pill" onclick="playAudio('公車')">
+            <div class="hanzi">公車</div>
+            <div class="pinyin">gōngchē</div>
+            <div class="meaning">bus</div>
+        </div>
+
+        <div class="vocab-pill" onclick="playAudio('咖啡店')">
+            <div class="hanzi">咖啡店</div>
+            <div class="pinyin">kāfēidiàn</div>
+            <div class="meaning">coffee shop</div>
+        </div>
+
+        <div class="vocab-pill" onclick="playAudio('誰')">
+            <div class="hanzi">誰</div>
+            <div class="pinyin">shuí</div>
+            <div class="meaning">who</div>
+        </div>
+
+        <div class="vocab-pill" onclick="playAudio('為什麼')">
+            <div class="hanzi">為什麼</div>
+            <div class="pinyin">wèishéme</div>
+            <div class="meaning">why</div>
+        </div>
+
+        <div class="vocab-pill" onclick="playAudio('怎麼')">
+            <div class="hanzi">怎麼</div>
+            <div class="pinyin">zěnme</div>
+            <div class="meaning">how</div>
+        </div>
+
+        <div class="vocab-pill" onclick="playAudio('怎麼辦')">
+            <div class="hanzi">怎麼辦</div>
+            <div class="pinyin">zěnbàn</div>
+            <div class="meaning">what to do</div>
+        </div>
+
+        <div class="vocab-pill" onclick="playAudio('怎麼樣')">
+            <div class="hanzi">怎麼樣</div>
+            <div class="pinyin">zěnyàng</div>
+            <div class="meaning">how about / how is it</div>
+        </div>
+
+        <div class="vocab-pill" onclick="playAudio('哪一個')">
+            <div class="hanzi">哪一個</div>
+            <div class="pinyin">nǎ yī ge</div>
+            <div class="meaning">which one</div>
         </div>
 
     </div>
 
 </div>
 
-</section></main><!-- ========================================================
-     LESSON.JS
-     
-     IMPORTANT:
-     This file is ONLY used by Grammar Master for
-     reviewQuestions from Lessons 1–16.
 
-     There is NO:
-     const lessonData = allLessonsData[17];
+<!-- =====================================================
+     GAME 1
+===================================================== -->
 
-     Lesson 17 material and questions are directly
-     contained in this HTML.
-======================================================== --><script src="lesson.js"></script><script>
-/* ========================================================
-   LESSON 17 — LOCAL DATA
-======================================================== */
+<div class="game-card">
+
+    <span class="game-number">GAME 1</span>
+
+    <h2>🧩 Question Words Builder (5W + 1H)</h2>
+
+    <p class="game-description">Build sentences using question words like 誰, 什麼, 哪裡, 什麼時候, 為什麼, 怎麼.</p>
+
+    <div class="game-progress">
+        Question <span id="g1Num">1</span> / 5
+    </div>
+
+    <div class="question-box">
+        <div class="question-label">Translate:</div>
+        <div class="question-meaning" id="g1Meaning"></div>
+    </div>
+
+    <div class="answer-area" id="g1Answer">
+        <span class="answer-placeholder">Tap the words below</span>
+    </div>
+
+    <div class="word-bank" id="g1Bank"></div>
+
+    <div class="game-buttons">
+        <button class="check-btn" onclick="checkGame(1)">✓ Check</button>
+        <button class="reset-btn" onclick="resetGame(1)">↻ Reset</button>
+        <button class="listen-btn" onclick="listenCurrent(1)"><i class="fas fa-volume-up"></i></button>
+    </div>
+
+    <div class="feedback" id="g1Feedback"></div>
+
+    <button class="next-game-btn" id="g1Next" onclick="nextGameQuestion(1)">Next →</button>
+
+</div>
+
+
+<!-- =====================================================
+     GAME 2
+===================================================== -->
+
+<div class="game-card">
+
+    <span class="game-number">GAME 2</span>
+
+    <h2>🧩 Advanced Expressions Builder</h2>
+
+    <p class="game-description">Build sentences using 怎麼辦, 怎麼樣, 多, 幾, and 哪一個.</p>
+
+    <div class="game-progress">
+        Question <span id="g2Num">1</span> / 5
+    </div>
+
+    <div class="question-box">
+        <div class="question-label">Translate:</div>
+        <div class="question-meaning" id="g2Meaning"></div>
+    </div>
+
+    <div class="answer-area" id="g2Answer">
+        <span class="answer-placeholder">Tap the words below</span>
+    </div>
+
+    <div class="word-bank" id="g2Bank"></div>
+
+    <div class="game-buttons">
+        <button class="check-btn" onclick="checkGame(2)">✓ Check</button>
+        <button class="reset-btn" onclick="resetGame(2)">↻ Reset</button>
+        <button class="listen-btn" onclick="listenCurrent(2)"><i class="fas fa-volume-up"></i></button>
+    </div>
+
+    <div class="feedback" id="g2Feedback"></div>
+
+    <button class="next-game-btn" id="g2Next" onclick="nextGameQuestion(2)">Next →</button>
+
+</div>
+
+
+<!-- =====================================================
+     GAME 3
+===================================================== -->
+
+<div class="game-card">
+
+    <span class="game-number">GAME 3</span>
+
+    <h2>🧩 Daily Life & Transport Builder</h2>
+
+    <p class="game-description">Build sentences based on Xiaomei's routine and vocabulary.</p>
+
+    <div class="game-progress">
+        Question <span id="g3Num">1</span> / 5
+    </div>
+
+    <div class="question-box">
+        <div class="question-label">Translate:</div>
+        <div class="question-meaning" id="g3Meaning"></div>
+    </div>
+
+    <div class="answer-area" id="g3Answer">
+        <span class="answer-placeholder">Tap the words below</span>
+    </div>
+
+    <div class="word-bank" id="g3Bank"></div>
+
+    <div class="game-buttons">
+        <button class="check-btn" onclick="checkGame(3)">✓ Check</button>
+        <button class="reset-btn" onclick="resetGame(3)">↻ Reset</button>
+        <button class="listen-btn" onclick="listenCurrent(3)"><i class="fas fa-volume-up"></i></button>
+    </div>
+
+    <div class="feedback" id="g3Feedback"></div>
+
+    <button class="next-game-btn" id="g3Next" onclick="nextGameQuestion(3)">Next →</button>
+
+</div>
+
+
+<!-- =====================================================
+     SENTENCE WRITING
+===================================================== -->
+
+<div class="writing-card">
+
+    <h2>📝 Sentence Writing</h2>
+
+    <p>Translate the English prompt into Mandarin using Lesson 17 vocabulary and grammar.</p>
+
+    <div class="sentence-writing">
+        <div class="sentence-prompt" id="sentencePrompt"></div>
+        <div class="sentence-hint">Write the Mandarin sentence in Hanzi.</div>
+        <input type="text" id="sentenceInput" placeholder="Type Hanzi here..." autocomplete="off">
+        <button class="check-writing" onclick="checkSentenceWriting()">Check Answer</button>
+        <div class="feedback" id="sentenceFeedback"></div>
+        <button class="next-game-btn" id="nextSentenceBtn" onclick="nextSentenceWriting()">Next →</button>
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     HANZI WRITING
+===================================================== -->
+
+<div class="writing-card">
+
+    <h2>✍️ Hanzi Writing Practice</h2>
+
+    <p>Practice stroke order for every Lesson 17 vocabulary word character by character.</p>
+
+    <div class="writing-mode-buttons">
+        <button class="mode-btn active" onclick="setWritingMode('quiz',this)">✍️ Quiz</button>
+        <button class="mode-btn" onclick="setWritingMode('animate',this)">👀 Animate</button>
+    </div>
+
+    <div class="writing-info" id="writingInfo">Loading...</div>
+
+    <div class="canvas-wrapper">
+        <div id="target-div"></div>
+    </div>
+
+    <div class="feedback" id="writingFeedback"></div>
+
+    <div class="writing-buttons">
+        <button class="write-btn clear-btn" onclick="resetWritingQuiz()">↻ Retry</button>
+        <button class="write-btn" style="background:#f0f7f4;color:#2d6a4f;" onclick="playCurrentWriting()">
+            <i class="fas fa-volume-up"></i> Listen
+        </button>
+        <button class="write-btn next-write-btn" onclick="nextWritingCharacter()">Next →</button>
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     GRAMMAR MASTER
+===================================================== -->
+
+<div class="final-card">
+
+    <span class="game-number">FINAL CHALLENGE</span>
+
+    <h2>🏆 Grammar Master</h2>
+
+    <p>Test your knowledge with 5 questions from Lesson 17 and 5 random review questions from Lessons 1–16!</p>
+
+    <div class="final-progress-bar">
+        <div class="final-progress-fill" id="finalProgressFill"></div>
+    </div>
+
+    <div class="question-box">
+        <div class="question-label">
+            Question <span id="finalNum">1</span> / 10
+        </div>
+        <div class="question-meaning" id="finalMeaning">Loading Grammar Master...</div>
+    </div>
+
+    <div class="answer-area" id="finalAnswer">
+        <span class="answer-placeholder">Build your answer</span>
+    </div>
+
+    <div class="word-bank" id="finalBank"></div>
+
+    <button class="check-btn" style="width:100%;" onclick="checkFinal()">✓ Check Final Answer</button>
+    <button class="reset-btn" id="finalResetBtn" onclick="resetFinal()" style="width:100%;margin-top:8px;">↻ Reset Answer</button>
+
+    <div class="feedback" id="finalFeedback"></div>
+    <div class="final-score" id="finalScore">0 / 10</div>
+    <div class="final-error" id="finalError"></div>
+
+    <div class="unlock" id="unlockBox" style="display:none;">
+        🎉 <strong>Grammar Master Unlocked!</strong>
+        <p>You completed all 10 Grammar Master questions.</p>
+    </div>
+
+</div>
+
+</main>
+</div>
+
+
+<script>
+
+/* =====================================================
+   AUDIO
+===================================================== */
+
+function playAudio(text){
+    if(!("speechSynthesis" in window)) return;
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = "zh-TW";
+    utterance.rate = 0.82;
+    utterance.pitch = 1;
+    window.speechSynthesis.speak(utterance);
+}
+
+function playReadingAudio(){
+    playAudio("我有一個朋友。她叫小美。她是老師。她住在台北。她每天早上七點去學校。她坐公車去公司。她喜歡喝咖啡。因為她喜歡咖啡，所以她常常去咖啡店。");
+}
+
+
+/* =====================================================
+   GRAMMAR SLIDER
+===================================================== */
+
+let currentSlideIndex = 0;
+const totalSlides = 11;
+
+function showSlide(index){
+    if(index >= totalSlides) currentSlideIndex = 0;
+    else if(index < 0) currentSlideIndex = totalSlides - 1;
+    else currentSlideIndex = index;
+
+    for(let i = 1; i <= totalSlides; i++){
+        const slide = document.getElementById("slide-" + i);
+        if(slide) slide.classList.remove("active-slide");
+    }
+
+    document.querySelectorAll(".indicator").forEach(ind => ind.classList.remove("active"));
+
+    const activeSlide = document.getElementById("slide-" + (currentSlideIndex + 1));
+    if(activeSlide) activeSlide.classList.add("active-slide");
+    
+    const indicators = document.querySelectorAll(".indicator");
+    if(indicators[currentSlideIndex]) indicators[currentSlideIndex].classList.add("active");
+}
+
+function nextSlide(){ showSlide(currentSlideIndex + 1); }
+function prevSlide(){ showSlide(currentSlideIndex - 1); }
+function currentSlide(n){ showSlide(n - 1); }
+
+
+/* =====================================================
+   SHUFFLE
+===================================================== */
+
+function shuffle(array){
+    const result = [...array];
+    for(let i = result.length - 1; i > 0; i--){
+        const j = Math.floor(Math.random() * (i + 1));
+        [result[i], result[j]] = [result[j], result[i]];
+    }
+    return result;
+}
+
+
+/* =====================================================
+   GAME DATA
+===================================================== */
+
+const games = {
+    1: [
+        { meaning:"Who is the teacher?", answer:["誰","是","老師"] },
+        { meaning:"What do you like to drink?", answer:["你","喜歡","喝","什麼"] },
+        { meaning:"Where do you live?", answer:["你","住","在","哪裡"] },
+        { meaning:"When do you go to school?", answer:["你","什麼時候","去","學校"] },
+        { meaning:"Why do you often go to the coffee shop?", answer:["為什麼","你","常常","去","咖啡店"] }
+    ],
+    2: [
+        { meaning:"It's raining, what should we do?", answer:["下雨","了","怎麼辦"] },
+        { meaning:"How is this coffee shop?", answer:["這家","咖啡店","怎麼樣"] },
+        { meaning:"How tall are you?", answer:["你","有","多","高"] },
+        { meaning:"How many friends do you have?", answer:["你","有","幾","個","朋友"] },
+        { meaning:"Which cup do you like?", answer:["你","喜歡","哪一個","杯子"] }
+    ],
+    3: [
+        { meaning:"She takes a bus to the company.", answer:["她","坐","公車","去","公司"] },
+        { meaning:"Because she likes coffee, she goes to the coffee shop.", answer:["因為","她","喜歡","咖啡","所以","去","咖啡店"] },
+        { meaning:"She lives in Taipei.", answer:["她","住","在","台北"] },
+        { meaning:"Every day at seven o'clock she goes to school.", answer:["每天","早上","七點","她","去","學校"] },
+        { meaning:"Her name is Xiaomei.", answer:["她","叫","小美"] }
+    ]
+};
+
+const gameState = {
+    1: { index:0, selected:[], done:false },
+    2: { index:0, selected:[], done:false },
+    3: { index:0, selected:[], done:false }
+};
+
+function loadGame(gameNumber){
+    const state = gameState[gameNumber];
+    const data = games[gameNumber][state.index];
+    state.selected = [];
+    state.done = false;
+
+    document.getElementById("g" + gameNumber + "Num").textContent = state.index + 1;
+    document.getElementById("g" + gameNumber + "Meaning").textContent = data.meaning;
+
+    const answer = document.getElementById("g" + gameNumber + "Answer");
+    answer.innerHTML = '<span class="answer-placeholder">Tap the words below</span>';
+
+    const bank = document.getElementById("g" + gameNumber + "Bank");
+    bank.innerHTML = "";
+
+    shuffle(data.answer).forEach(word => {
+        const button = document.createElement("button");
+        button.className = "word-btn";
+        button.textContent = word;
+        button.onclick = function(){
+            if(this.disabled) return;
+            selectWord(gameNumber, this, word);
+        };
+        bank.appendChild(button);
+    });
+
+    document.getElementById("g" + gameNumber + "Feedback").textContent = "";
+    document.getElementById("g" + gameNumber + "Next").style.display = "none";
+}
+
+function selectWord(gameNumber, button, word){
+    gameState[gameNumber].selected.push(word);
+    button.disabled = true;
+    button.classList.add("selected");
+    playAudio(word);
+    renderSelected(gameNumber);
+}
+
+function renderSelected(gameNumber){
+    const answer = document.getElementById("g" + gameNumber + "Answer");
+    answer.innerHTML = "";
+    gameState[gameNumber].selected.forEach(word => {
+        const span = document.createElement("span");
+        span.className = "selected-word";
+        span.textContent = word;
+        span.onclick = function(){ playAudio(word); };
+        answer.appendChild(span);
+    });
+}
+
+function checkGame(gameNumber){
+    const state = gameState[gameNumber];
+    const correct = games[gameNumber][state.index].answer;
+    const selected = state.selected;
+    const feedback = document.getElementById("g" + gameNumber + "Feedback");
+
+    if(selected.length !== correct.length){
+        feedback.textContent = "⚠️ Complete the sentence first.";
+        feedback.className = "feedback incorrect";
+        return;
+    }
+
+    const isCorrect = selected.every((word, index) => word === correct[index]);
+    if(isCorrect){
+        feedback.textContent = "🎉 Correct!";
+        feedback.className = "feedback correct";
+        state.done = true;
+        playAudio(correct.join(""));
+        document.getElementById("g" + gameNumber + "Next").style.display = "block";
+    } else {
+        feedback.textContent = "❌ Not quite. Check the word order.";
+        feedback.className = "feedback incorrect";
+    }
+}
+
+function resetGame(gameNumber){ loadGame(gameNumber); }
+
+function nextGameQuestion(gameNumber){
+    const state = gameState[gameNumber];
+    if(!state.done) return;
+    state.index++;
+    if(state.index >= games[gameNumber].length) state.index = 0;
+    loadGame(gameNumber);
+}
+
+function listenCurrent(gameNumber){
+    const state = gameState[gameNumber];
+    playAudio(games[gameNumber][state.index].answer.join(""));
+}
+
+
+/* =====================================================
+   SENTENCE WRITING
+===================================================== */
+
+const sentenceQuestions = [
+    { prompt:"Who is the teacher?", answer:"誰是老師" },
+    { prompt:"What do you like to drink?", answer:"你喜歡喝什麼" },
+    { prompt:"Where do you live?", answer:"你住在哪裡" },
+    { prompt:"When do you go to school?", answer:"你什麼時候去學校" },
+    { prompt:"She takes a bus to the company.", answer:"她坐公車去公司" },
+    { prompt:"It's raining, what should we do?", answer:"下雨了怎麼辦" },
+    { prompt:"How is this coffee shop?", answer:"這家咖啡店怎麼樣" },
+    { prompt:"Which one do you like?", answer:"你喜歡哪一個" }
+];
+
+let sentenceIndex = 0;
+
+function loadSentenceWriting(){
+    const q = sentenceQuestions[sentenceIndex];
+    document.getElementById("sentencePrompt").textContent = q.prompt;
+    document.getElementById("sentenceInput").value = "";
+    document.getElementById("sentenceFeedback").textContent = "";
+    document.getElementById("nextSentenceBtn").style.display = "none";
+}
+
+function normalizeChinese(text){
+    return text.trim().replace(/[。，？！、,.!?]/g,"").replace(/\s+/g,"");
+}
+
+function checkSentenceWriting(){
+    const input = normalizeChinese(document.getElementById("sentenceInput").value);
+    const correct = normalizeChinese(sentenceQuestions[sentenceIndex].answer);
+    const feedback = document.getElementById("sentenceFeedback");
+
+    if(input === correct){
+        feedback.textContent = "🎉 Perfect!";
+        feedback.className = "feedback correct";
+        playAudio(correct);
+        document.getElementById("nextSentenceBtn").style.display = "block";
+    } else {
+        feedback.textContent = "❌ Try again. Check the word order and grammar.";
+        feedback.className = "feedback incorrect";
+    }
+}
+
+function nextSentenceWriting(){
+    sentenceIndex++;
+    if(sentenceIndex >= sentenceQuestions.length) sentenceIndex = 0;
+    loadSentenceWriting();
+}
+
+
+/* =====================================================
+   HANZI WRITING
+===================================================== */
 
 const lesson17Vocabulary = [
-    "坐",
-    "公車",
-    "咖啡店",
-    "誰",
-    "為什麼",
-    "怎麼",
-    "怎麼辦",
-    "怎麼樣",
-    "哪一個"
+    ["坐", "zuò", "to sit / ride"],
+    ["公車", "gōngchē", "bus"],
+    ["咖啡店", "kāfēidiàn", "coffee shop"],
+    ["誰", "shuí", "who"],
+    ["為什麼", "wèishéme", "why"],
+    ["怎麼", "zěnme", "how"],
+    ["怎麼辦", "zěnbàn", "what to do"],
+    ["怎麼樣", "zěnyàng", "how about / how is it"],
+    ["哪一個", "nǎ yī ge", "which one"]
 ];
 
+const writingCharacters = [];
+const seenWritingCharacters = new Set();
 
-/* ========================================================
-   READING AUDIO
-======================================================== */
+lesson17Vocabulary.forEach(item => {
+    const word = item[0];
+    const pinyin = item[1];
+    const meaning = item[2];
 
-function speakReading() {
+    [...word].forEach(character => {
+        if(!seenWritingCharacters.has(character)){
+            seenWritingCharacters.add(character);
+            writingCharacters.push({
+                hanzi: character,
+                pinyin: pinyin,
+                meaning: "Character from " + word + " — " + meaning
+            });
+        }
+    });
+});
 
-    const text =
-        "我有一個朋友。" +
-        "她叫小美。" +
-        "她是老師。" +
-        "她住在台北。" +
-        "她每天早上七點去學校。" +
-        "她坐公車去公司。" +
-        "她喜歡喝咖啡。" +
-        "因為她喜歡咖啡，所以她常常去咖啡店。" +
-        "她有幾個朋友？" +
-        "她有多少個朋友？" +
-        "哪一個朋友是老師？";
+let writingIndex = 0;
+let writingMode = "quiz";
+let writer = null;
 
-    if ("speechSynthesis" in window) {
+function initWriter(){
+    const item = writingCharacters[writingIndex];
+    document.getElementById("target-div").innerHTML = "";
+    const info = document.getElementById("writingInfo");
 
-        window.speechSynthesis.cancel();
-
-        const utterance =
-            new SpeechSynthesisUtterance(text);
-
-        utterance.lang = "zh-TW";
-        utterance.rate = 0.82;
-
-        window.speechSynthesis.speak(utterance);
-
+    if(writingMode === "quiz"){
+        info.innerHTML = `Write <strong>${item.hanzi}</strong> (${item.pinyin}) following the correct stroke order!<br><small>${item.meaning}</small><br>(${writingIndex + 1}/${writingCharacters.length})`;
     } else {
-
-        alert("Speech synthesis is not supported by this browser.");
-
+        info.innerHTML = `Watch stroke order for <strong>${item.hanzi}</strong> (${item.pinyin}).<br><small>${item.meaning}</small><br>(${writingIndex + 1}/${writingCharacters.length})`;
     }
-}
 
-
-/* ========================================================
-   GENERAL GAME FUNCTIONS
-======================================================== */
-
-function gameAnswer(button, isCorrect, feedbackId) {
-
-    const parent =
-        button.parentElement;
-
-    const buttons =
-        parent.querySelectorAll(".game-option");
-
-    buttons.forEach(btn => {
-        btn.disabled = true;
+    writer = HanziWriter.create("target-div", item.hanzi, {
+        width: 260,
+        height: 260,
+        padding: 10,
+        showOutline: true,
+        strokeAnimationSpeed: 1,
+        drawingColor: "#5c4033",
+        strokeHighlightColor: "#b8865c",
+        showCharacter: writingMode === "animate"
     });
 
-    if (isCorrect) {
-
-        button.classList.add("correct");
-
-        document.getElementById(feedbackId).textContent =
-            "✓ Correct! Great job!";
-
+    if(writingMode === "quiz"){
+        startQuiz();
     } else {
-
-        button.classList.add("wrong");
-
-        document.getElementById(feedbackId).textContent =
-            "✗ Not quite. Try to remember the question word.";
-
+        writer.animateCharacter();
     }
 }
 
+function startQuiz(){
+    const feedback = document.getElementById("writingFeedback");
+    feedback.textContent = "";
 
-/* ========================================================
-   SENTENCE WRITING
-======================================================== */
+    writer.quiz({
+        onMistake: function(){
+            feedback.textContent = "❌ Incorrect stroke order! Try again.";
+            feedback.className = "feedback incorrect";
+        },
+        onCorrectStroke: function(){
+            feedback.textContent = "✨ Great! Continue with next stroke.";
+            feedback.className = "feedback correct";
+        },
+        onComplete: function(){
+            feedback.textContent = "🎉 Perfect! Correct stroke order.";
+            feedback.className = "feedback correct";
+        }
+    });
+}
 
-function showWritingMessage() {
+function setWritingMode(mode, button){
+    writingMode = mode;
+    document.querySelectorAll(".writing-card .mode-btn").forEach(btn => btn.classList.remove("active"));
+    button.classList.add("active");
+    initWriter();
+}
 
-    document.getElementById("writing-feedback").textContent =
-        "✓ Great! Your Lesson 17 sentence practice is complete.";
+function resetWritingQuiz(){ initWriter(); }
 
+function nextWritingCharacter(){
+    writingIndex++;
+    if(writingIndex >= writingCharacters.length) writingIndex = 0;
+    initWriter();
+}
+
+function playCurrentWriting(){
+    playAudio(writingCharacters[writingIndex].hanzi);
 }
 
 
-/* ========================================================
-   HANZI WRITER
-======================================================== */
+/* =====================================================
+   GRAMMAR MASTER (10 Questions: 5 from HTML L17, 5 from L1-16)
+===================================================== */
 
-const hanziWriters = {};
-
-
-/*
- * Every individual character used in Lesson 17 vocabulary
- * is included here.
- */
-
-const hanziCharacters = [
-    "坐",
-    "公",
-    "車",
-    "咖",
-    "啡",
-    "店",
-    "誰",
-    "為",
-    "什",
-    "麼",
-    "怎",
-    "辦",
-    "樣",
-    "哪",
-    "一"
+const htmlFinalQuestions = [
+    { meaning:"Who is the teacher?", answer:["誰","是","老師"] },
+    { meaning:"What do you like to drink?", answer:["你","喜歡","喝","什麼"] },
+    { meaning:"Where do you live?", answer:["你","住","在","哪裡"] },
+    { meaning:"It's raining, what should we do?", answer:["下雨","了","怎麼辦"] },
+    { meaning:"How is this coffee shop?", answer:["這家","咖啡店","怎麼樣"] }
 ];
 
+let finalQuestions = [];
+let finalIndex = 0;
+let finalScore = 0;
+let finalSelected = [];
+let finalInitialized = false;
 
-function createHanziWriters() {
+function getRandomLessonQuestions(){
+    const allReviewQuestions = [];
+    if(typeof allLessonsData === "undefined") return [];
 
-    if (typeof HanziWriter === "undefined") {
+    for(let lessonNumber = 1; lessonNumber <= 16; lessonNumber++){
+        const lesson = allLessonsData[lessonNumber];
+        if(!lesson || !Array.isArray(lesson.reviewQuestions)) continue;
 
-        console.warn(
-            "Hanzi Writer library could not be loaded."
-        );
+        lesson.reviewQuestions.forEach(question => {
+            if(question && typeof question.meaning === "string" && Array.isArray(question.answer) && question.answer.length > 0){
+                allReviewQuestions.push({
+                    meaning: question.meaning,
+                    answer: [...question.answer],
+                    sourceLesson: lessonNumber
+                });
+            }
+        });
+    }
+    return shuffle(allReviewQuestions).slice(0, 5);
+}
 
-        return;
+function initFinalQuestions(){
+    const errorBox = document.getElementById("finalError");
+    errorBox.style.display = "none";
+    errorBox.textContent = "";
+
+    if(typeof allLessonsData === "undefined"){
+        showFinalError("Grammar Master could not load lesson.js. Review questions from Lessons 1–16 cannot be loaded.");
+        return false;
     }
 
-    hanziCharacters.forEach(character => {
+    const randomReviewQuestions = getRandomLessonQuestions();
+    if(randomReviewQuestions.length < 5){
+        showFinalError("Grammar Master could not find 5 valid review questions from Lessons 1–16 in lesson.js.");
+        return false;
+    }
 
-        const element =
-            document.getElementById("writer-" + character);
+    const lesson17Questions = htmlFinalQuestions.map(q => ({
+        meaning: q.meaning,
+        answer: [...q.answer],
+        sourceLesson: 17
+    }));
 
-        if (!element) {
-            return;
-        }
+    finalQuestions = shuffle([...lesson17Questions, ...randomReviewQuestions]);
 
-        try {
+    if(finalQuestions.length !== 10){
+        showFinalError("Grammar Master initialization failed: final question set does not contain exactly 10 questions.");
+        finalQuestions = [];
+        return false;
+    }
 
-            hanziWriters[character] =
-                HanziWriter.create(
-                    element,
-                    character,
-                    {
-                        width: 150,
-                        height: 150,
-                        padding: 8,
-                        showOutline: true,
-                        strokeAnimationSpeed: 1,
-                        delayBetweenStrokes: 250
-                    }
-                );
+    finalInitialized = true;
+    return true;
+}
 
-        } catch (error) {
+function showFinalError(message){
+    const errorBox = document.getElementById("finalError");
+    errorBox.textContent = "⚠️ " + message;
+    errorBox.style.display = "block";
+    document.getElementById("finalMeaning").textContent = "Grammar Master unavailable.";
+    document.getElementById("finalBank").innerHTML = "";
+    document.getElementById("finalAnswer").innerHTML = '<span class="answer-placeholder">Review questions could not be loaded.</span>';
+}
 
-            console.error(
-                "Could not create Hanzi Writer for:",
-                character,
-                error
-            );
+function loadFinal(){
+    if(!finalInitialized) return;
+    if(finalIndex >= finalQuestions.length) return;
 
-        }
+    const q = finalQuestions[finalIndex];
+    document.getElementById("finalNum").textContent = finalIndex + 1;
+    document.getElementById("finalMeaning").textContent = q.meaning;
+    finalSelected = [];
 
+    document.getElementById("finalAnswer").innerHTML = '<span class="answer-placeholder">Build your answer</span>';
+
+    const bank = document.getElementById("finalBank");
+    bank.innerHTML = "";
+
+    shuffle(q.answer).forEach(word => {
+        const button = document.createElement("button");
+        button.className = "word-btn";
+        button.textContent = word;
+        button.onclick = function(){
+            if(button.disabled) return;
+            finalSelected.push(word);
+            button.disabled = true;
+            button.classList.add("selected");
+            playAudio(word);
+            renderFinal();
+        };
+        bank.appendChild(button);
     });
 
+    document.getElementById("finalFeedback").textContent = "";
+    updateFinalProgress();
 }
 
-
-/*
- * Special writers whose ID cannot be created simply from
- * the full vocabulary phrase.
- */
-
-function createSpecialHanziWriters() {
-
-    if (typeof HanziWriter === "undefined") {
-        return;
-    }
-
-    const specialMap = {
-        "writer-怎麼": "麼"
-    };
-
-    Object.entries(specialMap).forEach(
-        ([id, character]) => {
-
-            const element =
-                document.getElementById(id);
-
-            if (!element) {
-                return;
-            }
-
-            try {
-
-                hanziWriters[
-                    "special-" + id
-                ] =
-                    HanziWriter.create(
-                        element,
-                        character,
-                        {
-                            width: 150,
-                            height: 150,
-                            padding: 8,
-                            showOutline: true,
-                            strokeAnimationSpeed: 1,
-                            delayBetweenStrokes: 250
-                        }
-                    );
-
-            } catch (error) {
-
-                console.error(error);
-
-            }
-
-        }
-    );
-
+function updateFinalProgress(){
+    const percentage = (finalIndex / 10) * 100;
+    document.getElementById("finalProgressFill").style.width = percentage + "%";
 }
 
-
-function animateCharacter(character) {
-
-    let writer =
-        hanziWriters[character];
-
-    if (!writer) {
-
-        const specialKey =
-            "special-writer-" + character;
-
-        writer =
-            hanziWriters[specialKey];
-
-    }
-
-    if (!writer) {
-
-        /*
-         * For vocabulary phrases, animate each character
-         * using the available individual writer.
-         */
-
-        const characters =
-            [...character];
-
-        let index = 0;
-
-        function nextCharacter() {
-
-            if (index >= characters.length) {
-                return;
-            }
-
-            const current =
-                characters[index];
-
-            if (hanziWriters[current]) {
-
-                hanziWriters[current]
-                    .animateCharacter({
-                        onComplete: () => {
-
-                            index++;
-                            nextCharacter();
-
-                        }
-                    });
-
-            } else {
-
-                index++;
-                nextCharacter();
-
-            }
-
-        }
-
-        nextCharacter();
-
-        return;
-    }
-
-    writer.animateCharacter();
-
-}
-
-
-/* ========================================================
-   LESSON 17 — EXACTLY 5 QUESTIONS
-========================================================
-   These questions are written directly in HTML/JS.
-   They DO NOT come from lesson.js.
-======================================================== */
-
-const lesson17GrammarQuestions = [
-
-    {
-        source: "Lesson 17",
-        type: "lesson17",
-        question:
-            "小美怎麼去公司？",
-
-        options: [
-            "她坐公車去公司。",
-            "她走路去公司。",
-            "她坐火車去公司。",
-            "她坐計程車去公司。"
-        ],
-
-        answer:
-            "她坐公車去公司。",
-
-        explanation:
-            "怎麼 asks how someone does something. 小美坐公車去公司。"
-    },
-
-
-    {
-        source: "Lesson 17",
-        type: "lesson17",
-        question:
-            "_____叫小美？",
-
-        options: [
-            "誰",
-            "什麼",
-            "哪裡",
-            "怎麼"
-        ],
-
-        answer:
-            "誰",
-
-        explanation:
-            "誰 means Who, so 誰叫小美？ means Who is called Xiaomei?"
-    },
-
-
-    {
-        source: "Lesson 17",
-        type: "lesson17",
-        question:
-            "為什麼小美常常去咖啡店？",
-
-        options: [
-            "因為她喜歡咖啡。",
-            "因為她喜歡公車。",
-            "因為她是學生。",
-            "因為她住在台中。"
-        ],
-
-        answer:
-            "因為她喜歡咖啡。",
-
-        explanation:
-            "The reading says: 因為她喜歡咖啡，所以她常常去咖啡店。"
-    },
-
-
-    {
-        source: "Lesson 17",
-        type: "lesson17",
-        question:
-            "你有 _____ 個朋友？",
-
-        options: [
-            "幾",
-            "誰",
-            "怎麼",
-            "哪裡"
-        ],
-
-        answer:
-            "幾",
-
-        explanation:
-            "幾 is used to ask how many when followed by a measure word such as 個."
-    },
-
-
-    {
-        source: "Lesson 17",
-        type: "lesson17",
-        question:
-            "Which sentence correctly asks for an opinion about a coffee shop?",
-
-        options: [
-            "這家咖啡店怎麼樣？",
-            "這家咖啡店誰？",
-            "這家咖啡店為什麼？",
-            "這家咖啡店怎麼辦？"
-        ],
-
-        answer:
-            "這家咖啡店怎麼樣？",
-
-        explanation:
-            "怎麼樣 can be used to ask how something is or what someone thinks about it."
-    }
-
-];
-
-
-/* ========================================================
-   REVIEW QUESTION NORMALIZER
-========================================================
-   lesson.js may contain reviewQuestions using the
-   established database structure.
-
-   This function supports common property names without
-   changing lesson.js itself.
-======================================================== */
-
-function normalizeReviewQuestion(questionObject, lessonNumber) {
-
-    if (!questionObject ||
-        typeof questionObject !== "object") {
-
-        return null;
-    }
-
-
-    const question =
-        questionObject.question ??
-        questionObject.q ??
-        questionObject.prompt ??
-        questionObject.text;
-
-
-    let options =
-        questionObject.options ??
-        questionObject.choices ??
-        questionObject.answers;
-
-
-    const answer =
-        questionObject.answer ??
-        questionObject.correctAnswer ??
-        questionObject.correct ??
-        questionObject.correctOption;
-
-
-    const explanation =
-        questionObject.explanation ??
-        questionObject.explain ??
-        "";
-
-
-    if (!question ||
-        !Array.isArray(options) ||
-        options.length < 2 ||
-        answer === undefined ||
-        answer === null) {
-
-        return null;
-    }
-
-
-    /*
-     * Convert option objects into text when the existing
-     * database stores options as objects.
-     */
-
-    options = options.map(option => {
-
-        if (typeof option === "string") {
-            return option;
-        }
-
-        if (option &&
-            typeof option === "object") {
-
-            return option.text ??
-                   option.label ??
-                   option.value ??
-                   option.answer ??
-                   "";
-
-        }
-
-        return String(option);
-
+function renderFinal(){
+    const area = document.getElementById("finalAnswer");
+    area.innerHTML = "";
+    finalSelected.forEach(word => {
+        const span = document.createElement("span");
+        span.className = "selected-word";
+        span.textContent = word;
+        span.onclick = function(){ playAudio(word); };
+        area.appendChild(span);
     });
+}
 
+function resetFinal(){
+    if(!finalInitialized) return;
+    loadFinal();
+}
 
-    let normalizedAnswer;
+function checkFinal(){
+    if(!finalInitialized || finalQuestions.length !== 10) return;
 
+    const correct = finalQuestions[finalIndex].answer;
+    const feedback = document.getElementById("finalFeedback");
 
-    if (typeof answer === "number" &&
-        options[answer] !== undefined) {
+    if(finalSelected.length !== correct.length){
+        feedback.textContent = "⚠️ Complete the sentence first.";
+        feedback.className = "feedback incorrect";
+        return;
+    }
 
-        normalizedAnswer =
-            options[answer];
+    const isCorrect = finalSelected.every((word, index) => word === correct[index]);
 
-    } else if (
-        answer &&
-        typeof answer === "object"
-    ) {
+    if(isCorrect){
+        feedback.textContent = "🎉 Correct!";
+        feedback.className = "feedback correct";
+        finalScore++;
+        document.getElementById("finalScore").textContent = finalScore + " / 10";
+        finalIndex++;
+        updateFinalProgress();
 
-        normalizedAnswer =
-            answer.text ??
-            answer.label ??
-            answer.value ??
-            answer.answer;
-
+        if(finalIndex < 10){
+            setTimeout(loadFinal, 650);
+        } else {
+            document.getElementById("finalProgressFill").style.width = "100%";
+            document.getElementById("unlockBox").style.display = "block";
+            playAudio("太棒了");
+        }
     } else {
-
-        normalizedAnswer =
-            String(answer);
-
+        feedback.textContent = "❌ Check the word order and try again.";
+        feedback.className = "feedback incorrect";
     }
-
-
-    /*
-     * If the answer is represented by an option index
-     * stored as a numeric string, resolve it.
-     */
-
-    if (
-        typeof normalizedAnswer === "string" &&
-        /^\d+$/.test(normalizedAnswer)
-    ) {
-
-        const index =
-            Number(normalizedAnswer);
-
-        if (options[index] !== undefined) {
-
-            normalizedAnswer =
-                options[index];
-
-        }
-
-    }
-
-
-    /*
-     * Some databases may use answer = option text.
-     * Preserve that directly.
-     */
-
-    if (!options.includes(normalizedAnswer)) {
-
-        /*
-         * If answer is a 1-based index.
-         */
-
-        if (
-            typeof answer === "number" &&
-            options[answer - 1] !== undefined
-        ) {
-
-            normalizedAnswer =
-                options[answer - 1];
-
-        }
-
-    }
-
-
-    if (!options.includes(normalizedAnswer)) {
-
-        return null;
-    }
-
-
-    return {
-
-        source:
-            "Review — Lesson " + lessonNumber,
-
-        type:
-            "review",
-
-        lessonNumber:
-            lessonNumber,
-
-        question:
-            String(question),
-
-        options:
-            options,
-
-        answer:
-            normalizedAnswer,
-
-        explanation:
-            String(explanation)
-
-    };
-
 }
 
 
-/* ========================================================
-   GET REVIEW QUESTIONS FROM LESSONS 1–16 ONLY
-======================================================== */
+/* =====================================================
+   INITIALIZATION
+===================================================== */
 
-function collectPreviousLessonReviews() {
+loadGame(1);
+loadGame(2);
+loadGame(3);
+loadSentenceWriting();
+initWriter();
 
-    /*
-     * IMPORTANT:
-     * We intentionally reference the GLOBAL DATABASE only.
-     *
-     * Lesson 17 is NEVER accessed here.
-     */
-
-    if (
-        typeof window.allLessonsData === "undefined" ||
-        !window.allLessonsData
-    ) {
-
-        throw new Error(
-            "The lesson.js database could not be found. " +
-            "Please make sure lesson.js is loaded before Grammar Master."
-        );
-
-    }
-
-
-    const reviewPool = [];
-
-
-    for (let lessonNumber = 1;
-         lessonNumber <= 16;
-         lessonNumber++) {
-
-        const lesson =
-            window.allLessonsData[lessonNumber];
-
-        if (!lesson) {
-            continue;
-        }
-
-
-        const reviewQuestions =
-            lesson.reviewQuestions;
-
-
-        if (!Array.isArray(reviewQuestions)) {
-            continue;
-        }
-
-
-        reviewQuestions.forEach(
-            questionObject => {
-
-                const normalized =
-                    normalizeReviewQuestion(
-                        questionObject,
-                        lessonNumber
-                    );
-
-                if (normalized) {
-
-                    reviewPool.push(normalized);
-
-                }
-
-            }
-        );
-
-    }
-
-
-    if (reviewPool.length < 5) {
-
-        throw new Error(
-            "Grammar Master needs at least 5 valid review questions " +
-            "from Lessons 1–16, but only " +
-            reviewPool.length +
-            " valid review questions were found. " +
-            "No hard-coded fallback questions will be used."
-        );
-
-    }
-
-
-    return reviewPool;
-
+if(initFinalQuestions()){
+    loadFinal();
 }
 
+</script>
 
-/* ========================================================
-   SHUFFLE
-======================================================== */
+<script src="../script.js"></script>
 
-function shuffle(array) {
-
-    const copy =
-        [...array];
-
-    for (
-        let i = copy.length - 1;
-        i > 0;
-        i--
-    ) {
-
-        const j =
-            Math.floor(
-                Math.random() * (i + 1)
-            );
-
-        [
-            copy[i],
-            copy[j]
-        ] = [
-            copy[j],
-            copy[i]
-        ];
-
-    }
-
-    return copy;
-
-}
-
-
-/* ========================================================
-   PREPARE GRAMMAR MASTER
-======================================================== */
-
-let grammarMasterQuestions = [];
-let currentMasterQuestion = 0;
-let masterScore = 0;
-let masterAnswered = false;
-
-
-function prepareGrammarMaster() {
-
-    const loading =
-        document.getElementById(
-            "master-loading"
-        );
-
-    const content =
-        document.getElementById(
-            "master-content"
-        );
-
-    const errorBox =
-        document.getElementById(
-            "master-error"
-        );
-
-
-    try {
-
-        /*
-         * 1. Get all review questions from Lessons 1–16.
-         */
-
-        const reviewPool =
-            collectPreviousLessonReviews();
-
-
-        /*
-         * 2. Randomize the COMPLETE previous-lesson pool.
-         *
-         * This prevents the system from always taking
-         * Lessons 1–3.
-         */
-
-        const shuffledReviewPool =
-            shuffle(reviewPool);
-
-
-        /*
-         * 3. Take exactly 5 random review questions.
-         */
-
-        const fiveReviewQuestions =
-            shuffledReviewPool.slice(0, 5);
-
-
-        /*
-         * 4. Take exactly 5 Lesson 17 questions.
-         */
-
-        const fiveLesson17Questions =
-            shuffle(
-                lesson17GrammarQuestions
-            ).slice(0, 5);
-
-
-        /*
-         * 5. Combine them.
-         */
-
-        grammarMasterQuestions =
-            [
-                ...fiveLesson17Questions,
-                ...fiveReviewQuestions
-            ];
-
-
-        /*
-         * 6. Shuffle ALL 10 questions.
-         *
-         * Therefore the Lesson 17/review order is not fixed.
-         */
-
-        grammarMasterQuestions =
-            shuffle(
-                grammarMasterQuestions
-            );
-
-
-        /*
-         * Safety check:
-         * Grammar Master MUST contain exactly 10.
-         */
-
-        if (
-            grammarMasterQuestions.length !== 10
-        ) {
-
-            throw new Error(
-                "Grammar Master could not create exactly 10 questions."
-            );
-
-        }
-
-
-        loading.classList.add(
-            "hidden"
-        );
-
-        errorBox.classList.add(
-            "hidden"
-        );
-
-        content.classList.remove(
-            "hidden"
-        );
-
-
-        currentMasterQuestion = 0;
-        masterScore = 0;
-
-        renderMasterQuestion();
-
-
-    } catch (error) {
-
-        console.error(
-            "Grammar Master Error:",
-            error
-        );
-
-
-        loading.classList.add(
-            "hidden"
-        );
-
-        content.classList.add(
-            "hidden"
-        );
-
-        errorBox.classList.remove(
-            "hidden"
-        );
-
-        errorBox.innerHTML =
-            "<strong>Grammar Master could not start.</strong>" +
-            "<br><br>" +
-            escapeHtml(
-                error.message
-            ) +
-            "<br><br>" +
-            "Please check that lesson.js is loaded correctly " +
-            "and that Lessons 1–16 contain reviewQuestions.";
-
-    }
-
-}
-
-
-/* ========================================================
-   RENDER MASTER QUESTION
-======================================================== */
-
-function renderMasterQuestion() {
-
-    const question =
-        grammarMasterQuestions[
-            currentMasterQuestion
-        ];
-
-
-    if (!question) {
-        return;
-    }
-
-
-    masterAnswered = false;
-
-
-    const counter =
-        document.getElementById(
-            "master-counter"
-        );
-
-    const questionElement =
-        document.getElementById(
-            "master-question"
-        );
-
-    const optionsElement =
-        document.getElementById(
-            "master-options"
-        );
-
-    const feedback =
-        document.getElementById(
-            "master-feedback"
-        );
-
-    const nextButton =
-        document.getElementById(
-            "master-next"
-        );
-
-
-    counter.textContent =
-        (currentMasterQuestion + 1) +
-        " / 10";
-
-
-    questionElement.textContent =
-        question.question;
-
-
-    optionsElement.innerHTML =
-        "";
-
-
-    feedback.textContent =
-        "";
-
-
-    nextButton.disabled =
-        true;
-
-
-    /*
-     * Shuffle answer choices independently.
-     */
-
-    const shuffledOptions =
-        shuffle(question.options);
-
-
-    shuffledOptions.forEach(
-        option => {
-
-            const button =
-                document.createElement(
-                    "button"
-                );
-
-            button.className =
-                "master-option";
-
-            button.textContent =
-                option;
-
-            button.addEventListener(
-                "click",
-                () => answerMasterQuestion(
-                    button,
-                    option,
-                    question
-                )
-            );
-
-            optionsElement.appendChild(
-                button
-            );
-
-        }
-    );
-
-}
-
-
-/* ========================================================
-   ANSWER MASTER QUESTION
-======================================================== */
-
-function answerMasterQuestion(
-    clickedButton,
-    selectedAnswer,
-    question
-) {
-
-    if (masterAnswered) {
-        return;
-    }
-
-
-    masterAnswered = true;
-
-
-    const buttons =
-        document.querySelectorAll(
-            "#master-options .master-option"
-        );
-
-
-    buttons.forEach(button => {
-
-        button.disabled =
-            true;
-
-
-        if (
-            button.textContent ===
-            question.answer
-        ) {
-
-            button.classList.add(
-                "correct"
-            );
-
-        }
-
-    });
-
-
-    const feedback =
-        document.getElementById(
-            "master-feedback"
-        );
-
-
-    if (
-        selectedAnswer ===
-        question.answer
-    ) {
-
-        masterScore++;
-
-        clickedButton.classList.add(
-            "correct"
-        );
-
-        feedback.innerHTML =
-            "✓ Correct!";
-
-    } else {
-
-        clickedButton.classList.add(
-            "wrong"
-        );
-
-        feedback.innerHTML =
-            "✗ Incorrect.<br>" +
-            "Correct answer: <strong>" +
-            escapeHtml(
-                question.answer
-            ) +
-            "</strong>";
-
-    }
-
-
-    if (question.explanation) {
-
-        feedback.innerHTML +=
-            "<br><small>" +
-            escapeHtml(
-                question.explanation
-            ) +
-            "</small>";
-
-    }
-
-
-    const nextButton =
-        document.getElementById(
-            "master-next"
-        );
-
-    nextButton.disabled =
-        false;
-
-}
-
-
-/* ========================================================
-   NEXT MASTER QUESTION
-======================================================== */
-
-function nextMasterQuestion() {
-
-    if (!masterAnswered) {
-        return;
-    }
-
-
-    currentMasterQuestion++;
-
-
-    if (
-        currentMasterQuestion >=
-        grammarMasterQuestions.length
-    ) {
-
-        showFinalScore();
-
-        return;
-
-    }
-
-
-    renderMasterQuestion();
-
-}
-
-
-document.getElementById(
-    "master-next"
-).addEventListener(
-    "click",
-    nextMasterQuestion
-);
-
-
-/* ========================================================
-   FINAL SCORE
-======================================================== */
-
-function showFinalScore() {
-
-    const content =
-        document.getElementById(
-            "master-content"
-        );
-
-
-    const percentage =
-        masterScore * 10;
-
-
-    let message;
-
-
-    if (masterScore === 10) {
-
-        message =
-            "Perfect! You mastered Lesson 17! 🎉";
-
-    } else if (masterScore >= 8) {
-
-        message =
-            "Excellent work! Keep practicing! 🌟";
-
-    } else if (masterScore >= 6) {
-
-        message =
-            "Good job! Review the questions you missed. 💪";
-
-    } else {
-
-        message =
-            "Keep practicing! You can try the lesson again. 📚";
-
-    }
-
-
-    content.innerHTML = `
-
-        <div class="final-score">
-            ${masterScore} / 10
-        </div>
-
-        <p class="score-message">
-            ${message}
-        </p>
-
-        <p class="score-message">
-            Final Score: ${percentage}%
-        </p>
-
-        <button
-            class="master-next"
-            onclick="restartGrammarMaster()">
-            Try Again
-        </button>
-
-    `;
-
-}
-
-
-/* ========================================================
-   RESTART GRAMMAR MASTER
-======================================================== */
-
-function restartGrammarMaster() {
-
-    const content =
-        document.getElementById(
-            "master-content"
-        );
-
-
-    content.innerHTML = `
-
-        <div id="master-counter"
-             class="master-counter">
-        </div>
-
-        <div id="master-question"
-             class="master-question">
-        </div>
-
-        <div id="master-options"
-             class="master-options">
-        </div>
-
-        <div id="master-feedback"
-             class="master-feedback">
-        </div>
-
-        <button id="master-next"
-                class="master-next"
-                disabled>
-            Next Question
-        </button>
-
-    `;
-
-
-    document.getElementById(
-        "master-next"
-    ).addEventListener(
-        "click",
-        nextMasterQuestion
-    );
-
-
-    prepareGrammarMaster();
-
-}
-
-
-/* ========================================================
-   HTML ESCAPE
-======================================================== */
-
-function escapeHtml(value) {
-
-    return String(value)
-        .replace(
-            /&/g,
-            "&amp;"
-        )
-        .replace(
-            /</g,
-            "&lt;"
-        )
-        .replace(
-            />/g,
-            "&gt;"
-        )
-        .replace(
-            /"/g,
-            "&quot;"
-        )
-        .replace(
-            /'/g,
-            "&#039;"
-        );
-
-}
-
-
-/* ========================================================
-   INITIALIZE
-======================================================== */
-
-document.addEventListener(
-    "DOMContentLoaded",
-    () => {
-
-        createHanziWriters();
-
-        createSpecialHanziWriters();
-
-        /*
-         * Grammar Master starts after the page has loaded.
-         *
-         * It ONLY accesses lesson.js for Lessons 1–16
-         * reviewQuestions.
-         */
-
-        prepareGrammarMaster();
-
-    }
-);
-
-</script></body>
+</body>
 </html>
