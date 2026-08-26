@@ -1,0 +1,4516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Question Words & My Friend | Boba Break Study</title>
+
+<link rel="stylesheet" href="../style.css">
+
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/hanzi-writer@3.5.0/dist/hanzi-writer.min.js"></script>
+
+<!-- MASTER DATABASE: ONLY USED BY GRAMMAR MASTER REVIEW -->
+<script src="lesson.js"></script>
+
+<style>
+
+/* =====================================================
+   GENERAL
+===================================================== */
+
+.lesson-card,
+.grammar-card,
+.game-card,
+.writing-card,
+.final-card {
+    background:#fff;
+    padding:30px;
+    border-radius:20px;
+    box-shadow:0 6px 15px rgba(0,0,0,.06);
+    margin:25px auto;
+    max-width:750px;
+}
+
+h2 {
+    color:#b8865c;
+    font-size:24px;
+    margin-bottom:12px;
+}
+
+h3 {
+    color:#5c4033;
+    margin-top:15px;
+}
+
+p {
+    color:#666;
+    font-size:14px;
+    line-height:1.65;
+}
+
+
+/* =====================================================
+   TITLE
+===================================================== */
+
+.lesson-title {
+    text-align:center;
+    margin-top:20px;
+}
+
+.lesson-title .badge {
+    display:inline-block;
+    background:#fff8ef;
+    color:#b8865c;
+    border:1px solid #d7b89c;
+    padding:6px 13px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.lesson-title h1 {
+    color:#5c4033;
+    font-size:28px;
+    margin:12px 0 5px;
+}
+
+.lesson-title p {
+    margin:0;
+}
+
+
+/* =====================================================
+   READING
+===================================================== */
+
+.reading-content {
+    background:#fff8ef;
+    border:1.5px solid #d7b89c;
+    padding:35px 22px 22px;
+    border-radius:15px;
+    margin-top:15px;
+    font-size:19px;
+    line-height:2.8;
+    color:#5c4033;
+}
+
+.char-group {
+    display:inline-flex;
+    flex-direction:column-reverse;
+    align-items:center;
+    vertical-align:baseline;
+    margin:0 2px;
+    line-height:1;
+}
+
+.char-group .pinyin-sub {
+    position:static;
+    font-size:10px;
+    font-weight:normal;
+    color:#8c7355;
+    line-height:1;
+    white-space:nowrap;
+    margin-top:2px;
+}
+
+.char-group .hanzi-main {
+    display:inline;
+    font-weight:bold;
+    font-size:21px;
+    line-height:1;
+    white-space:nowrap;
+}
+
+.reading-note {
+    background:#fdfbf7;
+    border-left:4px solid #b8865c;
+    padding:12px 15px;
+    border-radius:10px;
+    margin-top:15px;
+}
+
+
+/* =====================================================
+   AUDIO
+===================================================== */
+
+.sound-btn {
+    background:#b8865c;
+    color:#fff;
+    border:none;
+    width:32px;
+    height:32px;
+    border-radius:50%;
+    cursor:pointer;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    margin-left:8px;
+}
+
+
+/* =====================================================
+   QUESTION CARDS
+===================================================== */
+
+.question-list {
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    margin-top:20px;
+}
+
+.question-card {
+    background:#fff8ef;
+    border:1.5px solid #d7b89c;
+    border-radius:15px;
+    padding:16px;
+}
+
+.question-type {
+    font-size:11px;
+    color:#b8865c;
+    font-weight:bold;
+    margin-bottom:6px;
+}
+
+.question-hanzi {
+    font-size:20px;
+    font-weight:bold;
+    color:#5c4033;
+    margin-bottom:4px;
+}
+
+.question-pinyin {
+    font-size:13px;
+    color:#8c7355;
+    margin-bottom:5px;
+}
+
+.question-english {
+    font-size:13px;
+    color:#666;
+    margin-bottom:12px;
+}
+
+.answer-toggle {
+    width:100%;
+    background:#fff;
+    border:1px dashed #d7b89c;
+    color:#8c7355;
+    border-radius:10px;
+    padding:9px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.answer-content {
+    display:none;
+    margin-top:10px;
+    padding:12px;
+    background:#fff;
+    border-radius:10px;
+    border-left:4px solid #b8865c;
+}
+
+.answer-content.show {
+    display:block;
+}
+
+.answer-hanzi {
+    font-size:20px;
+    font-weight:bold;
+    color:#5c4033;
+}
+
+.answer-pinyin {
+    font-size:13px;
+    color:#8c7355;
+    margin-top:3px;
+}
+
+.answer-english {
+    font-size:13px;
+    color:#666;
+    margin-top:4px;
+}
+
+
+/* =====================================================
+   GRAMMAR CAROUSEL
+===================================================== */
+
+.grammar-slider-container {
+    position:relative;
+}
+
+.grammar-slide {
+    display:none;
+}
+
+.grammar-slide.active-slide {
+    display:block;
+}
+
+.pattern-display {
+    background:#fff8ef;
+    padding:15px;
+    border-radius:14px;
+    border:1.5px solid #d7b89c;
+    margin:15px 0;
+    text-align:center;
+}
+
+.pattern-code {
+    font-weight:bold;
+    color:#b8865c;
+    font-size:18px;
+}
+
+.grammar-explanation {
+    background:#fff8ef;
+    border:1.5px solid #d7b89c;
+    padding:15px;
+    border-radius:15px;
+    margin-top:15px;
+}
+
+.grammar-explanation strong {
+    color:#b8865c;
+}
+
+.example-sentence {
+    text-align:center;
+    margin-top:18px;
+    padding:15px;
+    background:#fff;
+    border-radius:15px;
+    border:1px dashed #d7b89c;
+}
+
+.example-hanzi {
+    font-size:25px;
+    font-weight:bold;
+    color:#5c4033;
+    margin-bottom:5px;
+}
+
+.example-pinyin {
+    color:#8c7355;
+    font-size:13px;
+    margin-bottom:3px;
+}
+
+.example-english {
+    color:#666;
+    font-size:14px;
+}
+
+.slider-nav {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-top:20px;
+}
+
+.slider-btn {
+    background:#fff8ef;
+    border:1.5px solid #d7b89c;
+    color:#8c7355;
+    padding:8px 16px;
+    border-radius:12px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.slider-indicators {
+    display:flex;
+    gap:6px;
+    flex-wrap:wrap;
+    justify-content:center;
+    max-width:450px;
+}
+
+.indicator {
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:#f0e4d5;
+    cursor:pointer;
+}
+
+.indicator.active {
+    background:#b8865c;
+}
+
+
+/* =====================================================
+   VOCABULARY
+===================================================== */
+
+.vocab-container {
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    justify-content:center;
+    margin-top:15px;
+}
+
+.vocab-pill {
+    background:#fff8ef;
+    border-radius:14px;
+    padding:10px 12px;
+    width:110px;
+    text-align:center;
+    border:1.5px solid #d7b89c;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.vocab-pill:hover {
+    transform:translateY(-2px);
+    background:#faedcd;
+}
+
+.vocab-pill .hanzi {
+    font-size:20px;
+    font-weight:bold;
+    color:#b8865c;
+}
+
+.vocab-pill .pinyin {
+    font-size:11px;
+    color:#555;
+}
+
+.vocab-pill .meaning {
+    font-size:10px;
+    color:#777;
+    margin-top:2px;
+}
+
+
+/* =====================================================
+   GAMES
+===================================================== */
+
+.game-card {
+    position:relative;
+}
+
+.game-number {
+    display:inline-block;
+    background:#fff8ef;
+    color:#b8865c;
+    border:1px solid #d7b89c;
+    padding:5px 12px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.game-description {
+    margin-bottom:15px;
+}
+
+.game-progress {
+    font-size:12px;
+    color:#8c7355;
+    text-align:right;
+    margin-bottom:8px;
+}
+
+.question-box {
+    text-align:center;
+    background:#fff8ef;
+    border:1.5px dashed #d7b89c;
+    padding:16px;
+    border-radius:15px;
+    margin-bottom:15px;
+}
+
+.question-label {
+    font-size:11px;
+    color:#999;
+    margin-bottom:5px;
+}
+
+.question-meaning {
+    font-size:17px;
+    color:#5c4033;
+    font-weight:bold;
+}
+
+.question-pinyin-small {
+    font-size:12px;
+    color:#8c7355;
+    margin-top:5px;
+}
+
+.answer-area {
+    min-height:65px;
+    padding:12px;
+    border:2px dashed #d7b89c;
+    border-radius:15px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:7px;
+    background:#fdfbf7;
+    margin-bottom:12px;
+}
+
+.answer-placeholder {
+    color:#aaa;
+    font-size:13px;
+}
+
+.word-bank {
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-bottom:15px;
+}
+
+.word-btn {
+    border:1.5px solid #d7b89c;
+    background:#fff;
+    color:#5c4033;
+    padding:9px 14px;
+    border-radius:12px;
+    font-size:17px;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.word-btn:hover {
+    background:#fff8ef;
+    transform:translateY(-2px);
+}
+
+.word-btn.selected {
+    background:#faedcd;
+    border-color:#b8865c;
+    color:#8c5d35;
+}
+
+.word-btn:disabled {
+    opacity:.4;
+    cursor:default;
+}
+
+.selected-word {
+    background:#b8865c;
+    color:#fff;
+    padding:8px 13px;
+    border-radius:10px;
+    font-size:17px;
+    cursor:pointer;
+}
+
+.game-buttons {
+    display:flex;
+    gap:8px;
+}
+
+.check-btn,
+.reset-btn,
+.listen-btn,
+.next-game-btn {
+    flex:1;
+    border:none;
+    border-radius:12px;
+    padding:11px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.check-btn {
+    background:#b8865c;
+    color:#fff;
+}
+
+.reset-btn {
+    background:#fff8ef;
+    color:#8c7355;
+    border:1px solid #d7b89c;
+}
+
+.listen-btn {
+    background:#f0f7f4;
+    color:#2d6a4f;
+    border:1px solid #b7e4c7;
+}
+
+.next-game-btn {
+    background:#5c4033;
+    color:#fff;
+    display:none;
+    margin-top:12px;
+    width:100%;
+}
+
+.feedback {
+    text-align:center;
+    min-height:30px;
+    margin-top:12px;
+    font-weight:bold;
+}
+
+.correct {
+    color:#2d6a4f;
+}
+
+.incorrect {
+    color:#9b2226;
+}
+
+
+/* =====================================================
+   SENTENCE WRITING
+===================================================== */
+
+.writing-card {
+    text-align:center;
+}
+
+.sentence-writing {
+    background:#fff8ef;
+    border:1.5px solid #d7b89c;
+    padding:18px;
+    border-radius:15px;
+    margin-top:15px;
+    text-align:left;
+}
+
+.sentence-prompt {
+    font-size:18px;
+    font-weight:bold;
+    color:#5c4033;
+}
+
+.sentence-hint {
+    font-size:12px;
+    color:#888;
+    margin:8px 0;
+}
+
+#sentenceInput {
+    width:100%;
+    box-sizing:border-box;
+    padding:12px;
+    border-radius:12px;
+    border:1.5px solid #d7b89c;
+    font-size:20px;
+    text-align:center;
+    outline:none;
+}
+
+.check-writing {
+    width:100%;
+    margin-top:10px;
+    padding:11px;
+    background:#b8865c;
+    color:#fff;
+    border:none;
+    border-radius:12px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+
+/* =====================================================
+   HANZI WRITING
+===================================================== */
+
+.writing-mode-buttons {
+    display:flex;
+    gap:8px;
+    margin:15px 0;
+}
+
+.mode-btn {
+    flex:1;
+    border:1.5px solid #d7b89c;
+    background:#fff8ef;
+    color:#8c7355;
+    padding:10px 5px;
+    border-radius:12px;
+    cursor:pointer;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.mode-btn.active {
+    background:#b8865c;
+    color:#fff;
+    border-color:#b8865c;
+}
+
+.writing-info {
+    color:#777;
+    font-size:13px;
+    margin-bottom:15px;
+}
+
+.canvas-wrapper {
+    margin:15px auto;
+    width:280px;
+    max-width:100%;
+    height:280px;
+    background:
+        linear-gradient(#eadac7 1px,transparent 1px),
+        linear-gradient(90deg,#eadac7 1px,transparent 1px);
+    background-size:70px 70px;
+    background-position:center;
+    border:2px solid #d7b89c;
+    border-radius:15px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+    position:relative;
+    touch-action:none;
+}
+
+#target-div {
+    width:260px;
+    height:260px;
+}
+
+.writing-buttons {
+    display:flex;
+    gap:8px;
+    justify-content:center;
+    margin-top:15px;
+}
+
+.write-btn {
+    border:none;
+    padding:10px 15px;
+    border-radius:12px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.clear-btn {
+    background:#fff8ef;
+    color:#8c7355;
+    border:1px solid #d7b89c;
+}
+
+.next-write-btn {
+    background:#b8865c;
+    color:#fff;
+}
+
+
+/* =====================================================
+   FINAL CHALLENGE
+===================================================== */
+
+.final-card {
+    text-align:center;
+}
+
+.final-card .question-box {
+    margin-top:20px;
+}
+
+.final-score {
+    font-size:36px;
+    font-weight:bold;
+    color:#b8865c;
+    margin-top:10px;
+}
+
+.final-progress-bar {
+    width:100%;
+    height:8px;
+    background:#f0e4d5;
+    border-radius:10px;
+    overflow:hidden;
+    margin:15px 0;
+}
+
+.final-progress-fill {
+    height:100%;
+    width:0%;
+    background:#b8865c;
+    transition:.3s;
+}
+
+.unlock {
+    background:#fff8ef;
+    padding:15px;
+    border-radius:15px;
+    border:1.5px solid #d7b89c;
+    margin-top:15px;
+}
+
+.final-error {
+    background:#fff1f1;
+    color:#9b2226;
+    border:1.5px solid #e5a5a5;
+    padding:15px;
+    border-radius:15px;
+    margin-top:15px;
+    display:none;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:700px){
+
+    .lesson-card,
+    .grammar-card,
+    .game-card,
+    .writing-card,
+    .final-card {
+        padding:18px;
+        margin:15px;
+    }
+
+    .lesson-title h1 {
+        font-size:23px;
+    }
+
+    .word-btn {
+        padding:8px 12px;
+        font-size:16px;
+    }
+
+    .game-buttons {
+        flex-wrap:wrap;
+    }
+
+    .writing-mode-buttons {
+        flex-wrap:wrap;
+    }
+
+    .mode-btn {
+        min-width:45%;
+    }
+
+    .reading-content {
+        font-size:17px;
+        line-height:2.7;
+        padding:30px 14px 18px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="app-container">
+
+<div id="sidebar-container"></div>
+
+<main class="main-content">
+
+
+<!-- =====================================================
+     TITLE
+===================================================== -->
+
+<div class="lesson-title">
+
+    <span class="badge">LESSON 17 • QUESTION WORDS</span>
+
+    <h1>Who Is My Friend?</h1>
+
+    <p>
+        Learn how to ask and answer questions about people,
+        places, time, reasons, methods, and descriptions.
+    </p>
+
+</div>
+
+
+<!-- =====================================================
+     READING
+===================================================== -->
+
+<div class="lesson-card">
+
+    <h2>📖 Reading: My Friend Xiaomei</h2>
+
+    <p>
+        Read about Xiaomei and practice common Mandarin question words.
+        Pinyin is shown only above the Lesson 17 vocabulary.
+    </p>
+
+    <div style="display:flex;align-items:center;margin-top:20px;">
+
+        <h3 style="margin-top:0;">Reading Text</h3>
+
+        <button class="sound-btn" onclick="playReadingText()">
+            <i class="fas fa-volume-up"></i>
+        </button>
+
+    </div>
+
+    <p style="font-size:12px;color:#888;">
+        Pinyin appears only above target vocabulary from Lesson 17.
+    </p>
+
+    <div class="reading-content">
+
+        我有一個朋友，她叫小美。
+
+        她很漂亮，也很
+
+        <span class="char-group">
+            <span class="pinyin-sub">qīnqiè</span>
+            <span class="hanzi-main">親切</span>
+        </span>。
+
+        她是老師，在一
+
+        <span class="char-group">
+            <span class="pinyin-sub">suǒ</span>
+            <span class="hanzi-main">所</span>
+        </span>
+
+        學校工作。
+
+        她每天早上七點去上班。
+
+        她星期一到星期六都工作，星期日
+
+        <span class="char-group">
+            <span class="pinyin-sub">xiūxi</span>
+            <span class="hanzi-main">休息</span>
+        </span>。
+
+        她每天
+
+        <span class="char-group">
+            <span class="pinyin-sub">zuò</span>
+            <span class="hanzi-main">坐</span>
+        </span>
+
+        <span class="char-group">
+            <span class="pinyin-sub">gōngchē</span>
+            <span class="hanzi-main">公車</span>
+        </span>
+
+        去學校。
+
+        她很喜歡她的工作，因為她喜歡
+
+        <span class="char-group">
+            <span class="pinyin-sub">jiāo</span>
+            <span class="hanzi-main">教</span>
+        </span>
+
+        學生。
+
+        她今年二十五歲。
+
+        她的生日是二零二一年一月二十三日。
+
+        她有很多學生，每天都很忙。
+
+        星期日她不上班，她
+
+        <span class="char-group">
+            <span class="pinyin-sub">chángcháng</span>
+            <span class="hanzi-main">常常</span>
+        </span>
+
+        在家看電視、聽音樂。
+
+    </div>
+
+    <div class="reading-note">
+
+        <strong>English Meaning:</strong><br>
+
+        I have a friend. Her name is Xiaomei.
+
+        She is very beautiful and also very kind.
+
+        She is a teacher and works at a school.
+
+        She goes to work at seven o'clock every morning.
+
+        She works from Monday to Saturday and rests on Sunday.
+
+        She takes the bus to school every day.
+
+        She really likes her job because she likes teaching students.
+
+        She is twenty-five years old this year.
+
+        Her birthday is January 23, 2021.
+
+        She has many students and is very busy every day.
+
+        On Sunday, she does not work. She often stays at home,
+        watches TV, and listens to music.
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     QUESTIONS
+===================================================== -->
+
+<div class="lesson-card">
+
+    <h2>❓ Reading Questions</h2>
+
+    <p>
+        Read each question and try to answer it yourself.
+        Tap <strong>Show Answer</strong> to reveal the answer,
+        pinyin, and English meaning.
+    </p>
+
+    <div class="question-list">
+
+
+        <div class="question-card">
+
+            <div class="question-type">誰 — Who</div>
+
+            <div class="question-hanzi">
+                誰是我的朋友？
+            </div>
+
+            <div class="question-pinyin">
+                Shéi shì wǒ de péngyǒu?
+            </div>
+
+            <div class="question-english">
+                Who is my friend?
+            </div>
+
+            <button class="answer-toggle"
+                    onclick="toggleAnswer(this)">
+                👁 Show Answer
+            </button>
+
+            <div class="answer-content">
+
+                <div class="answer-hanzi">小美</div>
+
+                <div class="answer-pinyin">
+                    Xiǎoměi
+                </div>
+
+                <div class="answer-english">
+                    Xiaomei.
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="question-card">
+
+            <div class="question-type">什麼 — What</div>
+
+            <div class="question-hanzi">
+                小美是做什麼工作的？
+            </div>
+
+            <div class="question-pinyin">
+                Xiǎoměi shì zuò shénme gōngzuò de?
+            </div>
+
+            <div class="question-english">
+                What does Xiaomei do for work?
+            </div>
+
+            <button class="answer-toggle"
+                    onclick="toggleAnswer(this)">
+                👁 Show Answer
+            </button>
+
+            <div class="answer-content">
+
+                <div class="answer-hanzi">
+                    她是老師。
+                </div>
+
+                <div class="answer-pinyin">
+                    Tā shì lǎoshī.
+                </div>
+
+                <div class="answer-english">
+                    She is a teacher.
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="question-card">
+
+            <div class="question-type">哪裡 — Where</div>
+
+            <div class="question-hanzi">
+                小美在哪裡工作？
+            </div>
+
+            <div class="question-pinyin">
+                Xiǎoměi zài nǎlǐ gōngzuò?
+            </div>
+
+            <div class="question-english">
+                Where does Xiaomei work?
+            </div>
+
+            <button class="answer-toggle"
+                    onclick="toggleAnswer(this)">
+                👁 Show Answer
+            </button>
+
+            <div class="answer-content">
+
+                <div class="answer-hanzi">
+                    她在學校工作。
+                </div>
+
+                <div class="answer-pinyin">
+                    Tā zài xuéxiào gōngzuò.
+                </div>
+
+                <div class="answer-english">
+                    She works at a school.
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="question-card">
+
+            <div class="question-type">什麼時候 — When</div>
+
+            <div class="question-hanzi">
+                她的生日是什麼時候？
+            </div>
+
+            <div class="question-pinyin">
+                Tā de shēngrì shì shénme shíhou?
+            </div>
+
+            <div class="question-english">
+                When is her birthday?
+            </div>
+
+            <button class="answer-toggle"
+                    onclick="toggleAnswer(this)">
+                👁 Show Answer
+            </button>
+
+            <div class="answer-content">
+
+                <div class="answer-hanzi">
+                    她的生日是二零二一年一月二十三日。
+                </div>
+
+                <div class="answer-pinyin">
+                    Tā de shēngrì shì èr líng èr yī nián yī yuè èr shí sān rì.
+                </div>
+
+                <div class="answer-english">
+                    Her birthday is January 23, 2021.
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="question-card">
+
+            <div class="question-type">為什麼 — Why</div>
+
+            <div class="question-hanzi">
+                小美為什麼喜歡她的工作？
+            </div>
+
+            <div class="question-pinyin">
+                Xiǎoměi wèishéme xǐhuān tā de gōngzuò?
+            </div>
+
+            <div class="question-english">
+                Why does Xiaomei like her job?
+            </div>
+
+            <button class="answer-toggle"
+                    onclick="toggleAnswer(this)">
+                👁 Show Answer
+            </button>
+
+            <div class="answer-content">
+
+                <div class="answer-hanzi">
+                    因為她喜歡教學生。
+                </div>
+
+                <div class="answer-pinyin">
+                    Yīnwèi tā xǐhuān jiāo xuéshēng.
+                </div>
+
+                <div class="answer-english">
+                    Because she likes teaching students.
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="question-card">
+
+            <div class="question-type">怎麼 — How</div>
+
+            <div class="question-hanzi">
+                小美怎麼去學校？
+            </div>
+
+            <div class="question-pinyin">
+                Xiǎoměi zěnme qù xuéxiào?
+            </div>
+
+            <div class="question-english">
+                How does Xiaomei go to school?
+            </div>
+
+            <button class="answer-toggle"
+                    onclick="toggleAnswer(this)">
+                👁 Show Answer
+            </button>
+
+            <div class="answer-content">
+
+                <div class="answer-hanzi">
+                    坐公車。
+                </div>
+
+                <div class="answer-pinyin">
+                    Zuò gōngchē.
+                </div>
+
+                <div class="answer-english">
+                    By bus.
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="question-card">
+
+            <div class="question-type">幾點 — What time</div>
+
+            <div class="question-hanzi">
+                小美幾點去上班？
+            </div>
+
+            <div class="question-pinyin">
+                Xiǎoměi jǐ diǎn qù shàngbān?
+            </div>
+
+            <div class="question-english">
+                What time does Xiaomei go to work?
+            </div>
+
+            <button class="answer-toggle"
+                    onclick="toggleAnswer(this)">
+                👁 Show Answer
+            </button>
+
+            <div class="answer-content">
+
+                <div class="answer-hanzi">
+                    七點。
+                </div>
+
+                <div class="answer-pinyin">
+                    Qī diǎn.
+                </div>
+
+                <div class="answer-english">
+                    Seven o'clock.
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="question-card">
+
+            <div class="question-type">多少 — How many / How much</div>
+
+            <div class="question-hanzi">
+                小美有多少學生？
+            </div>
+
+            <div class="question-pinyin">
+                Xiǎoměi yǒu duōshǎo xuéshēng?
+            </div>
+
+            <div class="question-english">
+                How many students does Xiaomei have?
+            </div>
+
+            <button class="answer-toggle"
+                    onclick="toggleAnswer(this)">
+                👁 Show Answer
+            </button>
+
+            <div class="answer-content">
+
+                <div class="answer-hanzi">
+                    很多學生。
+                </div>
+
+                <div class="answer-pinyin">
+                    Hěn duō xuéshēng.
+                </div>
+
+                <div class="answer-english">
+                    Many students.
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="question-card">
+
+            <div class="question-type">怎麼樣 — How / What is ... like</div>
+
+            <div class="question-hanzi">
+                小美長得怎麼樣？
+            </div>
+
+            <div class="question-pinyin">
+                Xiǎoměi zhǎng de zěnmeyàng?
+            </div>
+
+            <div class="question-english">
+                What does Xiaomei look like?
+            </div>
+
+            <button class="answer-toggle"
+                    onclick="toggleAnswer(this)">
+                👁 Show Answer
+            </button>
+
+            <div class="answer-content">
+
+                <div class="answer-hanzi">
+                    她很漂亮，也很親切。
+                </div>
+
+                <div class="answer-pinyin">
+                    Tā hěn piàoliang, yě hěn qīnqiè.
+                </div>
+
+                <div class="answer-english">
+                    She is very beautiful and also very kind.
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="question-card">
+
+            <div class="question-type">怎麼辦 — What should someone do</div>
+
+            <div class="question-hanzi">
+                星期日小美不上班，她常常怎麼辦？
+            </div>
+
+            <div class="question-pinyin">
+                Xīngqīrì Xiǎoměi bù shàngbān, tā chángcháng zěnmebàn?
+            </div>
+
+            <div class="question-english">
+                On Sunday Xiaomei does not work. What does she often do?
+            </div>
+
+            <button class="answer-toggle"
+                    onclick="toggleAnswer(this)">
+                👁 Show Answer
+            </button>
+
+            <div class="answer-content">
+
+                <div class="answer-hanzi">
+                    她常常在家看電視、聽音樂。
+                </div>
+
+                <div class="answer-pinyin">
+                    Tā chángcháng zài jiā kàn diànshì, tīng yīnyuè.
+                </div>
+
+                <div class="answer-english">
+                    She often watches TV and listens to music at home.
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="question-card">
+
+            <div class="question-type">多大 — How old</div>
+
+            <div class="question-hanzi">
+                小美多大？
+            </div>
+
+            <div class="question-pinyin">
+                Xiǎoměi duō dà?
+            </div>
+
+            <div class="question-english">
+                How old is Xiaomei?
+            </div>
+
+            <button class="answer-toggle"
+                    onclick="toggleAnswer(this)">
+                👁 Show Answer
+            </button>
+
+            <div class="answer-content">
+
+                <div class="answer-hanzi">
+                    二十五歲。
+                </div>
+
+                <div class="answer-pinyin">
+                    Èr shí wǔ suì.
+                </div>
+
+                <div class="answer-english">
+                    Twenty-five years old.
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     GRAMMAR CAROUSEL
+===================================================== -->
+
+<div class="grammar-card">
+
+    <h2>🧠 Grammar Patterns</h2>
+
+    <p>
+        Learn how Mandarin question words work.
+        The explanations and examples are written in English.
+    </p>
+
+    <div class="grammar-slider-container">
+
+
+        <!-- SLIDE 1 -->
+
+        <div class="grammar-slide active-slide" id="slide-1">
+
+            <h3>1. 誰 (shéi) — Who</h3>
+
+            <div class="pattern-display">
+
+                <div class="pattern-code">
+                    誰 + 是 + Subject / Person?
+                </div>
+
+            </div>
+
+            <div class="grammar-explanation">
+
+                <p>
+                    <strong>誰</strong> asks about a person.
+                    It means <strong>"who."</strong>
+                </p>
+
+                <p>
+                    The question-word position is usually the same position
+                    where the answer would appear.
+                </p>
+
+            </div>
+
+            <div class="example-sentence">
+
+                <div class="example-hanzi">
+                    誰是我的朋友？
+                </div>
+
+                <div class="example-pinyin">
+                    Shéi shì wǒ de péngyǒu?
+                </div>
+
+                <div class="example-english">
+                    Who is my friend?
+                </div>
+
+                <br>
+
+                <div class="example-hanzi">
+                    小美是我的朋友。
+                </div>
+
+                <div class="example-pinyin">
+                    Xiǎoměi shì wǒ de péngyǒu.
+                </div>
+
+                <div class="example-english">
+                    Xiaomei is my friend.
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- SLIDE 2 -->
+
+        <div class="grammar-slide" id="slide-2">
+
+            <h3>2. 什麼 (shénme) — What</h3>
+
+            <div class="pattern-display">
+
+                <div class="pattern-code">
+                    Subject + Verb + 什麼？
+                </div>
+
+            </div>
+
+            <div class="grammar-explanation">
+
+                <p>
+                    <strong>什麼</strong> asks about a thing, information,
+                    activity, or identity. It means <strong>"what."</strong>
+                </p>
+
+                <p>
+                    Place <strong>什麼</strong> where the unknown information
+                    would normally appear.
+                </p>
+
+            </div>
+
+            <div class="example-sentence">
+
+                <div class="example-hanzi">
+                    你吃什麼？
+                </div>
+
+                <div class="example-pinyin">
+                    Nǐ chī shénme?
+                </div>
+
+                <div class="example-english">
+                    What do you eat?
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- SLIDE 3 -->
+
+        <div class="grammar-slide" id="slide-3">
+
+            <h3>3. 為什麼 (wèishéme) — Why</h3>
+
+            <div class="pattern-display">
+
+                <div class="pattern-code">
+                    Subject + 為什麼 + Verb？
+                </div>
+
+            </div>
+
+            <div class="grammar-explanation">
+
+                <p>
+                    <strong>為什麼</strong> asks for a reason.
+                    It means <strong>"why."</strong>
+                </p>
+
+                <p>
+                    A common structure is:
+                    <strong>Subject + 為什麼 + Verb?</strong>
+                </p>
+
+            </div>
+
+            <div class="example-sentence">
+
+                <div class="example-hanzi">
+                    你為什麼學中文？
+                </div>
+
+                <div class="example-pinyin">
+                    Nǐ wèishéme xué Zhōngwén?
+                </div>
+
+                <div class="example-english">
+                    Why do you study Chinese?
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- SLIDE 4 -->
+
+        <div class="grammar-slide" id="slide-4">
+
+            <h3>4. 什麼時候 (shénme shíhou) — When</h3>
+
+            <div class="pattern-display">
+
+                <div class="pattern-code">
+                    Subject + 什麼時候 + Verb？
+                </div>
+
+            </div>
+
+            <div class="grammar-explanation">
+
+                <p>
+                    <strong>什麼時候</strong> asks about a time.
+                    It means <strong>"when."</strong>
+                </p>
+
+                <p>
+                    It can be used to ask about birthdays,
+                    schedules, events, and activities.
+                </p>
+
+            </div>
+
+            <div class="example-sentence">
+
+                <div class="example-hanzi">
+                    你的生日是什麼時候？
+                </div>
+
+                <div class="example-pinyin">
+                    Nǐ de shēngrì shì shénme shíhou?
+                </div>
+
+                <div class="example-english">
+                    When is your birthday?
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- SLIDE 5 -->
+
+        <div class="grammar-slide" id="slide-5">
+
+            <h3>5. 哪裡 (nǎlǐ) — Where</h3>
+
+            <div class="pattern-display">
+
+                <div class="pattern-code">
+                    Subject + 在 + 哪裡？
+                </div>
+
+            </div>
+
+            <div class="grammar-explanation">
+
+                <p>
+                    <strong>哪裡</strong> asks about a place.
+                    It means <strong>"where."</strong>
+                </p>
+
+                <p>
+                    A common structure is
+                    <strong>在 + 哪裡</strong>.
+                </p>
+
+            </div>
+
+            <div class="example-sentence">
+
+                <div class="example-hanzi">
+                    你在哪裡工作？
+                </div>
+
+                <div class="example-pinyin">
+                    Nǐ zài nǎlǐ gōngzuò?
+                </div>
+
+                <div class="example-english">
+                    Where do you work?
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- SLIDE 6 -->
+
+        <div class="grammar-slide" id="slide-6">
+
+            <h3>6. 怎麼 (zěnme) — How</h3>
+
+            <div class="pattern-display">
+
+                <div class="pattern-code">
+                    Subject + 怎麼 + Verb？
+                </div>
+
+            </div>
+
+            <div class="grammar-explanation">
+
+                <p>
+                    <strong>怎麼</strong> asks about the way or method
+                    of doing something. It means <strong>"how."</strong>
+                </p>
+
+            </div>
+
+            <div class="example-sentence">
+
+                <div class="example-hanzi">
+                    你怎麼去學校？
+                </div>
+
+                <div class="example-pinyin">
+                    Nǐ zěnme qù xuéxiào?
+                </div>
+
+                <div class="example-english">
+                    How do you go to school?
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- SLIDE 7 -->
+
+        <div class="grammar-slide" id="slide-7">
+
+            <h3>7. 怎麼樣 (zěnmeyàng) — How / What is ... like?</h3>
+
+            <div class="pattern-display">
+
+                <div class="pattern-code">
+                    Subject + 怎麼樣？
+                </div>
+
+            </div>
+
+            <div class="grammar-explanation">
+
+                <p>
+                    <strong>怎麼樣</strong> asks about a condition,
+                    quality, experience, or description.
+                </p>
+
+                <p>
+                    It can be translated as
+                    <strong>"how is it?"</strong> or
+                    <strong>"what is it like?"</strong>
+                </p>
+
+            </div>
+
+            <div class="example-sentence">
+
+                <div class="example-hanzi">
+                    小美長得怎麼樣？
+                </div>
+
+                <div class="example-pinyin">
+                    Xiǎoměi zhǎng de zěnmeyàng?
+                </div>
+
+                <div class="example-english">
+                    What does Xiaomei look like?
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- SLIDE 8 -->
+
+        <div class="grammar-slide" id="slide-8">
+
+            <h3>8. 怎麼辦 (zěnmebàn) — What should I do?</h3>
+
+            <div class="pattern-display">
+
+                <div class="pattern-code">
+                    Situation + 怎麼辦？
+                </div>
+
+            </div>
+
+            <div class="grammar-explanation">
+
+                <p>
+                    <strong>怎麼辦</strong> asks what someone should do
+                    in a situation.
+                </p>
+
+                <p>
+                    It can mean
+                    <strong>"What should I do?"</strong>
+                    or
+                    <strong>"What should we do?"</strong>
+                    depending on context.
+                </p>
+
+            </div>
+
+            <div class="example-sentence">
+
+                <div class="example-hanzi">
+                    今天下雨，我們怎麼辦？
+                </div>
+
+                <div class="example-pinyin">
+                    Jīntiān xiàyǔ, wǒmen zěnmebàn?
+                </div>
+
+                <div class="example-english">
+                    It is raining today. What should we do?
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- SLIDE 9 -->
+
+        <div class="grammar-slide" id="slide-9">
+
+            <h3>9. 幾 (jǐ) + Measure Word — How Many?</h3>
+
+            <div class="pattern-display">
+
+                <div class="pattern-code">
+                    幾 + Measure Word + Noun？
+                </div>
+
+            </div>
+
+            <div class="grammar-explanation">
+
+                <p>
+                    <strong>幾</strong> asks for a small or specific number.
+                    It is usually followed by a measure word.
+                </p>
+
+                <p>
+                    For example,
+                    <strong>幾點</strong> asks
+                    "what time?"
+                </p>
+
+            </div>
+
+            <div class="example-sentence">
+
+                <div class="example-hanzi">
+                    你幾點上班？
+                </div>
+
+                <div class="example-pinyin">
+                    Nǐ jǐ diǎn shàngbān?
+                </div>
+
+                <div class="example-english">
+                    What time do you go to work?
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- SLIDE 10 -->
+
+        <div class="grammar-slide" id="slide-10">
+
+            <h3>10. 多 + Adjective — How ...?</h3>
+
+            <div class="pattern-display">
+
+                <div class="pattern-code">
+                    多 + Adjective？
+                </div>
+
+            </div>
+
+            <div class="grammar-explanation">
+
+                <p>
+                    <strong>多</strong> can be combined with an adjective
+                    to ask about degree or measurement.
+                </p>
+
+                <p>
+                    <strong>多大</strong> asks
+                    "how old?" or "how big?"
+                    depending on context.
+                </p>
+
+            </div>
+
+            <div class="example-sentence">
+
+                <div class="example-hanzi">
+                    小美多大？
+                </div>
+
+                <div class="example-pinyin">
+                    Xiǎoměi duō dà?
+                </div>
+
+                <div class="example-english">
+                    How old is Xiaomei?
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- SLIDE 11 -->
+
+        <div class="grammar-slide" id="slide-11">
+
+            <h3>11. 哪 (nǎ) — Which</h3>
+
+            <div class="pattern-display">
+
+                <div class="pattern-code">
+                    哪 + Measure Word + Noun？
+                </div>
+
+            </div>
+
+            <div class="grammar-explanation">
+
+                <p>
+                    <strong>哪</strong> asks someone to choose
+                    or identify one item from a group.
+                    It means <strong>"which."</strong>
+                </p>
+
+                <p>
+                    It is normally followed by a measure word
+                    and noun.
+                </p>
+
+            </div>
+
+            <div class="example-sentence">
+
+                <div class="example-hanzi">
+                    你是哪個老師的學生？
+                </div>
+
+                <div class="example-pinyin">
+                    Nǐ shì nǎ ge lǎoshī de xuéshēng?
+                </div>
+
+                <div class="example-english">
+                    Which teacher's student are you?
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="slider-nav">
+
+        <button class="slider-btn" onclick="prevSlide()">
+            ← Prev
+        </button>
+
+        <div class="slider-indicators">
+
+            <span class="indicator active" onclick="currentSlide(1)"></span>
+            <span class="indicator" onclick="currentSlide(2)"></span>
+            <span class="indicator" onclick="currentSlide(3)"></span>
+            <span class="indicator" onclick="currentSlide(4)"></span>
+            <span class="indicator" onclick="currentSlide(5)"></span>
+            <span class="indicator" onclick="currentSlide(6)"></span>
+            <span class="indicator" onclick="currentSlide(7)"></span>
+            <span class="indicator" onclick="currentSlide(8)"></span>
+            <span class="indicator" onclick="currentSlide(9)"></span>
+            <span class="indicator" onclick="currentSlide(10)"></span>
+            <span class="indicator" onclick="currentSlide(11)"></span>
+
+        </div>
+
+        <button class="slider-btn" onclick="nextSlide()">
+            Next →
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     VOCABULARY
+===================================================== -->
+
+<div class="lesson-card">
+
+    <h2>📚 Lesson 17 Vocabulary</h2>
+
+    <p>
+        Tap any vocabulary word to hear its Mandarin pronunciation.
+        Every Lesson 17 vocabulary item is included below.
+    </p>
+
+    <div class="vocab-container">
+
+
+        <div class="vocab-pill" onclick="playAudio('親切')">
+            <div class="hanzi">親切</div>
+            <div class="pinyin">qīnqiè</div>
+            <div class="meaning">kind / friendly</div>
+        </div>
+
+
+        <div class="vocab-pill" onclick="playAudio('所')">
+            <div class="hanzi">所</div>
+            <div class="pinyin">suǒ</div>
+            <div class="meaning">measure word for buildings / institutions</div>
+        </div>
+
+
+        <div class="vocab-pill" onclick="playAudio('休息')">
+            <div class="hanzi">休息</div>
+            <div class="pinyin">xiūxi</div>
+            <div class="meaning">to rest / have a day off</div>
+        </div>
+
+
+        <div class="vocab-pill" onclick="playAudio('坐')">
+            <div class="hanzi">坐</div>
+            <div class="pinyin">zuò</div>
+            <div class="meaning">to take / ride / sit</div>
+        </div>
+
+
+        <div class="vocab-pill" onclick="playAudio('公車')">
+            <div class="hanzi">公車</div>
+            <div class="pinyin">gōngchē</div>
+            <div class="meaning">bus</div>
+        </div>
+
+
+        <div class="vocab-pill" onclick="playAudio('教')">
+            <div class="hanzi">教</div>
+            <div class="pinyin">jiāo</div>
+            <div class="meaning">to teach</div>
+        </div>
+
+
+        <div class="vocab-pill" onclick="playAudio('常常')">
+            <div class="hanzi">常常</div>
+            <div class="pinyin">chángcháng</div>
+            <div class="meaning">often</div>
+        </div>
+
+
+        <div class="vocab-pill" onclick="playAudio('長得')">
+            <div class="hanzi">長得</div>
+            <div class="pinyin">zhǎng de</div>
+            <div class="meaning">to look / appear</div>
+        </div>
+
+
+        <div class="vocab-pill" onclick="playAudio('答案')">
+            <div class="hanzi">答案</div>
+            <div class="pinyin">dá'àn</div>
+            <div class="meaning">answer</div>
+        </div>
+
+
+        <div class="vocab-pill" onclick="playAudio('多大')">
+            <div class="hanzi">多大</div>
+            <div class="pinyin">duō dà</div>
+            <div class="meaning">how old / how big</div>
+        </div>
+
+
+        <div class="vocab-pill" onclick="playAudio('幾點')">
+            <div class="hanzi">幾點</div>
+            <div class="pinyin">jǐ diǎn</div>
+            <div class="meaning">what time</div>
+        </div>
+
+
+        <div class="vocab-pill" onclick="playAudio('怎麼')">
+            <div class="hanzi">怎麼</div>
+            <div class="pinyin">zěnme</div>
+            <div class="meaning">how</div>
+        </div>
+
+
+        <div class="vocab-pill" onclick="playAudio('怎麼樣')">
+            <div class="hanzi">怎麼樣</div>
+            <div class="pinyin">zěnmeyàng</div>
+            <div class="meaning">how / what is ... like</div>
+        </div>
+
+
+        <div class="vocab-pill" onclick="playAudio('怎麼辦')">
+            <div class="hanzi">怎麼辦</div>
+            <div class="pinyin">zěnmebàn</div>
+            <div class="meaning">what should I do</div>
+        </div>
+
+
+        <div class="vocab-pill" onclick="playAudio('為什麼')">
+            <div class="hanzi">為什麼</div>
+            <div class="pinyin">wèishéme</div>
+            <div class="meaning">why</div>
+        </div>
+
+
+        <div class="vocab-pill" onclick="playAudio('誰')">
+            <div class="hanzi">誰</div>
+            <div class="pinyin">shéi</div>
+            <div class="meaning">who</div>
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     GAME 1
+===================================================== -->
+
+<div class="game-card">
+
+    <span class="game-number">GAME 1</span>
+
+    <h2>🧩 Question Word Builder</h2>
+
+    <p class="game-description">
+        Build the correct Mandarin question.
+        Choose the words in the correct order.
+    </p>
+
+    <div class="game-progress">
+        Question <span id="g1Num">1</span> / 5
+    </div>
+
+    <div class="question-box">
+
+        <div class="question-label">
+            Translate into Mandarin:
+        </div>
+
+        <div class="question-meaning"
+             id="g1Meaning">
+        </div>
+
+    </div>
+
+    <div class="answer-area" id="g1Answer">
+
+        <span class="answer-placeholder">
+            Tap the words below
+        </span>
+
+    </div>
+
+    <div class="word-bank" id="g1Bank"></div>
+
+    <div class="game-buttons">
+
+        <button class="check-btn"
+                onclick="checkGame(1)">
+            ✓ Check
+        </button>
+
+        <button class="reset-btn"
+                onclick="resetGame(1)">
+            ↻ Reset
+        </button>
+
+        <button class="listen-btn"
+                onclick="listenCurrent(1)">
+            <i class="fas fa-volume-up"></i>
+        </button>
+
+    </div>
+
+    <div class="feedback"
+         id="g1Feedback">
+    </div>
+
+    <button class="next-game-btn"
+            id="g1Next"
+            onclick="nextGameQuestion(1)">
+        Next →
+    </button>
+
+</div>
+
+
+<!-- =====================================================
+     GAME 2
+===================================================== -->
+
+<div class="game-card">
+
+    <span class="game-number">GAME 2</span>
+
+    <h2>🚌 Xiaomei's Daily Life</h2>
+
+    <p class="game-description">
+        Build sentences using Lesson 17 vocabulary
+        from Xiaomei's story.
+    </p>
+
+    <div class="game-progress">
+        Question <span id="g2Num">1</span> / 5
+    </div>
+
+    <div class="question-box">
+
+        <div class="question-label">
+            Translate into Mandarin:
+        </div>
+
+        <div class="question-meaning"
+             id="g2Meaning">
+        </div>
+
+    </div>
+
+    <div class="answer-area" id="g2Answer">
+
+        <span class="answer-placeholder">
+            Tap the words below
+        </span>
+
+    </div>
+
+    <div class="word-bank" id="g2Bank"></div>
+
+    <div class="game-buttons">
+
+        <button class="check-btn"
+                onclick="checkGame(2)">
+            ✓ Check
+        </button>
+
+        <button class="reset-btn"
+                onclick="resetGame(2)">
+            ↻ Reset
+        </button>
+
+        <button class="listen-btn"
+                onclick="listenCurrent(2)">
+            <i class="fas fa-volume-up"></i>
+        </button>
+
+    </div>
+
+    <div class="feedback"
+         id="g2Feedback">
+    </div>
+
+    <button class="next-game-btn"
+            id="g2Next"
+            onclick="nextGameQuestion(2)">
+        Next →
+    </button>
+
+</div>
+
+
+<!-- =====================================================
+     GAME 3
+===================================================== -->
+
+<div class="game-card">
+
+    <span class="game-number">GAME 3</span>
+
+    <h2>🧠 Question Word Challenge</h2>
+
+    <p class="game-description">
+        Practice 誰, 什麼, 哪裡, 為什麼, 怎麼,
+        怎麼樣, 怎麼辦, 幾點, and 多大.
+    </p>
+
+    <div class="game-progress">
+        Question <span id="g3Num">1</span> / 5
+    </div>
+
+    <div class="question-box">
+
+        <div class="question-label">
+            Choose the correct question:
+        </div>
+
+        <div class="question-meaning"
+             id="g3Meaning">
+        </div>
+
+    </div>
+
+    <div class="answer-area" id="g3Answer">
+
+        <span class="answer-placeholder">
+            Tap the words below
+        </span>
+
+    </div>
+
+    <div class="word-bank" id="g3Bank"></div>
+
+    <div class="game-buttons">
+
+        <button class="check-btn"
+                onclick="checkGame(3)">
+            ✓ Check
+        </button>
+
+        <button class="reset-btn"
+                onclick="resetGame(3)">
+            ↻ Reset
+        </button>
+
+        <button class="listen-btn"
+                onclick="listenCurrent(3)">
+            <i class="fas fa-volume-up"></i>
+        </button>
+
+    </div>
+
+    <div class="feedback"
+         id="g3Feedback">
+    </div>
+
+    <button class="next-game-btn"
+            id="g3Next"
+            onclick="nextGameQuestion(3)">
+        Next →
+    </button>
+
+</div>
+
+
+<!-- =====================================================
+     SENTENCE WRITING
+===================================================== -->
+
+<div class="writing-card">
+
+    <h2>📝 Sentence Writing</h2>
+
+    <p>
+        Translate the English prompt into Mandarin.
+        Use Lesson 17 vocabulary and question-word grammar.
+    </p>
+
+    <div class="sentence-writing">
+
+        <div class="sentence-prompt"
+             id="sentencePrompt">
+        </div>
+
+        <div class="sentence-hint">
+            Write the Mandarin sentence in Hanzi.
+        </div>
+
+        <input
+            type="text"
+            id="sentenceInput"
+            placeholder="Type Hanzi here..."
+            autocomplete="off"
+        >
+
+        <button class="check-writing"
+                onclick="checkSentenceWriting()">
+            Check Answer
+        </button>
+
+        <div class="feedback"
+             id="sentenceFeedback">
+        </div>
+
+        <button class="next-game-btn"
+                id="nextSentenceBtn"
+                onclick="nextSentenceWriting()">
+            Next →
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     HANZI WRITING
+===================================================== -->
+
+<div class="writing-card">
+
+    <h2>✍️ Hanzi Writing Practice</h2>
+
+    <p>
+        Practice every Lesson 17 vocabulary item character by character.
+        Every character from every vocabulary word is included.
+    </p>
+
+    <div class="writing-mode-buttons">
+
+        <button class="mode-btn active"
+                onclick="setWritingMode('quiz',this)">
+            ✍️ Quiz
+        </button>
+
+        <button class="mode-btn"
+                onclick="setWritingMode('animate',this)">
+            👀 Animate
+        </button>
+
+    </div>
+
+    <div class="writing-info"
+         id="writingInfo">
+        Loading...
+    </div>
+
+    <div class="canvas-wrapper">
+
+        <div id="target-div"></div>
+
+    </div>
+
+    <div class="feedback"
+         id="writingFeedback">
+    </div>
+
+    <div class="writing-buttons">
+
+        <button class="write-btn clear-btn"
+                onclick="resetWritingQuiz()">
+            ↻ Retry
+        </button>
+
+        <button class="write-btn"
+                style="background:#f0f7f4;color:#2d6a4f;"
+                onclick="playCurrentWriting()">
+            <i class="fas fa-volume-up"></i>
+            Listen
+        </button>
+
+        <button class="write-btn next-write-btn"
+                onclick="nextWritingCharacter()">
+            Next →
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     GRAMMAR MASTER
+===================================================== -->
+
+<div class="final-card">
+
+    <span class="game-number">
+        FINAL CHALLENGE
+    </span>
+
+    <h2>🏆 Grammar Master</h2>
+
+    <p>
+        Test yourself with exactly 10 questions:
+        5 Lesson 17 questions and 5 random review questions
+        from Lessons 1–16.
+    </p>
+
+    <div class="grammar-explanation">
+
+        <p>
+            <strong>Grammar Master Structure</strong>
+        </p>
+
+        <p>
+            5 questions are created directly in this Lesson 17 HTML.
+            The other 5 questions are loaded randomly from
+            <strong>reviewQuestions</strong> in Lessons 1–16
+            of the master <strong>lesson.js</strong> database.
+        </p>
+
+        <p>
+            The 10 questions are shuffled so that Lesson 17 and
+            review questions do not always appear in the same order.
+        </p>
+
+    </div>
+
+    <div class="final-progress-bar">
+
+        <div class="final-progress-fill"
+             id="finalProgressFill">
+        </div>
+
+    </div>
+
+    <div class="question-box">
+
+        <div class="question-label">
+
+            Question
+            <span id="finalNum">1</span>
+            / 10
+
+        </div>
+
+        <div class="question-meaning"
+             id="finalMeaning">
+            Loading Grammar Master...
+        </div>
+
+    </div>
+
+    <div class="answer-area"
+         id="finalAnswer">
+
+        <span class="answer-placeholder">
+            Build your answer
+        </span>
+
+    </div>
+
+    <div class="word-bank"
+         id="finalBank">
+    </div>
+
+    <button class="check-btn"
+            style="width:100%;"
+            onclick="checkFinal()">
+
+        ✓ Check Final Answer
+
+    </button>
+
+    <button class="reset-btn"
+            onclick="resetFinal()"
+            style="width:100%;margin-top:8px;">
+
+        ↻ Reset Answer
+
+    </button>
+
+    <div class="feedback"
+         id="finalFeedback">
+    </div>
+
+    <div class="final-score"
+         id="finalScore">
+
+        0 / 10
+
+    </div>
+
+    <div class="final-error"
+         id="finalError">
+    </div>
+
+    <div class="unlock"
+         id="unlockBox"
+         style="display:none;">
+
+        🎉 <strong>Grammar Master Unlocked!</strong>
+
+        <p>
+            You completed all 10 Grammar Master questions.
+        </p>
+
+    </div>
+
+</div>
+
+
+</main>
+</div>
+
+
+<script>
+
+/* =====================================================
+   AUDIO
+===================================================== */
+
+function playAudio(text){
+
+    if(!("speechSynthesis" in window)) return;
+
+    window.speechSynthesis.cancel();
+
+    const utterance =
+        new SpeechSynthesisUtterance(text);
+
+    utterance.lang = "zh-TW";
+    utterance.rate = 0.82;
+    utterance.pitch = 1;
+
+    window.speechSynthesis.speak(utterance);
+
+}
+
+
+function playReadingText(){
+
+    const text =
+        "我有一個朋友，她叫小美。" +
+        "她很漂亮，也很親切。" +
+        "她是老師，在一所學校工作。" +
+        "她每天早上七點去上班。" +
+        "她星期一到星期六都工作，星期日休息。" +
+        "她每天坐公車去學校。" +
+        "她很喜歡她的工作，因為她喜歡教學生。" +
+        "她今年二十五歲。" +
+        "她的生日是二零二一年一月二十三日。" +
+        "她有很多學生，每天都很忙。" +
+        "星期日她不上班，她常常在家看電視、聽音樂。";
+
+    playAudio(text);
+
+}
+
+
+/* =====================================================
+   ANSWER TOGGLE
+===================================================== */
+
+function toggleAnswer(button){
+
+    const answer =
+        button.nextElementSibling;
+
+    answer.classList.toggle("show");
+
+    if(answer.classList.contains("show")){
+
+        button.textContent =
+            "🙈 Hide Answer";
+
+    } else {
+
+        button.textContent =
+            "👁 Show Answer";
+
+    }
+
+}
+
+
+/* =====================================================
+   GRAMMAR SLIDER
+===================================================== */
+
+let currentSlideIndex = 0;
+
+const totalSlides = 11;
+
+
+function showSlide(index){
+
+    if(index >= totalSlides){
+
+        currentSlideIndex = 0;
+
+    } else if(index < 0){
+
+        currentSlideIndex =
+            totalSlides - 1;
+
+    } else {
+
+        currentSlideIndex = index;
+
+    }
+
+
+    for(let i = 1; i <= totalSlides; i++){
+
+        document
+            .getElementById("slide-" + i)
+            .classList
+            .remove("active-slide");
+
+    }
+
+
+    document
+        .querySelectorAll(".indicator")
+        .forEach(indicator => {
+
+            indicator.classList.remove("active");
+
+        });
+
+
+    document
+        .getElementById(
+            "slide-" + (currentSlideIndex + 1)
+        )
+        .classList
+        .add("active-slide");
+
+
+    document
+        .querySelectorAll(".indicator")
+        [currentSlideIndex]
+        .classList
+        .add("active");
+
+}
+
+
+function nextSlide(){
+
+    showSlide(
+        currentSlideIndex + 1
+    );
+
+}
+
+
+function prevSlide(){
+
+    showSlide(
+        currentSlideIndex - 1
+    );
+
+}
+
+
+function currentSlide(n){
+
+    showSlide(n - 1);
+
+}
+
+
+/* =====================================================
+   SHUFFLE
+===================================================== */
+
+function shuffle(array){
+
+    const result = [...array];
+
+    for(
+        let i = result.length - 1;
+        i > 0;
+        i--
+    ){
+
+        const j =
+            Math.floor(
+                Math.random() * (i + 1)
+            );
+
+        [
+            result[i],
+            result[j]
+        ] =
+        [
+            result[j],
+            result[i]
+        ];
+
+    }
+
+    return result;
+
+}
+
+
+/* =====================================================
+   GAME DATA
+===================================================== */
+
+const games = {
+
+    1: [
+
+        {
+            meaning:"Who is my friend?",
+            answer:["誰","是","我的","朋友"]
+        },
+
+        {
+            meaning:"Where does Xiaomei work?",
+            answer:["小美","在","學校","工作"]
+        },
+
+        {
+            meaning:"Why does Xiaomei like her job?",
+            answer:["小美","為什麼","喜歡","她的","工作"]
+        },
+
+        {
+            meaning:"How does Xiaomei go to school?",
+            answer:["小美","怎麼","去","學校"]
+        },
+
+        {
+            meaning:"What time does Xiaomei go to work?",
+            answer:["小美","幾點","去","上班"]
+        }
+
+    ],
+
+
+    2: [
+
+        {
+            meaning:"Xiaomei is very kind.",
+            answer:["小美","很","親切"]
+        },
+
+        {
+            meaning:"Xiaomei takes the bus every day.",
+            answer:["小美","每天","坐","公車"]
+        },
+
+        {
+            meaning:"She teaches students.",
+            answer:["她","教","學生"]
+        },
+
+        {
+            meaning:"She often rests at home on Sunday.",
+            answer:["她","星期日","常常","在家","休息"]
+        },
+
+        {
+            meaning:"She works at a school.",
+            answer:["她","在","一","所","學校","工作"]
+        }
+
+    ],
+
+
+    3: [
+
+        {
+            meaning:"What does Xiaomei look like?",
+            answer:["小美","長得","怎麼樣"]
+        },
+
+        {
+            meaning:"How old is Xiaomei?",
+            answer:["小美","多大"]
+        },
+
+        {
+            meaning:"What time do you go to work?",
+            answer:["你","幾點","去","上班"]
+        },
+
+        {
+            meaning:"What should we do?",
+            answer:["我們","怎麼辦"]
+        },
+
+        {
+            meaning:"Who is the teacher?",
+            answer:["誰","是","老師"]
+        }
+
+    ]
+
+};
+
+
+/* =====================================================
+   GAME STATE
+===================================================== */
+
+const gameState = {
+
+    1:{
+        index:0,
+        selected:[],
+        done:false
+    },
+
+    2:{
+        index:0,
+        selected:[],
+        done:false
+    },
+
+    3:{
+        index:0,
+        selected:[],
+        done:false
+    }
+
+};
+
+
+/* =====================================================
+   LOAD GAME
+===================================================== */
+
+function loadGame(gameNumber){
+
+    const state =
+        gameState[gameNumber];
+
+    const data =
+        games[gameNumber][state.index];
+
+
+    state.selected = [];
+
+    state.done = false;
+
+
+    document
+        .getElementById(
+            "g" + gameNumber + "Num"
+        )
+        .textContent =
+        state.index + 1;
+
+
+    document
+        .getElementById(
+            "g" + gameNumber + "Meaning"
+        )
+        .textContent =
+        data.meaning;
+
+
+    const answer =
+        document.getElementById(
+            "g" + gameNumber + "Answer"
+        );
+
+
+    answer.innerHTML =
+        '<span class="answer-placeholder">' +
+        'Tap the words below' +
+        '</span>';
+
+
+    const bank =
+        document.getElementById(
+            "g" + gameNumber + "Bank"
+        );
+
+
+    bank.innerHTML = "";
+
+
+    shuffle(data.answer).forEach(word => {
+
+        const button =
+            document.createElement("button");
+
+        button.className =
+            "word-btn";
+
+        button.textContent =
+            word;
+
+
+        button.onclick = function(){
+
+            if(this.disabled) return;
+
+            selectWord(
+                gameNumber,
+                this,
+                word
+            );
+
+        };
+
+
+        bank.appendChild(button);
+
+    });
+
+
+    document
+        .getElementById(
+            "g" + gameNumber + "Feedback"
+        )
+        .textContent = "";
+
+
+    document
+        .getElementById(
+            "g" + gameNumber + "Next"
+        )
+        .style.display =
+        "none";
+
+}
+
+
+/* =====================================================
+   GAME WORD SELECTION
+===================================================== */
+
+function selectWord(
+    gameNumber,
+    button,
+    word
+){
+
+    gameState[gameNumber]
+        .selected
+        .push(word);
+
+
+    button.disabled = true;
+
+    button.classList.add("selected");
+
+
+    playAudio(word);
+
+    renderSelected(gameNumber);
+
+}
+
+
+function renderSelected(gameNumber){
+
+    const answer =
+        document.getElementById(
+            "g" + gameNumber + "Answer"
+        );
+
+
+    answer.innerHTML = "";
+
+
+    gameState[gameNumber]
+        .selected
+        .forEach(word => {
+
+            const span =
+                document.createElement("span");
+
+            span.className =
+                "selected-word";
+
+            span.textContent =
+                word;
+
+            span.onclick =
+                function(){
+
+                    playAudio(word);
+
+                };
+
+            answer.appendChild(span);
+
+        });
+
+}
+
+
+/* =====================================================
+   GAME CHECK
+===================================================== */
+
+function checkGame(gameNumber){
+
+    const state =
+        gameState[gameNumber];
+
+
+    const correct =
+        games[gameNumber][state.index]
+            .answer;
+
+
+    const selected =
+        state.selected;
+
+
+    const feedback =
+        document.getElementById(
+            "g" + gameNumber + "Feedback"
+        );
+
+
+    if(
+        selected.length !==
+        correct.length
+    ){
+
+        feedback.textContent =
+            "⚠️ Complete the sentence first.";
+
+        feedback.className =
+            "feedback incorrect";
+
+        return;
+
+    }
+
+
+    const isCorrect =
+        selected.every(
+            (word,index) =>
+                word === correct[index]
+        );
+
+
+    if(isCorrect){
+
+        feedback.textContent =
+            "🎉 Correct!";
+
+        feedback.className =
+            "feedback correct";
+
+
+        state.done = true;
+
+
+        playAudio(
+            correct.join("")
+        );
+
+
+        document
+            .getElementById(
+                "g" + gameNumber + "Next"
+            )
+            .style.display =
+            "block";
+
+    } else {
+
+        feedback.textContent =
+            "❌ Not quite. Check the word order.";
+
+        feedback.className =
+            "feedback incorrect";
+
+    }
+
+}
+
+
+function resetGame(gameNumber){
+
+    loadGame(gameNumber);
+
+}
+
+
+function nextGameQuestion(gameNumber){
+
+    const state =
+        gameState[gameNumber];
+
+
+    if(!state.done) return;
+
+
+    state.index++;
+
+
+    if(
+        state.index >=
+        games[gameNumber].length
+    ){
+
+        state.index = 0;
+
+    }
+
+
+    loadGame(gameNumber);
+
+}
+
+
+function listenCurrent(gameNumber){
+
+    const state =
+        gameState[gameNumber];
+
+
+    playAudio(
+        games[gameNumber][state.index]
+            .answer
+            .join("")
+    );
+
+}
+
+
+/* =====================================================
+   SENTENCE WRITING
+===================================================== */
+
+const sentenceQuestions = [
+
+    {
+        prompt:"Who is my friend?",
+        answer:"誰是我的朋友"
+    },
+
+    {
+        prompt:"Where does Xiaomei work?",
+        answer:"小美在哪裡工作"
+    },
+
+    {
+        prompt:"Why does Xiaomei like her job?",
+        answer:"小美為什麼喜歡她的工作"
+    },
+
+    {
+        prompt:"How does Xiaomei go to school?",
+        answer:"小美怎麼去學校"
+    },
+
+    {
+        prompt:"What time does Xiaomei go to work?",
+        answer:"小美幾點去上班"
+    },
+
+    {
+        prompt:"How old is Xiaomei?",
+        answer:"小美多大"
+    },
+
+    {
+        prompt:"What does Xiaomei look like?",
+        answer:"小美長得怎麼樣"
+    },
+
+    {
+        prompt:"What should we do?",
+        answer:"我們怎麼辦"
+    }
+
+];
+
+
+let sentenceIndex = 0;
+
+
+function loadSentenceWriting(){
+
+    const q =
+        sentenceQuestions[sentenceIndex];
+
+
+    document
+        .getElementById("sentencePrompt")
+        .textContent =
+        q.prompt;
+
+
+    document
+        .getElementById("sentenceInput")
+        .value = "";
+
+
+    document
+        .getElementById("sentenceFeedback")
+        .textContent = "";
+
+
+    document
+        .getElementById("nextSentenceBtn")
+        .style.display =
+        "none";
+
+}
+
+
+function normalizeChinese(text){
+
+    return text
+        .trim()
+        .replace(/[。，？！、,.!?]/g,"")
+        .replace(/\s+/g,"");
+
+}
+
+
+function checkSentenceWriting(){
+
+    const input =
+        normalizeChinese(
+            document
+                .getElementById("sentenceInput")
+                .value
+        );
+
+
+    const correct =
+        normalizeChinese(
+            sentenceQuestions[sentenceIndex]
+                .answer
+        );
+
+
+    const feedback =
+        document
+            .getElementById(
+                "sentenceFeedback"
+            );
+
+
+    if(input === correct){
+
+        feedback.textContent =
+            "🎉 Perfect!";
+
+        feedback.className =
+            "feedback correct";
+
+
+        playAudio(correct);
+
+
+        document
+            .getElementById(
+                "nextSentenceBtn"
+            )
+            .style.display =
+            "block";
+
+    } else {
+
+        feedback.textContent =
+            "❌ Try again. Check the word order and grammar.";
+
+        feedback.className =
+            "feedback incorrect";
+
+    }
+
+}
+
+
+function nextSentenceWriting(){
+
+    sentenceIndex++;
+
+
+    if(
+        sentenceIndex >=
+        sentenceQuestions.length
+    ){
+
+        sentenceIndex = 0;
+
+    }
+
+
+    loadSentenceWriting();
+
+}
+
+
+/* =====================================================
+   LESSON 17 VOCABULARY
+   Used by Hanzi Writing Practice
+===================================================== */
+
+const lesson17Vocabulary = [
+
+    ["親切","qīnqiè","kind / friendly"],
+
+    ["所","suǒ","measure word for buildings / institutions"],
+
+    ["休息","xiūxi","to rest / have a day off"],
+
+    ["坐","zuò","to take / ride / sit"],
+
+    ["公車","gōngchē","bus"],
+
+    ["教","jiāo","to teach"],
+
+    ["常常","chángcháng","often"],
+
+    ["長得","zhǎng de","to look / appear"],
+
+    ["答案","dá'àn","answer"],
+
+    ["多大","duō dà","how old / how big"],
+
+    ["幾點","jǐ diǎn","what time"],
+
+    ["怎麼","zěnme","how"],
+
+    ["怎麼樣","zěnmeyàng","how / what is ... like"],
+
+    ["怎麼辦","zěnmebàn","what should I do"],
+
+    ["為什麼","wèishéme","why"],
+
+    ["誰","shéi","who"]
+
+];
+
+
+/* =====================================================
+   HANZI WRITING CHARACTERS
+   EVERY VOCAB CHARACTER INCLUDED
+===================================================== */
+
+const writingCharacters = [];
+
+const seenWritingCharacters =
+    new Set();
+
+
+lesson17Vocabulary.forEach(item => {
+
+    const word =
+        item[0];
+
+    const pinyin =
+        item[1];
+
+    const meaning =
+        item[2];
+
+
+    [...word].forEach(character => {
+
+        if(
+            !seenWritingCharacters
+                .has(character)
+        ){
+
+            seenWritingCharacters
+                .add(character);
+
+
+            writingCharacters.push({
+
+                hanzi:character,
+
+                pinyin:pinyin,
+
+                meaning:
+                    "Character from " +
+                    word +
+                    " — " +
+                    meaning
+
+            });
+
+        }
+
+    });
+
+});
+
+
+let writingIndex = 0;
+
+let writingMode = "quiz";
+
+let writer = null;
+
+
+function initWriter(){
+
+    const item =
+        writingCharacters[writingIndex];
+
+
+    document
+        .getElementById("target-div")
+        .innerHTML = "";
+
+
+    const info =
+        document
+            .getElementById(
+                "writingInfo"
+            );
+
+
+    if(writingMode === "quiz"){
+
+        info.innerHTML =
+            `Write <strong>${item.hanzi}</strong>
+             following the correct stroke order!
+             <br>
+             <small>${item.pinyin} — ${item.meaning}</small>
+             <br>
+             (${writingIndex + 1}/${writingCharacters.length})`;
+
+    } else {
+
+        info.innerHTML =
+            `Watch the stroke order for
+             <strong>${item.hanzi}</strong>.
+             <br>
+             <small>${item.pinyin} — ${item.meaning}</small>
+             <br>
+             (${writingIndex + 1}/${writingCharacters.length})`;
+
+    }
+
+
+    writer =
+        HanziWriter.create(
+            "target-div",
+            item.hanzi,
+            {
+                width:260,
+                height:260,
+                padding:10,
+                showOutline:true,
+                strokeAnimationSpeed:1,
+                drawingColor:"#5c4033",
+                strokeHighlightColor:"#b8865c",
+                showCharacter:
+                    writingMode === "animate"
+            }
+        );
+
+
+    if(writingMode === "quiz"){
+
+        startQuiz();
+
+    } else {
+
+        writer.animateCharacter();
+
+    }
+
+}
+
+
+function startQuiz(){
+
+    const feedback =
+        document
+            .getElementById(
+                "writingFeedback"
+            );
+
+
+    feedback.textContent = "";
+
+
+    writer.quiz({
+
+        onMistake:function(){
+
+            feedback.textContent =
+                "❌ Incorrect stroke order! Try again.";
+
+            feedback.className =
+                "feedback incorrect";
+
+        },
+
+
+        onCorrectStroke:function(){
+
+            feedback.textContent =
+                "✨ Great! Continue with the next stroke.";
+
+            feedback.className =
+                "feedback correct";
+
+        },
+
+
+        onComplete:function(){
+
+            feedback.textContent =
+                "🎉 Perfect! Correct stroke order.";
+
+            feedback.className =
+                "feedback correct";
+
+        }
+
+    });
+
+}
+
+
+function setWritingMode(mode,button){
+
+    writingMode = mode;
+
+
+    document
+        .querySelectorAll(
+            ".writing-card .mode-btn"
+        )
+        .forEach(btn => {
+
+            btn.classList.remove("active");
+
+        });
+
+
+    button.classList.add("active");
+
+
+    initWriter();
+
+}
+
+
+function resetWritingQuiz(){
+
+    initWriter();
+
+}
+
+
+function nextWritingCharacter(){
+
+    writingIndex++;
+
+
+    if(
+        writingIndex >=
+        writingCharacters.length
+    ){
+
+        writingIndex = 0;
+
+    }
+
+
+    initWriter();
+
+}
+
+
+function playCurrentWriting(){
+
+    playAudio(
+        writingCharacters[writingIndex]
+            .hanzi
+    );
+
+}
+
+
+/* =====================================================
+   GRAMMAR MASTER
+===================================================== */
+
+/*
+ * IMPORTANT:
+ * These 5 questions belong directly to Lesson 17.
+ * They are NOT loaded from lesson.js.
+ */
+
+const htmlFinalQuestions = [
+
+    {
+        meaning:"Who is my friend?",
+        answer:["誰","是","我的","朋友"],
+        source:"Lesson 17"
+    },
+
+    {
+        meaning:"Where does Xiaomei work?",
+        answer:["小美","在","哪裡","工作"],
+        source:"Lesson 17"
+    },
+
+    {
+        meaning:"Why does Xiaomei like her job?",
+        answer:["小美","為什麼","喜歡","她的","工作"],
+        source:"Lesson 17"
+    },
+
+    {
+        meaning:"How does Xiaomei go to school?",
+        answer:["小美","怎麼","去","學校"],
+        source:"Lesson 17"
+    },
+
+    {
+        meaning:"How old is Xiaomei?",
+        answer:["小美","多大"],
+        source:"Lesson 17"
+    }
+
+];
+
+
+let finalQuestions = [];
+
+let finalIndex = 0;
+
+let finalScore = 0;
+
+let finalSelected = [];
+
+let finalInitialized = false;
+
+
+/* =====================================================
+   NORMALIZE REVIEW QUESTION
+===================================================== */
+
+function normalizeReviewQuestion(question,lessonNumber){
+
+    if(!question) return null;
+
+
+    if(
+        typeof question.meaning !== "string"
+    ){
+
+        return null;
+
+    }
+
+
+    if(
+        !Array.isArray(question.answer) ||
+        question.answer.length === 0
+    ){
+
+        return null;
+
+    }
+
+
+    return {
+
+        meaning:question.meaning,
+
+        answer:[...question.answer],
+
+        source:
+            "Review Lesson " +
+            lessonNumber
+
+    };
+
+}
+
+
+/* =====================================================
+   GET REVIEW QUESTIONS FROM LESSONS 1–16
+===================================================== */
+
+/*
+ * This function NEVER reads Lesson 17.
+ *
+ * It first collects valid reviewQuestions from every
+ * available lesson from 1 through 16.
+ *
+ * When possible, it selects questions from different
+ * previous lessons so the system does not repeatedly
+ * choose only Lessons 1–3.
+ */
+
+function getRandomReviewQuestions(){
+
+    if(
+        typeof allLessonsData ===
+        "undefined"
+    ){
+
+        return {
+
+            questions:[],
+
+            error:
+                "lesson.js could not be loaded. " +
+                "The review database is unavailable."
+
+        };
+
+    }
+
+
+    const lessonPools = [];
+
+
+    for(
+        let lessonNumber = 1;
+        lessonNumber <= 16;
+        lessonNumber++
+    ){
+
+        const lesson =
+            allLessonsData[lessonNumber];
+
+
+        if(!lesson){
+
+            continue;
+
+        }
+
+
+        if(
+            !Array.isArray(
+                lesson.reviewQuestions
+            )
+        ){
+
+            continue;
+
+        }
+
+
+        const validQuestions =
+            lesson.reviewQuestions
+                .map(question =>
+                    normalizeReviewQuestion(
+                        question,
+                        lessonNumber
+                    )
+                )
+                .filter(Boolean);
+
+
+        if(validQuestions.length > 0){
+
+            lessonPools.push({
+
+                lessonNumber:lessonNumber,
+
+                questions:
+                    validQuestions
+
+            });
+
+        }
+
+    }
+
+
+    if(lessonPools.length === 0){
+
+        return {
+
+            questions:[],
+
+            error:
+                "No valid reviewQuestions were found " +
+                "in Lessons 1–16 of lesson.js."
+
+        };
+
+    }
+
+
+    /*
+     * Randomize the available lessons first.
+     * This allows review questions to come from the
+     * entire previous lesson range instead of always
+     * starting with Lesson 1.
+     */
+
+    const shuffledPools =
+        shuffle(lessonPools);
+
+
+    const selected = [];
+
+
+    /*
+     * First pass:
+     * take one random question from each of up to
+     * five different previous lessons.
+     */
+
+    shuffledPools
+        .slice(
+            0,
+            Math.min(5,shuffledPools.length)
+        )
+        .forEach(pool => {
+
+            const question =
+                shuffle(pool.questions)[0];
+
+            selected.push(question);
+
+        });
+
+
+    /*
+     * If fewer than five lessons contain review
+     * questions, fill the remaining slots from the
+     * complete pool of valid previous-lesson questions.
+     *
+     * Still no hard-coded fallback is used.
+     */
+
+    if(selected.length < 5){
+
+        const allQuestions = [];
+
+        lessonPools.forEach(pool => {
+
+            pool.questions.forEach(question => {
+
+                allQuestions.push(question);
+
+            });
+
+        });
+
+
+        const selectedKeys =
+            new Set(
+                selected.map(
+                    question =>
+                        question.source +
+                        "|" +
+                        question.meaning +
+                        "|" +
+                        question.answer.join("|")
+                )
+            );
+
+
+        shuffle(allQuestions).forEach(question => {
+
+            if(selected.length >= 5) return;
+
+
+            const key =
+                question.source +
+                "|" +
+                question.meaning +
+                "|" +
+                question.answer.join("|");
+
+
+            if(
+                !selectedKeys.has(key)
+            ){
+
+                selected.push(question);
+
+                selectedKeys.add(key);
+
+            }
+
+        });
+
+    }
+
+
+    if(selected.length < 5){
+
+        return {
+
+            questions:selected,
+
+            error:
+                "Fewer than 5 valid review questions are available " +
+                "from Lessons 1–16 of lesson.js. " +
+                "No hard-coded fallback questions were added."
+
+        };
+
+    }
+
+
+    return {
+
+        questions:
+            shuffle(selected).slice(0,5),
+
+        error:null
+
+    };
+
+}
+
+
+/* =====================================================
+   INITIALIZE GRAMMAR MASTER
+===================================================== */
+
+function initFinalQuestions(){
+
+    const errorBox =
+        document.getElementById(
+            "finalError"
+        );
+
+
+    errorBox.style.display =
+        "none";
+
+
+    errorBox.textContent =
+        "";
+
+
+    /*
+     * HTML Lesson 17 questions.
+     */
+
+    const lesson17Questions =
+        htmlFinalQuestions.map(question => ({
+
+            meaning:
+                question.meaning,
+
+            answer:
+                [...question.answer],
+
+            source:
+                "Lesson 17"
+
+        }));
+
+
+    if(
+        lesson17Questions.length !== 5
+    ){
+
+        showFinalError(
+            "Grammar Master could not create exactly 5 Lesson 17 questions."
+        );
+
+        return false;
+
+    }
+
+
+    /*
+     * lesson.js review questions.
+     */
+
+    const reviewResult =
+        getRandomReviewQuestions();
+
+
+    if(
+        reviewResult.error
+    ){
+
+        showFinalError(
+            reviewResult.error
+        );
+
+        return false;
+
+    }
+
+
+    if(
+        reviewResult.questions.length !== 5
+    ){
+
+        showFinalError(
+            "Grammar Master could not load exactly 5 valid " +
+            "review questions from Lessons 1–16. " +
+            "No fallback questions were added."
+        );
+
+        return false;
+
+    }
+
+
+    /*
+     * Combine exactly:
+     * 5 Lesson 17 + 5 lesson.js review.
+     */
+
+    finalQuestions =
+        shuffle([
+
+            ...lesson17Questions,
+
+            ...reviewResult.questions
+
+        ]);
+
+
+    if(
+        finalQuestions.length !== 10
+    ){
+
+        showFinalError(
+            "Grammar Master initialization failed. " +
+            "The final question set must contain exactly 10 questions."
+        );
+
+        finalQuestions = [];
+
+        return false;
+
+    }
+
+
+    finalInitialized = true;
+
+    return true;
+
+}
+
+
+/* =====================================================
+   FINAL ERROR
+===================================================== */
+
+function showFinalError(message){
+
+    const errorBox =
+        document.getElementById(
+            "finalError"
+        );
+
+
+    errorBox.textContent =
+        "⚠️ " + message;
+
+
+    errorBox.style.display =
+        "block";
+
+
+    document
+        .getElementById("finalMeaning")
+        .textContent =
+        "Grammar Master unavailable.";
+
+
+    document
+        .getElementById("finalBank")
+        .innerHTML =
+        "";
+
+
+    document
+        .getElementById("finalAnswer")
+        .innerHTML =
+        '<span class="answer-placeholder">' +
+        'Review questions could not be loaded.' +
+        '</span>';
+
+}
+
+
+/* =====================================================
+   LOAD FINAL QUESTION
+===================================================== */
+
+function loadFinal(){
+
+    if(!finalInitialized) return;
+
+
+    if(
+        finalIndex >=
+        finalQuestions.length
+    ){
+
+        return;
+
+    }
+
+
+    const q =
+        finalQuestions[finalIndex];
+
+
+    document
+        .getElementById("finalNum")
+        .textContent =
+        finalIndex + 1;
+
+
+    document
+        .getElementById("finalMeaning")
+        .textContent =
+        q.meaning;
+
+
+    finalSelected = [];
+
+
+    document
+        .getElementById("finalAnswer")
+        .innerHTML =
+        '<span class="answer-placeholder">' +
+        'Build your answer' +
+        '</span>';
+
+
+    const bank =
+        document.getElementById(
+            "finalBank"
+        );
+
+
+    bank.innerHTML = "";
+
+
+    shuffle(q.answer).forEach(word => {
+
+        const button =
+            document.createElement("button");
+
+
+        button.className =
+            "word-btn";
+
+
+        button.textContent =
+            word;
+
+
+        button.onclick =
+            function(){
+
+                if(button.disabled) return;
+
+
+                finalSelected.push(word);
+
+
+                button.disabled = true;
+
+                button.classList.add(
+                    "selected"
+                );
+
+
+                playAudio(word);
+
+                renderFinal();
+
+            };
+
+
+        bank.appendChild(button);
+
+    });
+
+
+    document
+        .getElementById(
+            "finalFeedback"
+        )
+        .textContent =
+        "";
+
+
+    updateFinalProgress();
+
+}
+
+
+/* =====================================================
+   FINAL PROGRESS
+===================================================== */
+
+function updateFinalProgress(){
+
+    const percentage =
+        (finalIndex / 10) * 100;
+
+
+    document
+        .getElementById(
+            "finalProgressFill"
+        )
+        .style.width =
+        percentage + "%";
+
+}
+
+
+/* =====================================================
+   FINAL ANSWER RENDER
+===================================================== */
+
+function renderFinal(){
+
+    const area =
+        document.getElementById(
+            "finalAnswer"
+        );
+
+
+    area.innerHTML = "";
+
+
+    finalSelected.forEach(word => {
+
+        const span =
+            document.createElement("span");
+
+
+        span.className =
+            "selected-word";
+
+
+        span.textContent =
+            word;
+
+
+        span.onclick =
+            function(){
+
+                playAudio(word);
+
+            };
+
+
+        area.appendChild(span);
+
+    });
+
+}
+
+
+/* =====================================================
+   RESET FINAL ANSWER
+===================================================== */
+
+function resetFinal(){
+
+    if(!finalInitialized) return;
+
+
+    loadFinal();
+
+}
+
+
+/* =====================================================
+   FINAL CHECK
+===================================================== */
+
+function checkFinal(){
+
+    if(
+        !finalInitialized ||
+        finalQuestions.length !== 10
+    ){
+
+        return;
+
+    }
+
+
+    const correct =
+        finalQuestions[finalIndex]
+            .answer;
+
+
+    const feedback =
+        document.getElementById(
+            "finalFeedback"
+        );
+
+
+    if(
+        finalSelected.length !==
+        correct.length
+    ){
+
+        feedback.textContent =
+            "⚠️ Complete the sentence first.";
+
+        feedback.className =
+            "feedback incorrect";
+
+        return;
+
+    }
+
+
+    const isCorrect =
+        finalSelected.every(
+            (word,index) =>
+                word === correct[index]
+        );
+
+
+    if(isCorrect){
+
+        feedback.textContent =
+            "🎉 Correct!";
+
+        feedback.className =
+            "feedback correct";
+
+
+        finalScore++;
+
+
+        document
+            .getElementById(
+                "finalScore"
+            )
+            .textContent =
+            finalScore + " / 10";
+
+
+        finalIndex++;
+
+
+        updateFinalProgress();
+
+
+        if(
+            finalIndex < 10
+        ){
+
+            setTimeout(
+                loadFinal,
+                650
+            );
+
+        } else {
+
+            document
+                .getElementById(
+                    "finalProgressFill"
+                )
+                .style.width =
+                "100%";
+
+
+            document
+                .getElementById(
+                    "unlockBox"
+                )
+                .style.display =
+                "block";
+
+
+            playAudio("太棒了");
+
+        }
+
+    } else {
+
+        feedback.textContent =
+            "❌ Check the word order and try again.";
+
+        feedback.className =
+            "feedback incorrect";
+
+    }
+
+}
+
+
+/* =====================================================
+   INITIALIZATION
+===================================================== */
+
+loadGame(1);
+
+loadGame(2);
+
+loadGame(3);
+
+loadSentenceWriting();
+
+initWriter();
+
+if(initFinalQuestions()){
+
+    loadFinal();
+
+}
+
+</script>
+
+
+<script src="../script.js"></script>
+
+</body>
+</html>
