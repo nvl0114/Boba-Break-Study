@@ -2174,6 +2174,296 @@ const allLessonsData = {
     ]
 },
 
+
+// ========================================================
+// LESSON 17
+// ========================================================
+17: {
+    grammar: [
+        {
+            id: "question-word-shéi",
+            name: "誰 — Who",
+            category: "Question Words",
+            explanation: "誰 means 'who'. It asks about a person. The question word usually appears in the same position where the answer would appear.",
+            examples: [
+                "誰是我的朋友？",
+                "Shéi shì wǒ de péngyǒu?",
+                "Who is my friend?",
+                "小美是我的朋友。",
+                "Xiǎoměi shì wǒ de péngyǒu.",
+                "Xiaomei is my friend."
+            ]
+        },
+
+        {
+            id: "question-word-shénme",
+            name: "什麼 — What",
+            category: "Question Words",
+            explanation: "什麼 means 'what'. It asks about a thing, information, activity, or identity. It normally appears where the unknown information would appear.",
+            examples: [
+                "你吃什麼？",
+                "Nǐ chī shénme?",
+                "What do you eat?",
+                "你做什麼工作？",
+                "Nǐ zuò shénme gōngzuò?",
+                "What kind of work do you do?"
+            ]
+        },
+
+        {
+            id: "question-word-wèishéme",
+            name: "為什麼 — Why",
+            category: "Question Words",
+            explanation: "為什麼 means 'why'. It asks for a reason. A common pattern is Subject + 為什麼 + Verb.",
+            examples: [
+                "你為什麼學中文？",
+                "Nǐ wèishéme xué Zhōngwén?",
+                "Why do you study Chinese?",
+                "小美為什麼喜歡她的工作？",
+                "Xiǎoměi wèishéme xǐhuān tā de gōngzuò?",
+                "Why does Xiaomei like her job?"
+            ]
+        },
+
+        {
+            id: "question-word-shénme-shíhou",
+            name: "什麼時候 — When",
+            category: "Question Words",
+            explanation: "什麼時候 means 'when'. It asks about a time, such as a birthday, schedule, event, or activity.",
+            examples: [
+                "你的生日是什麼時候？",
+                "Nǐ de shēngrì shì shénme shíhou?",
+                "When is your birthday?",
+                "她的生日是什麼時候？",
+                "Tā de shēngrì shì shénme shíhou?",
+                "When is her birthday?"
+            ]
+        },
+
+        {
+            id: "question-word-nǎlǐ",
+            name: "哪裡 — Where",
+            category: "Question Words",
+            explanation: "哪裡 means 'where'. It asks about a place. A common structure is 在 + 哪裡.",
+            examples: [
+                "你在哪裡工作？",
+                "Nǐ zài nǎlǐ gōngzuò?",
+                "Where do you work?",
+                "小美在哪裡工作？",
+                "Xiǎoměi zài nǎlǐ gōngzuò?",
+                "Where does Xiaomei work?"
+            ]
+        },
+
+        {
+            id: "question-word-zěnme",
+            name: "怎麼 — How",
+            category: "Question Words",
+            explanation: "怎麼 means 'how'. It asks about the way or method of doing something.",
+            examples: [
+                "你怎麼去學校？",
+                "Nǐ zěnme qù xuéxiào?",
+                "How do you go to school?",
+                "小美怎麼去學校？",
+                "Xiǎoměi zěnme qù xuéxiào?",
+                "How does Xiaomei go to school?"
+            ]
+        },
+
+        {
+            id: "question-word-zěnmeyàng",
+            name: "怎麼樣 — How / What is ... like?",
+            category: "Question Words",
+            explanation: "怎麼樣 asks about a condition, quality, experience, or description. It can mean 'how is it?' or 'what is it like?'.",
+            examples: [
+                "小美長得怎麼樣？",
+                "Xiǎoměi zhǎng de zěnmeyàng?",
+                "What does Xiaomei look like?",
+                "今天的天氣怎麼樣？",
+                "Jīntiān de tiānqì zěnmeyàng?",
+                "How is the weather today?"
+            ]
+        },
+
+        {
+            id: "question-word-zěnm bàn",
+            name: "怎麼辦 — What should I do?",
+            category: "Question Words",
+            explanation: "怎麼辦 asks what someone should do in a situation. Depending on context, it can mean 'What should I do?' or 'What should we do?'.",
+            examples: [
+                "今天下雨，我們怎麼辦？",
+                "Jīntiān xiàyǔ, wǒmen zěnmebàn?",
+                "It is raining today. What should we do?",
+                "我忘了帶書，怎麼辦？",
+                "Wǒ wàng le dài shū, zěnmebàn?",
+                "I forgot to bring my book. What should I do?"
+            ]
+        },
+
+        {
+            id: "question-word-jǐ",
+            name: "幾 + Measure Word — How Many / What Number",
+            category: "Question Words",
+            explanation: "幾 asks for a small or specific number and is usually followed by a measure word. 幾點 is commonly used to ask what time it is or when an activity happens.",
+            examples: [
+                "你幾點上班？",
+                "Nǐ jǐ diǎn shàngbān?",
+                "What time do you go to work?",
+                "小美幾點去上班？",
+                "Xiǎoměi jǐ diǎn qù shàngbān?",
+                "What time does Xiaomei go to work?"
+            ]
+        },
+
+        {
+            id: "question-word-duō",
+            name: "多 + Adjective — How ...?",
+            category: "Question Words",
+            explanation: "多 can combine with an adjective to ask about degree or measurement. 多大 can mean 'how old?' when asking about a person's age, or 'how big?' depending on context.",
+            examples: [
+                "小美多大？",
+                "Xiǎoměi duō dà?",
+                "How old is Xiaomei?",
+                "你的房間多大？",
+                "Nǐ de fángjiān duō dà?",
+                "How big is your room?"
+            ]
+        },
+
+        {
+            id: "question-word-nǎ",
+            name: "哪 — Which",
+            category: "Question Words",
+            explanation: "哪 means 'which'. It is normally followed by a measure word and noun when asking someone to identify one item or person from a group.",
+            examples: [
+                "你是哪個老師的學生？",
+                "Nǐ shì nǎ ge lǎoshī de xuéshēng?",
+                "Which teacher's student are you?",
+                "你要哪一杯咖啡？",
+                "Nǐ yào nǎ yì bēi kāfēi?",
+                "Which cup of coffee do you want?"
+            ]
+        }
+    ],
+
+    vocabulary: [
+        {
+            word: "親切",
+            pinyin: "qīnqiè",
+            meaning: "kind / friendly"
+        },
+        {
+            word: "所",
+            pinyin: "suǒ",
+            meaning: "measure word for buildings / institutions"
+        },
+        {
+            word: "休息",
+            pinyin: "xiūxi",
+            meaning: "to rest / have a day off"
+        },
+        {
+            word: "坐",
+            pinyin: "zuò",
+            meaning: "to take / ride / sit"
+        },
+        {
+            word: "公車",
+            pinyin: "gōngchē",
+            meaning: "bus"
+        },
+        {
+            word: "教",
+            pinyin: "jiāo",
+            meaning: "to teach"
+        },
+        {
+            word: "常常",
+            pinyin: "chángcháng",
+            meaning: "often"
+        },
+        {
+            word: "長得",
+            pinyin: "zhǎng de",
+            meaning: "to look / appear"
+        },
+        {
+            word: "答案",
+            pinyin: "dá'àn",
+            meaning: "answer"
+        },
+        {
+            word: "多大",
+            pinyin: "duō dà",
+            meaning: "how old / how big"
+        },
+        {
+            word: "幾點",
+            pinyin: "jǐ diǎn",
+            meaning: "what time"
+        },
+        {
+            word: "怎麼",
+            pinyin: "zěnme",
+            meaning: "how"
+        },
+        {
+            word: "怎麼樣",
+            pinyin: "zěnmeyàng",
+            meaning: "how / what is ... like"
+        },
+        {
+            word: "怎麼辦",
+            pinyin: "zěnmebàn",
+            meaning: "what should I do / what should we do"
+        },
+        {
+            word: "為什麼",
+            pinyin: "wèishéme",
+            meaning: "why"
+        },
+        {
+            word: "誰",
+            pinyin: "shéi",
+            meaning: "who"
+        }
+    ],
+
+    reviewQuestions: [
+        {
+            meaning: "Who is my friend?",
+            answer: ["誰", "是", "我的", "朋友"]
+        },
+        {
+            meaning: "Where does Xiaomei work?",
+            answer: ["小美", "在哪裡", "工作"]
+        },
+        {
+            meaning: "Why does Xiaomei like her job?",
+            answer: ["小美", "為什麼", "喜歡", "她的", "工作"]
+        },
+        {
+            meaning: "How does Xiaomei go to school?",
+            answer: ["小美", "怎麼", "去", "學校"]
+        },
+        {
+            meaning: "What time does Xiaomei go to work?",
+            answer: ["小美", "幾點", "去", "上班"]
+        },
+        {
+            meaning: "How old is Xiaomei?",
+            answer: ["小美", "多大"]
+        },
+        {
+            meaning: "What does Xiaomei look like?",
+            answer: ["小美", "長得", "怎麼樣"]
+        },
+        {
+            meaning: "What should we do?",
+            answer: ["我們", "怎麼辦"]
+        }
+    ]
+},
 };
 // ============================================================
 // MAKE DATABASE AVAILABLE TO HTML
