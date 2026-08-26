@@ -801,11 +801,8 @@ const allLessonsData = {
         {
             meaning: "Sorry. — It's okay.",
             answer: ["對", "不", "起", "沒", "關", "係"]
-        },
-        {
-            meaning: "Do you have another one?",
-            answer: ["你", "有", "另", "外", "一", "個", "嗎"]
         }
+        
     ]
 },
 // ==================== LESSON 10 ====================
