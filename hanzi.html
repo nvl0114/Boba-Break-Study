@@ -1,509 +1,542 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en"><head><link rel="stylesheet" href="style.css">
 
-<head>
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
 
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
 
-    <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <title>Boba Break Study - Stroke Order</title>
+<title>Boba Break Study - Stroke Order</title>
 
 
-    <!-- =========================================
-         HANZI WRITER
-    ========================================== -->
+<!-- =========================================
+     HANZI WRITER
+========================================== -->
 
-    <script src="https://cdn.jsdelivr.net/npm/hanzi-writer@3.5/dist/hanzi-writer.min.js"></script>
-
-
-    <!-- =========================================
-         PINYIN PRO
-    ========================================== -->
-
-    <script src="https://cdn.jsdelivr.net/npm/pinyin-pro@3.16.0/dist/index.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/hanzi-writer@3.5/dist/hanzi-writer.min.js"></script>
 
 
-    <!-- =========================================
-         PINYIN → ZHUYIN
-    ========================================== -->
+<!-- =========================================
+     PINYIN PRO
+========================================== -->
 
-    <script src="https://cdn.jsdelivr.net/npm/pinyin-to-bopomofo@latest/dist/index.umd.js"></script>
-
-
-    <style>
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-        }
+<script src="https://cdn.jsdelivr.net/npm/pinyin-pro@3.16.0/dist/index.js"></script>
 
 
-        body {
-            background-color: #f8f9fa;
-            display: flex;
-            min-height: 100vh;
-        }
+<!-- =========================================
+     PINYIN → ZHUYIN
+========================================== -->
+
+<script src="https://cdn.jsdelivr.net/npm/pinyin-to-bopomofo@latest/dist/index.umd.js"></script>
 
 
-        /* =========================================
-           MAIN CONTENT
-        ========================================== */
+<style>
 
-        .main-content {
-            flex: 1;
-            padding: 20px;
-        }
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+    }
 
 
-        .card {
-            width: 100%;
+    body {
+        background-color: #f8f9fa;
+        display: flex;
+        min-height: 100vh;
+    }
 
-            background: #ffffff;
 
-            border-radius: 12px;
+    /* =========================================
+       MAIN CONTENT
+    ========================================== */
 
-            padding: 20px;
+    .main-content {
+        flex: 1;
+        padding: 20px;
+    }
 
-            margin-bottom: 20px;
+
+    .card {
+        width: 100%;
+        background: #ffffff;
+        border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 20px;
+
+        box-shadow:
+            0 2px 5px rgba(0,0,0,0.03);
+
+        border: 1px solid #eaeaea;
+    }
+
+
+    .card h2 {
+        font-size: 20px;
+        margin-bottom: 15px;
+        color: #111;
+    }
+
+
+    /* =========================================
+       SEARCH
+    ========================================== */
+
+    .search-box {
+        display: flex;
+
+        border: 1px solid #ddd;
+
+        border-radius: 6px;
+
+        overflow: hidden;
+
+        margin-bottom: 8px;
+    }
+
+
+    .search-box input {
+        flex: 1;
+
+        padding: 10px 14px;
+
+        border: none;
+
+        outline: none;
+
+        font-size: 14px;
+    }
+
+
+    .search-box button {
+        background-color: #b5835a;
+
+        color: white;
+
+        border: none;
+
+        padding: 0 20px;
+
+        cursor: pointer;
+
+        font-weight: bold;
+    }
+
+
+    .search-box button:hover {
+        background-color: #9d704c;
+    }
+
+
+    .search-hint {
+        font-size: 12px;
+        color: #666;
+    }
+
+
+    /* =========================================
+       CHARACTER RESULTS
+    ========================================== */
+
+    #results-container {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+
+    .character-result {
+        width: 100%;
+
+        background: #ffffff;
+
+        border: 1px solid #eaeaea;
+
+        border-radius: 12px;
+
+        padding: 20px;
+
+        box-shadow:
+            0 2px 5px rgba(0,0,0,0.03);
+    }
+
+
+    .character-number {
+        font-size: 13px;
+
+        color: #888;
+
+        margin-bottom: 10px;
+
+        text-align: left;
+
+        font-weight: bold;
+    }
+
+
+    /* =========================================
+       STROKE DISPLAY
+    ========================================== */
+
+    .stroke-display {
+
+        width: 100%;
+
+        text-align: center;
+
+        border: 1px solid #eaeaea;
+
+        border-radius: 8px;
+
+        padding: 20px;
+
+        margin-bottom: 15px;
+
+        background: #fff;
+
+        display: flex;
+
+        justify-content: center;
+
+        align-items: center;
+
+    }
+
+
+    .character-target {
+
+        width: 600px;
+
+        height: 300px;
+
+    }
+
+
+    /* =========================================
+       CHARACTER INFO
+    ========================================== */
+
+    .character-info {
+
+        text-align: center;
+
+        font-family:
+            "Comic Sans MS",
+            "Segoe UI",
+            sans-serif;
+
+        margin-top: 15px;
+
+    }
+
+
+    .character-info p {
+
+        font-size: 20px;
+
+        color: #333;
+
+        margin-bottom: 10px;
+
+        font-weight: 500;
+
+    }
+
+
+    .character-info strong {
+
+        color: #b87333;
+
+    }
+
+
+    /* =========================================
+       MEANING
+    ========================================== */
+
+    .meaning-text {
+
+        max-width: 600px;
+
+        margin:
+            0 auto 12px auto;
+
+        line-height: 1.5;
+
+    }
+
+
+    .meaning-label {
+
+        color: #b87333;
+
+        font-weight: bold;
+
+    }
+
+
+    .meaning-value {
+
+        color: #333;
+
+    }
+
+
+    .meaning-loading {
+
+        color: #888;
+
+        font-size: 15px;
+
+    }
+
+
+    .meaning-unavailable {
+
+        color: #999;
+
+        font-size: 15px;
+
+    }
+
+
+    /* =========================================
+       SOUND BUTTON
+    ========================================== */
+
+    .sound-btn {
+
+        margin-top: 5px;
+
+        padding: 9px 18px;
+
+        border: none;
+
+        border-radius: 25px;
+
+        background-color: #b5835a;
+
+        color: white;
+
+        cursor: pointer;
+
+        font-size: 14px;
+
+        font-weight: bold;
+
+        transition:
+            background-color 0.2s ease,
+            transform 0.15s ease,
+            box-shadow 0.2s ease;
+
+    }
+
+
+    .sound-btn:hover {
+
+        background-color: #9d704c;
+
+        transform: translateY(-1px);
+
+    }
+
+
+    .sound-btn:active {
+
+        transform: scale(0.96);
+
+    }
+
+
+    /* =========================================
+       SOUND PLAYING
+    ========================================== */
+
+    .sound-btn.speaking {
+
+        background-color: #765437;
+
+        animation:
+            soundPulse 1.2s infinite;
+
+    }
+
+
+    @keyframes soundPulse {
+
+        0% {
 
             box-shadow:
-                0 2px 5px rgba(0,0,0,0.03);
+                0 0 0 0
+                rgba(181, 131, 90, 0.55);
 
-            border: 1px solid #eaeaea;
         }
 
+        70% {
 
-        .card h2 {
-            font-size: 20px;
+            box-shadow:
+                0 0 0 12px
+                rgba(181, 131, 90, 0);
 
-            margin-bottom: 15px;
-
-            color: #111;
         }
 
+        100% {
 
-        /* =========================================
-           SEARCH
-        ========================================== */
+            box-shadow:
+                0 0 0 0
+                rgba(181, 131, 90, 0);
 
-        .search-box {
-            display: flex;
-
-            border: 1px solid #ddd;
-
-            border-radius: 6px;
-
-            overflow: hidden;
-
-            margin-bottom: 8px;
         }
 
-
-        .search-box input {
-            flex: 1;
-
-            padding: 10px 14px;
-
-            border: none;
-
-            outline: none;
-
-            font-size: 14px;
-        }
+    }
 
 
-        .search-box button {
-            background-color: #b5835a;
+    /* =========================================
+       STROKE LOADING
+    ========================================== */
 
-            color: white;
+    .stroke-loading {
 
-            border: none;
+        color: #888;
 
-            padding: 0 20px;
+        font-size: 13px;
 
-            cursor: pointer;
+        margin-top: 120px;
 
-            font-weight: bold;
-        }
-
-
-        .search-box button:hover {
-            background-color: #9d704c;
-        }
+    }
 
 
-        .search-hint {
-            font-size: 12px;
+    .stroke-error {
 
-            color: #666;
-        }
+        color: #b44;
+
+        font-size: 13px;
+
+        margin-top: 120px;
+
+    }
 
 
-        /* =========================================
-           STROKE DISPLAY
-        ========================================== */
+    /* =========================================
+       MOBILE
+    ========================================== */
+
+    @media screen and (max-width: 768px) {
 
         .stroke-display {
 
-            width: 100%;
+            max-width: 300px;
 
-            text-align: center;
+            margin-left: auto;
 
-            border: 1px solid #eaeaea;
+            margin-right: auto;
 
-            border-radius: 8px;
-
-            padding: 20px;
-
-            margin-bottom: 15px;
-
-            background: #fff;
-
-            display: flex;
-
-            justify-content: center;
-
-            align-items: center;
+            padding: 5px;
 
         }
 
 
-        #character-target {
+        .character-target {
 
-            width: 600px;
+            width: 300px;
 
             height: 300px;
 
         }
 
 
-        /* =========================================
-           CHARACTER INFO
-        ========================================== */
-
-        .character-info {
-
-            text-align: center;
-
-            font-family:
-                "Comic Sans MS",
-                "Segoe UI",
-                sans-serif;
-
-            margin-top: 15px;
-
-        }
-
-
         .character-info p {
 
-            font-size: 20px;
-
-            color: #333;
-
-            margin-bottom: 10px;
-
-            font-weight: 500;
+            font-size: 18px;
 
         }
 
+    }
 
-        .character-info strong {
+</style>
 
-            color: #b87333;
+</head><body><div class="app-container"><!-- =========================================
+     SIDEBAR
+========================================== -->
 
-        }
+<div id="sidebar-container"></div>
 
 
-        /* =========================================
-           MEANING
-        ========================================== */
+<!-- =========================================
+     MAIN CONTENT
+========================================== -->
 
-        .meaning-text {
+<div class="main-content">
 
-            max-width: 600px;
 
-            margin:
-                0 auto 12px auto;
+    <!-- =====================================
+         SEARCH CARD
+    ====================================== -->
 
-            line-height: 1.5;
+    <div class="card">
 
-        }
+        <h2>
+            Hanzi Stroke Order Finder
+        </h2>
 
 
-        .meaning-label {
+        <div class="search-box">
 
-            color: #b87333;
+            <input
+                type="text"
+                id="char-input"
+                placeholder="Enter up to 3 traditional Hanzi characters (e.g. 學中文)"
+                maxlength="3"
+            >
 
-            font-weight: bold;
 
-        }
-
-
-        .meaning-value {
-
-            color: #333;
-
-        }
-
-
-        .meaning-loading {
-
-            color: #888;
-
-            font-size: 15px;
-
-        }
-
-
-        .meaning-unavailable {
-
-            color: #999;
-
-            font-size: 15px;
-
-        }
-
-
-        /* =========================================
-           SOUND BUTTON
-        ========================================== */
-
-        .sound-btn {
-
-            margin-top: 5px;
-
-            padding: 9px 18px;
-
-            border: none;
-
-            border-radius: 25px;
-
-            background-color: #b5835a;
-
-            color: white;
-
-            cursor: pointer;
-
-            font-size: 14px;
-
-            font-weight: bold;
-
-            transition:
-                background-color 0.2s ease,
-                transform 0.15s ease,
-                box-shadow 0.2s ease;
-
-        }
-
-
-        .sound-btn:hover {
-
-            background-color: #9d704c;
-
-            transform: translateY(-1px);
-
-        }
-
-
-        .sound-btn:active {
-
-            transform: scale(0.96);
-
-        }
-
-
-        /* =========================================
-           SOUND PLAYING
-        ========================================== */
-
-        .sound-btn.speaking {
-
-            background-color: #765437;
-
-            animation:
-                soundPulse 1.2s infinite;
-
-        }
-
-
-        @keyframes soundPulse {
-
-            0% {
-
-                box-shadow:
-                    0 0 0 0
-                    rgba(181, 131, 90, 0.55);
-
-            }
-
-            70% {
-
-                box-shadow:
-                    0 0 0 12px
-                    rgba(181, 131, 90, 0);
-
-            }
-
-            100% {
-
-                box-shadow:
-                    0 0 0 0
-                    rgba(181, 131, 90, 0);
-
-            }
-
-        }
-
-
-        /* =========================================
-           STROKE LOADING
-        ========================================== */
-
-        .stroke-loading {
-
-            color: #888;
-
-            font-size: 13px;
-
-            margin-top: 120px;
-
-        }
-
-
-        .stroke-error {
-
-            color: #b44;
-
-            font-size: 13px;
-
-            margin-top: 120px;
-
-        }
-
-
-        /* =========================================
-           MOBILE
-        ========================================== */
-
-        @media screen and (max-width: 768px) {
-
-            .stroke-display {
-
-                max-width: 300px;
-
-                margin-left: auto;
-
-                margin-right: auto;
-
-                padding: 5px;
-
-            }
-
-
-            #character-target {
-
-                width: 300px;
-
-                height: 300px;
-
-            }
-
-
-            .character-info p {
-
-                font-size: 18px;
-
-            }
-
-        }
-
-    </style>
-
-</head>
-
-
-<body>
-
-
-<div class="app-container">
-
-
-    <!-- =========================================
-         SIDEBAR
-    ========================================== -->
-
-    <div id="sidebar-container"></div>
-
-
-    <!-- =========================================
-         MAIN CONTENT
-    ========================================== -->
-
-    <div class="main-content">
-
-
-        <!-- =====================================
-             SEARCH CARD
-        ====================================== -->
-
-        <div class="card">
-
-            <h2>
-                Hanzi Stroke Order Finder
-            </h2>
-
-
-            <div class="search-box">
-
-                <input
-                    type="text"
-                    id="char-input"
-                    placeholder="Enter a traditional Hanzi character (e.g. 學)"
-                    maxlength="1"
-                >
-
-
-                <button id="search-btn">
-                    Search
-                </button>
-
-            </div>
-
-
-            <p class="search-hint">
-
-                Enter a traditional Hanzi character.
-
-            </p>
+            <button id="search-btn">
+                Search
+            </button>
 
         </div>
 
 
+        <p class="search-hint">
 
-        <!-- =====================================
-             RESULT CARD
-        ====================================== -->
+            Enter up to 3 traditional Hanzi characters.
+            Each character will be shown separately.
 
-        <div class="card">
+        </p>
+
+    </div>
 
 
-            <!-- =================================
-                 STROKE ORDER
-            ================================== -->
+
+    <!-- =====================================
+         RESULT CARD
+    ====================================== -->
+
+    <div id="results-container">
+
+
+        <!-- =================================
+             DEFAULT CHARACTER
+        ================================== -->
+
+        <div class="character-result">
+
+
+            <div class="character-number">
+
+                Character 1
+
+            </div>
+
 
             <div class="stroke-display">
 
-                <div id="character-target">
+                <div
+                    class="character-target"
+                    id="character-target-0"
+                >
 
                     <p class="stroke-loading">
                         Loading...
@@ -515,13 +548,9 @@
 
 
 
-            <!-- =================================
-                 CHARACTER INFORMATION
-            ================================== -->
-
             <div
                 class="character-info"
-                id="char-info"
+                id="char-info-0"
             >
 
                 <p>
@@ -571,13 +600,13 @@
 
                 <button
                     class="sound-btn"
-                    id="sound-btn"
-                    onclick="speakChinese()"
+                    id="sound-btn-0"
+                    onclick="speakChinese(0)"
                 >
 
                     🔊
 
-                    <span id="sound-text">
+                    <span id="sound-text-0">
 
                         Listen
 
@@ -587,24 +616,28 @@
 
             </div>
 
-
         </div>
-
 
     </div>
 
+
 </div>
 
-
-
-<script>
+</div><script>
 
 
 /* =========================================
-   CURRENT CHARACTER
+   CURRENT CHARACTERS
 ========================================= */
 
-let currentCharacter = "學";
+let currentCharacters = ["學"];
+
+
+/* =========================================
+   WRITER STORAGE
+========================================= */
+
+let writers = [];
 
 
 /* =========================================
@@ -624,7 +657,6 @@ const strokeOptions = {
     strokeColor: "#333333"
 
 };
-
 
 
 /* =========================================
@@ -768,13 +800,21 @@ function loadOriginalHanziWriterData(
 ========================================= */
 
 function createStrokeWriter(
-    character
+    character,
+    targetId
 ) {
 
     const target =
         document.getElementById(
-            "character-target"
+            targetId
         );
+
+
+    if (!target) {
+
+        return null;
+
+    }
 
 
     target.innerHTML = "";
@@ -790,7 +830,7 @@ function createStrokeWriter(
 
         const writer =
             HanziWriter.create(
-                "character-target",
+                targetId,
                 character,
                 {
 
@@ -817,7 +857,6 @@ function createStrokeWriter(
 
 
                     /*
-                     * IMPORTANT:
                      * Traditional ACJK first,
                      * original dataset second.
                      */
@@ -915,15 +954,6 @@ function createStrokeWriter(
 
 
 /* =========================================
-   INITIAL CHARACTER
-========================================= */
-
-let writer =
-    createStrokeWriter("學");
-
-
-
-/* =========================================
    ELEMENTS
 ========================================= */
 
@@ -939,10 +969,147 @@ const searchButton =
     );
 
 
-const infoBox =
+const resultsContainer =
     document.getElementById(
-        "char-info"
+        "results-container"
     );
+
+
+
+/* =========================================
+   INITIAL CHARACTER
+========================================= */
+
+writers[0] =
+    createStrokeWriter(
+        "學",
+        "character-target-0"
+    );
+
+
+
+/* =========================================
+   CREATE RESULT CARD
+========================================= */
+
+function createCharacterCard(
+    character,
+    index
+) {
+
+    return `
+
+        <div class="character-result">
+
+            <div class="character-number">
+
+                Character ${index + 1}
+
+            </div>
+
+
+            <div class="stroke-display">
+
+                <div
+                    class="character-target"
+                    id="character-target-${index}"
+                >
+
+                    <p class="stroke-loading">
+
+                        Loading...
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div
+                class="character-info"
+                id="char-info-${index}"
+            >
+
+                <p>
+
+                    <strong>Hanzi:</strong>
+
+                    ${character}
+
+                </p>
+
+
+                <p>
+
+                    <strong>Pinyin:</strong>
+
+                    <span id="pinyin-value-${index}">
+
+                        Loading...
+
+                    </span>
+
+                </p>
+
+
+                <p>
+
+                    <strong>Zhuyin:</strong>
+
+                    <span id="zhuyin-value-${index}">
+
+                        Loading...
+
+                    </span>
+
+                </p>
+
+
+                <p class="meaning-text">
+
+                    <span class="meaning-label">
+
+                        Meaning:
+
+                    </span>
+
+
+                    <span
+                        class="meaning-loading"
+                        id="meaning-value-${index}"
+                    >
+
+                        Looking up...
+
+                    </span>
+
+                </p>
+
+
+                <button
+                    class="sound-btn"
+                    id="sound-btn-${index}"
+                    onclick="speakChinese(${index})"
+                >
+
+                    🔊
+
+                    <span id="sound-text-${index}">
+
+                        Listen
+
+                    </span>
+
+                </button>
+
+            </div>
+
+        </div>
+
+    `;
+
+}
 
 
 
@@ -964,16 +1131,15 @@ async function handleSearch() {
 
 
     /*
-     * First character only
+     * Take maximum 3 characters
      */
 
-    const targetChar =
-        val[0];
+    const characters =
+        Array.from(val).slice(0, 3);
 
 
-    currentCharacter =
-        targetChar;
-
+    currentCharacters =
+        characters;
 
 
     /*
@@ -989,112 +1155,75 @@ async function handleSearch() {
     }
 
 
-    resetSoundButton();
-
+    resetAllSoundButtons();
 
 
     /*
-     * Create new stroke writer
+     * Clear old writers
      */
 
-    writer = null;
+    writers = [];
 
 
-    writer =
-        createStrokeWriter(
-            targetChar
+    /*
+     * Create cards
+     */
+
+    resultsContainer.innerHTML = "";
+
+
+    characters.forEach(
+        function(character, index) {
+
+            resultsContainer.insertAdjacentHTML(
+                "beforeend",
+                createCharacterCard(
+                    character,
+                    index
+                )
+            );
+
+        }
+    );
+
+
+    /*
+     * Create stroke writers
+     */
+
+    characters.forEach(
+        function(character, index) {
+
+            writers[index] =
+                createStrokeWriter(
+                    character,
+                    `character-target-${index}`
+                );
+
+        }
+    );
+
+
+    /*
+     * Load dictionary information
+     * independently for each character
+     */
+
+    const dictionaryPromises =
+        characters.map(
+            function(character, index) {
+
+                return loadDictionaryData(
+                    character,
+                    index
+                );
+
+            }
         );
 
 
-
-    /*
-     * Show loading information
-     */
-
-    infoBox.innerHTML = `
-
-        <p>
-
-            <strong>Hanzi:</strong>
-
-            ${targetChar}
-
-        </p>
-
-
-        <p>
-
-            <strong>Pinyin:</strong>
-
-            <span id="pinyin-value">
-
-                Loading...
-
-            </span>
-
-        </p>
-
-
-        <p>
-
-            <strong>Zhuyin:</strong>
-
-            <span id="zhuyin-value">
-
-                Loading...
-
-            </span>
-
-        </p>
-
-
-        <p class="meaning-text">
-
-            <span class="meaning-label">
-
-                Meaning:
-
-            </span>
-
-
-            <span
-                class="meaning-loading"
-                id="meaning-value"
-            >
-
-                Looking up...
-
-            </span>
-
-        </p>
-
-
-        <button
-            class="sound-btn"
-            id="sound-btn"
-            onclick="speakChinese()"
-        >
-
-            🔊
-
-            <span id="sound-text">
-
-                Listen
-
-            </span>
-
-        </button>
-
-    `;
-
-
-
-    /*
-     * Get dictionary information
-     */
-
-    await loadDictionaryData(
-        targetChar
+    await Promise.all(
+        dictionaryPromises
     );
 
 }
@@ -1106,7 +1235,8 @@ async function handleSearch() {
 ========================================= */
 
 async function loadDictionaryData(
-    targetChar
+    targetChar,
+    index
 ) {
 
     const encodedChar =
@@ -1176,7 +1306,7 @@ async function loadDictionaryData(
 
         const pinyinElement =
             document.getElementById(
-                "pinyin-value"
+                `pinyin-value-${index}`
             );
 
 
@@ -1195,7 +1325,7 @@ async function loadDictionaryData(
 
         const zhuyinElement =
             document.getElementById(
-                "zhuyin-value"
+                `zhuyin-value-${index}`
             );
 
 
@@ -1214,7 +1344,7 @@ async function loadDictionaryData(
 
         const meaningElement =
             document.getElementById(
-                "meaning-value"
+                `meaning-value-${index}`
             );
 
 
@@ -1248,6 +1378,7 @@ async function loadDictionaryData(
 
         console.log(
             "Taiwan Mandarin API error:",
+            targetChar,
             error
         );
 
@@ -1316,7 +1447,7 @@ async function loadDictionaryData(
 
         const pinyinElement =
             document.getElementById(
-                "pinyin-value"
+                `pinyin-value-${index}`
             );
 
 
@@ -1335,7 +1466,7 @@ async function loadDictionaryData(
 
         const zhuyinElement =
             document.getElementById(
-                "zhuyin-value"
+                `zhuyin-value-${index}`
             );
 
 
@@ -1354,7 +1485,7 @@ async function loadDictionaryData(
 
         const meaningElement =
             document.getElementById(
-                "meaning-value"
+                `meaning-value-${index}`
             );
 
 
@@ -1408,7 +1539,7 @@ inputField.addEventListener(
    TEXT TO SPEECH
 ========================================= */
 
-function speakChinese() {
+function speakChinese(index) {
 
     if (
         !("speechSynthesis" in window)
@@ -1433,7 +1564,18 @@ function speakChinese() {
 
         speechSynthesis.cancel();
 
-        resetSoundButton();
+        resetAllSoundButtons();
+
+        return;
+
+    }
+
+
+    const character =
+        currentCharacters[index];
+
+
+    if (!character) {
 
         return;
 
@@ -1446,7 +1588,7 @@ function speakChinese() {
 
     const utterance =
         new SpeechSynthesisUtterance(
-            currentCharacter
+            character
         );
 
 
@@ -1478,7 +1620,9 @@ function speakChinese() {
     utterance.onstart =
         function() {
 
-            setSpeakingButton();
+            setSpeakingButton(
+                index
+            );
 
         };
 
@@ -1486,12 +1630,15 @@ function speakChinese() {
 
     /*
      * End
+
      */
 
     utterance.onend =
         function() {
 
-            resetSoundButton();
+            resetSoundButton(
+                index
+            );
 
         };
 
@@ -1504,7 +1651,9 @@ function speakChinese() {
     utterance.onerror =
         function() {
 
-            resetSoundButton();
+            resetSoundButton(
+                index
+            );
 
         };
 
@@ -1524,17 +1673,19 @@ function speakChinese() {
    SOUND BUTTON - PLAYING
 ========================================= */
 
-function setSpeakingButton() {
+function setSpeakingButton(
+    index
+) {
 
     const button =
         document.getElementById(
-            "sound-btn"
+            `sound-btn-${index}`
         );
 
 
     const text =
         document.getElementById(
-            "sound-text"
+            `sound-text-${index}`
         );
 
 
@@ -1565,17 +1716,19 @@ function setSpeakingButton() {
    SOUND BUTTON - RESET
 ========================================= */
 
-function resetSoundButton() {
+function resetSoundButton(
+    index
+) {
 
     const button =
         document.getElementById(
-            "sound-btn"
+            `sound-btn-${index}`
         );
 
 
     const text =
         document.getElementById(
-            "sound-text"
+            `sound-text-${index}`
         );
 
 
@@ -1597,6 +1750,44 @@ function resetSoundButton() {
             "Listen";
 
     }
+
+}
+
+
+
+/* =========================================
+   RESET ALL SOUND BUTTONS
+========================================= */
+
+function resetAllSoundButtons() {
+
+    document
+        .querySelectorAll(
+            ".sound-btn"
+        )
+        .forEach(
+            function(button) {
+
+                button.classList.remove(
+                    "speaking"
+                );
+
+            }
+        );
+
+
+    document
+        .querySelectorAll(
+            "[id^='sound-text-']"
+        )
+        .forEach(
+            function(text) {
+
+                text.textContent =
+                    "Listen";
+
+            }
+        );
 
 }
 
@@ -1950,17 +2141,6 @@ function convertPinyinToZhuyin(
 }
 
 
-</script>
-
-
-
-<!-- =========================================
+</script><!-- =========================================
      YOUR EXISTING SCRIPT
-========================================= -->
-
-<script src="script.js"></script>
-
-
-</body>
-
-</html>
+========================================= --><script src="script.js"></script></body></html>
