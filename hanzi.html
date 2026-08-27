@@ -2343,25 +2343,69 @@ function addTextImageToPDF(
 }
 
 
-
 /* =========================================
-   RENDER FULL CHARACTER TO A PNG
+   FETCH RAW CHARACTER STROKE DATA
    ---------------------------------------
-   Waits for the real "data loaded"
-   callback instead of a fixed timeout,
-   so the captured image is never a
-   half-drawn / mid-animation frame.
+   Returns the raw hanzi-writer-data JSON
+   (with .strokes / .medians arrays) so we
+   can build a stroke-by-stroke sequence,
+   instead of only a finished character.
 ========================================= */
 
-function renderCharacterToPNG(char) {
+function fetchCharacterData(char) {
 
     return new Promise(function(resolve) {
+
+        loadACJKTraditionalData(
+            char,
+            function(data) {
+                resolve(data);
+            },
+            function() {
+                resolve(null);
+            }
+        );
+
+    });
+
+}
+
+
+
+/* =========================================
+   RENDER A CHARACTER-DATA OBJECT TO PNG
+   ---------------------------------------
+   Feeds a (possibly truncated) character
+   data object into a real HanziWriter
+   instance via a custom charDataLoader,
+   waits for the real "data loaded"
+   callback (never a guessed timeout),
+   then snapshots the resulting SVG to a
+   PNG. Because HanziWriter itself does
+   the positioning/scaling, we never have
+   to guess stroke coordinate transforms.
+========================================= */
+
+function renderCharDataToPNG(
+    char,
+    charDataObj,
+    sizePx
+) {
+
+    return new Promise(function(resolve) {
+
+        if (!charDataObj) {
+
+            resolve(null);
+            return;
+
+        }
 
         const tempDiv =
             document.createElement("div");
 
-        tempDiv.style.width = "300px";
-        tempDiv.style.height = "300px";
+        tempDiv.style.width = sizePx + "px";
+        tempDiv.style.height = sizePx + "px";
         tempDiv.style.position = "absolute";
         tempDiv.style.left = "-9999px";
 
@@ -2371,9 +2415,7 @@ function renderCharacterToPNG(char) {
 
             if (tempDiv.parentNode) {
 
-                document.body.removeChild(
-                    tempDiv
-                );
+                document.body.removeChild(tempDiv);
 
             }
 
@@ -2388,176 +2430,116 @@ function renderCharacterToPNG(char) {
                 char,
                 {
 
-                    width: 300,
+                    width: sizePx,
+                    height: sizePx,
+                    padding: Math.round(sizePx * 0.06),
 
-                    height: 300,
-
-                    padding: 10,
-
-                    showOutline: true,
-
+                    showOutline: false,
                     showCharacter: true,
+                    strokeColor: "#1a1a1a",
 
                     charDataLoader:
-                        function(
-                            c,
-                            onComplete,
-                            onError
-                        ) {
+                        function(c, onComplete) {
 
-                            loadACJKTraditionalData(
-                                c,
-                                onComplete,
-                                onError
-                            );
+                            onComplete(charDataObj);
 
                         },
-
 
                     onLoadCharDataSuccess:
                         function() {
 
-                            /*
-                             * Give the SVG two
-                             * animation frames to
-                             * actually paint before
-                             * we snapshot it.
-                             */
+                            requestAnimationFrame(function() {
 
-                            requestAnimationFrame(
-                                function() {
+                                requestAnimationFrame(function() {
 
-                                    requestAnimationFrame(
-                                        function() {
+                                    try {
 
-                                            try {
+                                        const svgEl =
+                                            tempDiv.querySelector("svg");
 
-                                                const svgEl =
-                                                    tempDiv.querySelector(
-                                                        "svg"
-                                                    );
+                                        if (!svgEl) {
 
-                                                if (!svgEl) {
-
-                                                    cleanupAndResolve(
-                                                        null
-                                                    );
-
-                                                    return;
-
-                                                }
-
-                                                const svgString =
-                                                    new XMLSerializer()
-                                                        .serializeToString(
-                                                            svgEl
-                                                        );
-
-                                                const svgBlob =
-                                                    new Blob(
-                                                        [svgString],
-                                                        {
-                                                            type:
-                                                                "image/svg+xml;charset=utf-8"
-                                                        }
-                                                    );
-
-                                                const URLObj =
-                                                    window.URL ||
-                                                    window.webkitURL ||
-                                                    window;
-
-                                                const blobURL =
-                                                    URLObj.createObjectURL(
-                                                        svgBlob
-                                                    );
-
-                                                const img =
-                                                    new Image();
-
-                                                img.onload =
-                                                    function() {
-
-                                                        const canvas =
-                                                            document.createElement(
-                                                                "canvas"
-                                                            );
-
-                                                        canvas.width = 300;
-                                                        canvas.height = 300;
-
-                                                        const ctx2d =
-                                                            canvas.getContext(
-                                                                "2d"
-                                                            );
-
-                                                        ctx2d.drawImage(
-                                                            img,
-                                                            0,
-                                                            0
-                                                        );
-
-                                                        const pngData =
-                                                            canvas.toDataURL(
-                                                                "image/png"
-                                                            );
-
-                                                        URLObj.revokeObjectURL(
-                                                            blobURL
-                                                        );
-
-                                                        cleanupAndResolve(
-                                                            pngData
-                                                        );
-
-                                                    };
-
-                                                img.onerror =
-                                                    function() {
-
-                                                        URLObj.revokeObjectURL(
-                                                            blobURL
-                                                        );
-
-                                                        cleanupAndResolve(
-                                                            null
-                                                        );
-
-                                                    };
-
-                                                img.src =
-                                                    blobURL;
-
-                                            }
-
-                                            catch (e) {
-
-                                                console.log(
-                                                    "Error snapshotting character SVG",
-                                                    e
-                                                );
-
-                                                cleanupAndResolve(
-                                                    null
-                                                );
-
-                                            }
+                                            cleanupAndResolve(null);
+                                            return;
 
                                         }
-                                    );
 
-                                }
-                            );
+                                        const svgString =
+                                            new XMLSerializer()
+                                                .serializeToString(svgEl);
+
+                                        const svgBlob =
+                                            new Blob(
+                                                [svgString],
+                                                { type: "image/svg+xml;charset=utf-8" }
+                                            );
+
+                                        const URLObj =
+                                            window.URL ||
+                                            window.webkitURL ||
+                                            window;
+
+                                        const blobURL =
+                                            URLObj.createObjectURL(svgBlob);
+
+                                        const img = new Image();
+
+                                        img.onload = function() {
+
+                                            const canvas =
+                                                document.createElement("canvas");
+
+                                            canvas.width = sizePx;
+                                            canvas.height = sizePx;
+
+                                            const ctx2d =
+                                                canvas.getContext("2d");
+
+                                            ctx2d.drawImage(
+                                                img, 0, 0, sizePx, sizePx
+                                            );
+
+                                            const pngData =
+                                                canvas.toDataURL("image/png");
+
+                                            URLObj.revokeObjectURL(blobURL);
+
+                                            cleanupAndResolve(pngData);
+
+                                        };
+
+                                        img.onerror = function() {
+
+                                            URLObj.revokeObjectURL(blobURL);
+                                            cleanupAndResolve(null);
+
+                                        };
+
+                                        img.src = blobURL;
+
+                                    }
+
+                                    catch (e) {
+
+                                        console.log(
+                                            "Error snapshotting character SVG",
+                                            e
+                                        );
+
+                                        cleanupAndResolve(null);
+
+                                    }
+
+                                });
+
+                            });
 
                         },
-
 
                     onLoadCharDataError:
                         function() {
 
-                            cleanupAndResolve(
-                                null
-                            );
+                            cleanupAndResolve(null);
 
                         }
 
@@ -2569,7 +2551,7 @@ function renderCharacterToPNG(char) {
         catch (e) {
 
             console.log(
-                "Error creating character writer for PDF",
+                "Error creating writer for PNG render",
                 e
             );
 
@@ -2578,6 +2560,107 @@ function renderCharacterToPNG(char) {
         }
 
     });
+
+}
+
+
+
+/* =========================================
+   BUILD STROKE-BY-STROKE SEQUENCE
+   ---------------------------------------
+   Renders strokes 1, 1-2, 1-2-3, ... up to
+   the full character, by re-rendering the
+   same data truncated to the first N
+   strokes each time. Each render goes
+   through the real HanziWriter pipeline,
+   so the shapes are always correct.
+========================================= */
+
+async function buildStrokeOrderSequence(
+    char,
+    fullData,
+    stepSizePx
+) {
+
+    if (
+        !fullData ||
+        !Array.isArray(fullData.strokes) ||
+        fullData.strokes.length === 0
+    ) {
+
+        return null;
+
+    }
+
+    const total = fullData.strokes.length;
+    const steps = [];
+
+    for (let k = 1; k <= total; k++) {
+
+        const truncatedData =
+            Object.assign(
+                {},
+                fullData,
+                {
+                    strokes: fullData.strokes.slice(0, k),
+                    medians:
+                        Array.isArray(fullData.medians)
+                            ? fullData.medians.slice(0, k)
+                            : fullData.medians
+                }
+            );
+
+        const stepPng =
+            await renderCharDataToPNG(
+                char,
+                truncatedData,
+                stepSizePx
+            );
+
+        steps.push(stepPng);
+
+    }
+
+    return { total: total, steps: steps };
+
+}
+
+
+
+/* =========================================
+   DRAW A LIGHT-OPACITY IMAGE
+   ---------------------------------------
+   Used to turn the solid black character
+   render into a faint tracing guide
+   without needing a second, separately
+   colored asset.
+========================================= */
+
+function addImageWithOpacity(
+    doc,
+    imgData,
+    x,
+    y,
+    w,
+    h,
+    opacity
+) {
+
+    try {
+
+        doc.saveGraphicsState();
+        doc.setGState(new doc.GState({ opacity: opacity }));
+        doc.addImage(imgData, "PNG", x, y, w, h);
+        doc.restoreGraphicsState();
+
+    }
+
+    catch (e) {
+
+        // GState not available - fall back to full opacity
+        doc.addImage(imgData, "PNG", x, y, w, h);
+
+    }
 
 }
 
@@ -2633,31 +2716,139 @@ async function generatePDFWorksheet(index) {
 
         const pageWidth = 210;
         const margin = 15;
-        let currentY = 15;
+        const contentWidth = pageWidth - (margin * 2);
+        let currentY = 18;
 
-        // Header Title (ASCII - safe with doc.text)
-        doc.setFont("Helvetica", "bold");
-        doc.setFontSize(16);
-        doc.setTextColor(50, 50, 50);
-        doc.text("Boba Break Study - Hanzi Writing Worksheet", margin, currentY);
+        /*
+         * Fetch the raw stroke data once, then
+         * derive both the clean full-character
+         * image and the stroke-order sequence
+         * from that same data - no re-fetching,
+         * no timeout guessing.
+         */
 
-        currentY += 8;
+        const fullData = await fetchCharacterData(char);
+
+        const charImgData =
+            await renderCharDataToPNG(char, fullData, 360);
+
+        const strokeSequence =
+            fullData
+                ? await buildStrokeOrderSequence(char, fullData, 200)
+                : null;
+
+        /* ---------------------------------
+           TITLE  (contains Hanzi -> image)
+        ---------------------------------- */
+
+        const titleWidth =
+            addTextImageToPDF(
+                doc,
+                `${char}  Writing Practice`,
+                margin,
+                currentY,
+                20,
+                "#4a90d9",
+                "bold",
+                10
+            );
+
+        currentY += 14;
+
         doc.setFont("Helvetica", "normal");
         doc.setFontSize(10);
         doc.setTextColor(100, 100, 100);
-        doc.text("Name: _______________________    Date: ___________________", margin, currentY);
+        doc.text(
+            "Name: _______________________    Date: ___________________",
+            margin,
+            currentY
+        );
 
         currentY += 10;
 
-        // Character Info Box
-        doc.setFillColor(245, 245, 245);
-        doc.roundedRect(margin, currentY, pageWidth - (margin * 2), 22, 2, 2, "F");
+        /* ---------------------------------
+           STROKE ORDER ROW
+        ---------------------------------- */
 
-        /*
-         * "Character: X" contains a Hanzi glyph,
-         * so it must be rendered as an image,
-         * not as PDF text.
-         */
+        doc.setFillColor(74, 144, 217);
+        doc.roundedRect(margin, currentY - 4.5, 26, 7, 1.5, 1.5, "F");
+
+        doc.setFont("Helvetica", "bold");
+        doc.setFontSize(9);
+        doc.setTextColor(255, 255, 255);
+        doc.text("Stroke Order", margin + 3, currentY);
+
+        if (strokeSequence && strokeSequence.steps.length > 0) {
+
+            const stepBox = 13;
+            const stepGap = 2;
+            const maxPerRow = Math.floor(
+                (contentWidth - 30) / (stepBox + stepGap)
+            );
+
+            let stepX = margin + 30;
+            let stepY = currentY - 6.5;
+            let colCount = 0;
+
+            for (let i = 0; i < strokeSequence.steps.length; i++) {
+
+                if (colCount >= maxPerRow) {
+
+                    colCount = 0;
+                    stepX = margin + 30;
+                    stepY += stepBox + stepGap;
+
+                }
+
+                doc.setDrawColor(220, 220, 220);
+                doc.setLineWidth(0.2);
+                doc.rect(stepX, stepY, stepBox, stepBox);
+
+                const stepImg = strokeSequence.steps[i];
+
+                if (stepImg) {
+
+                    doc.addImage(
+                        stepImg,
+                        "PNG",
+                        stepX + 0.8,
+                        stepY + 0.8,
+                        stepBox - 1.6,
+                        stepBox - 1.6
+                    );
+
+                }
+
+                stepX += stepBox + stepGap;
+                colCount++;
+
+            }
+
+            currentY = stepY + stepBox + 8;
+
+        }
+
+        else {
+
+            doc.setFont("Helvetica", "italic");
+            doc.setFontSize(8);
+            doc.setTextColor(150, 150, 150);
+            doc.text(
+                "Stroke order data unavailable for this character.",
+                margin + 30,
+                currentY
+            );
+
+            currentY += 10;
+
+        }
+
+        /* ---------------------------------
+           CHARACTER INFO BOX
+        ---------------------------------- */
+
+        doc.setFillColor(245, 245, 245);
+        doc.roundedRect(margin, currentY, contentWidth, 22, 2, 2, "F");
 
         addTextImageToPDF(
             doc,
@@ -2670,12 +2861,6 @@ async function generatePDFWorksheet(index) {
             6
         );
 
-        /*
-         * "Pinyin ... | Zhuyin ..." contains tone
-         * marks and Bopomofo symbols, so it also
-         * needs to be rendered as an image.
-         */
-
         addTextImageToPDF(
             doc,
             `Pinyin: ${pinyinText}   |   Zhuyin: ${zhuyinText}`,
@@ -2687,7 +2872,6 @@ async function generatePDFWorksheet(index) {
             5
         );
 
-        // Meaning is plain English/ASCII, safe for doc.text
         doc.setFont("Helvetica", "normal");
         doc.setFontSize(9);
         doc.setTextColor(60, 60, 60);
@@ -2700,46 +2884,89 @@ async function generatePDFWorksheet(index) {
 
         currentY += 30;
 
-        // Render full character image for the practice grid,
-        // waiting for the real load-complete event.
-        const charImgData = await renderCharacterToPNG(char);
+        /* ---------------------------------
+           PRACTICE GRID
+           Row 1: dark example + faded guides
+           Row 2: all faded guides
+           Remaining rows: blank for practice
+        ---------------------------------- */
 
-        // Draw Tianzi Grid (3 rows x 9 cols)
-        const cols = 9;
-        const rows = 3;
-        const boxSize = 16; // mm
-        const startX = margin + (pageWidth - (margin * 2) - (cols * boxSize)) / 2;
+        const cols = 8;
+        const rows = 6;
+        const boxSize = contentWidth / cols;
+        const guidedRows = charImgData ? 2 : 0;
 
         for (let r = 0; r < rows; r++) {
+
             for (let c = 0; c < cols; c++) {
-                const boxX = startX + (c * boxSize);
+
+                const boxX = margin + (c * boxSize);
                 const boxY = currentY + (r * boxSize);
 
                 doc.setDrawColor(180, 180, 180);
                 doc.setLineWidth(0.3);
                 doc.rect(boxX, boxY, boxSize, boxSize);
 
-                doc.setDrawColor(210, 210, 210);
+                doc.setDrawColor(215, 215, 225);
                 doc.setLineDashPattern([0.5, 0.5], 0);
-                doc.line(boxX + (boxSize / 2), boxY, boxX + (boxSize / 2), boxY + boxSize);
-                doc.line(boxX, boxY + (boxSize / 2), boxX + boxSize, boxY + (boxSize / 2));
+                doc.line(
+                    boxX + (boxSize / 2), boxY,
+                    boxX + (boxSize / 2), boxY + boxSize
+                );
+                doc.line(
+                    boxX, boxY + (boxSize / 2),
+                    boxX + boxSize, boxY + (boxSize / 2)
+                );
                 doc.setLineDashPattern([], 0);
 
-                if (r === 0 && c === 0 && charImgData) {
-                    doc.addImage(charImgData, 'PNG', boxX + 1.5, boxY + 1.5, boxSize - 3, boxSize - 3);
+                if (charImgData && r < guidedRows) {
+
+                    const pad = boxSize * 0.08;
+
+                    if (r === 0 && c === 0) {
+
+                        // Bold, dark reference example
+                        doc.addImage(
+                            charImgData, "PNG",
+                            boxX + pad, boxY + pad,
+                            boxSize - (pad * 2), boxSize - (pad * 2)
+                        );
+
+                    }
+
+                    else {
+
+                        // Faint tracing guide
+                        addImageWithOpacity(
+                            doc, charImgData,
+                            boxX + pad, boxY + pad,
+                            boxSize - (pad * 2), boxSize - (pad * 2),
+                            0.22
+                        );
+
+                    }
+
                 }
+
             }
+
         }
 
-        currentY += (rows * boxSize) + 15;
+        currentY += (rows * boxSize) + 10;
 
-        // Footer note (ASCII, safe)
+        /* ---------------------------------
+           FOOTER
+        ---------------------------------- */
+
         doc.setFont("Helvetica", "italic");
         doc.setFontSize(8);
         doc.setTextColor(150, 150, 150);
-        doc.text("Generated by Boba Break Study - Hanzi Stroke & Worksheet Module", margin, 287);
+        doc.text(
+            "Generated by Boba Break Study - Hanzi Stroke & Worksheet Module",
+            margin,
+            290
+        );
 
-        // Save PDF
         doc.save(`BobaBreakStudy_Worksheet_${char}.pdf`);
 
     }
