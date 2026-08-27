@@ -2121,6 +2121,19 @@ function renderTraditionalHanziToPNG(
    from the ACJK stroke PATH DATA.
 
    Hanzi Writer is NOT used here.
+
+   IMPORTANT COORDINATE NOTE:
+   The raw stroke path data (Make Me a Hanzi /
+   hanzi-writer-data / ACJK format) is stored in a
+   1024x1024 box where the Y axis is flipped compared
+   to normal SVG: (0,900) is the top-left and
+   (1024,-124) is the bottom-right - Y DECREASES going
+   down. Rendered as-is in a plain SVG (which assumes Y
+   increases going down), every stroke comes out upside
+   down. The official fix (per Make Me a Hanzi's own
+   docs) is to wrap the strokes in
+   <g transform="scale(1, -1) translate(0, -900)">,
+   which flips the coordinate system back to normal.
 ========================================================= */
 
 function createRawStrokeSVG(
@@ -2186,7 +2199,11 @@ function createRawStrokeSVG(
                 fill="white"
             />
 
-            ${pathHTML}
+            <g transform="scale(1, -1) translate(0, -900)">
+
+                ${pathHTML}
+
+            </g>
 
         </svg>
 
