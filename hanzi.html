@@ -32,6 +32,13 @@
 <script src="https://cdn.jsdelivr.net/npm/pinyin-to-bopomofo@latest/dist/index.umd.js"></script>
 
 
+<!-- =========================================
+     JSPDF FOR WORKSHEET GENERATION
+========================================== -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+
 <style>
 
     * {
@@ -81,7 +88,7 @@
 
 
     /* =========================================
-       SEARCH
+       SEARCH & ACTIONS
     ========================================== */
 
     .search-box {
@@ -133,6 +140,28 @@
     .search-hint {
         font-size: 12px;
         color: #666;
+        margin-bottom: 12px;
+    }
+
+
+    /* PDF Worksheet Button Style */
+    .pdf-btn {
+        background-color: #765437;
+        color: white;
+        border: none;
+        padding: 10px 16px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: bold;
+        font-size: 14px;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        transition: background-color 0.2s ease;
+    }
+
+    .pdf-btn:hover {
+        background-color: #5d412a;
     }
 
 
@@ -505,6 +534,12 @@
             Each character will be shown separately.
 
         </p>
+
+
+        <!-- PDF WORKHEET GENERATOR BUTTON -->
+        <button class="pdf-btn" onclick="generatePDFWorksheet()">
+            <i class="fa-solid fa-file-pdf"></i> Generate Worksheet PDF
+        </button>
 
     </div>
 
@@ -2140,6 +2175,128 @@ function convertPinyinToZhuyin(
 
 }
 
+
+/* =========================================
+   GENERATE WORKSHEET PDF USING JSPDF
+========================================= */
+
+async function generatePDFWorksheet() {
+    if (!window.jspdf) {
+        alert("jsPDF library is not loaded yet.");
+        return;
+    }
+
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF({
+        orientation: "portrait",
+        unit: "mm",
+        format: "a4"
+    });
+
+    // Page Dimensions (A4: 210 x 297 mm)
+    const pageWidth = 210;
+    const margin = 15;
+    let currentY = 15;
+
+    // Header Title
+    doc.setFont("Helvetica", "bold");
+    doc.setFontSize(16);
+    doc.setTextColor(50, 50, 50);
+    doc.text("Boba Break Study - Hanzi Writing Worksheet", margin, currentY);
+
+    currentY += 8;
+    doc.setFont("Helvetica", "normal");
+    doc.setFontSize(10);
+    doc.setTextColor(100, 100, 100);
+    doc.text("Name: _______________________    Date: ___________________", margin, currentY);
+
+    currentY += 10;
+
+    // Loop through current searched characters (max 3)
+    for (let i = 0; i < currentCharacters.length; i++) {
+        const char = currentCharacters[i];
+        
+        // Fetch pinyin & meaning text elements dynamically if available on DOM
+        const pinyinEl = document.getElementById(`pinyin-value-${i}`);
+        const zhuyinEl = document.getElementById(`zhuyin-value-${i}`);
+        const meaningEl = document.getElementById(`meaning-value-${i}`);
+
+        const pinyinText = pinyinEl ? pinyinEl.textContent : "";
+        const zhuyinText = zhuyinEl ? zhuyinEl.textContent : "";
+        const meaningText = meaningEl ? meaningEl.textContent : "";
+
+        // Check if we need a new page
+        if (currentY > 230) {
+            doc.addPage();
+            currentY = 15;
+        }
+
+        // Character Header Block
+        doc.setFillColor(245, 245, 245);
+        doc.roundedRect(margin, currentY, pageWidth - (margin * 2), 14, 2, 2, "F");
+
+        doc.setFont("Helvetica", "bold");
+        doc.setFontSize(14);
+        doc.setTextColor(181, 131, 90); // Brand primary color
+        doc.text(`Character ${i + 1}: ${char}`, margin + 5, currentY + 9.5);
+
+        doc.setFont("Helvetica", "normal");
+        doc.setFontSize(10);
+        doc.setTextColor(60, 60, 60);
+        doc.text(`Pinyin/Zhuyin: ${pinyinText} (${zhuyinText})  |  Meaning: ${meaningText}`, margin + 45, currentY + 9.5);
+
+        currentY += 18;
+
+        // Draw Tianzi/Grid boxes for practice (e.g., 2 rows of 8 boxes each)
+        const cols = 9;
+        const rows = 2;
+        const boxSize = 16; // mm per box
+        const startX = margin + (pageWidth - (margin * 2) - (cols * boxSize)) / 2;
+
+        for (let r = 0; r < rows; r++) {
+            for (let c = 0; c < cols; c++) {
+                const boxX = startX + (c * boxSize);
+                const boxY = currentY + (r * boxSize);
+
+                // Outer square box
+                doc.setDrawColor(180, 180, 180);
+                doc.setLineWidth(0.3);
+                doc.rect(boxX, boxY, boxSize, boxSize);
+
+                // Dashed/dotted inner grid lines (Tianzi cross)
+                doc.setDrawColor(210, 210, 210);
+                doc.setLineDashPattern([0.5, 0.5], 0);
+                
+                // Vertical middle line
+                doc.line(boxX + (boxSize / 2), boxY, boxX + (boxSize / 2), boxY + boxSize);
+                // Horizontal middle line
+                doc.line(boxX, boxY + (boxSize / 2), boxX + boxSize, boxY + (boxSize / 2));
+
+                // Reset line style
+                doc.setLineDashPattern([], 0);
+
+                // If it's the very first box of the first row, optionally lightly render the target character as a guide
+                if (r === 0 && c === 0) {
+                    doc.setFont("Helvetica", "normal");
+                    doc.setFontSize(26);
+                    doc.setTextColor(210, 210, 210);
+                    doc.text(char, boxX + 3.5, boxY + 12.5);
+                }
+            }
+        }
+
+        currentY += (rows * boxSize) + 10;
+    }
+
+    // Footer note
+    doc.setFont("Helvetica", "italic");
+    doc.setFontSize(8);
+    doc.setTextColor(150, 150, 150);
+    doc.text("Generated by Boba Break Study - Hanzi Stroke & Worksheet Module", margin, 287);
+
+    // Save PDF
+    doc.save(`BobaBreakStudy_Worksheet_${currentCharacters.join("_")}.pdf`);
+}
 
 </script><!-- =========================================
      YOUR EXISTING SCRIPT
