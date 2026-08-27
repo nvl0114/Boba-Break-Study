@@ -88,7 +88,7 @@
 
 
     /* =========================================
-       SEARCH & ACTIONS
+       SEARCH
     ========================================== */
 
     .search-box {
@@ -140,28 +140,6 @@
     .search-hint {
         font-size: 12px;
         color: #666;
-        margin-bottom: 12px;
-    }
-
-
-    /* PDF Worksheet Button Style */
-    .pdf-btn {
-        background-color: #765437;
-        color: white;
-        border: none;
-        padding: 10px 16px;
-        border-radius: 6px;
-        cursor: pointer;
-        font-weight: bold;
-        font-size: 14px;
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        transition: background-color 0.2s ease;
-    }
-
-    .pdf-btn:hover {
-        background-color: #5d412a;
     }
 
 
@@ -332,20 +310,25 @@
 
 
     /* =========================================
-       SOUND BUTTON
+       SOUND & PDF BUTTONS
     ========================================== */
 
-    .sound-btn {
+    .button-group {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        margin-top: 10px;
+    }
 
-        margin-top: 5px;
+
+    .sound-btn, .pdf-btn {
 
         padding: 9px 18px;
 
         border: none;
 
         border-radius: 25px;
-
-        background-color: #b5835a;
 
         color: white;
 
@@ -363,16 +346,31 @@
     }
 
 
+    .sound-btn {
+        background-color: #b5835a;
+    }
+
     .sound-btn:hover {
-
         background-color: #9d704c;
-
         transform: translateY(-1px);
-
     }
 
 
-    .sound-btn:active {
+    .pdf-btn {
+        background-color: #765437;
+        border-radius: 20px;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    .pdf-btn:hover {
+        background-color: #5d412a;
+        transform: translateY(-1px);
+    }
+
+
+    .sound-btn:active, .pdf-btn:active {
 
         transform: scale(0.96);
 
@@ -535,12 +533,6 @@
 
         </p>
 
-
-        <!-- PDF WORKHEET GENERATOR BUTTON -->
-        <button class="pdf-btn" onclick="generatePDFWorksheet()">
-            <i class="fa-solid fa-file-pdf"></i> Generate Worksheet PDF
-        </button>
-
     </div>
 
 
@@ -633,21 +625,30 @@
                 </p>
 
 
-                <button
-                    class="sound-btn"
-                    id="sound-btn-0"
-                    onclick="speakChinese(0)"
-                >
+                <div class="button-group">
+                    <button
+                        class="sound-btn"
+                        id="sound-btn-0"
+                        onclick="speakChinese(0)"
+                    >
 
-                    🔊
+                        🔊
 
-                    <span id="sound-text-0">
+                        <span id="sound-text-0">
 
-                        Listen
+                            Listen
 
-                    </span>
+                        </span>
 
-                </button>
+                    </button>
+
+                    <button
+                        class="pdf-btn"
+                        onclick="generatePDFWorksheet(0)"
+                    >
+                        <i class="fa-solid fa-file-pdf"></i> Generate Worksheet PDF
+                    </button>
+                </div>
 
             </div>
 
@@ -1122,21 +1123,30 @@ function createCharacterCard(
                 </p>
 
 
-                <button
-                    class="sound-btn"
-                    id="sound-btn-${index}"
-                    onclick="speakChinese(${index})"
-                >
+                <div class="button-group">
+                    <button
+                        class="sound-btn"
+                        id="sound-btn-${index}"
+                        onclick="speakChinese(${index})"
+                    >
 
-                    🔊
+                        🔊
 
-                    <span id="sound-text-${index}">
+                        <span id="sound-text-${index}">
 
-                        Listen
+                            Listen
 
-                    </span>
+                        </span>
 
-                </button>
+                    </button>
+
+                    <button
+                        class="pdf-btn"
+                        onclick="generatePDFWorksheet(${index})"
+                    >
+                        <i class="fa-solid fa-file-pdf"></i> Generate Worksheet PDF
+                    </button>
+                </div>
 
             </div>
 
@@ -2180,7 +2190,7 @@ function convertPinyinToZhuyin(
    GENERATE WORKSHEET PDF USING JSPDF
 ========================================= */
 
-async function generatePDFWorksheet() {
+async function generatePDFWorksheet(index) {
     if (!window.jspdf) {
         alert("jsPDF library is not loaded yet.");
         return;
@@ -2193,7 +2203,17 @@ async function generatePDFWorksheet() {
         format: "a4"
     });
 
-    // Page Dimensions (A4: 210 x 297 mm)
+    const char = currentCharacters[index];
+    if (!char) return;
+
+    const pinyinEl = document.getElementById(`pinyin-value-${index}`);
+    const zhuyinEl = document.getElementById(`zhuyin-value-${index}`);
+    const meaningEl = document.getElementById(`meaning-value-${index}`);
+
+    const pinyinText = pinyinEl ? pinyinEl.textContent : "";
+    const zhuyinText = zhuyinEl ? zhuyinEl.textContent : "";
+    const meaningText = meaningEl ? meaningEl.textContent : "";
+
     const pageWidth = 210;
     const margin = 15;
     let currentY = 15;
@@ -2210,83 +2230,88 @@ async function generatePDFWorksheet() {
     doc.setTextColor(100, 100, 100);
     doc.text("Name: _______________________    Date: ___________________", margin, currentY);
 
-    currentY += 10;
+    currentY += 12;
 
-    // Loop through current searched characters (max 3)
-    for (let i = 0; i < currentCharacters.length; i++) {
-        const char = currentCharacters[i];
-        
-        // Fetch pinyin & meaning text elements dynamically if available on DOM
-        const pinyinEl = document.getElementById(`pinyin-value-${i}`);
-        const zhuyinEl = document.getElementById(`zhuyin-value-${i}`);
-        const meaningEl = document.getElementById(`meaning-value-${i}`);
+    // Character Info Box
+    doc.setFillColor(245, 245, 245);
+    doc.roundedRect(margin, currentY, pageWidth - (margin * 2), 16, 2, 2, "F");
 
-        const pinyinText = pinyinEl ? pinyinEl.textContent : "";
-        const zhuyinText = zhuyinEl ? zhuyinEl.textContent : "";
-        const meaningText = meaningEl ? meaningEl.textContent : "";
+    doc.setFont("Helvetica", "bold");
+    doc.setFontSize(14);
+    doc.setTextColor(181, 131, 90);
+    doc.text(`Character: ${char}`, margin + 5, currentY + 10.5);
 
-        // Check if we need a new page
-        if (currentY > 230) {
-            doc.addPage();
-            currentY = 15;
-        }
+    doc.setFont("Helvetica", "normal");
+    doc.setFontSize(10);
+    doc.setTextColor(60, 60, 60);
+    doc.text(`Pinyin/Zhuyin: ${pinyinText} (${zhuyinText})  |  Meaning: ${meaningText}`, margin + 45, currentY + 10.5);
 
-        // Character Header Block
-        doc.setFillColor(245, 245, 245);
-        doc.roundedRect(margin, currentY, pageWidth - (margin * 2), 14, 2, 2, "F");
+    currentY += 24;
 
-        doc.setFont("Helvetica", "bold");
-        doc.setFontSize(14);
-        doc.setTextColor(181, 131, 90); // Brand primary color
-        doc.text(`Character ${i + 1}: ${char}`, margin + 5, currentY + 9.5);
-
-        doc.setFont("Helvetica", "normal");
-        doc.setFontSize(10);
-        doc.setTextColor(60, 60, 60);
-        doc.text(`Pinyin/Zhuyin: ${pinyinText} (${zhuyinText})  |  Meaning: ${meaningText}`, margin + 45, currentY + 9.5);
-
-        currentY += 18;
-
-        // Draw Tianzi/Grid boxes for practice (e.g., 2 rows of 8 boxes each)
-        const cols = 9;
-        const rows = 2;
-        const boxSize = 16; // mm per box
-        const startX = margin + (pageWidth - (margin * 2) - (cols * boxSize)) / 2;
-
-        for (let r = 0; r < rows; r++) {
-            for (let c = 0; c < cols; c++) {
-                const boxX = startX + (c * boxSize);
-                const boxY = currentY + (r * boxSize);
-
-                // Outer square box
-                doc.setDrawColor(180, 180, 180);
-                doc.setLineWidth(0.3);
-                doc.rect(boxX, boxY, boxSize, boxSize);
-
-                // Dashed/dotted inner grid lines (Tianzi cross)
-                doc.setDrawColor(210, 210, 210);
-                doc.setLineDashPattern([0.5, 0.5], 0);
+    // Extract SVG from Hanzi Writer DOM to render the character properly in PDF
+    let charImgData = null;
+    const targetEl = document.getElementById(`character-target-${index}`);
+    if (targetEl) {
+        const svgEl = targetEl.querySelector('svg');
+        if (svgEl) {
+            try {
+                const svgString = new XMLSerializer().serializeToString(svgEl);
+                const svgBlob = new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' });
+                const URL = window.URL || window.webkitURL || window;
+                const blobURL = URL.createObjectURL(svgBlob);
                 
-                // Vertical middle line
-                doc.line(boxX + (boxSize / 2), boxY, boxX + (boxSize / 2), boxY + boxSize);
-                // Horizontal middle line
-                doc.line(boxX, boxY + (boxSize / 2), boxX + boxSize, boxY + (boxSize / 2));
-
-                // Reset line style
-                doc.setLineDashPattern([], 0);
-
-                // If it's the very first box of the first row, optionally lightly render the target character as a guide
-                if (r === 0 && c === 0) {
-                    doc.setFont("Helvetica", "normal");
-                    doc.setFontSize(26);
-                    doc.setTextColor(210, 210, 210);
-                    doc.text(char, boxX + 3.5, boxY + 12.5);
-                }
+                await new Promise((resolve) => {
+                    const img = new Image();
+                    img.onload = () => {
+                        const canvas = document.createElement('canvas');
+                        canvas.width = 300;
+                        canvas.height = 300;
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(img, 0, 0);
+                        charImgData = canvas.toDataURL('image/png');
+                        URL.revokeObjectURL(blobURL);
+                        resolve();
+                    };
+                    img.onerror = () => resolve();
+                    img.src = blobURL;
+                });
+            } catch (e) {
+                console.log("Could not convert SVG to image for PDF", e);
             }
         }
-
-        currentY += (rows * boxSize) + 10;
     }
+
+    // Draw Tianzi Grid (e.g., 3 rows of 9 boxes each)
+    const cols = 9;
+    const rows = 3;
+    const boxSize = 16; // mm
+    const startX = margin + (pageWidth - (margin * 2) - (cols * boxSize)) / 2;
+
+    for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < cols; c++) {
+            const boxX = startX + (c * boxSize);
+            const boxY = currentY + (r * boxSize);
+
+            // Outer box
+            doc.setDrawColor(180, 180, 180);
+            doc.setLineWidth(0.3);
+            doc.rect(boxX, boxY, boxSize, boxSize);
+
+            // Inner dashed grid lines
+            doc.setDrawColor(210, 210, 210);
+            doc.setLineDashPattern([0.5, 0.5], 0);
+            doc.line(boxX + (boxSize / 2), boxY, boxX + (boxSize / 2), boxY + boxSize);
+            doc.line(boxX, boxY + (boxSize / 2), boxX + boxSize, boxY + (boxSize / 2));
+            doc.setLineDashPattern([], 0);
+
+            // Put character image as a guide in the very first box
+            if (r === 0 && c === 0 && charImgData) {
+                doc.addImage(charImgData, 'PNG', boxX + 1.5, boxY + 1.5, boxSize - 3, boxSize - 3);
+            }
+        }
+    }
+
+    currentY += (rows * boxSize) + 15;
 
     // Footer note
     doc.setFont("Helvetica", "italic");
@@ -2295,7 +2320,7 @@ async function generatePDFWorksheet() {
     doc.text("Generated by Boba Break Study - Hanzi Stroke & Worksheet Module", margin, 287);
 
     // Save PDF
-    doc.save(`BobaBreakStudy_Worksheet_${currentCharacters.join("_")}.pdf`);
+    doc.save(`BobaBreakStudy_Worksheet_${char}.pdf`);
 }
 
 </script><!-- =========================================
