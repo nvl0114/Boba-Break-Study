@@ -1,4 +1,7 @@
-<!DOCTYPE html><html lang="en"><head><link rel="stylesheet" href="style.css">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="style.css">
 
 <link rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -484,182 +487,189 @@
 
 </style>
 
-</head><body><div class="app-container"><!-- =========================================
-     SIDEBAR
-========================================== -->
+</head>
+<body>
 
-<div id="sidebar-container"></div>
+<div class="app-container">
 
+    <!-- =========================================
+         SIDEBAR
+    ========================================== -->
 
-<!-- =========================================
-     MAIN CONTENT
-========================================== -->
-
-<div class="main-content">
+    <div id="sidebar-container"></div>
 
 
-    <!-- =====================================
-         SEARCH CARD
-    ====================================== -->
+    <!-- =========================================
+         MAIN CONTENT
+    ========================================== -->
 
-    <div class="card">
-
-        <h2>
-            Hanzi Stroke Order Finder
-        </h2>
+    <div class="main-content">
 
 
-        <div class="search-box">
+        <!-- =====================================
+             SEARCH CARD
+        ====================================== -->
 
-            <input
-                type="text"
-                id="char-input"
-                placeholder="Enter up to 3 traditional Hanzi characters (e.g. 學中文)"
-                maxlength="3"
-            >
+        <div class="card">
+
+            <h2>
+                Hanzi Stroke Order Finder
+            </h2>
 
 
-            <button id="search-btn">
-                Search
-            </button>
+            <div class="search-box">
+
+                <input
+                    type="text"
+                    id="char-input"
+                    placeholder="Enter up to 3 traditional Hanzi characters (e.g. 學中文)"
+                    maxlength="3"
+                >
+
+
+                <button id="search-btn">
+                    Search
+                </button>
+
+            </div>
+
+
+            <p class="search-hint">
+
+                Enter up to 3 traditional Hanzi characters.
+                Each character will be shown separately.
+
+            </p>
 
         </div>
 
 
-        <p class="search-hint">
 
-            Enter up to 3 traditional Hanzi characters.
-            Each character will be shown separately.
+        <!-- =====================================
+             RESULT CARD
+        ====================================== -->
 
-        </p>
-
-    </div>
+        <div id="results-container">
 
 
-
-    <!-- =====================================
-         RESULT CARD
-    ====================================== -->
-
-    <div id="results-container">
-
-
-        <!-- =================================
-             DEFAULT CHARACTER
+            <!-- =================================
+                 DEFAULT CHARACTER
         ================================== -->
 
-        <div class="character-result">
+            <div class="character-result">
 
 
-            <div class="character-number">
+                <div class="character-number">
 
-                Character 1
-
-            </div>
-
-
-            <div class="stroke-display">
-
-                <div
-                    class="character-target"
-                    id="character-target-0"
-                >
-
-                    <p class="stroke-loading">
-                        Loading...
-                    </p>
+                    Character 1
 
                 </div>
 
-            </div>
 
+                <div class="stroke-display">
 
-
-            <div
-                class="character-info"
-                id="char-info-0"
-            >
-
-                <p>
-
-                    <strong>Hanzi:</strong>
-
-                    學
-
-                </p>
-
-
-                <p>
-
-                    <strong>Pinyin:</strong>
-
-                    xué
-
-                </p>
-
-
-                <p>
-
-                    <strong>Zhuyin:</strong>
-
-                    ㄒㄩㄝˊ
-
-                </p>
-
-
-                <p class="meaning-text">
-
-                    <span class="meaning-label">
-
-                        Meaning:
-
-                    </span>
-
-
-                    <span class="meaning-value">
-
-                        to study; to learn
-
-                    </span>
-
-                </p>
-
-
-                <div class="button-group">
-                    <button
-                        class="sound-btn"
-                        id="sound-btn-0"
-                        onclick="speakChinese(0)"
+                    <div
+                        class="character-target"
+                        id="character-target-0"
                     >
 
-                        🔊
+                        <p class="stroke-loading">
+                            Loading...
+                        </p>
 
-                        <span id="sound-text-0">
+                    </div>
 
-                            Listen
+                </div>
+
+
+
+                <div
+                    class="character-info"
+                    id="char-info-0"
+                >
+
+                    <p>
+
+                        <strong>Hanzi:</strong>
+
+                        學
+
+                    </p>
+
+
+                    <p>
+
+                        <strong>Pinyin:</strong>
+
+                        xué
+
+                    </p>
+
+
+                    <p>
+
+                        <strong>Zhuyin:</strong>
+
+                        ㄒㄩㄝˊ
+
+                    </p>
+
+
+                    <p class="meaning-text">
+
+                        <span class="meaning-label">
+
+                            Meaning:
 
                         </span>
 
-                    </button>
 
-                    <button
-                        class="pdf-btn"
-                        onclick="generatePDFWorksheet(0)"
-                    >
-                        <i class="fa-solid fa-file-pdf"></i> Generate Worksheet PDF
-                    </button>
+                        <span class="meaning-value">
+
+                            to study; to learn
+
+                        </span>
+
+                    </p>
+
+
+                    <div class="button-group">
+                        <button
+                            class="sound-btn"
+                            id="sound-btn-0"
+                            onclick="speakChinese(0)"
+                        >
+
+                            🔊
+
+                            <span id="sound-text-0">
+
+                                Listen
+
+                            </span>
+
+                        </button>
+
+                        <button
+                            class="pdf-btn"
+                            onclick="generatePDFWorksheet(0)"
+                        >
+                            <i class="fa-solid fa-file-pdf"></i> Generate Worksheet PDF
+                        </button>
+                    </div>
+
                 </div>
 
             </div>
 
         </div>
 
-    </div>
 
+    </div>
 
 </div>
 
-</div><script>
+<script>
 
 
 /* =========================================
@@ -2210,9 +2220,9 @@ async function generatePDFWorksheet(index) {
     const zhuyinEl = document.getElementById(`zhuyin-value-${index}`);
     const meaningEl = document.getElementById(`meaning-value-${index}`);
 
-    const pinyinText = pinyinEl ? pinyinEl.textContent : "";
-    const zhuyinText = zhuyinEl ? zhuyinEl.textContent : "";
-    const meaningText = meaningEl ? meaningEl.textContent : "";
+    const pinyinText = pinyinEl ? pinyinEl.textContent : "-";
+    const zhuyinText = zhuyinEl ? zhuyinEl.textContent : "-";
+    const meaningText = meaningEl ? meaningEl.textContent : "-";
 
     const pageWidth = 210;
     const margin = 15;
@@ -2230,58 +2240,83 @@ async function generatePDFWorksheet(index) {
     doc.setTextColor(100, 100, 100);
     doc.text("Name: _______________________    Date: ___________________", margin, currentY);
 
-    currentY += 12;
+    currentY += 10;
 
     // Character Info Box
     doc.setFillColor(245, 245, 245);
-    doc.roundedRect(margin, currentY, pageWidth - (margin * 2), 16, 2, 2, "F");
+    doc.roundedRect(margin, currentY, pageWidth - (margin * 2), 22, 2, 2, "F");
 
     doc.setFont("Helvetica", "bold");
-    doc.setFontSize(14);
+    doc.setFontSize(13);
     doc.setTextColor(181, 131, 90);
-    doc.text(`Character: ${char}`, margin + 5, currentY + 10.5);
+    doc.text(`Character: ${char}`, margin + 5, currentY + 8);
 
     doc.setFont("Helvetica", "normal");
-    doc.setFontSize(10);
+    doc.setFontSize(9);
     doc.setTextColor(60, 60, 60);
-    doc.text(`Pinyin/Zhuyin: ${pinyinText} (${zhuyinText})  |  Meaning: ${meaningText}`, margin + 45, currentY + 10.5);
+    doc.text(`Pinyin: ${pinyinText}   |   Zhuyin: ${zhuyinText}`, margin + 5, currentY + 14);
+    
+    let shortMeaning = meaningText;
+    if (shortMeaning.length > 75) {
+        shortMeaning = shortMeaning.substring(0, 72) + "...";
+    }
+    doc.text(`Meaning: ${shortMeaning}`, margin + 5, currentY + 19);
 
-    currentY += 24;
+    currentY += 30;
 
-    // Extract SVG from Hanzi Writer DOM to render the character properly in PDF
+    // Render temporary full character image for PDF
     let charImgData = null;
-    const targetEl = document.getElementById(`character-target-${index}`);
-    if (targetEl) {
-        const svgEl = targetEl.querySelector('svg');
-        if (svgEl) {
-            try {
-                const svgString = new XMLSerializer().serializeToString(svgEl);
-                const svgBlob = new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' });
-                const URL = window.URL || window.webkitURL || window;
-                const blobURL = URL.createObjectURL(svgBlob);
-                
-                await new Promise((resolve) => {
-                    const img = new Image();
-                    img.onload = () => {
-                        const canvas = document.createElement('canvas');
-                        canvas.width = 300;
-                        canvas.height = 300;
-                        const ctx = canvas.getContext('2d');
-                        ctx.drawImage(img, 0, 0);
-                        charImgData = canvas.toDataURL('image/png');
-                        URL.revokeObjectURL(blobURL);
-                        resolve();
-                    };
-                    img.onerror = () => resolve();
-                    img.src = blobURL;
-                });
-            } catch (e) {
-                console.log("Could not convert SVG to image for PDF", e);
+    const tempDiv = document.createElement('div');
+    tempDiv.style.width = '300px';
+    tempDiv.style.height = '300px';
+    tempDiv.style.position = 'absolute';
+    tempDiv.style.left = '-9999px';
+    document.body.appendChild(tempDiv);
+
+    try {
+        HanziWriter.create(tempDiv, char, {
+            width: 300,
+            height: 300,
+            padding: 10,
+            showOutline: true,
+            showCharacter: true,
+            charDataLoader: function(c, onComplete, onError) {
+                loadACJKTraditionalData(c, onComplete, onError);
             }
+        });
+
+        await new Promise(resolve => setTimeout(resolve, 300));
+
+        const svgEl = tempDiv.querySelector('svg');
+        if (svgEl) {
+            const svgString = new XMLSerializer().serializeToString(svgEl);
+            const svgBlob = new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' });
+            const URL = window.URL || window.webkitURL || window;
+            const blobURL = URL.createObjectURL(svgBlob);
+            
+            await new Promise((resolve) => {
+                const img = new Image();
+                img.onload = () => {
+                    const canvas = document.createElement('canvas');
+                    canvas.width = 300;
+                    canvas.height = 300;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0);
+                    charImgData = canvas.toDataURL('image/png');
+                    URL.revokeObjectURL(blobURL);
+                    resolve();
+                };
+                img.onerror = () => resolve();
+                img.src = blobURL;
+            });
         }
+    } catch (e) {
+        console.log("Error generating full character image for PDF", e);
+    } finally {
+        document.body.removeChild(tempDiv);
     }
 
-    // Draw Tianzi Grid (e.g., 3 rows of 9 boxes each)
+    // Draw Tianzi Grid (3 rows x 9 cols)
     const cols = 9;
     const rows = 3;
     const boxSize = 16; // mm
@@ -2292,19 +2327,16 @@ async function generatePDFWorksheet(index) {
             const boxX = startX + (c * boxSize);
             const boxY = currentY + (r * boxSize);
 
-            // Outer box
             doc.setDrawColor(180, 180, 180);
             doc.setLineWidth(0.3);
             doc.rect(boxX, boxY, boxSize, boxSize);
 
-            // Inner dashed grid lines
             doc.setDrawColor(210, 210, 210);
             doc.setLineDashPattern([0.5, 0.5], 0);
             doc.line(boxX + (boxSize / 2), boxY, boxX + (boxSize / 2), boxY + boxSize);
             doc.line(boxX, boxY + (boxSize / 2), boxX + boxSize, boxY + (boxSize / 2));
             doc.setLineDashPattern([], 0);
 
-            // Put character image as a guide in the very first box
             if (r === 0 && c === 0 && charImgData) {
                 doc.addImage(charImgData, 'PNG', boxX + 1.5, boxY + 1.5, boxSize - 3, boxSize - 3);
             }
@@ -2323,6 +2355,12 @@ async function generatePDFWorksheet(index) {
     doc.save(`BobaBreakStudy_Worksheet_${char}.pdf`);
 }
 
-</script><!-- =========================================
+</script>
+
+<!-- =========================================
      YOUR EXISTING SCRIPT
-========================================= --><script src="script.js"></script></body></html>
+========================================== -->
+<script src="script.js"></script>
+
+</body>
+</html>
