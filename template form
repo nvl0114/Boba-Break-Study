@@ -172,5 +172,81 @@ Gunakan lesson.js yang sudah saya berikan sebelumnya hanya untuk kebutuhan 5 soa
 Treat lesson numbers, database names, data sources, and question-generation logic as internal implementation details. Never expose them anywhere in the visible website UI. The final website must look like a normal standalone learning page and must not reveal that its content or review questions come from a specific lesson number or lesson.js.
 
 
-----
+-------------+-++++++++++++++++---------------
+Lesson.js
 
+
+Berdasarkan HTML Lesson yang saya berikan, buatkan entry lesson.js dengan format yang sama persis seperti database master saya.
+
+Ambil hanya materi yang benar-benar ada di HTML tersebut.
+
+Struktur wajib:
+
+- "grammar"
+- "vocabulary"
+- "reviewQuestions"
+
+Untuk "grammar", masukkan:
+
+- id
+- name
+- category
+- explanation
+- examples: Hanzi, Pinyin, English secara berurutan
+
+Untuk "vocabulary", masukkan semua vocabulary yang digunakan/diajarkan di HTML, dengan:
+
+- word
+- pinyin
+- meaning
+
+Untuk "reviewQuestions", buat soal berdasarkan grammar dan vocabulary dari HTML tersebut.
+
+Jangan mengambil materi dari lesson lain.
+Jangan menambahkan vocabulary yang tidak ada di HTML.
+Jangan mengubah struktur database.
+Jangan membuat "const lessonData".
+Jangan membuat "window.allLessonsData".
+
+Output hanya entry dengan format:
+
+// ========================================================
+// LESSON [NOMOR]
+// ========================================================
+[NOMOR]: {
+    grammar: [...],
+    vocabulary: [...],
+    reviewQuestions: [...]
+}
+
+Pastikan formatnya kompatibel langsung dengan "allLessonsData" yang sudah saya gunakan.
+
+
+---------------------------
+
+
+
+
+<article class="card">
+    <div class="card-img-placeholder">
+        <img src="https://media.tenor.com/nDA6i5hq-YIAAAAM/see-you.gif" alt="My Family">
+    </div><h3>title</h3>
+
+<p>
+    short description
+</p>
+
+<button class="btn-resume" onclick="location.href='content/18.html'">
+    Start Learning
+</button>
+
+</article>
+
+Berdasarkan materi HTML lesson yang saya berikan, buatkan course card HTML lengkap dengan format berikut:
+
+Buat judul berdasarkan topik utama materi.
+Buat deskripsi singkat dalam bahasa Inggris, 1–2 kalimat.
+Jangan menyebut nomor lesson.
+Jangan menyebut lesson.js.
+Jangan mengarang topik yang tidak ada di materi.
+Pertahankan struktur dan class HTML persis seperti template.
