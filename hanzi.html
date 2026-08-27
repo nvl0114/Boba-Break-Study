@@ -372,6 +372,11 @@
         transform: translateY(-1px);
     }
 
+    .pdf-btn:disabled {
+        opacity: 0.6;
+        cursor: wait;
+    }
+
 
     .sound-btn:active, .pdf-btn:active {
 
@@ -652,6 +657,7 @@
 
                         <button
                             class="pdf-btn"
+                            id="pdf-btn-0"
                             onclick="generatePDFWorksheet(0)"
                         >
                             <i class="fa-solid fa-file-pdf"></i> Generate Worksheet PDF
@@ -1152,6 +1158,7 @@ function createCharacterCard(
 
                     <button
                         class="pdf-btn"
+                        id="pdf-btn-${index}"
                         onclick="generatePDFWorksheet(${index})"
                     >
                         <i class="fa-solid fa-file-pdf"></i> Generate Worksheet PDF
@@ -2197,162 +2204,569 @@ function convertPinyinToZhuyin(
 
 
 /* =========================================
+   TEXT → IMAGE HELPER
+   ---------------------------------------
+   jsPDF's built-in fonts (Helvetica etc.)
+   only support basic Latin (WinAnsi)
+   characters. Hanzi, pinyin tone marks
+   (ā ǒ ü ...) and Zhuyin symbols
+   (ㄓㄨㄥ) are outside that range and
+   get corrupted if drawn with doc.text().
+
+   The browser's <canvas> can render
+   these correctly using system fonts,
+   so we render the text to a canvas
+   first, then embed the canvas as a
+   PNG image inside the PDF instead of
+   drawing it as PDF text.
+========================================= */
+
+function renderTextAsImage(
+    text,
+    fontSizePt,
+    color,
+    fontWeight
+) {
+
+    const scale = 4;
+
+    const canvas =
+        document.createElement(
+            "canvas"
+        );
+
+    const ctx =
+        canvas.getContext(
+            "2d"
+        );
+
+    const fontSpec =
+        `${fontWeight || "normal"} ` +
+        `${fontSizePt * scale}px ` +
+        `"Noto Sans TC", "Microsoft JhengHei", ` +
+        `"PingFang TC", Arial, sans-serif`;
+
+    ctx.font = fontSpec;
+
+    const metrics =
+        ctx.measureText(text);
+
+    const paddingPx =
+        6 * scale;
+
+    canvas.width =
+        Math.ceil(metrics.width) +
+        (paddingPx * 2);
+
+    canvas.height =
+        Math.ceil(fontSizePt * scale * 1.6);
+
+    /*
+     * Resizing the canvas resets
+     * the 2D context, so font
+     * settings must be reapplied.
+     */
+
+    ctx.font = fontSpec;
+
+    ctx.fillStyle =
+        color || "#000000";
+
+    ctx.textBaseline = "top";
+
+    ctx.fillText(
+        text,
+        paddingPx,
+        paddingPx * 0.3
+    );
+
+    return {
+
+        dataUrl:
+            canvas.toDataURL("image/png"),
+
+        widthPx: canvas.width,
+
+        heightPx: canvas.height
+
+    };
+
+}
+
+
+
+/*
+ * Place a text-image on the PDF at
+ * a fixed height (mm), preserving
+ * its aspect ratio.
+ */
+
+function addTextImageToPDF(
+    doc,
+    text,
+    x,
+    y,
+    fontSizePt,
+    color,
+    fontWeight,
+    heightMm
+) {
+
+    const rendered =
+        renderTextAsImage(
+            text,
+            fontSizePt,
+            color,
+            fontWeight
+        );
+
+    const aspect =
+        rendered.widthPx / rendered.heightPx;
+
+    const finalHeight =
+        heightMm;
+
+    const finalWidth =
+        finalHeight * aspect;
+
+    doc.addImage(
+        rendered.dataUrl,
+        "PNG",
+        x,
+        y,
+        finalWidth,
+        finalHeight
+    );
+
+    return finalWidth;
+
+}
+
+
+
+/* =========================================
+   RENDER FULL CHARACTER TO A PNG
+   ---------------------------------------
+   Waits for the real "data loaded"
+   callback instead of a fixed timeout,
+   so the captured image is never a
+   half-drawn / mid-animation frame.
+========================================= */
+
+function renderCharacterToPNG(char) {
+
+    return new Promise(function(resolve) {
+
+        const tempDiv =
+            document.createElement("div");
+
+        tempDiv.style.width = "300px";
+        tempDiv.style.height = "300px";
+        tempDiv.style.position = "absolute";
+        tempDiv.style.left = "-9999px";
+
+        document.body.appendChild(tempDiv);
+
+        function cleanupAndResolve(result) {
+
+            if (tempDiv.parentNode) {
+
+                document.body.removeChild(
+                    tempDiv
+                );
+
+            }
+
+            resolve(result);
+
+        }
+
+        try {
+
+            HanziWriter.create(
+                tempDiv,
+                char,
+                {
+
+                    width: 300,
+
+                    height: 300,
+
+                    padding: 10,
+
+                    showOutline: true,
+
+                    showCharacter: true,
+
+                    charDataLoader:
+                        function(
+                            c,
+                            onComplete,
+                            onError
+                        ) {
+
+                            loadACJKTraditionalData(
+                                c,
+                                onComplete,
+                                onError
+                            );
+
+                        },
+
+
+                    onLoadCharDataSuccess:
+                        function() {
+
+                            /*
+                             * Give the SVG two
+                             * animation frames to
+                             * actually paint before
+                             * we snapshot it.
+                             */
+
+                            requestAnimationFrame(
+                                function() {
+
+                                    requestAnimationFrame(
+                                        function() {
+
+                                            try {
+
+                                                const svgEl =
+                                                    tempDiv.querySelector(
+                                                        "svg"
+                                                    );
+
+                                                if (!svgEl) {
+
+                                                    cleanupAndResolve(
+                                                        null
+                                                    );
+
+                                                    return;
+
+                                                }
+
+                                                const svgString =
+                                                    new XMLSerializer()
+                                                        .serializeToString(
+                                                            svgEl
+                                                        );
+
+                                                const svgBlob =
+                                                    new Blob(
+                                                        [svgString],
+                                                        {
+                                                            type:
+                                                                "image/svg+xml;charset=utf-8"
+                                                        }
+                                                    );
+
+                                                const URLObj =
+                                                    window.URL ||
+                                                    window.webkitURL ||
+                                                    window;
+
+                                                const blobURL =
+                                                    URLObj.createObjectURL(
+                                                        svgBlob
+                                                    );
+
+                                                const img =
+                                                    new Image();
+
+                                                img.onload =
+                                                    function() {
+
+                                                        const canvas =
+                                                            document.createElement(
+                                                                "canvas"
+                                                            );
+
+                                                        canvas.width = 300;
+                                                        canvas.height = 300;
+
+                                                        const ctx2d =
+                                                            canvas.getContext(
+                                                                "2d"
+                                                            );
+
+                                                        ctx2d.drawImage(
+                                                            img,
+                                                            0,
+                                                            0
+                                                        );
+
+                                                        const pngData =
+                                                            canvas.toDataURL(
+                                                                "image/png"
+                                                            );
+
+                                                        URLObj.revokeObjectURL(
+                                                            blobURL
+                                                        );
+
+                                                        cleanupAndResolve(
+                                                            pngData
+                                                        );
+
+                                                    };
+
+                                                img.onerror =
+                                                    function() {
+
+                                                        URLObj.revokeObjectURL(
+                                                            blobURL
+                                                        );
+
+                                                        cleanupAndResolve(
+                                                            null
+                                                        );
+
+                                                    };
+
+                                                img.src =
+                                                    blobURL;
+
+                                            }
+
+                                            catch (e) {
+
+                                                console.log(
+                                                    "Error snapshotting character SVG",
+                                                    e
+                                                );
+
+                                                cleanupAndResolve(
+                                                    null
+                                                );
+
+                                            }
+
+                                        }
+                                    );
+
+                                }
+                            );
+
+                        },
+
+
+                    onLoadCharDataError:
+                        function() {
+
+                            cleanupAndResolve(
+                                null
+                            );
+
+                        }
+
+                }
+            );
+
+        }
+
+        catch (e) {
+
+            console.log(
+                "Error creating character writer for PDF",
+                e
+            );
+
+            cleanupAndResolve(null);
+
+        }
+
+    });
+
+}
+
+
+
+/* =========================================
    GENERATE WORKSHEET PDF USING JSPDF
 ========================================= */
 
 async function generatePDFWorksheet(index) {
+
     if (!window.jspdf) {
         alert("jsPDF library is not loaded yet.");
         return;
     }
 
-    const { jsPDF } = window.jspdf;
-    const doc = new jsPDF({
-        orientation: "portrait",
-        unit: "mm",
-        format: "a4"
-    });
+    const pdfButton =
+        document.getElementById(
+            `pdf-btn-${index}`
+        );
 
-    const char = currentCharacters[index];
-    if (!char) return;
+    const originalButtonHTML =
+        pdfButton ? pdfButton.innerHTML : null;
 
-    const pinyinEl = document.getElementById(`pinyin-value-${index}`);
-    const zhuyinEl = document.getElementById(`zhuyin-value-${index}`);
-    const meaningEl = document.getElementById(`meaning-value-${index}`);
+    if (pdfButton) {
 
-    const pinyinText = pinyinEl ? pinyinEl.textContent : "-";
-    const zhuyinText = zhuyinEl ? zhuyinEl.textContent : "-";
-    const meaningText = meaningEl ? meaningEl.textContent : "-";
+        pdfButton.disabled = true;
 
-    const pageWidth = 210;
-    const margin = 15;
-    let currentY = 15;
+        pdfButton.innerHTML =
+            '<i class="fa-solid fa-spinner fa-spin"></i> Generating...';
 
-    // Header Title
-    doc.setFont("Helvetica", "bold");
-    doc.setFontSize(16);
-    doc.setTextColor(50, 50, 50);
-    doc.text("Boba Break Study - Hanzi Writing Worksheet", margin, currentY);
-
-    currentY += 8;
-    doc.setFont("Helvetica", "normal");
-    doc.setFontSize(10);
-    doc.setTextColor(100, 100, 100);
-    doc.text("Name: _______________________    Date: ___________________", margin, currentY);
-
-    currentY += 10;
-
-    // Character Info Box
-    doc.setFillColor(245, 245, 245);
-    doc.roundedRect(margin, currentY, pageWidth - (margin * 2), 22, 2, 2, "F");
-
-    doc.setFont("Helvetica", "bold");
-    doc.setFontSize(13);
-    doc.setTextColor(181, 131, 90);
-    doc.text(`Character: ${char}`, margin + 5, currentY + 8);
-
-    doc.setFont("Helvetica", "normal");
-    doc.setFontSize(9);
-    doc.setTextColor(60, 60, 60);
-    doc.text(`Pinyin: ${pinyinText}   |   Zhuyin: ${zhuyinText}`, margin + 5, currentY + 14);
-    
-    let shortMeaning = meaningText;
-    if (shortMeaning.length > 75) {
-        shortMeaning = shortMeaning.substring(0, 72) + "...";
     }
-    doc.text(`Meaning: ${shortMeaning}`, margin + 5, currentY + 19);
-
-    currentY += 30;
-
-    // Render temporary full character image for PDF
-    let charImgData = null;
-    const tempDiv = document.createElement('div');
-    tempDiv.style.width = '300px';
-    tempDiv.style.height = '300px';
-    tempDiv.style.position = 'absolute';
-    tempDiv.style.left = '-9999px';
-    document.body.appendChild(tempDiv);
 
     try {
-        HanziWriter.create(tempDiv, char, {
-            width: 300,
-            height: 300,
-            padding: 10,
-            showOutline: true,
-            showCharacter: true,
-            charDataLoader: function(c, onComplete, onError) {
-                loadACJKTraditionalData(c, onComplete, onError);
-            }
+
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF({
+            orientation: "portrait",
+            unit: "mm",
+            format: "a4"
         });
 
-        await new Promise(resolve => setTimeout(resolve, 300));
+        const char = currentCharacters[index];
+        if (!char) return;
 
-        const svgEl = tempDiv.querySelector('svg');
-        if (svgEl) {
-            const svgString = new XMLSerializer().serializeToString(svgEl);
-            const svgBlob = new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' });
-            const URL = window.URL || window.webkitURL || window;
-            const blobURL = URL.createObjectURL(svgBlob);
-            
-            await new Promise((resolve) => {
-                const img = new Image();
-                img.onload = () => {
-                    const canvas = document.createElement('canvas');
-                    canvas.width = 300;
-                    canvas.height = 300;
-                    const ctx = canvas.getContext('2d');
-                    ctx.drawImage(img, 0, 0);
-                    charImgData = canvas.toDataURL('image/png');
-                    URL.revokeObjectURL(blobURL);
-                    resolve();
-                };
-                img.onerror = () => resolve();
-                img.src = blobURL;
-            });
+        const pinyinEl = document.getElementById(`pinyin-value-${index}`);
+        const zhuyinEl = document.getElementById(`zhuyin-value-${index}`);
+        const meaningEl = document.getElementById(`meaning-value-${index}`);
+
+        const pinyinText = pinyinEl ? pinyinEl.textContent.trim() : "-";
+        const zhuyinText = zhuyinEl ? zhuyinEl.textContent.trim() : "-";
+        const meaningText = meaningEl ? meaningEl.textContent.trim() : "-";
+
+        const pageWidth = 210;
+        const margin = 15;
+        let currentY = 15;
+
+        // Header Title (ASCII - safe with doc.text)
+        doc.setFont("Helvetica", "bold");
+        doc.setFontSize(16);
+        doc.setTextColor(50, 50, 50);
+        doc.text("Boba Break Study - Hanzi Writing Worksheet", margin, currentY);
+
+        currentY += 8;
+        doc.setFont("Helvetica", "normal");
+        doc.setFontSize(10);
+        doc.setTextColor(100, 100, 100);
+        doc.text("Name: _______________________    Date: ___________________", margin, currentY);
+
+        currentY += 10;
+
+        // Character Info Box
+        doc.setFillColor(245, 245, 245);
+        doc.roundedRect(margin, currentY, pageWidth - (margin * 2), 22, 2, 2, "F");
+
+        /*
+         * "Character: X" contains a Hanzi glyph,
+         * so it must be rendered as an image,
+         * not as PDF text.
+         */
+
+        addTextImageToPDF(
+            doc,
+            `Character: ${char}`,
+            margin + 5,
+            currentY + 3,
+            13,
+            "#b5835a",
+            "bold",
+            6
+        );
+
+        /*
+         * "Pinyin ... | Zhuyin ..." contains tone
+         * marks and Bopomofo symbols, so it also
+         * needs to be rendered as an image.
+         */
+
+        addTextImageToPDF(
+            doc,
+            `Pinyin: ${pinyinText}   |   Zhuyin: ${zhuyinText}`,
+            margin + 5,
+            currentY + 10,
+            9,
+            "#3c3c3c",
+            "normal",
+            5
+        );
+
+        // Meaning is plain English/ASCII, safe for doc.text
+        doc.setFont("Helvetica", "normal");
+        doc.setFontSize(9);
+        doc.setTextColor(60, 60, 60);
+
+        let shortMeaning = meaningText;
+        if (shortMeaning.length > 75) {
+            shortMeaning = shortMeaning.substring(0, 72) + "...";
         }
-    } catch (e) {
-        console.log("Error generating full character image for PDF", e);
-    } finally {
-        document.body.removeChild(tempDiv);
-    }
+        doc.text(`Meaning: ${shortMeaning}`, margin + 5, currentY + 19);
 
-    // Draw Tianzi Grid (3 rows x 9 cols)
-    const cols = 9;
-    const rows = 3;
-    const boxSize = 16; // mm
-    const startX = margin + (pageWidth - (margin * 2) - (cols * boxSize)) / 2;
+        currentY += 30;
 
-    for (let r = 0; r < rows; r++) {
-        for (let c = 0; c < cols; c++) {
-            const boxX = startX + (c * boxSize);
-            const boxY = currentY + (r * boxSize);
+        // Render full character image for the practice grid,
+        // waiting for the real load-complete event.
+        const charImgData = await renderCharacterToPNG(char);
 
-            doc.setDrawColor(180, 180, 180);
-            doc.setLineWidth(0.3);
-            doc.rect(boxX, boxY, boxSize, boxSize);
+        // Draw Tianzi Grid (3 rows x 9 cols)
+        const cols = 9;
+        const rows = 3;
+        const boxSize = 16; // mm
+        const startX = margin + (pageWidth - (margin * 2) - (cols * boxSize)) / 2;
 
-            doc.setDrawColor(210, 210, 210);
-            doc.setLineDashPattern([0.5, 0.5], 0);
-            doc.line(boxX + (boxSize / 2), boxY, boxX + (boxSize / 2), boxY + boxSize);
-            doc.line(boxX, boxY + (boxSize / 2), boxX + boxSize, boxY + (boxSize / 2));
-            doc.setLineDashPattern([], 0);
+        for (let r = 0; r < rows; r++) {
+            for (let c = 0; c < cols; c++) {
+                const boxX = startX + (c * boxSize);
+                const boxY = currentY + (r * boxSize);
 
-            if (r === 0 && c === 0 && charImgData) {
-                doc.addImage(charImgData, 'PNG', boxX + 1.5, boxY + 1.5, boxSize - 3, boxSize - 3);
+                doc.setDrawColor(180, 180, 180);
+                doc.setLineWidth(0.3);
+                doc.rect(boxX, boxY, boxSize, boxSize);
+
+                doc.setDrawColor(210, 210, 210);
+                doc.setLineDashPattern([0.5, 0.5], 0);
+                doc.line(boxX + (boxSize / 2), boxY, boxX + (boxSize / 2), boxY + boxSize);
+                doc.line(boxX, boxY + (boxSize / 2), boxX + boxSize, boxY + (boxSize / 2));
+                doc.setLineDashPattern([], 0);
+
+                if (r === 0 && c === 0 && charImgData) {
+                    doc.addImage(charImgData, 'PNG', boxX + 1.5, boxY + 1.5, boxSize - 3, boxSize - 3);
+                }
             }
         }
+
+        currentY += (rows * boxSize) + 15;
+
+        // Footer note (ASCII, safe)
+        doc.setFont("Helvetica", "italic");
+        doc.setFontSize(8);
+        doc.setTextColor(150, 150, 150);
+        doc.text("Generated by Boba Break Study - Hanzi Stroke & Worksheet Module", margin, 287);
+
+        // Save PDF
+        doc.save(`BobaBreakStudy_Worksheet_${char}.pdf`);
+
     }
 
-    currentY += (rows * boxSize) + 15;
+    catch (e) {
 
-    // Footer note
-    doc.setFont("Helvetica", "italic");
-    doc.setFontSize(8);
-    doc.setTextColor(150, 150, 150);
-    doc.text("Generated by Boba Break Study - Hanzi Stroke & Worksheet Module", margin, 287);
+        console.log("PDF generation error:", e);
+        alert("Sorry, something went wrong generating the PDF. Please try again.");
 
-    // Save PDF
-    doc.save(`BobaBreakStudy_Worksheet_${char}.pdf`);
+    }
+
+    finally {
+
+        if (pdfButton) {
+
+            pdfButton.disabled = false;
+
+            if (originalButtonHTML !== null) {
+
+                pdfButton.innerHTML = originalButtonHTML;
+
+            }
+
+        }
+
+    }
+
 }
 
 </script>
