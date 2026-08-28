@@ -1354,7 +1354,242 @@ const allLessonsData = {
         { meaning: "What does Xiaomei look like?", answer: ["小美", "長得", "怎麼樣"] }, 
         { meaning: "What should we do?", answer: ["我們", "怎麼辦"] } 
     ] 
+},
+
+// ========================================================
+// LESSON 18
+// ========================================================
+18: {
+grammar: [
+{
+id: "location_at_place",
+name: "Location with 在 (Place)",
+category: "Grammar",
+explanation: "Used to describe where someone or something is located by combining a subject, 在 (zài), and a place.",
+examples: [
+{
+hanzi: "我在房間。",
+pinyin: "Wǒ zài fángjiān.",
+english: "I am in the room."
+},
+{
+hanzi: "他在銀行。",
+pinyin: "Tā zài yínháng.",
+english: "He is at the bank."
+},
+{
+hanzi: "她在郵局。",
+pinyin: "Tā zài yóujú.",
+english: "She is at the post office."
+},
+{
+hanzi: "哥哥在工廠。",
+pinyin: "Gēge zài gōngchǎng.",
+english: "My older brother is at the factory."
 }
+]
+},
+{
+id: "location_position_word",
+name: "Location with Position Words",
+category: "Grammar",
+explanation: "Used with 在 and a position word to describe a specific relative position or orientation.",
+examples: [
+{
+hanzi: "貓在裡面。",
+pinyin: "Māo zài lǐmiàn.",
+english: "The cat is inside."
+},
+{
+hanzi: "老師在外面。",
+pinyin: "Lǎoshī zài wàimiàn.",
+english: "The teacher is outside."
+},
+{
+hanzi: "書在桌子上面。",
+pinyin: "Shū zài zhuōzi shàngmiàn.",
+english: "The book is on the desk."
+},
+{
+hanzi: "包包在椅子下面。",
+pinyin: "Bāobāo zài yǐzi xiàmiàn.",
+english: "The bag is under the chair."
+}
+]
+},
+{
+id: "location_relative_position",
+name: "Relative Position (A 在 B 的 Position)",
+category: "Grammar",
+explanation: "Used to describe where object A is in relation to object B using the structure A + 在 + B + 的 + position word.",
+examples: [
+{
+hanzi: "貓在椅子的下面。",
+pinyin: "Māo zài yǐzi de xiàmiàn.",
+english: "The cat is under the chair."
+},
+{
+hanzi: "銀行在郵局的前面。",
+pinyin: "Yínháng zài yóujú de qiánmiàn.",
+english: "The bank is in front of the post office."
+},
+{
+hanzi: "工廠在銀行的後面。",
+pinyin: "Gōngchǎng zài yínháng de hòumiàn.",
+english: "The factory is behind the bank."
+},
+{
+hanzi: "銀行在郵局的對面。",
+pinyin: "Yínháng zài yóujú de duìmiàn.",
+english: "The bank is across from the post office."
+}
+]
+},
+{
+id: "asking_location",
+name: "Asking About Location with 哪裡",
+category: "Grammar",
+explanation: "Used to inquire about locations using 哪裡 (nǎlǐ), either directly or in relation to another object.",
+examples: [
+{
+hanzi: "銀行在哪裡？",
+pinyin: "Yínháng zài nǎlǐ?",
+english: "Where is the bank?"
+},
+{
+hanzi: "銀行在郵局的哪裡？",
+pinyin: "Yínháng zài yóujú de nǎlǐ?",
+english: "Where is the bank in relation to the post office?"
+},
+{
+hanzi: "椅子在房間的哪裡？",
+pinyin: "Yǐzi zài fángjiān de nǎlǐ?",
+english: "Where is the chair in the room?"
+}
+]
+}
+],
+vocabulary: [
+{
+word: "椅子",
+pinyin: "yǐzi",
+meaning: "chair"
+},
+{
+word: "桌子",
+pinyin: "zhuōzi",
+meaning: "desk / table"
+},
+{
+word: "包包",
+pinyin: "bāobāo",
+meaning: "bag"
+},
+{
+word: "房間",
+pinyin: "fángjiān",
+meaning: "room"
+},
+{
+word: "銀行",
+pinyin: "yínháng",
+meaning: "bank"
+},
+{
+word: "工廠",
+pinyin: "gōngchǎng",
+meaning: "factory"
+},
+{
+word: "郵局",
+pinyin: "yóujú",
+meaning: "post office"
+},
+{
+word: "裡面",
+pinyin: "lǐmiàn",
+meaning: "inside"
+},
+{
+word: "外面",
+pinyin: "wàimiàn",
+meaning: "outside"
+},
+{
+word: "上面",
+pinyin: "shàngmiàn",
+meaning: "above / on top"
+},
+{
+word: "下面",
+pinyin: "xiàmiàn",
+meaning: "below / under"
+},
+{
+word: "前面",
+pinyin: "qiánmiàn",
+meaning: "in front of"
+},
+{
+word: "後面",
+pinyin: "hòumiàn",
+meaning: "behind"
+},
+{
+word: "中間",
+pinyin: "zhōngjiān",
+meaning: "in the middle"
+},
+{
+word: "對面",
+pinyin: "duìmiàn",
+meaning: "opposite / across from"
+}
+],
+reviewQuestions: [
+{
+meaning: "I am in the room.",
+answer: ["我", "在", "房間"]
+},
+{
+meaning: "The teacher is outside.",
+answer: ["老師", "在", "外面"]
+},
+{
+meaning: "The book is on the desk.",
+answer: ["書", "在", "桌子", "上面"]
+},
+{
+meaning: "The bag is under the chair.",
+answer: ["包包", "在", "椅子", "下面"]
+},
+{
+meaning: "The cat is under the chair.",
+answer: ["貓", "在", "椅子", "的", "下面"]
+},
+{
+meaning: "The bank is in front of the post office.",
+answer: ["銀行", "在", "郵局", "的", "前面"]
+},
+{
+meaning: "The factory is behind the bank.",
+answer: ["工廠", "在", "銀行", "的", "後面"]
+},
+{
+meaning: "The bank is across from the post office.",
+answer: ["銀行", "在", "郵局", "的", "對面"]
+},
+{
+meaning: "Where is the bank?",
+answer: ["銀行", "在", "哪裡"]
+},
+{
+meaning: "Where is the bank in relation to the post office?",
+answer: ["銀行", "在", "郵局", "的", "哪裡"]
+}
+]
+}
+
 
 };
 
