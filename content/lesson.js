@@ -13,8 +13,8 @@ const allLessonsData = {
         { id: "s-bu-v-o", name: "S + 不 + V + O", category: "Negative Sentence", examples: ["我不吃飯。", "你不喝水。", "她不看書。"] }, 
         { id: "svo-ma", name: "S + V + O + 嗎", category: "Yes / No Question", examples: ["你吃飯嗎？", "你喝水嗎？", "她看書嗎？"] }, 
         { id: "s-v-bu-v", name: "S + V + 不 + V", category: "A-not-A Question", examples: ["你吃不吃？", "你喝不喝？", "你看不看？"] }, 
-        { id: "answer-v-bu-v", name: "Answer with V and 不 + V", category: "Answer", examples: ["吃 / 不吃", "喝 / 不喝", "看 / 不看"] 
-    ] }, 
+        { id: "answer-v-bu-v", name: "Answer with V and 不 + V", category: "Answer", examples: ["吃 / 不吃", "喝 / 不喝", "看 / 不看"] }
+    ], 
     vocabulary: [ 
         { hanzi: "我", pinyin: "wǒ", meaning: "I / me", category: "Pronoun" }, 
         { hanzi: "你", pinyin: "nǐ", meaning: "you", category: "Pronoun" }, 
