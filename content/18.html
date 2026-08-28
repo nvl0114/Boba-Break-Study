@@ -1,0 +1,4975 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Location with 在 & Position Words | Boba Break Study</title>
+
+<link rel="stylesheet"
+      href="../style.css">
+
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/hanzi-writer@3.5.0/dist/hanzi-writer.min.js"></script>
+
+<!--
+    Global review database.
+    This page does NOT use it for lesson content.
+    It is only used by the final mixed review.
+-->
+<script src="lesson.js"></script>
+
+
+<style>
+
+/* =====================================================
+   GENERAL
+===================================================== */
+
+.lesson-card,
+.grammar-card,
+.game-card,
+.writing-card,
+.final-card {
+
+    background: white;
+
+    padding: 25px;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 6px 15px rgba(0,0,0,0.06);
+
+    margin: 25px auto;
+
+    max-width: 750px;
+
+}
+
+h2 {
+
+    color: #b8865c;
+
+    font-size: 24px;
+
+    margin-bottom: 12px;
+
+}
+
+h3 {
+
+    color: #5c4033;
+
+}
+
+p {
+
+    color: #666;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+
+}
+
+
+/* =====================================================
+   LESSON HEADER
+===================================================== */
+
+.lesson-title {
+
+    text-align: center;
+
+    margin-top: 20px;
+
+}
+
+.lesson-title .badge {
+
+    display: inline-block;
+
+    background: #fff8ef;
+
+    color: #b8865c;
+
+    border: 1px solid #d7b89c;
+
+    padding: 6px 13px;
+
+    border-radius: 20px;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+}
+
+.lesson-title h1 {
+
+    color: #5c4033;
+
+    font-size: 28px;
+
+    margin: 12px 0 5px;
+
+}
+
+.lesson-title p {
+
+    margin: 0;
+
+}
+
+
+/* =====================================================
+   GRAMMAR CAROUSEL
+===================================================== */
+
+.grammar-slider-container {
+
+    position: relative;
+
+}
+
+.grammar-slide {
+
+    display: none;
+
+}
+
+.grammar-slide.active-slide {
+
+    display: block;
+
+}
+
+.pattern-display {
+
+    background: #fff8ef;
+
+    padding: 15px;
+
+    border-radius: 14px;
+
+    border: 1.5px solid #d7b89c;
+
+    margin: 15px 0;
+
+    text-align: center;
+
+}
+
+.pattern-code {
+
+    font-weight: bold;
+
+    color: #b8865c;
+
+    font-size: 18px;
+
+}
+
+.grammar-explanation {
+
+    background: #fff8ef;
+
+    border: 1.5px solid #d7b89c;
+
+    padding: 15px;
+
+    border-radius: 15px;
+
+    margin-top: 15px;
+
+}
+
+.grammar-explanation strong {
+
+    color: #b8865c;
+
+}
+
+.example-sentence {
+
+    text-align: center;
+
+    margin-top: 18px;
+
+    padding: 15px;
+
+    background: white;
+
+    border-radius: 15px;
+
+    border: 1px dashed #d7b89c;
+
+}
+
+.example-hanzi {
+
+    font-size: 28px;
+
+    font-weight: bold;
+
+    color: #5c4033;
+
+    margin-bottom: 5px;
+
+}
+
+.example-pinyin {
+
+    color: #777;
+
+    margin-bottom: 4px;
+
+}
+
+.example-english {
+
+    color: #666;
+
+}
+
+.slider-nav {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-top: 20px;
+
+}
+
+.slider-btn {
+
+    background: #fff8ef;
+
+    border: 1.5px solid #d7b89c;
+
+    color: #8c7355;
+
+    padding: 8px 16px;
+
+    border-radius: 12px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+
+}
+
+.slider-btn:hover {
+
+    background: #faedcd;
+
+}
+
+.slider-indicators {
+
+    display: flex;
+
+    gap: 6px;
+
+    flex-wrap: wrap;
+
+    justify-content: center;
+
+    max-width: 400px;
+
+}
+
+.indicator {
+
+    width: 8px;
+
+    height: 8px;
+
+    border-radius: 50%;
+
+    background: #f0e4d5;
+
+    cursor: pointer;
+
+}
+
+.indicator.active {
+
+    background: #b8865c;
+
+}
+
+
+/* =====================================================
+   IMAGE SLIDE
+===================================================== */
+
+.grammar-image {
+
+    width: 100%;
+
+    max-width: 650px;
+
+    display: block;
+
+    margin: 15px auto;
+
+    border-radius: 16px;
+
+    border: 1px solid #eadac7;
+
+}
+
+
+/* =====================================================
+   VOCABULARY
+===================================================== */
+
+.vocab-container {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+
+    justify-content: center;
+
+}
+
+.vocab-pill {
+
+    position: relative;
+
+    background: #fff8ef;
+
+    border-radius: 14px;
+
+    padding: 9px 10px;
+
+    width: 110px;
+
+    text-align: center;
+
+    border: 1.5px solid #d7b89c;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+
+}
+
+.vocab-pill:hover {
+
+    transform: translateY(-2px);
+
+    background: #faedcd;
+
+}
+
+.vocab-pill:active {
+
+    transform: scale(0.95);
+
+}
+
+.vocab-pill .hanzi {
+
+    font-size: 20px;
+
+    font-weight: bold;
+
+    color: #b8865c;
+
+}
+
+.vocab-pill .pinyin {
+
+    font-size: 11px;
+
+    color: #555;
+
+}
+
+.vocab-pill .meaning {
+
+    font-size: 10px;
+
+    color: #777;
+
+    margin-top: 2px;
+
+}
+
+
+/* =====================================================
+   SOUND
+===================================================== */
+
+.sound-btn {
+
+    background: #b8865c;
+
+    color: white;
+
+    border: none;
+
+    width: 32px;
+
+    height: 32px;
+
+    border-radius: 50%;
+
+    cursor: pointer;
+
+    margin-top: 8px;
+
+}
+
+
+/* =====================================================
+   GAME
+===================================================== */
+
+.game-card {
+
+    position: relative;
+
+}
+
+.game-number {
+
+    display: inline-block;
+
+    background: #fff8ef;
+
+    color: #b8865c;
+
+    border: 1px solid #d7b89c;
+
+    padding: 5px 12px;
+
+    border-radius: 20px;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+}
+
+.game-description {
+
+    margin-bottom: 15px;
+
+}
+
+.question-box {
+
+    text-align: center;
+
+    background: #fff8ef;
+
+    border: 1.5px dashed #d7b89c;
+
+    padding: 15px;
+
+    border-radius: 15px;
+
+    margin-bottom: 15px;
+
+}
+
+.question-label {
+
+    font-size: 11px;
+
+    color: #999;
+
+    margin-bottom: 5px;
+
+}
+
+.question-meaning {
+
+    font-size: 17px;
+
+    color: #5c4033;
+
+    font-weight: bold;
+
+}
+
+.answer-area {
+
+    min-height: 65px;
+
+    padding: 12px;
+
+    border: 2px dashed #d7b89c;
+
+    border-radius: 15px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-wrap: wrap;
+
+    gap: 7px;
+
+    background: #fdfbf7;
+
+    margin-bottom: 12px;
+
+}
+
+.answer-placeholder {
+
+    color: #aaa;
+
+    font-size: 13px;
+
+}
+
+.word-bank {
+
+    display: flex;
+
+    justify-content: center;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+    margin-bottom: 15px;
+
+}
+
+.word-btn {
+
+    border: 1.5px solid #d7b89c;
+
+    background: white;
+
+    color: #5c4033;
+
+    padding: 9px 14px;
+
+    border-radius: 12px;
+
+    font-size: 17px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+
+}
+
+.word-btn:hover {
+
+    background: #fff8ef;
+
+    transform: translateY(-2px);
+
+}
+
+.word-btn.selected {
+
+    background: #faedcd;
+
+    border-color: #b8865c;
+
+    color: #8c5d35;
+
+}
+
+.word-btn:disabled {
+
+    opacity: 0.4;
+
+    cursor: default;
+
+}
+
+.selected-word {
+
+    background: #b8865c;
+
+    color: white;
+
+    padding: 8px 13px;
+
+    border-radius: 10px;
+
+    font-size: 17px;
+
+    cursor: pointer;
+
+}
+
+.selected-word:hover {
+
+    background: #a0724f;
+
+}
+
+.game-buttons {
+
+    display: flex;
+
+    gap: 8px;
+
+}
+
+.check-btn,
+.reset-btn,
+.listen-btn,
+.next-game-btn {
+
+    flex: 1;
+
+    border: none;
+
+    border-radius: 12px;
+
+    padding: 11px;
+
+    cursor: pointer;
+
+    font-weight: bold;
+
+    transition: 0.2s;
+
+}
+
+.check-btn {
+
+    background: #b8865c;
+
+    color: white;
+
+}
+
+.check-btn:hover {
+
+    background: #a0724f;
+
+}
+
+.reset-btn {
+
+    background: #fff8ef;
+
+    color: #8c7355;
+
+    border: 1px solid #d7b89c;
+
+}
+
+.listen-btn {
+
+    background: #f0f7f4;
+
+    color: #2d6a4f;
+
+    border: 1px solid #b7e4c7;
+
+}
+
+.next-game-btn {
+
+    background: #5c4033;
+
+    color: white;
+
+    display: none;
+
+    margin-top: 12px;
+
+}
+
+.feedback {
+
+    text-align: center;
+
+    min-height: 30px;
+
+    margin-top: 12px;
+
+    font-weight: bold;
+
+}
+
+.correct {
+
+    color: #2d6a4f;
+
+}
+
+.incorrect {
+
+    color: #9b2226;
+
+}
+
+
+/* =====================================================
+   QUESTION COUNTER
+===================================================== */
+
+.game-progress {
+
+    font-size: 12px;
+
+    color: #8c7355;
+
+    text-align: right;
+
+    margin-bottom: 8px;
+
+}
+
+
+/* =====================================================
+   SENTENCE WRITING
+===================================================== */
+
+.writing-card {
+
+    text-align: center;
+
+}
+
+.sentence-writing {
+
+    background: #fff8ef;
+
+    border: 1.5px solid #d7b89c;
+
+    padding: 18px;
+
+    border-radius: 15px;
+
+    margin-top: 15px;
+
+}
+
+.sentence-prompt {
+
+    font-size: 18px;
+
+    font-weight: bold;
+
+    color: #5c4033;
+
+}
+
+.sentence-hint {
+
+    font-size: 12px;
+
+    color: #888;
+
+    margin: 8px 0;
+
+}
+
+#sentenceInput {
+
+    width: 100%;
+
+    padding: 12px;
+
+    border-radius: 12px;
+
+    border: 1.5px solid #d7b89c;
+
+    font-size: 20px;
+
+    text-align: center;
+
+    outline: none;
+
+    box-sizing: border-box;
+
+}
+
+#sentenceInput:focus {
+
+    border-color: #b8865c;
+
+}
+
+.check-writing {
+
+    width: 100%;
+
+    margin-top: 10px;
+
+    padding: 11px;
+
+    background: #b8865c;
+
+    color: white;
+
+    border: none;
+
+    border-radius: 12px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+}
+
+
+/* =====================================================
+   HANZI WRITING
+===================================================== */
+
+.writing-mode-buttons {
+
+    display: flex;
+
+    gap: 8px;
+
+    margin: 15px 0;
+
+}
+
+.mode-btn {
+
+    flex: 1;
+
+    border: 1.5px solid #d7b89c;
+
+    background: #fff8ef;
+
+    color: #8c7355;
+
+    padding: 10px 5px;
+
+    border-radius: 12px;
+
+    cursor: pointer;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    transition: 0.2s;
+
+}
+
+.mode-btn.active {
+
+    background: #b8865c;
+
+    color: white;
+
+    border-color: #b8865c;
+
+}
+
+.writing-info {
+
+    color: #777;
+
+    font-size: 13px;
+
+    margin-bottom: 15px;
+
+}
+
+.canvas-wrapper {
+
+    margin: 15px auto;
+
+    width: 280px;
+
+    max-width: 100%;
+
+    height: 280px;
+
+    background:
+
+        linear-gradient(#eadac7 1px, transparent 1px),
+
+        linear-gradient(90deg, #eadac7 1px, transparent 1px),
+
+        linear-gradient(#eadac7 1px, transparent 1px),
+
+        linear-gradient(90deg, #eadac7 1px, transparent 1px);
+
+    background-size: 70px 70px;
+
+    background-position: center;
+
+    border: 2px solid #d7b89c;
+
+    border-radius: 15px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    overflow: hidden;
+
+    position: relative;
+
+    touch-action: none;
+
+}
+
+#target-div {
+
+    width: 260px;
+
+    height: 260px;
+
+}
+
+.writing-buttons {
+
+    display: flex;
+
+    gap: 8px;
+
+    justify-content: center;
+
+    margin-top: 15px;
+
+}
+
+.write-btn {
+
+    border: none;
+
+    padding: 10px 15px;
+
+    border-radius: 12px;
+
+    cursor: pointer;
+
+    font-weight: bold;
+
+}
+
+.clear-btn {
+
+    background: #fff8ef;
+
+    color: #8c7355;
+
+    border: 1px solid #d7b89c;
+
+}
+
+.next-write-btn {
+
+    background: #b8865c;
+
+    color: white;
+
+}
+
+
+/* =====================================================
+   FINAL CHALLENGE
+===================================================== */
+
+.final-card {
+
+    text-align: center;
+
+}
+
+.final-score {
+
+    font-size: 40px;
+
+    font-weight: bold;
+
+    color: #b8865c;
+
+    margin-top: 15px;
+
+}
+
+.unlock {
+
+    background: #fff8ef;
+
+    padding: 15px;
+
+    border-radius: 15px;
+
+    border: 1.5px solid #d7b89c;
+
+    margin-top: 15px;
+
+}
+
+.final-error {
+
+    display: none;
+
+    background: #fff1f1;
+
+    color: #9b2226;
+
+    border: 1.5px solid #e5aaaa;
+
+    padding: 15px;
+
+    border-radius: 15px;
+
+    margin-top: 15px;
+
+    line-height: 1.6;
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:700px){
+
+    .lesson-card,
+    .grammar-card,
+    .game-card,
+    .writing-card,
+    .final-card {
+
+        padding: 15px;
+
+        margin: 15px;
+
+    }
+
+    .lesson-title h1 {
+
+        font-size: 23px;
+
+    }
+
+    .word-btn {
+
+        padding: 8px 12px;
+
+        font-size: 16px;
+
+    }
+
+    .writing-mode-buttons {
+
+        flex-wrap: wrap;
+
+    }
+
+    .mode-btn {
+
+        min-width: 45%;
+
+    }
+
+    .game-buttons {
+
+        flex-wrap: wrap;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="app-container">
+
+
+<div id="sidebar-container"></div>
+
+
+<main class="main-content">
+
+
+<!-- =====================================================
+     TITLE
+===================================================== -->
+
+<div class="lesson-title">
+
+    <span class="badge">
+        LOCATION & POSITION
+    </span>
+
+    <h1>
+        Using 在 with Position Words
+    </h1>
+
+    <p>
+        Learn how to describe where people and things are
+        using 在 and 方位詞.
+    </p>
+
+</div>
+
+
+<!-- =====================================================
+     GRAMMAR
+===================================================== -->
+
+<div class="grammar-card">
+
+    <h2>
+        🧠 Grammar Patterns: Detailed Breakdown
+    </h2>
+
+
+    <div class="grammar-slider-container">
+
+
+        <!-- =================================================
+             SLIDE 1
+        ================================================== -->
+
+        <div class="grammar-slide active-slide"
+             id="slide-1">
+
+            <h3>
+                🔄 Review: 在
+            </h3>
+
+            <div class="grammar-explanation">
+
+                <p>
+                    We learned <strong>在 (zài)</strong>
+                    in an earlier lesson.
+                    Let's review it!
+                </p>
+
+                <p>
+                    Previously, we learned that 在 can be used
+                    to say where someone or something is.
+                </p>
+
+                <p>
+                    But sometimes, simply saying the place
+                    isn't enough.
+                </p>
+
+            </div>
+
+            <div class="example-sentence">
+
+                <div class="example-hanzi">
+                    書在教室。
+                </div>
+
+                <div class="example-pinyin">
+                    Shū zài jiàoshì.
+                </div>
+
+                <div class="example-english">
+                    The book is in the classroom.
+                </div>
+
+                <button class="sound-btn"
+                        onclick="playAudio('書在教室')">
+
+                    🔊
+
+                </button>
+
+            </div>
+
+            <div class="grammar-explanation">
+
+                <p>
+                    Where exactly is the book?
+                </p>
+
+                <p>
+                    Inside the bag?
+                    Outside?
+                    In front?
+                    Behind?
+                </p>
+
+                <p>
+                    To give a more specific location,
+                    we can use <strong>方位詞</strong>
+                    (position words) with 在.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             SLIDE 2
+        ================================================== -->
+
+        <div class="grammar-slide"
+             id="slide-2">
+
+            <h3>
+                📍 Position Words
+            </h3>
+
+            <img
+                class="grammar-image"
+                src="https://i.postimg.cc/xTyLqxkk/Tambahkan-subjudul-20260829-061313-0000.jpg"
+                alt="Chinese position words diagram">
+
+            <div class="grammar-explanation">
+
+                <p>
+                    Position words help us describe
+                    a more specific location.
+                </p>
+
+                <p>
+                    In this lesson, we will practice:
+                    <strong>裡面、外面、上面、下面、前面、後面、中間、對面</strong>.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             SLIDE 3
+        ================================================== -->
+
+        <div class="grammar-slide"
+             id="slide-3">
+
+            <h3>
+                1. Subject + 在 + Place
+            </h3>
+
+            <div class="pattern-display">
+
+                <div class="pattern-code">
+                    Subject + 在 + Place
+                </div>
+
+            </div>
+
+            <div class="grammar-explanation">
+
+                <p>
+                    <strong>Explanation:</strong>
+                    We use 在 to say where someone
+                    or something is.
+                </p>
+
+                <p>
+                    The place can be a room, building,
+                    workplace, or another location.
+                </p>
+
+            </div>
+
+
+            <div class="example-sentence">
+
+                <div class="example-hanzi">
+                    我在房間。
+                </div>
+
+                <div class="example-pinyin">
+                    Wǒ zài fángjiān.
+                </div>
+
+                <div class="example-english">
+                    I am in the room.
+                </div>
+
+                <button class="sound-btn"
+                        onclick="playAudio('我在房間')">
+
+                    🔊
+
+                </button>
+
+            </div>
+
+
+            <div class="example-sentence">
+
+                <div class="example-hanzi">
+                    他在銀行。
+                </div>
+
+                <div class="example-pinyin">
+                    Tā zài yínháng.
+                </div>
+
+                <div class="example-english">
+                    He is at the bank.
+                </div>
+
+                <button class="sound-btn"
+                        onclick="playAudio('他在銀行')">
+
+                    🔊
+
+                </button>
+
+            </div>
+
+
+            <div class="example-sentence">
+
+                <div class="example-hanzi">
+                    她在郵局。
+                </div>
+
+                <div class="example-pinyin">
+                    Tā zài yóujú.
+                </div>
+
+                <div class="example-english">
+                    She is at the post office.
+                </div>
+
+                <button class="sound-btn"
+                        onclick="playAudio('她在郵局')">
+
+                    🔊
+
+                </button>
+
+            </div>
+
+
+            <div class="example-sentence">
+
+                <div class="example-hanzi">
+                    哥哥在工廠。
+                </div>
+
+                <div class="example-pinyin">
+                    Gēge zài gōngchǎng.
+                </div>
+
+                <div class="example-english">
+                    My older brother is at the factory.
+                </div>
+
+                <button class="sound-btn"
+                        onclick="playAudio('哥哥在工廠')">
+
+                    🔊
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             SLIDE 4
+        ================================================== -->
+
+        <div class="grammar-slide"
+             id="slide-4">
+
+            <h3>
+                2. Subject + 在 + Position Word
+            </h3>
+
+            <div class="pattern-display">
+
+                <div class="pattern-code">
+                    Subject + 在 + Position Word
+                </div>
+
+            </div>
+
+            <div class="grammar-explanation">
+
+                <p>
+                    We can use
+                    <strong>在 + 方位詞</strong>
+                    to describe a more specific location.
+                </p>
+
+                <p>
+                    The position word tells us exactly
+                    where the subject is.
+                </p>
+
+            </div>
+
+
+            <div class="example-sentence">
+
+                <div class="example-hanzi">
+                    貓在裡面。
+                </div>
+
+                <div class="example-pinyin">
+                    Māo zài lǐmiàn.
+                </div>
+
+                <div class="example-english">
+                    The cat is inside.
+                </div>
+
+                <button class="sound-btn"
+                        onclick="playAudio('貓在裡面')">
+
+                    🔊
+
+                </button>
+
+            </div>
+
+
+            <div class="example-sentence">
+
+                <div class="example-hanzi">
+                    老師在外面。
+                </div>
+
+                <div class="example-pinyin">
+                    Lǎoshī zài wàimiàn.
+                </div>
+
+                <div class="example-english">
+                    The teacher is outside.
+                </div>
+
+                <button class="sound-btn"
+                        onclick="playAudio('老師在外面')">
+
+                    🔊
+
+                </button>
+
+            </div>
+
+
+            <div class="example-sentence">
+
+                <div class="example-hanzi">
+                    書在上面。
+                </div>
+
+                <div class="example-pinyin">
+                    Shū zài shàngmiàn.
+                </div>
+
+                <div class="example-english">
+                    The book is on top.
+                </div>
+
+                <button class="sound-btn"
+                        onclick="playAudio('書在上面')">
+
+                    🔊
+
+                </button>
+
+            </div>
+
+
+            <div class="example-sentence">
+
+                <div class="example-hanzi">
+                    包包在下面。
+                </div>
+
+                <div class="example-pinyin">
+                    Bāobāo zài xiàmiàn.
+                </div>
+
+                <div class="example-english">
+                    The bag is underneath.
+                </div>
+
+                <button class="sound-btn"
+                        onclick="playAudio('包包在下面')">
+
+                    🔊
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             SLIDE 5
+        ================================================== -->
+
+        <div class="grammar-slide"
+             id="slide-5">
+
+            <h3>
+                3. A + 在 + B + 的 + Position Word
+            </h3>
+
+            <div class="pattern-display">
+
+                <div class="pattern-code">
+                    A + 在 + B + 的 + Position Word
+                </div>
+
+            </div>
+
+            <div class="grammar-explanation">
+
+                <p>
+                    Now we can describe where
+                    <strong>A</strong> is in relation to
+                    <strong>B</strong>.
+                </p>
+
+                <p>
+                    Here, <strong>的</strong> connects
+                    B with the position word.
+                </p>
+
+            </div>
+
+
+            <div class="example-sentence">
+
+                <div class="example-hanzi">
+                    貓在椅子的下面。
+                </div>
+
+                <div class="example-pinyin">
+                    Māo zài yǐzi de xiàmiàn.
+                </div>
+
+                <div class="example-english">
+                    The cat is under the chair.
+                </div>
+
+                <button class="sound-btn"
+                        onclick="playAudio('貓在椅子的下面')">
+
+                    🔊
+
+                </button>
+
+            </div>
+
+
+            <div class="example-sentence">
+
+                <div class="example-hanzi">
+                    銀行在郵局的前面。
+                </div>
+
+                <div class="example-pinyin">
+                    Yínháng zài yóujú de qiánmiàn.
+                </div>
+
+                <div class="example-english">
+                    The bank is in front of the post office.
+                </div>
+
+                <button class="sound-btn"
+                        onclick="playAudio('銀行在郵局的前面')">
+
+                    🔊
+
+                </button>
+
+            </div>
+
+
+            <div class="example-sentence">
+
+                <div class="example-hanzi">
+                    工廠在銀行的後面。
+                </div>
+
+                <div class="example-pinyin">
+                    Gōngchǎng zài yínháng de hòumiàn.
+                </div>
+
+                <div class="example-english">
+                    The factory is behind the bank.
+                </div>
+
+                <button class="sound-btn"
+                        onclick="playAudio('工廠在銀行的後面')">
+
+                    🔊
+
+                </button>
+
+            </div>
+
+
+            <div class="example-sentence">
+
+                <div class="example-hanzi">
+                    銀行在郵局的對面。
+                </div>
+
+                <div class="example-pinyin">
+                    Yínháng zài yóujú de duìmiàn.
+                </div>
+
+                <div class="example-english">
+                    The bank is across from the post office.
+                </div>
+
+                <button class="sound-btn"
+                        onclick="playAudio('銀行在郵局的對面')">
+
+                    🔊
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             SLIDE 6
+        ================================================== -->
+
+        <div class="grammar-slide"
+             id="slide-6">
+
+            <h3>
+                4. Asking About Location with 哪裡
+            </h3>
+
+            <div class="pattern-display">
+
+                <div class="pattern-code">
+                    A + 在哪裡？
+                </div>
+
+            </div>
+
+            <div class="grammar-explanation">
+
+                <p>
+                    We use <strong>哪裡 (nǎlǐ)</strong>
+                    to ask about location.
+                </p>
+
+                <p>
+                    <strong>Pattern 1 — Where is A?</strong>
+                </p>
+
+                <p>
+                    A + 在哪裡？
+                </p>
+
+            </div>
+
+
+            <div class="example-sentence">
+
+                <div class="example-hanzi">
+                    銀行在哪裡？
+                </div>
+
+                <div class="example-pinyin">
+                    Yínháng zài nǎlǐ?
+                </div>
+
+                <div class="example-english">
+                    Where is the bank?
+                </div>
+
+                <button class="sound-btn"
+                        onclick="playAudio('銀行在哪裡')">
+
+                    🔊
+
+                </button>
+
+                <hr>
+
+                <div class="example-hanzi">
+                    銀行在郵局的對面。
+                </div>
+
+                <div class="example-pinyin">
+                    Yínháng zài yóujú de duìmiàn.
+                </div>
+
+                <div class="example-english">
+                    The bank is across from the post office.
+                </div>
+
+            </div>
+
+
+            <div class="pattern-display">
+
+                <div class="pattern-code">
+                    A + 在 + B + 的 + 哪裡？
+                </div>
+
+            </div>
+
+
+            <div class="grammar-explanation">
+
+                <p>
+                    <strong>Pattern 2 — Where is A
+                    in relation to B?</strong>
+                </p>
+
+                <p>
+                    A + 在 + B + 的 + 哪裡？
+                </p>
+
+            </div>
+
+
+            <div class="example-sentence">
+
+                <div class="example-hanzi">
+                    銀行在郵局的哪裡？
+                </div>
+
+                <div class="example-pinyin">
+                    Yínháng zài yóujú de nǎlǐ?
+                </div>
+
+                <div class="example-english">
+                    Where is the bank in relation to the post office?
+                </div>
+
+                <button class="sound-btn"
+                        onclick="playAudio('銀行在郵局的哪裡')">
+
+                    🔊
+
+                </button>
+
+            </div>
+
+
+            <div class="example-sentence">
+
+                <div class="example-hanzi">
+                    椅子在房間的哪裡？
+                </div>
+
+                <div class="example-pinyin">
+                    Yǐzi zài fángjiān de nǎlǐ?
+                </div>
+
+                <div class="example-english">
+                    Where is the chair in the room?
+                </div>
+
+                <button class="sound-btn"
+                        onclick="playAudio('椅子在房間的哪裡')">
+
+                    🔊
+
+                </button>
+
+                <hr>
+
+                <div class="example-hanzi">
+                    椅子在房間的裡面。
+                </div>
+
+                <div class="example-pinyin">
+                    Yǐzi zài fángjiān de lǐmiàn.
+                </div>
+
+                <div class="example-english">
+                    The chair is inside the room.
+                </div>
+
+            </div>
+
+
+            <div class="grammar-explanation">
+
+                <p>
+                    💡 <strong>Remember:</strong>
+                </p>
+
+                <p>
+                    A 在 B 的 + 方位詞
+                </p>
+
+                <p>
+                    Think of it as:
+                </p>
+
+                <p>
+                    A → 在 → B → 的 → position
+                </p>
+
+                <p>
+                    銀行 → 在 → 郵局 → 的 → 對面
+                </p>
+
+                <p>
+                    The bank is across from the post office.
+                </p>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- SLIDER NAVIGATION -->
+
+    <div class="slider-nav">
+
+        <button class="slider-btn"
+                onclick="prevSlide()">
+
+            ← Prev
+
+        </button>
+
+
+        <div class="slider-indicators"
+             id="sliderIndicators">
+
+            <span class="indicator active"
+                  onclick="currentSlide(1)"></span>
+
+            <span class="indicator"
+                  onclick="currentSlide(2)"></span>
+
+            <span class="indicator"
+                  onclick="currentSlide(3)"></span>
+
+            <span class="indicator"
+                  onclick="currentSlide(4)"></span>
+
+            <span class="indicator"
+                  onclick="currentSlide(5)"></span>
+
+            <span class="indicator"
+                  onclick="currentSlide(6)"></span>
+
+        </div>
+
+
+        <button class="slider-btn"
+                onclick="nextSlide()">
+
+            Next →
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     VOCABULARY
+===================================================== -->
+
+<div class="lesson-card">
+
+    <h2>
+        📚 Vocabulary
+    </h2>
+
+    <p>
+        Tap any word to hear its pronunciation.
+    </p>
+
+
+    <h3>
+        🏢 Places & Objects
+    </h3>
+
+
+    <div class="vocab-container">
+
+
+        <div class="vocab-pill"
+             onclick="playAudio('椅子')">
+
+            <div class="hanzi">
+                椅子
+            </div>
+
+            <div class="pinyin">
+                yǐzi
+            </div>
+
+            <div class="meaning">
+                chair
+            </div>
+
+        </div>
+
+
+        <div class="vocab-pill"
+             onclick="playAudio('房間')">
+
+            <div class="hanzi">
+                房間
+            </div>
+
+            <div class="pinyin">
+                fángjiān
+            </div>
+
+            <div class="meaning">
+                room
+            </div>
+
+        </div>
+
+
+        <div class="vocab-pill"
+             onclick="playAudio('銀行')">
+
+            <div class="hanzi">
+                銀行
+            </div>
+
+            <div class="pinyin">
+                yínháng
+            </div>
+
+            <div class="meaning">
+                bank
+            </div>
+
+        </div>
+
+
+        <div class="vocab-pill"
+             onclick="playAudio('工廠')">
+
+            <div class="hanzi">
+                工廠
+            </div>
+
+            <div class="pinyin">
+                gōngchǎng
+            </div>
+
+            <div class="meaning">
+                factory
+            </div>
+
+        </div>
+
+
+        <div class="vocab-pill"
+             onclick="playAudio('郵局')">
+
+            <div class="hanzi">
+                郵局
+            </div>
+
+            <div class="pinyin">
+                yóujú
+            </div>
+
+            <div class="meaning">
+                post office
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <h3 style="margin-top:25px;">
+        📍 Position Words — 方位詞
+    </h3>
+
+
+    <div class="vocab-container">
+
+
+        <div class="vocab-pill"
+             onclick="playAudio('裡面')">
+
+            <div class="hanzi">
+                裡面
+            </div>
+
+            <div class="pinyin">
+                lǐmiàn
+            </div>
+
+            <div class="meaning">
+                inside
+            </div>
+
+        </div>
+
+
+        <div class="vocab-pill"
+             onclick="playAudio('外面')">
+
+            <div class="hanzi">
+                外面
+            </div>
+
+            <div class="pinyin">
+                wàimiàn
+            </div>
+
+            <div class="meaning">
+                outside
+            </div>
+
+        </div>
+
+
+        <div class="vocab-pill"
+             onclick="playAudio('上面')">
+
+            <div class="hanzi">
+                上面
+            </div>
+
+            <div class="pinyin">
+                shàngmiàn
+            </div>
+
+            <div class="meaning">
+                above / on top
+            </div>
+
+        </div>
+
+
+        <div class="vocab-pill"
+             onclick="playAudio('下面')">
+
+            <div class="hanzi">
+                下面
+            </div>
+
+            <div class="pinyin">
+                xiàmiàn
+            </div>
+
+            <div class="meaning">
+                below / under
+            </div>
+
+        </div>
+
+
+        <div class="vocab-pill"
+             onclick="playAudio('前面')">
+
+            <div class="hanzi">
+                前面
+            </div>
+
+            <div class="pinyin">
+                qiánmiàn
+            </div>
+
+            <div class="meaning">
+                in front of
+            </div>
+
+        </div>
+
+
+        <div class="vocab-pill"
+             onclick="playAudio('後面')">
+
+            <div class="hanzi">
+                後面
+            </div>
+
+            <div class="pinyin">
+                hòumiàn
+            </div>
+
+            <div class="meaning">
+                behind
+            </div>
+
+        </div>
+
+
+        <div class="vocab-pill"
+             onclick="playAudio('中間')">
+
+            <div class="hanzi">
+                中間
+            </div>
+
+            <div class="pinyin">
+                zhōngjiān
+            </div>
+
+            <div class="meaning">
+                in the middle
+            </div>
+
+        </div>
+
+
+        <div class="vocab-pill"
+             onclick="playAudio('對面')">
+
+            <div class="hanzi">
+                對面
+            </div>
+
+            <div class="pinyin">
+                duìmiàn
+            </div>
+
+            <div class="meaning">
+                opposite / across from
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     GAME 1
+===================================================== -->
+
+<div class="game-card">
+
+    <span class="game-number">
+        GAME 1
+    </span>
+
+    <h2>
+        🧩 Where Is It?
+    </h2>
+
+    <p class="game-description">
+        Build sentences using 在 + place and
+        在 + position words.
+    </p>
+
+
+    <div class="game-progress">
+
+        Question
+        <span id="g1Num">1</span>
+        / 4
+
+    </div>
+
+
+    <div class="question-box">
+
+        <div class="question-label">
+            Translate:
+        </div>
+
+        <div class="question-meaning"
+             id="g1Meaning">
+        </div>
+
+    </div>
+
+
+    <div class="answer-area"
+         id="g1Answer">
+
+        <span class="answer-placeholder">
+            Tap the words below
+        </span>
+
+    </div>
+
+
+    <div class="word-bank"
+         id="g1Bank">
+    </div>
+
+
+    <div class="game-buttons">
+
+        <button class="check-btn"
+                onclick="checkGame(1)">
+
+            ✓ Check
+
+        </button>
+
+
+        <button class="reset-btn"
+                onclick="resetGame(1)">
+
+            ↻ Reset
+
+        </button>
+
+
+        <button class="listen-btn"
+                onclick="listenCurrent(1)">
+
+            🔊
+
+        </button>
+
+    </div>
+
+
+    <div class="feedback"
+         id="g1Feedback">
+    </div>
+
+
+    <button class="next-game-btn"
+            id="g1Next"
+            onclick="nextGameQuestion(1)">
+
+        Next →
+
+    </button>
+
+</div>
+
+
+<!-- =====================================================
+     GAME 2
+===================================================== -->
+
+<div class="game-card">
+
+    <span class="game-number">
+        GAME 2
+    </span>
+
+    <h2>
+        🧩 Position Challenge
+    </h2>
+
+    <p class="game-description">
+        Practice relationships between two places or objects
+        using B + 的 + position word.
+    </p>
+
+
+    <div class="game-progress">
+
+        Question
+        <span id="g2Num">1</span>
+        / 4
+
+    </div>
+
+
+    <div class="question-box">
+
+        <div class="question-label">
+            Translate:
+        </div>
+
+        <div class="question-meaning"
+             id="g2Meaning">
+        </div>
+
+    </div>
+
+
+    <div class="answer-area"
+         id="g2Answer">
+
+        <span class="answer-placeholder">
+            Tap the words below
+        </span>
+
+    </div>
+
+
+    <div class="word-bank"
+         id="g2Bank">
+    </div>
+
+
+    <div class="game-buttons">
+
+        <button class="check-btn"
+                onclick="checkGame(2)">
+
+            ✓ Check
+
+        </button>
+
+
+        <button class="reset-btn"
+                onclick="resetGame(2)">
+
+            ↻ Reset
+
+        </button>
+
+
+        <button class="listen-btn"
+                onclick="listenCurrent(2)">
+
+            🔊
+
+        </button>
+
+    </div>
+
+
+    <div class="feedback"
+         id="g2Feedback">
+    </div>
+
+
+    <button class="next-game-btn"
+            id="g2Next"
+            onclick="nextGameQuestion(2)">
+
+        Next →
+
+    </button>
+
+</div>
+
+
+<!-- =====================================================
+     GAME 3
+===================================================== -->
+
+<div class="game-card">
+
+    <span class="game-number">
+        GAME 3
+    </span>
+
+    <h2>
+        🧩 Ask About Location
+    </h2>
+
+    <p class="game-description">
+        Practice asking and answering location questions
+        with 哪裡.
+    </p>
+
+
+    <div class="game-progress">
+
+        Question
+        <span id="g3Num">1</span>
+        / 4
+
+    </div>
+
+
+    <div class="question-box">
+
+        <div class="question-label">
+            Translate:
+        </div>
+
+        <div class="question-meaning"
+             id="g3Meaning">
+        </div>
+
+    </div>
+
+
+    <div class="answer-area"
+         id="g3Answer">
+
+        <span class="answer-placeholder">
+            Tap the words below
+        </span>
+
+    </div>
+
+
+    <div class="word-bank"
+         id="g3Bank">
+    </div>
+
+
+    <div class="game-buttons">
+
+        <button class="check-btn"
+                onclick="checkGame(3)">
+
+            ✓ Check
+
+        </button>
+
+
+        <button class="reset-btn"
+                onclick="resetGame(3)">
+
+            ↻ Reset
+
+        </button>
+
+
+        <button class="listen-btn"
+                onclick="listenCurrent(3)">
+
+            🔊
+
+        </button>
+
+    </div>
+
+
+    <div class="feedback"
+         id="g3Feedback">
+    </div>
+
+
+    <button class="next-game-btn"
+            id="g3Next"
+            onclick="nextGameQuestion(3)">
+
+        Next →
+
+    </button>
+
+</div>
+
+
+<!-- =====================================================
+     SENTENCE WRITING
+===================================================== -->
+
+<div class="writing-card">
+
+    <h2>
+        📝 Sentence Writing
+    </h2>
+
+    <p>
+        Write the Mandarin sentence based on the English prompt.
+        Pay attention to the position of 在, 的, and the position word.
+    </p>
+
+
+    <div class="sentence-writing">
+
+        <div class="sentence-prompt"
+             id="sentencePrompt">
+
+            The cat is under the chair.
+
+        </div>
+
+
+        <div class="sentence-hint">
+
+            Write the Mandarin sentence.
+
+        </div>
+
+
+        <input
+            type="text"
+            id="sentenceInput"
+            placeholder="Type Hanzi here..."
+            autocomplete="off">
+
+
+        <button class="check-writing"
+                onclick="checkSentenceWriting()">
+
+            Check Answer
+
+        </button>
+
+
+        <div class="feedback"
+             id="sentenceFeedback">
+        </div>
+
+
+        <button
+            class="next-game-btn"
+            id="nextSentenceBtn"
+            onclick="nextSentenceWriting()">
+
+            Next →
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     HANZI WRITING PRACTICE
+===================================================== -->
+
+<div class="writing-card">
+
+    <h2>
+        ✍️ Hanzi Writing Practice
+    </h2>
+
+    <p>
+        Practice every new vocabulary item by following
+        the correct Hanzi stroke order.
+    </p>
+
+
+    <div class="writing-mode-buttons">
+
+        <button class="mode-btn active"
+                onclick="setWritingMode('quiz',this)">
+
+            ✍️ Quiz
+
+        </button>
+
+
+        <button class="mode-btn"
+                onclick="setWritingMode('animate',this)">
+
+            👀 Animate
+
+        </button>
+
+    </div>
+
+
+    <div class="writing-info"
+         id="writingInfo">
+
+        Write the character following the correct stroke order.
+
+    </div>
+
+
+    <div class="canvas-wrapper">
+
+        <div id="target-div"></div>
+
+    </div>
+
+
+    <div class="feedback"
+         id="writingFeedback">
+    </div>
+
+
+    <div class="writing-buttons">
+
+        <button class="write-btn clear-btn"
+                onclick="resetWritingQuiz()">
+
+            ↻ Retry
+
+        </button>
+
+
+        <button class="write-btn"
+                style="background:#f0f7f4;color:#2d6a4f;"
+                onclick="playCurrentWriting()">
+
+            🔊 Listen
+
+        </button>
+
+
+        <button class="write-btn next-write-btn"
+                onclick="nextWritingCharacter()">
+
+            Next →
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     FINAL CHALLENGE
+===================================================== -->
+
+<div class="final-card">
+
+    <span class="game-number">
+        FINAL CHALLENGE
+    </span>
+
+
+    <h2>
+        🏆 Grammar Master
+    </h2>
+
+
+    <p>
+        Test your grammar knowledge with a mixed set
+        of location questions and review questions.
+    </p>
+
+
+    <div class="grammar-explanation">
+
+        <p>
+            <strong>Grammar Master:</strong>
+            Build each sentence in the correct word order.
+        </p>
+
+        <p>
+            There are 10 questions.
+            Your maximum score is 10 / 10.
+        </p>
+
+    </div>
+
+
+    <!-- ERROR MESSAGE -->
+
+    <div class="final-error"
+         id="finalError">
+
+        ⚠️ Review questions are temporarily unavailable.
+        Please make sure the learning database is loaded
+        and refresh the page before starting Grammar Master.
+
+    </div>
+
+
+    <!-- QUESTION -->
+
+    <div class="question-box">
+
+        <div class="question-label">
+
+            Question
+            <span id="finalNum">1</span>
+            / 10
+
+        </div>
+
+
+        <div class="question-meaning"
+             id="finalMeaning">
+
+        </div>
+
+    </div>
+
+
+    <!-- ANSWER -->
+
+    <div class="answer-area"
+         id="finalAnswer">
+
+        <span class="answer-placeholder">
+            Build your answer
+        </span>
+
+    </div>
+
+
+    <!-- WORD BANK -->
+
+    <div class="word-bank"
+         id="finalBank">
+    </div>
+
+
+    <!-- BUTTONS -->
+
+    <button
+        class="check-btn"
+        id="finalCheckBtn"
+        style="width:100%;">
+
+        ✓ Check Answer
+
+    </button>
+
+
+    <button
+        class="reset-btn"
+        id="finalResetBtn"
+        style="width:100%; margin-top:8px;">
+
+        ↻ Reset Answer
+
+    </button>
+
+
+    <div class="feedback"
+         id="finalFeedback">
+
+    </div>
+
+
+    <div class="final-score"
+         id="finalScore">
+
+        0 / 10
+
+    </div>
+
+
+    <div class="unlock"
+         id="unlockBox"
+         style="display:none;">
+
+        🎉 <strong>Grammar Master Complete!</strong>
+
+        <p>
+            Excellent work! You completed the mixed
+            grammar challenge.
+        </p>
+
+    </div>
+
+</div>
+
+
+</main>
+
+</div>
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script>
+
+
+/* =====================================================
+   AUDIO
+===================================================== */
+
+function playAudio(text){
+
+    if(!("speechSynthesis" in window)){
+
+        return;
+
+    }
+
+    window.speechSynthesis.cancel();
+
+    const utterance =
+        new SpeechSynthesisUtterance(text);
+
+    utterance.lang = "zh-TW";
+
+    utterance.rate = 0.82;
+
+    utterance.pitch = 1;
+
+    window.speechSynthesis.speak(utterance);
+
+}
+
+
+/* =====================================================
+   GRAMMAR SLIDER
+===================================================== */
+
+let currentSlideIndex = 0;
+
+const totalSlides = 6;
+
+
+function showSlide(index){
+
+    if(index >= totalSlides){
+
+        currentSlideIndex = 0;
+
+    }
+
+    else if(index < 0){
+
+        currentSlideIndex =
+            totalSlides - 1;
+
+    }
+
+    else{
+
+        currentSlideIndex = index;
+
+    }
+
+
+    const slides =
+        document.querySelectorAll(
+            ".grammar-slide"
+        );
+
+
+    const indicators =
+        document.querySelectorAll(
+            ".indicator"
+        );
+
+
+    slides.forEach(slide => {
+
+        slide.classList.remove(
+            "active-slide"
+        );
+
+    });
+
+
+    indicators.forEach(indicator => {
+
+        indicator.classList.remove(
+            "active"
+        );
+
+    });
+
+
+    slides[currentSlideIndex]
+        .classList
+        .add("active-slide");
+
+
+    indicators[currentSlideIndex]
+        .classList
+        .add("active");
+
+}
+
+
+function nextSlide(){
+
+    showSlide(
+        currentSlideIndex + 1
+    );
+
+}
+
+
+function prevSlide(){
+
+    showSlide(
+        currentSlideIndex - 1
+    );
+
+}
+
+
+function currentSlide(n){
+
+    showSlide(n - 1);
+
+}
+
+
+/* =====================================================
+   GAME DATA
+   ALL GAME QUESTIONS ARE WRITTEN DIRECTLY IN HTML JS
+===================================================== */
+
+const games = {
+
+
+    /* =================================================
+       GAME 1
+    ================================================= */
+
+    1: [
+
+        {
+            meaning:
+                "I am in the room.",
+            answer:
+                ["我","在","房間"]
+        },
+
+        {
+            meaning:
+                "The teacher is outside.",
+            answer:
+                ["老師","在","外面"]
+        },
+
+        {
+            meaning:
+                "The book is on top.",
+            answer:
+                ["書","在","上面"]
+        },
+
+        {
+            meaning:
+                "The bag is underneath.",
+            answer:
+                ["包包","在","下面"]
+        }
+
+    ],
+
+
+    /* =================================================
+       GAME 2
+    ================================================= */
+
+    2: [
+
+        {
+            meaning:
+                "The cat is under the chair.",
+            answer:
+                ["貓","在","椅子","的","下面"]
+        },
+
+        {
+            meaning:
+                "The bank is in front of the post office.",
+            answer:
+                ["銀行","在","郵局","的","前面"]
+        },
+
+        {
+            meaning:
+                "The factory is behind the bank.",
+            answer:
+                ["工廠","在","銀行","的","後面"]
+        },
+
+        {
+            meaning:
+                "The bank is across from the post office.",
+            answer:
+                ["銀行","在","郵局","的","對面"]
+        }
+
+    ],
+
+
+    /* =================================================
+       GAME 3
+    ================================================= */
+
+    3: [
+
+        {
+            meaning:
+                "Where is the bank?",
+            answer:
+                ["銀行","在","哪裡"]
+        },
+
+        {
+            meaning:
+                "Where is the bank in relation to the post office?",
+            answer:
+                ["銀行","在","郵局","的","哪裡"]
+        },
+
+        {
+            meaning:
+                "Where is the chair in the room?",
+            answer:
+                ["椅子","在","房間","的","哪裡"]
+        },
+
+        {
+            meaning:
+                "Where is the factory in relation to the bank?",
+            answer:
+                ["工廠","在","銀行","的","哪裡"]
+        }
+
+    ]
+
+};
+
+
+/* =====================================================
+   GAME STATE
+===================================================== */
+
+const gameState = {
+
+    1:{
+        index:0,
+        selected:[],
+        done:false
+    },
+
+    2:{
+        index:0,
+        selected:[],
+        done:false
+    },
+
+    3:{
+        index:0,
+        selected:[],
+        done:false
+    }
+
+};
+
+
+/* =====================================================
+   SHUFFLE
+===================================================== */
+
+function shuffle(array){
+
+    const result = [...array];
+
+    for(
+        let i = result.length - 1;
+        i > 0;
+        i--
+    ){
+
+        const j =
+            Math.floor(
+                Math.random() * (i + 1)
+            );
+
+        [
+            result[i],
+            result[j]
+        ] = [
+            result[j],
+            result[i]
+        ];
+
+    }
+
+    return result;
+
+}
+
+
+/* =====================================================
+   LOAD GAME
+===================================================== */
+
+function loadGame(gameNumber){
+
+    const state =
+        gameState[gameNumber];
+
+    const data =
+        games[gameNumber][state.index];
+
+
+    state.selected = [];
+
+    state.done = false;
+
+
+    document
+        .getElementById(
+            "g" + gameNumber + "Num"
+        )
+        .textContent =
+        state.index + 1;
+
+
+    document
+        .getElementById(
+            "g" + gameNumber + "Meaning"
+        )
+        .textContent =
+        data.meaning;
+
+
+    const answer =
+        document.getElementById(
+            "g" + gameNumber + "Answer"
+        );
+
+
+    answer.innerHTML =
+        '<span class="answer-placeholder">' +
+        'Tap the words below' +
+        '</span>';
+
+
+    const bank =
+        document.getElementById(
+            "g" + gameNumber + "Bank"
+        );
+
+
+    bank.innerHTML = "";
+
+
+    shuffle(data.answer)
+        .forEach((word,index)=>{
+
+            const button =
+                document.createElement(
+                    "button"
+                );
+
+            button.className =
+                "word-btn";
+
+            button.textContent =
+                word;
+
+            button.dataset.word =
+                word;
+
+            button.dataset.id =
+                index;
+
+
+            button.onclick =
+                function(){
+
+                    if(this.disabled){
+
+                        return;
+
+                    }
+
+                    selectWord(
+                        gameNumber,
+                        this,
+                        word
+                    );
+
+                };
+
+
+            bank.appendChild(button);
+
+        });
+
+
+    document
+        .getElementById(
+            "g" + gameNumber + "Feedback"
+        )
+        .textContent = "";
+
+
+    document
+        .getElementById(
+            "g" + gameNumber + "Feedback"
+        )
+        .className =
+        "feedback";
+
+
+    document
+        .getElementById(
+            "g" + gameNumber + "Next"
+        )
+        .style.display =
+        "none";
+
+}
+
+
+/* =====================================================
+   SELECT WORD
+===================================================== */
+
+function selectWord(
+    gameNumber,
+    button,
+    word
+){
+
+    gameState[gameNumber]
+        .selected
+        .push(word);
+
+
+    button.disabled = true;
+
+    button.classList.add("selected");
+
+
+    playAudio(word);
+
+
+    renderSelected(gameNumber);
+
+}
+
+
+/* =====================================================
+   RENDER SELECTED
+===================================================== */
+
+function renderSelected(gameNumber){
+
+    const answer =
+        document.getElementById(
+            "g" + gameNumber + "Answer"
+        );
+
+
+    answer.innerHTML = "";
+
+
+    gameState[gameNumber]
+        .selected
+        .forEach(word=>{
+
+            const span =
+                document.createElement(
+                    "span"
+                );
+
+            span.className =
+                "selected-word";
+
+            span.textContent =
+                word;
+
+
+            span.onclick =
+                function(){
+
+                    playAudio(word);
+
+                };
+
+
+            answer.appendChild(span);
+
+        });
+
+}
+
+
+/* =====================================================
+   CHECK GAME
+===================================================== */
+
+function checkGame(gameNumber){
+
+    const state =
+        gameState[gameNumber];
+
+
+    const correct =
+        games[gameNumber]
+        [state.index]
+        .answer;
+
+
+    const selected =
+        state.selected;
+
+
+    const feedback =
+        document.getElementById(
+            "g" + gameNumber + "Feedback"
+        );
+
+
+    if(selected.length !== correct.length){
+
+        feedback.textContent =
+            "⚠️ Complete the sentence first.";
+
+        feedback.className =
+            "feedback incorrect";
+
+        return;
+
+    }
+
+
+    const isCorrect =
+        selected.every(
+            (word,index)=>
+                word === correct[index]
+        );
+
+
+    if(isCorrect){
+
+        feedback.textContent =
+            "🎉 Correct!";
+
+        feedback.className =
+            "feedback correct";
+
+
+        state.done = true;
+
+
+        playAudio(
+            correct.join("")
+        );
+
+
+        document
+            .getElementById(
+                "g" + gameNumber + "Next"
+            )
+            .style.display =
+            "block";
+
+    }
+
+    else{
+
+        feedback.textContent =
+            "❌ Not quite. Try again!";
+
+        feedback.className =
+            "feedback incorrect";
+
+    }
+
+}
+
+
+/* =====================================================
+   RESET GAME
+===================================================== */
+
+function resetGame(gameNumber){
+
+    loadGame(gameNumber);
+
+}
+
+
+/* =====================================================
+   NEXT GAME QUESTION
+===================================================== */
+
+function nextGameQuestion(gameNumber){
+
+    const state =
+        gameState[gameNumber];
+
+
+    if(!state.done){
+
+        return;
+
+    }
+
+
+    state.index++;
+
+
+    if(
+        state.index >=
+        games[gameNumber].length
+    ){
+
+        state.index = 0;
+
+    }
+
+
+    loadGame(gameNumber);
+
+}
+
+
+/* =====================================================
+   LISTEN CURRENT GAME
+===================================================== */
+
+function listenCurrent(gameNumber){
+
+    const state =
+        gameState[gameNumber];
+
+
+    const answer =
+        games[gameNumber]
+        [state.index]
+        .answer;
+
+
+    playAudio(
+        answer.join("")
+    );
+
+}
+
+
+/* =====================================================
+   SENTENCE WRITING
+===================================================== */
+
+const sentenceQuestions = [
+
+    {
+        prompt:
+            "The cat is under the chair.",
+
+        answer:
+            "貓在椅子的下面"
+    },
+
+    {
+        prompt:
+            "The bank is in front of the post office.",
+
+        answer:
+            "銀行在郵局的前面"
+    },
+
+    {
+        prompt:
+            "The factory is behind the bank.",
+
+        answer:
+            "工廠在銀行的後面"
+    },
+
+    {
+        prompt:
+            "The bank is across from the post office.",
+
+        answer:
+            "銀行在郵局的對面"
+    },
+
+    {
+        prompt:
+            "The chair is inside the room.",
+
+        answer:
+            "椅子在房間的裡面"
+    },
+
+    {
+        prompt:
+            "The factory is in the middle.",
+
+        answer:
+            "工廠在中間"
+    },
+
+    {
+        prompt:
+            "The teacher is outside.",
+
+        answer:
+            "老師在外面"
+    },
+
+    {
+        prompt:
+            "The book is above.",
+
+        answer:
+            "書在上面"
+    },
+
+    {
+        prompt:
+            "The bag is below.",
+
+        answer:
+            "包包在下面"
+    },
+
+    {
+        prompt:
+            "Where is the bank?",
+
+        answer:
+            "銀行在哪裡"
+    }
+
+];
+
+
+let sentenceIndex = 0;
+
+
+function loadSentenceWriting(){
+
+    const item =
+        sentenceQuestions
+        [sentenceIndex];
+
+
+    document
+        .getElementById(
+            "sentencePrompt"
+        )
+        .textContent =
+        item.prompt;
+
+
+    document
+        .getElementById(
+            "sentenceInput"
+        )
+        .value = "";
+
+
+    document
+        .getElementById(
+            "sentenceFeedback"
+        )
+        .textContent = "";
+
+
+    document
+        .getElementById(
+            "sentenceFeedback"
+        )
+        .className =
+        "feedback";
+
+
+    document
+        .getElementById(
+            "nextSentenceBtn"
+        )
+        .style.display =
+        "none";
+
+}
+
+
+function checkSentenceWriting(){
+
+    const input =
+        document
+        .getElementById(
+            "sentenceInput"
+        )
+        .value
+        .trim()
+        .replace(/[。？！?]/g,"");
+
+
+    const correct =
+        sentenceQuestions
+        [sentenceIndex]
+        .answer;
+
+
+    const feedback =
+        document.getElementById(
+            "sentenceFeedback"
+        );
+
+
+    if(input === correct){
+
+        feedback.textContent =
+            "🎉 Perfect!";
+
+        feedback.className =
+            "feedback correct";
+
+
+        playAudio(correct);
+
+
+        document
+            .getElementById(
+                "nextSentenceBtn"
+            )
+            .style.display =
+            "block";
+
+    }
+
+    else{
+
+        feedback.textContent =
+            "❌ Try again. Check the word order.";
+
+        feedback.className =
+            "feedback incorrect";
+
+    }
+
+}
+
+
+function nextSentenceWriting(){
+
+    sentenceIndex++;
+
+
+    if(
+        sentenceIndex >=
+        sentenceQuestions.length
+    ){
+
+        sentenceIndex = 0;
+
+    }
+
+
+    loadSentenceWriting();
+
+}
+
+
+/* =====================================================
+   HANZI WRITING
+   ALL NEW VOCABULARY IS INCLUDED
+===================================================== */
+
+const writingCharacters = [
+
+    {
+        hanzi:"椅",
+        pinyin:"yǐ",
+        meaning:"part of chair"
+    },
+
+    {
+        hanzi:"子",
+        pinyin:"zi",
+        meaning:"suffix"
+    },
+
+    {
+        hanzi:"房",
+        pinyin:"fáng",
+        meaning:"room / house"
+    },
+
+    {
+        hanzi:"間",
+        pinyin:"jiān",
+        meaning:"room / space"
+    },
+
+    {
+        hanzi:"銀",
+        pinyin:"yín",
+        meaning:"silver"
+    },
+
+    {
+        hanzi:"行",
+        pinyin:"háng",
+        meaning:"bank / profession"
+    },
+
+    {
+        hanzi:"工",
+        pinyin:"gōng",
+        meaning:"work"
+    },
+
+    {
+        hanzi:"廠",
+        pinyin:"chǎng",
+        meaning:"factory"
+    },
+
+    {
+        hanzi:"郵",
+        pinyin:"yóu",
+        meaning:"mail / postal"
+    },
+
+    {
+        hanzi:"局",
+        pinyin:"jú",
+        meaning:"office / bureau"
+    },
+
+    {
+        hanzi:"裡",
+        pinyin:"lǐ",
+        meaning:"inside"
+    },
+
+    {
+        hanzi:"面",
+        pinyin:"miàn",
+        meaning:"side / surface"
+    },
+
+    {
+        hanzi:"外",
+        pinyin:"wài",
+        meaning:"outside"
+    },
+
+    {
+        hanzi:"上",
+        pinyin:"shàng",
+        meaning:"above / on"
+    },
+
+    {
+        hanzi:"下",
+        pinyin:"xià",
+        meaning:"below / under"
+    },
+
+    {
+        hanzi:"前",
+        pinyin:"qián",
+        meaning:"front / before"
+    },
+
+    {
+        hanzi:"後",
+        pinyin:"hòu",
+        meaning:"behind / after"
+    },
+
+    {
+        hanzi:"中",
+        pinyin:"zhōng",
+        meaning:"middle"
+    },
+
+    {
+        hanzi:"間",
+        pinyin:"jiān",
+        meaning:"space / middle"
+    },
+
+    {
+        hanzi:"對",
+        pinyin:"duì",
+        meaning:"opposite / toward"
+    },
+
+    {
+        hanzi:"面",
+        pinyin:"miàn",
+        meaning:"side / surface"
+    }
+
+];
+
+
+let writingIndex = 0;
+
+let writingMode = "quiz";
+
+let writer = null;
+
+
+function initWriter(){
+
+    const item =
+        writingCharacters[writingIndex];
+
+
+    const container =
+        document.getElementById(
+            "target-div"
+        );
+
+
+    container.innerHTML = "";
+
+
+    const info =
+        document.getElementById(
+            "writingInfo"
+        );
+
+
+    if(writingMode === "quiz"){
+
+        info.innerHTML =
+            `Write <strong>${item.hanzi}</strong>
+            (${item.pinyin} — ${item.meaning})
+            following the correct stroke order.
+            (${writingIndex + 1}/${writingCharacters.length})`;
+
+    }
+
+    else{
+
+        info.innerHTML =
+            `Watch the animated stroke order for
+            <strong>${item.hanzi}</strong>
+            (${item.pinyin} — ${item.meaning}).
+            (${writingIndex + 1}/${writingCharacters.length})`;
+
+    }
+
+
+    writer =
+        HanziWriter.create(
+            "target-div",
+            item.hanzi,
+            {
+
+                width:260,
+
+                height:260,
+
+                padding:10,
+
+                showOutline:true,
+
+                strokeAnimationSpeed:1,
+
+                drawingColor:"#5c4033",
+
+                strokeHighlightColor:"#b8865c",
+
+                showCharacter:
+                    writingMode === "animate"
+
+            }
+        );
+
+
+    if(writingMode === "quiz"){
+
+        startQuiz();
+
+    }
+
+    else{
+
+        writer.animateCharacter();
+
+    }
+
+}
+
+
+function startQuiz(){
+
+    const feedback =
+        document.getElementById(
+            "writingFeedback"
+        );
+
+
+    feedback.textContent = "";
+
+    feedback.className =
+        "feedback";
+
+
+    writer.quiz({
+
+        onMistake:function(){
+
+            feedback.textContent =
+                "❌ Incorrect stroke order. Try again.";
+
+            feedback.className =
+                "feedback incorrect";
+
+        },
+
+
+        onCorrectStroke:function(){
+
+            feedback.textContent =
+                "✨ Great! Continue with the next stroke.";
+
+            feedback.className =
+                "feedback correct";
+
+        },
+
+
+        onComplete:function(){
+
+            feedback.textContent =
+                "🎉 Perfect! Correct stroke order.";
+
+            feedback.className =
+                "feedback correct";
+
+        }
+
+    });
+
+}
+
+
+function setWritingMode(
+    mode,
+    button
+){
+
+    writingMode = mode;
+
+
+    document
+        .querySelectorAll(
+            ".writing-card .mode-btn"
+        )
+        .forEach(btn => {
+
+            btn.classList.remove(
+                "active"
+            );
+
+        });
+
+
+    button.classList.add("active");
+
+
+    initWriter();
+
+}
+
+
+function resetWritingQuiz(){
+
+    initWriter();
+
+}
+
+
+function nextWritingCharacter(){
+
+    writingIndex++;
+
+
+    if(
+        writingIndex >=
+        writingCharacters.length
+    ){
+
+        writingIndex = 0;
+
+    }
+
+
+    initWriter();
+
+}
+
+
+function playCurrentWriting(){
+
+    playAudio(
+        writingCharacters
+        [writingIndex]
+        .hanzi
+    );
+
+}
+
+
+/* =====================================================
+   FINAL CHALLENGE
+===================================================== */
+
+
+/*
+    Exactly five questions are written directly here.
+    They cover all new vocabulary.
+*/
+
+const htmlFinalQuestions = [
+
+    {
+        meaning:
+            "The chair is inside the room.",
+        answer:
+            [
+                "椅子",
+                "在",
+                "房間",
+                "的",
+                "裡面"
+            ]
+    },
+
+    {
+        meaning:
+            "The teacher is outside the room.",
+        answer:
+            [
+                "老師",
+                "在",
+                "房間",
+                "的",
+                "外面"
+            ]
+    },
+
+    {
+        meaning:
+            "The bank is in front of the post office.",
+        answer:
+            [
+                "銀行",
+                "在",
+                "郵局",
+                "的",
+                "前面"
+            ]
+    },
+
+    {
+        meaning:
+            "The factory is behind the bank.",
+        answer:
+            [
+                "工廠",
+                "在",
+                "銀行",
+                "的",
+                "後面"
+            ]
+    },
+
+    {
+        meaning:
+            "The bank is across from the post office.",
+        answer:
+            [
+                "銀行",
+                "在",
+                "郵局",
+                "的",
+                "對面"
+            ]
+    }
+
+];
+
+
+/*
+    Additional vocabulary is deliberately represented
+    in the HTML lesson practice above and here through
+    the remaining lesson-specific structures.
+*/
+
+
+let finalQuestions = [];
+
+let finalIndex = 0;
+
+let finalScore = 0;
+
+let finalSelected = [];
+
+let finalReady = false;
+
+
+/* =====================================================
+   NORMALIZE DATABASE QUESTION
+===================================================== */
+
+/*
+    The master database may use different property names
+    for the English prompt and answer.
+
+    This function converts a valid review question into
+    the common format used by Grammar Master.
+
+    No replacement questions are created here.
+*/
+
+function normalizeReviewQuestion(q){
+
+    if(!q || typeof q !== "object"){
+
+        return null;
+
+    }
+
+
+    let meaning =
+        q.meaning ??
+        q.question ??
+        q.prompt ??
+        q.translation ??
+        q.english ??
+        q.text;
+
+
+    let answer =
+        q.answer ??
+        q.correctAnswer ??
+        q.correct ??
+        q.answerWords;
+
+
+    /*
+        Some databases may store the answer
+        as a complete Hanzi string.
+    */
+
+    if(
+        typeof answer === "string"
+    ){
+
+        answer =
+            answer
+            .replace(/[。？！?]/g,"")
+            .trim()
+            .split(/\s+/)
+            .filter(Boolean);
+
+    }
+
+
+    /*
+        Some databases may store answers
+        as arrays of words.
+    */
+
+    if(
+        !Array.isArray(answer)
+    ){
+
+        return null;
+
+    }
+
+
+    /*
+        If the database stores the answer as
+        individual characters instead of word chunks,
+        it can still be used correctly.
+    */
+
+    answer =
+        answer
+        .map(item => String(item).trim())
+        .filter(Boolean);
+
+
+    if(
+        typeof meaning !== "string" ||
+        !meaning.trim() ||
+        answer.length === 0
+    ){
+
+        return null;
+
+    }
+
+
+    return {
+
+        meaning:
+            meaning.trim(),
+
+        answer:
+            answer
+
+    };
+
+}
+
+
+/* =====================================================
+   COLLECT ALL PREVIOUS REVIEW QUESTIONS
+===================================================== */
+
+function getAllPreviousReviewQuestions(){
+
+    const database =
+        (
+            typeof window !== "undefined" &&
+            window.allLessonsData
+        )
+        ? window.allLessonsData
+        :
+        (
+            typeof allLessonsData !== "undefined"
+            ? allLessonsData
+            : null
+        );
+
+
+    if(!database){
+
+        throw new Error(
+            "Review database is unavailable."
+        );
+
+    }
+
+
+    const availableQuestions = [];
+
+
+    /*
+        Only previous material is searched.
+        The current page itself is never read from here.
+    */
+
+    for(
+        let lessonNumber = 1;
+        lessonNumber <= 17;
+        lessonNumber++
+    ){
+
+        const lesson =
+            database[lessonNumber];
+
+
+        if(
+            !lesson ||
+            !Array.isArray(
+                lesson.reviewQuestions
+            )
+        ){
+
+            continue;
+
+        }
+
+
+        lesson.reviewQuestions
+            .forEach(rawQuestion => {
+
+                const normalized =
+                    normalizeReviewQuestion(
+                        rawQuestion
+                    );
+
+
+                if(normalized){
+
+                    availableQuestions.push(
+                        normalized
+                    );
+
+                }
+
+            });
+
+    }
+
+
+    return availableQuestions;
+
+}
+
+
+/* =====================================================
+   GET FIVE RANDOM REVIEW QUESTIONS
+===================================================== */
+
+function getRandomReviewQuestions(){
+
+    const allQuestions =
+        getAllPreviousReviewQuestions();
+
+
+    if(
+        allQuestions.length < 5
+    ){
+
+        throw new Error(
+            "Fewer than five valid review questions are available."
+        );
+
+    }
+
+
+    return shuffle(
+        allQuestions
+    ).slice(0,5);
+
+}
+
+
+/* =====================================================
+   INITIALIZE FINAL QUESTIONS
+===================================================== */
+
+function initFinalQuestions(){
+
+    const errorBox =
+        document.getElementById(
+            "finalError"
+        );
+
+
+    const checkButton =
+        document.getElementById(
+            "finalCheckBtn"
+        );
+
+
+    const resetButton =
+        document.getElementById(
+            "finalResetBtn"
+        );
+
+
+    try{
+
+        /*
+            Exactly five local questions.
+        */
+
+        const lessonQuestions =
+            htmlFinalQuestions
+            .map(normalizeReviewQuestion)
+            .filter(Boolean);
+
+
+        if(
+            lessonQuestions.length !== 5
+        ){
+
+            throw new Error(
+                "The lesson question set is incomplete."
+            );
+
+        }
+
+
+        /*
+            Exactly five random questions
+            from all available previous reviews.
+        */
+
+        const reviewQuestions =
+            getRandomReviewQuestions();
+
+
+        if(
+            reviewQuestions.length !== 5
+        ){
+
+            throw new Error(
+                "Five review questions could not be selected."
+            );
+
+        }
+
+
+        /*
+            Exactly 10 total questions.
+        */
+
+        finalQuestions = shuffle([
+
+            ...lessonQuestions,
+
+            ...reviewQuestions
+
+        ]);
+
+
+        if(
+            finalQuestions.length !== 10
+        ){
+
+            throw new Error(
+                "Grammar Master could not create exactly 10 questions."
+            );
+
+        }
+
+
+        finalReady = true;
+
+        errorBox.style.display =
+            "none";
+
+        checkButton.disabled =
+            false;
+
+        resetButton.disabled =
+            false;
+
+
+        return true;
+
+    }
+
+    catch(error){
+
+        console.error(
+            "Grammar Master initialization failed:",
+            error
+        );
+
+
+        finalReady = false;
+
+        finalQuestions = [];
+
+
+        errorBox.style.display =
+            "block";
+
+
+        checkButton.disabled =
+            true;
+
+        resetButton.disabled =
+            true;
+
+
+        document
+            .getElementById(
+                "finalMeaning"
+            )
+            .textContent =
+            "Grammar Master cannot start right now.";
+
+
+        document
+            .getElementById(
+                "finalAnswer"
+            )
+            .innerHTML =
+            '<span class="answer-placeholder">' +
+            'Review questions are unavailable.' +
+            '</span>';
+
+
+        document
+            .getElementById(
+                "finalBank"
+            )
+            .innerHTML = "";
+
+
+        return false;
+
+    }
+
+}
+
+
+/* =====================================================
+   LOAD FINAL QUESTION
+===================================================== */
+
+function loadFinal(){
+
+    if(!finalReady){
+
+        return;
+
+    }
+
+
+    if(
+        finalIndex >=
+        finalQuestions.length
+    ){
+
+        return;
+
+    }
+
+
+    const q =
+        finalQuestions[finalIndex];
+
+
+    document
+        .getElementById(
+            "finalNum"
+        )
+        .textContent =
+        finalIndex + 1;
+
+
+    document
+        .getElementById(
+            "finalMeaning"
+        )
+        .textContent =
+        q.meaning;
+
+
+    finalSelected = [];
+
+
+    document
+        .getElementById(
+            "finalAnswer"
+        )
+        .innerHTML =
+        '<span class="answer-placeholder">' +
+        'Build your answer' +
+        '</span>';
+
+
+    const bank =
+        document.getElementById(
+            "finalBank"
+        );
+
+
+    bank.innerHTML = "";
+
+
+    /*
+        The answer word bank uses the same
+        format for both local and review questions.
+    */
+
+    shuffle(q.answer)
+        .forEach((word,index)=>{
+
+            const button =
+                document.createElement(
+                    "button"
+                );
+
+
+            button.className =
+                "word-btn";
+
+
+            button.textContent =
+                word;
+
+
+            button.dataset.id =
+                index;
+
+
+            button.onclick =
+                function(){
+
+                    if(button.disabled){
+
+                        return;
+
+                    }
+
+
+                    finalSelected.push(
+                        word
+                    );
+
+
+                    button.disabled =
+                        true;
+
+
+                    button.classList.add(
+                        "selected"
+                    );
+
+
+                    playAudio(word);
+
+
+                    renderFinal();
+
+                };
+
+
+            bank.appendChild(button);
+
+        });
+
+
+    document
+        .getElementById(
+            "finalFeedback"
+        )
+        .textContent = "";
+
+
+    document
+        .getElementById(
+            "finalFeedback"
+        )
+        .className =
+        "feedback";
+
+}
+
+
+/* =====================================================
+   RENDER FINAL ANSWER
+===================================================== */
+
+function renderFinal(){
+
+    const area =
+        document.getElementById(
+            "finalAnswer"
+        );
+
+
+    area.innerHTML = "";
+
+
+    if(finalSelected.length === 0){
+
+        area.innerHTML =
+            '<span class="answer-placeholder">' +
+            'Build your answer' +
+            '</span>';
+
+        return;
+
+    }
+
+
+    finalSelected
+        .forEach(word => {
+
+            const span =
+                document.createElement(
+                    "span"
+                );
+
+
+            span.className =
+                "selected-word";
+
+
+            span.textContent =
+                word;
+
+
+            span.onclick =
+                function(){
+
+                    playAudio(word);
+
+                };
+
+
+            area.appendChild(span);
+
+        });
+
+}
+
+
+/* =====================================================
+   RESET FINAL ANSWER
+===================================================== */
+
+function resetFinal(){
+
+    if(!finalReady){
+
+        return;
+
+    }
+
+
+    /*
+        Reset only the current question.
+        The selected 10-question set stays unchanged.
+    */
+
+    finalSelected = [];
+
+
+    document
+        .getElementById(
+            "finalAnswer"
+        )
+        .innerHTML =
+        '<span class="answer-placeholder">' +
+        'Build your answer' +
+        '</span>';
+
+
+    document
+        .querySelectorAll(
+            "#finalBank .word-btn"
+        )
+        .forEach(button => {
+
+            button.disabled =
+                false;
+
+            button.classList.remove(
+                "selected"
+            );
+
+        });
+
+
+    document
+        .getElementById(
+            "finalFeedback"
+        )
+        .textContent = "";
+
+
+    document
+        .getElementById(
+            "finalFeedback"
+        )
+        .className =
+        "feedback";
+
+}
+
+
+/* =====================================================
+   CHECK FINAL
+===================================================== */
+
+function checkFinal(){
+
+    if(!finalReady){
+
+        return;
+
+    }
+
+
+    if(
+        finalIndex >=
+        finalQuestions.length
+    ){
+
+        return;
+
+    }
+
+
+    const correct =
+        finalQuestions
+        [finalIndex]
+        .answer;
+
+
+    const feedback =
+        document.getElementById(
+            "finalFeedback"
+        );
+
+
+    if(
+        finalSelected.length !==
+        correct.length
+    ){
+
+        feedback.textContent =
+            "⚠️ Complete the sentence first.";
+
+        feedback.className =
+            "feedback incorrect";
+
+        return;
+
+    }
+
+
+    const isCorrect =
+        finalSelected.every(
+            (word,index) =>
+                word === correct[index]
+        );
+
+
+    if(isCorrect){
+
+        feedback.textContent =
+            "🎉 Correct!";
+
+        feedback.className =
+            "feedback correct";
+
+
+        finalScore++;
+
+
+        document
+            .getElementById(
+                "finalScore"
+            )
+            .textContent =
+            finalScore + " / 10";
+
+
+        finalIndex++;
+
+
+        if(
+            finalIndex < 10
+        ){
+
+            setTimeout(
+                loadFinal,
+                700
+            );
+
+        }
+
+        else{
+
+            document
+                .getElementById(
+                    "unlockBox"
+                )
+                .style.display =
+                "block";
+
+
+            document
+                .getElementById(
+                    "finalCheckBtn"
+                )
+                .disabled =
+                true;
+
+
+            document
+                .getElementById(
+                    "finalResetBtn"
+                )
+                .disabled =
+                true;
+
+
+            playAudio("太棒了");
+
+        }
+
+    }
+
+    else{
+
+        feedback.textContent =
+            "❌ Check the word order and try again.";
+
+        feedback.className =
+            "feedback incorrect";
+
+    }
+
+}
+
+
+/* =====================================================
+   FINAL BUTTON EVENTS
+===================================================== */
+
+document
+    .getElementById(
+        "finalCheckBtn"
+    )
+    .addEventListener(
+        "click",
+        checkFinal
+    );
+
+
+document
+    .getElementById(
+        "finalResetBtn"
+    )
+    .addEventListener(
+        "click",
+        resetFinal
+    );
+
+
+/* =====================================================
+   INITIALIZE PAGE
+===================================================== */
+
+loadGame(1);
+
+loadGame(2);
+
+loadGame(3);
+
+loadSentenceWriting();
+
+initWriter();
+
+
+/*
+    Grammar Master initialization happens only here.
+
+    It requires:
+    - exactly five local questions
+    - exactly five valid previous-review questions
+    - exactly ten total questions
+*/
+
+if(initFinalQuestions()){
+
+    loadFinal();
+
+}
+
+
+/*
+    Sidebar is handled by the site's main script.
+*/
+
+if(
+    typeof loadScriptSidebar === "function"
+){
+
+    loadScriptSidebar();
+
+}
+
+</script>
+
+
+<script src="../script.js"></script>
+
+
+</body>
+
+</html>
