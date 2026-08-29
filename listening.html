@@ -1,0 +1,2108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<link rel="stylesheet" href="style.css">
+
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Boba Break Study - Listening Corner</title>
+
+
+<style>
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+
+/* =========================================================
+   BODY
+========================================================= */
+
+body {
+    background-color: #f8f9fa;
+    min-height: 100vh;
+}
+
+
+/* =========================================================
+   APP CONTAINER
+========================================================= */
+
+.app-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+
+/* =========================================================
+   MAIN CONTENT
+========================================================= */
+
+.main-content {
+    flex: 1;
+    padding: 20px;
+    min-width: 0;
+}
+
+
+/* =========================================================
+   GENERAL CARD
+========================================================= */
+
+.card {
+    width: 100%;
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+
+    border: 1px solid #eaeaea;
+
+    box-shadow:
+        0 2px 5px rgba(0,0,0,0.03);
+}
+
+
+.card h2 {
+    font-size: 20px;
+    color: #111;
+    margin-bottom: 8px;
+}
+
+
+.card-subtitle {
+    color: #777;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   LISTENING HEADER
+========================================================= */
+
+.listening-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 8px;
+}
+
+
+.listening-icon {
+    width: 45px;
+    height: 45px;
+
+    border-radius: 12px;
+
+    background: #b5835a;
+
+    color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 20px;
+
+    flex-shrink: 0;
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+.search-box {
+    display: flex;
+
+    border: 1px solid #ddd;
+
+    border-radius: 8px;
+
+    overflow: hidden;
+
+    margin-top: 18px;
+
+    background: #fff;
+}
+
+
+.search-box input {
+    flex: 1;
+
+    min-width: 0;
+
+    padding: 12px 14px;
+
+    border: none;
+
+    outline: none;
+
+    font-size: 14px;
+}
+
+
+.search-box button {
+    background-color: #b5835a;
+
+    color: white;
+
+    border: none;
+
+    padding: 0 20px;
+
+    cursor: pointer;
+
+    font-weight: bold;
+
+    transition: background-color 0.2s ease;
+}
+
+
+.search-box button:hover {
+    background-color: #9d704c;
+}
+
+
+.search-hint {
+    font-size: 12px;
+
+    color: #888;
+
+    margin-top: 8px;
+}
+
+
+/* =========================================================
+   CATEGORY FILTER
+========================================================= */
+
+.filter-row {
+    display: flex;
+
+    gap: 8px;
+
+    flex-wrap: wrap;
+
+    margin-top: 15px;
+}
+
+
+.filter-btn {
+    border: 1px solid #ddd;
+
+    background: #fff;
+
+    color: #666;
+
+    border-radius: 20px;
+
+    padding: 7px 13px;
+
+    cursor: pointer;
+
+    font-size: 12px;
+
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease;
+}
+
+
+.filter-btn:hover {
+    border-color: #b5835a;
+}
+
+
+.filter-btn.active {
+    background: #b5835a;
+
+    color: white;
+
+    border-color: #b5835a;
+}
+
+
+/* =========================================================
+   VIDEO SECTION HEADER
+========================================================= */
+
+.video-section-header {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 15px;
+}
+
+
+.video-section-header h2 {
+    font-size: 20px;
+
+    color: #222;
+}
+
+
+.video-count {
+    font-size: 12px;
+
+    color: #888;
+}
+
+
+/* =========================================================
+   VIDEO GRID
+========================================================= */
+
+.video-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fill,
+            minmax(240px, 1fr)
+        );
+
+    gap: 16px;
+}
+
+
+/* =========================================================
+   VIDEO CARD
+========================================================= */
+
+.video-card {
+
+    background: #ffffff;
+
+    border: 1px solid #e6e6e6;
+
+    border-radius: 12px;
+
+    overflow: hidden;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+}
+
+
+.video-card:hover {
+
+    transform: translateY(-3px);
+
+    border-color: #d8c2ad;
+
+    box-shadow:
+        0 7px 18px rgba(0,0,0,0.08);
+}
+
+
+/* =========================================================
+   THUMBNAIL
+========================================================= */
+
+.video-thumbnail {
+
+    position: relative;
+
+    width: 100%;
+
+    aspect-ratio: 16 / 9;
+
+    background: #eee;
+
+    overflow: hidden;
+}
+
+
+.video-thumbnail img {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+
+    transition:
+        transform 0.3s ease;
+}
+
+
+.video-card:hover
+.video-thumbnail img {
+
+    transform: scale(1.03);
+}
+
+
+/* =========================================================
+   PLAY BUTTON
+========================================================= */
+
+.thumbnail-play {
+
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    transform:
+        translate(-50%, -50%);
+
+    width: 52px;
+    height: 52px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(181, 131, 90, 0.95);
+
+    color: white;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 18px;
+
+    padding-left: 3px;
+
+    box-shadow:
+        0 3px 10px
+        rgba(0,0,0,0.2);
+
+    transition:
+        transform 0.2s ease;
+}
+
+
+.video-card:hover
+.thumbnail-play {
+
+    transform:
+        translate(-50%, -50%)
+        scale(1.08);
+}
+
+
+/* =========================================================
+   LEVEL BADGE
+========================================================= */
+
+.video-level {
+
+    position: absolute;
+
+    top: 10px;
+
+    left: 10px;
+
+    background:
+        rgba(255,255,255,0.95);
+
+    color: #765437;
+
+    padding: 4px 8px;
+
+    border-radius: 6px;
+
+    font-size: 11px;
+
+    font-weight: bold;
+
+    box-shadow:
+        0 1px 4px
+        rgba(0,0,0,0.1);
+}
+
+
+/* =========================================================
+   VIDEO CARD CONTENT
+========================================================= */
+
+.video-card-content {
+
+    padding: 14px;
+}
+
+
+.video-card-title {
+
+    font-size: 15px;
+
+    font-weight: bold;
+
+    color: #222;
+
+    line-height: 1.4;
+
+    margin-bottom: 7px;
+}
+
+
+.video-card-description {
+
+    color: #777;
+
+    font-size: 12px;
+
+    line-height: 1.5;
+
+    margin-bottom: 10px;
+}
+
+
+.video-card-meta {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    flex-wrap: wrap;
+}
+
+
+.video-category {
+
+    background: #f5eee8;
+
+    color: #8a6241;
+
+    padding: 4px 8px;
+
+    border-radius: 12px;
+
+    font-size: 10px;
+
+    font-weight: bold;
+}
+
+
+/* =========================================================
+   NO RESULTS
+========================================================= */
+
+.no-results {
+
+    text-align: center;
+
+    padding: 50px 20px;
+
+    color: #888;
+
+    background: white;
+
+    border: 1px solid #eaeaea;
+
+    border-radius: 12px;
+}
+
+
+.no-results i {
+
+    font-size: 35px;
+
+    margin-bottom: 12px;
+
+    color: #c7b09a;
+}
+
+
+.no-results h3 {
+
+    color: #555;
+
+    font-size: 17px;
+
+    margin-bottom: 6px;
+}
+
+
+.no-results p {
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   PLAYER VIEW
+========================================================= */
+
+.player-view {
+
+    display: none;
+}
+
+
+.player-view.active {
+
+    display: block;
+}
+
+
+/* =========================================================
+   BACK BUTTON
+========================================================= */
+
+.back-button {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    border: none;
+
+    background: transparent;
+
+    color: #8a6241;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    padding: 5px 0;
+
+    margin-bottom: 15px;
+}
+
+
+.back-button:hover {
+
+    color: #5d412a;
+}
+
+
+/* =========================================================
+   PLAYER CARD
+========================================================= */
+
+.player-card {
+
+    width: 100%;
+
+    background: #ffffff;
+
+    border-radius: 14px;
+
+    padding: 20px;
+
+    border: 1px solid #eaeaea;
+
+    box-shadow:
+        0 2px 5px rgba(0,0,0,0.03);
+}
+
+
+/* =========================================================
+   PLAYER
+========================================================= */
+
+.player-wrapper {
+
+    width: 100%;
+
+    max-width: 1000px;
+
+    margin: 0 auto;
+
+    aspect-ratio: 16 / 9;
+
+    background: #111;
+
+    border-radius: 10px;
+
+    overflow: hidden;
+}
+
+
+.player-wrapper iframe {
+
+    width: 100%;
+
+    height: 100%;
+
+    border: none;
+
+    display: block;
+}
+
+
+/* =========================================================
+   PLAYER INFORMATION
+========================================================= */
+
+.player-info {
+
+    max-width: 1000px;
+
+    margin: 20px auto 0 auto;
+}
+
+
+.player-title {
+
+    font-size: 23px;
+
+    line-height: 1.4;
+
+    color: #222;
+
+    margin-bottom: 9px;
+}
+
+
+.player-meta {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    flex-wrap: wrap;
+
+    margin-bottom: 13px;
+}
+
+
+.player-level {
+
+    background: #b5835a;
+
+    color: white;
+
+    padding: 5px 10px;
+
+    border-radius: 15px;
+
+    font-size: 11px;
+
+    font-weight: bold;
+}
+
+
+.player-category {
+
+    background: #f4eee9;
+
+    color: #765437;
+
+    padding: 5px 10px;
+
+    border-radius: 15px;
+
+    font-size: 11px;
+
+    font-weight: bold;
+}
+
+
+.player-description {
+
+    color: #666;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+
+    margin-bottom: 15px;
+}
+
+
+/* =========================================================
+   LISTENING TIPS
+========================================================= */
+
+.listening-tips {
+
+    background: #faf7f4;
+
+    border: 1px solid #eee2d7;
+
+    border-radius: 10px;
+
+    padding: 14px;
+
+    font-size: 12px;
+
+    color: #765437;
+
+    line-height: 1.6;
+}
+
+
+.listening-tips strong {
+
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: #5d412a;
+}
+
+
+/* =========================================================
+   HIDDEN
+========================================================= */
+
+.hidden {
+
+    display: none !important;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media screen and (max-width: 768px) {
+
+    .main-content {
+
+        padding: 12px;
+    }
+
+
+    .card {
+
+        padding: 15px;
+    }
+
+
+    .video-grid {
+
+        grid-template-columns:
+            repeat(
+                2,
+                minmax(0, 1fr)
+            );
+
+        gap: 10px;
+    }
+
+
+    .video-card-content {
+
+        padding: 10px;
+    }
+
+
+    .video-card-title {
+
+        font-size: 13px;
+    }
+
+
+    .video-card-description {
+
+        font-size: 11px;
+    }
+
+
+    .thumbnail-play {
+
+        width: 42px;
+        height: 42px;
+
+        font-size: 15px;
+    }
+
+
+    .player-card {
+
+        padding: 12px;
+    }
+
+
+    .player-title {
+
+        font-size: 19px;
+    }
+
+
+    .search-box button {
+
+        padding: 0 14px;
+    }
+
+}
+
+
+@media screen and (max-width: 430px) {
+
+    .video-grid {
+
+        grid-template-columns:
+            1fr;
+    }
+
+
+    .video-card-title {
+
+        font-size: 14px;
+    }
+
+
+    .listening-header {
+
+        align-items: flex-start;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="app-container">
+
+
+    <!-- =====================================================
+         SIDEBAR
+         ===================================================== -->
+
+    <div id="sidebar-container"></div>
+
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+         ===================================================== -->
+
+    <div class="main-content">
+
+
+        <!-- =================================================
+             SEARCH / HEADER CARD
+        ================================================== -->
+
+        <div class="card">
+
+            <div class="listening-header">
+
+                <div class="listening-icon">
+
+                    <i class="fa-solid fa-headphones"></i>
+
+                </div>
+
+
+                <div>
+
+                    <h2>
+                        Mandarin Listening Corner
+                    </h2>
+
+                    <p class="card-subtitle">
+
+                        Practice your Mandarin listening
+                        skills with short videos and
+                        everyday conversations.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- SEARCH -->
+
+            <div class="search-box">
+
+                <input
+                    type="text"
+                    id="search-input"
+                    placeholder="Search videos, topics, or levels..."
+                    autocomplete="off"
+                >
+
+
+                <button
+                    id="search-button"
+                >
+
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                    Search
+
+                </button>
+
+            </div>
+
+
+            <p class="search-hint">
+
+                Try searching:
+                restaurant, family, daily conversation,
+                A1, shopping, school...
+
+            </p>
+
+
+
+            <!-- FILTER -->
+
+            <div
+                class="filter-row"
+                id="filter-row"
+            >
+
+                <button
+                    class="filter-btn active"
+                    data-filter="all"
+                >
+                    All
+                </button>
+
+
+                <button
+                    class="filter-btn"
+                    data-filter="A1"
+                >
+                    A1
+                </button>
+
+
+                <button
+                    class="filter-btn"
+                    data-filter="A2"
+                >
+                    A2
+                </button>
+
+
+                <button
+                    class="filter-btn"
+                    data-filter="B1"
+                >
+                    B1
+                </button>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             VIDEO LIST VIEW
+        ================================================== -->
+
+        <div id="video-list-view">
+
+
+            <div class="card">
+
+
+                <div class="video-section-header">
+
+                    <h2>
+                        <i class="fa-solid fa-play-circle"></i>
+                        Listening Videos
+                    </h2>
+
+
+                    <span
+                        class="video-count"
+                        id="video-count"
+                    >
+                        0 videos
+                    </span>
+
+                </div>
+
+
+
+                <!-- VIDEO GRID -->
+
+                <div
+                    class="video-grid"
+                    id="video-grid"
+                ></div>
+
+
+
+                <!-- NO RESULTS -->
+
+                <div
+                    class="no-results hidden"
+                    id="no-results"
+                >
+
+                    <i class="fa-solid fa-face-frown"></i>
+
+                    <h3>
+                        No videos found
+                    </h3>
+
+                    <p>
+                        Try another keyword or
+                        choose a different level.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             PLAYER VIEW
+        ================================================== -->
+
+        <div
+            class="player-view"
+            id="player-view"
+        >
+
+            <button
+                class="back-button"
+                id="back-button"
+            >
+
+                <i class="fa-solid fa-arrow-left"></i>
+
+                Back to all videos
+
+            </button>
+
+
+
+            <div class="player-card">
+
+
+                <!-- YOUTUBE PLAYER -->
+
+                <div
+                    class="player-wrapper"
+                    id="player-wrapper"
+                >
+
+                    <!-- iframe inserted by JavaScript -->
+
+                </div>
+
+
+
+                <!-- VIDEO INFORMATION -->
+
+                <div class="player-info">
+
+
+                    <h1
+                        class="player-title"
+                        id="player-title"
+                    >
+                    </h1>
+
+
+                    <div
+                        class="player-meta"
+                        id="player-meta"
+                    >
+                    </div>
+
+
+                    <p
+                        class="player-description"
+                        id="player-description"
+                    >
+                    </p>
+
+
+
+                    <div class="listening-tips">
+
+                        <strong>
+
+                            <i class="fa-solid fa-lightbulb"></i>
+
+                            Listening Tip
+
+                        </strong>
+
+                        Listen once without subtitles.
+
+                        Then listen again and try to catch
+                        words or phrases that you already know.
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+/* =========================================================
+   BOBA BREAK STUDY
+   MANDARIN LISTENING CORNER
+
+   Everything for this page is contained in this HTML file.
+
+   You do NOT need lesson.js for the video database.
+========================================================= */
+
+
+/* =========================================================
+   VIDEO DATABASE
+   ---------------------------------------------------------
+   ADD YOUR YOUTUBE VIDEOS HERE
+========================================================= */
+
+const videos = [
+
+    {
+        id: 1,
+
+        title:
+            "Mandarin Daily Conversation for Beginners",
+
+        level:
+            "A1",
+
+        category:
+            "Daily Conversation",
+
+        description:
+            "Practice simple Mandarin conversations used in everyday situations.",
+
+        youtubeId:
+            "YOUR_YOUTUBE_ID_1"
+    },
+
+
+    {
+        id: 2,
+
+        title:
+            "Mandarin at the Restaurant",
+
+        level:
+            "A1",
+
+        category:
+            "Restaurant",
+
+        description:
+            "Learn useful Mandarin expressions for ordering food at a restaurant.",
+
+        youtubeId:
+            "YOUR_YOUTUBE_ID_2"
+    },
+
+
+    {
+        id: 3,
+
+        title:
+            "Shopping in Taiwan - Mandarin Listening",
+
+        level:
+            "A1",
+
+        category:
+            "Shopping",
+
+        description:
+            "Listen to common Mandarin expressions used while shopping.",
+
+        youtubeId:
+            "YOUR_YOUTUBE_ID_3"
+    },
+
+
+    {
+        id: 4,
+
+        title:
+            "Talking About Family in Mandarin",
+
+        level:
+            "A1",
+
+        category:
+            "Family",
+
+        description:
+            "Practice listening to simple conversations about family members.",
+
+        youtubeId:
+            "YOUR_YOUTUBE_ID_4"
+    },
+
+
+    {
+        id: 5,
+
+        title:
+            "Mandarin Conversation at School",
+
+        level:
+            "A2",
+
+        category:
+            "School",
+
+        description:
+            "A listening practice about school, classes, and daily routines.",
+
+        youtubeId:
+            "YOUR_YOUTUBE_ID_5"
+    },
+
+
+    {
+        id: 6,
+
+        title:
+            "Ordering Drinks in Mandarin",
+
+        level:
+            "A2",
+
+        category:
+            "Food & Drinks",
+
+        description:
+            "Practice listening to Mandarin expressions for ordering drinks.",
+
+        youtubeId:
+            "YOUR_YOUTUBE_ID_6"
+    },
+
+
+    {
+        id: 7,
+
+        title:
+            "A Day in Taiwan - Mandarin Listening",
+
+        level:
+            "A2",
+
+        category:
+            "Daily Life",
+
+        description:
+            "Listen to a simple Mandarin story about a normal day in Taiwan.",
+
+        youtubeId:
+            "YOUR_YOUTUBE_ID_7"
+    },
+
+
+    {
+        id: 8,
+
+        title:
+            "Intermediate Mandarin Conversation",
+
+        level:
+            "B1",
+
+        category:
+            "Conversation",
+
+        description:
+            "Longer conversations for students who want to challenge their listening skills.",
+
+        youtubeId:
+            "YOUR_YOUTUBE_ID_8"
+    },
+
+
+    {
+        id: 9,
+
+        title:
+            "Talking About Weekend Plans",
+
+        level:
+            "A2",
+
+        category:
+            "Daily Life",
+
+        description:
+            "Practice understanding Mandarin conversations about weekend plans.",
+
+        youtubeId:
+            "YOUR_YOUTUBE_ID_9"
+    },
+
+
+    {
+        id: 10,
+
+        title:
+            "Mandarin Travel Conversation",
+
+        level:
+            "B1",
+
+        category:
+            "Travel",
+
+        description:
+            "Listen to useful Mandarin expressions related to travel and transportation.",
+
+        youtubeId:
+            "YOUR_YOUTUBE_ID_10"
+    }
+
+];
+
+
+
+/* =========================================================
+   STATE
+========================================================= */
+
+let currentFilter = "all";
+
+let currentSearch = "";
+
+let currentVideo = null;
+
+
+
+/* =========================================================
+   ELEMENTS
+========================================================= */
+
+const videoGrid =
+    document.getElementById(
+        "video-grid"
+    );
+
+
+const videoCount =
+    document.getElementById(
+        "video-count"
+    );
+
+
+const noResults =
+    document.getElementById(
+        "no-results"
+    );
+
+
+const searchInput =
+    document.getElementById(
+        "search-input"
+    );
+
+
+const searchButton =
+    document.getElementById(
+        "search-button"
+    );
+
+
+const filterButtons =
+    document.querySelectorAll(
+        ".filter-btn"
+    );
+
+
+const videoListView =
+    document.getElementById(
+        "video-list-view"
+    );
+
+
+const playerView =
+    document.getElementById(
+        "player-view"
+    );
+
+
+const playerWrapper =
+    document.getElementById(
+        "player-wrapper"
+    );
+
+
+const playerTitle =
+    document.getElementById(
+        "player-title"
+    );
+
+
+const playerMeta =
+    document.getElementById(
+        "player-meta"
+    );
+
+
+const playerDescription =
+    document.getElementById(
+        "player-description"
+    );
+
+
+const backButton =
+    document.getElementById(
+        "back-button"
+    );
+
+
+
+/* =========================================================
+   GET YOUTUBE THUMBNAIL
+========================================================= */
+
+function getThumbnail(
+    youtubeId
+) {
+
+    return (
+        "https://img.youtube.com/vi/" +
+        encodeURIComponent(youtubeId) +
+        "/hqdefault.jpg"
+    );
+
+}
+
+
+
+/* =========================================================
+   CREATE VIDEO CARD
+========================================================= */
+
+function createVideoCard(
+    video
+) {
+
+    return `
+
+        <article
+            class="video-card"
+            data-video-id="${video.id}"
+        >
+
+            <div class="video-thumbnail">
+
+                <img
+                    src="${getThumbnail(video.youtubeId)}"
+                    alt="${escapeHTML(video.title)}"
+                    loading="lazy"
+                >
+
+
+                <span class="video-level">
+
+                    ${escapeHTML(video.level)}
+
+                </span>
+
+
+                <div class="thumbnail-play">
+
+                    <i class="fa-solid fa-play"></i>
+
+                </div>
+
+            </div>
+
+
+            <div class="video-card-content">
+
+
+                <h3 class="video-card-title">
+
+                    ${escapeHTML(video.title)}
+
+                </h3>
+
+
+                <p class="video-card-description">
+
+                    ${escapeHTML(video.description)}
+
+                </p>
+
+
+                <div class="video-card-meta">
+
+                    <span class="video-category">
+
+                        ${escapeHTML(video.category)}
+
+                    </span>
+
+                </div>
+
+
+            </div>
+
+        </article>
+
+    `;
+
+}
+
+
+
+/* =========================================================
+   ESCAPE HTML
+   ---------------------------------------------------------
+   Prevents special characters in video data from
+   accidentally becoming HTML.
+========================================================= */
+
+function escapeHTML(
+    value
+) {
+
+    return String(value)
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+
+/* =========================================================
+   FILTER VIDEOS
+========================================================= */
+
+function getFilteredVideos() {
+
+    return videos.filter(
+        function(video) {
+
+            const matchesLevel =
+                currentFilter === "all" ||
+                video.level === currentFilter;
+
+
+            const searchText =
+                currentSearch
+                    .toLowerCase()
+                    .trim();
+
+
+            if (!searchText) {
+
+                return matchesLevel;
+
+            }
+
+
+            const searchableText = (
+
+                video.title +
+                " " +
+                video.level +
+                " " +
+                video.category +
+                " " +
+                video.description
+
+            ).toLowerCase();
+
+
+            const matchesSearch =
+                searchableText.includes(
+                    searchText
+                );
+
+
+            return (
+                matchesLevel &&
+                matchesSearch
+            );
+
+        }
+    );
+
+}
+
+
+
+/* =========================================================
+   RENDER VIDEO GRID
+========================================================= */
+
+function renderVideos() {
+
+    const filteredVideos =
+        getFilteredVideos();
+
+
+    videoGrid.innerHTML = "";
+
+
+    videoCount.textContent =
+        filteredVideos.length +
+        (
+            filteredVideos.length === 1
+                ? " video"
+                : " videos"
+        );
+
+
+    if (
+        filteredVideos.length === 0
+    ) {
+
+        noResults.classList.remove(
+            "hidden"
+        );
+
+        return;
+
+    }
+
+
+    noResults.classList.add(
+        "hidden"
+    );
+
+
+    filteredVideos.forEach(
+        function(video) {
+
+            videoGrid.insertAdjacentHTML(
+                "beforeend",
+                createVideoCard(video)
+            );
+
+        }
+    );
+
+
+    attachVideoCardEvents();
+
+}
+
+
+
+/* =========================================================
+   ATTACH VIDEO CARD EVENTS
+========================================================= */
+
+function attachVideoCardEvents() {
+
+    const cards =
+        document.querySelectorAll(
+            ".video-card"
+        );
+
+
+    cards.forEach(
+        function(card) {
+
+            card.addEventListener(
+                "click",
+                function() {
+
+                    const videoId =
+                        Number(
+                            card.dataset.videoId
+                        );
+
+
+                    const selectedVideo =
+                        videos.find(
+                            function(video) {
+
+                                return (
+                                    video.id ===
+                                    videoId
+                                );
+
+                            }
+                        );
+
+
+                    if (
+                        selectedVideo
+                    ) {
+
+                        openVideo(
+                            selectedVideo
+                        );
+
+                    }
+
+                }
+            );
+
+        }
+    );
+
+}
+
+
+
+/* =========================================================
+   OPEN VIDEO
+   ---------------------------------------------------------
+   IMPORTANT:
+   The iframe is created only after the user clicks a video.
+========================================================= */
+
+function openVideo(
+    video
+) {
+
+    currentVideo =
+        video;
+
+
+    /* =====================================
+       HIDE ALL VIDEO CARDS
+    ====================================== */
+
+    videoListView.classList.add(
+        "hidden"
+    );
+
+
+    /* =====================================
+       SHOW PLAYER
+    ====================================== */
+
+    playerView.classList.add(
+        "active"
+    );
+
+
+    /* =====================================
+       CREATE YOUTUBE IFRAME
+    ====================================== */
+
+    playerWrapper.innerHTML = `
+
+        <iframe
+            src="https://www.youtube-nocookie.com/embed/${encodeURIComponent(video.youtubeId)}?rel=0&modestbranding=1"
+            title="${escapeHTML(video.title)}"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+            loading="eager">
+        </iframe>
+
+    `;
+
+
+    /* =====================================
+       VIDEO TITLE
+    ====================================== */
+
+    playerTitle.textContent =
+        video.title;
+
+
+    /* =====================================
+       VIDEO META
+    ====================================== */
+
+    playerMeta.innerHTML = `
+
+        <span class="player-level">
+
+            ${escapeHTML(video.level)}
+
+        </span>
+
+
+        <span class="player-category">
+
+            ${escapeHTML(video.category)}
+
+        </span>
+
+    `;
+
+
+    /* =====================================
+       DESCRIPTION
+    ====================================== */
+
+    playerDescription.textContent =
+        video.description;
+
+
+    /* =====================================
+       SCROLL TO TOP
+    ====================================== */
+
+    window.scrollTo({
+
+        top: 0,
+
+        behavior: "smooth"
+
+    });
+
+}
+
+
+
+/* =========================================================
+   CLOSE VIDEO / BACK TO LIST
+========================================================= */
+
+function closeVideo() {
+
+    /* =====================================
+       REMOVE IFRAME
+       This stops the YouTube video.
+    ====================================== */
+
+    playerWrapper.innerHTML = "";
+
+
+    currentVideo =
+        null;
+
+
+    /* =====================================
+       HIDE PLAYER
+    ====================================== */
+
+    playerView.classList.remove(
+        "active"
+    );
+
+
+    /* =====================================
+       SHOW VIDEO LIST
+    ====================================== */
+
+    videoListView.classList.remove(
+        "hidden"
+    );
+
+
+    /* =====================================
+       SCROLL
+    ====================================== */
+
+    window.scrollTo({
+
+        top: 0,
+
+        behavior: "smooth"
+
+    });
+
+}
+
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+function performSearch() {
+
+    currentSearch =
+        searchInput.value;
+
+
+    renderVideos();
+
+}
+
+
+
+/* =========================================================
+   SEARCH BUTTON
+========================================================= */
+
+searchButton.addEventListener(
+    "click",
+    performSearch
+);
+
+
+
+/* =========================================================
+   SEARCH ENTER
+========================================================= */
+
+searchInput.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (
+            event.key === "Enter"
+        ) {
+
+            performSearch();
+
+        }
+
+    }
+);
+
+
+
+/* =========================================================
+   LIVE SEARCH
+   ---------------------------------------------------------
+   This makes the cards update while typing.
+========================================================= */
+
+searchInput.addEventListener(
+    "input",
+    function() {
+
+        currentSearch =
+            searchInput.value;
+
+
+        renderVideos();
+
+    }
+);
+
+
+
+/* =========================================================
+   LEVEL FILTER
+========================================================= */
+
+filterButtons.forEach(
+    function(button) {
+
+        button.addEventListener(
+            "click",
+            function() {
+
+                filterButtons.forEach(
+                    function(btn) {
+
+                        btn.classList.remove(
+                            "active"
+                        );
+
+                    }
+                );
+
+
+                button.classList.add(
+                    "active"
+                );
+
+
+                currentFilter =
+                    button.dataset.filter;
+
+
+                renderVideos();
+
+            }
+        );
+
+    }
+);
+
+
+
+/* =========================================================
+   BACK BUTTON
+========================================================= */
+
+backButton.addEventListener(
+    "click",
+    closeVideo
+);
+
+
+
+/* =========================================================
+   INITIAL RENDER
+========================================================= */
+
+renderVideos();
+
+</script>
+
+
+
+<!-- =========================================================
+     YOUR EXISTING SCRIPT
+========================================================= -->
+
+<script src="script.js"></script>
+
+
+</body>
+
+</html>
