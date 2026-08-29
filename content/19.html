@@ -2155,12 +2155,1264 @@ const games = {
         {
             meaning:"I should go to the library first.",
             answer:["我","應該","先","去","圖書館"]
+        },
+
+        {
+            meaning:"I haven't finished my homework yet.",
+            answer:["我","還沒","做","完","功課"]
+        },
+
+        {
+            meaning:"I do homework first.",
+            answer:["我","先","做","功課"]
+        },
+
+        {
+            meaning:"He should finish his homework first.",
+            answer:["他","應該","先","做","完","功課"]
+        },
+
+        {
+            meaning:"We should go to school first.",
+            answer:["我們","應該","先","去","學校"]
+        }
+
+    ],
+
+
+    3: [
+
+        {
+            meaning:"I think math is a bit harder than English.",
+            answer:["我","覺得","數學","比","英文","難","一點"]
+        },
+
+        {
+            meaning:"Math is harder than English.",
+            answer:["數學","比","英文","難"]
+        },
+
+        {
+            meaning:"My favorite subject is math.",
+            answer:["我","最","喜歡","的","科目","是","數學"]
+        },
+
+        {
+            meaning:"We ate too much.",
+            answer:["我們","吃","得","太","多","了"]
+        },
+
+        {
+            meaning:"My stomach is very uncomfortable.",
+            answer:["我","的","肚子","很","不","舒服"]
         }
 
     ]
 
 };
 
+
+/* =====================================================
+   GAME STATE
+===================================================== */
+
+const gameState = {
+
+    1:{
+        index:0,
+        selected:[],
+        done:false
+    },
+
+    2:{
+        index:0,
+        selected:[],
+        done:false
+    },
+
+    3:{
+        index:0,
+        selected:[],
+        done:false
+    }
+
+};
+
+
+/* =====================================================
+   LOAD GAME
+===================================================== */
+
+function loadGame(gameNumber){
+
+    const state = gameState[gameNumber];
+
+    const data =
+        games[gameNumber][state.index];
+
+    state.selected = [];
+    state.done = false;
+
+    document
+        .getElementById("g" + gameNumber + "Num")
+        .textContent =
+        state.index + 1;
+
+    document
+        .getElementById("g" + gameNumber + "Meaning")
+        .textContent =
+        data.meaning;
+
+    const answer =
+        document.getElementById(
+            "g" + gameNumber + "Answer"
+        );
+
+    answer.innerHTML =
+        '<span class="answer-placeholder">' +
+        'Tap the words below' +
+        '</span>';
+
+    const bank =
+        document.getElementById(
+            "g" + gameNumber + "Bank"
+        );
+
+    bank.innerHTML = "";
+
+    shuffle(data.answer).forEach(word => {
+
+        const button =
+            document.createElement("button");
+
+        button.className = "word-btn";
+
+        button.textContent = word;
+
+        button.onclick = function(){
+
+            if(this.disabled) return;
+
+            selectWord(
+                gameNumber,
+                this,
+                word
+            );
+
+        };
+
+        bank.appendChild(button);
+
+    });
+
+    document
+        .getElementById(
+            "g" + gameNumber + "Feedback"
+        )
+        .textContent = "";
+
+    document
+        .getElementById(
+            "g" + gameNumber + "Next"
+        )
+        .style.display = "none";
+
+}
+
+
+/* =====================================================
+   GAME WORD SELECTION
+===================================================== */
+
+function selectWord(
+    gameNumber,
+    button,
+    word
+){
+
+    gameState[gameNumber]
+        .selected
+        .push(word);
+
+    button.disabled = true;
+
+    button.classList.add("selected");
+
+    playAudio(word);
+
+    renderSelected(gameNumber);
+
+}
+
+
+function renderSelected(gameNumber){
+
+    const answer =
+        document.getElementById(
+            "g" + gameNumber + "Answer"
+        );
+
+    answer.innerHTML = "";
+
+    gameState[gameNumber]
+        .selected
+        .forEach(word => {
+
+            const span =
+                document.createElement("span");
+
+            span.className = "selected-word";
+
+            span.textContent = word;
+
+            span.onclick =
+                function(){
+                    playAudio(word);
+                };
+
+            answer.appendChild(span);
+
+        });
+
+}
+
+
+/* =====================================================
+   GAME CHECK
+===================================================== */
+
+function checkGame(gameNumber){
+
+    const state =
+        gameState[gameNumber];
+
+    const correct =
+        games[gameNumber][state.index].answer;
+
+    const selected =
+        state.selected;
+
+    const feedback =
+        document.getElementById(
+            "g" + gameNumber + "Feedback"
+        );
+
+    if(selected.length !== correct.length){
+
+        feedback.textContent =
+            "⚠️ Complete the sentence first.";
+
+        feedback.className =
+            "feedback incorrect";
+
+        return;
+
+    }
+
+    const isCorrect =
+        selected.every(
+            (word,index) =>
+                word === correct[index]
+        );
+
+    if(isCorrect){
+
+        feedback.textContent =
+            "🎉 Correct!";
+
+        feedback.className =
+            "feedback correct";
+
+        state.done = true;
+
+        playAudio(correct.join(""));
+
+        document
+            .getElementById(
+                "g" + gameNumber + "Next"
+            )
+            .style.display = "block";
+
+    } else {
+
+        feedback.textContent =
+            "❌ Not quite. Check the word order.";
+
+        feedback.className =
+            "feedback incorrect";
+
+    }
+
+}
+
+
+function resetGame(gameNumber){
+
+    loadGame(gameNumber);
+
+}
+
+
+function nextGameQuestion(gameNumber){
+
+    const state =
+        gameState[gameNumber];
+
+    if(!state.done) return;
+
+    state.index++;
+
+    if(
+        state.index >=
+        games[gameNumber].length
+    ){
+
+        state.index = 0;
+
+    }
+
+    loadGame(gameNumber);
+
+}
+
+
+function listenCurrent(gameNumber){
+
+    const state =
+        gameState[gameNumber];
+
+    playAudio(
+        games[gameNumber][state.index]
+            .answer
+            .join("")
+    );
+
+}
+
+
+/* =====================================================
+   SENTENCE WRITING
+===================================================== */
+
+const sentenceQuestions = [
+
+    {
+        prompt:"I get up at 7 every morning.",
+        answer:"我每天早上七點起床"
+    },
+
+    {
+        prompt:"I slept very late last night.",
+        answer:"昨天晚上我睡得很晚"
+    },
+
+    {
+        prompt:"It takes ten minutes to walk from home to school.",
+        answer:"從家裡到學校要走十分鐘"
+    },
+
+    {
+        prompt:"I should go to the library first.",
+        answer:"我應該先去圖書館"
+    },
+
+    {
+        prompt:"I haven't finished my homework yet.",
+        answer:"我還沒做完功課"
+    },
+
+    {
+        prompt:"I think math is a bit harder than English.",
+        answer:"我覺得數學比英文難一點"
+    },
+
+    {
+        prompt:"My favorite subject is math.",
+        answer:"我最喜歡的科目是數學"
+    },
+
+    {
+        prompt:"We ate too much.",
+        answer:"我們吃得太多了"
+    }
+
+];
+
+let sentenceIndex = 0;
+
+
+function loadSentenceWriting(){
+
+    const q =
+        sentenceQuestions[sentenceIndex];
+
+    document
+        .getElementById("sentencePrompt")
+        .textContent =
+        q.prompt;
+
+    document
+        .getElementById("sentenceInput")
+        .value = "";
+
+    document
+        .getElementById("sentenceFeedback")
+        .textContent = "";
+
+    document
+        .getElementById("nextSentenceBtn")
+        .style.display = "none";
+
+}
+
+
+function normalizeChinese(text){
+
+    return text
+        .trim()
+        .replace(/[。，？！、,.!?]/g,"")
+        .replace(/\s+/g,"");
+
+}
+
+
+function checkSentenceWriting(){
+
+    const input =
+        normalizeChinese(
+            document
+                .getElementById("sentenceInput")
+                .value
+        );
+
+    const correct =
+        normalizeChinese(
+            sentenceQuestions[sentenceIndex]
+                .answer
+        );
+
+    const feedback =
+        document
+            .getElementById(
+                "sentenceFeedback"
+            );
+
+    if(input === correct){
+
+        feedback.textContent =
+            "🎉 Perfect!";
+
+        feedback.className =
+            "feedback correct";
+
+        playAudio(correct);
+
+        document
+            .getElementById(
+                "nextSentenceBtn"
+            )
+            .style.display = "block";
+
+    } else {
+
+        feedback.textContent =
+            "❌ Try again. Check the word order and grammar.";
+
+        feedback.className =
+            "feedback incorrect";
+
+    }
+
+}
+
+
+function nextSentenceWriting(){
+
+    sentenceIndex++;
+
+    if(
+        sentenceIndex >=
+        sentenceQuestions.length
+    ){
+
+        sentenceIndex = 0;
+
+    }
+
+    loadSentenceWriting();
+
+}
+
+
+/* =====================================================
+   HANZI WRITING
+   EVERY LESSON VOCABULARY ITEM IS INCLUDED
+===================================================== */
+
+const lessonVocabulary = [
+
+    ["起床","qǐchuáng","to get up"],
+    ["起","qǐ","to rise / get up"],
+    ["得","de","manner complement"],
+    ["一點","yìdiǎn","a little"],
+    ["晚","wǎn","late"],
+    ["睡覺","shuìjiào","to sleep"],
+    ["睡","shuì","to sleep (short form)"],
+    ["從","cóng","from"],
+    ["走","zǒu","to walk"],
+    ["走路","zǒulù","to walk / on foot"],
+    ["風景","fēngjǐng","scenery"],
+    ["分鐘","fēnzhōng","minute"],
+    ["應該","yīnggāi","should"],
+    ["先","xiān","first"],
+    ["功課","gōngkè","homework"],
+    ["覺得","juéde","to feel / think"],
+    ["數學","shùxué","math"],
+    ["清楚","qīngchǔ","clear"],
+    ["最","zuì","most"],
+    ["科目","kēmù","subject"],
+    ["太","tài","too"],
+    ["肚子","dùzi","stomach"],
+    ["舒服","shūfú","comfortable"]
+
+];
+
+
+/*
+ * Convert every vocabulary word into individual Hanzi characters.
+ * Duplicate characters are removed only for efficiency.
+ */
+
+const writingCharacters = [];
+
+const seenWritingCharacters = new Set();
+
+lessonVocabulary.forEach(item => {
+
+    const word = item[0];
+    const pinyin = item[1];
+    const meaning = item[2];
+
+    [...word].forEach(character => {
+
+        if(!seenWritingCharacters.has(character)){
+
+            seenWritingCharacters.add(character);
+
+            writingCharacters.push({
+
+                hanzi:character,
+                pinyin:pinyin,
+                meaning:
+                    "Character from " +
+                    word +
+                    " — " +
+                    meaning
+
+            });
+
+        }
+
+    });
+
+});
+
+
+let writingIndex = 0;
+
+let writingMode = "quiz";
+
+let writer = null;
+
+
+function initWriter(){
+
+    const item =
+        writingCharacters[writingIndex];
+
+    document
+        .getElementById("target-div")
+        .innerHTML = "";
+
+    const info =
+        document
+            .getElementById("writingInfo");
+
+    if(writingMode === "quiz"){
+
+        info.innerHTML =
+            `Write <strong>${item.hanzi}</strong>
+             (${item.pinyin})
+             following the correct stroke order!
+             <br>
+             <small>${item.meaning}</small>
+             <br>
+             (${writingIndex + 1}/${writingCharacters.length})`;
+
+    } else {
+
+        info.innerHTML =
+            `Watch the stroke order for
+             <strong>${item.hanzi}</strong>
+             (${item.pinyin}).
+             <br>
+             <small>${item.meaning}</small>
+             <br>
+             (${writingIndex + 1}/${writingCharacters.length})`;
+
+    }
+
+    writer =
+        HanziWriter.create(
+            "target-div",
+            item.hanzi,
+            {
+                width:260,
+                height:260,
+                padding:10,
+                showOutline:true,
+                strokeAnimationSpeed:1,
+                drawingColor:"#5c4033",
+                strokeHighlightColor:"#b8865c",
+                showCharacter:
+                    writingMode === "animate"
+            }
+        );
+
+    if(writingMode === "quiz"){
+
+        startQuiz();
+
+    } else {
+
+        writer.animateCharacter();
+
+    }
+
+}
+
+
+function startQuiz(){
+
+    const feedback =
+        document
+            .getElementById(
+                "writingFeedback"
+            );
+
+    feedback.textContent = "";
+
+    writer.quiz({
+
+        onMistake:function(){
+
+            feedback.textContent =
+                "❌ Incorrect stroke order! Try again.";
+
+            feedback.className =
+                "feedback incorrect";
+
+        },
+
+        onCorrectStroke:function(){
+
+            feedback.textContent =
+                "✨ Great! Continue with the next stroke.";
+
+            feedback.className =
+                "feedback correct";
+
+        },
+
+        onComplete:function(){
+
+            feedback.textContent =
+                "🎉 Perfect! Correct stroke order.";
+
+            feedback.className =
+                "feedback correct";
+
+        }
+
+    });
+
+}
+
+
+function setWritingMode(mode,button){
+
+    writingMode = mode;
+
+    document
+        .querySelectorAll(
+            ".writing-card .mode-btn"
+        )
+        .forEach(btn => {
+
+            btn.classList.remove("active");
+
+        });
+
+    button.classList.add("active");
+
+    initWriter();
+
+}
+
+
+function resetWritingQuiz(){
+
+    initWriter();
+
+}
+
+
+function nextWritingCharacter(){
+
+    writingIndex++;
+
+    if(
+        writingIndex >=
+        writingCharacters.length
+    ){
+
+        writingIndex = 0;
+
+    }
+
+    initWriter();
+
+}
+
+
+function playCurrentWriting(){
+
+    playAudio(
+        writingCharacters[writingIndex]
+            .hanzi
+    );
+
+}
+
+
+/* =====================================================
+   BOBA QUICK REVIEW (FINAL CHALLENGE)
+===================================================== */
+
+const htmlFinalQuestions = [
+
+    {
+        meaning:"I get up at 7 every morning.",
+        answer:["我","每天","早上","七點","起床"]
+    },
+
+    {
+        meaning:"It takes ten minutes to walk from home to school.",
+        answer:["從","家裡","到","學校","要","走","十","分鐘"]
+    },
+
+    {
+        meaning:"I should go to the library first.",
+        answer:["我","應該","先","去","圖書館"]
+    },
+
+    {
+        meaning:"I think math is a bit harder than English.",
+        answer:["我","覺得","數學","比","英文","難","一點"]
+    },
+
+    {
+        meaning:"We ate too much.",
+        answer:["我們","吃","得","太","多","了"]
+    }
+
+];
+
+
+let finalQuestions = [];
+
+let finalIndex = 0;
+
+let finalScore = 0;
+
+let finalSelected = [];
+
+let finalInitialized = false;
+
+
+/* =====================================================
+   GET RANDOM REVIEW QUESTIONS FROM OTHER LESSONS
+===================================================== */
+
+function getRandomLessonQuestions(){
+
+    const allReviewQuestions = [];
+
+    if(typeof allLessonsData === "undefined"){
+
+        return [];
+
+    }
+
+    Object.keys(allLessonsData).forEach(lessonKey => {
+
+        const lesson =
+            allLessonsData[lessonKey];
+
+        if(
+            !lesson ||
+            !Array.isArray(
+                lesson.reviewQuestions
+            )
+        ){
+
+            return;
+
+        }
+
+        lesson.reviewQuestions.forEach(question => {
+
+            if(
+                question &&
+                typeof question.meaning === "string" &&
+                Array.isArray(question.answer) &&
+                question.answer.length > 0
+            ){
+
+                allReviewQuestions.push({
+
+                    meaning:question.meaning,
+
+                    answer:[...question.answer],
+
+                    sourceLesson:lessonKey
+
+                });
+
+            }
+
+        });
+
+    });
+
+    return shuffle(allReviewQuestions).slice(0,5);
+
+}
+
+
+/* =====================================================
+   INITIALIZE BOBA QUICK REVIEW
+===================================================== */
+
+function initFinalQuestions(){
+
+    const errorBox =
+        document.getElementById(
+            "finalError"
+        );
+
+    errorBox.style.display = "none";
+
+    errorBox.textContent = "";
+
+
+    const randomReviewQuestions =
+        getRandomLessonQuestions();
+
+
+    const lessonQuestions =
+        htmlFinalQuestions.map(question => ({
+
+            meaning:question.meaning,
+
+            answer:[...question.answer],
+
+            sourceLesson:"current"
+
+        }));
+
+
+    if(randomReviewQuestions.length < 5){
+
+        /* No previous-lesson data available yet (e.g. lesson.js has
+           no other lessons loaded) — fall back to this lesson's own
+           questions so the review still works. */
+
+        finalQuestions =
+            shuffle([
+                ...lessonQuestions,
+                ...lessonQuestions
+            ]).slice(0,10);
+
+    } else {
+
+        finalQuestions =
+            shuffle([
+                ...lessonQuestions,
+                ...randomReviewQuestions
+            ]);
+
+    }
+
+
+    if(finalQuestions.length !== 10){
+
+        showFinalError(
+            "Boba Quick Review initialization failed: " +
+            "the final question set does not contain exactly 10 questions."
+        );
+
+        finalQuestions = [];
+
+        return false;
+
+    }
+
+
+    finalInitialized = true;
+
+    return true;
+
+}
+
+
+/* =====================================================
+   FINAL ERROR
+===================================================== */
+
+function showFinalError(message){
+
+    const errorBox =
+        document.getElementById(
+            "finalError"
+        );
+
+    errorBox.textContent =
+        "⚠️ " + message;
+
+    errorBox.style.display =
+        "block";
+
+    document
+        .getElementById("finalMeaning")
+        .textContent =
+        "Boba Quick Review unavailable.";
+
+    document
+        .getElementById("finalBank")
+        .innerHTML = "";
+
+    document
+        .getElementById("finalAnswer")
+        .innerHTML =
+        '<span class="answer-placeholder">' +
+        'Review questions could not be loaded.' +
+        '</span>';
+
+}
+
+
+/* =====================================================
+   LOAD FINAL QUESTION
+===================================================== */
+
+function loadFinal(){
+
+    if(!finalInitialized) return;
+
+    if(finalIndex >= finalQuestions.length){
+
+        return;
+
+    }
+
+    const q =
+        finalQuestions[finalIndex];
+
+
+    document
+        .getElementById("finalNum")
+        .textContent =
+        finalIndex + 1;
+
+
+    document
+        .getElementById("finalMeaning")
+        .textContent =
+        q.meaning;
+
+
+    finalSelected = [];
+
+
+    document
+        .getElementById("finalAnswer")
+        .innerHTML =
+        '<span class="answer-placeholder">' +
+        'Build your answer' +
+        '</span>';
+
+
+    const bank =
+        document.getElementById(
+            "finalBank"
+        );
+
+    bank.innerHTML = "";
+
+
+    shuffle(q.answer).forEach(word => {
+
+        const button =
+            document.createElement("button");
+
+        button.className =
+            "word-btn";
+
+        button.textContent =
+            word;
+
+        button.onclick = function(){
+
+            if(button.disabled) return;
+
+            finalSelected.push(word);
+
+            button.disabled = true;
+
+            button.classList.add("selected");
+
+            playAudio(word);
+
+            renderFinal();
+
+        };
+
+        bank.appendChild(button);
+
+    });
+
+
+    document
+        .getElementById(
+            "finalFeedback"
+        )
+        .textContent = "";
+
+
+    updateFinalProgress();
+
+}
+
+
+/* =====================================================
+   FINAL PROGRESS
+===================================================== */
+
+function updateFinalProgress(){
+
+    const percentage =
+        (finalIndex / 10) * 100;
+
+    document
+        .getElementById(
+            "finalProgressFill"
+        )
+        .style.width =
+        percentage + "%";
+
+}
+
+
+/* =====================================================
+   FINAL ANSWER
+===================================================== */
+
+function renderFinal(){
+
+    const area =
+        document.getElementById(
+            "finalAnswer"
+        );
+
+    area.innerHTML = "";
+
+
+    finalSelected.forEach(word => {
+
+        const span =
+            document.createElement("span");
+
+        span.className =
+            "selected-word";
+
+        span.textContent =
+            word;
+
+        span.onclick =
+            function(){
+
+                playAudio(word);
+
+            };
+
+        area.appendChild(span);
+
+    });
+
+}
+
+
+function resetFinal(){
+
+    if(!finalInitialized) return;
+
+    loadFinal();
+
+}
+
+
+/* =====================================================
+   FINAL CHECK
+===================================================== */
+
+function checkFinal(){
+
+    if(
+        !finalInitialized ||
+        finalQuestions.length !== 10
+    ){
+
+        return;
+
+    }
+
+
+    const correct =
+        finalQuestions[finalIndex].answer;
+
+
+    const feedback =
+        document.getElementById(
+            "finalFeedback"
+        );
+
+
+    if(
+        finalSelected.length !==
+        correct.length
+    ){
+
+        feedback.textContent =
+            "⚠️ Complete the sentence first.";
+
+        feedback.className =
+            "feedback incorrect";
+
+        return;
+
+    }
+
+
+    const isCorrect =
+        finalSelected.every(
+            (word,index) =>
+                word === correct[index]
+        );
+
+
+    if(isCorrect){
+
+        feedback.textContent =
+            "🎉 Correct!";
+
+        feedback.className =
+            "feedback correct";
+
+
+        finalScore++;
+
+
+        document
+            .getElementById(
+                "finalScore"
+            )
+            .textContent =
+            finalScore + " / 10";
+
+
+        finalIndex++;
+
+
+        updateFinalProgress();
+
+
+        if(finalIndex < 10){
+
+            setTimeout(
+                loadFinal,
+                650
+            );
+
+        } else {
+
+            document
+                .getElementById(
+                    "finalProgressFill"
+                )
+                .style.width =
+                "100%";
+
+
+            document
+                .getElementById(
+                    "unlockBox"
+                )
+                .style.display =
+                "block";
+
+
+            playAudio("太棒了");
+
+        }
+
+    } else {
+
+        feedback.textContent =
+            "❌ Check the word order and try again.";
+
+        feedback.className =
+            "feedback incorrect";
+
+    }
+
+}
+
+
+/* =====================================================
+   INITIALIZATION
+===================================================== */
+
+loadGame(1);
+
+loadGame(2);
+
+loadGame(3);
+
+loadSentenceWriting();
+
+initWriter();
+
+if(initFinalQuestions()){
+
+    loadFinal();
+
+}
+
 </script>
+
+
+<script src="../script.js"></script>
+
 </body>
 </html>
