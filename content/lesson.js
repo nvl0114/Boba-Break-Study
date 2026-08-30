@@ -1588,6 +1588,145 @@ meaning: "Where is the bank in relation to the post office?",
 answer: ["銀行", "在", "郵局", "的", "哪裡"]
 }
 ]
+},
+// ========================================================
+// LESSON 19
+// ========================================================
+19: {
+    grammar: [
+        {
+            id: "de_action_manner",
+            name: "Describing How an Action Is Done with 得 (de)",
+            category: "Grammar",
+            explanation: "Used after a verb to describe how an action is performed. For 1-character verbs, put 得 directly after the verb. For 2-character verbs, repeat the verb before 得.",
+            examples: [
+                {
+                    hanzi: "她寫得很漂亮。",
+                    pinyin: "Tā xiě de hěn piàoliang.",
+                    english: "She writes very beautifully."
+                },
+                {
+                    hanzi: "老師講得很清楚。",
+                    pinyin: "Lǎoshī jiǎng de hěn qīngchǔ.",
+                    english: "The teacher explains very clearly."
+                },
+                {
+                    hanzi: "她跳舞跳得很好。",
+                    pinyin: "Tā tiàowǔ tiào de hěn hǎo.",
+                    english: "She dances very well."
+                },
+                {
+                    hanzi: "他跑步跑得很快。",
+                    pinyin: "Tā pǎobù pǎo de hěn kuài.",
+                    english: "He runs very fast."
+                },
+                {
+                    hanzi: "爸爸開車開得很慢。",
+                    pinyin: "Bàba kāichē kāi de hěn màn.",
+                    english: "Dad drives very slowly."
+                }
+            ]
+        }
+    ],
+    vocabulary: [
+        {
+            word: "講",
+            pinyin: "jiǎng",
+            meaning: "to speak / explain"
+        },
+        {
+            word: "畫",
+            pinyin: "huà",
+            meaning: "to draw"
+        },
+        {
+            word: "跳舞",
+            pinyin: "tiàowǔ",
+            meaning: "to dance"
+        },
+        {
+            word: "游泳",
+            pinyin: "yóuyǒng",
+            meaning: "to swim"
+        },
+        {
+            word: "開車",
+            pinyin: "kāichē",
+            meaning: "to drive"
+        },
+        {
+            word: "清楚",
+            pinyin: "qīngchǔ",
+            meaning: "clear / clearly"
+        },
+        {
+            word: "好聽",
+            pinyin: "hǎotīng",
+            meaning: "sound good"
+        },
+        {
+            word: "認真",
+            pinyin: "rènzhēn",
+            meaning: "serious / diligent"
+        },
+        {
+            word: "快",
+            pinyin: "kuài",
+            meaning: "fast"
+        },
+        {
+            word: "慢",
+            pinyin: "màn",
+            meaning: "slow"
+        },
+        {
+            word: "得",
+            pinyin: "de",
+            meaning: "describes how an action is done"
+        }
+    ],
+    reviewQuestions: [
+        {
+            meaning: "She writes very beautifully.",
+            answer: ["她", "寫", "得", "很", "漂亮"]
+        },
+        {
+            meaning: "The teacher explains very clearly.",
+            answer: ["老師", "講", "得", "很", "清楚"]
+        },
+        {
+            meaning: "He draws very beautifully.",
+            answer: ["他", "畫", "得", "很", "漂亮"]
+        },
+        {
+            meaning: "You do it very well.",
+            answer: ["你", "做", "得", "很", "好"]
+        },
+        {
+            meaning: "She dances very well.",
+            answer: ["她", "跳舞", "跳", "得", "很", "好"]
+        },
+        {
+            meaning: "He runs very fast.",
+            answer: ["他", "跑步", "跑", "得", "很", "快"]
+        },
+        {
+            meaning: "My younger brother swims very fast.",
+            answer: ["弟弟", "游泳", "游", "得", "很", "快"]
+        },
+        {
+            meaning: "Dad drives very slowly.",
+            answer: ["爸爸", "開車", "開", "得", "很", "慢"]
+        },
+        {
+            meaning: "My younger sister sings very well.",
+            answer: ["妹妹", "唱歌", "唱", "得", "很好聽"]
+        },
+        {
+            meaning: "My older sister dances beautifully.",
+            answer: ["姐姐", "跳舞", "跳", "得", "很", "漂亮"]
+        }
+    ]
 }
 
 
