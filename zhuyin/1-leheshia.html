@@ -39,14 +39,6 @@
         .game-message.wrong { color: #b45c55; }
         .game-button { border: none; background: #b8865c; color: white; border-radius: 12px; padding: 11px 18px; font-size: 15px; font-weight: 700; cursor: pointer; transition: 0.2s; }
         .game-button:hover { transform: translateY(-2px); opacity: 0.92; }
-        .game-button.secondary { background: #eee2d7; color: #705b4d; }
-
-        /* ========================================================= STROKE GAME (ZHUYIN SVG CANVAS) ========================================================= */
-        .stroke-game { text-align: center; }
-        .canvas-wrap { width: min(300px, 100%); height: 300px; margin: 0 auto 18px; position: relative; background: linear-gradient(#f1e8e0 1px, transparent 1px), linear-gradient(90deg, #f1e8e0 1px, transparent 1px), #fffdfb; background-size: 25% 25%; border: 2px solid #eadbce; border-radius: 20px; display: flex; align-items: center; justify-content: center; overflow: hidden; touch-action: none; }
-        #zhuyinSvg { width: 100%; height: 100%; cursor: crosshair; }
-        .stroke-buttons { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
-        .stroke-hint { color: #9a8578; font-size: 13px; margin-top: 12px; }
 
         /* ========================================================= SOUND GAME ========================================================= */
         .sound-game { text-align: center; }
@@ -85,7 +77,7 @@
                 <!-- HEADER -->
                 <div class="section-header">
                     <h1>Learn Zhuyin: ㄌ ㄏ ㄕ ㄚ</h1>
-                    <p>Learn the symbols, practice the strokes, and listen to the sounds.</p>
+                    <p>Learn the symbols and listen to the sounds.</p>
                 </div>
 
                 <!-- VIDEO -->
@@ -98,7 +90,7 @@
                             <strong>🎬 What will you learn?</strong>
                             <p>In this lesson, you'll learn four Zhuyin symbols: <b>ㄌ, ㄏ, ㄕ, and ㄚ</b>.</p>
                             <p>You'll also practice connecting the symbols together to build simple sounds.</p>
-                            <p>Watch the video first, then try the games below to review what you learned.</p>
+                            <p>Watch the video first, then try the game below to review what you learned.</p>
                         </div>
                     </article>
                 </div>
@@ -108,10 +100,10 @@
                     <h2 class="lesson-title">📖 Quick Review</h2>
                     <p class="lesson-subtitle">Let's remember the four Zhuyin symbols from the video.</p>
                     <div class="zhuyin-review">
-                        <div class="zhuyin-symbol"><div class="zhuyin-big">ㄌ</div><div class="zhuyin-label">Zhuyin</div></div>
-                        <div class="zhuyin-symbol"><div class="zhuyin-big">ㄏ</div><div class="zhuyin-label">Zhuyin</div></div>
-                        <div class="zhuyin-symbol"><div class="zhuyin-big">ㄕ</div><div class="zhuyin-label">Zhuyin</div></div>
-                        <div class="zhuyin-symbol"><div class="zhuyin-big">ㄚ</div><div class="zhuyin-label">Zhuyin</div></div>
+                        <div class="zhuyin-symbol"><div class="zhuyin-big">ㄌ</div><div class="zhuyin-label">Le / L</div></div>
+                        <div class="zhuyin-symbol"><div class="zhuyin-big">ㄏ</div><div class="zhuyin-label">He / H</div></div>
+                        <div class="zhuyin-symbol"><div class="zhuyin-big">ㄕ</div><div class="zhuyin-label">Shi / Sh</div></div>
+                        <div class="zhuyin-symbol"><div class="zhuyin-big">ㄚ</div><div class="zhuyin-label">A</div></div>
                     </div>
                     <div class="combination-box">
                         <h3 style="text-align:center;color:#8f6645;">🔗 Practice Combining</h3>
@@ -123,31 +115,7 @@
                     </div>
                 </div>
 
-                <!-- GAME 1 — STROKE CHALLENGE -->
-                <div class="lesson-card game-section stroke-game">
-                    <div class="game-header">
-                        <div>
-                            <h2 class="lesson-title">✍️ Zhuyin Stroke Challenge</h2>
-                            <p class="lesson-subtitle" id="strokeSubTitle">Watch the animation or trace the symbol.</p>
-                        </div>
-                        <div class="score-box">Score: <span id="strokeScore">0</span></div>
-                    </div>
-                    <div class="canvas-wrap">
-                        <svg id="zhuyinSvg" viewBox="0 0 200 200">
-                            <!-- SVG container dynamically loaded per character -->
-                        </svg>
-                    </div>
-                    <div class="game-message" id="strokeMessage">Trace or watch the animation below!</div>
-                    <div class="stroke-buttons">
-                        <button class="game-button secondary" id="strokeAnimate">Animate 🎬</button>
-                        <button class="game-button secondary" id="strokeClear">Clear 🔄</button>
-                        <button class="game-button" id="strokeVerify">Check ✔️</button>
-                        <button class="game-button" id="strokeNext" style="display:none;">Next Symbol →</button>
-                    </div>
-                    <div class="stroke-hint">💡 Tip: Click Animate to see the correct stroke path, then draw on the box.</div>
-                </div>
-
-                <!-- GAME 2 — SOUND MATCH -->
+                <!-- GAME — MATCH THE SOUND -->
                 <div class="lesson-card game-section sound-game">
                     <div class="game-header">
                         <div style="text-align:left;">
@@ -177,160 +145,7 @@
     <script src="../script.js"></script>
     <script>
         /* ===============================================================
-           ZHUYIN STROKE CHALLENGE (Custom SVG Stroke Animation & Tracing)
-           =============================================================== */
-        const zhuyinData = [
-            {
-                char: "ㄌ",
-                paths: [
-                    "M 60 50 L 60 140 Q 60 155 75 155 L 140 155", // Stroke 1: Vertical & bottom hook
-                    "M 60 50 L 140 50"                         // Stroke 2: Top horizontal line
-                ]
-            },
-            {
-                char: "ㄏ",
-                paths: [
-                    "M 60 50 L 60 150",                        // Stroke 1: Left vertical wall
-                    "M 60 50 L 150 50 L 150 110"               // Stroke 2: Top bar and right side curve
-                ]
-            },
-            {
-                char: "ㄕ",
-                paths: [
-                    "M 60 40 L 60 150",                        // Stroke 1
-                    "M 60 40 L 140 40 L 140 100",              // Stroke 2
-                    "M 80 90 L 140 90"                         // Stroke 3: Middle horizontal bar
-                ]
-            },
-            {
-                char: "ㄚ",
-                paths: [
-                    "M 60 50 L 100 100 L 140 50",              // Stroke 1: V-top part
-                    "M 100 100 L 100 155"                      // Stroke 2: Vertical stem down
-                ]
-            }
-        ];
-
-        let currentIndex = 0;
-        let strokeScore = 0;
-        let userPoints = [];
-        let isDrawing = false;
-
-        const svg = document.getElementById("zhuyinSvg");
-        const scoreEl = document.getElementById("strokeScore");
-        const msgEl = document.getElementById("strokeMessage");
-        const subTitleEl = document.getElementById("strokeSubTitle");
-        const nextBtn = document.getElementById("strokeNext");
-        const verifyBtn = document.getElementById("strokeVerify");
-
-        function loadZhuyinSymbol() {
-            const current = zhuyinData[currentIndex];
-            subTitleEl.textContent = `Practice writing symbol: ${current.char}`;
-            msgEl.textContent = "Trace the symbol or click Animate to watch.";
-            msgEl.className = "game-message";
-            nextBtn.style.display = "none";
-            verifyBtn.style.display = "inline-block";
-            userPoints = [];
-
-            // Render background guide paths
-            let svgContent = `<g opacity="0.25" stroke="#b8865c" stroke-width="12" fill="none" stroke-linecap="round" stroke-linejoin="round">`;
-            current.paths.forEach(p => { svgContent += `<path d="${p}" />`; });
-            svgContent += `</g>`;
-            
-            // Layer for user freehand drawing
-            svgContent += `<g id="userLayer" stroke="#5b4b43" stroke-width="10" fill="none" stroke-linecap="round" stroke-linejoin="round"></g>`;
-            svg.innerHTML = svgContent;
-        }
-
-        // Draw animation function
-        document.getElementById("strokeAnimate").addEventListener("click", function() {
-            loadZhuyinSymbol();
-            const current = zhuyinData[currentIndex];
-            let userLayer = document.getElementById("userLayer");
-            if(!userLayer) return;
-
-            let pathIndex = 0;
-            function animateNext() {
-                if (pathIndex >= current.paths.length) return;
-                let animPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
-                animPath.setAttribute("d", current.paths[pathIndex]);
-                animPath.setAttribute("stroke", "#b8865c");
-                animPath.setAttribute("stroke-width", "12");
-                animPath.setAttribute("fill", "none");
-                animPath.setAttribute("stroke-linecap", "round");
-                animPath.setAttribute("stroke-linejoin", "round");
-                
-                let length = animPath.getTotalLength();
-                animPath.style.strokeDasharray = length;
-                animPath.style.strokeDashoffset = length;
-                userLayer.appendChild(animPath);
-
-                animPath.style.transition = "stroke-dashoffset 0.8s ease-in-out";
-                setTimeout(() => { animPath.style.strokeDashoffset = "0"; }, 50);
-
-                pathIndex++;
-                setTimeout(animateNext, 900);
-            }
-            animateNext();
-        });
-
-        // Pointer event listeners for interactive canvas drawing
-        svg.addEventListener("pointerdown", (e) => {
-            isDrawing = true;
-            const rect = svg.getBoundingClientRect();
-            const x = ((e.clientX - rect.left) / rect.width) * 200;
-            const y = ((e.clientY - rect.top) / rect.height) * 200;
-            userPoints.push({x, y});
-            updateUserDrawing();
-        });
-
-        svg.addEventListener("pointermove", (e) => {
-            if (!isDrawing) return;
-            const rect = svg.getBoundingClientRect();
-            const x = ((e.clientX - rect.left) / rect.width) * 200;
-            const y = ((e.clientY - rect.top) / rect.height) * 200;
-            userPoints.push({x, y});
-            updateUserDrawing();
-        });
-
-        window.addEventListener("pointerup", () => { isDrawing = false; });
-
-        function updateUserDrawing() {
-            let userLayer = document.getElementById("userLayer");
-            if (!userLayer) return;
-            // Keep background faded guides, clear user strokes only
-            let guides = svg.querySelectorAll("g")[0].outerHTML;
-            let pathData = userPoints.length > 1 ? `M ${userPoints[0].x} ${userPoints[0].y} ` + userPoints.slice(1).map(p => `L ${p.x} ${p.y}`).join(" ") : "";
-            svg.innerHTML = guides + `<g id="userLayer" stroke="#5b4b43" stroke-width="10" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="${pathData}" /></g>`;
-        }
-
-        document.getElementById("strokeClear").addEventListener("click", loadZhuyinSymbol);
-
-        verifyBtn.addEventListener("click", function() {
-            if (userPoints.length < 5) {
-                msgEl.textContent = "✍️ Please draw the symbol on the canvas first!";
-                msgEl.className = "game-message wrong";
-                return;
-            }
-            strokeScore += 5;
-            scoreEl.textContent = strokeScore;
-            msgEl.textContent = "🎉 Awesome! Great job tracing!";
-            msgEl.className = "game-message correct";
-            verifyBtn.style.display = "none";
-            nextBtn.style.display = "inline-block";
-        });
-
-        nextBtn.addEventListener("click", function() {
-            currentIndex = (currentIndex + 1) % zhuyinData.length;
-            loadZhuyinSymbol();
-        });
-
-        // Initial load
-        loadZhuyinSymbol();
-
-
-        /* ===============================================================
-           GAME 2 — MATCH THE SOUND
+           GAME — MATCH THE SOUND
            =============================================================== */
         const soundCharacters = ["ㄌ", "ㄏ", "ㄕ", "ㄚ"];
         const soundPronunciation = { "ㄌ": "ㄌ", "ㄏ": "ㄏ", "ㄕ": "ㄕ", "ㄚ": "ㄚ" };
