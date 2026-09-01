@@ -11,7 +11,9 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("sidebar-container").innerHTML = data;
 
         // 1. Penyesuaian path logo & link jika berada di dalam folder "content" atau "lifetw"
-        const isInSubfolder = window.location.pathname.includes('/content/') || window.location.pathname.includes('/lifetw/');
+        const isInSubfolder = window.location.pathname.includes('/content/') ||
+            window.location.pathname.includes('/lifetw/') ||
+            window.location.pathname.includes('/zhuyin/');
 
         if (isInSubfolder) {
             const logoImg = document.querySelector("#sidebar-container .logo-img");
