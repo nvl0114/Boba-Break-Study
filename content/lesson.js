@@ -1727,7 +1727,138 @@ answer: ["銀行", "在", "郵局", "的", "哪裡"]
             answer: ["姐姐", "跳舞", "跳", "得", "很", "漂亮"]
         }
     ]
+},
+// ========================================================
+// LESSON 20
+// ========================================================
+20: {
+    grammar: [
+        {
+            id: "l20_g1",
+            name: "Basic Comparisons with 比",
+            category: "grammar",
+            explanation: "Directly compare object A and object B with an adjective using 比 (bǐ, 'than'). Do not use 很 (hěn) before the adjective in basic comparison sentences.",
+            examples: [
+                {
+                    hanzi: "我比你高。",
+                    pinyin: "Wǒ bǐ nǐ gāo.",
+                    english: "I am taller than you."
+                },
+                {
+                    hanzi: "他比我忙。",
+                    pinyin: "Tā bǐ wǒ máng.",
+                    english: "He is busier than me."
+                },
+                {
+                    hanzi: "今天比昨天熱。",
+                    pinyin: "Jīntiān bǐ zuótiān rè.",
+                    english: "Today is hotter than yesterday."
+                }
+            ]
+        },
+        {
+            id: "l20_g2",
+            name: "Adding Specific Differences & Extents",
+            category: "grammar",
+            explanation: "Use 多了 (duō le) for a big difference ('much more'), and 一點 (yìdiǎn) for a small difference ('a little more').",
+            examples: [
+                {
+                    hanzi: "台灣比我的家鄉熱多了。",
+                    pinyin: "Táiwān bǐ wǒ de jiāxiāng rè duō le.",
+                    english: "Taiwan is much hotter than my hometown."
+                },
+                {
+                    hanzi: "今天比昨天冷一點。",
+                    pinyin: "Jīntiān bǐ zuótiān lěng yìdiǎn.",
+                    english: "Today is a little colder than yesterday."
+                }
+            ]
+        },
+        {
+            id: "l20_g3",
+            name: "\"Not as... as\" Comparisons",
+            category: "grammar",
+            explanation: "Use 沒有 (méiyǒu) to state that A is not as [adjective] as B.",
+            examples: [
+                {
+                    hanzi: "我沒有你高。",
+                    pinyin: "Wǒ méiyǒu nǐ gāo.",
+                    english: "I am not as tall as you."
+                }
+            ]
+        },
+        {
+            id: "l20_g4",
+            name: "Asking Comparisons & Inquiries",
+            category: "grammar",
+            explanation: "Use 跟 (gēn, 'with/and') to list items being compared, followed by 哪一個 (nǎ yí ge, 'which one') and 比較 to ask for a comparative judgment.",
+            examples: [
+                {
+                    hanzi: "咖啡跟奶茶，哪一個比較貴？",
+                    pinyin: "Kāfēi gēn nǎichá, nǎ yí ge bǐjiào guì?",
+                    english: "Which is more expensive, coffee or milk tea?"
+                }
+            ]
+        },
+        {
+            id: "l20_g5",
+            name: "Relative Degree with 比較",
+            category: "grammar",
+            explanation: "Use 比較 (bǐjiào) by itself to indicate a relative degree ('relatively' / 'comparatively') without needing a direct second object.",
+            examples: [
+                {
+                    hanzi: "今天比較忙。",
+                    pinyin: "Jīntiān bǐjiào máng.",
+                    english: "Today is relatively busy."
+                }
+            ]
+        }
+    ],
+    vocabulary: [
+        { word: "比", pinyin: "bǐ", meaning: "than; to compare" },
+        { word: "比較", pinyin: "bǐjiào", meaning: "relatively" },
+        { word: "高", pinyin: "gāo", meaning: "tall; high" },
+        { word: "熱", pinyin: "rè", meaning: "hot" },
+        { word: "冷", pinyin: "lěng", meaning: "cold" },
+        { word: "難", pinyin: "nán", meaning: "difficult" },
+        { word: "大", pinyin: "dà", meaning: "big; older" },
+        { word: "貴", pinyin: "guì", meaning: "expensive" },
+        { word: "多了", pinyin: "duō le", meaning: "much more" },
+        { word: "一點", pinyin: "yìdiǎn", meaning: "a little" },
+        { word: "家鄉", pinyin: "jiāxiāng", meaning: "hometown" },
+        { word: "店", pinyin: "diàn", meaning: "shop; store" },
+        { word: "便宜", pinyin: "piányí", meaning: "cheap" },
+        { word: "跟", pinyin: "gēn", meaning: "with; and" },
+        { word: "哪一個", pinyin: "nǎ yí ge", meaning: "which one" },
+        { word: "奶茶", pinyin: "nǎichá", meaning: "milk tea" },
+        { word: "苦", pinyin: "kǔ", meaning: "bitter" },
+        { word: "以前", pinyin: "yǐqián", meaning: "before" },
+        { word: "藥", pinyin: "yào", meaning: "medicine" }
+    ],
+    reviewQuestions: [
+        {
+            meaning: "I am taller than you.",
+            answer: ["我", "比", "你", "高"]
+        },
+        {
+            meaning: "He is busier than me.",
+            answer: ["他", "比", "我", "忙"]
+        },
+        {
+            meaning: "Today is hotter than yesterday.",
+            answer: ["今天", "比", "昨天", "熱"]
+        },
+        {
+            meaning: "Taiwan is much hotter than my hometown.",
+            answer: ["台灣", "比", "我", "的", "家鄉", "熱", "多了"]
+        },
+        {
+            meaning: "I am not as tall as you.",
+            answer: ["我", "沒", "有", "你", "高"]
+        }
+    ]
 }
+
 
 
 };
