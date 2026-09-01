@@ -1,0 +1,1528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Learn Zhuyin ㄌ ㄏ ㄕ ㄚ - Boba Break Study</title>
+
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        /* =========================================================
+           PAGE
+        ========================================================= */
+
+        .section-header h1 {
+            font-size: 36px;
+            color: #b8865c;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .section-header p {
+            font-size: 17px;
+            color: #6e5c52;
+            margin-bottom: 30px;
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .video-card,
+        .lesson-card {
+            background: #ffffff;
+            border-radius: 24px;
+            box-shadow: 0 10px 30px rgba(184, 134, 92, 0.15);
+            border: 1px solid #f2e9e1;
+            padding: 24px;
+        }
+
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            overflow: hidden;
+            background: #2a2522;
+            border-radius: 16px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .video-wrapper iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .description-text {
+            color: #5d4f47;
+            line-height: 1.7;
+            font-size: 16px;
+            background: #fdfaf7;
+            padding: 16px;
+            border-left: 4px solid #b8865c;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .description-text strong {
+            display: block;
+            font-size: 18px;
+            color: #b8865c;
+            margin-bottom: 8px;
+        }
+
+        .description-text p {
+            margin-bottom: 12px;
+        }
+
+        .description-text p:last-child {
+            margin-bottom: 0;
+        }
+
+
+        /* =========================================================
+           SECTION TITLES
+        ========================================================= */
+
+        .lesson-title {
+            color: #8f6645;
+            font-size: 27px;
+            margin: 0 0 8px;
+        }
+
+        .lesson-subtitle {
+            color: #806f66;
+            margin: 0 0 22px;
+        }
+
+
+        /* =========================================================
+           QUICK REVIEW
+        ========================================================= */
+
+        .zhuyin-review {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+            margin-top: 20px;
+        }
+
+        .zhuyin-symbol {
+            background: #fdf8f2;
+            border: 1px solid #f0dfd0;
+            border-radius: 18px;
+            padding: 18px 10px;
+            text-align: center;
+            transition: 0.2s;
+        }
+
+        .zhuyin-symbol:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 18px rgba(184,134,92,0.12);
+        }
+
+        .zhuyin-big {
+            font-size: 48px;
+            color: #594a42;
+            line-height: 1.1;
+        }
+
+        .zhuyin-label {
+            margin-top: 7px;
+            font-size: 14px;
+            color: #8c7668;
+        }
+
+
+        /* =========================================================
+           GAME SHARED
+        ========================================================= */
+
+        .game-section {
+            margin-top: 30px;
+        }
+
+        .game-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .score-box {
+            background: #f8eee5;
+            color: #8f6645;
+            padding: 9px 15px;
+            border-radius: 999px;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .game-message {
+            min-height: 28px;
+            margin: 15px 0;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .game-message.correct {
+            color: #5c8a63;
+        }
+
+        .game-message.wrong {
+            color: #b45c55;
+        }
+
+        .game-button {
+            border: none;
+            background: #b8865c;
+            color: white;
+            border-radius: 12px;
+            padding: 11px 18px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .game-button:hover {
+            transform: translateY(-2px);
+            opacity: 0.92;
+        }
+
+        .game-button.secondary {
+            background: #eee2d7;
+            color: #705b4d;
+        }
+
+
+        /* =========================================================
+           STROKE GAME
+        ========================================================= */
+
+        .stroke-game {
+            text-align: center;
+        }
+
+        .stroke-target {
+            font-size: 70px;
+            color: #5b4b43;
+            margin: 10px 0 4px;
+        }
+
+        .stroke-instruction {
+            color: #806f66;
+            margin-bottom: 15px;
+        }
+
+        .stroke-progress {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin: 12px 0 20px;
+        }
+
+        .stroke-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #eaded4;
+        }
+
+        .stroke-dot.active {
+            background: #b8865c;
+        }
+
+        .canvas-wrap {
+            width: min(330px, 100%);
+            margin: 0 auto 18px;
+            position: relative;
+        }
+
+        #strokeCanvas {
+            width: 100%;
+            aspect-ratio: 1;
+            background:
+                linear-gradient(#f1e8e0 1px, transparent 1px),
+                linear-gradient(90deg, #f1e8e0 1px, transparent 1px),
+                #fffdfb;
+            background-size: 25% 25%;
+            border: 2px solid #eadbce;
+            border-radius: 20px;
+            touch-action: none;
+            cursor: crosshair;
+        }
+
+        .stroke-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .stroke-hint {
+            color: #9a8578;
+            font-size: 13px;
+            margin-top: 12px;
+        }
+
+
+        /* =========================================================
+           SOUND GAME
+        ========================================================= */
+
+        .sound-game {
+            text-align: center;
+        }
+
+        .sound-card {
+            background: #fdf8f2;
+            border-radius: 20px;
+            padding: 25px 20px;
+            margin-top: 15px;
+        }
+
+        .listen-button {
+            width: 85px;
+            height: 85px;
+            border-radius: 50%;
+            border: none;
+            background: #b8865c;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(184,134,92,0.25);
+            transition: 0.2s;
+        }
+
+        .listen-button:hover {
+            transform: scale(1.05);
+        }
+
+        .sound-question {
+            color: #77665d;
+            margin: 15px 0 20px;
+        }
+
+        .sound-options {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .sound-option {
+            border: 2px solid #eaded4;
+            background: white;
+            color: #5d4f47;
+            border-radius: 18px;
+            padding: 17px 10px;
+            cursor: pointer;
+            font-size: 42px;
+            transition: 0.2s;
+        }
+
+        .sound-option:hover {
+            border-color: #b8865c;
+            transform: translateY(-2px);
+        }
+
+        .sound-option.correct-answer {
+            border-color: #78a47d;
+            background: #eef7ef;
+        }
+
+        .sound-option.wrong-answer {
+            border-color: #c87970;
+            background: #fff0ee;
+        }
+
+        .sound-next {
+            margin-top: 20px;
+        }
+
+
+        /* =========================================================
+           COMBINATION REVIEW
+        ========================================================= */
+
+        .combination-box {
+            background: #fdf8f2;
+            border-radius: 20px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .combination-list {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .combination {
+            background: white;
+            border: 1px solid #eaded4;
+            border-radius: 14px;
+            padding: 12px 18px;
+            font-size: 24px;
+            color: #594a42;
+        }
+
+
+        /* =========================================================
+           RESPONSIVE
+        ========================================================= */
+
+        @media (max-width: 650px) {
+
+            .section-header h1 {
+                font-size: 29px;
+            }
+
+            .zhuyin-review {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .sound-options {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .video-card,
+            .lesson-card {
+                padding: 17px;
+            }
+
+            .stroke-target {
+                font-size: 60px;
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+
+<div class="app-container">
+
+    <!-- SIDEBAR -->
+    <div id="sidebar-container"></div>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+        <div class="courses-section">
+
+            <!-- =====================================================
+                 HEADER
+            ====================================================== -->
+
+            <div class="section-header">
+                <h1>Learn Zhuyin: ㄌ ㄏ ㄕ ㄚ</h1>
+                <p>Learn the symbols, practice the strokes, and listen to the sounds.</p>
+            </div>
+
+
+            <!-- =====================================================
+                 VIDEO
+            ====================================================== -->
+
+            <div class="video-grid">
+
+                <article class="card video-card">
+
+                    <div class="video-wrapper">
+
+                        <iframe
+                            src="https://www.youtube.com/embed/YsZdgzIji_g"
+                            title="Learn Zhuyin ㄌ ㄏ ㄕ ㄚ"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen>
+                        </iframe>
+
+                    </div>
+
+
+                    <div class="description-text">
+
+                        <strong>🎬 What will you learn?</strong>
+
+                        <p>
+                            In this lesson, you'll learn four Zhuyin symbols:
+                            <b>ㄌ, ㄏ, ㄕ, and ㄚ</b>.
+                        </p>
+
+                        <p>
+                            You'll also practice connecting the symbols together
+                            to build simple sounds.
+                        </p>
+
+                        <p>
+                            Watch the video first, then try the games below
+                            to review what you learned.
+                        </p>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+
+            <!-- =====================================================
+                 QUICK REVIEW
+            ====================================================== -->
+
+            <div class="lesson-card game-section">
+
+                <h2 class="lesson-title">📖 Quick Review</h2>
+
+                <p class="lesson-subtitle">
+                    Let's remember the four Zhuyin symbols from the video.
+                </p>
+
+
+                <div class="zhuyin-review">
+
+                    <div class="zhuyin-symbol">
+                        <div class="zhuyin-big">ㄌ</div>
+                        <div class="zhuyin-label">Zhuyin</div>
+                    </div>
+
+                    <div class="zhuyin-symbol">
+                        <div class="zhuyin-big">ㄏ</div>
+                        <div class="zhuyin-label">Zhuyin</div>
+                    </div>
+
+                    <div class="zhuyin-symbol">
+                        <div class="zhuyin-big">ㄕ</div>
+                        <div class="zhuyin-label">Zhuyin</div>
+                    </div>
+
+                    <div class="zhuyin-symbol">
+                        <div class="zhuyin-big">ㄚ</div>
+                        <div class="zhuyin-label">Zhuyin</div>
+                    </div>
+
+                </div>
+
+
+                <div class="combination-box">
+
+                    <h3 style="text-align:center;color:#8f6645;">
+                        🔗 Practice Combining
+                    </h3>
+
+                    <div class="combination-list">
+
+                        <div class="combination">ㄌ + ㄚ</div>
+
+                        <div class="combination">ㄏ + ㄚ</div>
+
+                        <div class="combination">ㄕ + ㄚ</div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =====================================================
+                 GAME 1 — STROKE
+            ====================================================== -->
+
+            <div class="lesson-card game-section stroke-game">
+
+                <div class="game-header">
+
+                    <div>
+                        <h2 class="lesson-title">
+                            ✍️ Zhuyin Stroke Challenge
+                        </h2>
+
+                        <p class="lesson-subtitle">
+                            Follow the guide and practice writing the Zhuyin symbol.
+                        </p>
+                    </div>
+
+                    <div class="score-box">
+                        Score: <span id="strokeScore">0</span>
+                    </div>
+
+                </div>
+
+
+                <div class="stroke-target" id="strokeTarget">
+                    ㄌ
+                </div>
+
+
+                <div class="stroke-instruction" id="strokeInstruction">
+                    Trace the highlighted stroke.
+                </div>
+
+
+                <div class="stroke-progress" id="strokeProgress"></div>
+
+
+                <div class="canvas-wrap">
+
+                    <canvas id="strokeCanvas"></canvas>
+
+                </div>
+
+
+                <div class="game-message" id="strokeMessage"></div>
+
+
+                <div class="stroke-buttons">
+
+                    <button
+                        class="game-button secondary"
+                        id="strokeClear">
+                        Clear
+                    </button>
+
+                    <button
+                        class="game-button"
+                        id="strokeCheck">
+                        Check
+                    </button>
+
+                    <button
+                        class="game-button secondary"
+                        id="strokeNext"
+                        style="display:none;">
+                        Next →
+                    </button>
+
+                </div>
+
+
+                <div class="stroke-hint">
+                    💡 Tip: Start near the highlighted dot and follow the line.
+                </div>
+
+            </div>
+
+
+
+            <!-- =====================================================
+                 GAME 2 — SOUND MATCH
+            ====================================================== -->
+
+            <div class="lesson-card game-section sound-game">
+
+                <div class="game-header">
+
+                    <div style="text-align:left;">
+                        <h2 class="lesson-title">
+                            🔊 Match the Sound
+                        </h2>
+
+                        <p class="lesson-subtitle">
+                            Listen carefully and choose the correct Zhuyin symbol.
+                        </p>
+                    </div>
+
+                    <div class="score-box">
+                        Score: <span id="soundScore">0</span>
+                    </div>
+
+                </div>
+
+
+                <div class="sound-card">
+
+                    <button
+                        class="listen-button"
+                        id="listenButton"
+                        aria-label="Play sound">
+                        <i class="fa-solid fa-volume-high"></i>
+                    </button>
+
+
+                    <div class="sound-question">
+                        Listen to the sound, then choose the correct symbol.
+                    </div>
+
+
+                    <div class="sound-options">
+
+                        <button
+                            class="sound-option"
+                            data-symbol="ㄌ">
+                            ㄌ
+                        </button>
+
+                        <button
+                            class="sound-option"
+                            data-symbol="ㄏ">
+                            ㄏ
+                        </button>
+
+                        <button
+                            class="sound-option"
+                            data-symbol="ㄕ">
+                            ㄕ
+                        </button>
+
+                        <button
+                            class="sound-option"
+                            data-symbol="ㄚ">
+                            ㄚ
+                        </button>
+
+                    </div>
+
+
+                    <div
+                        class="game-message"
+                        id="soundMessage">
+                    </div>
+
+
+                    <button
+                        class="game-button sound-next"
+                        id="soundNext"
+                        style="display:none;">
+                        Next Sound →
+                    </button>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </main>
+
+</div>
+
+
+
+<script src="../script.js"></script>
+
+
+<script>
+/* ===============================================================
+   ZHUYIN STROKE GAME
+   ===============================================================
+
+   This is a lightweight tracing game.
+
+   Each character has simple guide strokes.
+   The player draws on the canvas and then presses Check.
+
+   The system checks whether the player's drawing reaches
+   the expected stroke area.
+
+================================================================ */
+
+
+/* ---------------------------------------------------------------
+   Stroke data
+---------------------------------------------------------------- */
+
+const strokeData = {
+
+    "ㄌ": [
+        {
+            points: [
+                [0.35, 0.25],
+                [0.35, 0.72],
+                [0.70, 0.72]
+            ]
+        },
+        {
+            points: [
+                [0.35, 0.25],
+                [0.68, 0.25]
+            ]
+        }
+    ],
+
+    "ㄏ": [
+        {
+            points: [
+                [0.30, 0.25],
+                [0.30, 0.72]
+            ]
+        },
+        {
+            points: [
+                [0.30, 0.25],
+                [0.68, 0.25],
+                [0.68, 0.72]
+            ]
+        }
+    ],
+
+    "ㄕ": [
+        {
+            points: [
+                [0.30, 0.25],
+                [0.30, 0.72]
+            ]
+        },
+        {
+            points: [
+                [0.30, 0.25],
+                [0.68, 0.25],
+                [0.68, 0.72]
+            ]
+        },
+        {
+            points: [
+                [0.42, 0.48],
+                [0.68, 0.48]
+            ]
+        }
+    ],
+
+    "ㄚ": [
+        {
+            points: [
+                [0.30, 0.28],
+                [0.48, 0.48],
+                [0.68, 0.28]
+            ]
+        },
+        {
+            points: [
+                [0.48, 0.48],
+                [0.48, 0.75]
+            ]
+        }
+    ]
+
+};
+
+
+/* ---------------------------------------------------------------
+   Game variables
+---------------------------------------------------------------- */
+
+const strokeCharacters = ["ㄌ", "ㄏ", "ㄕ", "ㄚ"];
+
+let currentStrokeCharacter = "ㄌ";
+let currentStrokeIndex = 0;
+let strokeScore = 0;
+let userDrawing = [];
+
+const canvas = document.getElementById("strokeCanvas");
+const ctx = canvas.getContext("2d");
+
+const targetElement = document.getElementById("strokeTarget");
+const instructionElement = document.getElementById("strokeInstruction");
+const progressElement = document.getElementById("strokeProgress");
+const messageElement = document.getElementById("strokeMessage");
+
+const clearButton = document.getElementById("strokeClear");
+const checkButton = document.getElementById("strokeCheck");
+const nextButton = document.getElementById("strokeNext");
+
+const scoreElement = document.getElementById("strokeScore");
+
+
+/* ---------------------------------------------------------------
+   Canvas setup
+---------------------------------------------------------------- */
+
+function resizeCanvas() {
+
+    const rect = canvas.getBoundingClientRect();
+
+    const dpr = window.devicePixelRatio || 1;
+
+    canvas.width = rect.width * dpr;
+    canvas.height = rect.height * dpr;
+
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    drawGuide();
+}
+
+
+window.addEventListener("resize", resizeCanvas);
+
+
+/* ---------------------------------------------------------------
+   Draw guide
+---------------------------------------------------------------- */
+
+function drawGuide() {
+
+    const rect = canvas.getBoundingClientRect();
+
+    ctx.clearRect(0, 0, rect.width, rect.height);
+
+    const strokes = strokeData[currentStrokeCharacter];
+
+    strokes.forEach((stroke, index) => {
+
+        ctx.beginPath();
+
+        stroke.points.forEach((point, i) => {
+
+            const x = point[0] * rect.width;
+            const y = point[1] * rect.height;
+
+            if (i === 0) {
+                ctx.moveTo(x, y);
+            } else {
+                ctx.lineTo(x, y);
+            }
+
+        });
+
+        ctx.lineWidth = index === currentStrokeIndex ? 10 : 6;
+
+        ctx.lineCap = "round";
+        ctx.lineJoin = "round";
+
+        ctx.strokeStyle =
+            index === currentStrokeIndex
+                ? "#b8865c"
+                : "#eaded4";
+
+        ctx.stroke();
+
+
+        /* Start point */
+
+        if (index === currentStrokeIndex) {
+
+            const first = stroke.points[0];
+
+            const x = first[0] * rect.width;
+            const y = first[1] * rect.height;
+
+            ctx.beginPath();
+
+            ctx.arc(x, y, 9, 0, Math.PI * 2);
+
+            ctx.fillStyle = "#b8865c";
+
+            ctx.fill();
+
+        }
+
+    });
+
+
+    /* User drawing */
+
+    if (userDrawing.length > 1) {
+
+        ctx.beginPath();
+
+        userDrawing.forEach((point, index) => {
+
+            if (index === 0) {
+                ctx.moveTo(point.x, point.y);
+            } else {
+                ctx.lineTo(point.x, point.y);
+            }
+
+        });
+
+        ctx.lineWidth = 7;
+        ctx.lineCap = "round";
+        ctx.lineJoin = "round";
+        ctx.strokeStyle = "#6e5c52";
+
+        ctx.stroke();
+
+    }
+
+}
+
+
+/* ---------------------------------------------------------------
+   Pointer drawing
+---------------------------------------------------------------- */
+
+let drawing = false;
+
+canvas.addEventListener("pointerdown", function(e) {
+
+    drawing = true;
+
+    canvas.setPointerCapture(e.pointerId);
+
+    const rect = canvas.getBoundingClientRect();
+
+    userDrawing = [
+        {
+            x: e.clientX - rect.left,
+            y: e.clientY - rect.top
+        }
+    ];
+
+    drawGuide();
+
+});
+
+
+canvas.addEventListener("pointermove", function(e) {
+
+    if (!drawing) return;
+
+    const rect = canvas.getBoundingClientRect();
+
+    userDrawing.push({
+        x: e.clientX - rect.left,
+        y: e.clientY - rect.top
+    });
+
+    drawGuide();
+
+});
+
+
+canvas.addEventListener("pointerup", function() {
+
+    drawing = false;
+
+});
+
+
+canvas.addEventListener("pointercancel", function() {
+
+    drawing = false;
+
+});
+
+
+/* ---------------------------------------------------------------
+   Distance helper
+---------------------------------------------------------------- */
+
+function distance(a, b) {
+
+    return Math.sqrt(
+        Math.pow(a.x - b.x, 2) +
+        Math.pow(a.y - b.y, 2)
+    );
+
+}
+
+
+/* ---------------------------------------------------------------
+   Check drawing
+---------------------------------------------------------------- */
+
+function checkStroke() {
+
+    if (userDrawing.length < 5) {
+
+        messageElement.textContent =
+            "✍️ Draw the stroke first!";
+
+        messageElement.className =
+            "game-message wrong";
+
+        return;
+
+    }
+
+
+    const rect = canvas.getBoundingClientRect();
+
+    const expected =
+        strokeData[currentStrokeCharacter][currentStrokeIndex];
+
+
+    const start = {
+        x: expected.points[0][0] * rect.width,
+        y: expected.points[0][1] * rect.height
+    };
+
+
+    const endPoint =
+        expected.points[expected.points.length - 1];
+
+
+    const end = {
+        x: endPoint[0] * rect.width,
+        y: endPoint[1] * rect.height
+    };
+
+
+    const firstPoint = userDrawing[0];
+
+    const lastPoint =
+        userDrawing[userDrawing.length - 1];
+
+
+    const startDistance =
+        distance(firstPoint, start);
+
+    const endDistance =
+        distance(lastPoint, end);
+
+
+    const tolerance =
+        Math.max(rect.width * 0.16, 45);
+
+
+    if (
+        startDistance <= tolerance &&
+        endDistance <= tolerance
+    ) {
+
+        strokeScore++;
+
+        scoreElement.textContent = strokeScore;
+
+        messageElement.textContent =
+            "✅ Great job!";
+
+        messageElement.className =
+            "game-message correct";
+
+
+        currentStrokeIndex++;
+
+
+        userDrawing = [];
+
+
+        if (
+            currentStrokeIndex >=
+            strokeData[currentStrokeCharacter].length
+        ) {
+
+            instructionElement.textContent =
+                "🎉 You completed this symbol!";
+
+            nextButton.style.display = "inline-block";
+
+            checkButton.style.display = "none";
+
+        } else {
+
+            instructionElement.textContent =
+                "Now trace the next stroke.";
+
+        }
+
+
+        updateProgress();
+
+        drawGuide();
+
+    } else {
+
+        messageElement.textContent =
+            "🔄 Not quite. Try following the highlighted line.";
+
+        messageElement.className =
+            "game-message wrong";
+
+    }
+
+}
+
+
+/* ---------------------------------------------------------------
+   Clear drawing
+---------------------------------------------------------------- */
+
+function clearStroke() {
+
+    userDrawing = [];
+
+    messageElement.textContent = "";
+
+    drawGuide();
+
+}
+
+
+clearButton.addEventListener(
+    "click",
+    clearStroke
+);
+
+
+checkButton.addEventListener(
+    "click",
+    checkStroke
+);
+
+
+/* ---------------------------------------------------------------
+   Progress dots
+---------------------------------------------------------------- */
+
+function updateProgress() {
+
+    progressElement.innerHTML = "";
+
+    const total =
+        strokeData[currentStrokeCharacter].length;
+
+    for (let i = 0; i < total; i++) {
+
+        const dot =
+            document.createElement("div");
+
+        dot.className = "stroke-dot";
+
+        if (i === currentStrokeIndex) {
+            dot.classList.add("active");
+        }
+
+        if (i < currentStrokeIndex) {
+            dot.style.background = "#78a47d";
+        }
+
+        progressElement.appendChild(dot);
+
+    }
+
+}
+
+
+/* ---------------------------------------------------------------
+   Next character
+---------------------------------------------------------------- */
+
+function nextStrokeCharacter() {
+
+    const currentIndex =
+        strokeCharacters.indexOf(currentStrokeCharacter);
+
+    const nextIndex =
+        (currentIndex + 1) % strokeCharacters.length;
+
+    currentStrokeCharacter =
+        strokeCharacters[nextIndex];
+
+    currentStrokeIndex = 0;
+
+    userDrawing = [];
+
+    targetElement.textContent =
+        currentStrokeCharacter;
+
+    instructionElement.textContent =
+        "Trace the highlighted stroke.";
+
+    messageElement.textContent = "";
+
+    messageElement.className =
+        "game-message";
+
+    nextButton.style.display = "none";
+
+    checkButton.style.display = "inline-block";
+
+    updateProgress();
+
+    drawGuide();
+
+}
+
+
+nextButton.addEventListener(
+    "click",
+    nextStrokeCharacter
+);
+
+
+/* ---------------------------------------------------------------
+   Initialize stroke game
+---------------------------------------------------------------- */
+
+updateProgress();
+
+setTimeout(
+    resizeCanvas,
+    100
+);
+
+
+
+/* ===============================================================
+   GAME 2 — MATCH THE SOUND
+   ===============================================================
+
+   Uses the browser's Speech Synthesis API.
+
+   This means no MP3 files are required.
+================================================================ */
+
+
+const soundCharacters = ["ㄌ", "ㄏ", "ㄕ", "ㄚ"];
+
+const soundPronunciation = {
+
+    "ㄌ": "ㄌ",
+
+    "ㄏ": "ㄏ",
+
+    "ㄕ": "ㄕ",
+
+    "ㄚ": "ㄚ"
+
+};
+
+
+let currentSound = "ㄌ";
+let soundScore = 0;
+
+const soundScoreElement =
+    document.getElementById("soundScore");
+
+const listenButton =
+    document.getElementById("listenButton");
+
+const soundMessage =
+    document.getElementById("soundMessage");
+
+const soundNext =
+    document.getElementById("soundNext");
+
+const soundOptions =
+    document.querySelectorAll(".sound-option");
+
+
+/* ---------------------------------------------------------------
+   Shuffle
+---------------------------------------------------------------- */
+
+function shuffle(array) {
+
+    return array
+        .map(value => ({
+            value,
+            sort: Math.random()
+        }))
+        .sort((a, b) => a.sort - b.sort)
+        .map(({ value }) => value);
+
+}
+
+
+/* ---------------------------------------------------------------
+   Speak Zhuyin
+---------------------------------------------------------------- */
+
+function speakCurrentSound() {
+
+    if (!("speechSynthesis" in window)) {
+
+        soundMessage.textContent =
+            "Your browser does not support speech playback.";
+
+        soundMessage.className =
+            "game-message wrong";
+
+        return;
+
+    }
+
+
+    window.speechSynthesis.cancel();
+
+
+    const utterance =
+        new SpeechSynthesisUtterance(
+            soundPronunciation[currentSound]
+        );
+
+
+    /*
+       zh-TW asks the browser to use a Taiwan Mandarin
+       voice when one is available.
+    */
+
+    utterance.lang = "zh-TW";
+
+    utterance.rate = 0.75;
+
+    utterance.pitch = 1;
+
+
+    window.speechSynthesis.speak(
+        utterance
+    );
+
+}
+
+
+listenButton.addEventListener(
+    "click",
+    speakCurrentSound
+);
+
+
+/* ---------------------------------------------------------------
+   New sound
+---------------------------------------------------------------- */
+
+function newSoundQuestion() {
+
+    currentSound =
+        soundCharacters[
+            Math.floor(
+                Math.random() *
+                soundCharacters.length
+            )
+        ];
+
+
+    soundMessage.textContent = "";
+
+    soundMessage.className =
+        "game-message";
+
+    soundNext.style.display =
+        "none";
+
+
+    soundOptions.forEach(button => {
+
+        button.classList.remove(
+            "correct-answer",
+            "wrong-answer"
+        );
+
+        button.disabled = false;
+
+    });
+
+
+    /*
+       Automatically play the new sound
+       after a short delay.
+    */
+
+    setTimeout(
+        speakCurrentSound,
+        350
+    );
+
+}
+
+
+/* ---------------------------------------------------------------
+   Answer
+---------------------------------------------------------------- */
+
+soundOptions.forEach(button => {
+
+    button.addEventListener(
+        "click",
+        function() {
+
+            const selected =
+                this.dataset.symbol;
+
+
+            soundOptions.forEach(
+                option => {
+                    option.disabled = true;
+                }
+            );
+
+
+            if (selected === currentSound) {
+
+                soundScore++;
+
+                soundScoreElement.textContent =
+                    soundScore;
+
+                this.classList.add(
+                    "correct-answer"
+                );
+
+                soundMessage.textContent =
+                    "🎉 Correct! Great listening!";
+
+                soundMessage.className =
+                    "game-message correct";
+
+
+                soundNext.style.display =
+                    "inline-block";
+
+            } else {
+
+                this.classList.add(
+                    "wrong-answer"
+                );
+
+                soundMessage.textContent =
+                    "❌ Not quite. Listen again!";
+
+                soundMessage.className =
+                    "game-message wrong";
+
+
+                soundOptions.forEach(
+                    option => {
+
+                        if (
+                            option.dataset.symbol ===
+                            currentSound
+                        ) {
+
+                            option.classList.add(
+                                "correct-answer"
+                            );
+
+                        }
+
+                    }
+                );
+
+
+                soundNext.style.display =
+                    "inline-block";
+
+            }
+
+        }
+    );
+
+});
+
+
+/* ---------------------------------------------------------------
+   Next sound
+---------------------------------------------------------------- */
+
+soundNext.addEventListener(
+    "click",
+    newSoundQuestion
+);
+
+
+/* ---------------------------------------------------------------
+   Start sound game
+---------------------------------------------------------------- */
+
+newSoundQuestion();
+
+</script>
+
+</body>
+</html>
