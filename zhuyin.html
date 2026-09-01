@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Boba Break Study - Zhuyin Course</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        .section-header h1 {
+            font-size: 36px;
+            color: #b8865c; /* Warna cokelat lembut ala boba */
+            font-weight: 700; /* Ketebalan huruf */
+            margin-bottom: 8px;
+        }
+
+        .section-header p {
+            font-size: 17px;
+            color: #6e5c52; /* Warna teks deskripsi yang lembut */
+            margin-bottom: 30px;
+        }
+
+    /* Styling Search Bar ala Gambar */
+    .search-bar {
+        position: relative;
+        width: 100%;
+        margin-bottom: 24px;
+    }
+
+    .search-bar i {
+        position: absolute;
+        left: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #b5a497; /* Warna ikon kaca pembesar yang lembut */
+        font-size: 15px;
+    }
+
+    .search-bar input {
+        width: 100%;
+        padding: 14px 20px 14px 50px; /* Padding kiri lebih besar agar teks tidak menabrak ikon */
+        background-color: #ffffff;
+        border: 1px solid #e0d4c8; /* Garis tepi warna cokelat muda */
+        border-radius: 50px; /* Membuat sudutnya melengkung total / bentuk kapsul */
+        outline: none;
+        font-size: 14px;
+        color: #4a3b32;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.01);
+        transition: border-color 0.2s;
+    }
+
+    .search-bar input::placeholder {
+        color: #b5a497; /* Warna tulisan "Search" */
+    }
+
+    .search-bar input:focus {
+        border-color: #b8865c; /* Warna garis tepi saat diklik */
+    }
+       .course-grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    margin-top: 20px;
+}
+
+.card{
+    background: #fff;
+    border-radius: 20px;
+    padding: 24px;
+    box-shadow: 0 8px 20px rgba(0,0,0,.08);
+    display: flex;
+    flex-direction: column;
+}
+
+.card-img-placeholder{
+    width:100%;
+    height:180px;
+    background:#f8efe7;
+    border-radius:16px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+    margin-bottom:18px;
+}
+
+/* Untuk ikon */
+.card-img-placeholder i{
+    font-size:60px;
+    color:#b8865c;
+}
+
+/* Untuk gambar */
+.card-img-placeholder img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+} 
+        .card h3{
+    font-size: 24px;       /* Lebih besar */
+    color: #b8865c;        /* Warna boba */
+    font-weight: 700;
+    margin-top: 8px;       /* Jarak dari gambar */
+    margin-bottom: 12px;   /* Jarak ke deskripsi */
+    line-height: 1.3;
+}
+/* Pagination */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin: 35px 0;
+    flex-wrap: wrap;
+}
+
+.pagination button {
+    border: 1px solid #e0d4c8;
+    background: #fff;
+    color: #6e5c52;
+    padding: 8px 13px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+.pagination button:hover {
+    background: #f8efe7;
+}
+
+.pagination button.active {
+    background: #b8865c;
+    color: white;
+    border-color: #b8865c;
+}
+
+.pagination button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="app-container">
+
+    <div id="sidebar-container"></div>
+
+
+    <main class="main-content">
+
+        <div class="courses-section">
+
+            <div class="section-header">
+
+                <h1>
+                    Zhuyin Courses
+                </h1>
+
+                <p>
+                    Master Taiwan's phonetic symbol system step by step.
+                </p>
+
+            </div>
+
+
+            <div class="search-bar">
+
+    <i class="fa-solid fa-magnifying-glass"></i>
+
+    <input
+        type="text"
+        id="searchInput"
+        placeholder="Search Zhuyin courses..."
+    >
+
+</div>
+
+
+
+            <section class="course-grid">
+
+<article class="card">
+    <div class="card-img-placeholder">
+        <img src="https://castleofcostamesa.com/wp-content/uploads/2011/07/mdnkidsdotcom.jpg" alt="Introduction to Zhuyin">
+    </div>
+
+    <h3>Introduction to Zhuyin (Bopomofo)</h3>
+
+    <p>
+        Discover Zhuyin Fuhao (commonly known as Bopomofo), Taiwan's essential phonetic alphabet system. 
+        Learn how these unique symbols represent Mandarin sounds and why it's the ultimate tool for perfecting your Taiwan Mandarin pronunciation.
+    </p>
+
+    <button class="btn-resume" onclick="location.href='zhuyin/introduction.html'">
+        Start Learning
+    </button>
+</article>
+
+</section>
+
+
+<div class="pagination" id="pagination"></div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
+    <script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const searchInput = document.getElementById("searchInput");
+    const cards = Array.from(
+        document.querySelectorAll(".course-grid .card")
+    );
+    const pagination = document.getElementById("pagination");
+
+    const cardsPerPage = 12;
+
+    let currentPage = 1;
+    let filteredCards = [...cards];
+
+
+    // ==============================
+    // TAMPILKAN CARD
+    // ==============================
+
+    function showCards() {
+
+        const totalPages = Math.ceil(
+            filteredCards.length / cardsPerPage
+        );
+
+        // Kalau halaman sekarang lebih besar dari jumlah halaman
+        if (currentPage > totalPages) {
+            currentPage = Math.max(totalPages, 1);
+        }
+
+        const start = (currentPage - 1) * cardsPerPage;
+        const end = start + cardsPerPage;
+
+        cards.forEach(card => {
+            card.style.display = "none";
+        });
+
+        filteredCards.forEach((card, index) => {
+
+            if (index >= start && index < end) {
+                card.style.display = "flex";
+            }
+
+        });
+
+        createPagination(totalPages);
+    }
+
+
+    // ==============================
+    // PAGINATION
+    // ==============================
+
+    function createPagination(totalPages) {
+
+        pagination.innerHTML = "";
+
+        // Tidak perlu pagination kalau hanya 1 halaman
+        if (totalPages <= 1) {
+            return;
+        }
+
+
+        // PREVIOUS
+        const previousButton = document.createElement("button");
+
+        previousButton.textContent = "←";
+
+        previousButton.disabled = currentPage === 1;
+
+        previousButton.addEventListener("click", function () {
+
+            if (currentPage > 1) {
+                currentPage--;
+                showCards();
+
+                window.scrollTo({
+                    top: 0,
+                    behavior: "smooth"
+                });
+            }
+
+        });
+
+        pagination.appendChild(previousButton);
+
+
+        // NOMOR HALAMAN
+        for (let i = 1; i <= totalPages; i++) {
+
+            const button = document.createElement("button");
+
+            button.textContent = i;
+
+            if (i === currentPage) {
+                button.classList.add("active");
+            }
+
+            button.addEventListener("click", function () {
+
+                currentPage = i;
+                showCards();
+
+                window.scrollTo({
+                    top: 0,
+                    behavior: "smooth"
+                });
+
+            });
+
+            pagination.appendChild(button);
+        }
+
+
+        // NEXT
+        const nextButton = document.createElement("button");
+
+        nextButton.textContent = "→";
+
+        nextButton.disabled = currentPage === totalPages;
+
+        nextButton.addEventListener("click", function () {
+
+            if (currentPage < totalPages) {
+                currentPage++;
+                showCards();
+
+                window.scrollTo({
+                    top: 0,
+                    behavior: "smooth"
+                });
+            }
+
+        });
+
+        pagination.appendChild(nextButton);
+    }
+
+
+    // ==============================
+    // SEARCH
+    // ==============================
+
+    searchInput.addEventListener("input", function () {
+
+        const searchTerm = this.value
+            .toLowerCase()
+            .trim();
+
+
+        filteredCards = cards.filter(card => {
+
+            const title = card
+                .querySelector("h3")
+                .textContent
+                .toLowerCase();
+
+            const description = card
+                .querySelector("p")
+                .textContent
+                .toLowerCase();
+
+
+            return (
+                title.includes(searchTerm) ||
+                description.includes(searchTerm)
+            );
+
+        });
+
+
+        // Kembali ke halaman pertama
+        currentPage = 1;
+
+        showCards();
+    });
+
+
+    // ==============================
+    // LOAD AWAL
+    // ==============================
+
+    showCards();
+
+});
+</script>
+<script src="script.js"></script>
+</body>
+</html>
