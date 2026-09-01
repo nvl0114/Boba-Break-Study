@@ -1,0 +1,1220 @@
+<!DOCTYPE html><html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Learn Zhuyin Tone Symbols - Boba Break Study</title>
+
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+    /* =========================================================
+       PAGE
+    ========================================================= */
+
+    .section-header h1 {
+        font-size: 36px;
+        color: #b8865c;
+        font-weight: 700;
+        margin-bottom: 8px;
+    }
+
+    .section-header p {
+        font-size: 17px;
+        color: #6e5c52;
+        margin-bottom: 30px;
+    }
+
+    .video-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 30px;
+        margin-top: 20px;
+    }
+
+    .video-card,
+    .lesson-card {
+        background: #ffffff;
+        border-radius: 24px;
+        box-shadow: 0 10px 30px rgba(184, 134, 92, 0.15);
+        border: 1px solid #f2e9e1;
+        padding: 24px;
+    }
+
+    .video-wrapper {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        overflow: hidden;
+        background: #2a2522;
+        border-radius: 16px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .video-wrapper iframe {
+        width: 100%;
+        height: 100%;
+        border: 0;
+    }
+
+    .description-text {
+        color: #5d4f47;
+        line-height: 1.7;
+        font-size: 16px;
+        background: #fdfaf7;
+        padding: 16px;
+        border-left: 4px solid #b8865c;
+        border-radius: 0 8px 8px 0;
+    }
+
+    .description-text strong {
+        display: block;
+        font-size: 18px;
+        color: #b8865c;
+        margin-bottom: 8px;
+    }
+
+    .description-text p {
+        margin-bottom: 12px;
+    }
+
+    .description-text p:last-child {
+        margin-bottom: 0;
+    }
+
+    /* =========================================================
+       SECTION TITLES
+    ========================================================= */
+
+    .lesson-title {
+        color: #8f6645;
+        font-size: 27px;
+        margin: 0 0 8px;
+    }
+
+    .lesson-subtitle {
+        color: #806f66;
+        margin: 0 0 22px;
+        line-height: 1.6;
+    }
+
+    /* =========================================================
+       TONE CARDS
+    ========================================================= */
+
+    .tone-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 15px;
+        margin-top: 20px;
+    }
+
+    .tone-card {
+        background: #fdf8f2;
+        border: 1px solid #f0dfd0;
+        border-radius: 20px;
+        padding: 22px 12px;
+        text-align: center;
+        transition: 0.2s;
+    }
+
+    .tone-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 18px rgba(184,134,92,0.12);
+    }
+
+    .tone-number {
+        font-size: 14px;
+        font-weight: 700;
+        color: #b8865c;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .tone-symbol {
+        font-size: 50px;
+        color: #594a42;
+        line-height: 1.2;
+        margin: 8px 0;
+    }
+
+    .tone-name {
+        font-size: 16px;
+        font-weight: 700;
+        color: #8f6645;
+    }
+
+    .tone-example {
+        font-size: 22px;
+        color: #594a42;
+        margin-top: 10px;
+    }
+
+    .tone-description {
+        font-size: 13px;
+        color: #8c7668;
+        margin-top: 7px;
+        line-height: 1.5;
+    }
+
+    /* =========================================================
+       NOTE BOX
+    ========================================================= */
+
+    .note-box {
+        background: #fdfaf7;
+        border-left: 4px solid #b8865c;
+        border-radius: 0 12px 12px 0;
+        padding: 16px 18px;
+        margin-top: 20px;
+        color: #5d4f47;
+        line-height: 1.7;
+    }
+
+    .note-box strong {
+        color: #8f6645;
+    }
+
+    /* =========================================================
+       EXAMPLES
+    ========================================================= */
+
+    .example-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+        margin-top: 20px;
+    }
+
+    .example-card {
+        background: #fdf8f2;
+        border: 1px solid #eaded4;
+        border-radius: 18px;
+        padding: 18px;
+    }
+
+    .example-hanzi {
+        font-size: 31px;
+        color: #594a42;
+        font-weight: 700;
+    }
+
+    .example-pinyin {
+        font-size: 16px;
+        color: #b8865c;
+        margin-top: 5px;
+    }
+
+    .example-meaning {
+        font-size: 14px;
+        color: #806f66;
+        margin-top: 5px;
+    }
+
+    /* =========================================================
+       GAME SHARED
+    ========================================================= */
+
+    .game-section {
+        margin-top: 30px;
+    }
+
+    .game-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+
+    .score-box {
+        background: #f8eee5;
+        color: #8f6645;
+        padding: 9px 15px;
+        border-radius: 999px;
+        font-weight: 700;
+        font-size: 14px;
+    }
+
+    .game-message {
+        min-height: 28px;
+        margin: 15px 0;
+        font-weight: 700;
+        text-align: center;
+    }
+
+    .game-message.correct {
+        color: #5c8a63;
+    }
+
+    .game-message.wrong {
+        color: #b45c55;
+    }
+
+    .game-button {
+        border: none;
+        background: #b8865c;
+        color: white;
+        border-radius: 12px;
+        padding: 11px 18px;
+        font-size: 15px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+    .game-button:hover {
+        transform: translateY(-2px);
+        opacity: 0.92;
+    }
+
+    /* =========================================================
+       TONE SOUND GAME
+    ========================================================= */
+
+    .sound-game {
+        text-align: center;
+    }
+
+    .sound-card {
+        background: #fdf8f2;
+        border-radius: 20px;
+        padding: 28px 20px;
+        margin-top: 15px;
+    }
+
+    .listen-button {
+        width: 85px;
+        height: 85px;
+        border-radius: 50%;
+        border: none;
+        background: #b8865c;
+        color: white;
+        font-size: 30px;
+        cursor: pointer;
+        box-shadow: 0 8px 20px rgba(184,134,92,0.25);
+        transition: 0.2s;
+    }
+
+    .listen-button:hover {
+        transform: scale(1.05);
+    }
+
+    .sound-word {
+        font-size: 42px;
+        font-weight: 700;
+        color: #594a42;
+        margin: 20px 0 5px;
+    }
+
+    .sound-hint {
+        color: #8c7668;
+        font-size: 14px;
+        margin-bottom: 20px;
+    }
+
+    .sound-question {
+        color: #77665d;
+        margin: 15px 0 20px;
+        line-height: 1.5;
+    }
+
+    .sound-options {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .sound-option {
+        border: 2px solid #eaded4;
+        background: white;
+        color: #5d4f47;
+        border-radius: 18px;
+        padding: 17px 10px;
+        cursor: pointer;
+        font-size: 32px;
+        font-weight: 700;
+        transition: 0.2s;
+    }
+
+    .sound-option:hover {
+        border-color: #b8865c;
+        transform: translateY(-2px);
+    }
+
+    .sound-option.correct-answer {
+        border-color: #78a47d;
+        background: #eef7ef;
+    }
+
+    .sound-option.wrong-answer {
+        border-color: #c87970;
+        background: #fff0ee;
+    }
+
+    .sound-next {
+        margin-top: 20px;
+    }
+
+    /* =========================================================
+       TONE COMPARISON
+    ========================================================= */
+
+    .comparison-box {
+        background: #fdf8f2;
+        border-radius: 20px;
+        padding: 20px;
+        margin-top: 20px;
+    }
+
+    .comparison-title {
+        text-align: center;
+        color: #8f6645;
+        margin-bottom: 15px;
+    }
+
+    .comparison-list {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    .comparison-item {
+        background: white;
+        border: 1px solid #eaded4;
+        border-radius: 14px;
+        padding: 12px 18px;
+        font-size: 23px;
+        color: #594a42;
+    }
+
+    /* =========================================================
+       RESPONSIVE
+    ========================================================= */
+
+    @media (max-width: 750px) {
+
+        .tone-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .sound-options {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .example-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    @media (max-width: 650px) {
+
+        .section-header h1 {
+            font-size: 29px;
+        }
+
+        .video-card,
+        .lesson-card {
+            padding: 17px;
+        }
+
+        .tone-symbol {
+            font-size: 43px;
+        }
+
+        .sound-word {
+            font-size: 35px;
+        }
+    }
+</style>
+
+</head><body><div class="app-container"><!-- SIDEBAR -->
+<div id="sidebar-container"></div>
+
+<!-- MAIN CONTENT -->
+<main class="main-content">
+
+    <div class="courses-section">
+
+        <!-- =====================================================
+             HEADER
+        ====================================================== -->
+
+        <div class="section-header">
+
+            <h1>Learn Zhuyin Tone Symbols</h1>
+
+            <p>
+                Learn how tone symbols work in Zhuyin and practice
+                recognizing different Mandarin tones by listening.
+            </p>
+
+        </div>
+
+
+        <!-- =====================================================
+             VIDEO
+        ====================================================== -->
+
+        <div class="video-grid">
+
+            <article class="card video-card">
+
+                <div class="video-wrapper">
+
+                    <iframe
+                        src="https://www.youtube.com/embed/ztYM_l9Xgg0"
+                        title="Zhuyin Tone Symbols"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen>
+                    </iframe>
+
+                </div>
+
+
+                <div class="description-text">
+
+                    <strong>🎬 Let's Learn Zhuyin Tone Symbols!</strong>
+
+                    <p>
+                        In this lesson, you'll learn how Mandarin tones
+                        are represented in Zhuyin (Bopomofo).
+                    </p>
+
+                    <p>
+                        Mandarin has four main tones, plus a neutral tone.
+                        In Zhuyin, tone marks help us show how a syllable
+                        should be pronounced.
+                    </p>
+
+                    <p>
+                        Watch the video first, then try the listening game
+                        below and see if you can identify the correct tone!
+                    </p>
+
+                </div>
+
+            </article>
+
+        </div>
+
+
+        <!-- =====================================================
+             TONE INTRODUCTION
+        ====================================================== -->
+
+        <div class="lesson-card game-section">
+
+            <h2 class="lesson-title">
+                📖 Zhuyin Tone Symbols
+            </h2>
+
+            <p class="lesson-subtitle">
+                Tone marks are an important part of reading Mandarin.
+                They help us understand how the pitch of a syllable changes.
+            </p>
+
+
+            <div class="tone-grid">
+
+                <!-- TONE 1 -->
+                <div class="tone-card">
+
+                    <div class="tone-number">
+                        1st Tone
+                    </div>
+
+                    <div class="tone-symbol">
+                        ㄚ
+                    </div>
+
+                    <div class="tone-name">
+                        First Tone
+                    </div>
+
+                    <div class="tone-example">
+                        ㄇㄚˉ
+                    </div>
+
+                    <div class="tone-description">
+                        High and steady.
+                    </div>
+
+                </div>
+
+
+                <!-- TONE 2 -->
+                <div class="tone-card">
+
+                    <div class="tone-number">
+                        2nd Tone
+                    </div>
+
+                    <div class="tone-symbol">
+                        ㄚˊ
+                    </div>
+
+                    <div class="tone-name">
+                        Second Tone
+                    </div>
+
+                    <div class="tone-example">
+                        ㄇㄚˊ
+                    </div>
+
+                    <div class="tone-description">
+                        Rising, like asking a question.
+                    </div>
+
+                </div>
+
+
+                <!-- TONE 3 -->
+                <div class="tone-card">
+
+                    <div class="tone-number">
+                        3rd Tone
+                    </div>
+
+                    <div class="tone-symbol">
+                        ㄚˇ
+                    </div>
+
+                    <div class="tone-name">
+                        Third Tone
+                    </div>
+
+                    <div class="tone-example">
+                        ㄇㄚˇ
+                    </div>
+
+                    <div class="tone-description">
+                        Low and dipping.
+                    </div>
+
+                </div>
+
+
+                <!-- TONE 4 -->
+                <div class="tone-card">
+
+                    <div class="tone-number">
+                        4th Tone
+                    </div>
+
+                    <div class="tone-symbol">
+                        ㄚˋ
+                    </div>
+
+                    <div class="tone-name">
+                        Fourth Tone
+                    </div>
+
+                    <div class="tone-example">
+                        ㄇㄚˋ
+                    </div>
+
+                    <div class="tone-description">
+                        Falling and strong.
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="note-box">
+
+                <strong>💡 Remember:</strong>
+
+                In Zhuyin, the first tone is usually not marked with
+                a visible tone symbol. The second tone uses
+                <b>ˊ</b>, the third tone uses <b>ˇ</b>,
+                and the fourth tone uses <b>ˋ</b>.
+
+            </div>
+
+        </div>
+
+
+        <!-- =====================================================
+             EXAMPLES
+        ====================================================== -->
+
+        <div class="lesson-card game-section">
+
+            <h2 class="lesson-title">
+                📝 Same Sound, Different Tones
+            </h2>
+
+            <p class="lesson-subtitle">
+                The same Zhuyin sound can represent different words
+                when the tone changes.
+            </p>
+
+
+            <div class="example-grid">
+
+                <div class="example-card">
+
+                    <div class="example-hanzi">
+                        媽
+                    </div>
+
+                    <div class="example-pinyin">
+                        mā · ㄇㄚ
+                    </div>
+
+                    <div class="example-meaning">
+                        mother
+                    </div>
+
+                </div>
+
+
+                <div class="example-card">
+
+                    <div class="example-hanzi">
+                        麻
+                    </div>
+
+                    <div class="example-pinyin">
+                        má · ㄇㄚˊ
+                    </div>
+
+                    <div class="example-meaning">
+                        numb / hemp
+                    </div>
+
+                </div>
+
+
+                <div class="example-card">
+
+                    <div class="example-hanzi">
+                        馬
+                    </div>
+
+                    <div class="example-pinyin">
+                        mǎ · ㄇㄚˇ
+                    </div>
+
+                    <div class="example-meaning">
+                        horse
+                    </div>
+
+                </div>
+
+
+                <div class="example-card">
+
+                    <div class="example-hanzi">
+                        罵
+                    </div>
+
+                    <div class="example-pinyin">
+                        mà · ㄇㄚˋ
+                    </div>
+
+                    <div class="example-meaning">
+                        to scold
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="note-box">
+
+                <strong>🎯 Why are tones important?</strong>
+
+                Changing the tone can change the meaning of a word.
+                That's why listening carefully to tones is an important
+                part of learning Mandarin.
+
+            </div>
+
+        </div>
+
+
+        <!-- =====================================================
+             GAME
+        ====================================================== -->
+
+        <div class="lesson-card game-section sound-game">
+
+            <div class="game-header">
+
+                <div style="text-align:left;">
+
+                    <h2 class="lesson-title">
+                        🔊 Tone Detective
+                    </h2>
+
+                    <p class="lesson-subtitle">
+                        Listen to the word and choose the tone you hear.
+                    </p>
+
+                </div>
+
+                <div class="score-box">
+                    Score:
+                    <span id="soundScore">0</span>
+                </div>
+
+            </div>
+
+
+            <div class="sound-card">
+
+                <button
+                    class="listen-button"
+                    id="listenButton"
+                    aria-label="Play pronunciation">
+
+                    <i class="fa-solid fa-volume-high"></i>
+
+                </button>
+
+
+                <div
+                    class="sound-word"
+                    id="soundWord">
+                    ㄇㄚ
+                </div>
+
+
+                <div class="sound-hint">
+                    Listen carefully to the tone.
+                </div>
+
+
+                <div class="sound-question">
+
+                    Which tone did you hear?
+
+                </div>
+
+
+                <div class="sound-options">
+
+                    <button
+                        class="sound-option"
+                        data-tone="1">
+
+                        1️⃣
+
+                    </button>
+
+
+                    <button
+                        class="sound-option"
+                        data-tone="2">
+
+                        2️⃣
+
+                    </button>
+
+
+                    <button
+                        class="sound-option"
+                        data-tone="3">
+
+                        3️⃣
+
+                    </button>
+
+
+                    <button
+                        class="sound-option"
+                        data-tone="4">
+
+                        4️⃣
+
+                    </button>
+
+                </div>
+
+
+                <div
+                    class="game-message"
+                    id="soundMessage">
+                </div>
+
+
+                <button
+                    class="game-button sound-next"
+                    id="soundNext"
+                    style="display:none;">
+
+                    Next Sound →
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- =====================================================
+             QUICK TONE COMPARISON
+        ====================================================== -->
+
+        <div class="lesson-card game-section">
+
+            <h2 class="lesson-title">
+                🎧 Quick Tone Review
+            </h2>
+
+            <p class="lesson-subtitle">
+                Try saying these four syllables aloud.
+                Notice how the pitch changes.
+            </p>
+
+
+            <div class="comparison-box">
+
+                <h3 class="comparison-title">
+                    ㄇㄚ + Tone
+                </h3>
+
+
+                <div class="comparison-list">
+
+                    <div class="comparison-item">
+                        ㄇㄚ
+                    </div>
+
+                    <div class="comparison-item">
+                        ㄇㄚˊ
+                    </div>
+
+                    <div class="comparison-item">
+                        ㄇㄚˇ
+                    </div>
+
+                    <div class="comparison-item">
+                        ㄇㄚˋ
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="note-box">
+
+                <strong>🌟 Challenge yourself!</strong>
+
+                Can you hear the difference between
+                the rising second tone and the falling fourth tone?
+                Try the game again and listen carefully!
+
+            </div>
+
+        </div>
+
+    </div>
+
+</main>
+
+</div><!-- ===============================================================
+     MAIN SCRIPT
+================================================================ --><script src="../script.js"></script><script>
+
+    /* ===============================================================
+       TONE SOUND GAME
+    =============================================================== */
+
+    const toneQuestions = [
+
+        {
+            tone: 1,
+            zhuyin: "ㄇㄚ",
+            speech: "媽"
+        },
+
+        {
+            tone: 2,
+            zhuyin: "ㄇㄚˊ",
+            speech: "麻"
+        },
+
+        {
+            tone: 3,
+            zhuyin: "ㄇㄚˇ",
+            speech: "馬"
+        },
+
+        {
+            tone: 4,
+            zhuyin: "ㄇㄚˋ",
+            speech: "罵"
+        },
+
+        {
+            tone: 1,
+            zhuyin: "ㄅㄚ",
+            speech: "八"
+        },
+
+        {
+            tone: 2,
+            zhuyin: "ㄅㄚˊ",
+            speech: "拔"
+        },
+
+        {
+            tone: 3,
+            zhuyin: "ㄅㄚˇ",
+            speech: "把"
+        },
+
+        {
+            tone: 4,
+            zhuyin: "ㄅㄚˋ",
+            speech: "爸"
+        }
+
+    ];
+
+
+    let currentQuestion = null;
+    let score = 0;
+
+
+    const soundScoreElement =
+        document.getElementById("soundScore");
+
+    const listenButton =
+        document.getElementById("listenButton");
+
+    const soundWord =
+        document.getElementById("soundWord");
+
+    const soundMessage =
+        document.getElementById("soundMessage");
+
+    const soundNext =
+        document.getElementById("soundNext");
+
+    const soundOptions =
+        document.querySelectorAll(".sound-option");
+
+
+    /* ===============================================================
+       SPEECH
+    =============================================================== */
+
+    function speakCurrentSound() {
+
+        if (!("speechSynthesis" in window)) {
+
+            soundMessage.textContent =
+                "Your browser does not support speech playback.";
+
+            soundMessage.className =
+                "game-message wrong";
+
+            return;
+        }
+
+
+        window.speechSynthesis.cancel();
+
+
+        const utterance =
+            new SpeechSynthesisUtterance(
+                currentQuestion.speech
+            );
+
+
+        utterance.lang = "zh-TW";
+
+        /*
+         * A slightly slower speed makes the tone
+         * easier for beginners to hear.
+         */
+
+        utterance.rate = 0.65;
+
+        utterance.pitch = 1;
+
+
+        window.speechSynthesis.speak(utterance);
+
+    }
+
+
+    listenButton.addEventListener(
+        "click",
+        speakCurrentSound
+    );
+
+
+    /* ===============================================================
+       NEW QUESTION
+    =============================================================== */
+
+    function newToneQuestion() {
+
+        const randomIndex =
+            Math.floor(
+                Math.random() * toneQuestions.length
+            );
+
+
+        currentQuestion =
+            toneQuestions[randomIndex];
+
+
+        soundWord.textContent =
+            currentQuestion.zhuyin;
+
+
+        soundMessage.textContent = "";
+
+        soundMessage.className =
+            "game-message";
+
+
+        soundNext.style.display =
+            "none";
+
+
+        soundOptions.forEach(button => {
+
+            button.disabled = false;
+
+            button.classList.remove(
+                "correct-answer",
+                "wrong-answer"
+            );
+
+        });
+
+
+        /*
+         * Automatically play the sound
+         * shortly after the question appears.
+         */
+
+        setTimeout(
+            speakCurrentSound,
+            400
+        );
+
+    }
+
+
+    /* ===============================================================
+       ANSWERS
+    =============================================================== */
+
+    soundOptions.forEach(button => {
+
+        button.addEventListener(
+            "click",
+            function() {
+
+                const selectedTone =
+                    Number(this.dataset.tone);
+
+
+                soundOptions.forEach(option => {
+
+                    option.disabled = true;
+
+                });
+
+
+                if (
+                    selectedTone ===
+                    currentQuestion.tone
+                ) {
+
+                    score++;
+
+                    soundScoreElement.textContent =
+                        score;
+
+
+                    this.classList.add(
+                        "correct-answer"
+                    );
+
+
+                    soundMessage.textContent =
+                        "🎉 Correct! You heard the tone!";
+
+
+                    soundMessage.className =
+                        "game-message correct";
+
+                }
+
+                else {
+
+                    this.classList.add(
+                        "wrong-answer"
+                    );
+
+
+                    soundMessage.textContent =
+                        "❌ Not quite! Listen again and notice the pitch.";
+
+
+                    soundMessage.className =
+                        "game-message wrong";
+
+
+                    soundOptions.forEach(option => {
+
+                        if (
+                            Number(option.dataset.tone) ===
+                            currentQuestion.tone
+                        ) {
+
+                            option.classList.add(
+                                "correct-answer"
+                            );
+
+                        }
+
+                    });
+
+                }
+
+
+                soundNext.style.display =
+                    "inline-block";
+
+            }
+        );
+
+    });
+
+
+    /* ===============================================================
+       NEXT BUTTON
+    =============================================================== */
+
+    soundNext.addEventListener(
+        "click",
+        newToneQuestion
+    );
+
+
+    /* ===============================================================
+       START GAME
+    =============================================================== */
+
+    newToneQuestion();
+
+</script></body>
+</html>
