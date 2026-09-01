@@ -314,6 +314,12 @@
         transform: scale(0.96);
     }
 
+    .listen-button:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        transform: none;
+    }
+
     .sound-word {
         font-size: 48px;
         font-weight: 700;
@@ -368,6 +374,13 @@
         background: #fff0ee;
     }
 
+    .sound-reveal {
+        min-height: 22px;
+        margin-top: 4px;
+        font-size: 14px;
+        color: #8f6645;
+    }
+
     .sound-next {
         margin-top: 20px;
     }
@@ -402,28 +415,6 @@
     .tone-line-label {
         font-size: 13px;
         color: #8c7668;
-    }
-
-
-    /* =========================================================
-       FINAL REVIEW
-    ========================================================= */
-
-    .symbol-list {
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 12px;
-        margin-top: 20px;
-    }
-
-    .symbol-item {
-        background: #fdf8f2;
-        border: 1px solid #eaded4;
-        border-radius: 14px;
-        padding: 13px 20px;
-        font-size: 23px;
-        color: #594a42;
     }
 
 
@@ -891,8 +882,8 @@
 
                     <p class="lesson-subtitle">
 
-                        Listen to the sound and identify
-                        the correct tone.
+                        Listen to a real Mandarin word and
+                        identify the correct tone.
 
                     </p>
 
@@ -924,7 +915,7 @@
                 </button>
 
 
-                <!-- CURRENT ZHUYIN -->
+                <!-- CURRENT ZHUYIN (tone hidden) -->
 
                 <div
                     class="sound-word"
@@ -935,7 +926,7 @@
                 </div>
 
 
-                <div class="sound-hint">
+                <div class="sound-hint" id="soundHint">
 
                     The tone mark is hidden.
                     Listen carefully!
@@ -959,16 +950,12 @@
                         class="sound-option"
                         data-tone="1">
 
-                        ㄌㄚ
-
                     </button>
 
 
                     <button
                         class="sound-option"
                         data-tone="2">
-
-                        ㄌㄚˊ
 
                     </button>
 
@@ -977,16 +964,12 @@
                         class="sound-option"
                         data-tone="3">
 
-                        ㄌㄚˇ
-
                     </button>
 
 
                     <button
                         class="sound-option"
                         data-tone="4">
-
-                        ㄌㄚˋ
 
                     </button>
 
@@ -997,6 +980,12 @@
                 <div
                     class="game-message"
                     id="soundMessage">
+                </div>
+
+
+                <div
+                    class="sound-reveal"
+                    id="soundReveal">
                 </div>
 
 
@@ -1014,59 +1003,6 @@
         </div>
 
 
-        <!-- =====================================================
-             FINAL REVIEW
-        ====================================================== -->
-
-        <div class="lesson-card game-section">
-
-            <h2 class="lesson-title">
-                🌟 Final Review
-            </h2>
-
-            <p class="lesson-subtitle">
-
-                Can you recognize the four tone symbols?
-
-            </p>
-
-
-            <div class="symbol-list">
-
-                <div class="symbol-item">
-                    Tone 1 → ㄌㄚ
-                </div>
-
-                <div class="symbol-item">
-                    Tone 2 → ㄌㄚˊ
-                </div>
-
-                <div class="symbol-item">
-                    Tone 3 → ㄌㄚˇ
-                </div>
-
-                <div class="symbol-item">
-                    Tone 4 → ㄌㄚˋ
-                </div>
-
-            </div>
-
-
-            <div class="note-box">
-
-                <strong>🎉 Keep practicing!</strong>
-
-                <br>
-
-                Listen carefully to the pitch movement,
-                then connect the sound with the correct
-                tone symbol.
-
-            </div>
-
-        </div>
-
-
     </div>
 
 </main>
@@ -1078,91 +1014,60 @@
     /* ===============================================================
        TONE DETECTIVE GAME
 
-       No MP3 files.
-       No SpeechSynthesis.
+       Uses the browser's built-in Speech Synthesis (Web Speech API)
+       to say REAL Mandarin words out loud — no audio files needed.
 
-       The browser creates a simple tone using Web Audio API.
+       Each word below is a real word that contains one of the
+       syllables the learner already knows (ㄌㄚ / ㄏㄚ / ㄕㄚ),
+       said with a specific tone. The Zhuyin shown on screen hides
+       the tone mark — the learner has to guess it from the audio.
 
-       Tone patterns:
-
-       Tone 1 = high and steady
-       Tone 2 = rising
-       Tone 3 = low → rising
-       Tone 4 = falling
-
+       Note: not every syllable+tone combination exists as a common
+       word in Mandarin (this is normal — e.g. a 4th-tone "ha" isn't
+       really used), so a couple of slots are skipped rather than
+       forcing an inaccurate example.
     =============================================================== */
 
 
-    const questions = [
+    const wordBank = [
 
-        {
-            base: "ㄌㄚ",
-            tone: 1
-        },
+        // ㄌㄚ family
+        { base: "ㄌㄚ", tone: 1, hanzi: "拉",   pinyin: "lā",   note: "拉 (lā) — \"to pull\"" },
+        { base: "ㄌㄚ", tone: 2, hanzi: "砬",   pinyin: "lá",   note: "砬 (lá) — used in place names like 砬子" },
+        { base: "ㄌㄚ", tone: 3, hanzi: "喇叭", pinyin: "lǎbā", note: "喇叭 (lǎbā) — \"horn / trumpet\"" },
+        { base: "ㄌㄚ", tone: 4, hanzi: "辣",   pinyin: "là",   note: "辣 (là) — \"spicy\"" },
 
-        {
-            base: "ㄌㄚ",
-            tone: 2
-        },
+        // ㄏㄚ family (no common 4th-tone "ha" word, so it's skipped)
+        { base: "ㄏㄚ", tone: 1, hanzi: "哈",   pinyin: "hā",   note: "哈 (hā) — \"ha\" (laughing)" },
+        { base: "ㄏㄚ", tone: 2, hanzi: "蛤蟆", pinyin: "háma", note: "蛤蟆 (háma) — \"toad\"" },
+        { base: "ㄏㄚ", tone: 3, hanzi: "哈達", pinyin: "hǎdá", note: "哈達 (hǎdá) — a ceremonial silk scarf" },
 
-        {
-            base: "ㄌㄚ",
-            tone: 3
-        },
-
-        {
-            base: "ㄌㄚ",
-            tone: 4
-        },
-
-        {
-            base: "ㄏㄚ",
-            tone: 1
-        },
-
-        {
-            base: "ㄏㄚ",
-            tone: 2
-        },
-
-        {
-            base: "ㄏㄚ",
-            tone: 3
-        },
-
-        {
-            base: "ㄏㄚ",
-            tone: 4
-        },
-
-        {
-            base: "ㄕㄚ",
-            tone: 1
-        },
-
-        {
-            base: "ㄕㄚ",
-            tone: 2
-        },
-
-        {
-            base: "ㄕㄚ",
-            tone: 3
-        },
-
-        {
-            base: "ㄕㄚ",
-            tone: 4
-        }
+        // ㄕㄚ family
+        { base: "ㄕㄚ", tone: 1, hanzi: "沙",   pinyin: "shā",   note: "沙 (shā) — \"sand\"" },
+        { base: "ㄕㄚ", tone: 2, hanzi: "啥",   pinyin: "shá",   note: "啥 (shá) — colloquial \"what\"" },
+        { base: "ㄕㄚ", tone: 3, hanzi: "傻",   pinyin: "shǎ",   note: "傻 (shǎ) — \"silly / foolish\"" },
+        { base: "ㄕㄚ", tone: 4, hanzi: "大廈", pinyin: "dàshà", note: "大廈 (dàshà) — \"building\"" }
 
     ];
+
+
+    const TONE_MARKS = {
+
+        1: "",
+        2: "ˊ",
+        3: "ˇ",
+        4: "ˋ"
+
+    };
 
 
     let currentQuestion = null;
 
     let score = 0;
 
-    let audioContext = null;
+    let chineseVoice = null;
+
+    let speechReady = !!window.speechSynthesis;
 
 
     const soundScore =
@@ -1174,8 +1079,14 @@
     const soundWord =
         document.getElementById("soundWord");
 
+    const soundHint =
+        document.getElementById("soundHint");
+
     const soundMessage =
         document.getElementById("soundMessage");
+
+    const soundReveal =
+        document.getElementById("soundReveal");
 
     const soundNext =
         document.getElementById("soundNext");
@@ -1185,163 +1096,79 @@
 
 
     /* ===============================================================
-       AUDIO CONTEXT
+       VOICE SELECTION
+
+       Prefer a Taiwan Mandarin voice (zh-TW). Fall back to any
+       other Chinese voice if zh-TW isn't installed on the device.
     =============================================================== */
 
-    function getAudioContext() {
+    function pickChineseVoice() {
 
-        if (!audioContext) {
+        if (!window.speechSynthesis) return null;
 
-            audioContext =
-                new (
-                    window.AudioContext ||
-                    window.webkitAudioContext
-                )();
+        const voices = window.speechSynthesis.getVoices();
 
-        }
+        if (!voices.length) return null;
 
-        return audioContext;
+
+        return (
+
+            voices.find(v => v.lang === "zh-TW") ||
+            voices.find(v => v.lang && v.lang.toLowerCase().startsWith("zh-tw")) ||
+            voices.find(v => v.lang && v.lang.toLowerCase().startsWith("zh")) ||
+            null
+
+        );
+
+    }
+
+
+    if (window.speechSynthesis) {
+
+        chineseVoice = pickChineseVoice();
+
+        window.speechSynthesis.onvoiceschanged = function() {
+
+            chineseVoice = pickChineseVoice();
+
+        };
+
+    } else {
+
+        speechReady = false;
+
+        soundHint.textContent =
+            "Your browser doesn't support spoken audio. Try the latest Chrome or Safari.";
+
+        listenButton.disabled = true;
 
     }
 
 
     /* ===============================================================
-       CREATE TONE
+       SPEAK A WORD
     =============================================================== */
 
-    function playTone(tone) {
+    function speakWord(hanzi) {
 
-        const ctx = getAudioContext();
+        if (!speechReady) return;
 
-        if (ctx.state === "suspended") {
+        window.speechSynthesis.cancel();
 
-            ctx.resume();
+        const utterance =
+            new SpeechSynthesisUtterance(hanzi);
 
-        }
+        utterance.lang = "zh-TW";
 
+        utterance.rate = 0.8;
 
-        const oscillator =
-            ctx.createOscillator();
+        if (chineseVoice) {
 
-        const gain =
-            ctx.createGain();
-
-
-        oscillator.type = "sine";
-
-
-        /*
-         * Frequency patterns.
-         */
-
-        const now = ctx.currentTime;
-
-        const duration = 0.9;
-
-
-        if (tone === 1) {
-
-            /* Tone 1: high + steady */
-
-            oscillator.frequency.setValueAtTime(
-                520,
-                now
-            );
-
-            oscillator.frequency.setValueAtTime(
-                520,
-                now + duration
-            );
+            utterance.voice = chineseVoice;
 
         }
 
-
-        else if (tone === 2) {
-
-            /* Tone 2: rising */
-
-            oscillator.frequency.setValueAtTime(
-                380,
-                now
-            );
-
-            oscillator.frequency.linearRampToValueAtTime(
-                620,
-                now + duration
-            );
-
-        }
-
-
-        else if (tone === 3) {
-
-            /* Tone 3: low → rising */
-
-            oscillator.frequency.setValueAtTime(
-                430,
-                now
-            );
-
-            oscillator.frequency.linearRampToValueAtTime(
-                260,
-                now + 0.45
-            );
-
-            oscillator.frequency.linearRampToValueAtTime(
-                500,
-                now + duration
-            );
-
-        }
-
-
-        else if (tone === 4) {
-
-            /* Tone 4: falling */
-
-            oscillator.frequency.setValueAtTime(
-                650,
-                now
-            );
-
-            oscillator.frequency.linearRampToValueAtTime(
-                260,
-                now + duration
-            );
-
-        }
-
-
-        /* =========================================================
-           VOLUME ENVELOPE
-        ========================================================= */
-
-        gain.gain.setValueAtTime(
-            0.0001,
-            now
-        );
-
-        gain.gain.exponentialRampToValueAtTime(
-            0.18,
-            now + 0.03
-        );
-
-        gain.gain.exponentialRampToValueAtTime(
-            0.0001,
-            now + duration
-        );
-
-
-        oscillator.connect(gain);
-
-        gain.connect(ctx.destination);
-
-
-        oscillator.start(now);
-
-        oscillator.stop(
-            now + duration + 0.05
-        );
+        window.speechSynthesis.speak(utterance);
 
     }
 
@@ -1354,9 +1181,26 @@
 
         if (!currentQuestion) return;
 
-        playTone(
-            currentQuestion.tone
-        );
+        speakWord(currentQuestion.hanzi);
+
+    }
+
+
+    /* ===============================================================
+       BUILD ANSWER OPTIONS FOR THE CURRENT BASE
+    =============================================================== */
+
+    function buildOptions(base) {
+
+        soundOptions.forEach(option => {
+
+            const tone =
+                Number(option.dataset.tone);
+
+            option.textContent =
+                base + TONE_MARKS[tone];
+
+        });
 
     }
 
@@ -1368,14 +1212,14 @@
     function newQuestion() {
 
         /*
-         * Pick random question.
+         * Pick random word.
          */
 
         currentQuestion =
-            questions[
+            wordBank[
                 Math.floor(
                     Math.random() *
-                    questions.length
+                    wordBank.length
                 )
             ];
 
@@ -1391,13 +1235,22 @@
 
 
         /*
-         * Reset message.
+         * Build the 4 tone options for this base.
+         */
+
+        buildOptions(currentQuestion.base);
+
+
+        /*
+         * Reset message + reveal.
          */
 
         soundMessage.textContent = "";
 
         soundMessage.className =
             "game-message";
+
+        soundReveal.textContent = "";
 
 
         /*
@@ -1559,6 +1412,14 @@
                         );
 
                     }
+
+
+                    /*
+                     * Reveal the real word behind this round.
+                     */
+
+                    soundReveal.textContent =
+                        "Word: " + currentQuestion.note;
 
 
                     /*
