@@ -1,8 +1,27 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Expressing Feelings & Intensity | Boba Break Study</title><link rel="stylesheet" href="../style.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"><!-- Hanzi Writer --><script src="https://cdn.jsdelivr.net/npm/hanzi-writer@3.5.0/dist/hanzi-writer.min.js"></script><!-- Global Review Database --><script src="lesson.js"></script><style>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Expressing Feelings & Intensity | Boba Break Study</title>
+
+<link rel="stylesheet" href="../style.css">
+
+<link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+>
+
+<!-- Hanzi Writer -->
+<script src="https://cdn.jsdelivr.net/npm/hanzi-writer@3.5.0/dist/hanzi-writer.min.js"></script>
+
+<!-- Global Review Database -->
+<script src="../lesson.js"></script>
+
+<style>
 
 /* =====================================================
    GENERAL
@@ -69,6 +88,48 @@ p {
 }
 
 /* =====================================================
+   READING AUDIO
+===================================================== */
+
+.reading-audio-controls {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin: 15px 0;
+}
+
+.reading-sound-btn,
+.reading-stop-btn {
+    border-radius: 12px;
+    padding: 11px 18px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.reading-sound-btn {
+    background: #b8865c;
+    color: white;
+    border: none;
+}
+
+.reading-sound-btn:hover {
+    transform: translateY(-2px);
+}
+
+.reading-stop-btn {
+    background: #fff8ef;
+    color: #8c7355;
+    border: 1.5px solid #d7b89c;
+}
+
+.reading-stop-btn:hover {
+    background: #faedcd;
+}
+
+/* =====================================================
    READING
 ===================================================== */
 
@@ -83,28 +144,13 @@ p {
     color: #5c4033;
 }
 
-.reading-header-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.reading-content h3 {
+    margin-top: 0;
     margin-bottom: 18px;
 }
 
-.reading-content h3 {
-    margin: 0;
-}
-
-.reading-paragraph {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 12px;
+.reading-content p {
     margin: 0 0 16px 0;
-}
-
-.reading-paragraph p {
-    margin: 0;
-    flex: 1;
 }
 
 .reading-content p:last-child {
@@ -589,10 +635,7 @@ p {
     height: 34px;
     border-radius: 50%;
     cursor: pointer;
-    flex-shrink: 0;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+    margin-left: 8px;
 }
 
 /* =====================================================
@@ -600,6 +643,7 @@ p {
 ===================================================== */
 
 @media(max-width:700px) {
+
     .lesson-card,
     .grammar-card,
     .game-card,
@@ -621,381 +665,600 @@ p {
         flex-wrap: wrap;
         justify-content: center;
     }
+
 }
 
-</style></head><body><div class="app-container"><div id="sidebar-container"></div><main class="main-content"><!-- =====================================================
+</style>
+</head>
+
+<body>
+
+<div class="app-container">
+
+<div id="sidebar-container"></div>
+
+<main class="main-content">
+
+<!-- =====================================================
      TITLE
-===================================================== --><div class="lesson-title">
-    <span class="badge">LESSON 21 • FEELINGS & INTENSITY</span>
+===================================================== -->
+
+<div class="lesson-title">
+
+    <span class="badge">
+        LESSON 21 • FEELINGS & INTENSITY
+    </span>
+
     <h1>Expressing Feelings & Strong Emotions</h1>
-    <p>Learn how to describe strong feelings and different levels of intensity in Mandarin.</p>
-</div><!-- =====================================================
+
+    <p>
+        Learn how to describe strong feelings and different levels
+        of intensity in Mandarin.
+    </p>
+
+</div>
+
+
+<!-- =====================================================
      READING
-===================================================== --><div class="lesson-card"><h2>📖 Reading Text</h2>
+===================================================== -->
+
+<div class="lesson-card">
+
+<h2>📖 Reading Text</h2>
 
 <p>
-    Read the story below. Pinyin is shown only for the target vocabulary introduced in this lesson.
+    Read the story below. Pinyin is shown only for the target
+    vocabulary introduced in this lesson.
 </p>
+
+<div class="reading-audio-controls">
+
+    <button
+        class="reading-sound-btn"
+        onclick="playReadingAudio()"
+    >
+        <i class="fas fa-volume-up"></i>
+        Listen to the Reading
+    </button>
+
+    <button
+        class="reading-stop-btn"
+        onclick="stopAudio()"
+    >
+        <i class="fas fa-stop"></i>
+        Stop
+    </button>
+
+</div>
 
 <div class="reading-content">
 
-    <div class="reading-header-row">
-        <h3>阿豪喜歡小美</h3>
-        <button class="sound-btn" onclick="playFullReading()" title="Dengarkan seluruh teks">
-            <i class="fas fa-volume-up"></i>
-        </button>
-    </div>
+    <h3 style="text-align:center;">
+        阿豪喜歡小美
+    </h3>
 
-    <div class="reading-paragraph">
-        <p>
-            <span class="char-group">
-                <span class="pinyin-sub">Ā Háo</span>
-                <span class="hanzi-main">阿豪</span>
-            </span>
-            很喜歡一個女生。她叫
-            <span class="char-group">
-                <span class="pinyin-sub">Xiǎoměi</span>
-                <span class="hanzi-main">小美</span>
-            </span>
-            ，是阿豪的朋友。
-        </p>
-    </div>
+    <p>
+        <span class="char-group">
+            <span class="pinyin-sub">Ā Háo</span>
+            <span class="hanzi-main">阿豪</span>
+        </span>
 
-    <div class="reading-paragraph">
-        <p>
-            小美很漂亮，也
-            <span class="char-group">
-                <span class="pinyin-sub">fēicháng</span>
-                <span class="hanzi-main">非常</span>
-            </span>
-            可愛。阿豪
-            <span class="char-group">
-                <span class="pinyin-sub">juéde</span>
-                <span class="hanzi-main">覺得</span>
-            </span>
-            小美
-            <span class="char-group">
-                <span class="pinyin-sub">xiào</span>
-                <span class="hanzi-main">笑</span>
-            </span>
-            的
-            <span class="char-group">
-                <span class="pinyin-sub">shíhou</span>
-                <span class="hanzi-main">時候</span>
-            </span>
-            真好看。
-        </p>
-    </div>
+        很喜歡一個女生。她叫
 
-    <div class="reading-paragraph">
-        <p>
-            今天，阿豪跟小美
-            <span class="char-group">
-                <span class="pinyin-sub">zài yīqǐ</span>
-                <span class="hanzi-main">在一起</span>
-            </span>
-            去看電影。他們也一起喝咖啡。阿豪非常開心。
-        </p>
-    </div>
+        <span class="char-group">
+            <span class="pinyin-sub">Xiǎoměi</span>
+            <span class="hanzi-main">小美</span>
+        </span>
 
-    <div class="reading-paragraph">
-        <p>
-            可是，阿豪看到小美的時候，常常
-            <span class="char-group">
-                <span class="pinyin-sub">tài</span>
-                <span class="hanzi-main">太</span>
-            </span>
-            <span class="char-group">
-                <span class="pinyin-sub">jǐnzhāng</span>
-                <span class="hanzi-main">緊張</span>
-            </span>
-            了。他想
-            <span class="char-group">
-                <span class="pinyin-sub">gàosù</span>
-                <span class="hanzi-main">告訴</span>
-            </span>
-            小美：「我喜歡你。」
-        </p>
-    </div>
+        ，是阿豪的朋友。
+    </p>
 
-    <div class="reading-paragraph">
-        <p>
-            今天跟小美在一起，
-            <span class="char-group">
-                <span class="pinyin-sub">shíjiān</span>
-                <span class="hanzi-main">時間</span>
-            </span>
-            <span class="char-group">
-                <span class="pinyin-sub">guò</span>
-                <span class="hanzi-main">過</span>
-            </span>
-            得太快了！阿豪覺得今天真開心。
-        </p>
+    <p>
+        小美很漂亮，也
+
+        <span class="char-group">
+            <span class="pinyin-sub">fēicháng</span>
+            <span class="hanzi-main">非常</span>
+        </span>
+
+        可愛。阿豪
+
+        <span class="char-group">
+            <span class="pinyin-sub">juéde</span>
+            <span class="hanzi-main">覺得</span>
+        </span>
+
+        小美
+
+        <span class="char-group">
+            <span class="pinyin-sub">xiào</span>
+            <span class="hanzi-main">笑</span>
+        </span>
+
+        的
+
+        <span class="char-group">
+            <span class="pinyin-sub">shíhou</span>
+            <span class="hanzi-main">時候</span>
+        </span>
+
+        真好看。
+    </p>
+
+    <p>
+        今天，阿豪跟小美
+
+        <span class="char-group">
+            <span class="pinyin-sub">zài yīqǐ</span>
+            <span class="hanzi-main">在一起</span>
+        </span>
+
+        去看電影。他們也一起喝咖啡。阿豪非常開心。
+    </p>
+
+    <p>
+        可是，阿豪看到小美的時候，常常
+
+        <span class="char-group">
+            <span class="pinyin-sub">tài</span>
+            <span class="hanzi-main">太</span>
+        </span>
+
+        <span class="char-group">
+            <span class="pinyin-sub">jǐnzhāng</span>
+            <span class="hanzi-main">緊張</span>
+        </span>
+
+        了。他想
+
+        <span class="char-group">
+            <span class="pinyin-sub">gàosù</span>
+            <span class="hanzi-main">告訴</span>
+        </span>
+
+        小美：「我喜歡你。」
+    </p>
+
+    <p>
+        今天跟小美在一起，
+
+        <span class="char-group">
+            <span class="pinyin-sub">shíjiān</span>
+            <span class="hanzi-main">時間</span>
+        </span>
+
+        <span class="char-group">
+            <span class="pinyin-sub">guò</span>
+            <span class="hanzi-main">過</span>
+        </span>
+
+        得太快了！阿豪覺得今天真開心。
+    </p>
+
+</div>
+
+
+<div class="grammar-explanation">
+
+<strong>English Meaning:</strong>
+
+<p>
+    Ahao really likes a girl. Her name is Xiaomei, and she is
+    Ahao's friend.
+
+    Xiaomei is very beautiful and also extremely cute. Ahao thinks
+    that Xiaomei looks really beautiful when she smiles.
+
+    Today, Ahao and Xiaomei went to watch a movie together. They also
+    drank coffee together. Ahao was extremely happy.
+
+    However, whenever Ahao sees Xiaomei, he is often too nervous.
+    He wants to tell Xiaomei, "I like you."
+
+    Today, the time passed too quickly while he was with Xiaomei!
+    Ahao thinks today was really wonderful.
+</p>
+
+</div>
+
+</div>
+
+
+<!-- =====================================================
+     GRAMMAR
+===================================================== -->
+
+<div class="grammar-card">
+
+<h2>🧠 Grammar Patterns: Expressing Intensity</h2>
+
+
+<!-- SLIDE 1 -->
+
+<div class="grammar-slide active-slide" id="slide-1">
+
+<h3>1. 真 (zhēn) — really / truly</h3>
+
+<div class="pattern-display">
+    <div class="pattern-code">
+        真 + Adjective
     </div>
+</div>
+
+<div class="grammar-explanation">
+
+<p>
+    <strong>真</strong> is often used to express a strong and natural
+    personal feeling. It can sound emotional, spontaneous, and
+    conversational.
+</p>
+
+<p>
+    It is commonly used when the speaker wants to say
+    "really!" or "truly!"
+</p>
+
+</div>
+
+<div class="example-sentence">
+
+<div class="example-hanzi">
+    小美真漂亮。
+</div>
+
+<div>
+    Xiǎoměi zhēn piàoliang.
+</div>
+
+<div>
+    Xiaomei is really beautiful.
+</div>
+
+<button
+    class="sound-btn"
+    onclick="playAudio('小美真漂亮')"
+>
+    <i class="fas fa-volume-up"></i>
+</button>
+
+</div>
+
+</div>
+
+
+<!-- SLIDE 2 -->
+
+<div class="grammar-slide" id="slide-2">
+
+<h3>2. 非常 (fēicháng) — very / extremely</h3>
+
+<div class="pattern-display">
+    <div class="pattern-code">
+        非常 + Adjective / Verb
+    </div>
+</div>
+
+<div class="grammar-explanation">
+
+<p>
+    <strong>非常</strong> expresses a high degree of intensity.
+    It is generally stronger and more formal than 很.
+</p>
+
+<p>
+    Use it when you want to emphasize that something is
+    <strong>very</strong> or <strong>extremely</strong> strong.
+</p>
+
+</div>
+
+<div class="example-sentence">
+
+<div class="example-hanzi">
+    阿豪非常開心。
+</div>
+
+<div>
+    Ā Háo fēicháng kāixīn.
+</div>
+
+<div>
+    Ahao is extremely happy.
+</div>
+
+<button
+    class="sound-btn"
+    onclick="playAudio('阿豪非常開心')"
+>
+    <i class="fas fa-volume-up"></i>
+</button>
+
+</div>
+
+</div>
+
+
+<!-- SLIDE 3 -->
+
+<div class="grammar-slide" id="slide-3">
+
+<h3>3. 太……了 (tài...le) — too / so ...!</h3>
+
+<div class="pattern-display">
+
+<div class="pattern-code">
+    太 + Adjective / Verb + 了
+</div>
 
 </div>
 
 <div class="grammar-explanation">
-    <strong>English Meaning:</strong>
-    <p>
-        Ahao really likes a girl. Her name is Xiaomei, and she is Ahao's friend.
-        Xiaomei is very beautiful and also extremely cute. Ahao thinks that Xiaomei looks really beautiful when she smiles.
-        Today, Ahao and Xiaomei went to watch a movie together. They also drank coffee together. Ahao was extremely happy.
-        However, whenever Ahao sees Xiaomei, he is often too nervous. He wants to tell Xiaomei, "I like you."
-        Today, the time passed too quickly while he was with Xiaomei! Ahao thinks today was really wonderful.
-    </p>
-</div>
 
-</div><!-- =====================================================
-     GRAMMAR
-===================================================== --><div class="grammar-card"><h2>🧠 Grammar Patterns: Expressing Intensity</h2>
+<p>
+    <strong>太……了</strong> expresses an excessive or very strong
+    degree. Depending on the situation, it can mean "too..." or
+    "so...!"
+</p>
 
-<!-- SLIDE 1 -->
-<div class="grammar-slide active-slide" id="slide-1">
-
-    <h3>1. 真 (zhēn) — really / truly</h3>
-
-    <div class="pattern-display">
-        <div class="pattern-code">真 + Adjective</div>
-    </div>
-
-    <div class="grammar-explanation">
-        <p>
-            <strong>真</strong> is often used to express a strong and natural personal feeling.
-            It can sound emotional, spontaneous, and conversational.
-        </p>
-
-        <p>
-            It is commonly used when the speaker wants to say,
-            "really!" or "truly!"
-        </p>
-    </div>
-
-    <div class="example-sentence">
-        <div class="example-hanzi">小美真漂亮。</div>
-        <div>Xiǎoměi zhēn piàoliang.</div>
-        <div>Xiaomei is really beautiful.</div>
-
-        <button class="sound-btn" onclick="playAudio('小美真漂亮')">
-            <i class="fas fa-volume-up"></i>
-        </button>
-    </div>
+<p>
+    The <strong>了</strong> at the end helps give the sentence a
+    strong, expressive feeling.
+</p>
 
 </div>
 
-<!-- SLIDE 2 -->
-<div class="grammar-slide" id="slide-2">
+<div class="example-sentence">
 
-    <h3>2. 非常 (fēicháng) — very / extremely</h3>
+<div class="example-hanzi">
+    時間過得太快了！
+</div>
 
-    <div class="pattern-display">
-        <div class="pattern-code">非常 + Adjective / Verb</div>
-    </div>
+<div>
+    Shíjiān guò de tài kuài le!
+</div>
 
-    <div class="grammar-explanation">
-        <p>
-            <strong>非常</strong> expresses a high degree of intensity.
-            It is generally stronger and more formal than 很.
-        </p>
+<div>
+    Time passed too quickly!
+</div>
 
-        <p>
-            Use it when you want to emphasize that something is
-            <strong>very</strong> or <strong>extremely</strong> strong.
-        </p>
-    </div>
-
-    <div class="example-sentence">
-        <div class="example-hanzi">阿豪非常開心。</div>
-        <div>Ā Háo fēicháng kāixīn.</div>
-        <div>Ahao is extremely happy.</div>
-
-        <button class="sound-btn" onclick="playAudio('阿豪非常開心')">
-            <i class="fas fa-volume-up"></i>
-        </button>
-    </div>
+<button
+    class="sound-btn"
+    onclick="playAudio('時間過得太快了')"
+>
+    <i class="fas fa-volume-up"></i>
+</button>
 
 </div>
 
-<!-- SLIDE 3 -->
-<div class="grammar-slide" id="slide-3">
-
-    <h3>3. 太……了 (tài...le) — too / so ...!</h3>
-
-    <div class="pattern-display">
-        <div class="pattern-code">太 + Adjective / Verb + 了</div>
-    </div>
-
-    <div class="grammar-explanation">
-        <p>
-            <strong>太……了</strong> expresses an excessive or very strong degree.
-            Depending on the situation, it can mean "too..." or "so...!"
-        </p>
-
-        <p>
-            The <strong>了</strong> at the end helps give the sentence a strong,
-            expressive feeling.
-        </p>
-    </div>
-
-    <div class="example-sentence">
-        <div class="example-hanzi">時間過得太快了！</div>
-        <div>Shíjiān guò de tài kuài le!</div>
-        <div>Time passed too quickly!</div>
-
-        <button class="sound-btn" onclick="playAudio('時間過得太快了')">
-            <i class="fas fa-volume-up"></i>
-        </button>
-    </div>
-
 </div>
+
 
 <!-- SLIDE 4 -->
+
 <div class="grammar-slide" id="slide-4">
 
-    <h3>4. What Is the Difference?</h3>
+<h3>4. What Is the Difference?</h3>
 
-    <div class="grammar-explanation">
+<div class="grammar-explanation">
 
-        <p><strong>真</strong> — expresses a natural and personal feeling.</p>
-        <p>Example: 你真可愛！<br>"You are really cute!"</p>
+<p>
+    <strong>真</strong> — expresses a natural and personal feeling.
+</p>
 
-        <hr>
+<p>
+    Example: 你真可愛！<br>
+    "You are really cute!"
+</p>
 
-        <p><strong>非常</strong> — emphasizes a very high degree and sounds more neutral or formal.</p>
-        <p>Example: 我非常喜歡這部電影。<br>"I like this movie very much."</p>
+<hr>
 
-        <hr>
+<p>
+    <strong>非常</strong> — emphasizes a very high degree and sounds
+    more neutral or formal.
+</p>
 
-        <p><strong>太……了</strong> — expresses something that feels excessive, surprising, or strongly emotional.</p>
-        <p>Example: 今天太熱了！<br>"Today is too hot!"</p>
+<p>
+    Example: 我非常喜歡這部電影。<br>
+    "I like this movie very much."
+</p>
 
-    </div>
+<hr>
 
-    <div class="example-sentence">
-        <div class="example-hanzi">今天真開心！</div>
-        <div>Today is really wonderful!</div>
+<p>
+    <strong>太……了</strong> — expresses something that feels
+    excessive, surprising, or strongly emotional.
+</p>
 
-        <div style="margin-top:12px;" class="example-hanzi">我非常開心。</div>
-        <div>I am extremely happy.</div>
-
-        <div style="margin-top:12px;" class="example-hanzi">今天太開心了！</div>
-        <div>Today is so much fun!</div>
-    </div>
+<p>
+    Example: 今天太熱了！<br>
+    "Today is too hot!"
+</p>
 
 </div>
+
+<div class="example-sentence">
+
+<div class="example-hanzi">
+    今天真開心！
+</div>
+
+<div>
+    Today is really wonderful!
+</div>
+
+<div
+    style="margin-top:12px;"
+    class="example-hanzi"
+>
+    我非常開心。
+</div>
+
+<div>
+    I am extremely happy.
+</div>
+
+<div
+    style="margin-top:12px;"
+    class="example-hanzi"
+>
+    今天太開心了！
+</div>
+
+<div>
+    Today is so much fun!
+</div>
+
+</div>
+
+</div>
+
 
 <div class="slider-nav">
 
-    <button class="slider-btn" onclick="prevSlide()">← Prev</button>
+<button
+    class="slider-btn"
+    onclick="prevSlide()"
+>
+    ← Prev
+</button>
 
-    <div class="slider-indicators">
-        <span class="indicator active" onclick="currentSlide(1)"></span>
-        <span class="indicator" onclick="currentSlide(2)"></span>
-        <span class="indicator" onclick="currentSlide(3)"></span>
-        <span class="indicator" onclick="currentSlide(4)"></span>
-    </div>
+<div class="slider-indicators">
 
-    <button class="slider-btn" onclick="nextSlide()">Next →</button>
+<span
+    class="indicator active"
+    onclick="currentSlide(1)"
+></span>
+
+<span
+    class="indicator"
+    onclick="currentSlide(2)"
+></span>
+
+<span
+    class="indicator"
+    onclick="currentSlide(3)"
+></span>
+
+<span
+    class="indicator"
+    onclick="currentSlide(4)"
+></span>
 
 </div>
 
-</div><!-- =====================================================
+<button
+    class="slider-btn"
+    onclick="nextSlide()"
+>
+    Next →
+</button>
+
+</div>
+
+</div>
+
+
+<!-- =====================================================
      VOCABULARY
-===================================================== --><div class="lesson-card"><h2>📚 Vocabulary List</h2>
+===================================================== -->
+
+<div class="lesson-card">
+
+<h2>📚 Vocabulary List</h2>
 
 <p>Tap any vocabulary word to hear its pronunciation.</p>
 
 <div class="vocab-container">
 
-    <div class="vocab-pill" onclick="playAudio('阿豪')">
-        <div class="hanzi">阿豪</div>
-        <div class="pinyin">Ā Háo</div>
-        <div class="meaning">Ahao (name)</div>
-    </div>
+<div class="vocab-pill" onclick="playAudio('阿豪')">
+    <div class="hanzi">阿豪</div>
+    <div class="pinyin">Ā Háo</div>
+    <div class="meaning">Ahao (name)</div>
+</div>
 
-    <div class="vocab-pill" onclick="playAudio('小美')">
-        <div class="hanzi">小美</div>
-        <div class="pinyin">Xiǎoměi</div>
-        <div class="meaning">Xiaomei (name)</div>
-    </div>
+<div class="vocab-pill" onclick="playAudio('小美')">
+    <div class="hanzi">小美</div>
+    <div class="pinyin">Xiǎoměi</div>
+    <div class="meaning">Xiaomei (name)</div>
+</div>
 
-    <div class="vocab-pill" onclick="playAudio('覺得')">
-        <div class="hanzi">覺得</div>
-        <div class="pinyin">juéde</div>
-        <div class="meaning">to think / feel</div>
-    </div>
+<div class="vocab-pill" onclick="playAudio('覺得')">
+    <div class="hanzi">覺得</div>
+    <div class="pinyin">juéde</div>
+    <div class="meaning">to think / feel</div>
+</div>
 
-    <div class="vocab-pill" onclick="playAudio('笑')">
-        <div class="hanzi">笑</div>
-        <div class="pinyin">xiào</div>
-        <div class="meaning">to smile</div>
-    </div>
+<div class="vocab-pill" onclick="playAudio('笑')">
+    <div class="hanzi">笑</div>
+    <div class="pinyin">xiào</div>
+    <div class="meaning">to smile</div>
+</div>
 
-    <div class="vocab-pill" onclick="playAudio('的時候')">
-        <div class="hanzi">的時候</div>
-        <div class="pinyin">de shíhou</div>
-        <div class="meaning">when...</div>
-    </div>
+<div class="vocab-pill" onclick="playAudio('時候')">
+    <div class="hanzi">時候</div>
+    <div class="pinyin">shíhou</div>
+    <div class="meaning">time / moment; when</div>
+</div>
 
-    <div class="vocab-pill" onclick="playAudio('非常')">
-        <div class="hanzi">非常</div>
-        <div class="pinyin">fēicháng</div>
-        <div class="meaning">very / extremely</div>
-    </div>
+<div class="vocab-pill" onclick="playAudio('非常')">
+    <div class="hanzi">非常</div>
+    <div class="pinyin">fēicháng</div>
+    <div class="meaning">very / extremely</div>
+</div>
 
-    <div class="vocab-pill" onclick="playAudio('真')">
-        <div class="hanzi">真</div>
-        <div class="pinyin">zhēn</div>
-        <div class="meaning">really / truly</div>
-    </div>
+<div class="vocab-pill" onclick="playAudio('真')">
+    <div class="hanzi">真</div>
+    <div class="pinyin">zhēn</div>
+    <div class="meaning">really / truly</div>
+</div>
 
-    <div class="vocab-pill" onclick="playAudio('時候')">
-        <div class="hanzi">時候</div>
-        <div class="pinyin">shíhou</div>
-        <div class="meaning">time / moment; when</div>
-    </div>
+<div class="vocab-pill" onclick="playAudio('太')">
+    <div class="hanzi">太</div>
+    <div class="pinyin">tài</div>
+    <div class="meaning">too / excessively</div>
+</div>
 
-    <div class="vocab-pill" onclick="playAudio('太')">
-        <div class="hanzi">太</div>
-        <div class="pinyin">tài</div>
-        <div class="meaning">too / excessively</div>
-    </div>
+<div class="vocab-pill" onclick="playAudio('緊張')">
+    <div class="hanzi">緊張</div>
+    <div class="pinyin">jǐnzhāng</div>
+    <div class="meaning">nervous</div>
+</div>
 
-    <div class="vocab-pill" onclick="playAudio('緊張')">
-        <div class="hanzi">緊張</div>
-        <div class="pinyin">jǐnzhāng</div>
-        <div class="meaning">nervous</div>
-    </div>
+<div class="vocab-pill" onclick="playAudio('告訴')">
+    <div class="hanzi">告訴</div>
+    <div class="pinyin">gàosù</div>
+    <div class="meaning">to tell</div>
+</div>
 
-    <div class="vocab-pill" onclick="playAudio('告訴')">
-        <div class="hanzi">告訴</div>
-        <div class="pinyin">gàosù</div>
-        <div class="meaning">to tell</div>
-    </div>
+<div class="vocab-pill" onclick="playAudio('時間')">
+    <div class="hanzi">時間</div>
+    <div class="pinyin">shíjiān</div>
+    <div class="meaning">time</div>
+</div>
 
-    <div class="vocab-pill" onclick="playAudio('時間')">
-        <div class="hanzi">時間</div>
-        <div class="pinyin">shíjiān</div>
-        <div class="meaning">time</div>
-    </div>
+<div class="vocab-pill" onclick="playAudio('過')">
+    <div class="hanzi">過</div>
+    <div class="pinyin">guò</div>
+    <div class="meaning">to pass</div>
+</div>
 
-    <div class="vocab-pill" onclick="playAudio('過')">
-        <div class="hanzi">過</div>
-        <div class="pinyin">guò</div>
-        <div class="meaning">to pass</div>
-    </div>
-
-    <div class="vocab-pill" onclick="playAudio('在一起')">
-        <div class="hanzi">在一起</div>
-        <div class="pinyin">zài yīqǐ</div>
-        <div class="meaning">together</div>
-    </div>
+<div class="vocab-pill" onclick="playAudio('在一起')">
+    <div class="hanzi">在一起</div>
+    <div class="pinyin">zài yīqǐ</div>
+    <div class="meaning">together</div>
+</div>
 
 </div>
 
-</div><!-- =====================================================
-     GAME 1
-===================================================== --><div class="game-card"><span class="game-number">GAME 1</span>
+</div>
+
+
+<!-- GAME 1 -->
+
+<div class="game-card">
+
+<span class="game-number">GAME 1</span>
 
 <h2>🧩 Build the Sentence</h2>
 
@@ -1006,33 +1269,78 @@ p {
 </div>
 
 <div class="question-box">
-    <div class="question-label">Translate into Mandarin:</div>
-    <div class="question-meaning" id="g1Meaning"></div>
+
+<div class="question-label">
+    Translate into Mandarin:
 </div>
 
-<div class="answer-area" id="g1Answer">
-    <span class="answer-placeholder">Tap the words below</span>
+<div
+    class="question-meaning"
+    id="g1Meaning"
+></div>
+
 </div>
 
-<div class="word-bank" id="g1Bank"></div>
+<div
+    class="answer-area"
+    id="g1Answer"
+>
+    <span class="answer-placeholder">
+        Tap the words below
+    </span>
+</div>
+
+<div
+    class="word-bank"
+    id="g1Bank"
+></div>
 
 <div class="game-buttons">
-    <button class="check-btn" onclick="checkGame(1)">✓ Check</button>
-    <button class="reset-btn" onclick="resetGame(1)">↻ Reset</button>
-    <button class="listen-btn" onclick="listenCurrent(1)">
-        <i class="fas fa-volume-up"></i>
-    </button>
+
+<button
+    class="check-btn"
+    onclick="checkGame(1)"
+>
+    ✓ Check
+</button>
+
+<button
+    class="reset-btn"
+    onclick="resetGame(1)"
+>
+    ↻ Reset
+</button>
+
+<button
+    class="listen-btn"
+    onclick="listenCurrent(1)"
+>
+    <i class="fas fa-volume-up"></i>
+</button>
+
 </div>
 
-<div class="feedback" id="g1Feedback"></div>
+<div
+    class="feedback"
+    id="g1Feedback"
+></div>
 
-<button class="next-game-btn" id="g1Next" onclick="nextGameQuestion(1)">
+<button
+    class="next-game-btn"
+    id="g1Next"
+    onclick="nextGameQuestion(1)"
+>
     Next →
 </button>
 
-</div><!-- =====================================================
-     GAME 2
-===================================================== --><div class="game-card"><span class="game-number">GAME 2</span>
+</div>
+
+
+<!-- GAME 2 -->
+
+<div class="game-card">
+
+<span class="game-number">GAME 2</span>
 
 <h2>🔥 Choose the Correct Intensity Word</h2>
 
@@ -1043,21 +1351,44 @@ p {
 </div>
 
 <div class="question-box">
-    <div class="question-label">Choose the correct answer:</div>
-    <div class="question-meaning" id="g2Meaning"></div>
+
+<div class="question-label">
+    Choose the correct answer:
 </div>
 
-<div class="word-bank" id="g2Choices"></div>
+<div
+    class="question-meaning"
+    id="g2Meaning"
+></div>
 
-<div class="feedback" id="g2Feedback"></div>
+</div>
 
-<button class="next-game-btn" id="g2Next" onclick="nextChoiceQuestion()">
+<div
+    class="word-bank"
+    id="g2Choices"
+></div>
+
+<div
+    class="feedback"
+    id="g2Feedback"
+></div>
+
+<button
+    class="next-game-btn"
+    id="g2Next"
+    onclick="nextChoiceQuestion()"
+>
     Next →
 </button>
 
-</div><!-- =====================================================
-     GAME 3
-===================================================== --><div class="game-card"><span class="game-number">GAME 3</span>
+</div>
+
+
+<!-- GAME 3 -->
+
+<div class="game-card">
+
+<span class="game-number">GAME 3</span>
 
 <h2>💬 Complete the Story</h2>
 
@@ -1068,186 +1399,280 @@ p {
 </div>
 
 <div class="question-box">
-    <div class="question-label">Complete the sentence:</div>
-    <div class="question-meaning" id="g3Meaning"></div>
+
+<div class="question-label">
+    Complete the sentence:
 </div>
 
-<div class="word-bank" id="g3Choices"></div>
+<div
+    class="question-meaning"
+    id="g3Meaning"
+></div>
 
-<div class="feedback" id="g3Feedback"></div>
+</div>
 
-<button class="next-game-btn" id="g3Next" onclick="nextGame3Question()">
+<div
+    class="word-bank"
+    id="g3Choices"
+></div>
+
+<div
+    class="feedback"
+    id="g3Feedback"
+></div>
+
+<button
+    class="next-game-btn"
+    id="g3Next"
+    onclick="nextGame3Question()"
+>
     Next →
 </button>
 
-</div><!-- =====================================================
-     SENTENCE WRITING
-===================================================== --><div class="writing-card"><h2>📝 Sentence Writing</h2>
+</div>
+
+
+<!-- SENTENCE WRITING -->
+
+<div class="writing-card">
+
+<h2>📝 Sentence Writing</h2>
 
 <p>Write the complete Mandarin sentence using what you have learned.</p>
 
 <div class="sentence-writing">
 
-    <div class="sentence-prompt" id="sentencePrompt"></div>
+<div
+    class="sentence-prompt"
+    id="sentencePrompt"
+></div>
 
-    <div class="sentence-hint">
-        Type the sentence in Hanzi. Punctuation is optional.
-    </div>
+<div class="sentence-hint">
+    Type the sentence in Hanzi. Punctuation is optional.
+</div>
 
-    <input
-        type="text"
-        id="sentenceInput"
-        placeholder="Type Hanzi here..."
-        autocomplete="off"
-    >
+<input
+    type="text"
+    id="sentenceInput"
+    placeholder="Type Hanzi here..."
+    autocomplete="off"
+>
 
-    <button class="check-writing" onclick="checkSentenceWriting()">
-        Check Answer
-    </button>
+<button
+    class="check-writing"
+    onclick="checkSentenceWriting()"
+>
+    Check Answer
+</button>
 
-    <div class="feedback" id="sentenceFeedback"></div>
+<div
+    class="feedback"
+    id="sentenceFeedback"
+></div>
 
-    <button
-        class="next-game-btn"
-        id="nextSentenceBtn"
-        onclick="nextSentenceWriting()"
-    >
-        Next →
-    </button>
+<button
+    class="next-game-btn"
+    id="nextSentenceBtn"
+    onclick="nextSentenceWriting()"
+>
+    Next →
+</button>
 
 </div>
 
-</div><!-- =====================================================
-     HANZI WRITING
-===================================================== --><div class="writing-card"><h2>✍️ Hanzi Writing Practice</h2>
+</div>
+
+
+<!-- HANZI WRITING -->
+
+<div class="writing-card">
+
+<h2>✍️ Hanzi Writing Practice</h2>
 
 <p>
-    Practice the stroke order of every character used in this lesson's vocabulary.
+    Practice the stroke order of every character used in this
+    lesson's vocabulary.
 </p>
 
 <div class="writing-mode-buttons">
 
-    <button
-        class="mode-btn active"
-        onclick="setWritingMode('quiz',this)"
-    >
-        ✍️ Quiz
-    </button>
+<button
+    class="mode-btn active"
+    onclick="setWritingMode('quiz',this)"
+>
+    ✍️ Quiz
+</button>
 
-    <button
-        class="mode-btn"
-        onclick="setWritingMode('animate',this)"
-    >
-        👀 Animate
-    </button>
+<button
+    class="mode-btn"
+    onclick="setWritingMode('animate',this)"
+>
+    👀 Animate
+</button>
 
 </div>
 
-<div id="writingInfo" class="sentence-hint"></div>
+<div
+    id="writingInfo"
+    class="sentence-hint"
+></div>
 
 <div class="canvas-wrapper">
     <div id="target-div"></div>
 </div>
 
-<div class="feedback" id="writingFeedback"></div>
+<div
+    class="feedback"
+    id="writingFeedback"
+></div>
 
 <div class="writing-buttons">
 
-    <button
-        class="write-btn clear-btn"
-        onclick="resetWritingQuiz()"
-    >
-        ↻ Retry
-    </button>
+<button
+    class="write-btn clear-btn"
+    onclick="resetWritingQuiz()"
+>
+    ↻ Retry
+</button>
 
-    <button
-        class="write-btn"
-        style="background:#f0f7f4;color:#2d6a4f;border:1px solid #b7e4c7;"
-        onclick="playCurrentWriting()"
-    >
-        <i class="fas fa-volume-up"></i> Listen
-    </button>
+<button
+    class="write-btn"
+    style="background:#f0f7f4;color:#2d6a4f;border:1px solid #b7e4c7;"
+    onclick="playCurrentWriting()"
+>
+    <i class="fas fa-volume-up"></i>
+    Listen
+</button>
 
-    <button
-        class="write-btn next-write-btn"
-        onclick="nextWritingCharacter()"
-    >
-        Next →
-    </button>
+<button
+    class="write-btn next-write-btn"
+    onclick="nextWritingCharacter()"
+>
+    Next →
+</button>
 
 </div>
 
-</div><!-- =====================================================
-     FINAL CHALLENGE
-===================================================== --><div class="final-card"><span class="game-number">FINAL CHALLENGE</span>
+</div>
+
+
+<!-- FINAL CHALLENGE -->
+
+<div class="final-card">
+
+<span class="game-number">
+    FINAL CHALLENGE
+</span>
 
 <h2>🧋 Grammar Master</h2>
 
 <p>Complete all 10 questions and test your Mandarin skills!</p>
 
 <div class="grammar-explanation">
-    <p>
-        This challenge combines today's grammar practice with questions
-        from your previous learning journey.
-    </p>
+
+<p>
+    This challenge combines today's grammar practice with questions
+    from your previous learning journey.
+</p>
+
 </div>
 
 <div id="finalQuizContent">
 
-    <div class="question-box">
-        <div class="question-label">
-            Question <span id="finalNum">1</span> / 10
-        </div>
+<div class="question-box">
 
-        <div class="question-meaning" id="finalMeaning"></div>
-    </div>
+<div class="question-label">
+    Question <span id="finalNum">1</span> / 10
+</div>
 
-    <div class="answer-area" id="finalAnswer">
-        <span class="answer-placeholder">Build your answer</span>
-    </div>
-
-    <div class="word-bank" id="finalBank"></div>
-
-    <button
-        class="check-btn"
-        style="width:100%;"
-        onclick="checkFinal()"
-    >
-        ✓ Check Answer
-    </button>
-
-    <button
-        class="reset-btn"
-        style="width:100%;margin-top:8px;"
-        onclick="resetFinal()"
-    >
-        ↻ Reset Answer
-    </button>
-
-    <div class="feedback" id="finalFeedback"></div>
+<div
+    class="question-meaning"
+    id="finalMeaning"
+></div>
 
 </div>
 
-<div class="final-score" id="finalScore">0 / 10</div>
-
-<div class="unlock" id="unlockBox" style="display:none;">
-    🎉 <strong>Congratulations!</strong>
-    <p>You completed all 10 Grammar Master questions!</p>
+<div
+    class="answer-area"
+    id="finalAnswer"
+>
+    <span class="answer-placeholder">
+        Build your answer
+    </span>
 </div>
 
-</div></main>
-</div><script>
+<div
+    class="word-bank"
+    id="finalBank"
+></div>
+
+<button
+    class="check-btn"
+    style="width:100%;"
+    onclick="checkFinal()"
+>
+    ✓ Check Answer
+</button>
+
+<button
+    class="reset-btn"
+    style="width:100%;margin-top:8px;"
+    onclick="resetFinal()"
+>
+    ↻ Reset Answer
+</button>
+
+<div
+    class="feedback"
+    id="finalFeedback"
+></div>
+
+</div>
+
+<div
+    class="final-score"
+    id="finalScore"
+>
+    0 / 10
+</div>
+
+<div
+    class="unlock"
+    id="unlockBox"
+    style="display:none;"
+>
+
+🎉 <strong>Congratulations!</strong>
+
+<p>
+    You completed all 10 Grammar Master questions!
+</p>
+
+</div>
+
+</div>
+
+</main>
+</div>
+
+
+<script>
 
 /* =====================================================
    AUDIO
 ===================================================== */
 
 function playAudio(text) {
-    if (!("speechSynthesis" in window)) return;
+
+    if (!("speechSynthesis" in window)) {
+        return;
+    }
 
     window.speechSynthesis.cancel();
 
-    const utterance = new SpeechSynthesisUtterance(text);
+    const utterance =
+        new SpeechSynthesisUtterance(text);
+
     utterance.lang = "zh-TW";
     utterance.rate = 0.82;
     utterance.pitch = 1;
@@ -1255,20 +1680,53 @@ function playAudio(text) {
     window.speechSynthesis.speak(utterance);
 }
 
-function playFullReading() {
-    if (!("speechSynthesis" in window)) return;
+
+/* =====================================================
+   READING AUDIO
+===================================================== */
+
+const readingText = `
+阿豪很喜歡一個女生。她叫小美，是阿豪的朋友。
+
+小美很漂亮，也非常可愛。阿豪覺得小美笑的時候真好看。
+
+今天，阿豪跟小美在一起去看電影。他們也一起喝咖啡。阿豪非常開心。
+
+可是，阿豪看到小美的時候，常常太緊張了。他想告訴小美：「我喜歡你。」
+
+今天跟小美在一起，時間過得太快了！阿豪覺得今天真開心。
+`;
+
+function playReadingAudio() {
+
+    if (!("speechSynthesis" in window)) {
+        return;
+    }
 
     window.speechSynthesis.cancel();
 
-    const fullText = "阿豪喜歡小美。阿豪很喜歡一個女生。她叫小美，是阿豪的朋友。小美很漂亮，也非常可愛。阿豪覺得小美笑的時候真好看。今天，阿豪跟小美在一起去看電影。他們也一起喝咖啡。阿豪非常開心。可是，阿豪看到小美的時候，常常太緊張了。他想告訴小美：我喜歡你。今天跟小美在一起，時間過得太快了！阿豪覺得今天真開心。";
+    const utterance =
+        new SpeechSynthesisUtterance(readingText);
 
-    const utterance = new SpeechSynthesisUtterance(fullText);
     utterance.lang = "zh-TW";
-    utterance.rate = 0.82;
+
+    /* Slower speed for listening practice */
+    utterance.rate = 0.75;
+
     utterance.pitch = 1;
 
     window.speechSynthesis.speak(utterance);
 }
+
+
+function stopAudio() {
+
+    if ("speechSynthesis" in window) {
+        window.speechSynthesis.cancel();
+    }
+
+}
+
 
 /* =====================================================
    GRAMMAR SLIDER
@@ -1281,42 +1739,60 @@ function showSlide(index) {
 
     if (index >= totalSlides) {
         currentSlideIndex = 0;
+
     } else if (index < 0) {
         currentSlideIndex = totalSlides - 1;
+
     } else {
         currentSlideIndex = index;
     }
 
-    for (let i = 1; i <= totalSlides; i++) {
+    for (
+        let i = 1;
+        i <= totalSlides;
+        i++
+    ) {
+
         document
             .getElementById("slide-" + i)
             .classList.remove("active-slide");
     }
 
-    document.querySelectorAll(".indicator").forEach(indicator => {
-        indicator.classList.remove("active");
-    });
+    document
+        .querySelectorAll(".indicator")
+        .forEach(indicator => {
+
+            indicator.classList.remove("active");
+
+        });
 
     document
-        .getElementById("slide-" + (currentSlideIndex + 1))
+        .getElementById(
+            "slide-" + (currentSlideIndex + 1)
+        )
         .classList.add("active-slide");
 
     document
-        .querySelectorAll(".indicator")[currentSlideIndex]
+        .querySelectorAll(".indicator")
+        [currentSlideIndex]
         .classList.add("active");
 }
+
 
 function nextSlide() {
     showSlide(currentSlideIndex + 1);
 }
 
+
 function prevSlide() {
     showSlide(currentSlideIndex - 1);
 }
 
+
 function currentSlide(number) {
     showSlide(number - 1);
 }
+
 
 /* =====================================================
    SHUFFLE
@@ -1326,15 +1802,22 @@ function shuffle(array) {
 
     const copy = [...array];
 
-    for (let i = copy.length - 1; i > 0; i--) {
+    for (
+        let i = copy.length - 1;
+        i > 0;
+        i--
+    ) {
 
-        const j = Math.floor(Math.random() * (i + 1));
+        const j =
+            Math.floor(Math.random() * (i + 1));
 
-        [copy[i], copy[j]] = [copy[j], copy[i]];
+        [copy[i], copy[j]] =
+            [copy[j], copy[i]];
     }
 
     return copy;
 }
+
 
 /* =====================================================
    GAME 1
@@ -1345,33 +1828,78 @@ const games = {
     1: [
 
         {
-            meaning: "Ahao thinks Xiaomei is really beautiful when she smiles.",
-            answer: ["阿豪", "覺得", "小美", "笑", "的時候", "真", "好看"]
+            meaning:
+                "Ahao thinks Xiaomei is really beautiful when she smiles.",
+
+            answer: [
+                "阿豪",
+                "覺得",
+                "小美",
+                "笑",
+                "的時候",
+                "真",
+                "好看"
+            ]
         },
 
         {
-            meaning: "Ahao and Xiaomei are together today.",
-            answer: ["今天", "阿豪", "跟", "小美", "在", "一起"]
+            meaning:
+                "Ahao and Xiaomei are together today.",
+
+            answer: [
+                "今天",
+                "阿豪",
+                "跟",
+                "小美",
+                "在",
+                "一起"
+            ]
         },
 
         {
-            meaning: "Ahao is extremely happy.",
-            answer: ["阿豪", "非常", "開心"]
+            meaning:
+                "Ahao is extremely happy.",
+
+            answer: [
+                "阿豪",
+                "非常",
+                "開心"
+            ]
         },
 
         {
-            meaning: "Ahao is too nervous when he sees Xiaomei.",
-            answer: ["阿豪", "看到", "小美", "的時候", "太", "緊張", "了"]
+            meaning:
+                "Ahao is too nervous when he sees Xiaomei.",
+
+            answer: [
+                "阿豪",
+                "看到",
+                "小美",
+                "的時候",
+                "太",
+                "緊張",
+                "了"
+            ]
         },
 
         {
-            meaning: "Time passed too quickly.",
-            answer: ["時間", "過", "得", "太", "快", "了"]
+            meaning:
+                "Time passed too quickly.",
+
+            answer: [
+                "時間",
+                "過",
+                "得",
+                "太",
+                "快",
+                "了"
+            ]
         }
 
     ]
 
 };
+
 
 const gameState = {
 
@@ -1383,38 +1911,47 @@ const gameState = {
 
 };
 
+
 function loadGame(gameNumber) {
 
-    const state = gameState[gameNumber];
-    const data = games[gameNumber][state.index];
+    const state =
+        gameState[gameNumber];
+
+    const data =
+        games[gameNumber][state.index];
 
     state.selected = [];
     state.done = false;
 
     document.getElementById(
         "g" + gameNumber + "Num"
-    ).textContent = state.index + 1;
+    ).textContent =
+        state.index + 1;
 
     document.getElementById(
         "g" + gameNumber + "Meaning"
-    ).textContent = data.meaning;
+    ).textContent =
+        data.meaning;
 
-    const answerArea = document.getElementById(
-        "g" + gameNumber + "Answer"
-    );
+    const answerArea =
+        document.getElementById(
+            "g" + gameNumber + "Answer"
+        );
 
     answerArea.innerHTML =
         '<span class="answer-placeholder">Tap the words below</span>';
 
-    const bank = document.getElementById(
-        "g" + gameNumber + "Bank"
-    );
+    const bank =
+        document.getElementById(
+            "g" + gameNumber + "Bank"
+        );
 
     bank.innerHTML = "";
 
     shuffle(data.answer).forEach(word => {
 
-        const button = document.createElement("button");
+        const button =
+            document.createElement("button");
 
         button.className = "word-btn";
         button.textContent = word;
@@ -1426,7 +1963,10 @@ function loadGame(gameNumber) {
             state.selected.push(word);
 
             button.disabled = true;
-            button.classList.add("selected");
+
+            button.classList.add(
+                "selected"
+            );
 
             playAudio(word);
 
@@ -1445,41 +1985,57 @@ function loadGame(gameNumber) {
     ).style.display = "none";
 }
 
+
 function renderSelected(gameNumber) {
 
-    const area = document.getElementById(
-        "g" + gameNumber + "Answer"
-    );
+    const area =
+        document.getElementById(
+            "g" + gameNumber + "Answer"
+        );
 
     area.innerHTML = "";
 
-    gameState[gameNumber].selected.forEach(word => {
+    gameState[gameNumber]
+        .selected
+        .forEach(word => {
 
-        const span = document.createElement("span");
+            const span =
+                document.createElement("span");
 
-        span.className = "selected-word";
-        span.textContent = word;
+            span.className =
+                "selected-word";
 
-        span.onclick = function() {
-            playAudio(word);
-        };
+            span.textContent = word;
 
-        area.appendChild(span);
-    });
+            span.onclick = function() {
+                playAudio(word);
+            };
+
+            area.appendChild(span);
+
+        });
 }
+
 
 function checkGame(gameNumber) {
 
-    const state = gameState[gameNumber];
+    const state =
+        gameState[gameNumber];
 
     const correct =
-        games[gameNumber][state.index].answer;
+        games[gameNumber]
+            [state.index]
+            .answer;
 
-    const feedback = document.getElementById(
-        "g" + gameNumber + "Feedback"
-    );
+    const feedback =
+        document.getElementById(
+            "g" + gameNumber + "Feedback"
+        );
 
-    if (state.selected.length !== correct.length) {
+    if (
+        state.selected.length !==
+        correct.length
+    ) {
 
         feedback.textContent =
             "⚠️ Complete the sentence first.";
@@ -1492,17 +2048,23 @@ function checkGame(gameNumber) {
 
     const isCorrect =
         state.selected.every(
-            (word, index) => word === correct[index]
+            (word, index) =>
+                word === correct[index]
         );
 
     if (isCorrect) {
 
-        feedback.textContent = "🎉 Correct!";
-        feedback.className = "feedback correct";
+        feedback.textContent =
+            "🎉 Correct!";
+
+        feedback.className =
+            "feedback correct";
 
         state.done = true;
 
-        playAudio(correct.join(""));
+        playAudio(
+            correct.join("")
+        );
 
         document.getElementById(
             "g" + gameNumber + "Next"
@@ -1518,38 +2080,49 @@ function checkGame(gameNumber) {
     }
 }
 
+
 function resetGame(gameNumber) {
     loadGame(gameNumber);
 }
 
+
 function nextGameQuestion(gameNumber) {
 
-    const state = gameState[gameNumber];
+    const state =
+        gameState[gameNumber];
 
     if (!state.done) return;
 
     state.index++;
 
     if (
-        state.index >= games[gameNumber].length
+        state.index >=
+        games[gameNumber].length
     ) {
+
         state.index = 0;
     }
 
     loadGame(gameNumber);
 }
 
+
 function listenCurrent(gameNumber) {
 
-    const state = gameState[gameNumber];
+    const state =
+        gameState[gameNumber];
 
     playAudio(
-        games[gameNumber][state.index].answer.join("")
+        games[gameNumber]
+            [state.index]
+            .answer
+            .join("")
     );
 }
 
+
 /* =====================================================
-   GAME 2 — INTENSITY
+   GAME 2
 ===================================================== */
 
 const game2Questions = [
@@ -1557,62 +2130,96 @@ const game2Questions = [
     {
         question: "小美 ______ 可愛。",
         answer: "非常",
-        choices: ["非常", "太", "的時候"]
+        choices: [
+            "非常",
+            "太",
+            "的時候"
+        ]
     },
 
     {
         question: "你 ______ 漂亮！",
         answer: "真",
-        choices: ["真", "告訴", "過"]
+        choices: [
+            "真",
+            "告訴",
+            "過"
+        ]
     },
 
     {
         question: "今天 ______ 熱了！",
         answer: "太",
-        choices: ["太", "非常", "笑"]
+        choices: [
+            "太",
+            "非常",
+            "笑"
+        ]
     },
 
     {
         question: "阿豪 ______ 喜歡小美。",
         answer: "非常",
-        choices: ["非常", "時候", "在一起"]
+        choices: [
+            "非常",
+            "時候",
+            "在一起"
+        ]
     },
 
     {
         question: "今天 ______ 開心！",
         answer: "真",
-        choices: ["真", "過", "緊張"]
+        choices: [
+            "真",
+            "過",
+            "緊張"
+        ]
     }
 
 ];
 
+
 let game2Index = 0;
+
 
 function loadGame2() {
 
-    const data = game2Questions[game2Index];
+    const data =
+        game2Questions[game2Index];
 
-    document.getElementById("g2Num").textContent =
+    document.getElementById(
+        "g2Num"
+    ).textContent =
         game2Index + 1;
 
-    document.getElementById("g2Meaning").textContent =
+    document.getElementById(
+        "g2Meaning"
+    ).textContent =
         data.question;
 
     const choicesArea =
-        document.getElementById("g2Choices");
+        document.getElementById(
+            "g2Choices"
+        );
 
     choicesArea.innerHTML = "";
 
     shuffle(data.choices).forEach(choice => {
 
-        const button = document.createElement("button");
+        const button =
+            document.createElement("button");
 
-        button.className = "word-btn";
-        button.textContent = choice;
+        button.className =
+            "word-btn";
 
-        button.onclick = function() {
-            checkGame2Choice(choice);
-        };
+        button.textContent =
+            choice;
+
+        button.onclick =
+            function() {
+                checkGame2Choice(choice);
+            };
 
         choicesArea.appendChild(button);
     });
@@ -1626,17 +2233,24 @@ function loadGame2() {
     ).style.display = "none";
 }
 
+
 function checkGame2Choice(choice) {
 
-    const data = game2Questions[game2Index];
+    const data =
+        game2Questions[game2Index];
 
     const feedback =
-        document.getElementById("g2Feedback");
+        document.getElementById(
+            "g2Feedback"
+        );
 
     if (choice === data.answer) {
 
-        feedback.textContent = "🎉 Correct!";
-        feedback.className = "feedback correct";
+        feedback.textContent =
+            "🎉 Correct!";
+
+        feedback.className =
+            "feedback correct";
 
         playAudio(choice);
 
@@ -1654,84 +2268,137 @@ function checkGame2Choice(choice) {
     }
 }
 
+
 function nextChoiceQuestion() {
 
     game2Index++;
 
-    if (game2Index >= game2Questions.length) {
+    if (
+        game2Index >=
+        game2Questions.length
+    ) {
+
         game2Index = 0;
     }
 
     loadGame2();
 }
 
+
 /* =====================================================
-   GAME 3 — VOCABULARY
+   GAME 3
 ===================================================== */
 
 const game3Questions = [
 
     {
-        question: "阿豪想 ______ 小美：「我喜歡你。」",
+        question:
+            "阿豪想 ______ 小美：「我喜歡你。」",
+
         answer: "告訴",
-        choices: ["告訴", "過", "笑"]
+
+        choices: [
+            "告訴",
+            "過",
+            "笑"
+        ]
     },
 
     {
-        question: "看到喜歡的人，他常常很 ______。",
+        question:
+            "看到喜歡的人，他常常很 ______。",
+
         answer: "緊張",
-        choices: ["緊張", "非常", "時間"]
+
+        choices: [
+            "緊張",
+            "非常",
+            "時間"
+        ]
     },
 
     {
-        question: "小美 ______ 的時候很好看。",
+        question:
+            "小美 ______ 的時候很好看。",
+
         answer: "笑",
-        choices: ["笑", "告訴", "太"]
+
+        choices: [
+            "笑",
+            "告訴",
+            "太"
+        ]
     },
 
     {
-        question: "今天跟朋友 ______，我很開心。",
+        question:
+            "今天跟朋友 ______，我很開心。",
+
         answer: "在一起",
-        choices: ["在一起", "時候", "真"]
+
+        choices: [
+            "在一起",
+            "時候",
+            "真"
+        ]
     },
 
     {
-        question: "______ 過得太快了！",
+        question:
+            "______ 過得太快了！",
+
         answer: "時間",
-        choices: ["時間", "緊張", "小美"]
+
+        choices: [
+            "時間",
+            "緊張",
+            "小美"
+        ]
     }
 
 ];
 
+
 let game3Index = 0;
+
 
 function loadGame3() {
 
-    const data = game3Questions[game3Index];
+    const data =
+        game3Questions[game3Index];
 
     document.getElementById(
         "g3Num"
-    ).textContent = game3Index + 1;
+    ).textContent =
+        game3Index + 1;
 
     document.getElementById(
         "g3Meaning"
-    ).textContent = data.question;
+    ).textContent =
+        data.question;
 
     const choicesArea =
-        document.getElementById("g3Choices");
+        document.getElementById(
+            "g3Choices"
+        );
 
     choicesArea.innerHTML = "";
 
     shuffle(data.choices).forEach(choice => {
 
-        const button = document.createElement("button");
+        const button =
+            document.createElement("button");
 
-        button.className = "word-btn";
-        button.textContent = choice;
+        button.className =
+            "word-btn";
 
-        button.onclick = function() {
-            checkGame3Choice(choice);
-        };
+        button.textContent =
+            choice;
+
+        button.onclick =
+            function() {
+                checkGame3Choice(choice);
+            };
 
         choicesArea.appendChild(button);
     });
@@ -1745,17 +2412,24 @@ function loadGame3() {
     ).style.display = "none";
 }
 
+
 function checkGame3Choice(choice) {
 
-    const data = game3Questions[game3Index];
+    const data =
+        game3Questions[game3Index];
 
     const feedback =
-        document.getElementById("g3Feedback");
+        document.getElementById(
+            "g3Feedback"
+        );
 
     if (choice === data.answer) {
 
-        feedback.textContent = "🎉 Correct!";
-        feedback.className = "feedback correct";
+        feedback.textContent =
+            "🎉 Correct!";
+
+        feedback.className =
+            "feedback correct";
 
         playAudio(choice);
 
@@ -1773,16 +2447,22 @@ function checkGame3Choice(choice) {
     }
 }
 
+
 function nextGame3Question() {
 
     game3Index++;
 
-    if (game3Index >= game3Questions.length) {
+    if (
+        game3Index >=
+        game3Questions.length
+    ) {
+
         game3Index = 0;
     }
 
     loadGame3();
 }
+
 
 /* =====================================================
    SENTENCE WRITING
@@ -1791,45 +2471,69 @@ function nextGame3Question() {
 const sentenceQuestions = [
 
     {
-        prompt: "Ahao thinks Xiaomei is really beautiful.",
-        answer: "阿豪覺得小美真漂亮"
+        prompt:
+            "Ahao thinks Xiaomei is really beautiful.",
+
+        answer:
+            "阿豪覺得小美真漂亮"
     },
 
     {
-        prompt: "Xiaomei is extremely cute.",
-        answer: "小美非常可愛"
+        prompt:
+            "Xiaomei is extremely cute.",
+
+        answer:
+            "小美非常可愛"
     },
 
     {
-        prompt: "Ahao is too nervous.",
-        answer: "阿豪太緊張了"
+        prompt:
+            "Ahao is too nervous.",
+
+        answer:
+            "阿豪太緊張了"
     },
 
     {
-        prompt: "Ahao wants to tell Xiaomei that he likes her.",
-        answer: "阿豪想告訴小美我喜歡你"
+        prompt:
+            "Ahao wants to tell Xiaomei that he likes her.",
+
+        answer:
+            "阿豪想告訴小美我喜歡你"
     },
 
     {
-        prompt: "Time passed too quickly.",
-        answer: "時間過得太快了"
+        prompt:
+            "Time passed too quickly.",
+
+        answer:
+            "時間過得太快了"
     },
 
     {
-        prompt: "Ahao and Xiaomei are together.",
-        answer: "阿豪跟小美在一起"
+        prompt:
+            "Ahao and Xiaomei are together.",
+
+        answer:
+            "阿豪跟小美在一起"
     }
 
 ];
 
+
 let sentenceIndex = 0;
+
 
 function normalizeSentence(text) {
 
     return text
-        .replace(/[。，！？!?「」""\s]/g, "")
+        .replace(
+            /[。，！？!?「」""\s]/g,
+            ""
+        )
         .trim();
 }
+
 
 function loadSentenceWriting() {
 
@@ -1851,26 +2555,38 @@ function loadSentenceWriting() {
     ).style.display = "none";
 }
 
+
 function checkSentenceWriting() {
 
-    const input = normalizeSentence(
-        document.getElementById("sentenceInput").value
-    );
+    const input =
+        normalizeSentence(
+            document.getElementById(
+                "sentenceInput"
+            ).value
+        );
 
-    const correct = normalizeSentence(
-        sentenceQuestions[sentenceIndex].answer
-    );
+    const correct =
+        normalizeSentence(
+            sentenceQuestions[sentenceIndex]
+                .answer
+        );
 
     const feedback =
-        document.getElementById("sentenceFeedback");
+        document.getElementById(
+            "sentenceFeedback"
+        );
 
     if (input === correct) {
 
-        feedback.textContent = "🎉 Perfect!";
-        feedback.className = "feedback correct";
+        feedback.textContent =
+            "🎉 Perfect!";
+
+        feedback.className =
+            "feedback correct";
 
         playAudio(
-            sentenceQuestions[sentenceIndex].answer
+            sentenceQuestions[sentenceIndex]
+                .answer
         );
 
         document.getElementById(
@@ -1887,22 +2603,25 @@ function checkSentenceWriting() {
     }
 }
 
+
 function nextSentenceWriting() {
 
     sentenceIndex++;
 
     if (
-        sentenceIndex >= sentenceQuestions.length
+        sentenceIndex >=
+        sentenceQuestions.length
     ) {
+
         sentenceIndex = 0;
     }
 
     loadSentenceWriting();
 }
 
+
 /* =====================================================
    HANZI WRITING
-   Every character appearing in the Lesson 21 vocabulary
 ===================================================== */
 
 const writingCharacters = [
@@ -1914,19 +2633,17 @@ const writingCharacters = [
     { hanzi: "美", pinyin: "měi", meaning: "beautiful" },
 
     { hanzi: "覺", pinyin: "jué", meaning: "to feel / think" },
-    { hanzi: "得", pinyin: "de", meaning: "complement particle / obtain" },
+    { hanzi: "得", pinyin: "de", meaning: "complement particle" },
 
     { hanzi: "笑", pinyin: "xiào", meaning: "to smile" },
 
-    { hanzi: "的", pinyin: "de", meaning: "possessive particle" },
-
     { hanzi: "時", pinyin: "shí", meaning: "time" },
-    { hanzi: "候", pinyin: "hou", meaning: "wait / part of 時候" },
+    { hanzi: "候", pinyin: "hou", meaning: "part of 時候" },
 
     { hanzi: "非", pinyin: "fēi", meaning: "not / non-" },
     { hanzi: "常", pinyin: "cháng", meaning: "often / usual" },
 
-    { hanzi: "真", pinyin: "zhēn", meaning: "real / truly" },
+    { hanzi: "真", pinyin: "zhēn", meaning: "really / truly" },
 
     { hanzi: "太", pinyin: "tài", meaning: "too / excessively" },
 
@@ -1946,9 +2663,11 @@ const writingCharacters = [
 
 ];
 
+
 let writingIndex = 0;
 let writingMode = "quiz";
 let writer = null;
+
 
 function initWriter() {
 
@@ -1960,12 +2679,19 @@ function initWriter() {
     ).innerHTML = "";
 
     const info =
-        document.getElementById("writingInfo");
+        document.getElementById(
+            "writingInfo"
+        );
 
-    info.innerHTML =
-        `<strong>${item.hanzi}</strong> (${item.pinyin}) — ${item.meaning}
+    info.innerHTML = `
+        <strong>${item.hanzi}</strong>
+        (${item.pinyin}) — ${item.meaning}
         <br>
-        Character ${writingIndex + 1} / ${writingCharacters.length}`;
+        Character
+        ${writingIndex + 1}
+        /
+        ${writingCharacters.length}
+    `;
 
     writer = HanziWriter.create(
         "target-div",
@@ -1978,21 +2704,28 @@ function initWriter() {
             strokeAnimationSpeed: 1,
             drawingColor: "#5c4033",
             strokeHighlightColor: "#b8865c",
-            showCharacter: writingMode === "animate"
+            showCharacter:
+                writingMode === "animate"
         }
     );
 
     if (writingMode === "quiz") {
+
         startQuiz();
+
     } else {
+
         writer.animateCharacter();
     }
 }
 
+
 function startQuiz() {
 
     const feedback =
-        document.getElementById("writingFeedback");
+        document.getElementById(
+            "writingFeedback"
+        );
 
     feedback.textContent = "";
 
@@ -2028,35 +2761,43 @@ function startQuiz() {
     });
 }
 
+
 function setWritingMode(mode, button) {
 
     writingMode = mode;
 
     document
         .querySelectorAll(".mode-btn")
-        .forEach(btn => btn.classList.remove("active"));
+        .forEach(btn =>
+            btn.classList.remove("active")
+        );
 
     button.classList.add("active");
 
     initWriter();
 }
 
+
 function resetWritingQuiz() {
     initWriter();
 }
+
 
 function nextWritingCharacter() {
 
     writingIndex++;
 
     if (
-        writingIndex >= writingCharacters.length
+        writingIndex >=
+        writingCharacters.length
     ) {
+
         writingIndex = 0;
     }
 
     initWriter();
 }
+
 
 function playCurrentWriting() {
 
@@ -2065,45 +2806,81 @@ function playCurrentWriting() {
     );
 }
 
+
 /* =====================================================
    FINAL CHALLENGE
-   5 CURRENT MATERIAL QUESTIONS
 ===================================================== */
 
 const currentMaterialQuestions = [
 
     {
-        meaning: "Xiaomei is really beautiful.",
-        answer: ["小美", "真", "漂亮"]
+        meaning:
+            "Xiaomei is really beautiful.",
+
+        answer: [
+            "小美",
+            "真",
+            "漂亮"
+        ]
     },
 
     {
-        meaning: "Ahao is extremely happy.",
-        answer: ["阿豪", "非常", "開心"]
+        meaning:
+            "Ahao is extremely happy.",
+
+        answer: [
+            "阿豪",
+            "非常",
+            "開心"
+        ]
     },
 
     {
-        meaning: "Ahao is too nervous.",
-        answer: ["阿豪", "太", "緊張", "了"]
+        meaning:
+            "Ahao is too nervous.",
+
+        answer: [
+            "阿豪",
+            "太",
+            "緊張",
+            "了"
+        ]
     },
 
     {
-        meaning: "Time passed too quickly.",
-        answer: ["時間", "過", "得", "太", "快", "了"]
+        meaning:
+            "Time passed too quickly.",
+
+        answer: [
+            "時間",
+            "過",
+            "得",
+            "太",
+            "快",
+            "了"
+        ]
     },
 
     {
-        meaning: "Ahao wants to tell Xiaomei that he likes her.",
-        answer: ["阿豪", "想", "告訴", "小美", "我", "喜歡", "你"]
+        meaning:
+            "Ahao wants to tell Xiaomei that he likes her.",
+
+        answer: [
+            "阿豪",
+            "想",
+            "告訴",
+            "小美",
+            "我",
+            "喜歡",
+            "你"
+        ]
     }
 
 ];
 
-/* =====================================================
-   REVIEW QUESTION COLLECTION
 
-   Only questions from previous available lessons are used.
-   No hard-coded fallback review questions exist.
+/* =====================================================
+   REVIEW DATABASE
 ===================================================== */
 
 function getReviewQuestionPool() {
@@ -2117,31 +2894,43 @@ function getReviewQuestionPool() {
 
     const pool = [];
 
-    for (let lessonNumber = 1; lessonNumber <= 20; lessonNumber++) {
+    for (
+        let lessonNumber = 1;
+        lessonNumber <= 20;
+        lessonNumber++
+    ) {
 
         const lesson =
             allLessonsData[lessonNumber];
 
         if (
             lesson &&
-            Array.isArray(lesson.reviewQuestions)
+            Array.isArray(
+                lesson.reviewQuestions
+            )
         ) {
 
-            lesson.reviewQuestions.forEach(question => {
+            lesson.reviewQuestions.forEach(
+                question => {
 
-                if (
-                    question &&
-                    typeof question.meaning === "string" &&
-                    Array.isArray(question.answer) &&
-                    question.answer.length > 0
-                ) {
-                    pool.push({
-                        meaning: question.meaning,
-                        answer: [...question.answer]
-                    });
+                    if (
+                        question &&
+                        typeof question.meaning === "string" &&
+                        Array.isArray(question.answer) &&
+                        question.answer.length > 0
+                    ) {
+
+                        pool.push({
+                            meaning:
+                                question.meaning,
+
+                            answer:
+                                [...question.answer]
+                        });
+                    }
+
                 }
-
-            });
+            );
 
         }
 
@@ -2149,6 +2938,7 @@ function getReviewQuestionPool() {
 
     return pool;
 }
+
 
 /* =====================================================
    FINAL QUIZ
@@ -2159,6 +2949,7 @@ let finalIndex = 0;
 let finalScore = 0;
 let finalSelected = [];
 let finalLocked = false;
+
 
 function showFinalError(message) {
 
@@ -2171,8 +2962,10 @@ function showFinalError(message) {
 
     document.getElementById(
         "finalScore"
-    ).textContent = "Unavailable";
+    ).textContent =
+        "Unavailable";
 }
+
 
 function initFinalQuestions() {
 
@@ -2182,7 +2975,7 @@ function initFinalQuestions() {
     if (reviewPool === null) {
 
         showFinalError(
-            "⚠️ The review database could not be loaded. Please make sure the required data file is available, then refresh this page."
+            "⚠️ The review database could not be loaded. Please check lesson.js and refresh this page."
         );
 
         return false;
@@ -2191,7 +2984,7 @@ function initFinalQuestions() {
     if (reviewPool.length < 5) {
 
         showFinalError(
-            "⚠️ There are not enough review questions available to start the final challenge. Please check the review database and refresh the page."
+            "⚠️ There are not enough review questions available to start the final challenge."
         );
 
         return false;
@@ -2200,31 +2993,15 @@ function initFinalQuestions() {
     const selectedReviews =
         shuffle(reviewPool).slice(0, 5);
 
-    if (selectedReviews.length !== 5) {
-
-        showFinalError(
-            "⚠️ The final challenge could not prepare enough review questions. Please refresh the page after checking the learning database."
-        );
-
-        return false;
-    }
-
-    finalQuestions = shuffle([
-        ...currentMaterialQuestions,
-        ...selectedReviews
-    ]);
-
-    if (finalQuestions.length !== 10) {
-
-        showFinalError(
-            "⚠️ The final challenge could not prepare all 10 questions correctly. Please refresh the page."
-        );
-
-        return false;
-    }
+    finalQuestions =
+        shuffle([
+            ...currentMaterialQuestions,
+            ...selectedReviews
+        ]);
 
     return true;
 }
+
 
 function loadFinal() {
 
@@ -2240,11 +3017,13 @@ function loadFinal() {
 
     document.getElementById(
         "finalNum"
-    ).textContent = finalIndex + 1;
+    ).textContent =
+        finalIndex + 1;
 
     document.getElementById(
         "finalMeaning"
-    ).textContent = question.meaning;
+    ).textContent =
+        question.meaning;
 
     finalSelected = [];
 
@@ -2254,62 +3033,88 @@ function loadFinal() {
         '<span class="answer-placeholder">Build your answer</span>';
 
     const bank =
-        document.getElementById("finalBank");
+        document.getElementById(
+            "finalBank"
+        );
 
     bank.innerHTML = "";
 
-    shuffle(question.answer).forEach(word => {
+    shuffle(question.answer).forEach(
+        word => {
 
-        const button =
-            document.createElement("button");
+            const button =
+                document.createElement("button");
 
-        button.className = "word-btn";
-        button.textContent = word;
+            button.className =
+                "word-btn";
 
-        button.onclick = function() {
+            button.textContent =
+                word;
 
-            if (button.disabled || finalLocked) return;
+            button.onclick =
+                function() {
 
-            finalSelected.push(word);
+                    if (
+                        button.disabled ||
+                        finalLocked
+                    ) return;
 
-            button.disabled = true;
-            button.classList.add("selected");
+                    finalSelected.push(word);
 
-            playAudio(word);
+                    button.disabled = true;
 
-            renderFinal();
-        };
+                    button.classList.add(
+                        "selected"
+                    );
 
-        bank.appendChild(button);
-    });
+                    playAudio(word);
+
+                    renderFinal();
+                };
+
+            bank.appendChild(button);
+
+        }
+    );
 
     document.getElementById(
         "finalFeedback"
     ).textContent = "";
 }
 
+
 function renderFinal() {
 
     const area =
-        document.getElementById("finalAnswer");
+        document.getElementById(
+            "finalAnswer"
+        );
 
     area.innerHTML = "";
 
-    finalSelected.forEach(word => {
+    finalSelected.forEach(
+        word => {
 
-        const span =
-            document.createElement("span");
+            const span =
+                document.createElement("span");
 
-        span.className = "selected-word";
-        span.textContent = word;
+            span.className =
+                "selected-word";
 
-        span.onclick = function() {
-            playAudio(word);
-        };
+            span.textContent =
+                word;
 
-        area.appendChild(span);
-    });
+            span.onclick =
+                function() {
+                    playAudio(word);
+                };
+
+            area.appendChild(span);
+
+        }
+    );
 }
+
 
 function resetFinal() {
 
@@ -2317,6 +3122,7 @@ function resetFinal() {
 
     loadFinal();
 }
+
 
 function checkFinal() {
 
@@ -2332,10 +3138,13 @@ function checkFinal() {
         finalQuestions[finalIndex].answer;
 
     const feedback =
-        document.getElementById("finalFeedback");
+        document.getElementById(
+            "finalFeedback"
+        );
 
     if (
-        finalSelected.length !== correct.length
+        finalSelected.length !==
+        correct.length
     ) {
 
         feedback.textContent =
@@ -2349,7 +3158,8 @@ function checkFinal() {
 
     const isCorrect =
         finalSelected.every(
-            (word, index) => word === correct[index]
+            (word, index) =>
+                word === correct[index]
         );
 
     if (isCorrect) {
@@ -2411,6 +3221,7 @@ function checkFinal() {
     }
 }
 
+
 /* =====================================================
    INITIALIZE
 ===================================================== */
@@ -2418,12 +3229,18 @@ function checkFinal() {
 loadGame(1);
 loadGame2();
 loadGame3();
+
 loadSentenceWriting();
+
 initWriter();
 
 if (initFinalQuestions()) {
     loadFinal();
 }
 
-</script><script src="../script.js"></script></body>
+</script>
+
+<script src="../script.js"></script>
+
+</body>
 </html>
