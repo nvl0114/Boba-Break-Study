@@ -1859,6 +1859,163 @@ answer: ["銀行", "在", "郵局", "的", "哪裡"]
     ]
 }
 
+// ========================================================
+// LESSON 21
+// ========================================================
+21: {
+    grammar: [
+        {
+            id: "zhen",
+            name: "真 (zhēn)",
+            category: "Degree Adverb",
+            explanation: "真 means 'really' or 'truly'. It is commonly used before an adjective to emphasize a strong feeling or opinion.",
+            examples: [
+                ["小美真漂亮。", "Xiǎoměi zhēn piàoliang.", "Xiaomei is really beautiful."],
+                ["今天真開心。", "Jīntiān zhēn kāixīn.", "Today is really happy."],
+                ["她笑的時候真好看。", "Tā xiào de shíhou zhēn hǎokàn.", "She looks really beautiful when she smiles."]
+            ]
+        },
+        {
+            id: "feichang",
+            name: "非常 (fēicháng)",
+            category: "Degree Adverb",
+            explanation: "非常 means 'very' or 'extremely'. It is used before adjectives or verbs to express a high degree of intensity.",
+            examples: [
+                ["小美非常可愛。", "Xiǎoměi fēicháng kě'ài.", "Xiaomei is extremely cute."],
+                ["阿豪非常開心。", "Ā Háo fēicháng kāixīn.", "Ahao is very happy."],
+                ["阿豪非常喜歡小美。", "Ā Háo fēicháng xǐhuān Xiǎoměi.", "Ahao likes Xiaomei very much."]
+            ]
+        },
+        {
+            id: "tai_le",
+            name: "太……了 (tài...le)",
+            category: "Degree Expression",
+            explanation: "太……了 means 'too' or 'so' followed by an adjective or situation. It expresses that something reaches a very high or excessive degree.",
+            examples: [
+                ["阿豪太緊張了。", "Ā Háo tài jǐnzhāng le.", "Ahao is too nervous."],
+                ["時間過得太快了！", "Shíjiān guò de tài kuài le!", "Time passed too quickly!"],
+                ["今天太開心了！", "Jīntiān tài kāixīn le!", "Today is so happy!"]
+            ]
+        }
+    ],
+
+    vocabulary: [
+        {
+            word: "阿豪",
+            pinyin: "Ā Háo",
+            meaning: "Ahao (name)"
+        },
+        {
+            word: "小美",
+            pinyin: "Xiǎoměi",
+            meaning: "Xiaomei (name)"
+        },
+        {
+            word: "覺得",
+            pinyin: "juéde",
+            meaning: "to think / feel"
+        },
+        {
+            word: "笑",
+            pinyin: "xiào",
+            meaning: "to smile"
+        },
+        {
+            word: "的時候",
+            pinyin: "de shíhou",
+            meaning: "when"
+        },
+        {
+            word: "非常",
+            pinyin: "fēicháng",
+            meaning: "very / extremely"
+        },
+        {
+            word: "真",
+            pinyin: "zhēn",
+            meaning: "really / truly"
+        },
+        {
+            word: "時候",
+            pinyin: "shíhou",
+            meaning: "time / moment; when"
+        },
+        {
+            word: "太",
+            pinyin: "tài",
+            meaning: "too / excessively"
+        },
+        {
+            word: "緊張",
+            pinyin: "jǐnzhāng",
+            meaning: "nervous"
+        },
+        {
+            word: "告訴",
+            pinyin: "gàosù",
+            meaning: "to tell"
+        },
+        {
+            word: "時間",
+            pinyin: "shíjiān",
+            meaning: "time"
+        },
+        {
+            word: "過",
+            pinyin: "guò",
+            meaning: "to pass"
+        },
+        {
+            word: "在一起",
+            pinyin: "zài yīqǐ",
+            meaning: "together"
+        }
+    ],
+
+    reviewQuestions: [
+        {
+            meaning: "Xiaomei is really beautiful.",
+            answer: ["小美", "真", "漂亮"]
+        },
+        {
+            meaning: "Xiaomei is extremely cute.",
+            answer: ["小美", "非常", "可愛"]
+        },
+        {
+            meaning: "Ahao likes Xiaomei very much.",
+            answer: ["阿豪", "非常", "喜歡", "小美"]
+        },
+        {
+            meaning: "Ahao is too nervous.",
+            answer: ["阿豪", "太", "緊張", "了"]
+        },
+        {
+            meaning: "Time passed too quickly!",
+            answer: ["時間", "過", "得", "太", "快", "了"]
+        },
+        {
+            meaning: "She looks really beautiful when she smiles.",
+            answer: ["她", "笑", "的時候", "真", "好看"]
+        },
+        {
+            meaning: "Today is really happy.",
+            answer: ["今天", "真", "開心"]
+        },
+        {
+            meaning: "Today is so happy!",
+            answer: ["今天", "太", "開心", "了"]
+        },
+        {
+            meaning: "Ahao thinks Xiaomei is very cute.",
+            answer: ["阿豪", "覺得", "小美", "非常", "可愛"]
+        },
+        {
+            meaning: "Ahao wants to tell Xiaomei: I like you.",
+            answer: ["阿豪", "想", "告訴", "小美", "我", "喜歡", "你"]
+        }
+    ]
+}
+
 
 
 };
