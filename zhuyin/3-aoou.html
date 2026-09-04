@@ -1,0 +1,1927 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Learn Zhuyin ㄠ ㄡ - Boba Break Study</title>
+
+<link rel="stylesheet" href="../style.css">
+
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+
+    /* =========================================================
+       PAGE
+    ========================================================= */
+
+    .section-header h1 {
+        font-size: 36px;
+        color: #b8865c;
+        font-weight: 700;
+        margin-bottom: 8px;
+    }
+
+    .section-header p {
+        font-size: 17px;
+        color: #6e5c52;
+        margin-bottom: 30px;
+    }
+
+    .video-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 30px;
+        margin-top: 20px;
+    }
+
+    .video-card,
+    .lesson-card {
+        background: #ffffff;
+        border-radius: 24px;
+        box-shadow: 0 10px 30px rgba(184, 134, 92, 0.15);
+        border: 1px solid #f2e9e1;
+        padding: 24px;
+    }
+
+    .video-wrapper {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        overflow: hidden;
+        background: #2a2522;
+        border-radius: 16px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .video-wrapper iframe {
+        width: 100%;
+        height: 100%;
+        border: 0;
+    }
+
+    .description-text {
+        color: #5d4f47;
+        line-height: 1.7;
+        font-size: 16px;
+        background: #fdfaf7;
+        padding: 16px;
+        border-left: 4px solid #b8865c;
+        border-radius: 0 8px 8px 0;
+    }
+
+    .description-text strong {
+        display: block;
+        font-size: 18px;
+        color: #b8865c;
+        margin-bottom: 8px;
+    }
+
+    .description-text p {
+        margin-bottom: 12px;
+    }
+
+    .description-text p:last-child {
+        margin-bottom: 0;
+    }
+
+
+    /* =========================================================
+       SECTION TITLES
+    ========================================================= */
+
+    .lesson-title {
+        color: #8f6645;
+        font-size: 27px;
+        margin: 0 0 8px;
+    }
+
+    .lesson-subtitle {
+        color: #806f66;
+        margin: 0 0 22px;
+    }
+
+
+    /* =========================================================
+       QUICK REVIEW
+    ========================================================= */
+
+    .zhuyin-review {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 18px;
+        margin-top: 20px;
+    }
+
+    .zhuyin-symbol {
+        background: #fdf8f2;
+        border: 1px solid #f0dfd0;
+        border-radius: 18px;
+        padding: 25px 15px;
+        text-align: center;
+        transition: 0.2s;
+    }
+
+    .zhuyin-symbol:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 18px rgba(184, 134, 92, 0.12);
+    }
+
+    .zhuyin-big {
+        font-size: 64px;
+        color: #594a42;
+        line-height: 1.1;
+    }
+
+    .zhuyin-label {
+        margin-top: 10px;
+        font-size: 16px;
+        color: #8c7668;
+    }
+
+
+    /* =========================================================
+       COMBINATION REVIEW
+    ========================================================= */
+
+    .combination-box {
+        background: #fdf8f2;
+        border-radius: 20px;
+        padding: 20px;
+        margin-top: 20px;
+    }
+
+    .combination-box h3 {
+        text-align: center;
+        color: #8f6645;
+        margin-bottom: 15px;
+    }
+
+    .combination-list {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    .combination {
+        background: white;
+        border: 1px solid #eaded4;
+        border-radius: 14px;
+        padding: 12px 18px;
+        font-size: 24px;
+        color: #594a42;
+    }
+
+
+    /* =========================================================
+       GAME SHARED
+    ========================================================= */
+
+    .game-section {
+        margin-top: 30px;
+    }
+
+    .game-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+
+    .score-box {
+        background: #f8eee5;
+        color: #8f6645;
+        padding: 9px 15px;
+        border-radius: 999px;
+        font-weight: 700;
+        font-size: 14px;
+    }
+
+    .game-message {
+        min-height: 28px;
+        margin: 15px 0;
+        font-weight: 700;
+        text-align: center;
+    }
+
+    .game-message.correct {
+        color: #5c8a63;
+    }
+
+    .game-message.wrong {
+        color: #b45c55;
+    }
+
+    .game-button {
+        border: none;
+        background: #b8865c;
+        color: white;
+        border-radius: 12px;
+        padding: 11px 18px;
+        font-size: 15px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+    .game-button:hover {
+        transform: translateY(-2px);
+        opacity: 0.92;
+    }
+
+
+    /* =========================================================
+       SOUND GAME
+    ========================================================= */
+
+    .sound-game {
+        text-align: center;
+    }
+
+    .sound-card {
+        background: #fdf8f2;
+        border-radius: 20px;
+        padding: 25px 20px;
+        margin-top: 15px;
+    }
+
+    .listen-button {
+        width: 85px;
+        height: 85px;
+        border-radius: 50%;
+        border: none;
+        background: #b8865c;
+        color: white;
+        font-size: 30px;
+        cursor: pointer;
+        box-shadow: 0 8px 20px rgba(184, 134, 92, 0.25);
+        transition: 0.2s;
+    }
+
+    .listen-button:hover {
+        transform: scale(1.05);
+    }
+
+    .sound-question {
+        color: #77665d;
+        margin: 15px 0 20px;
+    }
+
+    .sound-options {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+        max-width: 650px;
+        margin: 0 auto;
+    }
+
+    .sound-option {
+        border: 2px solid #eaded4;
+        background: white;
+        color: #5d4f47;
+        border-radius: 18px;
+        padding: 17px 10px;
+        cursor: pointer;
+        font-size: 38px;
+        transition: 0.2s;
+    }
+
+    .sound-option:hover:not(:disabled) {
+        border-color: #b8865c;
+        transform: translateY(-2px);
+    }
+
+    .sound-option:disabled {
+        cursor: default;
+    }
+
+    .sound-option.correct-answer {
+        border-color: #78a47d;
+        background: #eef7ef;
+    }
+
+    .sound-option.wrong-answer {
+        border-color: #c87970;
+        background: #fff0ee;
+    }
+
+    .sound-next {
+        margin-top: 20px;
+    }
+
+
+    /* =========================================================
+       BUILD GAME
+    ========================================================= */
+
+    #buildTarget {
+        font-size: 48px;
+        color: #594a42;
+        margin-bottom: 10px;
+    }
+
+    #selectedSymbols {
+        min-height: 75px;
+        font-size: 46px;
+        color: #b8865c;
+        margin: 20px 0;
+        letter-spacing: 8px;
+    }
+
+
+    /* =========================================================
+       TONE GAME
+    ========================================================= */
+
+    .tone-display {
+        margin-bottom: 20px;
+    }
+
+    #toneZhuyin {
+        font-size: 60px;
+        color: #594a42;
+        margin-bottom: 8px;
+    }
+
+    #tonePinyin {
+        font-size: 30px;
+        color: #8f6645;
+        font-weight: 700;
+    }
+
+    .tone-options {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+
+    /* =========================================================
+       RESPONSIVE
+    ========================================================= */
+
+    @media (max-width: 650px) {
+
+        .section-header h1 {
+            font-size: 29px;
+        }
+
+        .zhuyin-review {
+            grid-template-columns: 1fr;
+        }
+
+        .sound-options {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .tone-options {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .video-card,
+        .lesson-card {
+            padding: 17px;
+        }
+
+        .sound-option {
+            font-size: 32px;
+        }
+
+    }
+
+</style>
+
+</head><body><div class="app-container"><!-- =========================================================
+     SIDEBAR
+========================================================= -->
+
+<div id="sidebar-container"></div>
+
+
+<!-- =========================================================
+     MAIN CONTENT
+========================================================= -->
+
+<main class="main-content">
+
+    <div class="courses-section">
+
+
+        <!-- =========================================================
+             HEADER
+        ========================================================= -->
+
+        <div class="section-header">
+
+            <h1>Learn Zhuyin: ㄠ ㄡ</h1>
+
+            <p>
+                Learn two new Zhuyin symbols and practice combining
+                them with the sounds you already know.
+            </p>
+
+        </div>
+
+
+        <!-- =========================================================
+             VIDEO
+        ========================================================= -->
+
+        <div class="video-grid">
+
+            <article class="card video-card">
+
+                <div class="video-wrapper">
+
+                    <iframe
+                        src="https://www.youtube.com/embed/xUkTaBemiiM"
+                        title="Learn Zhuyin ㄠ ㄡ"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen>
+                    </iframe>
+
+                </div>
+
+
+                <div class="description-text">
+
+                    <strong>
+                        🎬 What will you learn?
+                    </strong>
+
+                    <p>
+                        In this lesson, you'll learn two new Zhuyin
+                        symbols: <b>ㄠ and ㄡ</b>.
+                    </p>
+
+                    <p>
+                        You'll practice their sounds and learn how they
+                        combine with consonants you already know.
+                    </p>
+
+                    <p>
+                        After watching the video, try the games below
+                        to review <b>ㄌ ㄏ ㄕ ㄚ ㄠ ㄡ</b>.
+                    </p>
+
+                </div>
+
+            </article>
+
+        </div>
+
+
+        <!-- =========================================================
+             QUICK REVIEW
+        ========================================================= -->
+
+        <div class="lesson-card game-section">
+
+            <h2 class="lesson-title">
+                📖 Today's New Sounds
+            </h2>
+
+            <p class="lesson-subtitle">
+                Let's learn the two new Zhuyin symbols.
+            </p>
+
+
+            <div class="zhuyin-review">
+
+                <div class="zhuyin-symbol">
+
+                    <div class="zhuyin-big">
+                        ㄠ
+                    </div>
+
+                    <div class="zhuyin-label">
+                        ao
+                    </div>
+
+                </div>
+
+
+                <div class="zhuyin-symbol">
+
+                    <div class="zhuyin-big">
+                        ㄡ
+                    </div>
+
+                    <div class="zhuyin-label">
+                        ou
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="combination-box">
+
+                <h3>
+                    🔗 Combine With Previous Sounds
+                </h3>
+
+
+                <div class="combination-list">
+
+                    <div class="combination">
+                        ㄌ + ㄠ = ㄌㄠ
+                    </div>
+
+                    <div class="combination">
+                        ㄏ + ㄠ = ㄏㄠ
+                    </div>
+
+                    <div class="combination">
+                        ㄕ + ㄠ = ㄕㄠ
+                    </div>
+
+                    <div class="combination">
+                        ㄌ + ㄡ = ㄌㄡ
+                    </div>
+
+                    <div class="combination">
+                        ㄏ + ㄡ = ㄏㄡ
+                    </div>
+
+                    <div class="combination">
+                        ㄕ + ㄡ = ㄕㄡ
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================================================
+             GAME 1
+        ========================================================= -->
+
+        <div class="lesson-card game-section sound-game">
+
+            <div class="game-header">
+
+                <div style="text-align:left;">
+
+                    <h2 class="lesson-title">
+                        🔊 Game 1: Listen & Choose
+                    </h2>
+
+                    <p class="lesson-subtitle">
+                        Listen carefully and choose the correct Zhuyin sound.
+                    </p>
+
+                </div>
+
+
+                <div class="score-box">
+
+                    Score:
+                    <span id="soundScore">0</span>
+
+                </div>
+
+            </div>
+
+
+            <div class="sound-card">
+
+                <button class="listen-button"
+                        id="listenButton"
+                        aria-label="Play sound">
+
+                    <i class="fa-solid fa-volume-high"></i>
+
+                </button>
+
+
+                <div class="sound-question">
+
+                    Listen to the sound and choose the correct answer.
+
+                </div>
+
+
+                <div class="sound-options"
+                     id="soundOptions">
+                </div>
+
+
+                <div class="game-message"
+                     id="soundMessage">
+                </div>
+
+
+                <button class="game-button sound-next"
+                        id="soundNext"
+                        style="display:none;">
+
+                    Next Question →
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================================================
+             GAME 2
+        ========================================================= -->
+
+        <div class="lesson-card game-section">
+
+            <div class="game-header">
+
+                <div>
+
+                    <h2 class="lesson-title">
+                        🧩 Game 2: Build the Sound
+                    </h2>
+
+                    <p class="lesson-subtitle">
+                        Choose the correct Zhuyin symbols to build the sound.
+                    </p>
+
+                </div>
+
+
+                <div class="score-box">
+
+                    Score:
+                    <span id="buildScore">0</span>
+
+                </div>
+
+            </div>
+
+
+            <div class="sound-card"
+                 style="text-align:center;">
+
+
+                <div id="buildTarget">
+                    lā
+                </div>
+
+
+                <p class="sound-question">
+
+                    Which Zhuyin symbols make this sound?
+
+                </p>
+
+
+                <div id="selectedSymbols">
+
+                    ＿ ＿
+
+                </div>
+
+
+                <div class="sound-options"
+                     id="buildOptions">
+                </div>
+
+
+                <div class="game-message"
+                     id="buildMessage">
+                </div>
+
+
+                <button class="game-button"
+                        id="buildCheck">
+
+                    Check Answer
+
+                </button>
+
+
+                <button class="game-button"
+                        id="buildClear"
+                        style="margin-left:8px;">
+
+                    Clear
+
+                </button>
+
+
+                <button class="game-button"
+                        id="buildNext"
+                        style="display:none;margin-left:8px;">
+
+                    Next →
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================================================
+             GAME 3
+        ========================================================= -->
+
+        <div class="lesson-card game-section sound-game">
+
+            <div class="game-header">
+
+                <div style="text-align:left;">
+
+                    <h2 class="lesson-title">
+                        🎵 Game 3: Choose the Tone
+                    </h2>
+
+                    <p class="lesson-subtitle">
+                        Listen carefully and choose the correct tone.
+                    </p>
+
+                </div>
+
+
+                <div class="score-box">
+
+                    Score:
+                    <span id="toneScore">0</span>
+
+                </div>
+
+            </div>
+
+
+            <div class="sound-card">
+
+
+                <div class="tone-display">
+
+                    <div id="toneZhuyin">
+                        ㄏㄠˇ
+                    </div>
+
+
+                    <div id="tonePinyin">
+                        hǎo
+                    </div>
+
+                </div>
+
+
+                <button class="listen-button"
+                        id="toneListenButton"
+                        aria-label="Play tone sound">
+
+                    <i class="fa-solid fa-volume-high"></i>
+
+                </button>
+
+
+                <p class="sound-question">
+
+                    Which tone does this sound have?
+
+                </p>
+
+
+                <div class="sound-options tone-options">
+
+                    <button class="sound-option tone-option"
+                            data-tone="1">
+
+                        ˉ
+
+                    </button>
+
+
+                    <button class="sound-option tone-option"
+                            data-tone="2">
+
+                        ˊ
+
+                    </button>
+
+
+                    <button class="sound-option tone-option"
+                            data-tone="3">
+
+                        ˇ
+
+                    </button>
+
+
+                    <button class="sound-option tone-option"
+                            data-tone="4">
+
+                        ˋ
+
+                    </button>
+
+                </div>
+
+
+                <div class="game-message"
+                     id="toneMessage">
+                </div>
+
+
+                <button class="game-button sound-next"
+                        id="toneNext"
+                        style="display:none;">
+
+                    Next Sound →
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</main>
+
+</div><!-- =========================================================
+     MAIN SCRIPT
+========================================================= --><script src="../script.js"></script><script>
+
+
+/* =========================================================
+   GAME 1 — LISTEN & CHOOSE
+========================================================= */
+
+
+const soundQuestions = [
+
+    {
+        sound: "ㄌ",
+        answer: "ㄌ"
+    },
+
+    {
+        sound: "ㄏ",
+        answer: "ㄏ"
+    },
+
+    {
+        sound: "ㄕ",
+        answer: "ㄕ"
+    },
+
+    {
+        sound: "ㄚ",
+        answer: "ㄚ"
+    },
+
+    {
+        sound: "ㄠ",
+        answer: "ㄠ"
+    },
+
+    {
+        sound: "ㄡ",
+        answer: "ㄡ"
+    }
+
+];
+
+
+const allSymbols = [
+
+    "ㄌ",
+    "ㄏ",
+    "ㄕ",
+    "ㄚ",
+    "ㄠ",
+    "ㄡ"
+
+];
+
+
+let currentSoundQuestion;
+
+let soundScore = 0;
+
+
+const soundScoreElement =
+    document.getElementById("soundScore");
+
+
+const soundOptionsContainer =
+    document.getElementById("soundOptions");
+
+
+const soundMessage =
+    document.getElementById("soundMessage");
+
+
+const soundNext =
+    document.getElementById("soundNext");
+
+
+const listenButton =
+    document.getElementById("listenButton");
+
+
+
+function shuffleArray(array) {
+
+    const newArray = [...array];
+
+
+    for (
+        let i = newArray.length - 1;
+        i > 0;
+        i--
+    ) {
+
+        const j =
+            Math.floor(
+                Math.random() * (i + 1)
+            );
+
+
+        [
+            newArray[i],
+            newArray[j]
+        ] =
+        [
+            newArray[j],
+            newArray[i]
+        ];
+
+    }
+
+
+    return newArray;
+
+}
+
+
+
+function speakText(text) {
+
+    if (
+        !("speechSynthesis" in window)
+    ) {
+
+        return;
+
+    }
+
+
+    window.speechSynthesis.cancel();
+
+
+    const utterance =
+        new SpeechSynthesisUtterance(text);
+
+
+    utterance.lang = "zh-TW";
+
+    utterance.rate = 0.7;
+
+    utterance.pitch = 1;
+
+
+    window.speechSynthesis.speak(
+        utterance
+    );
+
+}
+
+
+
+function newSoundQuestion() {
+
+
+    currentSoundQuestion =
+        soundQuestions[
+            Math.floor(
+                Math.random() *
+                soundQuestions.length
+            )
+        ];
+
+
+    soundOptionsContainer.innerHTML = "";
+
+
+    soundMessage.textContent = "";
+
+
+    soundMessage.className =
+        "game-message";
+
+
+    soundNext.style.display =
+        "none";
+
+
+    const options =
+        shuffleArray(allSymbols);
+
+
+    options.forEach(symbol => {
+
+
+        const button =
+            document.createElement("button");
+
+
+        button.className =
+            "sound-option";
+
+
+        button.textContent =
+            symbol;
+
+
+
+        button.addEventListener(
+            "click",
+            function() {
+
+
+                const buttons =
+                    document.querySelectorAll(
+                        "#soundOptions .sound-option"
+                    );
+
+
+                buttons.forEach(
+                    btn => btn.disabled = true
+                );
+
+
+
+                if (
+                    symbol ===
+                    currentSoundQuestion.answer
+                ) {
+
+
+                    button.classList.add(
+                        "correct-answer"
+                    );
+
+
+                    soundScore++;
+
+
+                    soundScoreElement.textContent =
+                        soundScore;
+
+
+                    soundMessage.textContent =
+                        "🎉 Correct! Great listening!";
+
+
+                    soundMessage.className =
+                        "game-message correct";
+
+
+                } else {
+
+
+                    button.classList.add(
+                        "wrong-answer"
+                    );
+
+
+                    buttons.forEach(btn => {
+
+
+                        if (
+                            btn.textContent ===
+                            currentSoundQuestion.answer
+                        ) {
+
+                            btn.classList.add(
+                                "correct-answer"
+                            );
+
+                        }
+
+                    });
+
+
+                    soundMessage.textContent =
+                        "❌ Not quite! Listen carefully and try the next one.";
+
+
+                    soundMessage.className =
+                        "game-message wrong";
+
+
+                }
+
+
+                soundNext.style.display =
+                    "inline-block";
+
+
+            }
+        );
+
+
+        soundOptionsContainer.appendChild(
+            button
+        );
+
+
+    });
+
+
+
+    setTimeout(
+        () => {
+
+            speakText(
+                currentSoundQuestion.sound
+            );
+
+        },
+        500
+    );
+
+
+}
+
+
+
+listenButton.addEventListener(
+    "click",
+    function() {
+
+        speakText(
+            currentSoundQuestion.sound
+        );
+
+    }
+);
+
+
+
+soundNext.addEventListener(
+    "click",
+    newSoundQuestion
+);
+
+
+
+newSoundQuestion();
+
+
+
+/* =========================================================
+   GAME 2 — BUILD THE SOUND
+========================================================= */
+
+
+const buildQuestions = [
+
+    {
+        pinyin: "lā",
+        answer: ["ㄌ", "ㄚ"]
+    },
+
+    {
+        pinyin: "lá",
+        answer: ["ㄌ", "ㄚ"]
+    },
+
+    {
+        pinyin: "lǎ",
+        answer: ["ㄌ", "ㄚ"]
+    },
+
+    {
+        pinyin: "là",
+        answer: ["ㄌ", "ㄚ"]
+    },
+
+    {
+        pinyin: "lāo",
+        answer: ["ㄌ", "ㄠ"]
+    },
+
+    {
+        pinyin: "láo",
+        answer: ["ㄌ", "ㄠ"]
+    },
+
+    {
+        pinyin: "lǎo",
+        answer: ["ㄌ", "ㄠ"]
+    },
+
+    {
+        pinyin: "lào",
+        answer: ["ㄌ", "ㄠ"]
+    },
+
+    {
+        pinyin: "lóu",
+        answer: ["ㄌ", "ㄡ"]
+    },
+
+    {
+        pinyin: "hā",
+        answer: ["ㄏ", "ㄚ"]
+    },
+
+    {
+        pinyin: "hāo",
+        answer: ["ㄏ", "ㄠ"]
+    },
+
+    {
+        pinyin: "háo",
+        answer: ["ㄏ", "ㄠ"]
+    },
+
+    {
+        pinyin: "hǎo",
+        answer: ["ㄏ", "ㄠ"]
+    },
+
+    {
+        pinyin: "hào",
+        answer: ["ㄏ", "ㄠ"]
+    },
+
+    {
+        pinyin: "hóu",
+        answer: ["ㄏ", "ㄡ"]
+    },
+
+    {
+        pinyin: "shā",
+        answer: ["ㄕ", "ㄚ"]
+    },
+
+    {
+        pinyin: "shāo",
+        answer: ["ㄕ", "ㄠ"]
+    },
+
+    {
+        pinyin: "shǎo",
+        answer: ["ㄕ", "ㄠ"]
+    },
+
+    {
+        pinyin: "shòu",
+        answer: ["ㄕ", "ㄡ"]
+    }
+
+];
+
+
+let currentBuildQuestion;
+
+let selectedBuildSymbols = [];
+
+let buildScore = 0;
+
+
+const buildTarget =
+    document.getElementById("buildTarget");
+
+
+const buildOptions =
+    document.getElementById("buildOptions");
+
+
+const selectedSymbols =
+    document.getElementById("selectedSymbols");
+
+
+const buildMessage =
+    document.getElementById("buildMessage");
+
+
+const buildScoreElement =
+    document.getElementById("buildScore");
+
+
+const buildCheck =
+    document.getElementById("buildCheck");
+
+
+const buildClear =
+    document.getElementById("buildClear");
+
+
+const buildNext =
+    document.getElementById("buildNext");
+
+
+
+function updateSelectedSymbols() {
+
+
+    if (
+        selectedBuildSymbols.length === 0
+    ) {
+
+        selectedSymbols.textContent =
+            "＿ ＿";
+
+    }
+
+
+    else if (
+        selectedBuildSymbols.length === 1
+    ) {
+
+        selectedSymbols.textContent =
+            selectedBuildSymbols[0] +
+            " ＿";
+
+    }
+
+
+    else {
+
+        selectedSymbols.textContent =
+            selectedBuildSymbols.join("");
+
+    }
+
+}
+
+
+
+function newBuildQuestion() {
+
+
+    currentBuildQuestion =
+        buildQuestions[
+            Math.floor(
+                Math.random() *
+                buildQuestions.length
+            )
+        ];
+
+
+    selectedBuildSymbols = [];
+
+
+    buildTarget.textContent =
+        currentBuildQuestion.pinyin;
+
+
+    updateSelectedSymbols();
+
+
+    buildMessage.textContent = "";
+
+
+    buildMessage.className =
+        "game-message";
+
+
+    buildNext.style.display =
+        "none";
+
+
+    buildOptions.innerHTML = "";
+
+
+    const symbols =
+        shuffleArray(allSymbols);
+
+
+    symbols.forEach(symbol => {
+
+
+        const button =
+            document.createElement("button");
+
+
+        button.className =
+            "sound-option";
+
+
+        button.textContent =
+            symbol;
+
+
+
+        button.addEventListener(
+            "click",
+            function() {
+
+
+                if (
+                    selectedBuildSymbols.length < 2
+                ) {
+
+
+                    selectedBuildSymbols.push(
+                        symbol
+                    );
+
+
+                    updateSelectedSymbols();
+
+
+                }
+
+            }
+        );
+
+
+        buildOptions.appendChild(
+            button
+        );
+
+
+    });
+
+
+}
+
+
+
+buildClear.addEventListener(
+    "click",
+    function() {
+
+
+        selectedBuildSymbols = [];
+
+
+        updateSelectedSymbols();
+
+
+        buildMessage.textContent = "";
+
+
+    }
+);
+
+
+
+buildCheck.addEventListener(
+    "click",
+    function() {
+
+
+        if (
+            selectedBuildSymbols.length !== 2
+        ) {
+
+
+            buildMessage.textContent =
+                "Choose two Zhuyin symbols first!";
+
+
+            buildMessage.className =
+                "game-message wrong";
+
+
+            return;
+
+
+        }
+
+
+        const userAnswer =
+            selectedBuildSymbols.join("");
+
+
+        const correctAnswer =
+            currentBuildQuestion.answer.join("");
+
+
+
+        if (
+            userAnswer === correctAnswer
+        ) {
+
+
+            buildScore++;
+
+
+            buildScoreElement.textContent =
+                buildScore;
+
+
+            buildMessage.textContent =
+                "🎉 Correct! Great job!";
+
+
+            buildMessage.className =
+                "game-message correct";
+
+
+        }
+
+
+        else {
+
+
+            buildMessage.textContent =
+                "❌ Not quite! The correct answer is " +
+                correctAnswer;
+
+
+            buildMessage.className =
+                "game-message wrong";
+
+
+        }
+
+
+        buildNext.style.display =
+            "inline-block";
+
+
+    }
+);
+
+
+
+buildNext.addEventListener(
+    "click",
+    newBuildQuestion
+);
+
+
+
+newBuildQuestion();
+
+
+
+/* =========================================================
+   GAME 3 — CHOOSE THE TONE
+========================================================= */
+
+
+const toneQuestions = [
+
+    {
+        zhuyin: "ㄌㄚ",
+        pinyin: "lā",
+        tone: 1
+    },
+
+    {
+        zhuyin: "ㄌㄚˊ",
+        pinyin: "lá",
+        tone: 2
+    },
+
+    {
+        zhuyin: "ㄌㄚˇ",
+        pinyin: "lǎ",
+        tone: 3
+    },
+
+    {
+        zhuyin: "ㄌㄚˋ",
+        pinyin: "là",
+        tone: 4
+    },
+
+    {
+        zhuyin: "ㄏㄠ",
+        pinyin: "hāo",
+        tone: 1
+    },
+
+    {
+        zhuyin: "ㄏㄠˊ",
+        pinyin: "háo",
+        tone: 2
+    },
+
+    {
+        zhuyin: "ㄏㄠˇ",
+        pinyin: "hǎo",
+        tone: 3
+    },
+
+    {
+        zhuyin: "ㄏㄠˋ",
+        pinyin: "hào",
+        tone: 4
+    },
+
+    {
+        zhuyin: "ㄕㄠ",
+        pinyin: "shāo",
+        tone: 1
+    },
+
+    {
+        zhuyin: "ㄕㄠˊ",
+        pinyin: "sháo",
+        tone: 2
+    },
+
+    {
+        zhuyin: "ㄕㄠˇ",
+        pinyin: "shǎo",
+        tone: 3
+    },
+
+    {
+        zhuyin: "ㄕㄠˋ",
+        pinyin: "shào",
+        tone: 4
+    },
+
+    {
+        zhuyin: "ㄕㄡ",
+        pinyin: "shōu",
+        tone: 1
+    },
+
+    {
+        zhuyin: "ㄕㄡˊ",
+        pinyin: "shóu",
+        tone: 2
+    },
+
+    {
+        zhuyin: "ㄕㄡˇ",
+        pinyin: "shǒu",
+        tone: 3
+    },
+
+    {
+        zhuyin: "ㄕㄡˋ",
+        pinyin: "shòu",
+        tone: 4
+    }
+
+];
+
+
+let currentToneQuestion;
+
+let toneScore = 0;
+
+
+const toneZhuyin =
+    document.getElementById("toneZhuyin");
+
+
+const tonePinyin =
+    document.getElementById("tonePinyin");
+
+
+const toneScoreElement =
+    document.getElementById("toneScore");
+
+
+const toneMessage =
+    document.getElementById("toneMessage");
+
+
+const toneNext =
+    document.getElementById("toneNext");
+
+
+const toneListenButton =
+    document.getElementById("toneListenButton");
+
+
+const toneOptions =
+    document.querySelectorAll(
+        ".tone-option"
+    );
+
+
+
+function speakToneSound() {
+
+
+    if (
+        !("speechSynthesis" in window)
+    ) {
+
+        return;
+
+    }
+
+
+    window.speechSynthesis.cancel();
+
+
+    const utterance =
+        new SpeechSynthesisUtterance(
+            currentToneQuestion.pinyin
+        );
+
+
+    utterance.lang = "zh-TW";
+
+
+    utterance.rate = 0.7;
+
+
+    utterance.pitch = 1;
+
+
+    window.speechSynthesis.speak(
+        utterance
+    );
+
+
+}
+
+
+
+function newToneQuestion() {
+
+
+    currentToneQuestion =
+        toneQuestions[
+            Math.floor(
+                Math.random() *
+                toneQuestions.length
+            )
+        ];
+
+
+    toneZhuyin.textContent =
+        currentToneQuestion.zhuyin;
+
+
+    tonePinyin.textContent =
+        currentToneQuestion.pinyin;
+
+
+    toneMessage.textContent = "";
+
+
+    toneMessage.className =
+        "game-message";
+
+
+    toneNext.style.display =
+        "none";
+
+
+    toneOptions.forEach(button => {
+
+
+        button.disabled = false;
+
+
+        button.classList.remove(
+            "correct-answer",
+            "wrong-answer"
+        );
+
+
+    });
+
+
+}
+
+
+
+toneListenButton.addEventListener(
+    "click",
+    speakToneSound
+);
+
+
+
+toneOptions.forEach(button => {
+
+
+    button.addEventListener(
+        "click",
+        function() {
+
+
+            const selectedTone =
+                Number(
+                    this.dataset.tone
+                );
+
+
+            toneOptions.forEach(
+                option =>
+                    option.disabled = true
+            );
+
+
+
+            if (
+                selectedTone ===
+                currentToneQuestion.tone
+            ) {
+
+
+                this.classList.add(
+                    "correct-answer"
+                );
+
+
+                toneScore++;
+
+
+                toneScoreElement.textContent =
+                    toneScore;
+
+
+                toneMessage.textContent =
+                    "🎉 Correct! You got the tone!";
+
+
+                toneMessage.className =
+                    "game-message correct";
+
+
+            }
+
+
+            else {
+
+
+                this.classList.add(
+                    "wrong-answer"
+                );
+
+
+                toneOptions.forEach(option => {
+
+
+                    if (
+                        Number(
+                            option.dataset.tone
+                        ) ===
+                        currentToneQuestion.tone
+                    ) {
+
+
+                        option.classList.add(
+                            "correct-answer"
+                        );
+
+
+                    }
+
+
+                });
+
+
+                toneMessage.textContent =
+                    "❌ Not quite! Listen to the sound again and notice the tone.";
+
+
+                toneMessage.className =
+                    "game-message wrong";
+
+
+            }
+
+
+            toneNext.style.display =
+                "inline-block";
+
+
+        }
+    );
+
+
+});
+
+
+
+toneNext.addEventListener(
+    "click",
+    function() {
+
+
+        newToneQuestion();
+
+
+        setTimeout(
+            speakToneSound,
+            300
+        );
+
+
+    }
+);
+
+
+
+newToneQuestion();
+
+
+</script></body></html>
