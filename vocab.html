@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<link rel="stylesheet" href="style.css">
+
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Boba Break Study - Vocabulary List</title>
+
+
+<!-- =========================================
+     LESSON DATABASE
+     (file is stored in the "content" folder,
+     this page is stored in root)
+========================================= -->
+<script src="content/lesson.js"></script>
+
+
+<style>
+
+/* =========================================
+   RESET
+========================================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+
+/* =========================================
+   BODY
+========================================= */
+
+body {
+    background-color: #f8f9fa;
+    display: flex;
+    min-height: 100vh;
+}
+
+
+/* =========================================
+   MAIN CONTENT
+========================================= */
+
+.main-content {
+    flex: 1;
+    padding: 20px;
+}
+
+
+.card {
+    width: 100%;
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+
+    box-shadow:
+        0 2px 5px rgba(0,0,0,0.03);
+
+    border: 1px solid #eaeaea;
+}
+
+
+.card h2 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    color: #111;
+}
+
+
+/* =========================================
+   SEARCH + FILTER ROW
+========================================= */
+
+.filter-row {
+    display: flex;
+
+    gap: 10px;
+
+    margin-bottom: 8px;
+
+    flex-wrap: wrap;
+}
+
+
+.search-box {
+    display: flex;
+
+    border: 1px solid #ddd;
+
+    border-radius: 6px;
+
+    overflow: hidden;
+
+    flex: 1;
+
+    min-width: 220px;
+}
+
+
+.search-box input {
+    flex: 1;
+
+    padding: 10px 14px;
+
+    border: none;
+
+    outline: none;
+
+    font-size: 14px;
+}
+
+
+.search-box button {
+    background-color: #b5835a;
+
+    color: white;
+
+    border: none;
+
+    padding: 0 20px;
+
+    cursor: pointer;
+
+    font-weight: bold;
+}
+
+
+.search-box button:hover {
+    background-color: #9d704c;
+}
+
+
+.lesson-filter {
+    padding: 0 14px;
+
+    border: 1px solid #ddd;
+
+    border-radius: 6px;
+
+    font-size: 14px;
+
+    background: white;
+
+    outline: none;
+
+    min-width: 160px;
+}
+
+
+.search-hint {
+    font-size: 12px;
+
+    color: #666;
+
+    margin-bottom: 15px;
+}
+
+
+.results-count {
+    font-size: 13px;
+
+    color: #888;
+
+    margin-bottom: 10px;
+}
+
+
+/* =========================================
+   VOCAB TABLE
+========================================= */
+
+.table-wrapper {
+    width: 100%;
+
+    overflow-x: auto;
+
+    border: 1px solid #eaeaea;
+
+    border-radius: 10px;
+}
+
+
+table.vocab-table {
+    width: 100%;
+
+    border-collapse: collapse;
+
+    font-size: 14px;
+}
+
+
+table.vocab-table thead th {
+    position: sticky;
+
+    top: 0;
+
+    background-color: #b5835a;
+
+    color: white;
+
+    text-align: left;
+
+    padding: 12px 14px;
+
+    font-weight: bold;
+
+    white-space: nowrap;
+}
+
+
+table.vocab-table tbody td {
+    padding: 10px 14px;
+
+    border-bottom: 1px solid #f0f0f0;
+
+    vertical-align: middle;
+}
+
+
+table.vocab-table tbody tr:hover {
+    background-color: #fdf6ef;
+}
+
+
+table.vocab-table td.hanzi-cell {
+    font-size: 20px;
+
+    font-weight: bold;
+
+    color: #333;
+
+    white-space: nowrap;
+}
+
+
+table.vocab-table td.pinyin-cell {
+    color: #b87333;
+
+    font-weight: 500;
+
+    white-space: nowrap;
+}
+
+
+table.vocab-table td.lesson-cell {
+    color: #888;
+
+    white-space: nowrap;
+}
+
+
+table.vocab-table td.category-cell {
+    color: #666;
+
+    white-space: nowrap;
+}
+
+
+.no-results {
+    text-align: center;
+
+    padding: 30px;
+
+    color: #999;
+
+    font-size: 14px;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media screen and (max-width: 768px) {
+
+    .filter-row {
+
+        flex-direction: column;
+    }
+
+
+    .lesson-filter {
+
+        width: 100%;
+    }
+
+
+    table.vocab-table td.category-cell {
+
+        display: none;
+    }
+
+
+    table.vocab-table thead th:nth-child(4) {
+
+        display: none;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="app-container">
+
+
+    <!-- =====================================
+         SIDEBAR
+    ====================================== -->
+
+    <div id="sidebar-container"></div>
+
+
+    <!-- =====================================
+         MAIN CONTENT
+    ====================================== -->
+
+    <div class="main-content">
+
+
+        <!-- =====================================
+             SEARCH CARD
+        ====================================== -->
+
+        <div class="card">
+
+            <h2>
+                Vocabulary List
+            </h2>
+
+
+            <div class="filter-row">
+
+                <div class="search-box">
+
+                    <input
+                        type="text"
+                        id="vocab-search"
+                        placeholder="Search by hanzi, pinyin, or meaning..."
+                    >
+
+                    <button id="clear-btn">
+                        Clear
+                    </button>
+
+                </div>
+
+
+                <select
+                    id="lesson-filter"
+                    class="lesson-filter"
+                >
+
+                    <option value="all">
+                        All Lessons
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <p class="search-hint">
+
+                Search across all lessons, or narrow the results down to a single lesson.
+
+            </p>
+
+
+            <p
+                class="results-count"
+                id="results-count"
+            >
+
+            </p>
+
+
+            <div class="table-wrapper">
+
+                <table class="vocab-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Hanzi</th>
+                            <th>Pinyin</th>
+                            <th>Meaning</th>
+                            <th>Category</th>
+                            <th>Lesson</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="vocab-table-body">
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+/* =========================================================
+   BUILD FLAT VOCAB LIST FROM allLessonsData
+   ---------------------------------------
+   Different lessons use slightly different key names
+   (hanzi/word), so this normalizes every entry into:
+   { hanzi, pinyin, meaning, category, lesson }
+========================================================= */
+
+let allVocab = [];
+
+
+function buildVocabList() {
+
+    const data = window.allLessonsData || {};
+
+    const list = [];
+
+
+    const lessonNumbers =
+        Object.keys(data)
+            .map(Number)
+            .sort(function(a, b) {
+                return a - b;
+            });
+
+
+    lessonNumbers.forEach(function(lessonNum) {
+
+        const lesson = data[lessonNum];
+
+
+        if (
+            !lesson ||
+            !Array.isArray(lesson.vocabulary)
+        ) {
+
+            return;
+
+        }
+
+
+        lesson.vocabulary.forEach(function(item) {
+
+            list.push({
+
+                hanzi:
+                    item.hanzi ||
+                    item.word ||
+                    "-",
+
+                pinyin:
+                    item.pinyin ||
+                    "-",
+
+                meaning:
+                    item.meaning ||
+                    "-",
+
+                category:
+                    item.category ||
+                    "-",
+
+                lesson:
+                    lessonNum
+
+            });
+
+        });
+
+    });
+
+
+    return list;
+
+}
+
+
+/* =========================================================
+   POPULATE LESSON FILTER DROPDOWN
+========================================================= */
+
+function populateLessonFilter(vocabList) {
+
+    const select =
+        document.getElementById(
+            "lesson-filter"
+        );
+
+
+    const lessonNumbers =
+        Array.from(
+
+            new Set(
+
+                vocabList.map(function(item) {
+
+                    return item.lesson;
+
+                })
+
+            )
+
+        ).sort(function(a, b) {
+
+            return a - b;
+
+        });
+
+
+    lessonNumbers.forEach(function(num) {
+
+        const option =
+            document.createElement(
+                "option"
+            );
+
+
+        option.value = num;
+
+        option.textContent =
+            "Lesson " + num;
+
+
+        select.appendChild(
+            option
+        );
+
+    });
+
+}
+
+
+/* =========================================================
+   RENDER TABLE
+========================================================= */
+
+function renderTable(vocabList) {
+
+    const tbody =
+        document.getElementById(
+            "vocab-table-body"
+        );
+
+
+    const countLabel =
+        document.getElementById(
+            "results-count"
+        );
+
+
+    tbody.innerHTML = "";
+
+
+    if (vocabList.length === 0) {
+
+        tbody.innerHTML =
+            '<tr><td colspan="5" class="no-results">' +
+            "No vocabulary found." +
+            "</td></tr>";
+
+
+        countLabel.textContent =
+            "0 words found";
+
+
+        return;
+
+    }
+
+
+    countLabel.textContent =
+        vocabList.length +
+        " word" +
+        (vocabList.length === 1 ? "" : "s") +
+        " found";
+
+
+    const rowsHTML =
+        vocabList
+            .map(function(item) {
+
+                return (
+
+                    "<tr>" +
+
+                    '<td class="hanzi-cell">' +
+                    item.hanzi +
+                    "</td>" +
+
+                    '<td class="pinyin-cell">' +
+                    item.pinyin +
+                    "</td>" +
+
+                    "<td>" +
+                    item.meaning +
+                    "</td>" +
+
+                    '<td class="category-cell">' +
+                    item.category +
+                    "</td>" +
+
+                    '<td class="lesson-cell">' +
+                    "Lesson " + item.lesson +
+                    "</td>" +
+
+                    "</tr>"
+
+                );
+
+            })
+            .join("");
+
+
+    tbody.innerHTML =
+        rowsHTML;
+
+}
+
+
+/* =========================================================
+   FILTER LOGIC
+========================================================= */
+
+function applyFilters() {
+
+    const searchTerm =
+        document
+            .getElementById("vocab-search")
+            .value
+            .trim()
+            .toLowerCase();
+
+
+    const selectedLesson =
+        document.getElementById(
+            "lesson-filter"
+        ).value;
+
+
+    let filtered =
+        allVocab;
+
+
+    if (selectedLesson !== "all") {
+
+        filtered =
+            filtered.filter(function(item) {
+
+                return (
+
+                    String(item.lesson) ===
+                    selectedLesson
+
+                );
+
+            });
+
+    }
+
+
+    if (searchTerm.length > 0) {
+
+        filtered =
+            filtered.filter(function(item) {
+
+                return (
+
+                    item.hanzi
+                        .toLowerCase()
+                        .includes(searchTerm) ||
+
+                    item.pinyin
+                        .toLowerCase()
+                        .includes(searchTerm) ||
+
+                    item.meaning
+                        .toLowerCase()
+                        .includes(searchTerm)
+
+                );
+
+            });
+
+    }
+
+
+    renderTable(
+        filtered
+    );
+
+}
+
+
+/* =========================================================
+   INIT
+========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        allVocab =
+            buildVocabList();
+
+
+        populateLessonFilter(
+            allVocab
+        );
+
+
+        renderTable(
+            allVocab
+        );
+
+
+        document
+            .getElementById("vocab-search")
+            .addEventListener(
+                "input",
+                applyFilters
+            );
+
+
+        document
+            .getElementById("lesson-filter")
+            .addEventListener(
+                "change",
+                applyFilters
+            );
+
+
+        document
+            .getElementById("clear-btn")
+            .addEventListener(
+                "click",
+                function() {
+
+                    document.getElementById(
+                        "vocab-search"
+                    ).value = "";
+
+
+                    document.getElementById(
+                        "lesson-filter"
+                    ).value = "all";
+
+
+                    applyFilters();
+
+                }
+            );
+
+    }
+);
+
+</script>
+
+
+<!-- =========================================
+     YOUR EXISTING SCRIPT (sidebar, dll)
+========================================= -->
+
+<script src="script.js"></script>
+
+
+</body>
+
+</html>
