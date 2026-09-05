@@ -2014,8 +2014,127 @@ answer: ["銀行", "在", "郵局", "的", "哪裡"]
             answer: ["阿豪", "想", "告訴", "小美", "我", "喜歡", "你"]
         }
     ]
-}
+},
 
+
+// ========================================================
+// LESSON 22
+// ========================================================
+22: {
+    grammar: [
+        {
+            id: "22-1",
+            name: "沒 + V",
+            category: "Negation",
+            explanation: "Used to say that someone did not do something. When negating a completed action with 沒, 了 is normally NOT used after the verb.",
+            examples: [
+                { hanzi: "我沒看到小美。", pinyin: "Wǒ méi kàndào Xiǎoměi.", english: "I didn't see Xiao Mei." },
+                { hanzi: "我沒吃早餐。", pinyin: "Wǒ méi chī zǎocān.", english: "I didn't eat breakfast." },
+                { hanzi: "小美沒來學校。", pinyin: "Xiǎoměi méi lái xuéxiào.", english: "Xiao Mei didn't come to school." }
+            ]
+        },
+        {
+            id: "22-2",
+            name: "V + 了 + O + 嗎？",
+            category: "Questions",
+            explanation: "Used to ask whether someone has already done something.",
+            examples: [
+                { hanzi: "你吃了早餐嗎？", pinyin: "Nǐ chī le zǎocān ma?", english: "Did you eat breakfast?" },
+                { hanzi: "你看了電影嗎？", pinyin: "Nǐ kàn le diànyǐng ma?", english: "Did you watch the movie?" },
+                { hanzi: "你做了功課嗎？", pinyin: "Nǐ zuò le gōngkè ma?", english: "Did you do your homework?" }
+            ]
+        },
+        {
+            id: "22-3",
+            name: "S + 有沒有 + V + O？",
+            category: "Questions",
+            explanation: "Review: an A-not-A question pattern that asks whether someone did something or not.",
+            examples: [
+                { hanzi: "你有沒有吃早餐？", pinyin: "Nǐ yǒuméiyǒu chī zǎocān?", english: "Did you eat breakfast?" },
+                { hanzi: "你有沒有看到小美？", pinyin: "Nǐ yǒuméiyǒu kàndào Xiǎoměi?", english: "Did you see Xiao Mei?" },
+                { hanzi: "你有沒有去學校？", pinyin: "Nǐ yǒuméiyǒu qù xuéxiào?", english: "Did you go to school?" }
+            ]
+        },
+        {
+            id: "22-4",
+            name: "應該",
+            category: "Modal Verbs",
+            explanation: "應該 means \"should\" or \"probably.\" Used for giving advice with the pattern S + 應該 + V.",
+            examples: [
+                { hanzi: "你應該休息。", pinyin: "Nǐ yīnggāi xiūxí.", english: "You should rest." },
+                { hanzi: "你應該吃早餐。", pinyin: "Nǐ yīnggāi chī zǎocān.", english: "You should eat breakfast." },
+                { hanzi: "你應該回家。", pinyin: "Nǐ yīnggāi huí jiā.", english: "You should go home." }
+            ]
+        },
+        {
+            id: "22-5",
+            name: "來",
+            category: "Motion Verbs",
+            explanation: "來 means \"to come.\" Used when someone moves toward the speaker or a place where the speaker is, in the pattern 來 + Place.",
+            examples: [
+                { hanzi: "來學校", pinyin: "lái xuéxiào", english: "come to school" },
+                { hanzi: "來我家", pinyin: "lái wǒ jiā", english: "come to my house" },
+                { hanzi: "來這裡", pinyin: "lái zhèlǐ", english: "come here" }
+            ]
+        }
+    ],
+
+    vocabulary: [
+        { word: "來", pinyin: "lái", meaning: "to come" },
+        { word: "說", pinyin: "shuō", meaning: "to say" },
+        { word: "知道", pinyin: "zhīdào", meaning: "to know" },
+        { word: "擔心", pinyin: "dānxīn", meaning: "to worry" },
+        { word: "舒服", pinyin: "shūfú", meaning: "comfortable / well" },
+        { word: "早餐", pinyin: "zǎocān", meaning: "breakfast" },
+        { word: "應該", pinyin: "yīnggāi", meaning: "should" },
+        { word: "就", pinyin: "jiù", meaning: "then / just" },
+        { word: "會", pinyin: "huì", meaning: "will / would" },
+        { word: "沒", pinyin: "méi", meaning: "did not" }
+    ],
+
+    reviewQuestions: [
+        {
+            meaning: "I didn't see Xiao Mei.",
+            answer: ["我", "沒", "看到", "小美"]
+        },
+        {
+            meaning: "I didn't eat breakfast.",
+            answer: ["我", "沒", "吃", "早餐"]
+        },
+        {
+            meaning: "Xiao Mei didn't come to school.",
+            answer: ["小美", "沒", "來", "學校"]
+        },
+        {
+            meaning: "Did you eat breakfast?",
+            answer: ["你", "吃", "了", "早餐", "嗎"]
+        },
+        {
+            meaning: "Did you come to school?",
+            answer: ["你", "來", "了", "學校", "嗎"]
+        },
+        {
+            meaning: "Did you see Xiao Mei or not?",
+            answer: ["你", "有沒有", "看到", "小美"]
+        },
+        {
+            meaning: "You should rest.",
+            answer: ["你", "應該", "休息"]
+        },
+        {
+            meaning: "I should come to school.",
+            answer: ["我", "應該", "會", "來", "學校"]
+        },
+        {
+            meaning: "She didn't worry.",
+            answer: ["她", "沒", "擔心"]
+        },
+        {
+            meaning: "Did she know?",
+            answer: ["她", "知道", "了", "嗎"]
+        }
+    ]
+}
 
 
 };
