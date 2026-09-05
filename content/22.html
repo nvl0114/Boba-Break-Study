@@ -1,0 +1,3169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Are You Feeling Well? | Boba Break Study</title>
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/hanzi-writer@3.5.0/dist/hanzi-writer.min.js"></script>
+<script src="lesson.js"></script>
+<style>
+
+/* =====================================================
+   GENERAL
+===================================================== */
+
+.lesson-card,
+.grammar-card,
+.game-card,
+.writing-card,
+.final-card {
+    background:#fff;
+    padding:30px;
+    border-radius:20px;
+    box-shadow:0 6px 15px rgba(0,0,0,.06);
+    margin:25px auto;
+    max-width:750px;
+}
+
+h2 {
+    color:#b8865c;
+    font-size:24px;
+    margin-bottom:12px;
+}
+
+h3 {
+    color:#5c4033;
+    margin-top:15px;
+}
+
+p {
+    color:#666;
+    font-size:14px;
+    line-height:1.65;
+}
+
+
+/* =====================================================
+   TITLE
+===================================================== */
+
+.lesson-title {
+    text-align:center;
+    margin-top:20px;
+}
+
+.lesson-title .badge {
+    display:inline-block;
+    background:#fff8ef;
+    color:#b8865c;
+    border:1px solid #d7b89c;
+    padding:6px 13px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.lesson-title h1 {
+    color:#5c4033;
+    font-size:28px;
+    margin:12px 0 5px;
+}
+
+.lesson-title p {
+    margin:0;
+}
+
+
+/* =====================================================
+   READING
+===================================================== */
+
+.reading-content {
+    background:#fff8ef;
+    border:1.5px solid #d7b89c;
+    padding:35px 22px 22px;
+    border-radius:15px;
+    margin-top:15px;
+    font-size:19px;
+    line-height:2.8;
+    color:#5c4033;
+}
+
+.char-group {
+    display:inline-flex;
+    flex-direction:column-reverse;
+    align-items:center;
+    vertical-align:baseline;
+    margin:0 2px;
+    line-height:1;
+}
+
+.char-group .pinyin-sub {
+    position:static;
+    font-size:10px;
+    font-weight:normal;
+    color:#8c7355;
+    line-height:1;
+    white-space:nowrap;
+    margin-top:2px;
+}
+
+.char-group .hanzi-main {
+    display:inline;
+    font-weight:bold;
+    font-size:21px;
+    line-height:1;
+    white-space:nowrap;
+}
+
+.reading-note {
+    background:#fdfbf7;
+    border-left:4px solid #b8865c;
+    padding:12px 15px;
+    border-radius:10px;
+    margin-top:15px;
+}
+
+
+/* =====================================================
+   AUDIO
+===================================================== */
+
+.sound-btn {
+    background:#b8865c;
+    color:#fff;
+    border:none;
+    width:32px;
+    height:32px;
+    border-radius:50%;
+    cursor:pointer;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    margin-left:8px;
+}
+
+
+/* =====================================================
+   GRAMMAR CAROUSEL
+===================================================== */
+
+.grammar-slider-container {
+    position:relative;
+}
+
+.grammar-slide {
+    display:none;
+}
+
+.grammar-slide.active-slide {
+    display:block;
+}
+
+.pattern-display {
+    background:#fff8ef;
+    padding:15px;
+    border-radius:14px;
+    border:1.5px solid #d7b89c;
+    margin:15px 0;
+    text-align:center;
+}
+
+.pattern-code {
+    font-weight:bold;
+    color:#b8865c;
+    font-size:18px;
+}
+
+.grammar-explanation {
+    background:#fff8ef;
+    border:1.5px solid #d7b89c;
+    padding:15px;
+    border-radius:15px;
+    margin-top:15px;
+}
+
+.grammar-explanation strong {
+    color:#b8865c;
+}
+
+.example-sentence {
+    text-align:center;
+    margin-top:18px;
+    padding:15px;
+    background:#fff;
+    border-radius:15px;
+    border:1px dashed #d7b89c;
+}
+
+.example-hanzi {
+    font-size:26px;
+    font-weight:bold;
+    color:#5c4033;
+    margin-bottom:5px;
+}
+
+.example-english {
+    color:#666;
+    font-size:14px;
+}
+
+.slider-nav {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-top:20px;
+}
+
+.slider-btn {
+    background:#fff8ef;
+    border:1.5px solid #d7b89c;
+    color:#8c7355;
+    padding:8px 16px;
+    border-radius:12px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.slider-indicators {
+    display:flex;
+    gap:6px;
+    flex-wrap:wrap;
+    justify-content:center;
+    max-width:400px;
+}
+
+.indicator {
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:#f0e4d5;
+    cursor:pointer;
+}
+
+.indicator.active {
+    background:#b8865c;
+}
+
+
+/* =====================================================
+   VOCABULARY
+===================================================== */
+
+.vocab-container {
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    justify-content:center;
+    margin-top:15px;
+}
+
+.vocab-pill {
+    background:#fff8ef;
+    border-radius:14px;
+    padding:10px 12px;
+    width:110px;
+    text-align:center;
+    border:1.5px solid #d7b89c;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.vocab-pill:hover {
+    transform:translateY(-2px);
+    background:#faedcd;
+}
+
+.vocab-pill .hanzi {
+    font-size:20px;
+    font-weight:bold;
+    color:#b8865c;
+}
+
+.vocab-pill .pinyin {
+    font-size:11px;
+    color:#555;
+}
+
+.vocab-pill .meaning {
+    font-size:10px;
+    color:#777;
+    margin-top:2px;
+}
+
+
+/* =====================================================
+   GAMES
+===================================================== */
+
+.game-card {
+    position:relative;
+}
+
+.game-number {
+    display:inline-block;
+    background:#fff8ef;
+    color:#b8865c;
+    border:1px solid #d7b89c;
+    padding:5px 12px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.game-description {
+    margin-bottom:15px;
+}
+
+.game-progress {
+    font-size:12px;
+    color:#8c7355;
+    text-align:right;
+    margin-bottom:8px;
+}
+
+.question-box {
+    text-align:center;
+    background:#fff8ef;
+    border:1.5px dashed #d7b89c;
+    padding:16px;
+    border-radius:15px;
+    margin-bottom:15px;
+}
+
+.question-label {
+    font-size:11px;
+    color:#999;
+    margin-bottom:5px;
+}
+
+.question-meaning {
+    font-size:17px;
+    color:#5c4033;
+    font-weight:bold;
+}
+
+.answer-area {
+    min-height:65px;
+    padding:12px;
+    border:2px dashed #d7b89c;
+    border-radius:15px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:7px;
+    background:#fdfbf7;
+    margin-bottom:12px;
+}
+
+.answer-placeholder {
+    color:#aaa;
+    font-size:13px;
+}
+
+.word-bank {
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-bottom:15px;
+}
+
+.word-btn {
+    border:1.5px solid #d7b89c;
+    background:#fff;
+    color:#5c4033;
+    padding:9px 14px;
+    border-radius:12px;
+    font-size:17px;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.word-btn:hover {
+    background:#fff8ef;
+    transform:translateY(-2px);
+}
+
+.word-btn.selected {
+    background:#faedcd;
+    border-color:#b8865c;
+    color:#8c5d35;
+}
+
+.word-btn:disabled {
+    opacity:.4;
+    cursor:default;
+}
+
+.selected-word {
+    background:#b8865c;
+    color:#fff;
+    padding:8px 13px;
+    border-radius:10px;
+    font-size:17px;
+    cursor:pointer;
+}
+
+.game-buttons {
+    display:flex;
+    gap:8px;
+}
+
+.check-btn,
+.reset-btn,
+.listen-btn,
+.next-game-btn {
+    flex:1;
+    border:none;
+    border-radius:12px;
+    padding:11px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.check-btn {
+    background:#b8865c;
+    color:#fff;
+}
+
+.reset-btn {
+    background:#fff8ef;
+    color:#8c7355;
+    border:1px solid #d7b89c;
+}
+
+.listen-btn {
+    background:#f0f7f4;
+    color:#2d6a4f;
+    border:1px solid #b7e4c7;
+}
+
+.next-game-btn {
+    background:#5c4033;
+    color:#fff;
+    display:none;
+    margin-top:12px;
+    width:100%;
+}
+
+.feedback {
+    text-align:center;
+    min-height:30px;
+    margin-top:12px;
+    font-weight:bold;
+}
+
+.correct {
+    color:#2d6a4f;
+}
+
+.incorrect {
+    color:#9b2226;
+}
+
+
+/* =====================================================
+   SENTENCE WRITING
+===================================================== */
+
+.writing-card {
+    text-align:center;
+}
+
+.sentence-writing {
+    background:#fff8ef;
+    border:1.5px solid #d7b89c;
+    padding:18px;
+    border-radius:15px;
+    margin-top:15px;
+    text-align:left;
+}
+
+.sentence-prompt {
+    font-size:18px;
+    font-weight:bold;
+    color:#5c4033;
+}
+
+.sentence-hint {
+    font-size:12px;
+    color:#888;
+    margin:8px 0;
+}
+
+#sentenceInput {
+    width:100%;
+    box-sizing:border-box;
+    padding:12px;
+    border-radius:12px;
+    border:1.5px solid #d7b89c;
+    font-size:20px;
+    text-align:center;
+    outline:none;
+}
+
+.check-writing {
+    width:100%;
+    margin-top:10px;
+    padding:11px;
+    background:#b8865c;
+    color:#fff;
+    border:none;
+    border-radius:12px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+
+/* =====================================================
+   HANZI WRITING
+===================================================== */
+
+.writing-mode-buttons {
+    display:flex;
+    gap:8px;
+    margin:15px 0;
+}
+
+.mode-btn {
+    flex:1;
+    border:1.5px solid #d7b89c;
+    background:#fff8ef;
+    color:#8c7355;
+    padding:10px 5px;
+    border-radius:12px;
+    cursor:pointer;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.mode-btn.active {
+    background:#b8865c;
+    color:#fff;
+    border-color:#b8865c;
+}
+
+.writing-info {
+    color:#777;
+    font-size:13px;
+    margin-bottom:15px;
+}
+
+.canvas-wrapper {
+    margin:15px auto;
+    width:280px;
+    max-width:100%;
+    height:280px;
+    background:
+        linear-gradient(#eadac7 1px,transparent 1px),
+        linear-gradient(90deg,#eadac7 1px,transparent 1px);
+    background-size:70px 70px;
+    background-position:center;
+    border:2px solid #d7b89c;
+    border-radius:15px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+    position:relative;
+    touch-action:none;
+}
+
+#target-div {
+    width:260px;
+    height:260px;
+}
+
+.writing-buttons {
+    display:flex;
+    gap:8px;
+    justify-content:center;
+    margin-top:15px;
+}
+
+.write-btn {
+    border:none;
+    padding:10px 15px;
+    border-radius:12px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.clear-btn {
+    background:#fff8ef;
+    color:#8c7355;
+    border:1px solid #d7b89c;
+}
+
+.next-write-btn {
+    background:#b8865c;
+    color:#fff;
+}
+
+
+/* =====================================================
+   FINAL CHALLENGE
+===================================================== */
+
+.final-card {
+    text-align:center;
+}
+
+.final-card .question-box {
+    margin-top:20px;
+}
+
+.final-score {
+    font-size:36px;
+    font-weight:bold;
+    color:#b8865c;
+    margin-top:10px;
+}
+
+.final-progress-bar {
+    width:100%;
+    height:8px;
+    background:#f0e4d5;
+    border-radius:10px;
+    overflow:hidden;
+    margin:15px 0;
+}
+
+.final-progress-fill {
+    height:100%;
+    width:0%;
+    background:#b8865c;
+    transition:.3s;
+}
+
+.unlock {
+    background:#fff8ef;
+    padding:15px;
+    border-radius:15px;
+    border:1.5px solid #d7b89c;
+    margin-top:15px;
+}
+
+.final-error {
+    background:#fff1f1;
+    color:#9b2226;
+    border:1.5px solid #e5a5a5;
+    padding:15px;
+    border-radius:15px;
+    margin-top:15px;
+    display:none;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:700px){
+
+    .lesson-card,
+    .grammar-card,
+    .game-card,
+    .writing-card,
+    .final-card {
+        padding:18px;
+        margin:15px;
+    }
+
+    .lesson-title h1 {
+        font-size:23px;
+    }
+
+    .word-btn {
+        padding:8px 12px;
+        font-size:16px;
+    }
+
+    .game-buttons {
+        flex-wrap:wrap;
+    }
+
+    .writing-mode-buttons {
+        flex-wrap:wrap;
+    }
+
+    .mode-btn {
+        min-width:45%;
+    }
+
+    .reading-content {
+        font-size:17px;
+        line-height:2.7;
+        padding:30px 14px 18px;
+    }
+
+}
+
+</style>
+</head>
+<body>
+<div class="app-container">
+<div id="sidebar-container"></div>
+<main class="main-content">
+
+<!-- =====================================================
+     TITLE
+===================================================== -->
+<div class="lesson-title">
+<span class="badge">DAILY LIFE • CHECKING IN</span>
+
+<h1>Are You Feeling Well?</h1>
+
+<p>
+    Learn how to say what someone didn't do, ask whether
+    something has already happened, and give gentle advice
+    with 應該.
+</p>
+
+</div>
+
+<!-- =====================================================
+     READING
+===================================================== -->
+<div class="lesson-card">
+<h2>📖 Reading: Where Is Xiao Mei?</h2>
+
+<p>
+    This lesson uses a short story about a worried friend to
+    practice talking about things that didn't happen and
+    giving advice. Pinyin is shown only for this lesson's
+    vocabulary.
+</p>
+
+<div style="display:flex;align-items:center;margin-top:20px;">
+
+    <h3 style="margin-top:0;">Reading Text</h3>
+
+    <button class="sound-btn" onclick="playReadingAudio()">
+        <i class="fas fa-volume-up"></i>
+    </button>
+
+</div>
+
+<p style="font-size:12px;color:#888;">
+    Pinyin appears only above target vocabulary from this lesson.
+</p>
+
+<div class="reading-content">
+
+    今天早上，阿豪
+    <span class="char-group">
+        <span class="pinyin-sub">lái</span>
+        <span class="hanzi-main">來</span>
+    </span>
+    學校，但是他
+    <span class="char-group">
+        <span class="pinyin-sub">méi</span>
+        <span class="hanzi-main">沒</span>
+    </span>
+    看到小美。
+
+    <br><br>
+
+    阿豪想：「小美今天有
+    <span class="char-group">
+        <span class="pinyin-sub">lái</span>
+        <span class="hanzi-main">來</span>
+    </span>
+    學校嗎？」
+
+    <br><br>
+
+    他問同學：「你有
+    <span class="char-group">
+        <span class="pinyin-sub">méi</span>
+        <span class="hanzi-main">沒</span>
+    </span>
+    有看到小美？」
+
+    <br><br>
+
+    同學
+    <span class="char-group">
+        <span class="pinyin-sub">shuō</span>
+        <span class="hanzi-main">說</span>
+    </span>
+    ：「
+    <span class="char-group">
+        <span class="pinyin-sub">méi</span>
+        <span class="hanzi-main">沒</span>
+    </span>
+    有，我不
+    <span class="char-group">
+        <span class="pinyin-sub">zhīdào</span>
+        <span class="hanzi-main">知道</span>
+    </span>
+    。」
+
+    <br><br>
+
+    阿豪有一點
+    <span class="char-group">
+        <span class="pinyin-sub">dānxīn</span>
+        <span class="hanzi-main">擔心</span>
+    </span>
+    ，所以打電話給小美。
+
+    <br><br>
+
+    「小美，你怎麼
+    <span class="char-group">
+        <span class="pinyin-sub">méi</span>
+        <span class="hanzi-main">沒</span>
+    </span>
+    <span class="char-group">
+        <span class="pinyin-sub">lái</span>
+        <span class="hanzi-main">來</span>
+    </span>
+    學校？你還好嗎？」
+
+    <br><br>
+
+    小美
+    <span class="char-group">
+        <span class="pinyin-sub">shuō</span>
+        <span class="hanzi-main">說</span>
+    </span>
+    ：「我今天不太
+    <span class="char-group">
+        <span class="pinyin-sub">shūfú</span>
+        <span class="hanzi-main">舒服</span>
+    </span>
+    ，所以
+    <span class="char-group">
+        <span class="pinyin-sub">méi</span>
+        <span class="hanzi-main">沒</span>
+    </span>
+    <span class="char-group">
+        <span class="pinyin-sub">lái</span>
+        <span class="hanzi-main">來</span>
+    </span>
+    學校。」
+
+    <br><br>
+
+    阿豪問：「你吃了
+    <span class="char-group">
+        <span class="pinyin-sub">zǎocān</span>
+        <span class="hanzi-main">早餐</span>
+    </span>
+    嗎？」
+
+    <br><br>
+
+    小美
+    <span class="char-group">
+        <span class="pinyin-sub">shuō</span>
+        <span class="hanzi-main">說</span>
+    </span>
+    ：「我
+    <span class="char-group">
+        <span class="pinyin-sub">méi</span>
+        <span class="hanzi-main">沒</span>
+    </span>
+    吃
+    <span class="char-group">
+        <span class="pinyin-sub">zǎocān</span>
+        <span class="hanzi-main">早餐</span>
+    </span>
+    。」
+
+    <br><br>
+
+    阿豪
+    <span class="char-group">
+        <span class="pinyin-sub">shuō</span>
+        <span class="hanzi-main">說</span>
+    </span>
+    ：「你
+    <span class="char-group">
+        <span class="pinyin-sub">yīnggāi</span>
+        <span class="hanzi-main">應該</span>
+    </span>
+    休息,也要吃一點東西。今天
+    <span class="char-group">
+        <span class="pinyin-sub">jiù</span>
+        <span class="hanzi-main">就</span>
+    </span>
+    好好休息，不要
+    <span class="char-group">
+        <span class="pinyin-sub">lái</span>
+        <span class="hanzi-main">來</span>
+    </span>
+    學校了！」
+
+    <br><br>
+
+    小美
+    <span class="char-group">
+        <span class="pinyin-sub">shuō</span>
+        <span class="hanzi-main">說</span>
+    </span>
+    ：「好，謝謝你。明天我
+    <span class="char-group">
+        <span class="pinyin-sub">yīnggāi</span>
+        <span class="hanzi-main">應該</span>
+    </span>
+    <span class="char-group">
+        <span class="pinyin-sub">huì</span>
+        <span class="hanzi-main">會</span>
+    </span>
+    <span class="char-group">
+        <span class="pinyin-sub">lái</span>
+        <span class="hanzi-main">來</span>
+    </span>
+    學校。」
+
+</div>
+
+<div class="reading-note">
+
+    <strong>English Meaning:</strong><br>
+    This morning, Ah Hao came to school, but he didn't see
+    Xiao Mei. Ah Hao thought, "Did Xiao Mei come to school
+    today?" He asked a classmate, "Did you see Xiao Mei?"
+    The classmate said, "No, I don't know."
+    <br><br>
+    Ah Hao got a little worried, so he called Xiao Mei.
+    "Xiao Mei, why didn't you come to school? Are you okay?"
+    Xiao Mei said, "I'm not feeling well today, so I didn't
+    come to school."
+    <br><br>
+    Ah Hao asked, "Did you eat breakfast?" Xiao Mei said,
+    "I didn't eat breakfast." Ah Hao said, "You should rest,
+    and you should also eat something. Just rest well today,
+    don't come to school!"
+    <br><br>
+    Xiao Mei said, "Okay, thank you. I should come to school
+    tomorrow."
+
+</div>
+
+</div>
+
+<!-- =====================================================
+     GRAMMAR CAROUSEL
+===================================================== -->
+<div class="grammar-card">
+<h2>🧠 Grammar Patterns</h2>
+
+<div class="grammar-slider-container">
+
+    <div class="grammar-slide active-slide" id="slide-1">
+
+        <h3>1. 沒 + V — Didn't Do Something</h3>
+
+        <div class="pattern-display">
+            <div class="pattern-code">
+                S + 沒 + V + O
+            </div>
+        </div>
+
+        <div class="grammar-explanation">
+
+            <p>
+                <strong>沒 + V</strong> is used to say that someone
+                did not do something.
+            </p>
+
+            <p>
+                When using 沒 to negate a completed action, we
+                normally do <strong>not</strong> use 了 after the verb.
+            </p>
+
+            <p>
+                ❌ 我沒吃了早餐。<br>
+                ✅ 我沒吃早餐。
+            </p>
+
+        </div>
+
+        <div class="example-sentence">
+
+            <div class="example-hanzi">我沒看到小美。</div>
+            <div>I didn't see Xiao Mei.</div>
+
+            <br>
+
+            <div class="example-hanzi">我沒吃早餐。</div>
+            <div>I didn't eat breakfast.</div>
+
+            <br>
+
+            <div class="example-hanzi">小美沒來學校。</div>
+            <div>Xiao Mei didn't come to school.</div>
+
+        </div>
+
+    </div>
+
+
+    <div class="grammar-slide" id="slide-2">
+
+        <h3>2. S + V + 了 + O + 嗎？</h3>
+
+        <div class="pattern-display">
+
+            <div class="pattern-code">
+                S + V + 了 + O + 嗎？
+            </div>
+
+        </div>
+
+        <div class="grammar-explanation">
+
+            <p>
+                Use <strong>V + 了 + O + 嗎？</strong> to ask whether
+                someone has already done something.
+            </p>
+
+            <p>
+                In the reading, 阿豪 asks Xiao Mei whether she
+                has eaten breakfast: <strong>你吃了早餐嗎？</strong>
+            </p>
+
+        </div>
+
+        <div class="example-sentence">
+
+            <div class="example-hanzi">你吃了早餐嗎？</div>
+            <div>Did you eat breakfast?</div>
+
+            <br>
+
+            <div class="example-hanzi">你看了電影嗎？</div>
+            <div>Did you watch the movie?</div>
+
+            <br>
+
+            <div class="example-hanzi">你做了功課嗎？</div>
+            <div>Did you do your homework?</div>
+
+        </div>
+
+    </div>
+
+
+    <div class="grammar-slide" id="slide-3">
+
+        <h3>3. Review: S + 有沒有 + V + O？</h3>
+
+        <div class="pattern-display">
+
+            <div class="pattern-code">
+                S + 有沒有 + V + O？
+            </div>
+
+        </div>
+
+        <div class="grammar-explanation">
+
+            <p>
+                <strong>有沒有 + V</strong> is an A-not-A question
+                pattern. It asks whether someone did something
+                or not.
+            </p>
+
+            <p>
+                In the reading, the classmate is asked:
+                <strong>你有沒有看到小美？</strong>
+            </p>
+
+        </div>
+
+        <div class="example-sentence">
+
+            <div class="example-hanzi">你有沒有吃早餐？</div>
+            <div>Did you eat breakfast?</div>
+
+            <br>
+
+            <div class="example-hanzi">你有沒有看到小美？</div>
+            <div>Did you see Xiao Mei?</div>
+
+            <br>
+
+            <div class="example-hanzi">你有沒有去學校？</div>
+            <div>Did you go to school?</div>
+
+        </div>
+
+    </div>
+
+
+    <div class="grammar-slide" id="slide-4">
+
+        <h3>4. 應該 — Should / Probably</h3>
+
+        <div class="pattern-display">
+
+            <div class="pattern-code">
+                S + 應該 + V
+            </div>
+
+        </div>
+
+        <div class="grammar-explanation">
+
+            <p>
+                <strong>應該</strong> means "should" or "probably."
+                It is often used for giving advice.
+            </p>
+
+            <p>
+                In the reading: <strong>你應該休息，也要吃一點東西。</strong>
+                "You should rest, and you should also eat something."
+            </p>
+
+        </div>
+
+        <div class="example-sentence">
+
+            <div class="example-hanzi">你應該休息。</div>
+            <div>You should rest.</div>
+
+            <br>
+
+            <div class="example-hanzi">你應該吃早餐。</div>
+            <div>You should eat breakfast.</div>
+
+            <br>
+
+            <div class="example-hanzi">你應該回家。</div>
+            <div>You should go home.</div>
+
+        </div>
+
+    </div>
+
+
+    <div class="grammar-slide" id="slide-5">
+
+        <h3>5. 來 — To Come</h3>
+
+        <div class="pattern-display">
+
+            <div class="pattern-code">
+                來 + Place
+            </div>
+
+        </div>
+
+        <div class="grammar-explanation">
+
+            <p>
+                <strong>來</strong> means "to come." Use it when
+                someone moves toward the speaker or a place
+                where the speaker is.
+            </p>
+
+            <p>
+                In the reading: <strong>明天我應該會來學校。</strong>
+                "I should come to school tomorrow."
+            </p>
+
+        </div>
+
+        <div class="example-sentence">
+
+            <div class="example-hanzi">來學校</div>
+            <div>come to school</div>
+
+            <br>
+
+            <div class="example-hanzi">來我家</div>
+            <div>come to my house</div>
+
+            <br>
+
+            <div class="example-hanzi">來這裡</div>
+            <div>come here</div>
+
+        </div>
+
+    </div>
+
+
+    <div class="grammar-slide" id="slide-6">
+
+        <h3>6. Key Grammar Review</h3>
+
+        <div class="pattern-display">
+            <div class="pattern-code">
+                A quick recap of all five patterns
+            </div>
+        </div>
+
+        <div class="grammar-explanation">
+
+            <p>
+                <strong>沒 + V</strong> → did not do something
+            </p>
+
+            <p>
+                <strong>V + 了 + O + 嗎？</strong> → Did someone do something?
+            </p>
+
+            <p>
+                <strong>有沒有 + V + O？</strong> → Did someone do something or not?
+            </p>
+
+            <p>
+                <strong>應該 + V</strong> → should do something
+            </p>
+
+            <p>
+                <strong>來 + Place</strong> → come to a place
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="slider-nav">
+
+    <button class="slider-btn" onclick="prevSlide()">
+        ← Prev
+    </button>
+
+    <div class="slider-indicators">
+
+        <span class="indicator active" onclick="currentSlide(1)"></span>
+        <span class="indicator" onclick="currentSlide(2)"></span>
+        <span class="indicator" onclick="currentSlide(3)"></span>
+        <span class="indicator" onclick="currentSlide(4)"></span>
+        <span class="indicator" onclick="currentSlide(5)"></span>
+        <span class="indicator" onclick="currentSlide(6)"></span>
+
+    </div>
+
+    <button class="slider-btn" onclick="nextSlide()">
+        Next →
+    </button>
+
+</div>
+
+</div>
+
+<!-- =====================================================
+     VOCABULARY
+===================================================== -->
+<div class="lesson-card">
+<h2>📚 Lesson Vocabulary</h2>
+
+<p>
+    Tap any word to hear its Mandarin pronunciation.
+</p>
+
+<div class="vocab-container">
+
+    <div class="vocab-pill" onclick="playAudio('來')">
+        <div class="hanzi">來</div>
+        <div class="pinyin">lái</div>
+        <div class="meaning">to come</div>
+    </div>
+
+    <div class="vocab-pill" onclick="playAudio('說')">
+        <div class="hanzi">說</div>
+        <div class="pinyin">shuō</div>
+        <div class="meaning">to say</div>
+    </div>
+
+    <div class="vocab-pill" onclick="playAudio('知道')">
+        <div class="hanzi">知道</div>
+        <div class="pinyin">zhīdào</div>
+        <div class="meaning">to know</div>
+    </div>
+
+    <div class="vocab-pill" onclick="playAudio('擔心')">
+        <div class="hanzi">擔心</div>
+        <div class="pinyin">dānxīn</div>
+        <div class="meaning">to worry</div>
+    </div>
+
+    <div class="vocab-pill" onclick="playAudio('舒服')">
+        <div class="hanzi">舒服</div>
+        <div class="pinyin">shūfú</div>
+        <div class="meaning">comfortable / well</div>
+    </div>
+
+    <div class="vocab-pill" onclick="playAudio('早餐')">
+        <div class="hanzi">早餐</div>
+        <div class="pinyin">zǎocān</div>
+        <div class="meaning">breakfast</div>
+    </div>
+
+    <div class="vocab-pill" onclick="playAudio('應該')">
+        <div class="hanzi">應該</div>
+        <div class="pinyin">yīnggāi</div>
+        <div class="meaning">should</div>
+    </div>
+
+    <div class="vocab-pill" onclick="playAudio('就')">
+        <div class="hanzi">就</div>
+        <div class="pinyin">jiù</div>
+        <div class="meaning">then / just</div>
+    </div>
+
+    <div class="vocab-pill" onclick="playAudio('會')">
+        <div class="hanzi">會</div>
+        <div class="pinyin">huì</div>
+        <div class="meaning">will / would</div>
+    </div>
+
+    <div class="vocab-pill" onclick="playAudio('沒')">
+        <div class="hanzi">沒</div>
+        <div class="pinyin">méi</div>
+        <div class="meaning">did not</div>
+    </div>
+
+</div>
+
+</div>
+
+<!-- =====================================================
+     GAME 1
+===================================================== -->
+<div class="game-card">
+<span class="game-number">GAME 1</span>
+
+<h2>🧩 沒 + V Builder</h2>
+
+<p class="game-description">
+    Build the correct Mandarin sentence to say that someone
+    didn't do something.
+</p>
+
+<div class="game-progress">
+    Question <span id="g1Num">1</span> / 5
+</div>
+
+<div class="question-box">
+
+    <div class="question-label">Translate:</div>
+
+    <div class="question-meaning" id="g1Meaning"></div>
+
+</div>
+
+<div class="answer-area" id="g1Answer">
+    <span class="answer-placeholder">
+        Tap the words below
+    </span>
+</div>
+
+<div class="word-bank" id="g1Bank"></div>
+
+<div class="game-buttons">
+
+    <button class="check-btn" onclick="checkGame(1)">
+        ✓ Check
+    </button>
+
+    <button class="reset-btn" onclick="resetGame(1)">
+        ↻ Reset
+    </button>
+
+    <button class="listen-btn" onclick="listenCurrent(1)">
+        <i class="fas fa-volume-up"></i>
+    </button>
+
+</div>
+
+<div class="feedback" id="g1Feedback"></div>
+
+<button class="next-game-btn"
+        id="g1Next"
+        onclick="nextGameQuestion(1)">
+    Next →
+</button>
+
+</div>
+
+<!-- =====================================================
+     GAME 2
+===================================================== -->
+<div class="game-card">
+<span class="game-number">GAME 2</span>
+
+<h2>🧩 Have You Already...？</h2>
+
+<p class="game-description">
+    Practice asking whether someone has already done something
+    with V + 了 + O + 嗎？
+</p>
+
+<div class="game-progress">
+    Question <span id="g2Num">1</span> / 5
+</div>
+
+<div class="question-box">
+
+    <div class="question-label">Translate:</div>
+
+    <div class="question-meaning" id="g2Meaning"></div>
+
+</div>
+
+<div class="answer-area" id="g2Answer">
+    <span class="answer-placeholder">
+        Tap the words below
+    </span>
+</div>
+
+<div class="word-bank" id="g2Bank"></div>
+
+<div class="game-buttons">
+
+    <button class="check-btn" onclick="checkGame(2)">
+        ✓ Check
+    </button>
+
+    <button class="reset-btn" onclick="resetGame(2)">
+        ↻ Reset
+    </button>
+
+    <button class="listen-btn" onclick="listenCurrent(2)">
+        <i class="fas fa-volume-up"></i>
+    </button>
+
+</div>
+
+<div class="feedback" id="g2Feedback"></div>
+
+<button class="next-game-btn"
+        id="g2Next"
+        onclick="nextGameQuestion(2)">
+    Next →
+</button>
+
+</div>
+
+<!-- =====================================================
+     GAME 3
+===================================================== -->
+<div class="game-card">
+<span class="game-number">GAME 3</span>
+
+<h2>🧩 Checking In & Giving Advice</h2>
+
+<p class="game-description">
+    Build sentences using 有沒有, 應該, and 來 to check on
+    a friend and give advice.
+</p>
+
+<div class="game-progress">
+    Question <span id="g3Num">1</span> / 5
+</div>
+
+<div class="question-box">
+
+    <div class="question-label">Translate:</div>
+
+    <div class="question-meaning" id="g3Meaning"></div>
+
+</div>
+
+<div class="answer-area" id="g3Answer">
+    <span class="answer-placeholder">
+        Tap the words below
+    </span>
+</div>
+
+<div class="word-bank" id="g3Bank"></div>
+
+<div class="game-buttons">
+
+    <button class="check-btn" onclick="checkGame(3)">
+        ✓ Check
+    </button>
+
+    <button class="reset-btn" onclick="resetGame(3)">
+        ↻ Reset
+    </button>
+
+    <button class="listen-btn" onclick="listenCurrent(3)">
+        <i class="fas fa-volume-up"></i>
+    </button>
+
+</div>
+
+<div class="feedback" id="g3Feedback"></div>
+
+<button class="next-game-btn"
+        id="g3Next"
+        onclick="nextGameQuestion(3)">
+    Next →
+</button>
+
+</div>
+
+<!-- =====================================================
+     SENTENCE WRITING
+===================================================== -->
+<div class="writing-card">
+<h2>📝 Sentence Writing</h2>
+
+<p>
+    Translate the English prompt into Mandarin.
+    Use this lesson's vocabulary and grammar.
+</p>
+
+<div class="sentence-writing">
+
+    <div class="sentence-prompt" id="sentencePrompt"></div>
+
+    <div class="sentence-hint">
+        Write the Mandarin sentence in Hanzi.
+    </div>
+
+    <input
+        type="text"
+        id="sentenceInput"
+        placeholder="Type Hanzi here..."
+        autocomplete="off"
+    >
+
+    <button class="check-writing"
+            onclick="checkSentenceWriting()">
+        Check Answer
+    </button>
+
+    <div class="feedback"
+         id="sentenceFeedback">
+    </div>
+
+    <button class="next-game-btn"
+            id="nextSentenceBtn"
+            onclick="nextSentenceWriting()">
+        Next →
+    </button>
+
+</div>
+
+</div>
+
+<!-- =====================================================
+     HANZI WRITING
+===================================================== -->
+<div class="writing-card">
+<h2>✍️ Hanzi Writing Practice</h2>
+
+<p>
+    Practice the stroke order of every vocabulary word in this
+    lesson. Multi-character vocabulary is practiced character
+    by character, so every character from every vocabulary
+    item is included.
+</p>
+
+<div class="writing-mode-buttons">
+
+    <button class="mode-btn active"
+            onclick="setWritingMode('quiz',this)">
+        ✍️ Quiz
+    </button>
+
+    <button class="mode-btn"
+            onclick="setWritingMode('animate',this)">
+        👀 Animate
+    </button>
+
+</div>
+
+<div class="writing-info" id="writingInfo">
+    Loading...
+</div>
+
+<div class="canvas-wrapper">
+
+    <div id="target-div"></div>
+
+</div>
+
+<div class="feedback" id="writingFeedback"></div>
+
+<div class="writing-buttons">
+
+    <button class="write-btn clear-btn"
+            onclick="resetWritingQuiz()">
+        ↻ Retry
+    </button>
+
+    <button class="write-btn"
+            style="background:#f0f7f4;color:#2d6a4f;"
+            onclick="playCurrentWriting()">
+        <i class="fas fa-volume-up"></i>
+        Listen
+    </button>
+
+    <button class="write-btn next-write-btn"
+            onclick="nextWritingCharacter()">
+        Next →
+    </button>
+
+</div>
+
+</div>
+
+<!-- =====================================================
+     GRAMMAR MASTER
+===================================================== -->
+<div class="final-card">
+<span class="game-number">
+    FINAL CHALLENGE
+</span>
+
+<h2>🧋 Boba Quick Review</h2>
+
+<p>
+    Let's see how much you remember!
+</p>
+
+<div class="grammar-explanation">
+<p>
+    A quick review to test what you've learned and help you
+    remember the key vocabulary, grammar, and expressions from
+    this lesson. 🧋📚
+</p>
+</div>
+
+<div class="final-progress-bar">
+
+    <div class="final-progress-fill"
+         id="finalProgressFill">
+    </div>
+
+</div>
+
+<div class="question-box">
+
+    <div class="question-label">
+
+        Question
+        <span id="finalNum">1</span>
+        / 10
+
+    </div>
+
+    <div class="question-meaning"
+         id="finalMeaning">
+        Loading Grammar Master...
+    </div>
+
+</div>
+
+<div class="answer-area"
+     id="finalAnswer">
+
+    <span class="answer-placeholder">
+        Build your answer
+    </span>
+
+</div>
+
+<div class="word-bank"
+     id="finalBank">
+</div>
+
+<button class="check-btn"
+        style="width:100%;"
+        onclick="checkFinal()">
+
+    ✓ Check Final Answer
+
+</button>
+
+<button class="reset-btn"
+        id="finalResetBtn"
+        onclick="resetFinal()"
+        style="width:100%;margin-top:8px;">
+
+    ↻ Reset Answer
+
+</button>
+
+<div class="feedback"
+     id="finalFeedback">
+</div>
+
+<div class="final-score"
+     id="finalScore">
+
+    0 / 10
+
+</div>
+
+<div class="final-error"
+     id="finalError">
+</div>
+
+<div class="unlock"
+     id="unlockBox"
+     style="display:none;">
+
+    🎉 <strong>Grammar Master Unlocked!</strong>
+
+    <p>
+        You completed all 10 Grammar Master questions.
+    </p>
+
+</div>
+
+</div>
+
+</main>
+</div>
+
+<script>
+
+/* =====================================================
+   AUDIO
+===================================================== */
+
+function playAudio(text){
+
+    if(!("speechSynthesis" in window)) return;
+
+    window.speechSynthesis.cancel();
+
+    const utterance =
+        new SpeechSynthesisUtterance(text);
+
+    utterance.lang = "zh-TW";
+    utterance.rate = 0.82;
+    utterance.pitch = 1;
+
+    window.speechSynthesis.speak(utterance);
+}
+
+
+function playReadingAudio(){
+
+    const audioUrl =
+        "https://res.cloudinary.com/xlgnlgrn/video/upload/v1787632163/22.m4a";
+
+    const audio = new Audio(audioUrl);
+
+    audio.play().catch(error => {
+        console.log("Audio playback failed:", error);
+    });
+
+}
+
+
+/* =====================================================
+   GRAMMAR SLIDER
+===================================================== */
+
+let currentSlideIndex = 0;
+
+const totalSlides = 6;
+
+
+function showSlide(index){
+
+    if(index >= totalSlides){
+
+        currentSlideIndex = 0;
+
+    } else if(index < 0){
+
+        currentSlideIndex = totalSlides - 1;
+
+    } else {
+
+        currentSlideIndex = index;
+
+    }
+
+    for(let i = 1; i <= totalSlides; i++){
+
+        document
+            .getElementById("slide-" + i)
+            .classList
+            .remove("active-slide");
+
+    }
+
+    document
+        .querySelectorAll(".indicator")
+        .forEach(indicator => {
+            indicator.classList.remove("active");
+        });
+
+    document
+        .getElementById(
+            "slide-" + (currentSlideIndex + 1)
+        )
+        .classList
+        .add("active-slide");
+
+    document
+        .querySelectorAll(".indicator")
+        [currentSlideIndex]
+        .classList
+        .add("active");
+
+}
+
+
+function nextSlide(){
+
+    showSlide(currentSlideIndex + 1);
+
+}
+
+
+function prevSlide(){
+
+    showSlide(currentSlideIndex - 1);
+
+}
+
+
+function currentSlide(n){
+
+    showSlide(n - 1);
+
+}
+
+
+/* =====================================================
+   SHUFFLE
+===================================================== */
+
+function shuffle(array){
+
+    const result = [...array];
+
+    for(let i = result.length - 1; i > 0; i--){
+
+        const j =
+            Math.floor(Math.random() * (i + 1));
+
+        [result[i], result[j]] =
+            [result[j], result[i]];
+
+    }
+
+    return result;
+
+}
+
+
+/* =====================================================
+   GAME DATA
+===================================================== */
+
+const games = {
+
+    1: [
+
+        {
+            meaning:"I didn't see Xiao Mei.",
+            answer:["我","沒","看到","小美"]
+        },
+
+        {
+            meaning:"I didn't eat breakfast.",
+            answer:["我","沒","吃","早餐"]
+        },
+
+        {
+            meaning:"Xiao Mei didn't come to school.",
+            answer:["小美","沒","來","學校"]
+        },
+
+        {
+            meaning:"He didn't say (it).",
+            answer:["他","沒","說"]
+        },
+
+        {
+            meaning:"She didn't worry.",
+            answer:["她","沒","擔心"]
+        }
+
+    ],
+
+
+    2: [
+
+        {
+            meaning:"Did you eat breakfast?",
+            answer:["你","吃","了","早餐","嗎"]
+        },
+
+        {
+            meaning:"Did you see Xiao Mei?",
+            answer:["你","看","了","小美","嗎"]
+        },
+
+        {
+            meaning:"Did he say (it)?",
+            answer:["他","說","了","嗎"]
+        },
+
+        {
+            meaning:"Did you come to school?",
+            answer:["你","來","了","學校","嗎"]
+        },
+
+        {
+            meaning:"Did she know?",
+            answer:["她","知道","了","嗎"]
+        }
+
+    ],
+
+
+    3: [
+
+        {
+            meaning:"Did you see Xiao Mei or not?",
+            answer:["你","有沒有","看到","小美"]
+        },
+
+        {
+            meaning:"Did you come to school or not?",
+            answer:["你","有沒有","來","學校"]
+        },
+
+        {
+            meaning:"You should rest.",
+            answer:["你","應該","休息"]
+        },
+
+        {
+            meaning:"You should eat breakfast.",
+            answer:["你","應該","吃","早餐"]
+        },
+
+        {
+            meaning:"I should come to school.",
+            answer:["我","應該","會","來","學校"]
+        }
+
+    ]
+
+};
+
+
+/* =====================================================
+   GAME STATE
+===================================================== */
+
+const gameState = {
+
+    1:{
+        index:0,
+        selected:[],
+        done:false
+    },
+
+    2:{
+        index:0,
+        selected:[],
+        done:false
+    },
+
+    3:{
+        index:0,
+        selected:[],
+        done:false
+    }
+
+};
+
+
+/* =====================================================
+   LOAD GAME
+===================================================== */
+
+function loadGame(gameNumber){
+
+    const state = gameState[gameNumber];
+
+    const data =
+        games[gameNumber][state.index];
+
+    state.selected = [];
+    state.done = false;
+
+    document
+        .getElementById("g" + gameNumber + "Num")
+        .textContent =
+        state.index + 1;
+
+    document
+        .getElementById("g" + gameNumber + "Meaning")
+        .textContent =
+        data.meaning;
+
+    const answer =
+        document.getElementById(
+            "g" + gameNumber + "Answer"
+        );
+
+    answer.innerHTML =
+        '<span class="answer-placeholder">' +
+        'Tap the words below' +
+        '</span>';
+
+    const bank =
+        document.getElementById(
+            "g" + gameNumber + "Bank"
+        );
+
+    bank.innerHTML = "";
+
+    shuffle(data.answer).forEach(word => {
+
+        const button =
+            document.createElement("button");
+
+        button.className = "word-btn";
+
+        button.textContent = word;
+
+        button.onclick = function(){
+
+            if(this.disabled) return;
+
+            selectWord(
+                gameNumber,
+                this,
+                word
+            );
+
+        };
+
+        bank.appendChild(button);
+
+    });
+
+    document
+        .getElementById(
+            "g" + gameNumber + "Feedback"
+        )
+        .textContent = "";
+
+    document
+        .getElementById(
+            "g" + gameNumber + "Next"
+        )
+        .style.display = "none";
+
+}
+
+
+/* =====================================================
+   GAME WORD SELECTION
+===================================================== */
+
+function selectWord(
+    gameNumber,
+    button,
+    word
+){
+
+    gameState[gameNumber]
+        .selected
+        .push(word);
+
+    button.disabled = true;
+
+    button.classList.add("selected");
+
+    playAudio(word);
+
+    renderSelected(gameNumber);
+
+}
+
+
+function renderSelected(gameNumber){
+
+    const answer =
+        document.getElementById(
+            "g" + gameNumber + "Answer"
+        );
+
+    answer.innerHTML = "";
+
+    gameState[gameNumber]
+        .selected
+        .forEach(word => {
+
+            const span =
+                document.createElement("span");
+
+            span.className = "selected-word";
+
+            span.textContent = word;
+
+            span.onclick =
+                function(){
+                    playAudio(word);
+                };
+
+            answer.appendChild(span);
+
+        });
+
+}
+
+
+/* =====================================================
+   GAME CHECK
+===================================================== */
+
+function checkGame(gameNumber){
+
+    const state =
+        gameState[gameNumber];
+
+    const correct =
+        games[gameNumber][state.index].answer;
+
+    const selected =
+        state.selected;
+
+    const feedback =
+        document.getElementById(
+            "g" + gameNumber + "Feedback"
+        );
+
+    if(selected.length !== correct.length){
+
+        feedback.textContent =
+            "⚠️ Complete the sentence first.";
+
+        feedback.className =
+            "feedback incorrect";
+
+        return;
+
+    }
+
+    const isCorrect =
+        selected.every(
+            (word,index) =>
+                word === correct[index]
+        );
+
+    if(isCorrect){
+
+        feedback.textContent =
+            "🎉 Correct!";
+
+        feedback.className =
+            "feedback correct";
+
+        state.done = true;
+
+        playAudio(correct.join(""));
+
+        document
+            .getElementById(
+                "g" + gameNumber + "Next"
+            )
+            .style.display = "block";
+
+    } else {
+
+        feedback.textContent =
+            "❌ Not quite. Check the word order.";
+
+        feedback.className =
+            "feedback incorrect";
+
+    }
+
+}
+
+
+function resetGame(gameNumber){
+
+    loadGame(gameNumber);
+
+}
+
+
+function nextGameQuestion(gameNumber){
+
+    const state =
+        gameState[gameNumber];
+
+    if(!state.done) return;
+
+    state.index++;
+
+    if(
+        state.index >=
+        games[gameNumber].length
+    ){
+
+        state.index = 0;
+
+    }
+
+    loadGame(gameNumber);
+
+}
+
+
+function listenCurrent(gameNumber){
+
+    const state =
+        gameState[gameNumber];
+
+    playAudio(
+        games[gameNumber][state.index]
+            .answer
+            .join("")
+    );
+
+}
+
+
+/* =====================================================
+   SENTENCE WRITING
+===================================================== */
+
+const sentenceQuestions = [
+
+    {
+        prompt:"I didn't eat breakfast.",
+        answer:"我沒吃早餐"
+    },
+
+    {
+        prompt:"Xiao Mei didn't come to school.",
+        answer:"小美沒來學校"
+    },
+
+    {
+        prompt:"Did you eat breakfast?",
+        answer:"你吃了早餐嗎"
+    },
+
+    {
+        prompt:"Did you see Xiao Mei or not?",
+        answer:"你有沒有看到小美"
+    },
+
+    {
+        prompt:"You should rest.",
+        answer:"你應該休息"
+    },
+
+    {
+        prompt:"I am not feeling well.",
+        answer:"我不舒服"
+    },
+
+    {
+        prompt:"Then you should rest well.",
+        answer:"你就應該好好休息"
+    },
+
+    {
+        prompt:"I should come to school tomorrow.",
+        answer:"我應該會來學校"
+    }
+
+];
+
+let sentenceIndex = 0;
+
+
+function loadSentenceWriting(){
+
+    const q =
+        sentenceQuestions[sentenceIndex];
+
+    document
+        .getElementById("sentencePrompt")
+        .textContent =
+        q.prompt;
+
+    document
+        .getElementById("sentenceInput")
+        .value = "";
+
+    document
+        .getElementById("sentenceFeedback")
+        .textContent = "";
+
+    document
+        .getElementById("nextSentenceBtn")
+        .style.display = "none";
+
+}
+
+
+function normalizeChinese(text){
+
+    return text
+        .trim()
+        .replace(/[。，？！、,.!?]/g,"")
+        .replace(/\s+/g,"");
+
+}
+
+
+function checkSentenceWriting(){
+
+    const input =
+        normalizeChinese(
+            document
+                .getElementById("sentenceInput")
+                .value
+        );
+
+    const correct =
+        normalizeChinese(
+            sentenceQuestions[sentenceIndex]
+                .answer
+        );
+
+    const feedback =
+        document
+            .getElementById(
+                "sentenceFeedback"
+            );
+
+    if(input === correct){
+
+        feedback.textContent =
+            "🎉 Perfect!";
+
+        feedback.className =
+            "feedback correct";
+
+        playAudio(correct);
+
+        document
+            .getElementById(
+                "nextSentenceBtn"
+            )
+            .style.display = "block";
+
+    } else {
+
+        feedback.textContent =
+            "❌ Try again. Check the word order and grammar.";
+
+        feedback.className =
+            "feedback incorrect";
+
+    }
+
+}
+
+
+function nextSentenceWriting(){
+
+    sentenceIndex++;
+
+    if(
+        sentenceIndex >=
+        sentenceQuestions.length
+    ){
+
+        sentenceIndex = 0;
+
+    }
+
+    loadSentenceWriting();
+
+}
+
+
+/* =====================================================
+   HANZI WRITING
+   EVERY VOCABULARY ITEM FROM THIS LESSON IS INCLUDED
+===================================================== */
+
+const lessonVocabulary = [
+
+    ["來","lái","to come"],
+    ["說","shuō","to say"],
+    ["知道","zhīdào","to know"],
+    ["擔心","dānxīn","to worry"],
+    ["舒服","shūfú","comfortable / well"],
+    ["早餐","zǎocān","breakfast"],
+    ["應該","yīnggāi","should"],
+    ["就","jiù","then / just"],
+    ["會","huì","will / would"],
+    ["沒","méi","did not"]
+
+];
+
+
+/*
+ * Convert every vocabulary word into individual Hanzi characters.
+ * Duplicate characters are removed only for efficiency.
+ */
+
+const writingCharacters = [];
+
+const seenWritingCharacters = new Set();
+
+lessonVocabulary.forEach(item => {
+
+    const word = item[0];
+    const pinyin = item[1];
+    const meaning = item[2];
+
+    [...word].forEach(character => {
+
+        if(!seenWritingCharacters.has(character)){
+
+            seenWritingCharacters.add(character);
+
+            writingCharacters.push({
+
+                hanzi:character,
+                pinyin:pinyin,
+                meaning:
+                    "Character from " +
+                    word +
+                    " — " +
+                    meaning
+
+            });
+
+        }
+
+    });
+
+});
+
+
+let writingIndex = 0;
+
+let writingMode = "quiz";
+
+let writer = null;
+
+
+function initWriter(){
+
+    const item =
+        writingCharacters[writingIndex];
+
+    document
+        .getElementById("target-div")
+        .innerHTML = "";
+
+    const info =
+        document
+            .getElementById("writingInfo");
+
+    if(writingMode === "quiz"){
+
+        info.innerHTML =
+            `Write <strong>${item.hanzi}</strong>
+             (${item.pinyin})
+             following the correct stroke order!
+             <br>
+             <small>${item.meaning}</small>
+             <br>
+             (${writingIndex + 1}/${writingCharacters.length})`;
+
+    } else {
+
+        info.innerHTML =
+            `Watch the stroke order for
+             <strong>${item.hanzi}</strong>
+             (${item.pinyin}).
+             <br>
+             <small>${item.meaning}</small>
+             <br>
+             (${writingIndex + 1}/${writingCharacters.length})`;
+
+    }
+
+    writer =
+        HanziWriter.create(
+            "target-div",
+            item.hanzi,
+            {
+                width:260,
+                height:260,
+                padding:10,
+                showOutline:true,
+                strokeAnimationSpeed:1,
+                drawingColor:"#5c4033",
+                strokeHighlightColor:"#b8865c",
+                showCharacter:
+                    writingMode === "animate"
+            }
+        );
+
+    if(writingMode === "quiz"){
+
+        startQuiz();
+
+    } else {
+
+        writer.animateCharacter();
+
+    }
+
+}
+
+
+function startQuiz(){
+
+    const feedback =
+        document
+            .getElementById(
+                "writingFeedback"
+            );
+
+    feedback.textContent = "";
+
+    writer.quiz({
+
+        onMistake:function(){
+
+            feedback.textContent =
+                "❌ Incorrect stroke order! Try again.";
+
+            feedback.className =
+                "feedback incorrect";
+
+        },
+
+        onCorrectStroke:function(){
+
+            feedback.textContent =
+                "✨ Great! Continue with the next stroke.";
+
+            feedback.className =
+                "feedback correct";
+
+        },
+
+        onComplete:function(){
+
+            feedback.textContent =
+                "🎉 Perfect! Correct stroke order.";
+
+            feedback.className =
+                "feedback correct";
+
+        }
+
+    });
+
+}
+
+
+function setWritingMode(mode,button){
+
+    writingMode = mode;
+
+    document
+        .querySelectorAll(
+            ".writing-card .mode-btn"
+        )
+        .forEach(btn => {
+
+            btn.classList.remove("active");
+
+        });
+
+    button.classList.add("active");
+
+    initWriter();
+
+}
+
+
+function resetWritingQuiz(){
+
+    initWriter();
+
+}
+
+
+function nextWritingCharacter(){
+
+    writingIndex++;
+
+    if(
+        writingIndex >=
+        writingCharacters.length
+    ){
+
+        writingIndex = 0;
+
+    }
+
+    initWriter();
+
+}
+
+
+function playCurrentWriting(){
+
+    playAudio(
+        writingCharacters[writingIndex]
+            .hanzi
+    );
+
+}
+
+
+/* =====================================================
+   GRAMMAR MASTER
+===================================================== */
+
+const htmlFinalQuestions = [
+
+    {
+        meaning:"Xiao Mei didn't eat breakfast.",
+        answer:["小美","沒","吃","早餐"]
+    },
+
+    {
+        meaning:"Did you come to school?",
+        answer:["你","來","了","學校","嗎"]
+    },
+
+    {
+        meaning:"Did you see Xiao Mei or not?",
+        answer:["你","有沒有","看到","小美"]
+    },
+
+    {
+        meaning:"I should rest.",
+        answer:["我","應該","休息"]
+    },
+
+    {
+        meaning:"She should come to school.",
+        answer:["她","應該","會","來","學校"]
+    }
+
+];
+
+
+let finalQuestions = [];
+
+let finalIndex = 0;
+
+let finalScore = 0;
+
+let finalSelected = [];
+
+let finalInitialized = false;
+
+
+/* =====================================================
+   GET RANDOM REVIEW QUESTIONS FROM PREVIOUS LESSONS
+===================================================== */
+
+function getRandomLessonQuestions(){
+
+    const allReviewQuestions = [];
+
+    if(typeof allLessonsData === "undefined"){
+
+        return [];
+
+    }
+
+    for(
+        let lessonNumber = 1;
+        lessonNumber <= 21;
+        lessonNumber++
+    ){
+
+        const lesson =
+            allLessonsData[lessonNumber];
+
+        if(
+            !lesson ||
+            !Array.isArray(
+                lesson.reviewQuestions
+            )
+        ){
+
+            continue;
+
+        }
+
+        lesson.reviewQuestions.forEach(question => {
+
+            if(
+                question &&
+                typeof question.meaning === "string" &&
+                Array.isArray(question.answer) &&
+                question.answer.length > 0
+            ){
+
+                allReviewQuestions.push({
+
+                    meaning:question.meaning,
+
+                    answer:[...question.answer],
+
+                    sourceLesson:lessonNumber
+
+                });
+
+            }
+
+        });
+
+    }
+
+    return shuffle(allReviewQuestions).slice(0,5);
+
+}
+
+
+/* =====================================================
+   INITIALIZE GRAMMAR MASTER
+===================================================== */
+
+function initFinalQuestions(){
+
+    const errorBox =
+        document.getElementById(
+            "finalError"
+        );
+
+    const meaningBox =
+        document.getElementById(
+            "finalMeaning"
+        );
+
+    errorBox.style.display = "none";
+
+    errorBox.textContent = "";
+
+
+    if(typeof allLessonsData === "undefined"){
+
+        showFinalError(
+            "Grammar Master could not load the review database. " +
+            "The 5 review questions cannot be loaded."
+        );
+
+        return false;
+
+    }
+
+
+    const randomReviewQuestions =
+        getRandomLessonQuestions();
+
+
+    if(randomReviewQuestions.length < 5){
+
+        showFinalError(
+            "Grammar Master could not find 5 valid review questions " +
+            "from earlier lessons. No fallback questions were added."
+        );
+
+        return false;
+
+    }
+
+
+    const currentLessonQuestions =
+        htmlFinalQuestions.map(question => ({
+
+            meaning:question.meaning,
+
+            answer:[...question.answer],
+
+            sourceLesson:"current"
+
+        }));
+
+
+    finalQuestions =
+        shuffle([
+            ...currentLessonQuestions,
+            ...randomReviewQuestions
+        ]);
+
+
+    if(finalQuestions.length !== 10){
+
+        showFinalError(
+            "Grammar Master initialization failed: " +
+            "the final question set does not contain exactly 10 questions."
+        );
+
+        finalQuestions = [];
+
+        return false;
+
+    }
+
+
+    finalInitialized = true;
+
+    return true;
+
+}
+
+
+/* =====================================================
+   FINAL ERROR
+===================================================== */
+
+function showFinalError(message){
+
+    const errorBox =
+        document.getElementById(
+            "finalError"
+        );
+
+    errorBox.textContent =
+        "⚠️ " + message;
+
+    errorBox.style.display =
+        "block";
+
+    document
+        .getElementById("finalMeaning")
+        .textContent =
+        "Grammar Master unavailable.";
+
+    document
+        .getElementById("finalBank")
+        .innerHTML = "";
+
+    document
+        .getElementById("finalAnswer")
+        .innerHTML =
+        '<span class="answer-placeholder">' +
+        'Review questions could not be loaded.' +
+        '</span>';
+
+}
+
+
+/* =====================================================
+   LOAD FINAL QUESTION
+===================================================== */
+
+function loadFinal(){
+
+    if(!finalInitialized) return;
+
+    if(finalIndex >= finalQuestions.length){
+
+        return;
+
+    }
+
+    const q =
+        finalQuestions[finalIndex];
+
+
+    document
+        .getElementById("finalNum")
+        .textContent =
+        finalIndex + 1;
+
+
+    document
+        .getElementById("finalMeaning")
+        .textContent =
+        q.meaning;
+
+
+    finalSelected = [];
+
+
+    document
+        .getElementById("finalAnswer")
+        .innerHTML =
+        '<span class="answer-placeholder">' +
+        'Build your answer' +
+        '</span>';
+
+
+    const bank =
+        document.getElementById(
+            "finalBank"
+        );
+
+    bank.innerHTML = "";
+
+
+    shuffle(q.answer).forEach(word => {
+
+        const button =
+            document.createElement("button");
+
+        button.className =
+            "word-btn";
+
+        button.textContent =
+            word;
+
+        button.onclick = function(){
+
+            if(button.disabled) return;
+
+            finalSelected.push(word);
+
+            button.disabled = true;
+
+            button.classList.add("selected");
+
+            playAudio(word);
+
+            renderFinal();
+
+        };
+
+        bank.appendChild(button);
+
+    });
+
+
+    document
+        .getElementById(
+            "finalFeedback"
+        )
+        .textContent = "";
+
+
+    updateFinalProgress();
+
+}
+
+
+/* =====================================================
+   FINAL PROGRESS
+===================================================== */
+
+function updateFinalProgress(){
+
+    const percentage =
+        (finalIndex / 10) * 100;
+
+    document
+        .getElementById(
+            "finalProgressFill"
+        )
+        .style.width =
+        percentage + "%";
+
+}
+
+
+/* =====================================================
+   FINAL ANSWER
+===================================================== */
+
+function renderFinal(){
+
+    const area =
+        document.getElementById(
+            "finalAnswer"
+        );
+
+    area.innerHTML = "";
+
+
+    finalSelected.forEach(word => {
+
+        const span =
+            document.createElement("span");
+
+        span.className =
+            "selected-word";
+
+        span.textContent =
+            word;
+
+        span.onclick =
+            function(){
+
+                playAudio(word);
+
+            };
+
+        area.appendChild(span);
+
+    });
+
+}
+
+
+function resetFinal(){
+
+    if(!finalInitialized) return;
+
+    loadFinal();
+
+}
+
+
+/* =====================================================
+   FINAL CHECK
+===================================================== */
+
+function checkFinal(){
+
+    if(
+        !finalInitialized ||
+        finalQuestions.length !== 10
+    ){
+
+        return;
+
+    }
+
+
+    const correct =
+        finalQuestions[finalIndex].answer;
+
+
+    const feedback =
+        document.getElementById(
+            "finalFeedback"
+        );
+
+
+    if(
+        finalSelected.length !==
+        correct.length
+    ){
+
+        feedback.textContent =
+            "⚠️ Complete the sentence first.";
+
+        feedback.className =
+            "feedback incorrect";
+
+        return;
+
+    }
+
+
+    const isCorrect =
+        finalSelected.every(
+            (word,index) =>
+                word === correct[index]
+        );
+
+
+    if(isCorrect){
+
+        feedback.textContent =
+            "🎉 Correct!";
+
+        feedback.className =
+            "feedback correct";
+
+
+        finalScore++;
+
+
+        document
+            .getElementById(
+                "finalScore"
+            )
+            .textContent =
+            finalScore + " / 10";
+
+
+        finalIndex++;
+
+
+        updateFinalProgress();
+
+
+        if(finalIndex < 10){
+
+            setTimeout(
+                loadFinal,
+                650
+            );
+
+        } else {
+
+            document
+                .getElementById(
+                    "finalProgressFill"
+                )
+                .style.width =
+                "100%";
+
+
+            document
+                .getElementById(
+                    "unlockBox"
+                )
+                .style.display =
+                "block";
+
+
+            playAudio("太棒了");
+
+        }
+
+    } else {
+
+        feedback.textContent =
+            "❌ Check the word order and try again.";
+
+        feedback.className =
+            "feedback incorrect";
+
+    }
+
+}
+
+
+/* =====================================================
+   INITIALIZATION
+===================================================== */
+
+loadGame(1);
+
+loadGame(2);
+
+loadGame(3);
+
+loadSentenceWriting();
+
+initWriter();
+
+if(initFinalQuestions()){
+
+    loadFinal();
+
+}
+
+</script>
+<script src="../script.js"></script>
+</body>
+</html>
