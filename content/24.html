@@ -33,6 +33,7 @@ canvas{
   position:fixed;
   inset:0;
   overflow:hidden;
+  touch-action:none;
 }
 
 #hud{
@@ -80,11 +81,25 @@ canvas{
   color:#8ff0b2;
 }
 
+#lookHint{
+  position:fixed;
+  top:auto;
+  bottom:275px;
+  left:0;
+  right:0;
+  text-align:center;
+  z-index:15;
+  pointer-events:none;
+  color:rgba(255,255,255,.75);
+  font-size:11px;
+  letter-spacing:.02em;
+}
+
 #hint{
   position:fixed;
   left:10px;
   right:10px;
-  bottom:150px;
+  top:140px;
   z-index:20;
   display:none;
   pointer-events:none;
@@ -119,7 +134,7 @@ canvas{
   box-shadow:0 6px 0 #9b7620;
 }
 
-#interactBtn:active{
+#interactBtn.pressed{
   transform:translateY(5px);
   box-shadow:0 1px 0 #9b7620;
 }
@@ -144,6 +159,11 @@ canvas{
   font-size:25px;
   font-weight:bold;
   touch-action:none;
+}
+
+.control.pressed{
+  background:rgba(242,193,78,.85);
+  color:#171717;
 }
 
 #up{left:45px;top:0}
@@ -249,6 +269,7 @@ canvas{
     #314b5c;
   color:white;
   padding:20px;
+  overflow-y:auto;
 }
 
 .startCard{
@@ -267,17 +288,27 @@ canvas{
 
 .startCard h1{
   margin:5px 0 8px;
+  font-size:22px;
 }
 
 .startCard p{
   color:#bfc7d0;
   line-height:1.6;
+  font-size:14px;
+  text-align:left;
+}
+
+.startCard .story{
+  background:rgba(242,204,104,.08);
+  border:1px solid rgba(242,204,104,.35);
+  border-radius:12px;
+  padding:10px 12px;
 }
 
 #startBtn{
   width:100%;
   padding:15px;
-  margin-top:12px;
+  margin-top:16px;
   border:0;
   border-radius:15px;
   background:#f2cc68;
@@ -313,7 +344,11 @@ canvas{
 
 @media(max-width:600px){
   #hint{
-    bottom:155px;
+    top:145px;
+  }
+
+  #lookHint{
+    bottom:280px;
   }
 
   #dialogue{
@@ -366,6 +401,8 @@ canvas{
   </div>
 </div>
 
+<div id="lookHint">Drag to 360° look around (movement controls remain fixed)</div>
+
 <div id="hint">
   <div class="hintBox" id="hintText"></div>
 </div>
@@ -400,15 +437,21 @@ canvas{
     <div class="logo">🧋</div>
     <h1>Ahao's Birthday Mission</h1>
 
-    <p>
-      Help Ahao buy a birthday present for Xiaomei
-      and travel to the restaurant.
+    <p class="story">
+      Today is Xiaomei's birthday. She invited the whole class to celebrate at "Haifeng Restaurant", a seaside restaurant in Tamsui.
+      When Ahao went out to buy a gift, his phone suddenly ran out of battery — with no map, he has to rely on asking strangers and reading road signs to make his way to Tamsui step by step.
     </p>
 
     <p>
-      Walk using the arrow buttons.<br>
-      When you are near an important landmark,
-      press <b>INTERACT</b>.
+      Use the directional buttons in the bottom-left corner to move Ahao (the buttons always correspond to the true map directions and will not change when the camera rotates).
+    </p>
+
+    <p>
+      When walking close to an important location, the <b>INTERACT</b> button will appear in the bottom-right corner. Tap it to continue the story.
+    </p>
+
+    <p>
+      Want to look around? Drag your finger across the screen to look 360° around the environment.
     </p>
 
     <button id="startBtn">START MISSION</button>
@@ -420,10 +463,10 @@ canvas{
     <div class="big">🎂</div>
     <h1>Mission Complete!</h1>
     <p>
-      阿浩終於到了海風小館。
+      阿豪終於到了海風小館。
     </p>
     <p>
-      小美的生日派對開始了！
+      全班同學都到齊了小美的生日派對開始了！
     </p>
   </div>
 </div>
@@ -441,6 +484,7 @@ const state = {
   inventory:[],
   dialogue:null,
   dialogueIndex:0,
+  dialogueCallback:null,
   movementLocked:false,
   reached:false,
   interacting:false
@@ -474,12 +518,21 @@ const playerStart = {
   z:7
 };
 
+const cam = {
+  yaw:0,
+  dragging:false,
+  dragStartX:0,
+  dragStartYaw:0,
+  radius:10,
+  height:8
+};
+
 /* =========================================================
    HELPERS
 ========================================================= */
 
-function mat(color){
-  return new THREE.MeshLambertMaterial({color});
+function mat(color,opts){
+  return new THREE.MeshLambertMaterial(Object.assign({color},opts||{}));
 }
 
 function box(w,h,d,color){
@@ -491,7 +544,14 @@ function box(w,h,d,color){
 
 function cyl(r,h,color){
   return new THREE.Mesh(
-    new THREE.CylinderGeometry(r,r,h,8),
+    new THREE.CylinderGeometry(r,r,h,10),
+    mat(color)
+  );
+}
+
+function cone(r,h,color){
+  return new THREE.Mesh(
+    new THREE.ConeGeometry(r,h,10),
     mat(color)
   );
 }
@@ -504,20 +564,61 @@ function addObject(obj,x,y,z){
 
 function clearWorld(){
   while(worldGroup.children.length){
-    worldGroup.remove(worldGroup.children[0]);
+    const child=worldGroup.children[0];
+    worldGroup.remove(child);
   }
 
   marker = null;
   landmarkObject = null;
 }
 
+let shadowTexture=null;
+
+function getShadowTexture(){
+
+  if(shadowTexture) return shadowTexture;
+
+  const canvas=document.createElement("canvas");
+  canvas.width=128;
+  canvas.height=128;
+
+  const ctx=canvas.getContext("2d");
+  const g=ctx.createRadialGradient(64,64,4,64,64,64);
+  g.addColorStop(0,"rgba(0,0,0,.45)");
+  g.addColorStop(1,"rgba(0,0,0,0)");
+
+  ctx.fillStyle=g;
+  ctx.fillRect(0,0,128,128);
+
+  shadowTexture=new THREE.CanvasTexture(canvas);
+  return shadowTexture;
+}
+
+function blobShadow(radius){
+
+  const geo=new THREE.PlaneGeometry(radius,radius);
+  const m=new THREE.MeshBasicMaterial({
+    map:getShadowTexture(),
+    transparent:true,
+    depthWrite:false
+  });
+
+  const mesh=new THREE.Mesh(geo,m);
+  mesh.rotation.x=-Math.PI/2;
+  mesh.position.y=.02;
+
+  return mesh;
+}
+
 /* =========================================================
-   PLAYER — AHAO
+   PLAYER — AHAOM
 ========================================================= */
 
 function createAhao(){
 
   const group = new THREE.Group();
+
+  group.add(blobShadow(1.3));
 
   const body = box(.75,1.15,.55,0x315a87);
   body.position.y=1.05;
@@ -589,17 +690,97 @@ function tree(x,z){
   const trunk=cyl(.18,1.1,0x6c4930);
   addObject(trunk,x,.55,z);
 
-  const leaves=cyl(.65,1.1,0x47734c);
-  addObject(leaves,x,1.45,z);
+  const leaves=cone(.75,1.6,0x3f7048);
+  addObject(leaves,x,1.7,z);
+
+  const leavesTop=cone(.5,1.1,0x4c8455);
+  addObject(leavesTop,x,2.5,z);
+}
+
+function crossroad(zPos){
+
+  const h = box(30,.09,8,0x42464b);
+  h.position.set(0,.021,zPos);
+  worldGroup.add(h);
+
+  const pad = box(8,.1,8,0x3c4046);
+  pad.position.set(0,.03,zPos);
+  worldGroup.add(pad);
+
+  for(let x=-13;x<14;x+=3){
+    if(Math.abs(x)<4.5) continue;
+    const line=box(1.2,.03,.22,0xe5d58d);
+    line.position.set(x,.09,zPos);
+    worldGroup.add(line);
+  }
+
+  const stripeColor=0xe7e9ec;
+
+  for(let x=-3;x<=3;x+=1){
+    const stripeNS=box(.6,.031,1.4,stripeColor);
+    stripeNS.position.set(x,.036,zPos+5.3);
+    worldGroup.add(stripeNS);
+
+    const stripeNS2=stripeNS.clone();
+    stripeNS2.position.set(x,.036,zPos-5.3);
+    worldGroup.add(stripeNS2);
+  }
+
+  for(let z=-3;z<=3;z+=1){
+    const stripeEW=box(1.4,.031,.6,stripeColor);
+    stripeEW.position.set(5.3,.036,zPos+z);
+    worldGroup.add(stripeEW);
+
+    const stripeEW2=stripeEW.clone();
+    stripeEW2.position.set(-5.3,.036,zPos+z);
+    worldGroup.add(stripeEW2);
+  }
+
+  const pole=box(.16,3,.16,0x3a4048);
+  pole.position.set(4.6,1.5,zPos+4.6);
+  worldGroup.add(pole);
+
+  const box_=box(.4,1,.3,0x1c2026);
+  box_.position.set(4.6,3.15,zPos+4.6);
+  worldGroup.add(box_);
+
+  const lightColors=[0xe0524f,0xf2cc68,0x4caf6a];
+
+  lightColors.forEach((c,i)=>{
+    const light=new THREE.Mesh(
+      new THREE.CircleGeometry(.09,12),
+      new THREE.MeshBasicMaterial({color:c})
+    );
+    light.position.set(4.6,3.45-i*.28,zPos+4.78);
+    light.rotation.y=Math.PI;
+    worldGroup.add(light);
+  });
 }
 
 function building(x,z,w,d,h,color,label){
 
+  const group=new THREE.Group();
+
   const b=box(w,h,d,color);
-  addObject(b,x,h/2,z);
+  b.position.y=h/2;
+  group.add(b);
+
+  const roof=box(w+.3,.3,d+.3,0x2f3540);
+  roof.position.y=h+.15;
+  group.add(roof);
+
+  for(let wx=-w/2+.6;wx<w/2;wx+=1.1){
+    const win=box(.55,.6,.06,0x9fd3e0);
+    win.position.set(wx,h*.55,d/2+.03);
+    group.add(win);
+  }
 
   const sign=box(w*.7,.35,.08,0xf2cc68);
-  addObject(sign,x,h*.65,z-d/2-.05);
+  sign.position.set(0,h*.65,-d/2-.05);
+  group.add(sign);
+
+  group.position.set(x,0,z);
+  worldGroup.add(group);
 
   if(label){
     const canvas=document.createElement("canvas");
@@ -632,6 +813,8 @@ function building(x,z,w,d,h,color,label){
 function npc(x,z,color=0x884e68){
 
   const n=new THREE.Group();
+
+  n.add(blobShadow(1.1));
 
   const body=box(.55,1,.45,color);
   body.position.y=.8;
@@ -670,11 +853,42 @@ function createLandmark(type){
     ribbon1.position.y=1.16;
     group.add(ribbon1);
 
+  }else if(type==="exit" || type==="cross"){
+
+    const post=box(.15,2.4,.15,0x4e5962);
+    post.position.y=1.2;
+    group.add(post);
+
+    const signColor = type==="exit" ? 0x4caf6a : 0xf2cc68;
+    const label = type==="exit" ? "出口 (chūkǒu)" : "路口 (lùkǒu)";
+
+    const board=box(1.1,.55,.08,signColor);
+    board.position.y=2.15;
+    group.add(board);
+
+    const canvas=document.createElement("canvas");
+    canvas.width=256;
+    canvas.height=128;
+    const ctx=canvas.getContext("2d");
+    ctx.fillStyle="#111";
+    ctx.font="bold 50px Arial";
+    ctx.textAlign="center";
+    ctx.textBaseline="middle";
+    ctx.fillText(label,128,64);
+
+    const tex=new THREE.CanvasTexture(canvas);
+    const boardFace=new THREE.Mesh(
+      new THREE.PlaneGeometry(1,.5),
+      new THREE.MeshBasicMaterial({map:tex,transparent:true})
+    );
+    boardFace.position.set(0,2.15,.045);
+    group.add(boardFace);
+
   }else if(type==="station"){
 
-    const building=box(5,2.5,3,0x5d7184);
-    building.position.y=1.25;
-    group.add(building);
+    const buildingMesh=box(5,2.5,3,0x5d7184);
+    buildingMesh.position.y=1.25;
+    group.add(buildingMesh);
 
     const entrance=box(1.5,1.5,.15,0x1d2933);
     entrance.position.set(0,.75,-1.56);
@@ -828,37 +1042,40 @@ function createMarker(){
 const scenes=[
 
 {
-  location:"百貨公司",
-  objective:"找到禮物店",
-  direction:"一直往前走。",
-  landmark:"禮物店",
-  hint:"一直往前走，找到禮物店。",
+  location:"百貨公司 (bǎihuò gōngsī)",
+  objective:"找到禮物店 (zhǎodào lǐwù diàn)",
+  direction:"一直往前走 (yìzhí wǎng qián zǒu)。",
+  landmark:"禮物店 (lǐwù diàn)",
+  hint:"Walk straight ahead and find the gift shop.",
   target:{x:0,z:-7},
   type:"gift",
-  arrivalText:"你找到禮物店了。",
+  arrivalText:"你找到禮物店了 (nǐ zhǎodào lǐwù diàn le)。",
   intro:[
-    ["路人","禮物店在前面。一直往前走。"]
+    ["旁白","今天是小美的生日，她邀請全班到淡水的海邊餐廳「海風小館」慶生。"],
+    ["阿豪","糟糕，我的手機沒電了！沒辦法用地圖找路了..."],
+    ["阿豪","沒關係，先去買禮物，路上再問問路人怎麼去淡水。"],
+    ["路人","禮物店在前麵。一直往前走 (yìzhí wǎng qián zǒu)。"]
   ],
   action:[
     ["店員","歡迎光臨！"],
-    ["阿浩","我想買生日禮物。"],
+    ["阿豪","我想買生日禮物。"],
     ["店員","這個很適合送給朋友。"],
-    ["阿浩","好，我買這個！"],
+    ["阿豪","好，我買這個！"],
     ["系統","你買到了生日禮物！"]
   ]
 },
 
 {
-  location:"百貨公司",
-  objective:"離開百貨公司",
-  direction:"往前走，找到出口。",
-  landmark:"出口",
-  hint:"離開禮物店，往前走找出口。",
+  location:"百貨公司 (bǎihuò gōngsī)",
+  objective:"離開百貨公司 (líkāi bǎihuò gōngsī)",
+  direction:"往前走，找到出口 (wǎng qián zǒu, zhǎodào chūkǒu)。",
+  landmark:"出口 (chūkǒu)",
+  hint:"Leave the gift shop, walk forward to find the exit.",
   target:{x:0,z:-13},
   type:"exit",
-  arrivalText:"你找到出口了。",
+  arrivalText:"你找到出口了 (nǐ zhǎodào chūkǒu le)。",
   intro:[
-    ["阿浩","禮物買好了。現在要去火車站。"]
+    ["阿豪","禮物買好了。現在要去火車站。"]
   ],
   action:[
     ["系統","你離開了百貨公司。"]
@@ -866,33 +1083,33 @@ const scenes=[
 },
 
 {
-  location:"城市街道",
-  objective:"走到十字路口",
-  direction:"一直往前走。",
-  landmark:"十字路口",
-  hint:"沿著道路一直往前走。",
+  location:"城市街道 (chéngshì jiēdào)",
+  objective:"走到十字路口 (zǒudào shízì lùkǒu)",
+  direction:"一直往前走 (yìzhí wǎng qián zǒu)。",
+  landmark:"十字路口 (shízì lùkǒu)",
+  hint:"Follow the road straight ahead.",
   target:{x:0,z:-12},
   type:"cross",
-  arrivalText:"你到了十字路口。",
+  arrivalText:"你到了十字路口 (nǐ dàole shízì lùkǒu)。",
   intro:[
-    ["路人","一直往前走，到十字路口再看看。"]
+    ["路人","一直往前走 (yìzhí wǎng qián zǒu)，到十字路口再看看。"]
   ],
   action:[
-    ["路人","到十字路口以後，往左轉。"]
+    ["路人","到十字路口以後，往左轉 (wǎng zuǒ zhuǎn)。"]
   ]
 },
 
 {
-  location:"十字路口",
-  objective:"找到火車站",
-  direction:"往左走。",
-  landmark:"火車站",
-  hint:"從十字路口往左走。",
+  location:"十字路口 (shízì lùkǒu)",
+  objective:"找到火車站 (zhǎodào huǒchē zhàn)",
+  direction:"往左走 (wǎng zuǒ zǒu)。",
+  landmark:"火車站 (huǒchē zhàn)",
+  hint:"Turn left from the intersection.",
   target:{x:-9,z:-5},
   type:"station",
-  arrivalText:"你找到火車站了。",
+  arrivalText:"你找到火車站了 (nǐ zhǎodào huǒchē zhàn le)。",
   intro:[
-    ["路人","到十字路口以後往左轉，火車站就在左邊。"]
+    ["路人","到十字路口以後往左轉 (wǎng zuǒ zhuǎn)，火車站就在左邊 (zuǒbiān)。"]
   ],
   action:[
     ["站務員","你找到火車站了。"],
@@ -901,16 +1118,16 @@ const scenes=[
 },
 
 {
-  location:"火車站",
-  objective:"進入月台",
-  direction:"一直往前走。",
-  landmark:"月台",
-  hint:"進入火車站，一直往前走。",
+  location:"火車站 (huǒchē zhàn)",
+  objective:"進入月台 (jìnrù yuètái)",
+  direction:"一直往前走 (yìzhí wǎng qián zǒu)。",
+  landmark:"月台 (yuètái)",
+  hint:"Enter the station and walk straight ahead.",
   target:{x:0,z:-8},
   type:"platform",
-  arrivalText:"你到了月台。",
+  arrivalText:"你到了月台 (nǐ dàole yuètái)。",
   intro:[
-    ["站務員","進入車站後，一直往前走。"]
+    ["站務員","進入車站後，一直往前走 (yìzhí wǎng qián zǒu)。"]
   ],
   action:[
     ["站務員","這裡是月台。"]
@@ -918,51 +1135,51 @@ const scenes=[
 },
 
 {
-  location:"火車月台",
-  objective:"搭火車",
-  direction:"走到火車旁邊。",
-  landmark:"火車",
-  hint:"走到火車旁邊，按 INTERACT。",
+  location:"火車月台 (huǒchē yuètái)",
+  objective:"搭火車 (dā huǒchē)",
+  direction:"走到火車旁邊 (zǒudào huǒchē pángbiān)。",
+  landmark:"火車 (huǒchē)",
+  hint:"Walk next to the train and press INTERACT.",
   target:{x:0,z:-4},
   type:"train",
-  arrivalText:"你找到火車了。",
+  arrivalText:"你找到火車了 (nǐ zhǎodào huǒchē le)。",
   intro:[
-    ["站務員","火車來了。走到火車旁邊。"]
+    ["站務員","火車來了。走到火車旁邊 (zǒudào huǒchē pángbiān)。"]
   ],
   action:[
     ["站務員","請上車。"],
-    ["阿浩","我要去台北車站。"]
+    ["阿豪","我要去台北車站。"]
   ]
 },
 
 {
-  location:"火車上",
-  objective:"前往台北車站",
-  direction:"等火車到站。",
-  landmark:"台北車站",
-  hint:"火車正在前往台北車站。",
+  location:"火車上 (huǒchē shàng)",
+  objective:"前往台北車站 (qiánwǎng táiběi huǒchē zhàn)",
+  direction:"等火車到站 (děng huǒchē dàozhàn)。",
+  landmark:"台北車站 (táiběi huǒchē zhàn)",
+  hint:"The train is heading to Taipei Station.",
   target:{x:0,z:-1},
   type:"trainRide",
-  arrivalText:"火車到了台北車站。",
+  arrivalText:"火車到了台北車站 (huǒchē dàole táiběi huǒchē zhàn)。",
   intro:[
     ["系統","火車正在前往台北車站。"]
   ],
   action:[
-    ["阿浩","到了！現在要轉車。"]
+    ["阿豪","到了！現在要轉乘 (zhuǎnchéng)。"]
   ]
 },
 
 {
-  location:"台北車站",
-  objective:"找到紅線轉乘處",
-  direction:"一直往前走。",
-  landmark:"紅線",
-  hint:"往前走，找淡水信義線。",
+  location:"台北車站 (táiběi huǒchē zhàn)",
+  objective:"找到捷運紅線轉乘處 (zhǎodào jiéyùn hóngxiàn zhuǎnchéng chù)",
+  direction:"一直往前走 (yìzhí wǎng qián zǒu)。",
+  landmark:"捷運紅線 (jiéyùn hóngxiàn)",
+  hint:"Walk forward to find the Tamsui-Xinyi MRT line.",
   target:{x:0,z:-8},
   type:"transfer",
-  arrivalText:"你找到紅線轉乘處了。",
+  arrivalText:"你找到捷運紅線轉乘處了 (nǐ zhǎodào jiéyùn hóngxiàn zhuǎnchéng chù le)。",
   intro:[
-    ["站務員","淡水信義線在前面。一直往前走。"]
+    ["站務員","捷運 (jiéyùn) 紅線在前面。一直往前走 (yìzhí wǎng qián zǒu)。"]
   ],
   action:[
     ["站務員","往淡水方向的月台在這裡。"]
@@ -970,16 +1187,16 @@ const scenes=[
 },
 
 {
-  location:"台北車站轉乘通道",
-  objective:"搭淡水信義線",
-  direction:"往前走。",
-  landmark:"紅線月台",
-  hint:"往前走，找到紅線月台。",
+  location:"台北車站捷運轉乘通道 (táiběi huǒchē zhàn jiéyùn zhuǎnchéng tōngdào)",
+  objective:"搭捷運紅線 (dā jiéyùn hóngxiàn)",
+  direction:"往前走 (wǎng qián zǒu)。",
+  landmark:"捷運月台 (jiéyùn yuètái)",
+  hint:"Walk forward to find the MRT platform.",
   target:{x:0,z:-7},
   type:"transfer",
-  arrivalText:"你到了紅線月台。",
+  arrivalText:"你到了捷運月台 (nǐ dàole jiéyùn yuètái)。",
   intro:[
-    ["站務員","往淡水方向，請一直往前走。"]
+    ["站務員","往淡水方向，請一直往前走 (yìzhí wǎng qián zǒu)。"]
   ],
   action:[
     ["站務員","淡水方向的列車來了。"]
@@ -987,33 +1204,33 @@ const scenes=[
 },
 
 {
-  location:"淡水信義線",
-  objective:"前往淡水",
-  direction:"搭車到淡水。",
-  landmark:"淡水站",
-  hint:"列車正在前往淡水。",
+  location:"捷運淡水信義線 (jiéyùn dànshuǐ xìnyí xiàn)",
+  objective:"前往淡水 (qiánwǎng dànshuǐ)",
+  direction:"搭車到淡水 (dāchē dào dànshuǐ)。",
+  landmark:"淡水站 (dànshuǐ zhàn)",
+  hint:"The MRT train is heading to Tamsui.",
   target:{x:0,z:-1},
   type:"trainRide",
-  arrivalText:"你到了淡水。",
+  arrivalText:"你到了淡水 (nǐ dàole dànshuǐ)。",
   intro:[
     ["系統","列車正在前往淡水。"]
   ],
   action:[
-    ["阿浩","淡水到了！"]
+    ["阿豪","淡水到了！"]
   ]
 },
 
 {
-  location:"淡水",
-  objective:"找到公車站",
-  direction:"往前走。",
-  landmark:"公車站",
-  hint:"出站後往前走，找公車站。",
+  location:"淡水 (dànshuǐ)",
+  objective:"找到公車站 (zhǎodào gōngchē zhàn)",
+  direction:"往前走 (wǎng qián zǒu)。",
+  landmark:"公車站 (gōngchē zhàn)",
+  hint:"Exit the station and walk forward to find the bus stop.",
   target:{x:0,z:-8},
   type:"busstop",
-  arrivalText:"你找到公車站了。",
+  arrivalText:"你找到公車站了 (nǐ zhǎodào gōngchē zhàn le)。",
   intro:[
-    ["路人","公車站在前面，往前走。"]
+    ["路人","公車站在前面，往前走 (wǎng qián zǒu)。"]
   ],
   action:[
     ["站牌","請在這裡等公車。"]
@@ -1021,16 +1238,16 @@ const scenes=[
 },
 
 {
-  location:"公車站",
-  objective:"搭公車",
-  direction:"走到公車旁邊。",
-  landmark:"公車",
-  hint:"走到公車旁邊，按 INTERACT。",
+  location:"公車站 (gōngchē zhàn)",
+  objective:"搭公車 (dā gōngchē)",
+  direction:"走到公車旁邊 (zǒudào gōngchē pángbiān)。",
+  landmark:"公車 (gōngchē)",
+  hint:"Walk next to the bus and press INTERACT.",
   target:{x:0,z:-5},
   type:"bus",
-  arrivalText:"你找到公車了。",
+  arrivalText:"你找到公車了 (nǐ zhǎodào gōngchē le)。",
   intro:[
-    ["司機","請到公車旁邊。"]
+    ["司機","請到公車旁邊 (zǒudào gōngchē pángbiān)。"]
   ],
   action:[
     ["司機","請上車。"]
@@ -1038,14 +1255,14 @@ const scenes=[
 },
 
 {
-  location:"公車上",
-  objective:"到轉車站",
-  direction:"等公車到站。",
-  landmark:"轉車站",
-  hint:"公車正在前往轉車站。",
+  location:"公車上 (gōngchē shàng)",
+  objective:"到轉車站 (dào zhuǎnchē zhàn)",
+  direction:"等公車到站 (děng gōngchē dàozhàn)。",
+  landmark:"轉車站 (zhuǎnchē zhàn)",
+  hint:"The bus is heading to the transfer station.",
   target:{x:0,z:-1},
   type:"busRide",
-  arrivalText:"你到了轉車站。",
+  arrivalText:"你到了轉車站 (nǐ dàole zhuǎnchē zhàn)。",
   intro:[
     ["系統","公車正在前往轉車站。"]
   ],
@@ -1055,14 +1272,14 @@ const scenes=[
 },
 
 {
-  location:"轉車站",
-  objective:"轉搭另一班公車",
-  direction:"找到另一班公車。",
-  landmark:"第二班公車",
-  hint:"找到另一班公車，按 INTERACT。",
+  location:"轉車站 (zhuǎnchē zhàn)",
+  objective:"轉乘另一班公車 (zhuǎnchéng lìngyī bān gōngchē)",
+  direction:"找到另一班公車 (zhǎodào lìngyī bān gōngchē)。",
+  landmark:"第二班公車 (dì-èr bān gōngchē)",
+  hint:"Find the next bus and press INTERACT.",
   target:{x:0,z:-6},
   type:"bus",
-  arrivalText:"你找到第二班公車了。",
+  arrivalText:"你找到第二班公車了 (nǐ zhǎodào dì-èr bān gōngchē le)。",
   intro:[
     ["司機","另一班公車在前面。"]
   ],
@@ -1072,14 +1289,14 @@ const scenes=[
 },
 
 {
-  location:"第二班公車",
-  objective:"前往藥局附近",
-  direction:"等公車到站。",
-  landmark:"藥局",
-  hint:"公車正在前往藥局附近。",
+  location:"第二班公車 (dì-èr bān gōngchē)",
+  objective:"前往藥局附近 (qiánwǎng yàojú fùjìn)",
+  direction:"等公車到站 (děng gōngchē dàozhàn)。",
+  landmark:"藥局 (yàojú)",
+  hint:"The bus is heading near the pharmacy.",
   target:{x:0,z:-1},
   type:"busRide",
-  arrivalText:"你到了藥局附近。",
+  arrivalText:"你到了藥局附近 (nǐ dàole yàojú fùjìn)。",
   intro:[
     ["系統","公車正在前往藥局附近。"]
   ],
@@ -1089,42 +1306,47 @@ const scenes=[
 },
 
 {
-  location:"藥局附近",
-  objective:"找到海風小館",
-  direction:"往前走。",
-  landmark:"海風小館",
-  hint:"從藥局往前走，找到海風小館。",
+  location:"藥局附近 (yàojú fùjìn)",
+  objective:"找到海風小館 (zhǎodào hǎifēng xiǎoguǎn)",
+  direction:"往前走 (wǎng qián zǒu)。",
+  landmark:"海風小館 (hǎifēng xiǎoguǎn)",
+  hint:"Walk forward from the pharmacy to find Haifeng Restaurant.",
   target:{x:0,z:-9},
-  type:"restaurant",
-  arrivalText:"你找到海風小館了。",
+  type:"pharmacy",
+  arrivalText:"藥局店員說海風小館就在附近。",
   intro:[
-    ["藥局店員","海風小館在前面。一直往前走。"]
+    ["藥局店員","海風小館在前面。一直往前走 (yìzhí wǎng qián zǒu)。"]
   ],
   action:[
-    ["阿浩","終於找到了！"]
+    ["阿豪","快到了！"]
   ]
 },
 
 {
-  location:"海風小館",
-  objective:"進入餐廳",
-  direction:"走到入口。",
-  landmark:"餐廳入口",
-  hint:"走到海風小館入口，按 INTERACT。",
+  location:"海風小館 (hǎifēng xiǎoguǎn)",
+  objective:"進入餐廳 (jìnrù cāntīng)",
+  direction:"走到入口 (zǒudào rùkǒu)。",
+  landmark:"餐廳入口 (cāntīng rùkǒu)",
+  hint:"Walk to the restaurant entrance and press INTERACT.",
   target:{x:0,z:-4},
   type:"restaurant",
-  arrivalText:"你到了海風小館。",
+  arrivalText:"你到了海風小館 (nǐ dàole hǎifēng xiǎoguǎn)。",
   intro:[
-    ["小美","阿浩！你終於到了！"]
+    ["小美","阿豪！你終於到了！"]
   ],
   action:[
-    ["阿浩","小美，生日快樂！"],
+    ["阿豪","小美，生日快樂！"],
     ["小美","謝謝你！"],
     ["系統","生日派對開始了！"]
   ]
 }
 
 ];
+
+const LANDMARK_TYPES = new Set([
+  "gift","exit","cross","station","platform","train",
+  "transfer","busstop","bus","pharmacy","restaurant"
+]);
 
 /* =========================================================
    SCENE BUILDING
@@ -1141,10 +1363,6 @@ function buildScene(data){
     0x71916d
   );
 
-  /*
-    Different visual environment depending on location.
-  */
-
   if(data.location.includes("百貨")){
 
     building(-5,-5,5,4,4,0x7e6c8c,"百貨公司");
@@ -1157,14 +1375,19 @@ function buildScene(data){
            data.location.includes("十字")){
 
     road();
+    crossroad(-12);
 
     for(let z=-12;z<=12;z+=5){
+      if(Math.abs(z-(-12))<4.5) continue;
       tree(-7,z);
       tree(7,z);
     }
 
-    building(-7,-7,4,4,3,0x727b91,"SHOP");
-    building(7,-2,4,4,3,0x8b6f5b,"STORE");
+    tree(-6.5,-16.5);
+    tree(6.5,-16.5);
+
+    building(-7,-3,4,4,3,0x727b91,"火車站");
+    building(7,4,4,4,3,0x8b6f5b,"STORE");
 
   }else if(data.location.includes("火車站") ||
            data.location.includes("月台") ||
@@ -1181,7 +1404,7 @@ function buildScene(data){
     }
 
   }else if(data.location.includes("火車") ||
-           data.location.includes("淡水信義線")){
+           data.location.includes("捷運")){
 
     const tunnel=box(16,5,25,0x303841);
     tunnel.position.y=2.5;
@@ -1228,59 +1451,11 @@ function buildScene(data){
     }
   }
 
-  /*
-    Landmark
-  */
-
-  if(data.type==="gift"){
-    landmarkObject=createLandmark("gift");
-    landmarkObject.position.set(data.target.x,0,data.target.z);
-    worldGroup.add(landmarkObject);
-
-  }else if(data.type==="station"){
-    landmarkObject=createLandmark("station");
-    landmarkObject.position.set(data.target.x,0,data.target.z);
-    worldGroup.add(landmarkObject);
-
-  }else if(data.type==="platform"){
-    landmarkObject=createLandmark("platform");
-    landmarkObject.position.set(data.target.x,0,data.target.z);
-    worldGroup.add(landmarkObject);
-
-  }else if(data.type==="train"){
-    landmarkObject=createLandmark("train");
-    landmarkObject.position.set(data.target.x,0,data.target.z);
-    worldGroup.add(landmarkObject);
-
-  }else if(data.type==="transfer"){
-    landmarkObject=createLandmark("transfer");
-    landmarkObject.position.set(data.target.x,0,data.target.z);
-    worldGroup.add(landmarkObject);
-
-  }else if(data.type==="busstop"){
-    landmarkObject=createLandmark("busstop");
-    landmarkObject.position.set(data.target.x,0,data.target.z);
-    worldGroup.add(landmarkObject);
-
-  }else if(data.type==="bus"){
-    landmarkObject=createLandmark("bus");
-    landmarkObject.position.set(data.target.x,0,data.target.z);
-    worldGroup.add(landmarkObject);
-
-  }else if(data.type==="pharmacy"){
-    landmarkObject=createLandmark("pharmacy");
-    landmarkObject.position.set(data.target.x,0,data.target.z);
-    worldGroup.add(landmarkObject);
-
-  }else if(data.type==="restaurant"){
-    landmarkObject=createLandmark("restaurant");
+  if(LANDMARK_TYPES.has(data.type)){
+    landmarkObject=createLandmark(data.type);
     landmarkObject.position.set(data.target.x,0,data.target.z);
     worldGroup.add(landmarkObject);
   }
-
-  /*
-    NPC
-  */
 
   if(data.intro){
     npc(
@@ -1290,20 +1465,12 @@ function buildScene(data){
     );
   }
 
-  /*
-    Marker
-  */
-
   marker=createMarker();
   marker.position.set(
     data.target.x,
     .15,
     data.target.z
   );
-
-  /*
-    Player
-  */
 
   player=createAhao();
   player.position.set(
@@ -1316,15 +1483,17 @@ function buildScene(data){
 
   updateGiftVisual();
 
+  cam.yaw=0;
+
   camera.position.set(
     player.position.x,
-    8,
-    player.position.z+10
+    cam.height,
+    player.position.z+cam.radius
   );
 
   camera.lookAt(
     player.position.x,
-    0,
+    .7,
     player.position.z
   );
 }
@@ -1366,7 +1535,7 @@ function startDialogue(lines,callback){
   state.dialogue=lines;
   state.dialogueIndex=0;
   state.movementLocked=true;
-  state.dialogueCallback=callback;
+  state.dialogueCallback=callback||null;
 
   document.getElementById("dialogue").style.display="flex";
 
@@ -1417,7 +1586,7 @@ function showFound(data,callback){
   state.movementLocked=true;
 
   document.getElementById("foundTitle").textContent=
-    "找到"+data.landmark+"！";
+    "找到了！";
 
   document.getElementById("foundSub").textContent=
     data.arrivalText;
@@ -1426,11 +1595,9 @@ function showFound(data,callback){
 
   if(marker){
 
-    marker.children.forEach((child,i)=>{
+    marker.children.forEach((child)=>{
       if(child.material){
-        child.material.color.set(
-          i===0 ? 0x78d99b : 0x78d99b
-        );
+        child.material.color.set(0x78d99b);
       }
     });
 
@@ -1495,10 +1662,6 @@ function interact(){
 
   const data=scenes[state.sceneIndex];
 
-  /*
-    SPECIAL LANDMARK FUNCTIONS
-  */
-
   if(data.type==="gift"){
 
     showFound(data,()=>{
@@ -1517,22 +1680,7 @@ function interact(){
     return;
   }
 
-  if(data.type==="train"){
-
-    showFound(data,()=>{
-
-      state.interacting=false;
-
-      setTimeout(()=>{
-        nextScene();
-      },500);
-
-    });
-
-    return;
-  }
-
-  if(data.type==="bus"){
+  if(data.type==="train" || data.type==="bus"){
 
     showFound(data,()=>{
 
@@ -1562,10 +1710,6 @@ function interact(){
     return;
   }
 
-  /*
-    Normal checkpoint
-  */
-
   showFound(data,()=>{
 
     state.interacting=false;
@@ -1591,10 +1735,6 @@ function updateGiftVisual(){
     player.userData.giftBag.visible=
       state.inventory.includes("🎁");
   }
-
-  /*
-    If Ahao has the gift, update inventory.
-  */
 }
 
 /* =========================================================
@@ -1623,11 +1763,6 @@ function loadScene(){
 
   state.movementLocked=false;
 
-  /*
-    Intro dialogue is shown only at beginning
-    of each important scene.
-  */
-
   setTimeout(()=>{
 
     if(data.intro){
@@ -1653,16 +1788,10 @@ function checkGoal(){
 
   const distance=Math.sqrt(dx*dx+dz*dz);
 
-  /*
-    IMPORTANT:
-    Merely touching the landmark is NOT enough.
-    Player must press INTERACT.
-  */
-
   if(distance<1.8){
 
     document.getElementById("hintText").textContent=
-      "按 INTERACT 與「"+data.landmark+"」互動。";
+      "Press INTERACT to interact with the landmark.";
 
   }else{
 
@@ -1698,86 +1827,72 @@ function updateMovement(){
     player.position.x+=dx*speed;
     player.position.z+=dz*speed;
 
-    /*
-      Face movement direction
-    */
-
     player.rotation.y=Math.atan2(dx,dz);
   }
-
-  /*
-    Keep player inside playable area.
-  */
 
   player.position.x=
     Math.max(-13,Math.min(13,player.position.x));
 
   player.position.z=
     Math.max(-14,Math.min(14,player.position.z));
+}
 
-  /*
-    Camera follows Ahao
-  */
+function updateCamera(){
 
-  const desiredX=player.position.x;
-  const desiredZ=player.position.z+9;
+  if(!player) return;
 
-  camera.position.x +=
-    (desiredX-camera.position.x)*.08;
+  if(!cam.dragging){
 
-  camera.position.z +=
-    (desiredZ-camera.position.z)*.08;
+    let diff=(0-cam.yaw);
+    diff=Math.atan2(Math.sin(diff),Math.cos(diff));
+    cam.yaw+=diff*.06;
+  }
+
+  const desiredX=player.position.x+Math.sin(cam.yaw)*cam.radius;
+  const desiredZ=player.position.z+Math.cos(cam.yaw)*cam.radius;
+
+  camera.position.x+=(desiredX-camera.position.x)*.12;
+  camera.position.z+=(desiredZ-camera.position.z)*.12;
+  camera.position.y+=(cam.height-camera.position.y)*.12;
 
   camera.lookAt(
     player.position.x,
-    .7,
+    .8,
     player.position.z
   );
 }
 
 /* =========================================================
-   TOUCH CONTROLS
+   TOUCH / POINTER CONTROLS
 ========================================================= */
 
 function bindControl(id,key){
 
   const el=document.getElementById(id);
+  let activePointer=null;
 
   function start(e){
     e.preventDefault();
+    if(activePointer!==null) return;
+    activePointer=e.pointerId;
     keys[key]=true;
+    el.classList.add("pressed");
+    if(el.setPointerCapture){
+      try{ el.setPointerCapture(e.pointerId); }catch(err){}
+    }
   }
 
   function end(e){
-    e.preventDefault();
+    if(activePointer!==e.pointerId) return;
+    activePointer=null;
     keys[key]=false;
+    el.classList.remove("pressed");
   }
 
-  el.addEventListener(
-    "touchstart",
-    start,
-    {passive:false}
-  );
-
-  el.addEventListener(
-    "touchend",
-    end,
-    {passive:false}
-  );
-
-  el.addEventListener(
-    "touchcancel",
-    end,
-    {passive:false}
-  );
-
-  /*
-    Mouse fallback
-  */
-
-  el.addEventListener("mousedown",start);
-  el.addEventListener("mouseup",end);
-  el.addEventListener("mouseleave",end);
+  el.addEventListener("pointerdown",start);
+  el.addEventListener("pointerup",end);
+  el.addEventListener("pointercancel",end);
+  el.addEventListener("lostpointercapture",end);
 }
 
 bindControl("up","up");
@@ -1785,22 +1900,63 @@ bindControl("down","down");
 bindControl("left","left");
 bindControl("right","right");
 
-/*
-  Global cleanup so controls cannot get stuck.
-*/
+const interactBtn=document.getElementById("interactBtn");
 
-document.addEventListener("touchend",()=>{
-  keys.up=false;
-  keys.down=false;
-  keys.left=false;
-  keys.right=false;
+interactBtn.addEventListener("pointerdown",e=>{
+  e.preventDefault();
+  interactBtn.classList.add("pressed");
 });
+
+interactBtn.addEventListener("pointerup",e=>{
+  e.preventDefault();
+  interactBtn.classList.remove("pressed");
+  interact();
+});
+
+interactBtn.addEventListener("pointercancel",()=>{
+  interactBtn.classList.remove("pressed");
+});
+
+/* =========================================================
+   360 LOOK-AROUND
+========================================================= */
+
+const gameEl=document.getElementById("game");
+let lookPointerId=null;
+
+gameEl.addEventListener("pointerdown",e=>{
+  lookPointerId=e.pointerId;
+  cam.dragging=true;
+  cam.dragStartX=e.clientX;
+  cam.dragStartYaw=cam.yaw;
+});
+
+gameEl.addEventListener("pointermove",e=>{
+  if(!cam.dragging || e.pointerId!==lookPointerId) return;
+  const dx=e.clientX-cam.dragStartX;
+  cam.yaw=cam.dragStartYaw+dx*0.008;
+});
+
+function endLook(e){
+  if(e.pointerId!==lookPointerId) return;
+  cam.dragging=false;
+  lookPointerId=null;
+}
+
+gameEl.addEventListener("pointerup",endLook);
+gameEl.addEventListener("pointercancel",endLook);
+gameEl.addEventListener("pointerleave",endLook);
 
 window.addEventListener("blur",()=>{
   keys.up=false;
   keys.down=false;
   keys.left=false;
   keys.right=false;
+  cam.dragging=false;
+  lookPointerId=null;
+
+  document.querySelectorAll(".control.pressed")
+    .forEach(el=>el.classList.remove("pressed"));
 });
 
 /* =========================================================
@@ -1831,6 +1987,7 @@ document.addEventListener("keydown",e=>{
 
   if(e.key===" "){
     interact();
+    e.preventDefault();
   }
 });
 
@@ -1855,6 +2012,7 @@ function animate(){
   if(state.running){
 
     updateMovement();
+    updateCamera();
     checkGoal();
     updateInteractButton();
 
@@ -1872,10 +2030,6 @@ function animate(){
         pulse
       );
     }
-
-    /*
-      Small walking animation.
-    */
 
     if(player &&
        (keys.up||keys.down||keys.left||keys.right) &&
@@ -1902,6 +2056,7 @@ function init(){
   scene=new THREE.Scene();
 
   scene.background=new THREE.Color(0x9ab5c4);
+  scene.fog=new THREE.Fog(0x9ab5c4,18,42);
 
   camera=new THREE.PerspectiveCamera(
     55,
@@ -1911,7 +2066,7 @@ function init(){
   );
 
   renderer=new THREE.WebGLRenderer({
-    antialias:false,
+    antialias:true,
     powerPreference:"high-performance"
   });
 
@@ -1926,10 +2081,6 @@ function init(){
 
   document.getElementById("game")
     .appendChild(renderer.domElement);
-
-  /*
-    Lighting
-  */
 
   const hemi=new THREE.HemisphereLight(
     0xffffff,
@@ -1976,10 +2127,6 @@ document.getElementById("startBtn")
 
   loadScene();
 });
-
-/* =========================================================
-   BOOT
-========================================================= */
 
 init();
 
