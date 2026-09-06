@@ -13,7 +13,7 @@ canvas{ display:block; }
 #title{ font-size:18px; font-weight:800; margin-bottom:7px; }
 #objective{ font-size:15px; line-height:1.5; }
 #objective b{ color:#ffd85c; }
-#interactHint{ position:fixed; left:50%; bottom:112px; transform:translateX(-50%); z-index:30; display:none; background:rgba(0,0,0,.82); border:1px solid rgba(255,255,255,.25); color:white; padding:11px 18px; border-radius:999px; font-weight:700; white-space:nowrap; }
+#interactHint{ position:fixed; left:50%; bottom:112px; transform:translateX(-50%); z-index:30; display:none; background:rgba(0,0,0,.82); border:1px solid rgba(255,255,255,.25); color:white; padding:11px 18px; border-radius:999px; font-weight:700; white-space:nowrap; cursor:pointer; }
 #dialogue{ position:fixed; left:50%; bottom:18px; transform:translateX(-50%); width:min(720px,calc(100vw - 28px)); background:rgba(15,15,15,.96); color:white; border:1px solid rgba(255,255,255,.2); border-radius:18px; padding:18px; z-index:50; display:none; }
 #speaker{ color:#ffd85c; font-weight:800; margin-bottom:7px; }
 #cn{ font-size:21px; line-height:1.5; }
@@ -567,7 +567,7 @@ const hint = document.getElementById(
 if(closest){
 currentInteraction= closest;
 hint.style.display="block";
-hint.textContent= `💬 ${closest.text} [E / INTERACT]`;
+hint.textContent= `💬 ${closest.text} [E / Tap here]`;
 }else{
 hint.style.display="none";
 }
@@ -594,6 +594,12 @@ interact();
 }
 }
 );
+document.getElementById(
+"interactHint"
+).onclick = (e) => {
+e.preventDefault();
+interact();
+};
 /* ===================================================== CLEAR WORLD ===================================================== */
 function clearWorld(){
 while(
