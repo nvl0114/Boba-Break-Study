@@ -76,6 +76,11 @@ canvas{
     font-size:14px;
 
     display:none;
+
+    cursor:pointer;
+    pointer-events:auto;
+
+    user-select:none;
 }
 
 /* ================= DIALOG ================= */
@@ -525,32 +530,12 @@ scene.add(sun);
 
 const player = {
     position:new THREE.Vector3(0,2,0),
-
-    // 0 = looking toward +Z
     angle:0,
-
     speed:0.65,
-
     rotateSpeed:0.055
 };
 
 camera.position.copy(player.position);
-
-/*
- IMPORTANT:
-
- forward = direction the camera is looking.
-
- If angle = 0:
- forward = +Z
-
- ▲ adds forward
- ▼ subtracts forward
-
- Therefore:
- ▲ = forward
- ▼ = backward
-*/
 
 function getForward(){
 
@@ -627,10 +612,6 @@ holdButton("right","arrowright");
 
 function updatePlayer(){
 
-    /*
-       FORWARD
-    */
-
     if(keys["arrowup"] || keys["w"]){
 
         const forward = getForward();
@@ -641,10 +622,6 @@ function updatePlayer(){
         );
 
     }
-
-    /*
-       BACKWARD
-    */
 
     if(keys["arrowdown"] || keys["s"]){
 
@@ -657,19 +634,11 @@ function updatePlayer(){
 
     }
 
-    /*
-       ROTATE LEFT
-    */
-
     if(keys["arrowleft"] || keys["a"]){
 
         player.angle -= player.rotateSpeed;
 
     }
-
-    /*
-       ROTATE RIGHT
-    */
 
     if(keys["arrowright"] || keys["d"]){
 
@@ -677,15 +646,7 @@ function updatePlayer(){
 
     }
 
-    /*
-       Camera follows player position.
-    */
-
     camera.position.copy(player.position);
-
-    /*
-       Look in player's forward direction.
-    */
 
     const forward = getForward();
 
@@ -1110,6 +1071,12 @@ function clearWorld(){
 
     interactions.length=0;
 
+    currentInteraction=null;
+
+    document.getElementById(
+        "interactHint"
+    ).style.display="none";
+
 }
 
 /* =========================================================
@@ -1190,10 +1157,6 @@ function showDialogue(){
     py.textContent =
         line.py;
 
-    /*
-       Chinese speech
-    */
-
     try{
 
         speechSynthesis.cancel();
@@ -1245,7 +1208,78 @@ function interact(){
 
 }
 
-/* keyboard E */
+/* =========================================================
+   CLICK / TAP INTERACTION
+========================================================= */
+
+/*
+   The interaction system still works with E / Enter.
+
+   Clicking the visible INTERACT hint also works.
+*/
+
+document.getElementById(
+    "interactHint"
+).addEventListener(
+    "pointerdown",
+    e=>{
+
+        e.preventDefault();
+        e.stopPropagation();
+
+        interact();
+
+    }
+);
+
+/*
+   Clicking / tapping the 3D scene while an
+   interaction is available also activates it.
+
+   This does NOT remove the distance requirement.
+*/
+
+renderer.domElement.addEventListener(
+    "pointerdown",
+    e=>{
+
+        /*
+           Ignore scene clicks while dialogue is open.
+        */
+
+        if(
+            dialogue.style.display==="block"
+        ){
+
+            return;
+
+        }
+
+        /*
+           Ignore clicks if the user is interacting
+           with one of the movement buttons.
+        */
+
+        if(
+            e.target.closest &&
+            e.target.closest(".control")
+        ){
+
+            return;
+
+        }
+
+        if(currentInteraction){
+
+            interact();
+
+        }
+
+    }
+);
+
+/* keyboard E / Enter */
+
 window.addEventListener(
     "keydown",
     e=>{
@@ -1611,38 +1645,13 @@ function loadBankArea(){
 
     clearWorld();
 
-    /*
-       =====================================================
-       BANK AREA ROUTE
-
-       銀行
-          ↓
-       路人（稍微遠離銀行）
-          ↓
-       便利商店
-          ↓
-       十字路口
-       ↙       ↑       ↘
-     公園     咖啡店    GR公車站
-      遠         遠         正確
-       =====================================================
-    */
-
     player.position.set(
         0,
         2,
         95
     );
 
-    /*
-       Looking toward -Z
-    */
-
     player.angle=Math.PI;
-
-    /* ==============================================
-       MAIN LONG ROAD
-       ============================================== */
 
     road(
         0,
@@ -1659,10 +1668,6 @@ function loadBankArea(){
         210,
         false
     );
-
-    /* ==============================================
-       BANK
-       ============================================== */
 
     building(
         -22,
@@ -1682,14 +1687,6 @@ function loadBankArea(){
         "#ffffff",
         38
     );
-
-    /* ==============================================
-       NPC AT BANK AREA
-       ============================================== */
-
-    /*
-       NPC is placed somewhat far from the bank.
-    */
 
     npc(
         6,
@@ -1764,27 +1761,6 @@ function loadBankArea(){
 
 function enableBankRoute(){
 
-    /*
-       =====================================================
-       LANDMARK ORDER
-
-       1. 便利商店
-       2. 十字路口
-       3. LEFT  → 公園
-       4. STRAIGHT → 咖啡店
-       5. RIGHT → GR公車站
-       =====================================================
-    */
-
-    /* ==============================================
-       CONVENIENCE STORE
-       ============================================== */
-
-    /*
-       The convenience store is encountered
-       BEFORE the intersection.
-    */
-
     building(
         25,
         -20,
@@ -1804,37 +1780,13 @@ function enableBankRoute(){
         32
     );
 
-    /*
-       Additional scenery.
-    */
-
     tree(-18,20);
     tree(18,10);
     tree(-18,-5);
     tree(18,-40);
 
-
-    /* ==============================================
-       CROSSROAD
-       ============================================== */
-
-    /*
-       The intersection is directly AFTER
-       the convenience store.
-
-       Main road comes from north.
-
-       LEFT   → 公園
-       STRAIGHT → 咖啡店
-       RIGHT  → GR公車站
-    */
-
     const crossX=0;
     const crossZ=-65;
-
-    /*
-       Main road arriving at intersection.
-    */
 
     road(
         crossX,
@@ -1844,11 +1796,6 @@ function enableBankRoute(){
         false
     );
 
-    /*
-       LEFT BRANCH
-       → 公園
-    */
-
     road(
         -55,
         crossZ,
@@ -1856,11 +1803,6 @@ function enableBankRoute(){
         110,
         true
     );
-
-    /*
-       STRAIGHT BRANCH
-       → 咖啡店
-    */
 
     road(
         crossX,
@@ -1870,11 +1812,6 @@ function enableBankRoute(){
         false
     );
 
-    /*
-       RIGHT BRANCH
-       → GR公車站
-    */
-
     road(
         75,
         crossZ,
@@ -1882,10 +1819,6 @@ function enableBankRoute(){
         150,
         true
     );
-
-    /* ==============================================
-       INTERSECTION MARKERS
-       ============================================== */
 
     addBox(
         -9,
@@ -1915,15 +1848,6 @@ function enableBankRoute(){
         "#ffd85c",
         40
     );
-
-
-    /* ==============================================
-       LEFT ROUTE → PARK
-       ============================================== */
-
-    /*
-       Park is deliberately far to the left.
-    */
 
     const parkX=-105;
     const parkZ=crossZ;
@@ -1960,15 +1884,6 @@ function enableBankRoute(){
         p=>tree(p[0],p[1])
     );
 
-
-    /* ==============================================
-       STRAIGHT ROUTE → COFFEE SHOP
-       ============================================== */
-
-    /*
-       Coffee shop is deliberately far straight ahead.
-    */
-
     const cafeX=0;
     const cafeZ=-155;
 
@@ -1990,16 +1905,6 @@ function enableBankRoute(){
         "#ffffff",
         36
     );
-
-
-    /* ==============================================
-       RIGHT ROUTE → GR BUS STOP
-       ============================================== */
-
-    /*
-       Correct route:
-       RIGHT → GR公車站
-    */
 
     const grX=145;
     const grZ=crossZ;
@@ -2023,10 +1928,6 @@ function enableBankRoute(){
             "#ffffff",
             34
         );
-
-    /*
-       Hide GR label initially.
-    */
 
     grSign.visible=false;
 
@@ -2067,15 +1968,7 @@ function enableBankRoute(){
             9
         );
 
-    /*
-       GR remains an active interaction.
-    */
-
     grPoint.active=true;
-
-    /*
-       Save reference for visibility.
-    */
 
     window.GR_STOP={
         x:grX,
@@ -2106,11 +1999,6 @@ function updateGRVisibility(){
             dx*dx+
             dz*dz
         );
-
-    /*
-       GR only becomes visually obvious
-       when player is relatively close.
-    */
 
     if(distance < 38){
 
@@ -2205,11 +2093,11 @@ function loadGRArea(){
 
                 loadTrainStation();
 
-            },
-            10
-        );
+            });
 
-    }
+        },
+        10
+    );
 
 }
 
@@ -2410,10 +2298,6 @@ function loadMRTEntrance(){
         false
     );
 
-    /*
-       LARGE MRT entrance.
-    */
-
     addBox(
         0,
         2,
@@ -2547,11 +2431,11 @@ function loadMRTArea(){
 
                 loadTamsuiArea();
 
-            },
-            10
-        );
+            });
 
-    }
+        },
+        10
+    );
 
 }
 
@@ -2571,10 +2455,6 @@ function loadTamsuiArea(){
 
     player.angle=Math.PI;
 
-    /*
-       Main road
-    */
-
     road(
         0,
         0,
@@ -2590,10 +2470,6 @@ function loadTamsuiArea(){
         120,
         false
     );
-
-    /*
-       NPC
-    */
 
     npc(
         7,
@@ -2668,10 +2544,6 @@ function loadTamsuiArea(){
 
 function enableRestaurantRoute(){
 
-    /*
-       Long approach.
-    */
-
     building(
         25,
         -25,
@@ -2681,22 +2553,6 @@ function enableRestaurantRoute(){
         0xe0b95d,
         "便利商店"
     );
-
-    /*
-       Three-way intersection.
-
-       Main road comes from north.
-
-       LEFT = correct
-       RIGHT = wrong
-
-       Only THREE branches:
-       1. north/south approach
-       2. left
-       3. right
-
-       No fourth straight road after intersection.
-    */
 
     road(
         0,
@@ -2731,10 +2587,6 @@ function enableRestaurantRoute(){
         40
     );
 
-    /*
-       Restaurant far along LEFT road.
-    */
-
     const restaurantX=-125;
     const restaurantZ=-75;
 
@@ -2757,10 +2609,6 @@ function enableRestaurantRoute(){
             "#ffffff",
             38
         );
-
-    /*
-       Hide restaurant until player approaches.
-    */
 
     restaurantSign.visible=false;
 
