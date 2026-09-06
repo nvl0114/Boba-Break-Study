@@ -2,251 +2,162 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Boba Break Study - Mobile Version</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Boba Break Study - Mobile Isometric Game</title>
     <style>
-        * { box-sizing: border-box; }
+        * { box-sizing: border-box; touch-action: manipulation; }
         body {
-            background-color: #1e1b18;
-            color: #f4f1ea;
+            background-color: #121212;
+            color: #fff;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            margin: 0; padding: 0;
+            display: flex; justify-content: center; align-items: center;
             min-height: 100vh;
         }
-        .game-wrapper {
-            width: 100%;
-            max-width: 480px; /* Ukuran pas ala layar HP */
-            height: 100vh;
-            max-height: 850px;
-            background: #2b2621;
-            display: flex;
-            flex-direction: column;
-            border-radius: 0;
-            box-shadow: 0 0 20px rgba(0,0,0,0.8);
-            position: relative;
-            overflow: hidden;
-        }
-        @media(min-width: 500px) {
-            .game-wrapper { border-radius: 16px; border: 4px solid #5c4033; }
-        }
-        /* Bagian Atas / Visual Scene */
-        .scene-container {
-            flex: 1;
-            background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=600&auto=format&fit=crop') center/cover;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            padding: 15px;
-        }
-        .top-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .badge {
-            background: rgba(92, 64, 51, 0.85);
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: bold;
-            color: #ffd700;
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-        .vocab-btn {
-            background: #c86d51;
-            color: white;
-            border: none;
-            padding: 8px 14px;
-            border-radius: 20px;
-            font-weight: bold;
-            cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        .game-card {
+            width: 100%; max-width: 420px; height: 100vh; max-height: 750px;
+            background: #231f20; display: flex; flex-direction: column;
+            position: relative; overflow: hidden; border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
         }
         
-        /* Area Dialog / Kotak Percintaan ala Visual Novel */
-        .dialogue-box {
-            background: rgba(35, 30, 26, 0.92);
-            border: 2px solid #8c6d53;
-            border-radius: 14px;
-            padding: 16px;
-            box-shadow: 0 -5px 20px rgba(0,0,0,0.5);
-            backdrop-filter: blur(5px);
+        /* Area Peta Isometrik */
+        .map-viewport {
+            flex: 1;
+            /* Latar Belakang Desaku Isometric 3D Estetik */
+            background: url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=800&auto=format&fit=crop') center/cover;
+            position: relative; overflow: hidden;
         }
-        .speaker-name {
-            color: #e67e22;
-            font-weight: bold;
-            font-size: 0.95rem;
-            margin-bottom: 4px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        .dialogue-text {
-            font-size: 1.05rem;
-            line-height: 1.4;
-            margin-bottom: 8px;
-        }
-        .pinyin-text {
-            color: #b2bec3;
-            font-size: 0.85rem;
-            font-style: italic;
-            margin-bottom: 12px;
-        }
-        .action-choice-btn {
-            background: #27ae60;
-            color: white;
-            border: none;
-            width: 100%;
-            padding: 12px;
-            border-radius: 8px;
-            font-size: 0.95rem;
-            font-weight: bold;
-            cursor: pointer;
-            text-align: center;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
-        }
-        .action-choice-btn:active { transform: scale(0.98); }
 
-        /* Modal Vocab Overlay */
-        .modal {
-            display: none;
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.8);
-            z-index: 100;
-            justify-content: center;
-            align-items: flex-end;
+        /* Overlay karakter & NPC */
+        .entity {
+            position: absolute; transform: translate(-50%, -50%);
+            transition: all 0.2s linear; display: flex; flex-direction: column; align-items: center;
         }
-        .modal-content {
-            background: #2b2621;
-            width: 100%;
-            height: 75%;
-            border-top-left-radius: 20px;
-            border-top-right-radius: 20px;
-            padding: 20px;
-            overflow-y: auto;
-            border-top: 3px solid #c86d51;
+        .entity-label {
+            background: rgba(0,0,0,0.7); color: #fff; font-size: 10px; font-weight: bold;
+            padding: 2px 6px; border-radius: 10px; white-space: nowrap; margin-bottom: 2px;
+            border: 1px solid #e67e22;
         }
-        .close-modal {
-            background: none; border: none; color: #fff; font-size: 1.5rem; float: right; cursor: pointer;
+        .avatar {
+            width: 36px; height: 36px; border-radius: 50%;
+            display: flex; justify-content: center; align-items: center; font-size: 18px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.5);
         }
-        .vocab-item {
-            background: #383029;
-            padding: 10px 14px;
-            border-radius: 8px;
-            margin-bottom: 8px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-left: 4px solid #c86d51;
+        #player { z-index: 10; }
+        #player .avatar { background: #e74c3c; border: 2px solid #fff; }
+        
+        .npc .avatar { background: #3498db; border: 2px solid #f1c40f; }
+
+        /* Dialog Box HP */
+        .dialogue-panel {
+            background: rgba(28, 25, 23, 0.95);
+            border-top: 3px solid #e67e22; padding: 12px 16px; min-height: 140px;
+            display: flex; flex-direction: column; justify-content: space-between;
         }
-        .vocab-cn { font-size: 1.1rem; font-weight: bold; color: #f1c40f; }
-        .vocab-en { font-size: 0.85rem; color: #bdc3c7; }
+        .speaker { color: #f39c12; font-weight: bold; font-size: 14px; margin-bottom: 2px; }
+        .pinyin { color: #bdc3c7; font-size: 11px; font-style: italic; }
+        .text { font-size: 13px; line-height: 1.3; margin: 4px 0; }
+
+        /* Tombol D-Pad Layar Sentuh HP */
+        .dpad-container {
+            position: absolute; bottom: 150px; left: 15px;
+            width: 100px; height: 100px; display: grid;
+            grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(3, 1fr);
+            gap: 2px; opacity: 0.8;
+        }
+        .dbtn {
+            background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.3);
+            color: white; border-radius: 6px; display: flex;
+            justify-content: center; align-items: center; font-weight: bold;
+            user-select: none;
+        }
+        .dbtn:active { background: #e67e22; }
+
+        .top-btn {
+            position: absolute; top: 12px; right: 12px;
+            background: #e67e22; color: white; border: none; padding: 6px 12px;
+            border-radius: 15px; font-size: 12px; font-weight: bold; z-index: 20;
+        }
     </style>
 </head>
 <body>
 
-<div class="game-wrapper">
-    <!-- Layar / Scene Utama -->
-    <div class="scene-container" id="sceneBg">
-        <div class="top-bar">
-            <div class="badge" id="levelBadge">📍 Misi 1: Ke Stasiun</div>
-            <button class="vocab-btn" onclick="toggleVocab(true)">📖 Vocab</button>
+<div class="game-card">
+    <button class="top-btn" onclick="alert('Kosakata Tamsui:\n• 公車 (gōngchē) = Bus\n• 火車 (huǒchē) = Kereta\n• 捷運 (jiéyùn) = MRT\n• 左 (zuǒ) = Kiri | 右 (yòu) = Kanan')">📖 Vocab</button>
+
+    <!-- Layar Game Isometrik -->
+    <div class="map-viewport" id="mapView" onclick="moveByTap(event)">
+        <!-- Karakter Ahao -->
+        <div class="entity" id="player" style="left: 20%; top: 70%;">
+            <div class="entity-label">Ahao (阿豪)</div>
+            <div class="avatar">👦</div>
         </div>
 
-        <!-- Kotak Dialog Bawah (Sangat Ramah HP/Touchscreen) -->
-        <div class="dialogue-box">
-            <div class="speaker-name" id="speakerTitle">Warga Desa</div>
-            <div class="dialogue-text" id="dialogueText">Mau ke stasiun? Naik <b>105 公車 (gōngchē)</b>, turun di depan <b>銀行 (yínháng)</b>.</div>
-            <div class="pinyin-text" id="pinyinText">Nǐ xiǎng qù chēzhàn ma? Dā 105 gōngchē...</div>
-            <button class="action-choice-btn" id="choiceBtn" onclick="nextStep()">Lanjut Naik Kereta (火車)</button>
+        <!-- NPC 1: Warga Desa -->
+        <div class="entity npc" id="npc1" style="left: 45%; top: 50%;">
+            <div class="entity-label">Warga Desa</div>
+            <div class="avatar">👨‍🌾</div>
+        </div>
+
+        <!-- NPC 2: Petugas Stasiun -->
+        <div class="entity npc" id="npc2" style="left: 80%; top: 30%;">
+            <div class="entity-label">Petugas Stasiun</div>
+            <div class="avatar">👮</div>
         </div>
     </div>
-</div>
 
-<!-- Modal Menu Kosakata -->
-<div class="modal" id="vocabModal">
-    <div class="modal-content">
-        <button class="close-modal" onclick="toggleVocab(false)">&times;</button>
-        <h3 style="color:#e67e22; margin-top:0;">Kosakata Tamsui Journey</h3>
-        <div id="vocabListContainer"></div>
+    <!-- D-Pad Kontrol HP -->
+    <div class="dpad-container">
+        <div></div><div class="dbtn" onclick="move(0, -5)">▲</div><div></div>
+        <div class="dbtn" onclick="move(-5, 0)">◀</div><div></div><div class="dbtn" onclick="move(5, 0)">▶</div>
+        <div></div><div class="dbtn" onclick="move(0, 5)">▼</div><div></div>
+    </div>
+
+    <!-- Kotak Dialog Teks -->
+    <div class="dialogue-panel">
+        <div>
+            <div class="speaker" id="spk">Petunjuk Navigasi</div>
+            <div class="pinyin" id="pyn">Pencet D-Pad Panah atau Sentuh Layar untuk Menggerakkan Ahao.</div>
+            <div class="text" id="txt">Misi: Dekati Warga Desa 👨‍🌾 di tengah peta untuk bertanya jalan ke Tamsui!</div>
+        </div>
     </div>
 </div>
 
 <script>
-    let currentStage = 0;
+    let posX = 20;
+    let posY = 70;
+    const player = document.getElementById('player');
 
-    const storyData = [
-        {
-            stageName: "📍 Misi 1: Mencari Bus",
-            bgUrl: "url('https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=600&auto=format&fit=crop')",
-            speaker: "Warga Desa",
-            text: "Mau ke stasiun? Naik <b>105 公車 (gōngchē)</b>, turun di depan <b>銀行 (yínháng)</b>, lalu lanjut jalan kaki.",
-            pinyin: "Nǐ xiǎng qù chēzhàn ma? Dā 105 gōngchē, xiàchē zài yínháng...",
-            btnText: "Naik Kereta Menuju Taipei (火車)"
-        },
-        {
-            stageName: "📍 Misi 2: Stasiun Taipei",
-            bgUrl: "url('https://images.unsplash.com/photo-1509198397868-475647b2a1e5?q=80&w=600&auto=format&fit=crop')",
-            speaker: "Petugas Stasiun",
-            text: "Mau ke Tamsui? Kamu harus <b>轉乘 (zhuǎnchéng - transfer)</b> ke <b>紅線 (hóng xiàn - Red Line)</b> <b>捷運 (jiéyùn - MRT)</b>.",
-            pinyin: "Qù Dànshuǐ? Nǐ děi zhuǎnchéng hóng xiàn jiéyùn.",
-            btnText: "Naik MRT ke Tamsui (捷運)"
-        },
-        {
-            stageName: "📍 Misi 3: Tamsui (Selesai!)",
-            bgUrl: "url('https://images.unsplash.com/photo-1508873696983-2df5c920ac1c?q=80&w=600&auto=format&fit=crop')",
-            speaker: "Warga Tamsui",
-            text: "Restorannya dekat! Pertama ke <b>左 (zuǒ - kiri)</b>, lalu belok ke <b>右 (yòu - kanan)</b>. Selamat Ulang Tahun Xiaomei! 🎉",
-            pinyin: "Xiān xiàng zuǒ, rùhòu guǎi yòu. Shēngrì kuàilè!",
-            btnText: "Selesai / Main Lagi 🔄"
-        }
-    ];
-
-    const vocabList = [
-        { cn: "左 (zuǒ)", en: "Left (Kiri)" },
-        { cn: "右 (yòu)", en: "Right (Kanan)" },
-        { cn: "轉車 / 轉乘 (zhuǎnchē / zhuǎnchéng)", en: "Transfer / Ganti kendaraan" },
-        { cn: "火車 (huǒchē)", en: "Train (Kereta api)" },
-        { cn: "捷運 (jiéyùn)", en: "MRT / Subway" },
-        { cn: "紅線 (hóng xiàn)", en: "Red Line (Jalur Merah MRT)" },
-        { cn: "淡水 (Dànshuǐ)", en: "Tamsui (Nama tempat)" },
-        { cn: "公車 (gōngchē)", en: "Bus" },
-        { cn: "銀行 (yínháng)", en: "Bank" }
-    ];
-
-    function nextStep() {
-        currentStage++;
-        if(currentStage >= storyData.length) {
-            currentStage = 0; // Reset ulang game
-        }
-        let data = storyData[currentStage];
-        document.getElementById('levelBadge').innerText = data.stageName;
-        document.getElementById('sceneBg').style.backgroundImage = data.bgUrl;
-        document.getElementById('speakerTitle').innerText = data.speaker;
-        document.getElementById('dialogueText').innerHTML = data.text;
-        document.getElementById('pinyinText').innerText = data.pinyin;
-        document.getElementById('choiceBtn').innerText = data.btnText;
+    function move(dx, dy) {
+        posX = Math.max(10, Math.min(90, posX + dx));
+        posY = Math.max(20, Math.min(85, posY + dy));
+        player.style.left = posX + '%';
+        player.style.top = posY + '%';
+        checkDistance();
     }
 
-    function toggleVocab(show) {
-        let modal = document.getElementById('vocabModal');
-        modal.style.display = show ? 'flex' : 'none';
-        if(show) {
-            let container = document.getElementById('vocabListContainer');
-            container.innerHTML = '';
-            vocabList.forEach(v => {
-                container.innerHTML += `
-                    <div class="vocab-item">
-                        <span class="vocab-cn">${v.cn}</span>
-                        <span class="vocab-en">${v.en}</span>
-                    </div>
-                `;
-            });
+    function moveByTap(e) {
+        const rect = document.getElementById('mapView').getBoundingClientRect();
+        posX = ((e.clientX - rect.left) / rect.width) * 100;
+        posY = ((e.clientY - rect.top) / rect.height) * 100;
+        player.style.left = posX + '%';
+        player.style.top = posY + '%';
+        checkDistance();
+    }
+
+    function checkDistance() {
+        // Dekat NPC 1 (Warga Desa)
+        if(Math.abs(posX - 45) < 12 && Math.abs(posY - 50) < 12) {
+            document.getElementById('spk').innerText = "Warga Desa";
+            document.getElementById('pyn').innerText = "Nǐ xiǎng qù chēzhàn ma? Dā 105 gōngchē...";
+            document.getElementById('txt').innerHTML = "Mau ke Tamsui? Naik <b>105 公車 (gōngchē - bus)</b>, turun di depan <b>銀行 (yínháng - bank)</b> lalu naik kereta <b>火車 (huǒchē)</b> ke Stasiun Taipei!";
+        } 
+        // Dekat NPC 2 (Petugas Stasiun)
+        else if(Math.abs(posX - 80) < 12 && Math.abs(posY - 30) < 12) {
+            document.getElementById('spk').innerText = "Petugas Stasiun Taipei";
+            document.getElementById('pyn').innerText = "Qù Dànshuǐ? Nǐ děi zhuǎnchéng hóng xiàn jiéyùn.";
+            document.getElementById('txt').innerHTML = "Di Stasiun Taipei, kamu harus <b>轉乘 (zhuǎnchéng - transfer)</b> ke <b>紅線 (hóng xiàn - Jalur Merah)</b> <b>捷運 (jiéyùn - MRT)</b> menuju Tamsui!";
         }
     }
 </script>
