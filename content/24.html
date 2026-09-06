@@ -2,8 +2,9 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>阿豪的生日任務｜Boba Break Study</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<title>Ahao's Lost Route</title>
 
 <style>
 *{
@@ -16,451 +17,272 @@ body{
     overflow:hidden;
     font-family:Arial,"Noto Sans TC",sans-serif;
     background:#111;
-    color:white;
 }
 
 canvas{
     display:block;
 }
 
-/* ================= HUD ================= */
-
 #hud{
     position:fixed;
-    top:15px;
-    left:15px;
+    top:0;
+    left:0;
+    width:100%;
+    padding:12px;
     z-index:20;
-    width:min(430px,calc(100vw - 30px));
-}
-
-.panel{
-    background:rgba(20,20,20,.82);
-    border:1px solid rgba(255,255,255,.18);
-    border-radius:15px;
-    padding:14px 16px;
-    backdrop-filter:blur(8px);
-    box-shadow:0 8px 30px rgba(0,0,0,.3);
-}
-
-#gameTitle{
-    font-size:18px;
-    font-weight:800;
-    margin-bottom:8px;
+    pointer-events:none;
 }
 
 #objective{
+    max-width:520px;
+    margin:auto;
+    padding:12px 16px;
+    border-radius:16px;
+    background:rgba(255,255,255,.94);
+    box-shadow:0 4px 18px rgba(0,0,0,.18);
+    color:#333;
     font-size:15px;
-    line-height:1.5;
+    font-weight:bold;
 }
 
-#objective b{
-    color:#ffd85c;
-}
-
-/* ================= INTERACT ================= */
-
-#interactHint{
+#landmarkMessage{
     position:fixed;
+    top:88px;
     left:50%;
-    bottom:115px;
     transform:translateX(-50%);
     z-index:30;
-
-    padding:12px 20px;
-    border-radius:999px;
-
-    background:rgba(0,0,0,.78);
-    border:1px solid rgba(255,255,255,.25);
-
-    font-weight:700;
-    font-size:14px;
-
-    display:none;
+    background:rgba(30,30,30,.88);
+    color:white;
+    padding:10px 16px;
+    border-radius:14px;
+    opacity:0;
+    transition:.3s;
+    pointer-events:none;
 }
 
-/* ================= DIALOG ================= */
+#landmarkMessage.show{
+    opacity:1;
+}
+
+#hint{
+    position:fixed;
+    left:50%;
+    bottom:145px;
+    transform:translateX(-50%);
+    background:rgba(0,0,0,.7);
+    color:white;
+    padding:9px 15px;
+    border-radius:14px;
+    z-index:20;
+    display:none;
+    pointer-events:none;
+}
 
 #dialogue{
     position:fixed;
     left:50%;
     bottom:20px;
     transform:translateX(-50%);
-
-    width:min(700px,calc(100vw - 30px));
-
-    background:rgba(15,15,15,.94);
-    border:1px solid rgba(255,255,255,.2);
-    border-radius:18px;
-
+    width:min(700px,92%);
+    background:rgba(255,255,255,.97);
+    border-radius:20px;
     padding:18px;
-
-    z-index:40;
+    z-index:50;
     display:none;
+    box-shadow:0 8px 30px rgba(0,0,0,.25);
 }
 
 #speaker{
-    color:#ffd85c;
-    font-weight:800;
-    margin-bottom:8px;
+    font-size:15px;
+    font-weight:bold;
+    color:#7a4b20;
+    margin-bottom:7px;
 }
 
-#cn{
-    font-size:21px;
+#zh{
+    font-size:20px;
+    font-weight:bold;
     line-height:1.5;
-    margin-bottom:5px;
 }
 
-#py{
+#pinyin{
     font-size:14px;
-    color:#bbb;
-    line-height:1.5;
+    color:#777;
+    margin-top:4px;
 }
 
-#dialogueButton{
+#dialogue button{
     margin-top:13px;
-    border:none;
-    background:#ffd85c;
-    color:#222;
-    padding:9px 18px;
-    border-radius:10px;
-    font-weight:800;
-    cursor:pointer;
+    width:100%;
+    border:0;
+    padding:11px;
+    border-radius:12px;
+    background:#222;
+    color:white;
+    font-size:15px;
 }
-
-/* ================= CONTROLS ================= */
 
 #controls{
     position:fixed;
-    right:18px;
-    bottom:18px;
-    z-index:25;
-
+    bottom:20px;
+    left:20px;
+    z-index:40;
     display:grid;
-    grid-template-columns:55px 55px 55px;
-    grid-template-rows:55px 55px;
-
+    grid-template-columns:58px 58px 58px;
+    grid-template-rows:58px 58px;
     gap:7px;
 }
 
-.control{
-    border:none;
-    border-radius:14px;
-    background:rgba(20,20,20,.8);
-    color:white;
-    font-size:24px;
-    border:1px solid rgba(255,255,255,.2);
+.ctrl{
+    border:0;
+    border-radius:17px;
+    background:rgba(255,255,255,.88);
+    font-size:25px;
+    box-shadow:0 4px 12px rgba(0,0,0,.2);
     touch-action:none;
     user-select:none;
 }
 
-.control:active{
+.ctrl:active{
     transform:scale(.94);
-    background:rgba(255,255,255,.25);
+    background:white;
 }
 
-#up{
-    grid-column:2;
-    grid-row:1;
-}
+#up{grid-column:2;grid-row:1;}
+#left{grid-column:1;grid-row:2;}
+#down{grid-column:2;grid-row:2;}
+#right{grid-column:3;grid-row:2;}
 
-#left{
-    grid-column:1;
-    grid-row:2;
-}
-
-#down{
-    grid-column:2;
-    grid-row:2;
-}
-
-#right{
-    grid-column:3;
-    grid-row:2;
-}
-
-/* ================= VOCAB ================= */
-
-#vocabButton{
+#controlLegend{
     position:fixed;
-    top:15px;
-    right:15px;
-    z-index:25;
-
-    border:none;
-    border-radius:12px;
-
-    padding:10px 14px;
-
-    background:rgba(20,20,20,.85);
+    bottom:21px;
+    right:20px;
+    z-index:40;
+    background:rgba(0,0,0,.58);
     color:white;
-
-    border:1px solid rgba(255,255,255,.2);
-    font-weight:700;
-}
-
-#vocabModal{
-    position:fixed;
-    inset:0;
-    z-index:100;
-
-    background:rgba(0,0,0,.7);
-
-    display:none;
-    align-items:center;
-    justify-content:center;
-
-    padding:20px;
-}
-
-.vocabBox{
-    width:min(700px,100%);
-    max-height:85vh;
-    overflow:auto;
-
-    background:#171717;
-    border-radius:20px;
-    padding:20px;
-
-    border:1px solid rgba(255,255,255,.2);
-}
-
-.vocabBox h2{
-    margin-bottom:15px;
-}
-
-.vocabGrid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
-    gap:10px;
-}
-
-.vocab{
-    background:#242424;
+    padding:9px 12px;
     border-radius:12px;
-    padding:12px;
+    font-size:11px;
+    line-height:1.6;
 }
 
-.vocab .word{
-    font-size:20px;
-    font-weight:800;
-}
-
-.vocab .pinyin{
-    color:#aaa;
-    margin-top:3px;
-}
-
-.vocab .meaning{
-    color:#ddd;
-    font-size:13px;
-    margin-top:5px;
-}
-
-#closeVocab{
-    margin-top:15px;
-    padding:10px 16px;
-    border:none;
-    border-radius:10px;
-}
-
-/* ================= STORY ================= */
-
-#story{
+#interact{
     position:fixed;
-    inset:0;
-    z-index:200;
-
-    background:
-        radial-gradient(circle at center,rgba(255,216,92,.08),transparent 45%),
-        #101010;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    padding:25px;
-}
-
-.storyBox{
-    max-width:650px;
-    text-align:center;
-}
-
-.storyBox h1{
-    font-size:clamp(28px,6vw,50px);
-    margin-bottom:18px;
-}
-
-.storyBox p{
-    color:#ccc;
-    line-height:1.8;
-    font-size:16px;
-}
-
-#startGame{
-    margin-top:25px;
-    padding:13px 25px;
-    border:none;
-    border-radius:13px;
-
-    background:#ffd85c;
+    right:20px;
+    bottom:115px;
+    z-index:40;
+    width:70px;
+    height:70px;
+    border-radius:50%;
+    border:0;
+    background:#f3b45b;
     color:#222;
-
-    font-size:16px;
-    font-weight:800;
+    font-size:18px;
+    font-weight:bold;
+    display:none;
+    box-shadow:0 5px 18px rgba(0,0,0,.25);
 }
 
-/* ================= SUCCESS ================= */
+#vocabBtn{
+    position:fixed;
+    top:12px;
+    right:12px;
+    z-index:60;
+    border:0;
+    border-radius:12px;
+    padding:10px 13px;
+    background:white;
+    font-weight:bold;
+}
 
+#vocabModal,
+#story,
 #success{
     position:fixed;
     inset:0;
-    z-index:150;
-
-    display:none;
-    align-items:center;
+    z-index:100;
+    background:rgba(0,0,0,.72);
+    display:flex;
     justify-content:center;
+    align-items:center;
+    padding:20px;
+}
 
-    background:rgba(0,0,0,.8);
+.modalBox{
+    width:min(720px,100%);
+    max-height:88vh;
+    overflow:auto;
+    background:white;
+    border-radius:24px;
+    padding:25px;
+}
+
+.modalBox h2{
+    margin-bottom:15px;
+}
+
+.vocabItem{
+    display:flex;
+    justify-content:space-between;
+    gap:12px;
+    padding:10px 0;
+    border-bottom:1px solid #eee;
+}
+
+.vocabItem b{
+    font-size:18px;
+}
+
+.vocabItem small{
+    color:#777;
+}
+
+.modalBox button{
+    margin-top:18px;
+    width:100%;
+    border:0;
+    padding:12px;
+    border-radius:13px;
+    background:#222;
+    color:white;
+}
+
+.storyText{
+    line-height:1.7;
+    color:#444;
+}
+
+.storyText h1{
+    margin-bottom:15px;
+}
+
+.storyText button{
+    margin-top:20px;
+    width:100%;
+    padding:13px;
+    border:0;
+    border-radius:14px;
+    background:#222;
+    color:white;
+    font-size:16px;
+}
+
+#success{
+    display:none;
 }
 
 .successBox{
-    text-align:center;
-    background:#181818;
-    border:1px solid rgba(255,255,255,.2);
-    border-radius:20px;
+    background:white;
+    border-radius:25px;
     padding:30px;
+    text-align:center;
+    width:min(500px,100%);
 }
 
-.successBox h2{
-    font-size:30px;
-    margin-bottom:12px;
-}
-
-.successBox p{
-    color:#ccc;
-    line-height:1.7;
+.hidden{
+    display:none !important;
 }
 </style>
-</head>
-
-<body>
-
-<!-- ================= STORY ================= -->
-
-<div id="story">
-    <div class="storyBox">
-
-        <h1>🎂 阿豪的生日任務</h1>
-
-        <p>
-            今天阿豪要去淡水的
-            <b>海風餐廳</b>參加小美的生日聚餐。
-        </p>
-
-        <p>
-            但是出發後，他的手機突然沒電了。
-            Google Maps 也不能用了。
-        </p>
-
-        <p>
-            現在，他只能靠自己問路，
-            記住別人說的方向，
-            再利用路上的地標找到目的地。
-        </p>
-
-        <button id="startGame">開始遊戲</button>
-
-    </div>
-</div>
-
-<!-- ================= HUD ================= -->
-
-<div id="hud">
-
-    <div class="panel">
-
-        <div id="gameTitle">
-            🎮 阿豪的生日任務
-        </div>
-
-        <div id="objective">
-            <b>任務：</b>
-            買生日禮物
-        </div>
-
-    </div>
-
-</div>
-
-<button id="vocabButton">📚 Vocabulary</button>
-
-<div id="interactHint">
-    💬 按 INTERACT
-</div>
-
-<!-- ================= DIALOGUE ================= -->
-
-<div id="dialogue">
-
-    <div id="speaker"></div>
-
-    <div id="cn"></div>
-
-    <div id="py"></div>
-
-    <button id="dialogueButton">
-        下一句
-    </button>
-
-</div>
-
-<!-- ================= CONTROLS ================= -->
-
-<div id="controls">
-
-    <button class="control" id="up">▲</button>
-    <button class="control" id="left">◀</button>
-    <button class="control" id="down">▼</button>
-    <button class="control" id="right">▶</button>
-
-</div>
-
-<!-- ================= VOCAB ================= -->
-
-<div id="vocabModal">
-
-    <div class="vocabBox">
-
-        <h2>📚 關鍵詞</h2>
-
-        <div class="vocabGrid" id="vocabGrid"></div>
-
-        <button id="closeVocab">
-            關閉
-        </button>
-
-    </div>
-
-</div>
-
-<!-- ================= SUCCESS ================= -->
-
-<div id="success">
-
-    <div class="successBox">
-
-        <h2>🎉 任務完成！</h2>
-
-        <p>
-            阿豪終於成功到達海風餐廳。
-            <br>
-            他也順利把生日禮物送給小美！
-        </p>
-
-    </div>
-
-</div>
 
 <script type="importmap">
 {
@@ -469,574 +291,525 @@ canvas{
     }
 }
 </script>
+</head>
+
+<body>
+
+<div id="hud">
+    <div id="objective">🎯 Objective</div>
+</div>
+
+<div id="landmarkMessage"></div>
+
+<div id="hint">按 E / 點擊右下角互動</div>
+
+<button id="vocabBtn">📖 Vocabulary</button>
+
+<div id="dialogue">
+    <div id="speaker"></div>
+    <div id="zh"></div>
+    <div id="pinyin"></div>
+    <button id="nextDialogue">下一句</button>
+</div>
+
+<div id="controls">
+    <button class="ctrl" id="up">▲</button>
+    <button class="ctrl" id="left">◀</button>
+    <button class="ctrl" id="down">▼</button>
+    <button class="ctrl" id="right">▶</button>
+</div>
+
+<div id="controlLegend">
+    ▲ maju<br>
+    ▼ mundur<br>
+    ◀ putar kiri<br>
+    ▶ putar kanan
+</div>
+
+<button id="interact">E</button>
+
+<div id="story">
+    <div class="modalBox">
+        <div class="storyText">
+            <h1>📱 阿豪的迷路任務</h1>
+
+            <p>
+                今天阿豪要去淡水的
+                <b>海風餐廳</b>參加小美的生日聚會。
+            </p>
+
+            <p>
+                可是走到半路，他的手機沒電了。
+                Google Maps 也不能用了。
+            </p>
+
+            <p>
+                現在，他只能問路人，
+                靠自己記住中文的方向。
+            </p>
+
+            <p>
+                🎁 先買生日禮物。<br>
+                🚌 找到105號公車。<br>
+                🚆 搭火車到台北車站。<br>
+                🚇 轉乘紅線到淡水。<br>
+                🍽️ 最後找到海風餐廳。
+            </p>
+
+            <button id="startBtn">開始遊戲</button>
+        </div>
+    </div>
+</div>
+
+<div id="vocabModal" class="hidden">
+    <div class="modalBox">
+        <h2>📖 Route Vocabulary</h2>
+        <div id="vocabList"></div>
+        <button id="closeVocab">Close</button>
+    </div>
+</div>
+
+<div id="success">
+    <div class="successBox">
+        <h1>🎉 到達目的地！</h1>
+        <p style="margin-top:12px;line-height:1.7;">
+            你成功靠中文方向找到海風餐廳了！
+        </p>
+        <p style="margin-top:10px;">
+            阿豪終於可以參加小美的生日聚會。
+        </p>
+    </div>
+</div>
 
 <script type="module">
 
 import * as THREE from "three";
 
 /* =========================================================
-   BASIC THREE.JS
+   BASIC SETUP
 ========================================================= */
 
 const scene = new THREE.Scene();
 
-scene.background = new THREE.Color(0x9ec8e8);
+scene.background = new THREE.Color(0x9fc9e8);
+
+scene.fog = new THREE.Fog(
+    0x9fc9e8,
+    45,
+    250
+);
 
 const camera = new THREE.PerspectiveCamera(
-    70,
+    65,
     innerWidth / innerHeight,
-    0.1,
-    2000
+    .1,
+    500
 );
 
 const renderer = new THREE.WebGLRenderer({
     antialias:true
 });
 
-renderer.setSize(innerWidth,innerHeight);
-renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+renderer.setPixelRatio(
+    Math.min(devicePixelRatio,2)
+);
+
+renderer.setSize(
+    innerWidth,
+    innerHeight
+);
 
 document.body.appendChild(renderer.domElement);
 
+
 /* =========================================================
-   LIGHT
+   LIGHTS
 ========================================================= */
 
-const ambient = new THREE.HemisphereLight(
+const ambient = new THREE.AmbientLight(
     0xffffff,
-    0x667788,
-    2
+    1.8
 );
-
-scene.add(ambient);
 
 const sun = new THREE.DirectionalLight(
     0xffffff,
     2
 );
 
-sun.position.set(100,200,100);
+sun.position.set(
+    80,
+    120,
+    60
+);
 
-scene.add(sun);
+scene.add(
+    ambient,
+    sun
+);
+
 
 /* =========================================================
    PLAYER
 ========================================================= */
 
 const player = {
-    position:new THREE.Vector3(0,2,0),
+    position:new THREE.Vector3(0,2,105),
 
-    // 0 = looking toward +Z
+    /*
+       IMPORTANT:
+
+       angle = 0
+       means Ahao faces toward -Z.
+
+       ▲ = move toward -Z
+       ▼ = move toward +Z
+
+       ◀ / ▶ only rotate.
+    */
+
     angle:0,
 
-    speed:0.65,
+    speed:.32,
 
-    rotateSpeed:0.055
+    rotateSpeed:.045
 };
 
-camera.position.copy(player.position);
-
-/*
- IMPORTANT:
-
- forward = direction the camera is looking.
-
- If angle = 0:
- forward = +Z
-
- ▲ adds forward
- ▼ subtracts forward
-
- Therefore:
- ▲ = forward
- ▼ = backward
-*/
-
-function getForward(){
-
-    return new THREE.Vector3(
-        Math.sin(player.angle),
-        0,
-        Math.cos(player.angle)
-    );
-
-}
-
-function getRight(){
-
-    const f = getForward();
-
-    return new THREE.Vector3(
-        f.z,
-        0,
-        -f.x
-    );
-
-}
 
 /* =========================================================
-   KEYBOARD
+   INPUT
 ========================================================= */
 
-const keys = {};
+const keys = {
+    forward:false,
+    backward:false,
+    left:false,
+    right:false
+};
+
+function setKey(action,value){
+    keys[action] = value;
+}
 
 window.addEventListener("keydown",e=>{
 
-    keys[e.key.toLowerCase()] = true;
+    if(
+        e.key === "ArrowUp" ||
+        e.key.toLowerCase() === "w"
+    ){
+        e.preventDefault();
+        setKey("forward",true);
+    }
+
+    if(
+        e.key === "ArrowDown" ||
+        e.key.toLowerCase() === "s"
+    ){
+        e.preventDefault();
+        setKey("backward",true);
+    }
+
+    if(
+        e.key === "ArrowLeft" ||
+        e.key.toLowerCase() === "a"
+    ){
+        e.preventDefault();
+        setKey("left",true);
+    }
+
+    if(
+        e.key === "ArrowRight" ||
+        e.key.toLowerCase() === "d"
+    ){
+        e.preventDefault();
+        setKey("right",true);
+    }
+
+    if(e.key === "e" || e.key === "Enter"){
+        interact();
+    }
 
 });
 
 window.addEventListener("keyup",e=>{
 
-    keys[e.key.toLowerCase()] = false;
+    if(
+        e.key === "ArrowUp" ||
+        e.key.toLowerCase() === "w"
+    ){
+        setKey("forward",false);
+    }
+
+    if(
+        e.key === "ArrowDown" ||
+        e.key.toLowerCase() === "s"
+    ){
+        setKey("backward",false);
+    }
+
+    if(
+        e.key === "ArrowLeft" ||
+        e.key.toLowerCase() === "a"
+    ){
+        setKey("left",false);
+    }
+
+    if(
+        e.key === "ArrowRight" ||
+        e.key.toLowerCase() === "d"
+    ){
+        setKey("right",false);
+    }
 
 });
 
-/* =========================================================
-   TOUCH / BUTTON
-========================================================= */
-
-function holdButton(id,key){
-
-    const el = document.getElementById(id);
-
-    const start = e=>{
-        e.preventDefault();
-        keys[key] = true;
-    };
-
-    const end = e=>{
-        e.preventDefault();
-        keys[key] = false;
-    };
-
-    el.addEventListener("pointerdown",start);
-    el.addEventListener("pointerup",end);
-    el.addEventListener("pointerleave",end);
-    el.addEventListener("pointercancel",end);
-}
-
-holdButton("up","arrowup");
-holdButton("down","arrowdown");
-holdButton("left","arrowleft");
-holdButton("right","arrowright");
 
 /* =========================================================
-   MOVEMENT
+   TOUCH BUTTONS
 ========================================================= */
 
-function updatePlayer(){
+function holdButton(id,action){
 
-    /*
-       FORWARD
-    */
+    const button = document.getElementById(id);
 
-    if(keys["arrowup"] || keys["w"]){
+    button.addEventListener("pointerdown",e=>{
+        e.preventDefault();
 
-        const forward = getForward();
+        setKey(action,true);
 
-        player.position.addScaledVector(
-            forward,
-            player.speed
-        );
+        try{
+            button.setPointerCapture(e.pointerId);
+        }catch(err){}
+    });
 
-    }
+    const release=e=>{
+        e.preventDefault();
+        setKey(action,false);
+    };
 
-    /*
-       BACKWARD
-    */
-
-    if(keys["arrowdown"] || keys["s"]){
-
-        const forward = getForward();
-
-        player.position.addScaledVector(
-            forward,
-            -player.speed
-        );
-
-    }
-
-    /*
-       ROTATE LEFT
-    */
-
-    if(keys["arrowleft"] || keys["a"]){
-
-        player.angle -= player.rotateSpeed;
-
-    }
-
-    /*
-       ROTATE RIGHT
-    */
-
-    if(keys["arrowright"] || keys["d"]){
-
-        player.angle += player.rotateSpeed;
-
-    }
-
-    /*
-       Camera follows player position.
-    */
-
-    camera.position.copy(player.position);
-
-    /*
-       Look in player's forward direction.
-    */
-
-    const forward = getForward();
-
-    camera.lookAt(
-        player.position.x + forward.x * 10,
-        player.position.y,
-        player.position.z + forward.z * 10
-    );
-
+    button.addEventListener("pointerup",release);
+    button.addEventListener("pointercancel",release);
+    button.addEventListener("pointerleave",release);
 }
+
+holdButton("up","forward");
+holdButton("down","backward");
+holdButton("left","left");
+holdButton("right","right");
+
 
 /* =========================================================
    WORLD HELPERS
 ========================================================= */
 
-const objects = [];
-
-function addBox(
-    x,
-    y,
-    z,
-    sx,
-    sy,
-    sz,
-    color,
-    name=""
+function box(
+    parent,
+    x,y,z,
+    w,h,d,
+    color
 ){
 
-    const geo = new THREE.BoxGeometry(
-        sx,sy,sz
-    );
-
-    const mat = new THREE.MeshStandardMaterial({
-        color
-    });
-
     const mesh = new THREE.Mesh(
-        geo,
-        mat
+        new THREE.BoxGeometry(w,h,d),
+        new THREE.MeshStandardMaterial({
+            color
+        })
     );
 
-    mesh.position.set(x,y,z);
+    mesh.position.set(
+        x,y,z
+    );
 
-    mesh.userData.name = name;
-
-    scene.add(mesh);
-
-    objects.push(mesh);
+    parent.add(mesh);
 
     return mesh;
 }
 
-/* =========================================================
-   TEXT LABEL
-========================================================= */
 
-function label(
+function cylinder(
+    parent,
+    x,y,z,
+    radius,
+    height,
+    color
+){
+
+    const mesh = new THREE.Mesh(
+        new THREE.CylinderGeometry(
+            radius,
+            radius,
+            height,
+            16
+        ),
+        new THREE.MeshStandardMaterial({
+            color
+        })
+    );
+
+    mesh.position.set(
+        x,y,z
+    );
+
+    parent.add(mesh);
+
+    return mesh;
+}
+
+
+function makeLabel(
+    parent,
     text,
-    x,
-    y,
-    z,
-    color="#ffffff",
-    size=32
+    x,y,z
 ){
 
     const canvas = document.createElement("canvas");
 
+    canvas.width = 512;
+    canvas.height = 128;
+
     const ctx = canvas.getContext("2d");
 
-    canvas.width = 1024;
-    canvas.height = 256;
-
-    ctx.clearRect(
-        0,0,
-        canvas.width,
-        canvas.height
+    ctx.fillStyle = "rgba(255,255,255,.94)";
+    ctx.roundRect(
+        5,5,502,118,25
     );
+    ctx.fill();
 
-    ctx.font = `bold ${size}px Arial`;
-
+    ctx.fillStyle = "#222";
+    ctx.font = "bold 42px Arial";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
 
-    ctx.fillStyle = "rgba(0,0,0,.65)";
-
-    ctx.fillRect(
-        0,60,
-        canvas.width,
-        135
-    );
-
-    ctx.fillStyle = color;
-
     ctx.fillText(
         text,
-        canvas.width/2,
-        canvas.height/2
+        256,
+        64
     );
 
-    const texture =
-        new THREE.CanvasTexture(canvas);
+    const texture = new THREE.CanvasTexture(canvas);
 
-    const mat =
-        new THREE.SpriteMaterial({
-            map:texture,
-            transparent:true
-        });
+    const material = new THREE.SpriteMaterial({
+        map:texture,
+        transparent:true
+    });
 
-    const sprite =
-        new THREE.Sprite(mat);
+    const sprite = new THREE.Sprite(material);
 
-    sprite.scale.set(18,4.5,1);
+    sprite.scale.set(
+        7,
+        1.75,
+        1
+    );
 
     sprite.position.set(
         x,y,z
     );
 
-    scene.add(sprite);
+    parent.add(sprite);
 
     return sprite;
 }
 
-/* =========================================================
-   ROAD
-========================================================= */
 
 function road(
-    x,
-    z,
+    parent,
+    x,z,
     width,
     length,
-    horizontal=false
+    rotation=0
 ){
 
-    if(horizontal){
-
-        addBox(
-            x,
-            -0.1,
-            z,
-            length,
-            0.2,
+    const mesh = new THREE.Mesh(
+        new THREE.PlaneGeometry(
             width,
-            0x444444,
-            "road"
-        );
-
-    }else{
-
-        addBox(
-            x,
-            -0.1,
-            z,
-            width,
-            0.2,
-            length,
-            0x444444,
-            "road"
-        );
-
-    }
-
-}
-
-/* =========================================================
-   SIDEWALK
-========================================================= */
-
-function sidewalk(
-    x,
-    z,
-    width,
-    length,
-    horizontal=false
-){
-
-    if(horizontal){
-
-        addBox(
-            x,
-            0.02,
-            z-width/2-1.5,
-            length,
-            0.15,
-            3,
-            0x999999
-        );
-
-        addBox(
-            x,
-            0.02,
-            z+width/2+1.5,
-            length,
-            0.15,
-            3,
-            0x999999
-        );
-
-    }else{
-
-        addBox(
-            x-width/2-1.5,
-            0.02,
-            z,
-            3,
-            0.15,
-            length,
-            0x999999
-        );
-
-        addBox(
-            x+width/2+1.5,
-            0.02,
-            z,
-            3,
-            0.15,
-            length,
-            0x999999
-        );
-
-    }
-
-}
-
-/* =========================================================
-   BUILDING
-========================================================= */
-
-function building(
-    x,
-    z,
-    w,
-    d,
-    h,
-    color,
-    text=""
-){
-
-    addBox(
-        x,
-        h/2,
-        z,
-        w,
-        h,
-        d,
-        color,
-        "building"
-    );
-
-    if(text){
-
-        label(
-            text,
-            x,
-            h+4,
-            z
-        );
-
-    }
-
-}
-
-/* =========================================================
-   TREE
-========================================================= */
-
-function tree(x,z){
-
-    addBox(
-        x,
-        2,
-        z,
-        1.5,
-        4,
-        1.5,
-        0x6b4423
-    );
-
-    const geo =
-        new THREE.SphereGeometry(
-            3.5,
-            10,
-            8
-        );
-
-    const mat =
+            length
+        ),
         new THREE.MeshStandardMaterial({
-            color:0x3f8f4a
-        });
+            color:0x555555
+        })
+    );
 
-    const crown =
-        new THREE.Mesh(
-            geo,
-            mat
-        );
+    mesh.rotation.x = -Math.PI/2;
 
-    crown.position.set(
+    mesh.rotation.z = rotation;
+
+    mesh.position.set(
         x,
-        6,
+        .03,
         z
     );
 
-    scene.add(crown);
+    parent.add(mesh);
 
+    return mesh;
 }
+
+
+function grass(
+    parent,
+    x,z,
+    w,d
+){
+
+    return box(
+        parent,
+        x,
+        -.4,
+        z,
+        w,
+        .8,
+        d,
+        0x77a95a
+    );
+}
+
+
+function tree(
+    parent,
+    x,z
+){
+
+    cylinder(
+        parent,
+        x,
+        2,
+        z,
+        .35,
+        4,
+        0x76502e
+    );
+
+    const crown = new THREE.Mesh(
+        new THREE.SphereGeometry(
+            1.7,
+            12,
+            12
+        ),
+        new THREE.MeshStandardMaterial({
+            color:0x43894b
+        })
+    );
+
+    crown.position.set(
+        x,
+        5,
+        z
+    );
+
+    parent.add(crown);
+}
+
 
 /* =========================================================
    NPC
 ========================================================= */
 
-function npc(
-    x,
-    z,
-    name
+function createNPC(
+    parent,
+    x,z,
+    name="路人"
 ){
 
-    const group =
-        new THREE.Group();
-
-    const body =
-        new THREE.Mesh(
-            new THREE.CylinderGeometry(
-                0.7,
-                0.8,
-                2.2,
-                12
-            ),
-            new THREE.MeshStandardMaterial({
-                color:0x4777aa
-            })
-        );
-
-    body.position.y=1.1;
-
-    group.add(body);
-
-    const head =
-        new THREE.Mesh(
-            new THREE.SphereGeometry(
-                0.65,
-                16,
-                12
-            ),
-            new THREE.MeshStandardMaterial({
-                color:0xf0c49b
-            })
-        );
-
-    head.position.y=2.65;
-
-    group.add(head);
+    const group = new THREE.Group();
 
     group.position.set(
         x,
@@ -1044,52 +817,251 @@ function npc(
         z
     );
 
-    scene.add(group);
+    parent.add(group);
 
-    label(
+    cylinder(
+        group,
+        0,
+        2,
+        0,
+        .7,
+        3,
+        0x4267a9
+    );
+
+    const head = new THREE.Mesh(
+        new THREE.SphereGeometry(
+            .55,
+            16,
+            16
+        ),
+        new THREE.MeshStandardMaterial({
+            color:0xffd0aa
+        })
+    );
+
+    head.position.y = 4;
+
+    group.add(head);
+
+    makeLabel(
+        group,
         name,
-        x,
-        4.5,
-        z,
-        "#ffd85c",
-        28
+        0,
+        6,
+        0
     );
 
     return group;
 }
 
+
 /* =========================================================
-   INTERACTION POINT
+   INTERACTIONS
 ========================================================= */
 
-let currentInteraction = null;
+let interactions = [];
 
-function interaction(
-    x,
-    z,
-    text,
+function addInteraction(
+    x,z,
+    label,
     callback,
-    range=7
+    range=6
 ){
 
-    const point = {
-        position:new THREE.Vector3(
-            x,
-            0,
-            z
-        ),
-        text,
+    interactions.push({
+        x,
+        z,
+        label,
         callback,
         range,
-        active:true
-    };
+        used:false
+    });
 
-    interactions.push(point);
-
-    return point;
 }
 
-const interactions = [];
+
+function getNearestInteraction(){
+
+    let nearest = null;
+    let distance = Infinity;
+
+    for(const item of interactions){
+
+        if(item.used) continue;
+
+        const d = Math.hypot(
+            player.position.x-item.x,
+            player.position.z-item.z
+        );
+
+        if(
+            d < item.range &&
+            d < distance
+        ){
+
+            distance = d;
+            nearest = item;
+        }
+    }
+
+    return nearest;
+}
+
+
+function updateInteractionUI(){
+
+    const item = getNearestInteraction();
+
+    const button =
+        document.getElementById("interact");
+
+    const hint =
+        document.getElementById("hint");
+
+    if(item){
+
+        button.style.display="block";
+        hint.style.display="block";
+
+    }else{
+
+        button.style.display="none";
+        hint.style.display="none";
+    }
+
+}
+
+
+function interact(){
+
+    if(dialogueActive) return;
+
+    const item =
+        getNearestInteraction();
+
+    if(!item) return;
+
+    item.used=true;
+
+    item.callback();
+}
+
+
+/* =========================================================
+   DIALOGUE
+========================================================= */
+
+let dialogueActive=false;
+let dialogueLines=[];
+let dialogueIndex=0;
+let dialogueCallback=null;
+
+function speak(
+    lines,
+    callback=null
+){
+
+    dialogueActive=true;
+
+    dialogueLines=lines;
+    dialogueIndex=0;
+    dialogueCallback=callback;
+
+    document.getElementById(
+        "dialogue"
+    ).style.display="block";
+
+    showDialogueLine();
+}
+
+
+function showDialogueLine(){
+
+    const line =
+        dialogueLines[dialogueIndex];
+
+    document.getElementById(
+        "speaker"
+    ).textContent=line.speaker;
+
+    document.getElementById(
+        "zh"
+    ).textContent=line.zh;
+
+    document.getElementById(
+        "pinyin"
+    ).textContent=line.pinyin;
+}
+
+
+document.getElementById(
+    "nextDialogue"
+).onclick=()=>{
+
+    dialogueIndex++;
+
+    if(
+        dialogueIndex >= dialogueLines.length
+    ){
+
+        document.getElementById(
+            "dialogue"
+        ).style.display="none";
+
+        dialogueActive=false;
+
+        if(dialogueCallback){
+            const cb=dialogueCallback;
+            dialogueCallback=null;
+            cb();
+        }
+
+    }else{
+
+        showDialogueLine();
+    }
+
+};
+
+
+/* =========================================================
+   OBJECTIVE
+========================================================= */
+
+function objective(text){
+
+    document.getElementById(
+        "objective"
+    ).innerHTML="🎯 "+text;
+
+}
+
+
+/* =========================================================
+   LANDMARK MESSAGE
+========================================================= */
+
+let messageTimer=null;
+
+function landmarkMessage(text){
+
+    const el =
+        document.getElementById(
+            "landmarkMessage"
+        );
+
+    el.textContent=text;
+
+    el.classList.add("show");
+
+    clearTimeout(messageTimer);
+
+    messageTimer=setTimeout(()=>{
+        el.classList.remove("show");
+    },2600);
+}
+
 
 /* =========================================================
    CLEAR WORLD
@@ -1102,229 +1074,16 @@ function clearWorld(){
         scene.remove(
             scene.children[0]
         );
-
     }
 
-    scene.add(ambient);
-    scene.add(sun);
+    scene.add(
+        ambient,
+        sun
+    );
 
-    interactions.length=0;
-
+    interactions=[];
 }
 
-/* =========================================================
-   STAGE SYSTEM
-========================================================= */
-
-let stage=0;
-
-const objective =
-    document.getElementById("objective");
-
-function setObjective(text){
-
-    objective.innerHTML =
-        `<b>任務：</b> ${text}`;
-
-}
-
-/* =========================================================
-   DIALOGUE SYSTEM
-========================================================= */
-
-const dialogue =
-    document.getElementById("dialogue");
-
-const speaker =
-    document.getElementById("speaker");
-
-const cn =
-    document.getElementById("cn");
-
-const py =
-    document.getElementById("py");
-
-const dialogueButton =
-    document.getElementById("dialogueButton");
-
-let dialogueQueue=[];
-let dialogueIndex=0;
-let dialogueCallback=null;
-
-function speak(lines,callback=null){
-
-    dialogueQueue=lines;
-    dialogueIndex=0;
-    dialogueCallback=callback;
-
-    dialogue.style.display="block";
-
-    showDialogue();
-
-}
-
-function showDialogue(){
-
-    if(dialogueIndex >= dialogueQueue.length){
-
-        dialogue.style.display="none";
-
-        if(dialogueCallback){
-            const cb=dialogueCallback;
-            dialogueCallback=null;
-            cb();
-        }
-
-        return;
-    }
-
-    const line =
-        dialogueQueue[dialogueIndex];
-
-    speaker.textContent =
-        line.speaker;
-
-    cn.textContent =
-        line.cn;
-
-    py.textContent =
-        line.py;
-
-    /*
-       Chinese speech
-    */
-
-    try{
-
-        speechSynthesis.cancel();
-
-        const utter =
-            new SpeechSynthesisUtterance(
-                line.cn
-            );
-
-        utter.lang="zh-TW";
-        utter.rate=0.9;
-
-        speechSynthesis.speak(
-            utter
-        );
-
-    }catch(e){}
-
-}
-
-dialogueButton.onclick=()=>{
-
-    dialogueIndex++;
-
-    showDialogue();
-
-};
-
-/* =========================================================
-   INTERACT
-========================================================= */
-
-function interact(){
-
-    if(!currentInteraction) return;
-
-    const item =
-        currentInteraction;
-
-    if(!item.active) return;
-
-    item.active=false;
-
-    document.getElementById(
-        "interactHint"
-    ).style.display="none";
-
-    item.callback();
-
-}
-
-/* keyboard E */
-window.addEventListener(
-    "keydown",
-    e=>{
-
-        if(
-            e.key.toLowerCase()==="e" ||
-            e.key==="Enter"
-        ){
-
-            interact();
-
-        }
-
-    }
-);
-
-/* =========================================================
-   UPDATE INTERACTION
-========================================================= */
-
-function updateInteraction(){
-
-    currentInteraction=null;
-
-    let closest=null;
-    let closestDistance=Infinity;
-
-    for(const item of interactions){
-
-        if(!item.active) continue;
-
-        const dx =
-            player.position.x -
-            item.position.x;
-
-        const dz =
-            player.position.z -
-            item.position.z;
-
-        const distance =
-            Math.sqrt(
-                dx*dx+
-                dz*dz
-            );
-
-        if(
-            distance < item.range &&
-            distance < closestDistance
-        ){
-
-            closest=item;
-            closestDistance=distance;
-
-        }
-
-    }
-
-    if(closest){
-
-        currentInteraction=closest;
-
-        document.getElementById(
-            "interactHint"
-        ).style.display="block";
-
-        document.getElementById(
-            "interactHint"
-        ).textContent=
-            `💬 ${closest.text}  [E / INTERACT]`;
-
-    }else{
-
-        document.getElementById(
-            "interactHint"
-        ).style.display="none";
-
-    }
-
-}
 
 /* =========================================================
    GIFT AREA
@@ -1335,855 +1094,855 @@ function loadGiftArea(){
     clearWorld();
 
     player.position.set(
-        0,
-        2,
-        20
+        0,2,20
     );
 
-    player.angle=Math.PI;
+    player.angle=0;
+
+    grass(
+        scene,
+        0,
+        0,
+        120,
+        100
+    );
 
     road(
+        scene,
         0,
         0,
-        14,
-        120,
-        false
-    );
-
-    sidewalk(
-        0,
-        0,
-        14,
-        120,
-        false
-    );
-
-    building(
-        -12,
-        -10,
-        16,
         18,
-        12,
-        0xd58a8a,
-        "禮物店"
+        100
     );
 
-    npc(
+    const shop =
+        new THREE.Group();
+
+    scene.add(shop);
+
+    box(
+        shop,
+        0,
+        5,
+        -18,
+        14,
+        10,
+        12,
+        0xd98b6a
+    );
+
+    makeLabel(
+        shop,
+        "🎁 禮物店",
+        0,
+        11,
+        -18
+    );
+
+    createNPC(
+        scene,
+        0,
         -2,
-        -7,
         "店員"
     );
 
-    interaction(
+    addInteraction(
+        0,
         -2,
-        -7,
-        "和店員說話",
+        "買生日禮物",
         ()=>{
 
             speak([
-
                 {
                     speaker:"店員",
-                    cn:"你好！你想買什麼？",
-                    py:"Nǐ hǎo! Nǐ xiǎng mǎi shénme?"
+                    zh:"你好！你想買什麼？",
+                    pinyin:"Nǐ hǎo! Nǐ xiǎng mǎi shénme?"
                 },
-
                 {
                     speaker:"阿豪",
-                    cn:"我想買一個生日禮物。",
-                    py:"Wǒ xiǎng mǎi yí ge shēngrì lǐwù."
+                    zh:"我想買一個生日禮物。",
+                    pinyin:"Wǒ xiǎng mǎi yí ge shēngrì lǐwù."
                 },
-
                 {
                     speaker:"店員",
-                    cn:"這個怎麼樣？",
-                    py:"Zhège zěnmeyàng?"
+                    zh:"這個怎麼樣？",
+                    pinyin:"Zhège zěnmeyàng?"
                 },
-
                 {
                     speaker:"阿豪",
-                    cn:"好，我要這個。",
-                    py:"Hǎo, wǒ yào zhège."
+                    zh:"好，我要這個。",
+                    pinyin:"Hǎo, wǒ yào zhège."
                 }
-
             ],()=>{
 
-                stage=1;
-
-                setObjective(
-                    "問路人：怎麼去車站？"
+                objective(
+                    "去找路人，問怎麼去車站。"
                 );
 
-                loadStreetArea();
-
+                loadFirstStreet();
             });
 
         }
     );
 
+    objective(
+        "先去禮物店買小美的生日禮物。"
+    );
 }
 
+
 /* =========================================================
-   STREET AREA
+   FIRST STREET
+   NPC IS FAR AWAY
 ========================================================= */
 
-function loadStreetArea(){
+function loadFirstStreet(){
 
     clearWorld();
 
     player.position.set(
-        0,
-        2,
-        35
+        0,2,100
     );
 
-    player.angle=Math.PI;
+    player.angle=0;
+
+    grass(
+        scene,
+        0,
+        -20,
+        150,
+        300
+    );
 
     road(
+        scene,
         0,
-        0,
-        14,
-        150,
-        false
-    );
-
-    sidewalk(
-        0,
-        0,
-        14,
-        150,
-        false
-    );
-
-    building(
+        -20,
         18,
-        -15,
-        15,
-        20,
-        13,
-        0xc8a26a,
-        "商店"
+        300
     );
 
-    npc(
-        4,
+    /*
+       NPC is intentionally far away.
+    */
+
+    createNPC(
+        scene,
         0,
+        30,
         "路人"
     );
 
-    interaction(
-        4,
+    addInteraction(
         0,
+        30,
         "問路",
         ()=>{
 
             speak([
-
                 {
                     speaker:"阿豪",
-                    cn:"請問，怎麼去車站？",
-                    py:"Qǐngwèn, zěnme qù chēzhàn?"
+                    zh:"請問，怎麼去車站？",
+                    pinyin:"Qǐngwèn, zěnme qù chēzhàn?"
                 },
-
                 {
                     speaker:"路人",
-                    cn:"你可以搭105號公車。",
-                    py:"Nǐ kěyǐ dā yī líng wǔ hào gōngchē."
+                    zh:"你可以搭105號公車。",
+                    pinyin:"Nǐ kěyǐ dā yī líng wǔ hào gōngchē."
                 },
-
                 {
                     speaker:"路人",
-                    cn:"在銀行前面下車。",
-                    py:"Zài yínháng qiánmiàn xià chē."
+                    zh:"在銀行前面下車。",
+                    pinyin:"Zài yínháng qiánmiàn xià chē."
                 }
-
             ],()=>{
 
-                stage=2;
-
-                setObjective(
-                    "找到105號公車站"
-                );
-
-                loadBus105Area();
-
-            });
-
-        }
-    );
-
-}
-
-/* =========================================================
-   BUS 105
-========================================================= */
-
-function loadBus105Area(){
-
-    clearWorld();
-
-    player.position.set(
-        0,
-        2,
-        25
-    );
-
-    player.angle=Math.PI;
-
-    road(
-        0,
-        0,
-        14,
-        100,
-        false
-    );
-
-    sidewalk(
-        0,
-        0,
-        14,
-        100,
-        false
-    );
-
-    addBox(
-        7,
-        3,
-        0,
-        10,
-        6,
-        18,
-        0xd84b4b
-    );
-
-    label(
-        "105",
-        7,
-        8,
-        0,
-        "#ffffff",
-        45
-    );
-
-    interaction(
-        7,
-        10,
-        "搭105號公車",
-        ()=>{
-
-            speak([
-
-                {
-                    speaker:"阿豪",
-                    cn:"我要搭105號公車。",
-                    py:"Wǒ yào dā yī líng wǔ hào gōngchē."
-                },
-
-                {
-                    speaker:"司機",
-                    cn:"好，請上車。",
-                    py:"Hǎo, qǐng shàng chē."
-                }
-
-            ],()=>{
-
-                stage=3;
-
-                setObjective(
-                    "下車後找銀行"
-                );
-
-                loadBankArea();
+                load105Area();
 
             });
 
         },
-        9
+        6
     );
 
+    objective(
+        "一直往前走，找到路人。"
+    );
 }
 
+
 /* =========================================================
-   BANK + LONG GR ROUTE
+   105 BUS
+========================================================= */
+
+function load105Area(){
+
+    clearWorld();
+
+    player.position.set(
+        0,2,80
+    );
+
+    player.angle=0;
+
+    grass(
+        scene,
+        0,
+        -10,
+        150,
+        220
+    );
+
+    road(
+        scene,
+        0,
+        -10,
+        18,
+        220
+    );
+
+    const bus =
+        new THREE.Group();
+
+    scene.add(bus);
+
+    box(
+        bus,
+        0,
+        3,
+        10,
+        9,
+        5,
+        16,
+        0xf0bd39
+    );
+
+    makeLabel(
+        bus,
+        "105 公車",
+        0,
+        7,
+        10
+    );
+
+    addInteraction(
+        0,
+        10,
+        "搭105公車",
+        ()=>{
+
+            loadBankArea();
+
+        },
+        8
+    );
+
+    objective(
+        "找到105號公車並搭車。"
+    );
+}
+
+
+/* =========================================================
+   BANK
 ========================================================= */
 
 function loadBankArea(){
 
     clearWorld();
 
-    /*
-       =====================================================
-       IMPORTANT MAP DESIGN
-
-       Player starts at the bank.
-
-       The route is deliberately LONG:
-
-       銀行
-          ↓
-       long road
-          ↓
-       公園
-          ↓
-       VERY long road
-          ↓
-       便利商店
-          ↓
-       VERY long road
-          ↓
-       十字路口
-          ↓
-       RIGHT
-          ↓
-       VERY long road
-          ↓
-       GR公車站
-       =====================================================
-    */
-
     player.position.set(
-        0,
-        2,
-        95
+        0,2,80
     );
 
-    /*
-       Looking toward -Z
-    */
+    player.angle=0;
 
-    player.angle=Math.PI;
-
-    /* ==============================================
-       MAIN LONG ROAD
-       ============================================== */
+    grass(
+        scene,
+        0,
+        -30,
+        180,
+        250
+    );
 
     road(
+        scene,
         0,
-        0,
-        14,
-        190,
-        false
+        -30,
+        18,
+        250
     );
 
-    sidewalk(
-        0,
-        0,
-        14,
-        190,
-        false
-    );
+    const bank =
+        new THREE.Group();
 
-    /* ==============================================
-       BANK
-       ============================================== */
+    scene.add(bank);
 
-    building(
-        -22,
-        75,
-        20,
-        22,
+    box(
+        bank,
+        -12,
+        5,
+        10,
+        16,
+        10,
         15,
-        0x668bb5,
-        "銀行"
+        0xb9b9c8
     );
 
-    label(
-        "銀行",
-        -22,
-        20,
-        75,
-        "#ffffff",
-        38
+    makeLabel(
+        bank,
+        "🏦 銀行",
+        -12,
+        12,
+        10
     );
 
-    /* ==============================================
-       NPC AT BANK
-       ============================================== */
-
-    npc(
-        6,
-        75,
+    createNPC(
+        scene,
+        10,
+        10,
         "路人"
     );
 
-    interaction(
-        6,
-        75,
-        "問GR公車站怎麼走",
+    addInteraction(
+        10,
+        10,
+        "問GR公車站",
         ()=>{
 
-            speak([
+            loadGRRoute();
 
-                {
-                    speaker:"阿豪",
-                    cn:"請問，GR公車站怎麼走？",
-                    py:"Qǐngwèn, GR gōngchē zhàn zěnme zǒu?"
-                },
-
-                {
-                    speaker:"路人",
-                    cn:"先一直走。",
-                    py:"Xiān yìzhí zǒu."
-                },
-
-                {
-                    speaker:"路人",
-                    cn:"看到便利商店以後繼續走。",
-                    py:"Kàndào biànlì shāngdiàn yǐhòu jìxù zǒu."
-                },
-
-                {
-                    speaker:"路人",
-                    cn:"到了十字路口往右轉。",
-                    py:"Dào le shízì lùkǒu wǎng yòu zhuǎn."
-                },
-
-                {
-                    speaker:"路人",
-                    cn:"右轉以後一直走。",
-                    py:"Yòu zhuǎn yǐhòu yìzhí zǒu."
-                },
-
-                {
-                    speaker:"路人",
-                    cn:"走一段路就會看到GR公車站。",
-                    py:"Zǒu yí duàn lù jiù huì kàndào GR gōngchē zhàn."
-                }
-
-            ],()=>{
-
-                stage=4;
-
-                setObjective(
-                    "一直走，找公園"
-                );
-
-                enableBankRoute();
-
-            });
-
-        }
+        },
+        7
     );
 
+    objective(
+        "在銀行附近找到路人，問 GR 公車站怎麼走。"
+    );
 }
 
-/* =========================================================
-   BANK ROUTE LANDMARKS
-========================================================= */
-
-function enableBankRoute(){
-
-    /*
-       公園很遠。
-       Player starts around z=95.
-       Bank is around z=75.
-
-       公園 placed at z=25.
-
-       So player has to walk about 50 units.
-    */
-
-    /* ================= PARK ================= */
-
-    building(
-        -30,
-        25,
-        28,
-        35,
-        3,
-        0x6e9b63,
-        "公園"
-    );
-
-    label(
-        "公園",
-        -30,
-        7,
-        25,
-        "#ffffff",
-        38
-    );
-
-    /*
-       Trees make park recognizable
-    */
-
-    const parkTrees=[
-        [-40,15],
-        [-30,10],
-        [-20,15],
-        [-42,35],
-        [-20,38],
-        [-32,45]
-    ];
-
-    parkTrees.forEach(
-        p=>tree(p[0],p[1])
-    );
-
-    /*
-       Important:
-       PARK IS NOT an interaction.
-       Player must continue.
-    */
-
-    /* ==============================================
-       CONVENIENCE STORE
-       ============================================== */
-
-    building(
-        25,
-        -35,
-        18,
-        18,
-        10,
-        0xe0b95d,
-        "便利商店"
-    );
-
-    label(
-        "便利商店",
-        25,
-        15,
-        -35,
-        "#ffffff",
-        32
-    );
-
-    /*
-       Many trees/buildings make the distance visually clear.
-    */
-
-    tree(-18,5);
-    tree(18,10);
-    tree(-18,-5);
-    tree(18,-15);
-
-    /* ==============================================
-       LONG ROAD BEFORE INTERSECTION
-       ============================================== */
-
-    /*
-       Main road continues from park
-       to intersection at z = -100.
-
-       This is deliberately far.
-    */
-
-    /* ==============================================
-       CROSSROAD
-       ============================================== */
-
-    /*
-       The intersection is at:
-
-       x = 0
-       z = -105
-
-       Main road comes from north.
-
-       Correct direction = RIGHT
-       => +X
-    */
-
-    road(
-        0,
-        -105,
-        14,
-        20,
-        false
-    );
-
-    /*
-       LEFT branch = trap
-    */
-
-    road(
-        -55,
-        -105,
-        14,
-        110,
-        true
-    );
-
-    /*
-       RIGHT branch = correct GR route
-    */
-
-    road(
-        75,
-        -105,
-        14,
-        150,
-        true
-    );
-
-    /*
-       Traffic lights / intersection markers
-    */
-
-    addBox(
-        -9,
-        4,
-        -105,
-        1,
-        8,
-        1,
-        0x333333
-    );
-
-    addBox(
-        9,
-        4,
-        -105,
-        1,
-        8,
-        1,
-        0x333333
-    );
-
-    label(
-        "十字路口",
-        0,
-        13,
-        -105,
-        "#ffd85c",
-        40
-    );
-
-    /*
-       DO NOT put GR stop here.
-       Player must turn RIGHT and continue.
-    */
-
-    /* ==============================================
-       RIGHT ROUTE
-       ============================================== */
-
-    /*
-       Correct road extends all the way to x = 145.
-    */
-
-    /* ==============================================
-       GR STOP
-       ============================================== */
-
-    const grX=145;
-    const grZ=-105;
-
-    /*
-       GR is far away from the intersection.
-    */
-
-    addBox(
-        grX,
-        2,
-        grZ,
-        12,
-        4,
-        5,
-        0x4477aa
-    );
-
-    const grSign =
-        label(
-            "GR 公車站",
-            grX,
-            8,
-            grZ,
-            "#ffffff",
-            34
-        );
-
-    /*
-       Hide GR label initially.
-    */
-
-    grSign.visible=false;
-
-    const grPoint =
-        interaction(
-            grX,
-            grZ,
-            "搭GR公車",
-            ()=>{
-
-                speak([
-
-                    {
-                        speaker:"阿豪",
-                        cn:"我找到GR公車站了！",
-                        py:"Wǒ zhǎodào GR gōngchē zhàn le!"
-                    },
-
-                    {
-                        speaker:"司機",
-                        cn:"請上車。",
-                        py:"Qǐng shàng chē."
-                    }
-
-                ],()=>{
-
-                    stage=5;
-
-                    setObjective(
-                        "搭GR公車前往車站"
-                    );
-
-                    loadGRArea();
-
-                });
-
-            },
-            9
-        );
-
-    /*
-       Initially impossible to interact because
-       destination is hidden far away.
-    */
-
-    grPoint.active=true;
-
-    /*
-       Save references for visibility logic.
-    */
-
-    window.GR_STOP={
-        x:grX,
-        z:grZ,
-        sign:grSign
-    };
-
-}
 
 /* =========================================================
-   GR STOP VISIBILITY
+   GR ROUTE
+=========================================================
+
+   THIS IS THE IMPORTANT PART.
+
+                         🌳 公園
+                            ↑
+                            │
+                         FAR AWAY
+                            │
+                            │
+🏃 Ahao → 🏪 便利商店 ───────┼────────────── ☕ 咖啡店
+                            │
+                         十字路口
+                            │
+                            │
+                         FAR AWAY
+                            │
+                            ↓
+                          🚌 GR
+
 ========================================================= */
 
-function updateGRVisibility(){
+let parkGroup;
+let cafeGroup;
+let crossroadGroup;
+let grGroup;
 
-    if(!window.GR_STOP) return;
+let parkFound=false;
+let cafeFound=false;
+let crossroadFound=false;
+let grFound=false;
 
-    const dx =
-        player.position.x -
-        window.GR_STOP.x;
-
-    const dz =
-        player.position.z -
-        window.GR_STOP.z;
-
-    const distance =
-        Math.sqrt(
-            dx*dx+
-            dz*dz
-        );
-
-    /*
-       GR only becomes visually obvious
-       when player is relatively close.
-    */
-
-    if(distance < 38){
-
-        window.GR_STOP.sign.visible=true;
-
-    }else{
-
-        window.GR_STOP.sign.visible=false;
-
-    }
-
-}
-
-/* =========================================================
-   GR BUS
-========================================================= */
-
-function loadGRArea(){
+function loadGRRoute(){
 
     clearWorld();
 
     player.position.set(
-        0,
-        2,
-        25
+        0,2,75
     );
 
-    player.angle=Math.PI;
+    player.angle=0;
+
+    parkFound=false;
+    cafeFound=false;
+    crossroadFound=false;
+    grFound=false;
+
+    grass(
+        scene,
+        0,
+        -70,
+        260,
+        400
+    );
+
+
+    /* ============================================
+       MAIN ROAD
+    ============================================ */
 
     road(
+        scene,
         0,
-        0,
-        14,
-        100,
-        false
-    );
-
-    sidewalk(
-        0,
-        0,
-        14,
-        100,
-        false
-    );
-
-    addBox(
-        7,
-        3,
-        0,
-        10,
-        6,
+        -65,
         18,
-        0x3976a5
+        300
     );
 
-    label(
-        "GR",
-        7,
+
+    /* ============================================
+       CONVENIENCE STORE
+       BEFORE THE INTERSECTION
+    ============================================ */
+
+    const convenience =
+        new THREE.Group();
+
+    scene.add(convenience);
+
+    box(
+        convenience,
+        -11,
+        4,
+        -55,
+        11,
         8,
-        0,
-        "#ffffff",
-        45
+        10,
+        0xe3d39a
     );
 
-    interaction(
-        7,
+    makeLabel(
+        convenience,
+        "🏪 便利商店",
+        -11,
         10,
-        "搭GR公車",
-        ()=>{
+        -55
+    );
 
-            speak([
+    /*
+       Trees hide the intersection slightly.
+    */
 
-                {
-                    speaker:"阿豪",
-                    cn:"我要搭GR公車。",
-                    py:"Wǒ yào dā GR gōngchē."
-                },
+    tree(scene,-22,-65);
+    tree(scene,22,-65);
 
-                {
-                    speaker:"司機",
-                    cn:"好，請上車。",
-                    py:"Hǎo, qǐng shàng chē."
-                }
 
-            ],()=>{
+    /* ============================================
+       INTERSECTION
+       CENTER = z -100
 
-                stage=6;
+       It is NOT immediately at the store.
+    ============================================ */
 
-                setObjective(
-                    "前往火車站"
-                );
+    road(
+        scene,
+        0,
+        -125,
+        18,
+        60
+    );
 
-                loadTrainStation();
+    /*
+       Left branch
+       Goes toward park.
+    */
+
+    road(
+        scene,
+        -55,
+        -100,
+        18,
+        110,
+        Math.PI/2
+    );
+
+    /*
+       Right branch
+       Goes toward GR.
+    */
+
+    road(
+        scene,
+        55,
+        -100,
+        18,
+        180,
+        Math.PI/2
+    );
+
+    /*
+       Straight branch
+       Goes toward café.
+    */
+
+    road(
+        scene,
+        0,
+        -160,
+        18,
+        120
+    );
+
+
+    /* ============================================
+       CROSSROAD GROUP
+
+       Label exists but is hidden until player
+       gets reasonably close.
+    ============================================ */
+
+    crossroadGroup =
+        new THREE.Group();
+
+    scene.add(crossroadGroup);
+
+    makeLabel(
+        crossroadGroup,
+        "十字路口",
+        0,
+        8,
+        -100
+    );
+
+
+    /* ============================================
+       PARK
+       FAR TO THE LEFT
+
+       x = -105
+       z = -100
+
+       Cannot be seen from intersection.
+    ============================================ */
+
+    parkGroup =
+        new THREE.Group();
+
+    parkGroup.visible=false;
+
+    scene.add(parkGroup);
+
+    box(
+        parkGroup,
+        -105,
+        -.4,
+        -100,
+        55,
+        .8,
+        70,
+        0x6da55c
+    );
+
+    for(
+        let i=0;
+        i<9;
+        i++
+    ){
+
+        tree(
+            parkGroup,
+            -125 + (i%3)*18,
+            -125 + Math.floor(i/3)*20
+        );
+
+    }
+
+    makeLabel(
+        parkGroup,
+        "🌳 公園",
+        -105,
+        8,
+        -100
+    );
+
+
+    /* ============================================
+       CAFE
+       FAR STRAIGHT AHEAD
+
+       z = -220
+
+       Not visible from intersection.
+    ============================================ */
+
+    cafeGroup =
+        new THREE.Group();
+
+    cafeGroup.visible=false;
+
+    scene.add(cafeGroup);
+
+    box(
+        cafeGroup,
+        0,
+        4,
+        -220,
+        18,
+        8,
+        14,
+        0xc88f76
+    );
+
+    makeLabel(
+        cafeGroup,
+        "☕ 咖啡店",
+        0,
+        10,
+        -220
+    );
+
+
+    /* ============================================
+       GR BUS STOP
+       FAR TO THE RIGHT
+
+       x = 145
+       z = -100
+
+       Not visible from intersection.
+    ============================================ */
+
+    grGroup =
+        new THREE.Group();
+
+    grGroup.visible=false;
+
+    scene.add(grGroup);
+
+    box(
+        grGroup,
+        145,
+        2,
+        -100,
+        7,
+        4,
+        4,
+        0x4f79bd
+    );
+
+    makeLabel(
+        grGroup,
+        "🚌 GR 公車站",
+        145,
+        7,
+        -100
+    );
+
+
+    /* ============================================
+       INTERACTION WITH GR
+       ADDED ONLY WHEN GR IS DISCOVERED
+    ============================================ */
+
+
+    objective(
+        "先一直走。找到路人說的 便利商店。"
+    );
+}
+
+
+/* =========================================================
+   LANDMARK DISCOVERY
+========================================================= */
+
+function updateGRRouteDiscovery(){
+
+    if(
+        !parkFound &&
+        player.position.z < -105 &&
+        player.position.x < -20
+    ){
+
+        parkFound=true;
+
+        parkGroup.visible=true;
+
+        landmarkMessage(
+            "🌳 你發現公園了！"
+        );
+    }
+
+
+    /*
+       Cafe only appears when player walks
+       a long distance straight.
+    */
+
+    if(
+        !cafeFound &&
+        player.position.z < -180 &&
+        Math.abs(player.position.x) < 25
+    ){
+
+        cafeFound=true;
+
+        cafeGroup.visible=true;
+
+        landmarkMessage(
+            "☕ 你發現咖啡店了！"
+        );
+    }
+
+
+    /*
+       Intersection becomes obvious only
+       after player reaches it.
+    */
+
+    if(
+        !crossroadFound &&
+        player.position.z < -85 &&
+        player.position.z > -120 &&
+        Math.abs(player.position.x) < 15
+    ){
+
+        crossroadFound=true;
+
+        crossroadGroup.visible=true;
+
+        landmarkMessage(
+            "↔️ 你到了十字路口！"
+        );
+
+        objective(
+            "到了十字路口，往右轉。"
+        );
+    }
+
+
+    /*
+       Correct route:
+       player must actually move to the RIGHT.
+
+       x must become positive.
+    */
+
+    if(
+        crossroadFound &&
+        !grFound &&
+        player.position.x > 100 &&
+        Math.abs(player.position.z + 100) < 25
+    ){
+
+        grFound=true;
+
+        grGroup.visible=true;
+
+        addInteraction(
+            145,
+            -100,
+            "搭GR公車",
+            ()=>{
+
+                loadGRBusArea();
 
             },
             10
         );
 
+        landmarkMessage(
+            "🚌 你找到 GR 公車站了！"
+        );
+
+        objective(
+            "找到 GR 公車站，按 E 搭車。"
+        );
+    }
+
+
+    /*
+       Before intersection, remind player about
+       convenience store only.
+    */
+
+    if(
+        !crossroadFound &&
+        player.position.z < -45 &&
+        player.position.z > -75
+    ){
+
+        objective(
+            "看到 便利商店 以後繼續走。"
+        );
     }
 
 }
+
+
+/* =========================================================
+   GR BUS
+========================================================= */
+
+function loadGRBusArea(){
+
+    clearWorld();
+
+    player.position.set(
+        0,2,30
+    );
+
+    player.angle=0;
+
+    grass(
+        scene,
+        0,
+        0,
+        150,
+        150
+    );
+
+    road(
+        scene,
+        0,
+        0,
+        18,
+        140
+    );
+
+    const bus =
+        new THREE.Group();
+
+    scene.add(bus);
+
+    box(
+        bus,
+        0,
+        3,
+        -20,
+        11,
+        6,
+        20,
+        0x4e8cc7
+    );
+
+    makeLabel(
+        bus,
+        "GR 公車",
+        0,
+        8,
+        -20
+    );
+
+    addInteraction(
+        0,
+        -20,
+        "搭GR公車",
+        ()=>{
+
+            loadTrainStation();
+
+        },
+        10
+    );
+
+    objective(
+        "搭 GR 公車前往火車站。"
+    );
+}
+
 
 /* =========================================================
    TRAIN STATION
@@ -2194,641 +1953,658 @@ function loadTrainStation(){
     clearWorld();
 
     player.position.set(
-        0,
-        2,
-        30
+        0,2,30
     );
 
-    player.angle=Math.PI;
+    player.angle=0;
+
+    grass(
+        scene,
+        0,
+        0,
+        180,
+        180
+    );
 
     road(
+        scene,
         0,
         0,
         18,
-        120,
-        false
+        140
     );
 
-    building(
-        -15,
-        -5,
+    const station =
+        new THREE.Group();
+
+    scene.add(station);
+
+    box(
+        station,
+        0,
+        5,
+        -20,
         30,
-        22,
-        14,
-        0x777777,
-        "火車站"
-    );
-
-    label(
-        "火車站",
-        -15,
-        20,
-        -5,
-        "#ffffff",
-        38
-    );
-
-    interaction(
-        -15,
         10,
-        "進入火車站",
+        20,
+        0xaaaab5
+    );
+
+    makeLabel(
+        station,
+        "🚉 車站",
+        0,
+        12,
+        -20
+    );
+
+    addInteraction(
+        0,
+        -20,
+        "進入車站",
         ()=>{
 
-            speak([
-
-                {
-                    speaker:"阿豪",
-                    cn:"我要去台北車站。",
-                    py:"Wǒ yào qù Táiběi chēzhàn."
-                },
-
-                {
-                    speaker:"站務員",
-                    cn:"請進。",
-                    py:"Qǐng jìn."
-                }
-
-            ],()=>{
-
-                stage=7;
-
-                setObjective(
-                    "前往台北車站"
-                );
-
-                loadTaipeiArea();
-
-            });
+            loadTaipeiMain();
 
         },
         12
     );
 
+    objective(
+        "找到車站，進去搭火車。"
+    );
 }
+
 
 /* =========================================================
    TAIPEI MAIN STATION
 ========================================================= */
 
-function loadTaipeiArea(){
+function loadTaipeiMain(){
 
     clearWorld();
 
     player.position.set(
-        0,
-        2,
-        30
+        0,2,30
     );
 
-    player.angle=Math.PI;
+    player.angle=0;
 
-    road(
+    grass(
+        scene,
         0,
         0,
-        18,
-        120,
-        false
+        160,
+        160
     );
 
-    building(
+    const station =
+        new THREE.Group();
+
+    scene.add(station);
+
+    box(
+        station,
         0,
-        -15,
-        42,
+        6,
+        -10,
+        38,
+        12,
         25,
-        16,
-        0x777777,
-        "台北車站"
+        0x9d9da8
     );
 
-    label(
-        "台北車站",
+    makeLabel(
+        station,
+        "🚉 台北車站",
         0,
-        22,
-        -15,
-        "#ffffff",
-        40
+        14,
+        -10
     );
 
-    npc(
+    createNPC(
+        scene,
         20,
-        -2,
+        20,
         "路人"
     );
 
-    interaction(
+    addInteraction(
         20,
-        -2,
-        "問淡水怎麼去",
+        20,
+        "問淡水",
         ()=>{
 
             speak([
-
                 {
                     speaker:"阿豪",
-                    cn:"請問，怎麼去淡水？",
-                    py:"Qǐngwèn, zěnme qù Dànshuǐ?"
+                    zh:"請問，怎麼去淡水？",
+                    pinyin:"Qǐngwèn, zěnme qù Dànshuǐ?"
                 },
-
                 {
                     speaker:"路人",
-                    cn:"搭捷運，轉乘紅線。",
-                    py:"Dā jiéyùn, zhuǎnchéng hóng xiàn."
+                    zh:"你可以轉乘紅線捷運。",
+                    pinyin:"Nǐ kěyǐ zhuǎnchéng hóng xiàn jiéyùn."
                 },
-
                 {
                     speaker:"路人",
-                    cn:"搭淡水信義線就可以到淡水。",
-                    py:"Dā Dànshuǐ Xìnyì xiàn jiù kěyǐ dào Dànshuǐ."
+                    zh:"搭紅線到淡水。",
+                    pinyin:"Dā hóng xiàn dào Dànshuǐ."
                 }
-
             ],()=>{
 
-                stage=8;
-
-                setObjective(
-                    "找到捷運入口"
-                );
-
-                loadMRTEntrance();
-
-            });
-
-        }
-    );
-
-}
-
-/* =========================================================
-   MRT ENTRANCE
-========================================================= */
-
-function loadMRTEntrance(){
-
-    clearWorld();
-
-    player.position.set(
-        0,
-        2,
-        35
-    );
-
-    player.angle=Math.PI;
-
-    road(
-        0,
-        0,
-        18,
-        120,
-        false
-    );
-
-    /*
-       LARGE MRT entrance.
-    */
-
-    addBox(
-        0,
-        2,
-        -10,
-        24,
-        4,
-        10,
-        0x333333
-    );
-
-    label(
-        "捷運 MRT",
-        0,
-        8,
-        -10,
-        "#ffd85c",
-        40
-    );
-
-    label(
-        "紅線",
-        0,
-        5,
-        -10,
-        "#ff7777",
-        30
-    );
-
-    interaction(
-        0,
-        -10,
-        "進入捷運",
-        ()=>{
-
-            speak([
-
-                {
-                    speaker:"阿豪",
-                    cn:"我要搭紅線去淡水。",
-                    py:"Wǒ yào dā hóng xiàn qù Dànshuǐ."
-                },
-
-                {
-                    speaker:"站務員",
-                    cn:"請搭淡水信義線。",
-                    py:"Qǐng dā Dànshuǐ Xìnyì xiàn."
-                }
-
-            ],()=>{
-
-                stage=9;
-
-                setObjective(
-                    "搭乘紅線前往淡水"
-                );
-
-                loadMRTArea();
+                loadMRT();
 
             });
 
         },
-        13
+        7
     );
 
+    objective(
+        "在台北車站問路，找到去淡水的方法。"
+    );
 }
+
 
 /* =========================================================
    MRT
 ========================================================= */
 
-function loadMRTArea(){
+function loadMRT(){
 
     clearWorld();
 
     player.position.set(
-        0,
-        2,
-        20
+        0,2,30
     );
 
-    player.angle=Math.PI;
+    player.angle=0;
+
+    grass(
+        scene,
+        0,
+        0,
+        160,
+        160
+    );
 
     road(
+        scene,
         0,
         0,
         18,
-        100,
-        false
+        140
     );
 
-    addBox(
+    const entrance =
+        new THREE.Group();
+
+    scene.add(entrance);
+
+    box(
+        entrance,
         0,
         3,
-        -10,
-        30,
+        -20,
+        20,
         6,
-        12,
-        0xcc4444
+        14,
+        0xc24c57
     );
 
-    label(
-        "淡水信義線",
+    makeLabel(
+        entrance,
+        "🔴 紅線 捷運",
         0,
-        10,
-        -10,
-        "#ffffff",
-        36
+        9,
+        -20
     );
 
-    interaction(
+    addInteraction(
         0,
-        -10,
-        "搭乘紅線",
+        -20,
+        "搭紅線",
         ()=>{
 
-            speak([
+            loadTamsui();
 
-                {
-                    speaker:"廣播",
-                    cn:"下一站，淡水。",
-                    py:"Xià yí zhàn, Dànshuǐ."
-                }
+        },
+        10
+    );
 
-            ],()=>{
-
-                stage=10;
-
-                setObjective(
-                    "下車後問海風餐廳怎麼走"
-                );
-
-                loadTamsuiArea();
-
-            },
-            10
-        );
-
-    }
-
+    objective(
+        "找到紅線捷運，轉乘到淡水。"
+    );
 }
+
 
 /* =========================================================
    TAMSUI
 ========================================================= */
 
-function loadTamsuiArea(){
+function loadTamsui(){
 
     clearWorld();
 
     player.position.set(
-        0,
-        2,
-        50
+        0,2,60
     );
 
-    player.angle=Math.PI;
+    player.angle=0;
 
-    /*
-       Main road
-    */
+    grass(
+        scene,
+        0,
+        0,
+        180,
+        220
+    );
 
     road(
+        scene,
         0,
         0,
-        14,
-        120,
-        false
+        18,
+        180
     );
 
-    sidewalk(
-        0,
-        0,
-        14,
-        120,
-        false
-    );
+    const station =
+        new THREE.Group();
 
-    /*
-       NPC
-    */
+    scene.add(station);
 
-    npc(
-        7,
+    box(
+        station,
+        0,
         5,
+        -30,
+        30,
+        10,
+        20,
+        0xd2d2d2
+    );
+
+    makeLabel(
+        station,
+        "🚇 淡水站",
+        0,
+        12,
+        -30
+    );
+
+    createNPC(
+        scene,
+        12,
+        -5,
         "路人"
     );
 
-    interaction(
-        7,
-        5,
-        "問海風餐廳怎麼走",
+    addInteraction(
+        12,
+        -5,
+        "問餐廳",
         ()=>{
 
             speak([
-
                 {
                     speaker:"阿豪",
-                    cn:"請問，海風餐廳怎麼走？",
-                    py:"Qǐngwèn, Hǎifēng cāntīng zěnme zǒu?"
+                    zh:"請問，海風餐廳怎麼走？",
+                    pinyin:"Qǐngwèn, Hǎifēng cāntīng zěnme zǒu?"
                 },
-
                 {
                     speaker:"路人",
-                    cn:"先一直走。",
-                    py:"Xiān yìzhí zǒu."
+                    zh:"先一直走。",
+                    pinyin:"Xiān yìzhí zǒu."
                 },
-
                 {
                     speaker:"路人",
-                    cn:"看到便利商店以後繼續走。",
-                    py:"Kàndào biànlì shāngdiàn yǐhòu jìxù zǒu."
+                    zh:"看到便利商店以後繼續走。",
+                    pinyin:"Kàndào biànlì shāngdiàn yǐhòu jìxù zǒu."
                 },
-
                 {
                     speaker:"路人",
-                    cn:"到了三叉路口往左轉。",
-                    py:"Dào le sānchā lùkǒu wǎng zuǒ zhuǎn."
+                    zh:"到了三叉路口往左轉。",
+                    pinyin:"Dào le sānchā lùkǒu wǎng zuǒ zhuǎn."
                 },
-
                 {
                     speaker:"路人",
-                    cn:"左轉以後一直走。",
-                    py:"Zuǒ zhuǎn yǐhòu yìzhí zǒu."
+                    zh:"左轉以後一直走。",
+                    pinyin:"Zuǒ zhuǎn yǐhòu yìzhí zǒu."
                 },
-
                 {
                     speaker:"路人",
-                    cn:"走一段路就會看到海風餐廳。",
-                    py:"Zǒu yí duàn lù jiù huì kàndào Hǎifēng cāntīng."
+                    zh:"走一段路就會看到海風餐廳。",
+                    pinyin:"Zǒu yí duàn lù jiù huì kàndào Hǎifēng cāntīng."
                 }
-
             ],()=>{
 
-                stage=11;
-
-                setObjective(
-                    "一直走，找到便利商店"
-                );
-
-                enableRestaurantRoute();
+                loadRestaurant();
 
             });
 
-        }
+        },
+        7
     );
 
+    objective(
+        "下車後找路人，問海風餐廳怎麼走。"
+    );
 }
+
 
 /* =========================================================
    RESTAURANT ROUTE
 ========================================================= */
 
-function enableRestaurantRoute(){
+function loadRestaurant(){
+
+    clearWorld();
+
+    player.position.set(
+        0,2,80
+    );
+
+    player.angle=0;
+
+    grass(
+        scene,
+        0,
+        -40,
+        250,
+        300
+    );
 
     /*
-       Long approach.
+       Main walking road
     */
 
-    building(
-        25,
-        -25,
+    road(
+        scene,
+        0,
+        -40,
         18,
+        240
+    );
+
+    /*
+       Three-way intersection
+    */
+
+    road(
+        scene,
+        -55,
+        -100,
         18,
+        120,
+        Math.PI/2
+    );
+
+    road(
+        scene,
+        55,
+        -100,
+        18,
+        120,
+        Math.PI/2
+    );
+
+    /*
+       Restaurant far on LEFT.
+    */
+
+    const restaurant =
+        new THREE.Group();
+
+    restaurant.visible=false;
+
+    scene.add(restaurant);
+
+    box(
+        restaurant,
+        -105,
+        5,
+        -100,
+        22,
         10,
-        0xe0b95d,
-        "便利商店"
+        18,
+        0xb96e5c
     );
 
-    /*
-       Three-way intersection.
-
-       Main road comes from north.
-
-       LEFT = correct
-       RIGHT = wrong
-
-       Only THREE branches:
-       1. north/south approach
-       2. left
-       3. right
-
-       No fourth straight road after intersection.
-    */
-
-    road(
-        0,
-        -75,
-        14,
-        20,
-        false
-    );
-
-    road(
-        -65,
-        -75,
-        14,
-        130,
-        true
-    );
-
-    road(
-        65,
-        -75,
-        14,
-        130,
-        true
-    );
-
-    label(
-        "三叉路口",
-        0,
+    makeLabel(
+        restaurant,
+        "🍽️ 海風餐廳",
+        -105,
         12,
-        -75,
-        "#ffd85c",
-        40
+        -100
     );
 
-    /*
-       Restaurant far along LEFT road.
-    */
+    let restaurantFound=false;
 
-    const restaurantX=-125;
-    const restaurantZ=-75;
-
-    building(
-        restaurantX,
-        restaurantZ,
-        24,
-        20,
-        12,
-        0xd77f73,
-        ""
+    objective(
+        "先一直走，找到三叉路口。"
     );
 
-    const restaurantSign =
-        label(
-            "海風餐廳",
-            restaurantX,
-            18,
-            restaurantZ,
-            "#ffffff",
-            38
-        );
+    function updateRestaurant(){
 
-    /*
-       Hide restaurant until player approaches.
-    */
+        if(
+            !restaurantFound &&
+            player.position.z < -75 &&
+            player.position.x < -50
+        ){
 
-    restaurantSign.visible=false;
+            restaurantFound=true;
 
-    const restaurantPoint =
-        interaction(
-            restaurantX,
-            restaurantZ,
-            "進入海風餐廳",
-            ()=>{
+            restaurant.visible=true;
 
-                speak([
+            addInteraction(
+                -105,
+                -100,
+                "進入海風餐廳",
+                ()=>{
 
-                    {
-                        speaker:"阿豪",
-                        cn:"我終於到了！",
-                        py:"Wǒ zhōngyú dào le!"
-                    },
+                    showSuccess();
 
-                    {
-                        speaker:"小美",
-                        cn:"阿豪！你終於來了！",
-                        py:"Āháo! Nǐ zhōngyú lái le!"
-                    },
+                },
+                12
+            );
 
-                    {
-                        speaker:"阿豪",
-                        cn:"生日快樂！這是給你的禮物。",
-                        py:"Shēngrì kuàilè! Zhè shì gěi nǐ de lǐwù."
-                    },
+            landmarkMessage(
+                "🍽️ 你找到了海風餐廳！"
+            );
 
-                    {
-                        speaker:"小美",
-                        cn:"謝謝你！",
-                        py:"Xièxie nǐ!"
-                    }
+            objective(
+                "找到海風餐廳，按 E 進去。"
+            );
+        }
 
-                ],()=>{
+    }
 
-                    document.getElementById(
-                        "success"
-                    ).style.display="flex";
+    restaurant.userData.update=
+        updateRestaurant;
 
-                });
-
-            },
-            12
-        );
-
-    window.RESTAURANT={
-        x:restaurantX,
-        z:restaurantZ,
-        sign:restaurantSign
-    };
-
+    window.currentRestaurantUpdate=
+        updateRestaurant;
 }
 
+
 /* =========================================================
-   RESTAURANT VISIBILITY
+   SUCCESS
 ========================================================= */
 
-function updateRestaurantVisibility(){
+function showSuccess(){
 
-    if(!window.RESTAURANT) return;
+    document.getElementById(
+        "success"
+    ).style.display="flex";
+}
 
-    const dx =
-        player.position.x -
-        window.RESTAURANT.x;
 
-    const dz =
-        player.position.z -
-        window.RESTAURANT.z;
+/* =========================================================
+   MOVEMENT
+========================================================= */
 
-    const distance =
-        Math.sqrt(
-            dx*dx+
-            dz*dz
+function getForward(){
+
+    /*
+       THIS is the new movement system.
+
+       angle 0:
+       forward = (0,0,-1)
+
+       ▲ => forward
+       ▼ => backward
+
+       So up/down can NEVER accidentally
+       become left/right because movement is
+       calculated directly from Ahao's angle.
+    */
+
+    return new THREE.Vector3(
+        Math.sin(player.angle),
+        0,
+        -Math.cos(player.angle)
+    );
+}
+
+
+function updateMovement(){
+
+    if(dialogueActive) return;
+
+    /*
+       LEFT / RIGHT = ROTATION ONLY
+    */
+
+    if(keys.left){
+        player.angle -= player.rotateSpeed;
+    }
+
+    if(keys.right){
+        player.angle += player.rotateSpeed;
+    }
+
+
+    /*
+       ▲ = FORWARD
+    */
+
+    if(keys.forward){
+
+        const forward =
+            getForward();
+
+        player.position.addScaledVector(
+            forward,
+            player.speed
         );
+    }
 
-    if(distance<35){
 
-        window.RESTAURANT.sign.visible=true;
+    /*
+       ▼ = BACKWARD
+    */
 
-    }else{
+    if(keys.backward){
 
-        window.RESTAURANT.sign.visible=false;
+        const forward =
+            getForward();
+
+        player.position.addScaledVector(
+            forward,
+            -player.speed
+        );
+    }
+
+
+    /*
+       Keep player on ground.
+    */
+
+    player.position.y=2;
+}
+
+
+/* =========================================================
+   CAMERA
+========================================================= */
+
+function updateCamera(){
+
+    const forward =
+        getForward();
+
+    const cameraTarget =
+        player.position.clone()
+            .add(
+                forward.clone().multiplyScalar(8)
+            );
+
+    camera.position.lerp(
+        new THREE.Vector3(
+            player.position.x -
+                forward.x*8,
+
+            player.position.y + 6,
+
+            player.position.z -
+                forward.z*8
+        ),
+        .12
+    );
+
+    camera.lookAt(
+        cameraTarget.x,
+        cameraTarget.y + 1.5,
+        cameraTarget.z
+    );
+}
+
+
+/* =========================================================
+   MAIN UPDATE
+========================================================= */
+
+function update(){
+
+    updateMovement();
+
+    updateCamera();
+
+    updateInteractionUI();
+
+    if(
+        typeof updateGRRouteDiscovery ===
+        "function"
+    ){
+
+        if(
+            grGroup &&
+            !dialogueActive
+        ){
+
+            updateGRRouteDiscovery();
+
+        }
+    }
+
+    if(
+        typeof window.currentRestaurantUpdate ===
+        "function"
+    ){
+
+        window.currentRestaurantUpdate();
 
     }
 
 }
+
 
 /* =========================================================
    VOCABULARY
 ========================================================= */
 
 const vocab=[
-
     ["左","zuǒ","left"],
     ["右","yòu","right"],
     ["左轉","zuǒ zhuǎn","turn left"],
@@ -2837,11 +2613,11 @@ const vocab=[
     ["繼續走","jìxù zǒu","continue walking"],
     ["十字路口","shízì lùkǒu","crossroad / four-way intersection"],
     ["三叉路口","sānchā lùkǒu","three-way intersection"],
-    ["轉車","zhuǎn chē","transfer vehicles"],
-    ["轉乘","zhuǎnchéng","transfer"],
     ["公車","gōngchē","bus"],
     ["公車站","gōngchē zhàn","bus stop"],
     ["搭公車","dā gōngchē","take a bus"],
+    ["轉車","zhuǎn chē","transfer vehicles"],
+    ["轉乘","zhuǎnchéng","transfer"],
     ["火車","huǒchē","train"],
     ["車站","chēzhàn","station"],
     ["捷運","jiéyùn","MRT"],
@@ -2849,6 +2625,7 @@ const vocab=[
     ["淡水信義線","Dànshuǐ Xìnyì xiàn","Tamsui-Xinyi Line"],
     ["銀行","yínháng","bank"],
     ["便利商店","biànlì shāngdiàn","convenience store"],
+    ["咖啡店","kāfēidiàn","café"],
     ["公園","gōngyuán","park"],
     ["台北車站","Táiběi chēzhàn","Taipei Main Station"],
     ["淡水","Dànshuǐ","Tamsui"],
@@ -2857,40 +2634,50 @@ const vocab=[
     ["方向","fāngxiàng","direction"],
     ["生日禮物","shēngrì lǐwù","birthday present"],
     ["餐廳","cāntīng","restaurant"]
-
 ];
 
-const vocabGrid =
-    document.getElementById(
-        "vocabGrid"
-    );
 
-vocab.forEach(v=>{
+function loadVocab(){
 
-    const div =
-        document.createElement("div");
+    const list =
+        document.getElementById(
+            "vocabList"
+        );
 
-    div.className="vocab";
+    list.innerHTML="";
 
-    div.innerHTML=`
-        <div class="word">${v[0]}</div>
-        <div class="pinyin">${v[1]}</div>
-        <div class="meaning">${v[2]}</div>
-    `;
+    vocab.forEach(item=>{
 
-    vocabGrid.appendChild(div);
+        const div =
+            document.createElement("div");
 
-});
+        div.className="vocabItem";
+
+        div.innerHTML=`
+            <div>
+                <b>${item[0]}</b>
+                <small>${item[1]}</small>
+            </div>
+            <div>${item[2]}</div>
+        `;
+
+        list.appendChild(div);
+    });
+}
+
+loadVocab();
+
 
 document.getElementById(
-    "vocabButton"
+    "vocabBtn"
 ).onclick=()=>{
 
     document.getElementById(
         "vocabModal"
-    ).style.display="flex";
+    ).classList.remove("hidden");
 
 };
+
 
 document.getElementById(
     "closeVocab"
@@ -2898,82 +2685,27 @@ document.getElementById(
 
     document.getElementById(
         "vocabModal"
-    ).style.display="none";
+    ).classList.add("hidden");
 
 };
 
+
 /* =========================================================
-   START GAME
+   START
 ========================================================= */
 
 document.getElementById(
-    "startGame"
+    "startBtn"
 ).onclick=()=>{
 
     document.getElementById(
         "story"
     ).style.display="none";
 
-    speak([
-
-        {
-            speaker:"阿豪",
-            cn:"糟糕！我的手機沒電了！",
-            py:"Zāogāo! Wǒ de shǒujī méi diàn le!"
-        },
-
-        {
-            speaker:"阿豪",
-            cn:"Google Maps不能用了。",
-            py:"Google Maps bù néng yòng le."
-        },
-
-        {
-            speaker:"阿豪",
-            cn:"看來我只能問路人了。",
-            py:"Kànlái wǒ zhǐ néng wèn lùrén le."
-        }
-
-    ],()=>{
-
-        stage=0;
-
-        setObjective(
-            "買一個生日禮物給小美"
-        );
-
-        loadGiftArea();
-
-    });
+    loadGiftArea();
 
 };
 
-/* =========================================================
-   GAME LOOP
-========================================================= */
-
-function animate(){
-
-    requestAnimationFrame(
-        animate
-    );
-
-    updatePlayer();
-
-    updateInteraction();
-
-    updateGRVisibility();
-
-    updateRestaurantVisibility();
-
-    renderer.render(
-        scene,
-        camera
-    );
-
-}
-
-animate();
 
 /* =========================================================
    RESIZE
@@ -2984,8 +2716,7 @@ window.addEventListener(
     ()=>{
 
         camera.aspect =
-            innerWidth/
-            innerHeight;
+            innerWidth / innerHeight;
 
         camera.updateProjectionMatrix();
 
@@ -2996,6 +2727,27 @@ window.addEventListener(
 
     }
 );
+
+
+/* =========================================================
+   ANIMATION
+========================================================= */
+
+function animate(){
+
+    requestAnimationFrame(
+        animate
+    );
+
+    update();
+
+    renderer.render(
+        scene,
+        camera
+    );
+}
+
+animate();
 
 </script>
 
