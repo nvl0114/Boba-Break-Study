@@ -3,434 +3,298 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Boba Break Study - Petualangan Tamsui (PS1 Style)</title>
+    <title>Boba Break Study - Tamsui 3D Chibi Style</title>
     <style>
-        :root {
-            --ps1-bg: #1e1e24;
-            --ps1-box-bg: #121216;
-            --ps1-border: #8c8c9e;
-            --ps1-text: #f0f0f5;
-            --ps1-accent: #f39c12;
-            --ps1-btn: #34495e;
-            --ps1-btn-hover: #4e6882;
-        }
-
         body {
-            font-family: 'Courier New', Courier, monospace; /* Gaya font retro klasik */
-            background-color: var(--ps1-bg);
-            color: var(--ps1-text);
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-        }
-
-        .game-container {
-            width: 100%;
-            max-width: 800px;
-            background: var(--ps1-box-bg);
-            border: 6px ridge var(--ps1-border);
-            box-shadow: 0 0 20px rgba(0,0,0,0.8);
-            border-radius: 4px;
-            overflow: hidden;
+            background-color: #2b2621;
+            color: #f4f1ea;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
             flex-direction: column;
+            align-items: center;
+            margin: 0;
+            padding: 15px;
         }
-
-        /* Header PS1 Style */
-        .game-header {
-            background-color: #2c2c35;
-            border-bottom: 4px ridge var(--ps1-border);
-            padding: 12px 20px;
+        .game-container {
+            width: 720px;
+            background: #fff8ee;
+            color: #2c3e50;
+            border: 5px solid #5c4033;
+            border-radius: 12px;
+            padding: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+        }
+        .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            margin-bottom: 10px;
         }
-
-        .game-header h1 {
-            margin: 0;
-            font-size: 1rem;
-            color: #ffd700;
-            letter-spacing: 1px;
-        }
-
+        h1 { font-size: 1.1rem; color: #5c4033; margin: 0; }
         .vocab-btn {
-            background-color: #7f8c8d;
+            background: #c86d51;
             color: white;
-            border: 3px outset #bdc3c7;
+            border: none;
             padding: 6px 12px;
+            border-radius: 6px;
             cursor: pointer;
-            font-family: 'Courier New', Courier, monospace;
             font-weight: bold;
-            font-size: 0.85rem;
         }
-
-        .vocab-btn:active {
-            border-style: inset;
+        .vocab-btn:hover { opacity: 0.9; }
+        canvas {
+            background: #a3d977; /* Warna rumput cerah ala game 3D kasual */
+            border-radius: 8px;
+            border: 3px solid #795548;
+            display: block;
+            margin: 0 auto;
         }
-
-        /* Main Game Screen */
-        .game-screen {
-            padding: 20px;
-            min-height: 350px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        /* Visual Karakter ala Harvest Moon PS1 (Low-Poly / Chunky Sprite Mockup) */
-        .scene-viewport {
-            width: 100%;
-            height: 180px;
-            background: linear-gradient(to bottom, #4a69bd, #60a3bc);
-            border: 4px inset var(--ps1-border);
-            position: relative;
-            display: flex;
-            align-items: flex-end;
-            justify-content: center;
-            overflow: hidden;
-            margin-bottom: 15px;
-        }
-
-        /* Simulasi Sprite Karakter Chibi PS1 */
-        .ps1-sprite-container {
-            position: absolute;
-            bottom: 20px;
-            display: flex;
-            gap: 40px;
-            align-items: flex-end;
-        }
-
-        .ps1-char {
-            width: 48px;
-            height: 64px;
-            background: #e74c3c; /* Baju Ahao */
-            border: 3px solid #000;
-            border-radius: 12px 12px 4px 4px;
-            position: relative;
-            box-shadow: 2px 4px 0px rgba(0,0,0,0.5);
-            display: flex;
-            justify-content: center;
-        }
-
-        /* Kepala kotak/chibi khas game lama */
-        .ps1-char::before {
-            content: '';
-            position: absolute;
-            top: -24px;
-            width: 36px;
-            height: 28px;
-            background: #f5cd79;
-            border: 3px solid #000;
-            border-radius: 50% 50% 30% 30%;
-        }
-
-        /* Topi hijau Ahao */
-        .ps1-char::after {
-            content: '';
-            position: absolute;
-            top: -30px;
-            width: 40px;
-            height: 14px;
-            background: #27ae60;
-            border: 2px solid #000;
-            border-radius: 10px 10px 0 0;
-        }
-
-        .scene-label {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            background: rgba(0,0,0,0.7);
-            color: #fff;
-            padding: 4px 8px;
-            font-size: 0.75rem;
-            border: 1px solid #fff;
-        }
-
-        /* Dialogue Box ala PS1 RPG */
-        .dialogue-box {
-            background: rgba(15, 15, 25, 0.95);
-            border: 4px ridge var(--ps1-border);
-            padding: 15px;
-            margin-bottom: 15px;
+        .ui-box {
+            margin-top: 12px;
+            background: #faf8f5;
+            border: 2px solid #d1c7bd;
+            border-radius: 8px;
+            padding: 12px;
             min-height: 80px;
         }
-
-        .speaker {
-            font-weight: bold;
-            color: var(--ps1-accent);
-            margin-bottom: 6px;
-            font-size: 0.95rem;
+        .speaker { color: #c86d51; font-weight: bold; margin-bottom: 4px; }
+        .text { font-size: 1.05rem; line-height: 1.4; }
+        .pinyin { color: #7f8c8d; font-size: 0.9rem; margin-bottom: 4px; font-style: italic; }
+        .controls-hint {
+            margin-top: 8px;
+            font-size: 0.8rem;
+            color: #7f8c8d;
+            text-align: center;
         }
-
-        .mandarin-text {
-            font-size: 1.15rem;
-            font-weight: bold;
-            color: #ffffff;
-            margin-top: 4px;
-        }
-
-        .pinyin-text {
-            font-size: 0.85rem;
-            color: #bdc3c7;
-            margin-bottom: 6px;
-        }
-
-        /* Choices Area */
-        .choices-area {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .choice-btn {
-            background-color: var(--ps1-btn);
-            border: 3px outset #7f8c8d;
-            color: white;
-            padding: 10px 15px;
-            cursor: pointer;
-            text-align: left;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 0.95rem;
-            font-weight: bold;
-            transition: background 0.1s;
-        }
-
-        .choice-btn:hover {
-            background-color: var(--ps1-btn-hover);
-            border-color: #ecf0f1;
-        }
-
-        .choice-btn:active {
-            border-style: inset;
-        }
-
         /* Modal Vocab */
         .modal {
             display: none;
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.8);
+            background: rgba(0,0,0,0.6);
             justify-content: center;
             align-items: center;
             z-index: 100;
         }
-
         .modal-content {
-            background: var(--ps1-box-bg);
-            width: 90%;
-            max-width: 500px;
-            border: 4px ridge var(--ps1-border);
+            background: white;
+            width: 90%; max-width: 500px;
+            border-radius: 10px;
             padding: 20px;
             max-height: 80vh;
             overflow-y: auto;
-            color: var(--ps1-text);
+            color: #2c3e50;
         }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 2px solid var(--ps1-border);
-            padding-bottom: 8px;
-            margin-bottom: 12px;
-        }
-
-        .close-btn {
-            background: #c0392b;
-            color: white;
-            border: 2px outset #e74c3c;
-            padding: 2px 8px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        .vocab-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.85rem;
-        }
-
-        .vocab-table th, .vocab-table td {
-            border: 1px solid var(--ps1-border);
-            padding: 6px 10px;
-            text-align: left;
-        }
-
-        .vocab-table th {
-            background-color: #2c2c35;
-            color: #ffd700;
-        }
+        .close-btn { background: none; border: none; font-size: 1.5rem; cursor: pointer; float: right; color: #7f8c8d;}
+        .vocab-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; margin-top: 15px;}
+        .vocab-table th, .vocab-table td { border: 1px solid #d1c7bd; padding: 8px; text-align: left; }
+        .vocab-table th { background: #3b5249; color: white; }
     </style>
 </head>
 <body>
 
 <div class="game-container">
-    <div class="game-header">
-        <h1>Boba Break: Tamsui Story (PS1 Edition)</h1>
-        <button class="vocab-btn" onclick="openVocabModal()">📖 Vocab Menu</button>
+    <div class="header">
+        <h1>Boba Break: Petualangan Tamsui (3D Chibi Style)</h1>
+        <button class="vocab-btn" onclick="openVocab()">📖 Vocab Menu</button>
     </div>
 
-    <div class="game-screen" id="gameScreen">
-        <!-- Render dinamis via JS -->
+    <!-- Canvas Game -->
+    <canvas id="gameCanvas" width="690" height="360"></canvas>
+
+    <div class="ui-box" id="uiBox">
+        <div class="speaker" id="speakerName">Petunjuk Permainan</div>
+        <div class="pinyin" id="uiPinyin">Gunakan Tombol Panah atau W, A, S, D untuk menggerakkan Ahao.</div>
+        <div class="text" id="uiText">Misi: Dekati karakter NPC di peta lalu tekan [Space] untuk bertanya arah ke Tamsui!</div>
     </div>
+    
+    <div class="controls-hint">Gerak: W/A/S/D | Interaksi: Tekan [Space] saat dekat NPC</div>
 </div>
 
 <!-- Modal Vocab -->
 <div class="modal" id="vocabModal">
     <div class="modal-content">
-        <div class="modal-header">
-            <h3 style="margin:0; color:#ffd700;">Keyword Vocabulary</h3>
-            <button class="close-btn" onclick="closeVocabModal()">X</button>
-        </div>
+        <button class="close-btn" onclick="closeVocab()">&times;</button>
+        <h3 style="margin:0; color:#3b5249;">Keyword Vocabulary</h3>
         <table class="vocab-table">
-            <thead>
-                <tr>
-                    <th>Mandarin</th>
-                    <th>Pinyin</th>
-                    <th>English</th>
-                </tr>
-            </thead>
-            <tbody id="vocabTableBody"></tbody>
+            <thead><tr><th>Mandarin</th><th>Pinyin</th><th>English</th></tr></thead>
+            <tbody id="vocabBody"></tbody>
         </table>
     </div>
 </div>
 
 <script>
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+
+    let ahao = { x: 60, y: 200, speed: 3 };
+
+    let keys = {};
+    window.addEventListener('keydown', e => { keys[e.key] = true; if(e.key === ' ') checkInteraction(); });
+    window.addEventListener('keyup', e => { keys[e.key] = false; });
+
+    let npcs = [
+        { id: 1, x: 220, y: 170, color: '#3498db', name: "Warga Desa", spoken: false },
+        { id: 2, x: 430, y: 90, color: '#9b59b6', name: "Petugas Stasiun", spoken: false },
+        { id: 3, x: 610, y: 230, color: '#e67e22', name: "Warga Tamsui", spoken: false }
+    ];
+
+    let gameState = 0; 
+
     const vocabData = [
         { cn: "左", pinyin: "zuǒ", en: "Left" },
         { cn: "右", pinyin: "yòu", en: "Right" },
-        { cn: "轉車 / 轉乘", pinyin: "zhuǎnchē / zhuǎnchéng", en: "Transfer / Change (transport)" },
+        { cn: "轉車 / 轉乘", pinyin: "zhuǎnchē / zhuǎnchéng", en: "Transfer / Change transport" },
         { cn: "火車", pinyin: "huǒchē", en: "Train" },
-        { cn: "捷運 (MRT)", pinyin: "jiéyùn", en: "MRT / Rapid Transit" },
+        { cn: "捷運 (MRT)", pinyin: "jiéyùn", en: "MRT" },
         { cn: "紅線", pinyin: "hóng xiàn", en: "Red Line" },
-        { cn: "淡水", pinyin: "Dànshuǐ", en: "Tamsui (Place name)" },
-        { cn: "公車", pinyin: "gōngchē", en: "Bus" },
-        { cn: "銀行", pinyin: "yínháng", en: "Bank" },
-        { cn: "生日快樂", pinyin: "shēngrì kuàilè", en: "Happy Birthday" }
+        { cn: "淡水", pinyin: "Dànshuǐ", en: "Tamsui" },
+        { cn: "公車", pinyin: "gōngchē", en: "Bus" }
     ];
 
-    let currentStep = 0;
+    function update() {
+        if ((keys['ArrowUp'] || keys['w'] || keys['W']) && ahao.y > 50) ahao.y -= ahao.speed;
+        if ((keys['ArrowDown'] || keys['s'] || keys['S']) && ahao.y < canvas.height - 50) ahao.y += ahao.speed;
+        if ((keys['ArrowLeft'] || keys['a'] || keys['A']) && ahao.x > 30) ahao.x -= ahao.speed;
+        if ((keys['ArrowRight'] || keys['d'] || keys['D']) && ahao.x < canvas.width - 40) ahao.x += ahao.speed;
+    }
 
-    const storySteps = [
-        {
-            sceneName: "Lokasi: Rumah / Toko Desa",
-            speaker: "Ahao (阿豪)",
-            text: "Waduh, HP-ku baterainya habis total! Gak bisa buka Google Maps buat ke restoran Xiaomei (小美) di 淡水 (Tamsui) dalam rangka ulang tahunnya.",
-            pinyin: "Wǒ de shǒujī méidiàn le!",
-            choices: [
-                { text: "Beli hadiah kecil dulu di toko desa (Transaksi sederhana)", next: 1 }
-            ]
-        },
-        {
-            sceneName: "Lokasi: Jalan Desa",
-            speaker: "Warga Lokal",
-            text: "你想去車站嗎？搭 **105公車** (gōngchē), turun di depan **銀行** (yínháng - bank), terus naik **GR** ke stasiun.",
-            pinyin: "Nǐ xiǎng qù chēzhàn ma? Dā 105 gōngchē...",
-            choices: [
-                { text: "Paham! Naik bus 105, turun di bank, lanjut GR ke stasiun.", next: 2 }
-            ]
-        },
-        {
-            sceneName: "Lokasi: Stasiun Kereta Lokal",
-            speaker: "Ahao (阿豪)",
-            text: "Sekarang aku naik **火車** (huǒchē - kereta) menuju Taipei Main Station.",
-            pinyin: "Wǒ zài zuò huǒchē qù Táiběi.",
-            choices: [
-                { text: "Lanjut perjalanan ke Taipei Main Station", next: 3 }
-            ]
-        },
-        {
-            sceneName: "Lokasi: Taipei Main Station",
-            speaker: "Petugas Stasiun",
-            text: "Mau ke Tamsui? Kamu harus **轉乘** (zhuǎnchéng - transfer) ke **紅線** (hóng xiàn - Red Line) **捷運** (jiéyùn - MRT).",
-            pinyin: "Qù Dànshuǐ? Nǐ děi zhuǎnchéng hóng xiàn jiéyùn.",
-            choices: [
-                { text: "Baik, saya transfer ke Red Line MRT.", next: 4 }
-            ]
-        },
-        {
-            sceneName: "Lokasi: Dalam Gerbong MRT",
-            speaker: "Ahao (阿豪)",
-            text: "Oke, gerbong MRT Red Line berjalan ke arah utara. Sebentar lagi sampai di stasiun akhir Tamsui.",
-            pinyin: "Zài hóng xiàn jiéyùn shàng.",
-            choices: [
-                { text: "Turun di stasiun Tamsui dan cari restonya", next: 5 }
-            ]
-        },
-        {
-            sceneName: "Lokasi: Area Tamsui",
-            speaker: "Warga Sekitar",
-            text: "餐廳就在前面。先向**左** (zuǒ - kiri), terus belok ke **右** (yòu - kanan).",
-            pinyin: "Xiān xiàng zuǒ, rùhòu guǎi yòu.",
-            choices: [
-                { text: "Jalan ke Kiri (左 - zuǒ) lalu Kanan (右 - yòu) sesuai petunjuk!", next: 6 }
-            ]
-        },
-        {
-            sceneName: "Lokasi: Restoran Tamsui (Selesai)",
-            speaker: "Xiaomei & Ahao",
-            text: " 🎉 **生日快樂 (Shēngrì kuàilè)!** Berhasil sampai di restoran Tamsui tepat waktu meskipun tanpa HP!",
-            pinyin: "Shēngrì kuàilè!",
-            choices: [
-                { text: "Mainkan Ulang Petualangan", next: 0 }
-            ]
+    // Fungsi menggambar karakter 3D Chibi (bulat dan mulus seperti miniatur mainan)
+    function drawChibiCharacter(x, y, isAhao = true) {
+        // Bayangan lembut di tanah
+        ctx.fillStyle = "rgba(0,0,0,0.25)";
+        ctx.beginPath();
+        ctx.ellipse(x, y + 14, 12, 6, 0, 0, Math.PI * 2);
+        ctx.fill();
+
+        if (isAhao) {
+            // Badan Ahao (Baju hijau/merah chibi melengkung)
+            ctx.fillStyle = "#e74c3c";
+            ctx.beginPath();
+            ctx.roundRect(x - 9, y - 2, 18, 16, [6, 6, 4, 4]);
+            ctx.fill();
+
+            // Kepala Bulat Chibi (Warna kulit mulus)
+            ctx.fillStyle = "#fde3a7";
+            ctx.beginPath();
+            ctx.arc(x, y - 12, 11, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Topi Khas Ahao (Hijau melengkung)
+            ctx.fillStyle = "#27ae60";
+            ctx.beginPath();
+            ctx.arc(x, y - 16, 11, Math.PI, Math.PI * 2);
+            ctx.fill();
+            ctx.fillRect(x - 13, y - 16, 26, 4);
+        } else {
+            // NPC Chibi Umum
+            ctx.fillStyle = "#2980b9";
+            ctx.beginPath();
+            ctx.roundRect(x - 9, y - 2, 18, 16, [6, 6, 4, 4]);
+            ctx.fill();
+
+            // Kepala Bulat NPC
+            ctx.fillStyle = "#fde3a7";
+            ctx.beginPath();
+            ctx.arc(x, y - 12, 11, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Rambut NPC
+            ctx.fillStyle = "#5d6d7e";
+            ctx.beginPath();
+            ctx.arc(x, y - 15, 10, Math.PI, Math.PI * 2);
+            ctx.fill();
         }
-    ];
+    }
 
-    function renderGame() {
-        const step = storySteps[currentStep];
-        const screen = document.getElementById('gameScreen');
+    function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        let choicesHTML = '';
-        step.choices.forEach(choice => {
-            choicesHTML += `<button class="choice-btn" onclick="nextStep(${choice.next})">${choice.text}</button>`;
+        // Jalan Setapak Desa (Warna tanah cokelat hangat melengkung estetik)
+        ctx.fillStyle = '#d2b48c';
+        ctx.beginPath();
+        ctx.roundRect(0, 140, canvas.width, 100, 20);
+        ctx.fill();
+
+        // Gambar NPC Chibi
+        npcs.forEach(npc => {
+            drawChibiCharacter(npc.x, npc.y, false);
+            // Label nama NPC
+            ctx.fillStyle = '#2c3e50';
+            ctx.font = 'bold 11px Segoe UI';
+            ctx.textAlign = 'center';
+            ctx.fillText(npc.name, npc.x, npc.y - 30);
         });
 
-        screen.innerHTML = `
-            <div class="scene-viewport">
-                <div class="scene-label">${step.sceneName}</div>
-                <div class="ps1-sprite-container">
-                    <div class="ps1-char" title="Ahao"></div>
-                </div>
-            </div>
-            <div class="dialogue-box">
-                <div class="speaker">${step.speaker}</div>
-                <div class="pinyin-text">${step.pinyin}</div>
-                <div class="mandarin-text">${step.text}</div>
-            </div>
-            <div class="choices-area">
-                ${choicesHTML}
-            </div>
-        `;
+        // Gambar Ahao Chibi
+        drawChibiCharacter(ahao.x, ahao.y, true);
+        ctx.fillStyle = '#c86d51';
+        ctx.font = 'bold 10px Segoe UI';
+        ctx.textAlign = 'center';
+        ctx.fillText("▼ AHAO", ahao.x, ahao.y - 28);
     }
 
-    function nextStep(nextIndex) {
-        currentStep = nextIndex;
-        renderGame();
+    function checkInteraction() {
+        npcs.forEach(npc => {
+            let dist = Math.hypot(ahao.x - npc.x, ahao.y - npc.y);
+            if (dist < 45) {
+                triggerDialogue(npc.id);
+            }
+        });
     }
 
-    function openVocabModal() {
+    function triggerDialogue(id) {
+        let speaker = document.getElementById('speakerName');
+        let pinyin = document.getElementById('uiPinyin');
+        let text = document.getElementById('uiText');
+
+        if (id === 1 && gameState === 0) {
+            speaker.innerText = "Warga Desa (Pemberi Arah Bus)";
+            pinyin.innerText = "Nǐ xiǎng qù chēzhàn ma? Dā 105 gōngchē, xiàchē zài yínháng...";
+            text.innerHTML = "Warga: 'Mau ke stasiun? Naik <b>105 公車 (gōngchē)</b>, turun di depan <b>銀行 (yínháng - bank)</b>, terus naik GR!'<br><span style='color:#c86d51; cursor:pointer; font-weight:bold;' onclick='nextStage(1)'>[Klik di sini untuk lanjut naik kereta 火車]</span>";
+        } else if (id === 2 && gameState === 1) {
+            speaker.innerText = "Petugas Stasiun Taipei";
+            pinyin.innerText = "Qù Dànshuǐ? Nǐ děi zhuǎnchéng hóng xiàn jiéyùn.";
+            text.innerHTML = "Petugas: 'Mau ke Tamsui? Kamu harus <b>轉乘 (zhuǎnchéng - transfer)</b> ke <b>紅線 (hóng xiàn - Red Line)</b> <b>捷運 (jiéyùn - MRT)</b>.'<br><span style='color:#c86d51; cursor:pointer; font-weight:bold;' onclick='nextStage(2)'>[Klik di sini untuk naik MRT ke Tamsui]</span>";
+        } else if (id === 3 && gameState === 2) {
+            speaker.innerText = "Warga Tamsui (Dekat Restoran)";
+            pinyin.innerText = "Xiān xiàng zuǒ, rùhòu guǎi yòu. Shēngrì kuàilè!";
+            text.innerHTML = "Warga: 'Restonya dekat! Pertama ke <b>左 (zuǒ - kiri)</b>, lalu belok ke <b>右 (yòu - kanan)</b>.'<br>🎉 <b>Selamat! Ahao berhasil sampai di Tamsui merayakan ulang tahun Xiaomei!</b>";
+        }
+    }
+
+    function nextStage(stage) {
+        gameState = stage;
+        if (stage === 1) {
+            npcs[0].name = "Selesai (Naik Huoche)";
+            document.getElementById('speakerName').innerText = "Ahao (阿豪)";
+            document.getElementById('uiPinyin').innerText = "Wǒ zài zuò huǒchē qù Táiběi.";
+            document.getElementById('uiText').innerText = "Ahao berada di dalam 火車 (huǒchē - kereta) menuju Taipei Main Station. (Dekati NPC Petugas Stasiun di atas map!)";
+        } else if (stage === 2) {
+            npcs[1].name = "Selesai (Naik MRT)";
+            document.getElementById('speakerName').innerText = "Ahao (阿豪)";
+            document.getElementById('uiPinyin').innerText = "Zài hóng xiàn jiéyùn shàng.";
+            document.getElementById('uiText').innerText = "Ahao naik MRT Red Line menuju utara. (Dekati Warga Tamsui di sebelah kanan map!)";
+            gameState = 2;
+        }
+    }
+
+    function openVocab() {
         document.getElementById('vocabModal').style.display = 'flex';
-        const tbody = document.getElementById('vocabTableBody');
+        let tbody = document.getElementById('vocabBody');
         tbody.innerHTML = '';
-        vocabData.forEach(item => {
-            tbody.innerHTML += `
-                <tr>
-                    <td><strong>${item.cn}</strong></td>
-                    <td>${item.pinyin}</td>
-                    <td>${item.en}</td>
-                </tr>
-            `;
+        vocabData.forEach(v => {
+            tbody.innerHTML += `<tr><td><strong>${v.cn}</strong></td><td>${v.pinyin}</td><td>${v.en}</td></tr>`;
         });
     }
 
-    function closeVocabModal() {
-        document.getElementById('vocabModal').style.display = 'none';
-    }
+    function closeVocab() { document.getElementById('vocabModal').style.display = 'none'; }
 
-    renderGame();
+    function loop() {
+        update();
+        draw();
+        requestAnimationFrame(loop);
+    }
+    loop();
 </script>
 
 </body>
