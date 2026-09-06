@@ -3,537 +3,841 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ahao's Birthday Mission — Boba Break Study</title>
+<meta name="theme-color" content="#f5c97a">
+
+<title>Ahao's Birthday Mission | Boba Break Study</title>
 
 <style>
-*{
-  box-sizing:border-box;
-  -webkit-tap-highlight-color:transparent;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-body{
-  margin:0;
-  background:#dce8d7;
-  color:#342b27;
-  font-family:Arial,"Microsoft JhengHei",sans-serif;
+body {
+  font-family: "Courier New", monospace;
+  background: #171717;
+  color: #fff;
+  min-height: 100vh;
+  overflow-x: hidden;
 }
 
-.game{
-  width:min(900px,95%);
-  margin:18px auto 40px;
+button {
+  font-family: inherit;
 }
 
-.header{
-  background:#fff8e8;
-  border:4px solid #382e2a;
-  box-shadow:6px 6px 0 #382e2a;
-  padding:16px;
-  text-align:center;
-  margin-bottom:18px;
+.game {
+  width: min(1100px, 100%);
+  margin: auto;
+  min-height: 100vh;
+  background: #202020;
+  border-left: 4px solid #111;
+  border-right: 4px solid #111;
 }
 
-.header h1{
-  margin:0;
-  font-size:clamp(25px,6vw,38px);
+/* ================= HEADER ================= */
+
+.header {
+  background: #f5c97a;
+  color: #2b2117;
+  padding: 14px 18px;
+  border-bottom: 5px solid #111;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
 }
 
-.header p{
-  margin:7px 0 0;
-  color:#74655d;
+.logo {
+  font-weight: 900;
+  font-size: clamp(16px, 3vw, 24px);
 }
 
-/* STORY */
-
-.story{
-  background:#fff8e8;
-  border:4px solid #382e2a;
-  box-shadow:5px 5px 0 #382e2a;
-  padding:18px;
-  margin-bottom:18px;
-  line-height:1.75;
+.header-right {
+  font-size: 13px;
+  font-weight: bold;
 }
 
-.story h2{
-  margin:0 0 8px;
+/* ================= STORY ================= */
+
+.story {
+  padding: 16px;
+  background: #292929;
+  border-bottom: 4px solid #111;
 }
 
-.dialogue{
-  margin-top:14px;
-  background:#f1eadb;
-  border-left:6px solid #c87957;
-  padding:13px;
-  font-size:17px;
+.story h2 {
+  color: #f5c97a;
+  font-size: 18px;
+  margin-bottom: 8px;
 }
 
-.dialogue small{
-  display:block;
-  color:#75665d;
-  margin-top:8px;
+.story p {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  color: #ddd;
+  font-size: 14px;
 }
 
-/* SCENE */
+/* ================= GAME AREA ================= */
 
-.scene{
-  position:relative;
-  height:420px;
-  overflow:hidden;
-  border:5px solid #382e2a;
-  box-shadow:7px 7px 0 #382e2a;
-  background:#9bc7dd;
+.game-area {
+  padding: 15px;
 }
 
-/* WALKING */
+.screen {
+  position: relative;
+  width: 100%;
+  height: min(580px, 70vh);
+  min-height: 420px;
+  overflow: hidden;
+  border: 6px solid #111;
+  background: #76b7d6;
+  image-rendering: pixelated;
+}
 
-.walking{
+/* ================= PIXEL WORLD ================= */
+
+.scene {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+/* SKY */
+
+.sky {
+  position: absolute;
+  inset: 0 0 52% 0;
   background:
     linear-gradient(
-      to bottom,
-      #8bc7e5 0 48%,
-      #74a86c 48% 100%
+      #7fc7e8 0%,
+      #a9dded 70%,
+      #cbe9ed 100%
     );
 }
 
-.road{
-  position:absolute;
-  bottom:-20px;
-  left:27%;
-  width:46%;
-  height:58%;
-  background:#777572;
-  clip-path:polygon(42% 0,58% 0,100% 100%,0 100%);
+/* CLOUDS */
+
+.cloud {
+  position: absolute;
+  background: #fff;
+  width: 80px;
+  height: 25px;
+  opacity: .85;
+  box-shadow:
+    20px -15px #fff,
+    45px -10px #fff,
+    60px 0 #fff;
 }
 
-.road-line{
-  position:absolute;
-  top:0;
-  left:50%;
-  transform:translateX(-50%);
-  width:6px;
-  height:100%;
-  background:repeating-linear-gradient(
-    to bottom,
-    #f4df9c 0 28px,
-    transparent 28px 55px
+.cloud.one {
+  top: 13%;
+  left: 10%;
+}
+
+.cloud.two {
+  top: 24%;
+  right: 12%;
+  transform: scale(.7);
+}
+
+/* GROUND */
+
+.ground {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 50%;
+  background:
+    repeating-linear-gradient(
+      45deg,
+      #75a85e 0px,
+      #75a85e 12px,
+      #699851 12px,
+      #699851 24px
+    );
+}
+
+/* ROAD */
+
+.road {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 42%;
+  background: #666;
+  border-top: 5px solid #444;
+}
+
+.road::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 7px;
+  background: repeating-linear-gradient(
+    90deg,
+    #e6d68a 0 45px,
+    transparent 45px 85px
   );
 }
 
-.sky-cloud{
-  position:absolute;
-  font-size:45px;
-  opacity:.9;
-}
+/* SIDEWALK */
 
-.c1{top:35px;left:10%}
-.c2{top:75px;right:12%;font-size:32px}
-
-.building{
-  position:absolute;
-  bottom:42%;
-  width:23%;
-  height:35%;
-  border:4px solid #382e2a;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  font-weight:bold;
-  padding:5px;
-}
-
-.b-left{left:3%}
-.b-right{right:3%}
-
-.bank{background:#e9d277}
-.hospital{background:#eee}
-.store{background:#b8dc9f}
-.pharmacy{background:#cde8d0}
-.restaurant{background:#cb705c;color:white}
-
-.player-view{
-  position:absolute;
-  left:50%;
-  bottom:12px;
-  transform:translateX(-50%);
-  font-size:58px;
-}
-
-/* STATION */
-
-.station-scene{
+.sidewalk {
+  position: absolute;
+  bottom: 0;
+  height: 43%;
+  width: 22%;
   background:
-    linear-gradient(#d7dce0 0 55%,#70747a 55% 100%);
+    repeating-linear-gradient(
+      0deg,
+      #aaa 0 20px,
+      #999 20px 22px
+    );
 }
 
-.station-sign{
-  position:absolute;
-  top:35px;
-  left:50%;
-  transform:translateX(-50%);
-  background:#f7f7f7;
-  border:5px solid #382e2a;
-  padding:14px 30px;
-  font-size:24px;
-  font-weight:bold;
+.sidewalk.left {
+  left: 0;
 }
 
-.station-columns{
-  position:absolute;
-  bottom:0;
-  width:100%;
-  display:flex;
-  justify-content:space-around;
+.sidewalk.right {
+  right: 0;
 }
 
-.column{
-  width:30px;
-  height:45%;
-  background:#ddd;
-  border:4px solid #382e2a;
+/* BUILDINGS */
+
+.building {
+  position: absolute;
+  bottom: 39%;
+  width: 130px;
+  height: 210px;
+  border: 5px solid #222;
+  background: #d7a56c;
 }
 
-/* TRAIN */
-
-.train-scene{
-  background:#bfc4c8;
+.building::before {
+  content: "";
+  position: absolute;
+  top: 35px;
+  left: 20px;
+  width: 30px;
+  height: 35px;
+  background: #79b6ca;
+  box-shadow:
+    50px 0 #79b6ca,
+    0 55px #79b6ca,
+    50px 55px #79b6ca;
 }
 
-.train-window{
-  position:absolute;
-  top:45px;
-  left:8%;
-  width:84%;
-  height:155px;
-  background:#6d9eb7;
-  border:8px solid #494b4e;
-  overflow:hidden;
+.building.left {
+  left: 7%;
 }
 
-.outside{
-  position:absolute;
-  bottom:0;
-  width:100%;
-  height:45%;
-  background:#6c9465;
+.building.right {
+  right: 7%;
+  background: #c77d7d;
 }
 
-.tunnel{
-  background:#45464a;
+.sign {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #fff;
+  color: #111;
+  border: 3px solid #222;
+  padding: 5px 8px;
+  font-size: 12px;
+  white-space: nowrap;
+  font-weight: bold;
 }
 
-.train-seat{
-  position:absolute;
-  bottom:0;
-  width:25%;
-  height:110px;
-  background:#9d6457;
-  border:5px solid #382e2a;
+/* STREET SIGNS */
+
+.street-sign {
+  position: absolute;
+  bottom: 37%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 110px;
+  height: 70px;
+  background: #2474a8;
+  border: 5px solid #172b36;
+  color: white;
+  text-align: center;
+  padding-top: 10px;
+  font-weight: bold;
 }
 
-.seat1{left:5%}
-.seat2{right:5%}
+/* ================= PLAYER ================= */
 
-.ahao-seat{
-  position:absolute;
-  bottom:5px;
-  left:50%;
-  transform:translateX(-50%);
-  font-size:70px;
+.player {
+  position: absolute;
+  z-index: 20;
+  bottom: 8%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 74px;
+  height: 125px;
 }
 
-/* TAIPEI MAIN */
+.player-head {
+  position: absolute;
+  top: 0;
+  left: 19px;
+  width: 36px;
+  height: 36px;
+  background: #e4a071;
+  border: 4px solid #222;
+}
 
-.taipei-scene{
+.player-head::before {
+  content: "";
+  position: absolute;
+  top: -9px;
+  left: -4px;
+  width: 36px;
+  height: 14px;
+  background: #36251c;
+  border: 4px solid #222;
+}
+
+.player-body {
+  position: absolute;
+  top: 38px;
+  left: 10px;
+  width: 54px;
+  height: 57px;
+  background: #3c73a8;
+  border: 4px solid #222;
+}
+
+.player-body::after {
+  content: "A";
+  position: absolute;
+  color: #fff;
+  font-weight: bold;
+  left: 18px;
+  top: 13px;
+  font-size: 20px;
+}
+
+.player-leg {
+  position: absolute;
+  bottom: 0;
+  width: 17px;
+  height: 34px;
+  background: #282828;
+  border: 4px solid #111;
+}
+
+.player-leg.left {
+  left: 14px;
+}
+
+.player-leg.right {
+  right: 14px;
+}
+
+/* ================= DIALOGUE ================= */
+
+.dialogue {
+  position: absolute;
+  z-index: 50;
+  left: 20px;
+  right: 20px;
+  bottom: 20px;
+  background: rgba(20,20,20,.94);
+  border: 5px solid #f5c97a;
+  padding: 14px;
+  box-shadow: 8px 8px 0 #111;
+}
+
+.speaker {
+  color: #f5c97a;
+  font-weight: bold;
+  margin-bottom: 7px;
+  font-size: 14px;
+}
+
+.dialogue-text {
+  font-family: Arial, sans-serif;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.dialogue-note {
+  margin-top: 8px;
+  font-size: 11px;
+  color: #aaa;
+}
+
+/* ================= TRAIN ================= */
+
+.train-scene {
+  background: #222;
+}
+
+.train-ceiling {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 17%;
+  background: #ddd;
+  border-bottom: 6px solid #111;
+}
+
+.train-window {
+  position: absolute;
+  top: 17%;
+  left: 8%;
+  right: 8%;
+  height: 43%;
+  background: #111;
+  border: 8px solid #444;
+  overflow: hidden;
+}
+
+.train-outside {
+  position: absolute;
+  inset: 0;
   background:
-    linear-gradient(#d8d9d7 0 58%,#aaa59e 58% 100%);
+    linear-gradient(
+      #6eb7d7 0 50%,
+      #578b51 50% 72%,
+      #555 72%
+    );
+  animation: trainMove .8s linear infinite;
 }
 
-.taipei-logo{
-  position:absolute;
-  top:25px;
-  left:50%;
-  transform:translateX(-50%);
-  background:#fff;
-  border:5px solid #382e2a;
-  padding:14px 25px;
-  font-size:25px;
-  font-weight:bold;
+@keyframes trainMove {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-120px);
+  }
 }
 
-.sign-board{
-  position:absolute;
-  padding:12px;
-  border:4px solid #382e2a;
-  background:white;
-  font-weight:bold;
-  text-align:center;
+.train-seat {
+  position: absolute;
+  left: 13%;
+  right: 13%;
+  bottom: 0;
+  height: 28%;
+  background: #9b5656;
+  border: 6px solid #111;
 }
 
-.sign-a{left:7%;top:48%}
-.sign-b{right:7%;top:48%}
-
-/* MRT */
-
-.mrt-scene{
-  background:#73777b;
+.train-seat::before {
+  content: "";
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  top: -45px;
+  height: 50px;
+  background: #b96767;
+  border: 6px solid #111;
 }
 
-.mrt-window{
-  position:absolute;
-  top:35px;
-  left:7%;
-  width:86%;
-  height:170px;
-  background:#24272b;
-  border:9px solid #383a3d;
+.train-handle {
+  position: absolute;
+  top: 15%;
+  width: 35px;
+  height: 70px;
+  border-left: 5px solid #aaa;
+  border-right: 5px solid #aaa;
 }
 
-.station-name{
-  position:absolute;
-  top:20px;
-  left:50%;
-  transform:translateX(-50%);
-  background:#fff;
-  border:4px solid #382e2a;
-  padding:10px 22px;
-  font-weight:bold;
+.train-handle.left {
+  left: 20%;
 }
 
-.mrt-seat{
-  position:absolute;
-  bottom:0;
-  height:110px;
-  width:25%;
-  background:#ad7a67;
-  border:5px solid #382e2a;
+.train-handle.right {
+  right: 20%;
 }
 
-.m1{left:4%}
-.m2{right:4%}
+/* ================= MRT ================= */
 
-.ahao-mrt{
-  position:absolute;
-  bottom:4px;
-  left:50%;
-  transform:translateX(-50%);
-  font-size:68px;
+.mrt-scene {
+  background: #303030;
 }
 
-/* BUS */
-
-.bus-scene{
-  background:#d7d9d5;
+.mrt-window {
+  position: absolute;
+  top: 18%;
+  left: 12%;
+  right: 12%;
+  height: 40%;
+  background: #090909;
+  border: 10px solid #555;
+  overflow: hidden;
 }
 
-.bus-window{
-  position:absolute;
-  top:35px;
-  left:7%;
-  width:86%;
-  height:170px;
-  background:#83aec1;
-  border:9px solid #383a3d;
-}
-
-.bus-outside{
-  position:absolute;
-  bottom:0;
-  height:45%;
-  width:100%;
-  background:#78a26d;
-}
-
-.bus-stop{
-  position:absolute;
-  right:10%;
-  bottom:35%;
-  font-size:60px;
-}
-
-.bus-seat{
-  position:absolute;
-  bottom:0;
-  height:105px;
-  width:24%;
-  background:#a66758;
-  border:5px solid #382e2a;
-}
-
-.bs1{left:4%}
-.bs2{right:4%}
-
-.ahao-bus{
-  position:absolute;
-  bottom:5px;
-  left:50%;
-  transform:translateX(-50%);
-  font-size:68px;
-}
-
-/* RESTAURANT */
-
-.restaurant-scene{
+.tunnel {
+  position: absolute;
+  inset: 0;
   background:
-    linear-gradient(#88bdd9 0 48%,#d7ad72 48% 100%);
+    radial-gradient(
+      ellipse at center,
+      #555 0 15%,
+      #222 35%,
+      #080808 70%
+    );
+  animation: tunnelMove .5s linear infinite;
 }
 
-.restaurant-building{
-  position:absolute;
-  left:15%;
-  bottom:10%;
-  width:70%;
-  height:60%;
-  background:#c96f5d;
-  border:6px solid #382e2a;
-  color:white;
-  text-align:center;
-  padding-top:35px;
-  font-size:28px;
-  font-weight:bold;
+@keyframes tunnelMove {
+  from { transform: scale(1); }
+  to { transform: scale(1.3); }
 }
 
-.party{
-  position:absolute;
-  bottom:10%;
-  width:100%;
-  text-align:center;
-  font-size:55px;
+.mrt-seat {
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  bottom: 0;
+  height: 30%;
+  background: #9c4e65;
+  border: 6px solid #111;
 }
 
-/* CONTROLS */
-
-.controls{
-  margin-top:18px;
-  text-align:center;
+.mrt-map {
+  position: absolute;
+  top: 7%;
+  left: 15%;
+  right: 15%;
+  height: 9%;
+  background: #eee;
+  color: #222;
+  border: 4px solid #111;
+  text-align: center;
+  padding: 5px;
+  font-size: 13px;
+  font-weight: bold;
 }
 
-.controls h3{
-  margin:0 0 10px;
+/* ================= BUS ================= */
+
+.bus-scene {
+  background: #222;
 }
 
-.dpad{
-  display:grid;
-  grid-template-columns:repeat(3,70px);
-  grid-template-rows:repeat(2,60px);
-  gap:8px;
-  justify-content:center;
+.bus-window {
+  position: absolute;
+  top: 13%;
+  left: 7%;
+  right: 7%;
+  height: 48%;
+  border: 9px solid #555;
+  background: #7cc0dc;
+  overflow: hidden;
 }
 
-.btn{
-  border:4px solid #382e2a;
-  background:#fff8e8;
-  box-shadow:4px 4px 0 #382e2a;
-  font-size:25px;
-  font-weight:bold;
-  cursor:pointer;
+.bus-outside {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      #86cbe2 0 48%,
+      #72a35d 48% 75%,
+      #666 75%
+    );
+  animation: busMove 1.2s linear infinite;
 }
 
-.btn:active{
-  transform:translate(4px,4px);
-  box-shadow:none;
+@keyframes busMove {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-160px);
+  }
 }
 
-.up{grid-column:2}
-.left{grid-column:1;grid-row:2}
-.down{grid-column:2;grid-row:2}
-.right{grid-column:3;grid-row:2}
-
-/* ACTION */
-
-.action-area{
-  display:flex;
-  justify-content:center;
-  gap:10px;
-  flex-wrap:wrap;
-  margin-top:16px;
+.bus-seat {
+  position: absolute;
+  bottom: 0;
+  left: 10%;
+  right: 10%;
+  height: 32%;
+  background: #4c75a8;
+  border: 6px solid #111;
 }
 
-.action{
-  border:3px solid #382e2a;
-  background:white;
-  padding:10px 16px;
-  box-shadow:3px 3px 0 #382e2a;
-  font-weight:bold;
-  cursor:pointer;
+.bus-pole {
+  position: absolute;
+  bottom: 25%;
+  width: 9px;
+  height: 65%;
+  background: #bbb;
+  border: 2px solid #222;
 }
 
-/* STATUS */
-
-.status{
-  margin-top:15px;
-  background:white;
-  border:3px solid #382e2a;
-  padding:13px;
-  text-align:center;
-  min-height:52px;
+.bus-pole.left {
+  left: 13%;
 }
 
-.success{
-  background:#d9edd1;
+.bus-pole.right {
+  right: 13%;
 }
 
-.error{
-  background:#f2d1cb;
+/* ================= RESTAURANT ================= */
+
+.restaurant-scene {
+  background:
+    linear-gradient(
+      #3c2923 0 40%,
+      #9d6a43 40% 100%
+    );
 }
 
-/* MISSION */
-
-.mission{
-  margin-top:18px;
-  background:#fff8e8;
-  border:4px solid #382e2a;
-  padding:15px;
-  box-shadow:5px 5px 0 #382e2a;
+.restaurant-sign {
+  position: absolute;
+  top: 13%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #f5c97a;
+  color: #3b2519;
+  border: 7px solid #111;
+  padding: 15px 25px;
+  font-size: 22px;
+  font-weight: bold;
+  white-space: nowrap;
 }
 
-.mission h3{
-  margin:0 0 8px;
+.restaurant-door {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 180px;
+  height: 48%;
+  background: #3c6d75;
+  border: 8px solid #111;
 }
 
-.mission div{
-  padding:4px 0;
+.restaurant-light {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 20px;
+  background: #f5c97a;
+  border: 4px solid #111;
 }
 
-.done{
-  text-decoration:line-through;
-  opacity:.55;
+/* ================= CONTROLS ================= */
+
+.controls-area {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-top: 15px;
 }
 
-.active{
-  font-weight:bold;
+.panel {
+  background: #292929;
+  border: 4px solid #111;
+  padding: 14px;
 }
 
-/* HINT */
-
-.hint{
-  display:none;
-  margin-top:12px;
-  background:#e5eef5;
-  border:3px solid #68879a;
-  padding:12px;
-  text-align:center;
+.panel-title {
+  color: #f5c97a;
+  font-weight: bold;
+  margin-bottom: 12px;
 }
 
-/* FINISH */
-
-.finish{
-  display:none;
-  background:#fff8e8;
-  border:5px solid #382e2a;
-  box-shadow:7px 7px 0 #382e2a;
-  padding:25px;
-  text-align:center;
+.dpad {
+  width: 190px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(3, 60px);
+  grid-template-rows: repeat(3, 60px);
+  gap: 5px;
+  justify-content: center;
 }
 
-.finish h1{
-  font-size:35px;
+.dpad button {
+  border: 4px solid #111;
+  background: #555;
+  color: #fff;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 4px 4px 0 #111;
 }
 
-@media(max-width:600px){
-  .scene{height:350px}
-  .building{font-size:12px}
-  .station-sign,
-  .taipei-logo{
-    font-size:18px;
+.dpad button:active {
+  transform: translate(3px,3px);
+  box-shadow: 1px 1px 0 #111;
+}
+
+.up {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.left {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.down {
+  grid-column: 2;
+  grid-row: 3;
+}
+
+.right {
+  grid-column: 3;
+  grid-row: 2;
+}
+
+.keyboard {
+  text-align: center;
+  color: #aaa;
+  font-size: 12px;
+  margin-top: 12px;
+}
+
+/* ================= MISSION ================= */
+
+.mission {
+  background: #292929;
+  border: 4px solid #111;
+  padding: 14px;
+  margin-top: 15px;
+}
+
+.mission h3 {
+  color: #f5c97a;
+  margin-bottom: 10px;
+}
+
+.mission-list {
+  list-style: none;
+}
+
+.mission-list li {
+  padding: 7px 0;
+  border-bottom: 1px solid #444;
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  color: #bbb;
+}
+
+.mission-list li.done {
+  color: #83d883;
+}
+
+.mission-list li.current {
+  color: #fff;
+  font-weight: bold;
+}
+
+/* ================= STATUS ================= */
+
+.status {
+  margin-top: 15px;
+  padding: 12px;
+  background: #111;
+  border: 4px solid #333;
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+.status.correct {
+  color: #8ee58e;
+}
+
+.status.wrong {
+  color: #ff9a9a;
+}
+
+/* ================= SUCCESS ================= */
+
+.success {
+  position: absolute;
+  z-index: 100;
+  inset: 0;
+  background: rgba(10,10,10,.94);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 30px;
+}
+
+.success.show {
+  display: flex;
+}
+
+.success-box {
+  border: 6px solid #f5c97a;
+  background: #222;
+  padding: 30px;
+  max-width: 600px;
+  box-shadow: 10px 10px 0 #111;
+}
+
+.success-box h1 {
+  color: #f5c97a;
+  margin-bottom: 15px;
+}
+
+.success-box p {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  color: #ddd;
+}
+
+.restart {
+  margin-top: 20px;
+  background: #f5c97a;
+  color: #222;
+  border: 4px solid #111;
+  padding: 12px 20px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 700px) {
+
+  .controls-area {
+    grid-template-columns: 1fr;
+  }
+
+  .screen {
+    min-height: 430px;
+    height: 65vh;
+  }
+
+  .dialogue {
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+  }
+
+  .dialogue-text {
+    font-size: 16px;
+  }
+
+  .building {
+    width: 90px;
+    height: 160px;
+  }
+
+  .restaurant-sign {
+    font-size: 15px;
   }
 }
 </style>
@@ -543,975 +847,878 @@ body{
 
 <div class="game">
 
-<header class="header">
-  <h1>🧭 Ahao's Birthday Mission</h1>
-  <p>Boba Break Study · Mandarin Direction Adventure</p>
-</header>
+  <!-- HEADER -->
+  <header class="header">
+    <div class="logo">🧋 BOBA BREAK STUDY</div>
+    <div class="header-right">AHao's Birthday Mission</div>
+  </header>
 
-<div id="game">
+  <!-- STORY -->
+  <section class="story">
+    <h2>🎂 Today's Mission</h2>
 
-  <section class="story" id="story"></section>
+    <p>
+      Today is Xiaomei's birthday. She invited all of her school friends
+      to dinner at a restaurant in Tamsui.
+      Ahao wants to buy her a present before going there.
+      Unfortunately, his phone battery dies.
+      He cannot use Google Maps.
+      He has to ask people for directions and use Mandarin
+      to find his way to the restaurant.
+    </p>
+  </section>
 
-  <div class="scene" id="scene"></div>
+  <!-- GAME -->
+  <section class="game-area">
 
-  <div class="controls">
+    <div class="screen" id="screen">
 
-    <h3>Choose your direction</h3>
+      <div id="scene" class="scene"></div>
 
-    <div class="dpad">
+      <div class="dialogue">
 
-      <button class="btn up" onclick="move('forward')">↑</button>
-      <button class="btn left" onclick="move('left')">←</button>
-      <button class="btn down" onclick="move('back')">↓</button>
-      <button class="btn right" onclick="move('right')">→</button>
+        <div class="speaker" id="speaker">
+          🧑 Stranger
+        </div>
+
+        <div class="dialogue-text" id="dialogue">
+          一直走，經過銀行和醫院。
+        </div>
+
+        <div class="dialogue-note">
+          聽懂對方的方向，選擇正確的方向。
+        </div>
+
+      </div>
+
+      <!-- SUCCESS -->
+      <div class="success" id="success">
+
+        <div class="success-box">
+
+          <h1>🎂 Mission Complete!</h1>
+
+          <p>
+            You finally arrived at 海風小館.
+            Xiaomei and your friends are waiting for you.
+            You successfully used Mandarin to navigate
+            streets, trains, MRT and buses.
+          </p>
+
+          <button class="restart" onclick="restartGame()">
+            PLAY AGAIN
+          </button>
+
+        </div>
+
+      </div>
 
     </div>
 
-  </div>
+    <!-- CONTROLS -->
 
-  <div class="action-area">
+    <div class="controls-area">
 
-    <button class="action" onclick="showHint()">
-      💡 Hint
-    </button>
+      <div class="panel">
 
-    <button class="action" onclick="restart()">
-      🔄 Restart
-    </button>
+        <div class="panel-title">
+          🕹️ MOVE
+        </div>
 
-  </div>
+        <div class="dpad">
 
-  <div class="status" id="status">
-    Read the stranger's directions carefully.
-  </div>
+          <button class="up" onclick="move('up')">
+            ↑
+          </button>
 
-  <div class="hint" id="hint"></div>
+          <button class="left" onclick="move('left')">
+            ←
+          </button>
 
-  <div class="mission">
+          <button class="down" onclick="move('down')">
+            ↓
+          </button>
 
-    <h3>🎯 Mission</h3>
+          <button class="right" onclick="move('right')">
+            →
+          </button>
 
-    <div id="m1">☐ Leave the mall</div>
-    <div id="m2">☐ Find the train station</div>
-    <div id="m3">☐ Take the train</div>
-    <div id="m4">☐ Transfer at Taipei Main Station</div>
-    <div id="m5">☐ Take the Red Line</div>
-    <div id="m6">☐ Find the bus stop</div>
-    <div id="m7">☐ Transfer buses</div>
-    <div id="m8">☐ Find 海風小館</div>
+        </div>
 
-  </div>
+        <div class="keyboard">
+          Keyboard: Arrow Keys
+        </div>
+
+      </div>
+
+
+      <div class="panel">
+
+        <div class="panel-title">
+          📍 CURRENT LOCATION
+        </div>
+
+        <div id="location">
+          Department Store
+        </div>
+
+        <br>
+
+        <div class="panel-title">
+          🧭 PROGRESS
+        </div>
+
+        <div id="progress">
+          0 / 16
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- MISSION -->
+
+    <div class="mission">
+
+      <h3>📋 Mission</h3>
+
+      <ul class="mission-list" id="missionList">
+
+        <li id="m0" class="current">
+          ⬜ Leave the department store
+        </li>
+
+        <li id="m1">
+          ⬜ Find the convenience store
+        </li>
+
+        <li id="m2">
+          ⬜ Find the train station
+        </li>
+
+        <li id="m3">
+          ⬜ Take the train to Taipei Main Station
+        </li>
+
+        <li id="m4">
+          ⬜ Transfer to the Red Line
+        </li>
+
+        <li id="m5">
+          ⬜ Take the MRT to Tamsui
+        </li>
+
+        <li id="m6">
+          ⬜ Find the bus stop
+        </li>
+
+        <li id="m7">
+          ⬜ Transfer to another bus
+        </li>
+
+        <li id="m8">
+          ⬜ Find the pharmacy
+        </li>
+
+        <li id="m9">
+          ⬜ Arrive at 海風小館
+        </li>
+
+      </ul>
+
+    </div>
+
+    <div class="status" id="status">
+      聽懂對方的指示，選擇方向。
+    </div>
+
+  </section>
 
 </div>
 
-<div class="finish" id="finish">
-
-  <h1>🎉 Mission Complete!</h1>
-
-  <div style="font-size:80px">
-    🎂🎁🍜
-  </div>
-
-  <h2>Happy Birthday, Xiaomei!</h2>
-
-  <p>
-    Ahao successfully traveled from the mall
-    to Tamsui and found the restaurant.
-  </p>
-
-  <p>
-    <strong>你成功了！</strong>
-  </p>
-
-  <button class="action" onclick="restart()">
-    🔄 Play Again
-  </button>
-
-</div>
-
-</div>
 
 <script>
 
-/* =====================================================
+/* =========================================================
    GAME DATA
-
-   General story = English
-   Stranger / staff dialogue = Mandarin
-===================================================== */
+========================================================= */
 
 const scenes = [
 
-/* 0 */
-{
-  type:"walking",
-  location:"Outside the department store",
-
-  story:`
-    <h2>🎁 The Birthday Gift</h2>
-
-    Today is Xiaomei's birthday.
-    She invited all of her school friends
-    to dinner at <strong>海風小館</strong> in Tamsui.
-
-    <br><br>
-
-    Ahao has just bought her a present at the
-    <strong>百貨公司</strong>.
-
-    <br><br>
-
-    Suddenly, his phone dies. 🔋
-
-    <div class="dialogue">
-      👤 <strong>Stranger:</strong><br>
-      一直走，經過銀行和醫院。
-      <small>
-        The stranger is giving you directions.
-      </small>
-    </div>
-  `,
-
-  correct:"forward",
-
-  hint:"「一直走」means go straight. Do not turn yet.",
-
-  render:`
-    <div class="sky-cloud c1">☁️</div>
-    <div class="sky-cloud c2">☁️</div>
-
-    <div class="road">
-      <div class="road-line"></div>
-    </div>
-
-    <div class="building b-left bank">
-      🏦<br>銀行
-    </div>
-
-    <div class="building b-right hospital">
-      🏥<br>醫院
-    </div>
-
-    <div class="player-view">👁️</div>
-  `
-},
-
-/* 1 */
-{
-  type:"walking",
-
-  story:`
-    <h2>🚶 Keep Walking</h2>
-
-    You pass the bank and the hospital.
-
-    <div class="dialogue">
-      👤 <strong>Stranger:</strong><br>
-      看到便利商店以後，往左轉。
-      <small>
-        Find the convenience store first,
-        then turn left.
-      </small>
-    </div>
-  `,
-
-  correct:"forward",
-
-  hint:"「看到便利商店以後」means after you see the convenience store.",
-
-  render:`
-    <div class="road">
-      <div class="road-line"></div>
-    </div>
-
-    <div class="building b-left store">
-      🏪<br>便利商店
-    </div>
-
-    <div class="building b-right bank">
-      🏦<br>銀行
-    </div>
-
-    <div class="player-view">👁️</div>
-  `
-},
-
-/* 2 */
-{
-  type:"walking",
-
-  story:`
-    <h2>🏪 The Convenience Store</h2>
-
-    You finally see the convenience store.
-
-    <div class="dialogue">
-      👤 <strong>Stranger:</strong><br>
-      看到便利商店以後，往左轉。
-      <small>
-        Now turn left.
-      </small>
-    </div>
-  `,
-
-  correct:"left",
-
-  hint:"「往左轉」= turn left.",
-
-  render:`
-    <div class="road">
-      <div class="road-line"></div>
-    </div>
-
-    <div class="building b-left station">
-      🏪<br>便利商店
-    </div>
-
-    <div class="building b-right hospital">
-      🏥<br>醫院
-    </div>
-
-    <div class="player-view">👁️</div>
-  `
-},
-
-/* 3 */
-{
-  type:"walking",
-
-  story:`
-    <h2>🚉 You Found the Station!</h2>
-
-    You turn left and see the train station.
-
-    <div class="dialogue">
-      📢 <strong>Station staff:</strong><br>
-      往前走，進入車站。
-      <small>
-        Walk forward and enter the station.
-      </small>
-    </div>
-  `,
-
-  correct:"forward",
-
-  hint:"「往前走」= go forward.",
-
-  render:`
-    <div class="station-sign">
-      🚉 火車站
-    </div>
-
-    <div class="station-columns">
-      <div class="column"></div>
-      <div class="column"></div>
-      <div class="column"></div>
-    </div>
-  `
-},
-
-/* 4 */
-{
-  type:"train",
-
-  story:`
-    <h2>🚆 On the Train</h2>
-
-    You sit down on the train.
-    Your destination is Taipei Main Station.
-
-    <div class="dialogue">
-      📢 <strong>Announcement:</strong><br>
-      下一站：台北車站。
-      <small>
-        Next stop: Taipei Main Station.
-      </small>
-    </div>
-  `,
-
-  correct:"forward",
-
-  hint:"You are already on the train. Wait for the next stop.",
-
-  render:`
-    <div class="train-window">
-      <div class="outside"></div>
-    </div>
-
-    <div class="train-seat seat1"></div>
-    <div class="train-seat seat2"></div>
-
-    <div class="ahao-seat">🧑</div>
-  `
-},
-
-/* 5 */
-{
-  type:"taipei",
-
-  story:`
-    <h2>🚉 Taipei Main Station</h2>
-
-    You get off the train.
-    Now you need to find the Red Line.
-
-    <div class="dialogue">
-      👩‍💼 <strong>Station staff:</strong><br>
-      往左走，然後一直走。
-      看到紅色的標誌以後往右轉。
-      <small>
-        Follow the directions carefully.
-      </small>
-    </div>
-  `,
-
-  correct:"left",
-
-  hint:"「往左走」= walk left.",
-
-  render:`
-    <div class="taipei-logo">
-      🚉 台北車站
-    </div>
-
-    <div class="sign-board sign-a">
-      ← 出口
-    </div>
-
-    <div class="sign-board sign-b">
-      🔴 捷運
-    </div>
-  `
-},
-
-/* 6 */
-{
-  type:"taipei",
-
-  story:`
-    <h2>🔴 Find the Red Sign</h2>
-
-    You walked left and then continued straight.
-    You can now see the red MRT sign.
-
-    <div class="dialogue">
-      👩‍💼 <strong>Station staff:</strong><br>
-      看到紅色的標誌以後往右轉。
-      <small>
-        After seeing the red sign, turn right.
-      </small>
-    </div>
-  `,
-
-  correct:"right",
-
-  hint:"「往右轉」= turn right.",
-
-  render:`
-    <div class="taipei-logo">
-      🔴 淡水信義線
-    </div>
-
-    <div class="sign-board sign-a">
-      ← 板南線
-    </div>
-
-    <div class="sign-board sign-b">
-      🔴 淡水信義線 →
-    </div>
-  `
-},
-
-/* 7 */
-{
-  type:"mrt",
-
-  story:`
-    <h2>🚇 On the Red Line</h2>
-
-    You enter the MRT and sit down.
-
-    Your destination is Tamsui.
-
-    <div class="dialogue">
-      📢 <strong>MRT announcement:</strong><br>
-      下一站：淡水。
-      <small>
-        Next stop: Tamsui.
-      </small>
-    </div>
-  `,
-
-  correct:"forward",
-
-  hint:"You are already on the train. Stay on until 淡水.",
-
-  render:`
-    <div class="mrt-window">
-      <div class="station-name">
-        下一站：淡水
-      </div>
-    </div>
-
-    <div class="mrt-seat m1"></div>
-    <div class="mrt-seat m2"></div>
-
-    <div class="ahao-mrt">🧑</div>
-  `
-},
-
-/* 8 */
-{
-  type:"walking",
-
-  story:`
-    <h2>🌊 Welcome to Tamsui</h2>
-
-    You arrive at Tamsui Station.
-
-    Now you need to find the bus stop.
-
-    <div class="dialogue">
-      👤 <strong>Stranger:</strong><br>
-      過馬路以後，往右轉。
-      公車站就在前面。
-      <small>
-        Cross the road, then turn right.
-      </small>
-    </div>
-  `,
-
-  correct:"forward",
-
-  hint:"「過馬路」means cross the road. Go forward first.",
-
-  render:`
-    <div class="road">
-      <div class="road-line"></div>
-    </div>
-
-    <div class="building b-left pharmacy">
-      💊<br>藥局
-    </div>
-
-    <div class="building b-right store">
-      🏪<br>便利商店
-    </div>
-
-    <div class="player-view">👁️</div>
-  `
-},
-
-/* 9 */
-{
-  type:"walking",
-
-  story:`
-    <h2>🚌 Find the Bus Stop</h2>
-
-    You have crossed the road.
-
-    <div class="dialogue">
-      👤 <strong>Stranger:</strong><br>
-      往右轉，公車站就在前面。
-      <small>
-        Turn right. The bus stop is ahead.
-      </small>
-    </div>
-  `,
-
-  correct:"right",
-
-  hint:"「往右轉」= turn right.",
-
-  render:`
-    <div class="road">
-      <div class="road-line"></div>
-    </div>
-
-    <div class="building b-left pharmacy">
-      💊<br>藥局
-    </div>
-
-    <div class="building b-right store">
-      🚌<br>公車站
-    </div>
-
-    <div class="player-view">👁️</div>
-  `
-},
-
-/* 10 */
-{
-  type:"bus",
-
-  story:`
-    <h2>🚌 First Bus</h2>
-
-    You get on the bus and sit down.
-
-    You need to transfer to another bus later.
-
-    <div class="dialogue">
-      📢 <strong>Bus announcement:</strong><br>
-      下一站：轉車站。
-      請準備下車。
-      <small>
-        Next stop: transfer station.
-        Get ready to get off.
-      </small>
-    </div>
-  `,
-
-  correct:"forward",
-
-  hint:"Stay on the bus until the transfer stop.",
-
-  render:`
-    <div class="bus-window">
-      <div class="bus-outside"></div>
-      <div class="bus-stop">🌳</div>
-    </div>
-
-    <div class="bus-seat bs1"></div>
-    <div class="bus-seat bs2"></div>
-
-    <div class="ahao-bus">🧑</div>
-  `
-},
-
-/* 11 */
-{
-  type:"walking",
-
-  story:`
-    <h2>🔄 Transfer Bus</h2>
-
-    You get off the first bus.
-
-    <div class="dialogue">
-      🪧 <strong>Bus sign:</strong><br>
-      26號公車 → 海風小館
-      <small>
-        Bus 26 goes toward the restaurant.
-      </small>
-    </div>
-  `,
-
-  correct:"right",
-
-  hint:"Look for the sign 「26號公車」.",
-
-  render:`
-    <div class="road">
-      <div class="road-line"></div>
-    </div>
-
-    <div class="building b-left station">
-      🚉<br>捷運站
-    </div>
-
-    <div class="building b-right store">
-      🚌<br>26號公車
-    </div>
-
-    <div class="player-view">👁️</div>
-  `
-},
-
-/* 12 */
-{
-  type:"bus",
-
-  story:`
-    <h2>🚌 Bus 26</h2>
-
-    You get on Bus 26 and sit down.
-
-    The restaurant is getting closer.
-
-    <div class="dialogue">
-      📢 <strong>Bus announcement:</strong><br>
-      下一站：藥局。
-      <small>
-        Next stop: the pharmacy.
-      </small>
-    </div>
-  `,
-
-  correct:"forward",
-
-  hint:"Stay on the bus until the pharmacy stop.",
-
-  render:`
-    <div class="bus-window">
-      <div class="bus-outside"></div>
-      <div class="bus-stop">💊</div>
-    </div>
-
-    <div class="bus-seat bs1"></div>
-    <div class="bus-seat bs2"></div>
-
-    <div class="ahao-bus">🧑</div>
-  `
-},
-
-/* 13 */
-{
-  type:"walking",
-
-  story:`
-    <h2>💊 The Pharmacy</h2>
-
-    You get off the bus and see the pharmacy.
-
-    <div class="dialogue">
-      👤 <strong>Stranger:</strong><br>
-      看到藥局以後，往左轉。
-      <small>
-        After you see the pharmacy, turn left.
-      </small>
-    </div>
-  `,
-
-  correct:"left",
-
-  hint:"「往左轉」= turn left.",
-
-  render:`
-    <div class="road">
-      <div class="road-line"></div>
-    </div>
-
-    <div class="building b-left restaurant">
-      🏮<br>海風小館
-    </div>
-
-    <div class="building b-right pharmacy">
-      💊<br>藥局
-    </div>
-
-    <div class="player-view">👁️</div>
-  `
-},
-
-/* 14 */
-{
-  type:"walking",
-
-  story:`
-    <h2>🏮 Almost There!</h2>
-
-    You turned left.
-
-    Now you remember the final instruction:
-
-    <div class="dialogue">
-      👤 <strong>Stranger:</strong><br>
-      餐廳就在右邊。
-      <small>
-        The restaurant is on your right.
-      </small>
-    </div>
-  `,
-
-  correct:"right",
-
-  hint:"「右邊」= on the right side.",
-
-  render:`
-    <div class="road">
-      <div class="road-line"></div>
-    </div>
-
-    <div class="building b-left store">
-      📚<br>書店
-    </div>
-
-    <div class="building b-right restaurant">
-      🏮<br>海風小館
-    </div>
-
-    <div class="player-view">👁️</div>
-  `
-},
-
-/* 15 */
-{
-  type:"restaurant",
-
-  story:`
-    <h2>🎉 You Made It!</h2>
-
-    You finally arrive at
-    <strong>海風小館</strong>.
-
-    Xiaomei and your friends are waiting
-    inside for the birthday dinner!
-
-    <div class="dialogue">
-      👩 <strong>小美：</strong><br>
-      阿豪！你終於到了！
-      <small>
-        Ahao! You finally made it!
-      </small>
-    </div>
-  `,
-
-  correct:"forward",
-
-  hint:"You made it! 🎉",
-
-  render:`
-    <div class="restaurant-building">
-      🏮 海風小館
-    </div>
-
-    <div class="party">
-      🧑 🎁 👩 🎂 🧑‍🤝‍🧑
-    </div>
-  `
-}
+  {
+    type: "street",
+    location: "Department Store",
+    speaker: "🧑 Stranger",
+    text: "一直走，經過銀行和醫院。",
+    correct: "up",
+    mission: 0
+  },
+
+  {
+    type: "street",
+    location: "Street",
+    speaker: "🧑 Stranger",
+    text: "看到便利商店以後，往左轉。",
+    correct: "up",
+    mission: 0
+  },
+
+  {
+    type: "street",
+    location: "Convenience Store",
+    speaker: "🧑 Stranger",
+    text: "便利商店在這裡。往左轉。",
+    correct: "left",
+    mission: 1
+  },
+
+  {
+    type: "street",
+    location: "Street",
+    speaker: "🧑 Stranger",
+    text: "一直走，車站就在前面。",
+    correct: "up",
+    mission: 2
+  },
+
+  {
+    type: "station",
+    location: "Train Station",
+    speaker: "🧑 Station Staff",
+    text: "往前走，進入車站。",
+    correct: "up",
+    mission: 2
+  },
+
+  {
+    type: "train",
+    location: "Train",
+    speaker: "🚆 車內廣播",
+    text: "下一站：台北車站。",
+    correct: "up",
+    mission: 3
+  },
+
+  {
+    type: "taipei",
+    location: "Taipei Main Station",
+    speaker: "🧑 Station Staff",
+    text: "往左走，然後一直走。",
+    correct: "left",
+    mission: 4
+  },
+
+  {
+    type: "taipei",
+    location: "Taipei Main Station",
+    speaker: "🧑 Station Staff",
+    text: "看到紅色的標誌以後往右轉。",
+    correct: "right",
+    mission: 4
+  },
+
+  {
+    type: "mrt",
+    location: "Red Line",
+    speaker: "🚇 車內廣播",
+    text: "淡水信義線。下一站：淡水。",
+    correct: "up",
+    mission: 5
+  },
+
+  {
+    type: "street",
+    location: "Tamsui Station",
+    speaker: "🧑 Stranger",
+    text: "出站以後，過馬路，然後一直走。",
+    correct: "up",
+    mission: 6
+  },
+
+  {
+    type: "street",
+    location: "Bus Stop",
+    speaker: "🧑 Stranger",
+    text: "公車站在右邊。往右轉。",
+    correct: "right",
+    mission: 6
+  },
+
+  {
+    type: "bus",
+    location: "Bus",
+    speaker: "🚌 公車廣播",
+    text: "下一站：轉車站。請準備下車。",
+    correct: "up",
+    mission: 7
+  },
+
+  {
+    type: "street",
+    location: "Bus Transfer Stop",
+    speaker: "🧑 Stranger",
+    text: "在這裡下車。轉搭二十六號公車。",
+    correct: "right",
+    mission: 7
+  },
+
+  {
+    type: "bus",
+    location: "Bus 26",
+    speaker: "🚌 公車廣播",
+    text: "下一站：藥局。",
+    correct: "up",
+    mission: 8
+  },
+
+  {
+    type: "street",
+    location: "Pharmacy",
+    speaker: "🧑 Stranger",
+    text: "看到藥局以後，往左轉。",
+    correct: "left",
+    mission: 8
+  },
+
+  {
+    type: "restaurant",
+    location: "海風小館",
+    speaker: "👩 小美",
+    text: "阿豪！你終於到了！",
+    correct: "up",
+    mission: 9
+  }
 
 ];
 
 
-/* =====================================================
-   GAME STATE
-===================================================== */
+/* =========================================================
+   VARIABLES
+========================================================= */
 
-let step=0;
+let currentScene = 0;
 
-
-/* =====================================================
-   ELEMENTS
-===================================================== */
-
-const story=document.getElementById("story");
-const scene=document.getElementById("scene");
-const status=document.getElementById("status");
-const hint=document.getElementById("hint");
+const sceneEl = document.getElementById("scene");
+const speakerEl = document.getElementById("speaker");
+const dialogueEl = document.getElementById("dialogue");
+const locationEl = document.getElementById("location");
+const progressEl = document.getElementById("progress");
+const statusEl = document.getElementById("status");
 
 
-/* =====================================================
-   SCENE CLASS
-===================================================== */
+/* =========================================================
+   RENDER SCENE
+========================================================= */
 
-function sceneClass(type){
+function renderScene() {
 
-  const classes={
-    walking:"walking",
-    train:"train-scene",
-    taipei:"taipei-scene",
-    mrt:"mrt-scene",
-    bus:"bus-scene",
-    restaurant:"restaurant-scene"
-  };
+  const data = scenes[currentScene];
 
-  return classes[type] || "walking";
-}
+  sceneEl.className = "scene";
 
+  if (data.type === "street") {
 
-/* =====================================================
-   RENDER
-===================================================== */
+    sceneEl.innerHTML = `
 
-function render(){
+      <div class="sky"></div>
 
-  if(step>=scenes.length){
-    finish();
-    return;
+      <div class="cloud one"></div>
+      <div class="cloud two"></div>
+
+      <div class="ground"></div>
+      <div class="road"></div>
+
+      <div class="sidewalk left"></div>
+      <div class="sidewalk right"></div>
+
+      <div class="building left">
+        <div class="sign">銀行</div>
+      </div>
+
+      <div class="building right">
+        <div class="sign">醫院</div>
+      </div>
+
+      <div class="street-sign">
+        ${data.location}
+      </div>
+
+      <div class="player">
+        <div class="player-head"></div>
+        <div class="player-body"></div>
+        <div class="player-leg left"></div>
+        <div class="player-leg right"></div>
+      </div>
+
+    `;
+
   }
 
-  const data=scenes[step];
+  else if (data.type === "station") {
 
-  story.innerHTML=data.story;
+    sceneEl.innerHTML = `
 
-  scene.className="scene "+sceneClass(data.type);
+      <div style="
+        position:absolute;
+        inset:0;
+        background:#333;
+      "></div>
 
-  scene.innerHTML=data.render;
+      <div style="
+        position:absolute;
+        top:8%;
+        left:10%;
+        right:10%;
+        height:20%;
+        background:#ddd;
+        border:6px solid #111;
+        text-align:center;
+        padding:20px;
+        color:#222;
+        font-size:24px;
+        font-weight:bold;
+      ">
+        🚆 車站
+      </div>
 
-  status.className="status";
+      <div style="
+        position:absolute;
+        bottom:0;
+        left:15%;
+        right:15%;
+        height:52%;
+        background:#555;
+        border:7px solid #111;
+      ">
 
-  status.textContent=
-    "Read the Mandarin instruction carefully and choose your direction.";
+        <div style="
+          position:absolute;
+          top:20px;
+          left:20px;
+          right:20px;
+          height:35px;
+          background:#b92e35;
+          color:white;
+          text-align:center;
+          padding:7px;
+          font-weight:bold;
+        ">
+          台北車站
+        </div>
 
-  hint.style.display="none";
+      </div>
+
+      <div class="player">
+        <div class="player-head"></div>
+        <div class="player-body"></div>
+        <div class="player-leg left"></div>
+        <div class="player-leg right"></div>
+      </div>
+
+    `;
+
+  }
+
+  else if (data.type === "train") {
+
+    sceneEl.className += " train-scene";
+
+    sceneEl.innerHTML = `
+
+      <div class="train-ceiling"></div>
+
+      <div class="train-window">
+        <div class="train-outside"></div>
+      </div>
+
+      <div class="train-handle left"></div>
+      <div class="train-handle right"></div>
+
+      <div class="train-seat"></div>
+
+      <div style="
+        position:absolute;
+        top:3%;
+        left:50%;
+        transform:translateX(-50%);
+        background:#222;
+        color:#fff;
+        border:4px solid #111;
+        padding:8px 14px;
+        font-weight:bold;
+      ">
+        🚆 台北車站
+      </div>
+
+      <div class="player">
+        <div class="player-head"></div>
+        <div class="player-body"></div>
+        <div class="player-leg left"></div>
+        <div class="player-leg right"></div>
+      </div>
+
+    `;
+
+  }
+
+  else if (data.type === "taipei") {
+
+    sceneEl.innerHTML = `
+
+      <div style="
+        position:absolute;
+        inset:0;
+        background:#292929;
+      "></div>
+
+      <div style="
+        position:absolute;
+        top:5%;
+        left:5%;
+        right:5%;
+        height:16%;
+        background:#eee;
+        color:#222;
+        border:6px solid #111;
+        text-align:center;
+        padding:18px;
+        font-size:18px;
+        font-weight:bold;
+      ">
+        台北車站
+      </div>
+
+      <div style="
+        position:absolute;
+        top:28%;
+        left:8%;
+        width:220px;
+        height:80px;
+        background:#c52832;
+        border:6px solid #111;
+        color:white;
+        text-align:center;
+        padding:20px;
+        font-size:18px;
+        font-weight:bold;
+      ">
+        🔴 紅線
+      </div>
+
+      <div style="
+        position:absolute;
+        bottom:0;
+        left:0;
+        right:0;
+        height:35%;
+        background:
+          repeating-linear-gradient(
+            90deg,
+            #555 0 40px,
+            #666 40px 80px
+          );
+        border-top:6px solid #111;
+      "></div>
+
+      <div class="player">
+        <div class="player-head"></div>
+        <div class="player-body"></div>
+        <div class="player-leg left"></div>
+        <div class="player-leg right"></div>
+      </div>
+
+    `;
+
+  }
+
+  else if (data.type === "mrt") {
+
+    sceneEl.className += " mrt-scene";
+
+    sceneEl.innerHTML = `
+
+      <div class="mrt-map">
+        🔴 淡水信義線　→　淡水
+      </div>
+
+      <div class="mrt-window">
+        <div class="tunnel"></div>
+      </div>
+
+      <div class="mrt-seat"></div>
+
+      <div class="player">
+        <div class="player-head"></div>
+        <div class="player-body"></div>
+        <div class="player-leg left"></div>
+        <div class="player-leg right"></div>
+      </div>
+
+    `;
+
+  }
+
+  else if (data.type === "bus") {
+
+    sceneEl.className += " bus-scene";
+
+    sceneEl.innerHTML = `
+
+      <div class="bus-window">
+        <div class="bus-outside"></div>
+      </div>
+
+      <div class="bus-pole left"></div>
+      <div class="bus-pole right"></div>
+
+      <div class="bus-seat"></div>
+
+      <div style="
+        position:absolute;
+        top:3%;
+        left:50%;
+        transform:translateX(-50%);
+        background:#222;
+        color:#fff;
+        border:4px solid #111;
+        padding:8px 14px;
+        font-weight:bold;
+      ">
+        🚌 ${data.location}
+      </div>
+
+      <div class="player">
+        <div class="player-head"></div>
+        <div class="player-body"></div>
+        <div class="player-leg left"></div>
+        <div class="player-leg right"></div>
+      </div>
+
+    `;
+
+  }
+
+  else if (data.type === "restaurant") {
+
+    sceneEl.className += " restaurant-scene";
+
+    sceneEl.innerHTML = `
+
+      <div class="restaurant-sign">
+        🍜 海風小館
+      </div>
+
+      <div class="restaurant-door">
+        <div class="restaurant-light"></div>
+      </div>
+
+      <div class="player">
+        <div class="player-head"></div>
+        <div class="player-body"></div>
+        <div class="player-leg left"></div>
+        <div class="player-leg right"></div>
+      </div>
+
+    `;
+
+  }
+
+  speakerEl.textContent = data.speaker;
+  dialogueEl.textContent = data.text;
+  locationEl.textContent = data.location;
+
+  progressEl.textContent =
+    currentScene + " / " + (scenes.length - 1);
 
   updateMission();
 
 }
 
 
-/* =====================================================
-   MOVEMENT
-===================================================== */
+/* =========================================================
+   MOVE
+========================================================= */
 
-function move(direction){
+function move(direction) {
 
-  const data=scenes[step];
+  const data = scenes[currentScene];
 
-  if(direction===data.correct){
+  if (direction === data.correct) {
 
-    status.className="status success";
-    status.textContent="✅ Correct! You understood the direction.";
+    statusEl.className = "status correct";
+    statusEl.textContent = "✓ 正確！";
 
-    setTimeout(()=>{
+    currentScene++;
 
-      step++;
+    if (currentScene >= scenes.length) {
 
-      render();
+      document
+        .getElementById("success")
+        .classList.add("show");
 
-    },650);
+      return;
+    }
 
-  }else{
+    setTimeout(() => {
+      renderScene();
+    }, 350);
 
-    status.className="status error";
+  }
 
-    status.textContent=
-      "❌ Wrong direction. Read the Mandarin instruction again.";
+  else {
 
-    hint.style.display="none";
+    statusEl.className = "status wrong";
 
-    setTimeout(()=>{
+    statusEl.textContent =
+      "再想一想：「" +
+      data.text +
+      "」";
 
-      hint.innerHTML=
-        "💡 Hint: "+data.hint;
-
-      hint.style.display="block";
-
-    },350);
+    shakeScreen();
 
   }
 
 }
 
 
-/* =====================================================
-   HINT
-===================================================== */
+/* =========================================================
+   SCREEN SHAKE
+========================================================= */
 
-function showHint(){
+function shakeScreen() {
 
-  const data=scenes[step];
+  const screen = document.getElementById("screen");
 
-  hint.innerHTML=
-    "💡 <strong>Hint:</strong><br>"+data.hint;
-
-  hint.style.display="block";
+  screen.animate(
+    [
+      { transform: "translateX(0)" },
+      { transform: "translateX(-8px)" },
+      { transform: "translateX(8px)" },
+      { transform: "translateX(-6px)" },
+      { transform: "translateX(6px)" },
+      { transform: "translateX(0)" }
+    ],
+    {
+      duration: 250
+    }
+  );
 
 }
 
 
-/* =====================================================
+/* =========================================================
    MISSION
-===================================================== */
+========================================================= */
 
-function updateMission(){
+function updateMission() {
 
-  const checks=[
-    step>=1,
-    step>=4,
-    step>=5,
-    step>=6,
-    step>=8,
-    step>=10,
-    step>=12,
-    step>=15
-  ];
+  const missionMap = {
 
-  checks.forEach((done,i)=>{
+    0: [0],
+    1: [0,1],
+    2: [0,1,2],
+    3: [0,1,2,3],
+    4: [0,1,2,3,4],
+    5: [0,1,2,3,4,5],
+    6: [0,1,2,3,4,5,6],
+    7: [0,1,2,3,4,5,6,7],
+    8: [0,1,2,3,4,5,6,7,8],
+    9: [0,1,2,3,4,5,6,7,8,9],
+    10: [0,1,2,3,4,5,6,7,8,9],
+    11: [0,1,2,3,4,5,6,7,8,9],
+    12: [0,1,2,3,4,5,6,7,8,9],
+    13: [0,1,2,3,4,5,6,7,8,9],
+    14: [0,1,2,3,4,5,6,7,8,9],
+    15: [0,1,2,3,4,5,6,7,8,9]
 
-    const el=document.getElementById("m"+(i+1));
+  };
 
-    if(done){
+  const completed = missionMap[currentScene] || [];
 
-      el.classList.add("done");
+  for (let i = 0; i <= 9; i++) {
 
-      el.innerHTML=
-        el.innerHTML.replace("☐","☑");
+    const item = document.getElementById("m" + i);
 
+    item.classList.remove("done");
+    item.classList.remove("current");
+
+    if (completed.includes(i)) {
+      item.classList.add("done");
+      item.innerHTML =
+        item.innerHTML.replace("⬜", "✅");
     }
 
-  });
+  }
+
+  if (currentScene < scenes.length) {
+
+    const currentMission =
+      scenes[currentScene].mission;
+
+    const currentItem =
+      document.getElementById("m" + currentMission);
+
+    if (currentItem) {
+      currentItem.classList.add("current");
+    }
+
+  }
 
 }
 
 
-/* =====================================================
-   FINISH
-===================================================== */
-
-function finish(){
-
-  document.getElementById("game").style.display="none";
-
-  document.getElementById("finish").style.display="block";
-
-}
-
-
-/* =====================================================
-   RESTART
-===================================================== */
-
-function restart(){
-
-  step=0;
-
-  document.getElementById("game").style.display="block";
-
-  document.getElementById("finish").style.display="none";
-
-  document
-    .querySelectorAll(".mission div")
-    .forEach((el,i)=>{
-
-      const text=el.textContent
-        .replace("☑","☐");
-
-      el.textContent=text;
-
-      el.classList.remove("done");
-
-    });
-
-  render();
-
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
-  });
-
-}
-
-
-/* =====================================================
+/* =========================================================
    KEYBOARD
-===================================================== */
+========================================================= */
 
-document.addEventListener("keydown",e=>{
+document.addEventListener("keydown", function(event) {
 
-  if(e.key==="ArrowUp")
-    move("forward");
+  const keyMap = {
 
-  if(e.key==="ArrowLeft")
-    move("left");
+    ArrowUp: "up",
+    ArrowDown: "down",
+    ArrowLeft: "left",
+    ArrowRight: "right"
 
-  if(e.key==="ArrowRight")
-    move("right");
+  };
 
-  if(e.key==="ArrowDown")
-    move("back");
+  if (keyMap[event.key]) {
+
+    event.preventDefault();
+
+    move(keyMap[event.key]);
+
+  }
 
 });
 
 
-/* =====================================================
-   START
-===================================================== */
+/* =========================================================
+   RESTART
+========================================================= */
 
-render();
+function restartGame() {
+
+  currentScene = 0;
+
+  document
+    .getElementById("success")
+    .classList.remove("show");
+
+  statusEl.className = "status";
+  statusEl.textContent =
+    "聽懂對方的指示，選擇方向。";
+
+  renderScene();
+
+}
+
+
+/* =========================================================
+   START
+========================================================= */
+
+renderScene();
 
 </script>
 
