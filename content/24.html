@@ -3,298 +3,252 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Boba Break Study - Tamsui 3D Chibi Style</title>
+    <title>Boba Break Study - Mobile Version</title>
     <style>
+        * { box-sizing: border-box; }
         body {
-            background-color: #2b2621;
+            background-color: #1e1b18;
             color: #f4f1ea;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .game-wrapper {
+            width: 100%;
+            max-width: 480px; /* Ukuran pas ala layar HP */
+            height: 100vh;
+            max-height: 850px;
+            background: #2b2621;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            margin: 0;
+            border-radius: 0;
+            box-shadow: 0 0 20px rgba(0,0,0,0.8);
+            position: relative;
+            overflow: hidden;
+        }
+        @media(min-width: 500px) {
+            .game-wrapper { border-radius: 16px; border: 4px solid #5c4033; }
+        }
+        /* Bagian Atas / Visual Scene */
+        .scene-container {
+            flex: 1;
+            background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=600&auto=format&fit=crop') center/cover;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
             padding: 15px;
         }
-        .game-container {
-            width: 720px;
-            background: #fff8ee;
-            color: #2c3e50;
-            border: 5px solid #5c4033;
-            border-radius: 12px;
-            padding: 12px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-        }
-        .header {
+        .top-bar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 10px;
         }
-        h1 { font-size: 1.1rem; color: #5c4033; margin: 0; }
+        .badge {
+            background: rgba(92, 64, 51, 0.85);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: #ffd700;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
         .vocab-btn {
             background: #c86d51;
             color: white;
             border: none;
-            padding: 6px 12px;
-            border-radius: 6px;
-            cursor: pointer;
+            padding: 8px 14px;
+            border-radius: 20px;
             font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }
-        .vocab-btn:hover { opacity: 0.9; }
-        canvas {
-            background: #a3d977; /* Warna rumput cerah ala game 3D kasual */
-            border-radius: 8px;
-            border: 3px solid #795548;
-            display: block;
-            margin: 0 auto;
+        
+        /* Area Dialog / Kotak Percintaan ala Visual Novel */
+        .dialogue-box {
+            background: rgba(35, 30, 26, 0.92);
+            border: 2px solid #8c6d53;
+            border-radius: 14px;
+            padding: 16px;
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
         }
-        .ui-box {
-            margin-top: 12px;
-            background: #faf8f5;
-            border: 2px solid #d1c7bd;
-            border-radius: 8px;
+        .speaker-name {
+            color: #e67e22;
+            font-weight: bold;
+            font-size: 0.95rem;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .dialogue-text {
+            font-size: 1.05rem;
+            line-height: 1.4;
+            margin-bottom: 8px;
+        }
+        .pinyin-text {
+            color: #b2bec3;
+            font-size: 0.85rem;
+            font-style: italic;
+            margin-bottom: 12px;
+        }
+        .action-choice-btn {
+            background: #27ae60;
+            color: white;
+            border: none;
+            width: 100%;
             padding: 12px;
-            min-height: 80px;
-        }
-        .speaker { color: #c86d51; font-weight: bold; margin-bottom: 4px; }
-        .text { font-size: 1.05rem; line-height: 1.4; }
-        .pinyin { color: #7f8c8d; font-size: 0.9rem; margin-bottom: 4px; font-style: italic; }
-        .controls-hint {
-            margin-top: 8px;
-            font-size: 0.8rem;
-            color: #7f8c8d;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: bold;
+            cursor: pointer;
             text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
         }
-        /* Modal Vocab */
+        .action-choice-btn:active { transform: scale(0.98); }
+
+        /* Modal Vocab Overlay */
         .modal {
             display: none;
-            position: fixed;
+            position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.6);
-            justify-content: center;
-            align-items: center;
+            background: rgba(0,0,0,0.8);
             z-index: 100;
+            justify-content: center;
+            align-items: flex-end;
         }
         .modal-content {
-            background: white;
-            width: 90%; max-width: 500px;
-            border-radius: 10px;
+            background: #2b2621;
+            width: 100%;
+            height: 75%;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
             padding: 20px;
-            max-height: 80vh;
             overflow-y: auto;
-            color: #2c3e50;
+            border-top: 3px solid #c86d51;
         }
-        .close-btn { background: none; border: none; font-size: 1.5rem; cursor: pointer; float: right; color: #7f8c8d;}
-        .vocab-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; margin-top: 15px;}
-        .vocab-table th, .vocab-table td { border: 1px solid #d1c7bd; padding: 8px; text-align: left; }
-        .vocab-table th { background: #3b5249; color: white; }
+        .close-modal {
+            background: none; border: none; color: #fff; font-size: 1.5rem; float: right; cursor: pointer;
+        }
+        .vocab-item {
+            background: #383029;
+            padding: 10px 14px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 4px solid #c86d51;
+        }
+        .vocab-cn { font-size: 1.1rem; font-weight: bold; color: #f1c40f; }
+        .vocab-en { font-size: 0.85rem; color: #bdc3c7; }
     </style>
 </head>
 <body>
 
-<div class="game-container">
-    <div class="header">
-        <h1>Boba Break: Petualangan Tamsui (3D Chibi Style)</h1>
-        <button class="vocab-btn" onclick="openVocab()">📖 Vocab Menu</button>
-    </div>
+<div class="game-wrapper">
+    <!-- Layar / Scene Utama -->
+    <div class="scene-container" id="sceneBg">
+        <div class="top-bar">
+            <div class="badge" id="levelBadge">📍 Misi 1: Ke Stasiun</div>
+            <button class="vocab-btn" onclick="toggleVocab(true)">📖 Vocab</button>
+        </div>
 
-    <!-- Canvas Game -->
-    <canvas id="gameCanvas" width="690" height="360"></canvas>
-
-    <div class="ui-box" id="uiBox">
-        <div class="speaker" id="speakerName">Petunjuk Permainan</div>
-        <div class="pinyin" id="uiPinyin">Gunakan Tombol Panah atau W, A, S, D untuk menggerakkan Ahao.</div>
-        <div class="text" id="uiText">Misi: Dekati karakter NPC di peta lalu tekan [Space] untuk bertanya arah ke Tamsui!</div>
+        <!-- Kotak Dialog Bawah (Sangat Ramah HP/Touchscreen) -->
+        <div class="dialogue-box">
+            <div class="speaker-name" id="speakerTitle">Warga Desa</div>
+            <div class="dialogue-text" id="dialogueText">Mau ke stasiun? Naik <b>105 公車 (gōngchē)</b>, turun di depan <b>銀行 (yínháng)</b>.</div>
+            <div class="pinyin-text" id="pinyinText">Nǐ xiǎng qù chēzhàn ma? Dā 105 gōngchē...</div>
+            <button class="action-choice-btn" id="choiceBtn" onclick="nextStep()">Lanjut Naik Kereta (火車)</button>
+        </div>
     </div>
-    
-    <div class="controls-hint">Gerak: W/A/S/D | Interaksi: Tekan [Space] saat dekat NPC</div>
 </div>
 
-<!-- Modal Vocab -->
+<!-- Modal Menu Kosakata -->
 <div class="modal" id="vocabModal">
     <div class="modal-content">
-        <button class="close-btn" onclick="closeVocab()">&times;</button>
-        <h3 style="margin:0; color:#3b5249;">Keyword Vocabulary</h3>
-        <table class="vocab-table">
-            <thead><tr><th>Mandarin</th><th>Pinyin</th><th>English</th></tr></thead>
-            <tbody id="vocabBody"></tbody>
-        </table>
+        <button class="close-modal" onclick="toggleVocab(false)">&times;</button>
+        <h3 style="color:#e67e22; margin-top:0;">Kosakata Tamsui Journey</h3>
+        <div id="vocabListContainer"></div>
     </div>
 </div>
 
 <script>
-    const canvas = document.getElementById('gameCanvas');
-    const ctx = canvas.getContext('2d');
+    let currentStage = 0;
 
-    let ahao = { x: 60, y: 200, speed: 3 };
-
-    let keys = {};
-    window.addEventListener('keydown', e => { keys[e.key] = true; if(e.key === ' ') checkInteraction(); });
-    window.addEventListener('keyup', e => { keys[e.key] = false; });
-
-    let npcs = [
-        { id: 1, x: 220, y: 170, color: '#3498db', name: "Warga Desa", spoken: false },
-        { id: 2, x: 430, y: 90, color: '#9b59b6', name: "Petugas Stasiun", spoken: false },
-        { id: 3, x: 610, y: 230, color: '#e67e22', name: "Warga Tamsui", spoken: false }
+    const storyData = [
+        {
+            stageName: "📍 Misi 1: Mencari Bus",
+            bgUrl: "url('https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=600&auto=format&fit=crop')",
+            speaker: "Warga Desa",
+            text: "Mau ke stasiun? Naik <b>105 公車 (gōngchē)</b>, turun di depan <b>銀行 (yínháng)</b>, lalu lanjut jalan kaki.",
+            pinyin: "Nǐ xiǎng qù chēzhàn ma? Dā 105 gōngchē, xiàchē zài yínháng...",
+            btnText: "Naik Kereta Menuju Taipei (火車)"
+        },
+        {
+            stageName: "📍 Misi 2: Stasiun Taipei",
+            bgUrl: "url('https://images.unsplash.com/photo-1509198397868-475647b2a1e5?q=80&w=600&auto=format&fit=crop')",
+            speaker: "Petugas Stasiun",
+            text: "Mau ke Tamsui? Kamu harus <b>轉乘 (zhuǎnchéng - transfer)</b> ke <b>紅線 (hóng xiàn - Red Line)</b> <b>捷運 (jiéyùn - MRT)</b>.",
+            pinyin: "Qù Dànshuǐ? Nǐ děi zhuǎnchéng hóng xiàn jiéyùn.",
+            btnText: "Naik MRT ke Tamsui (捷運)"
+        },
+        {
+            stageName: "📍 Misi 3: Tamsui (Selesai!)",
+            bgUrl: "url('https://images.unsplash.com/photo-1508873696983-2df5c920ac1c?q=80&w=600&auto=format&fit=crop')",
+            speaker: "Warga Tamsui",
+            text: "Restorannya dekat! Pertama ke <b>左 (zuǒ - kiri)</b>, lalu belok ke <b>右 (yòu - kanan)</b>. Selamat Ulang Tahun Xiaomei! 🎉",
+            pinyin: "Xiān xiàng zuǒ, rùhòu guǎi yòu. Shēngrì kuàilè!",
+            btnText: "Selesai / Main Lagi 🔄"
+        }
     ];
 
-    let gameState = 0; 
-
-    const vocabData = [
-        { cn: "左", pinyin: "zuǒ", en: "Left" },
-        { cn: "右", pinyin: "yòu", en: "Right" },
-        { cn: "轉車 / 轉乘", pinyin: "zhuǎnchē / zhuǎnchéng", en: "Transfer / Change transport" },
-        { cn: "火車", pinyin: "huǒchē", en: "Train" },
-        { cn: "捷運 (MRT)", pinyin: "jiéyùn", en: "MRT" },
-        { cn: "紅線", pinyin: "hóng xiàn", en: "Red Line" },
-        { cn: "淡水", pinyin: "Dànshuǐ", en: "Tamsui" },
-        { cn: "公車", pinyin: "gōngchē", en: "Bus" }
+    const vocabList = [
+        { cn: "左 (zuǒ)", en: "Left (Kiri)" },
+        { cn: "右 (yòu)", en: "Right (Kanan)" },
+        { cn: "轉車 / 轉乘 (zhuǎnchē / zhuǎnchéng)", en: "Transfer / Ganti kendaraan" },
+        { cn: "火車 (huǒchē)", en: "Train (Kereta api)" },
+        { cn: "捷運 (jiéyùn)", en: "MRT / Subway" },
+        { cn: "紅線 (hóng xiàn)", en: "Red Line (Jalur Merah MRT)" },
+        { cn: "淡水 (Dànshuǐ)", en: "Tamsui (Nama tempat)" },
+        { cn: "公車 (gōngchē)", en: "Bus" },
+        { cn: "銀行 (yínháng)", en: "Bank" }
     ];
 
-    function update() {
-        if ((keys['ArrowUp'] || keys['w'] || keys['W']) && ahao.y > 50) ahao.y -= ahao.speed;
-        if ((keys['ArrowDown'] || keys['s'] || keys['S']) && ahao.y < canvas.height - 50) ahao.y += ahao.speed;
-        if ((keys['ArrowLeft'] || keys['a'] || keys['A']) && ahao.x > 30) ahao.x -= ahao.speed;
-        if ((keys['ArrowRight'] || keys['d'] || keys['D']) && ahao.x < canvas.width - 40) ahao.x += ahao.speed;
+    function nextStep() {
+        currentStage++;
+        if(currentStage >= storyData.length) {
+            currentStage = 0; // Reset ulang game
+        }
+        let data = storyData[currentStage];
+        document.getElementById('levelBadge').innerText = data.stageName;
+        document.getElementById('sceneBg').style.backgroundImage = data.bgUrl;
+        document.getElementById('speakerTitle').innerText = data.speaker;
+        document.getElementById('dialogueText').innerHTML = data.text;
+        document.getElementById('pinyinText').innerText = data.pinyin;
+        document.getElementById('choiceBtn').innerText = data.btnText;
     }
 
-    // Fungsi menggambar karakter 3D Chibi (bulat dan mulus seperti miniatur mainan)
-    function drawChibiCharacter(x, y, isAhao = true) {
-        // Bayangan lembut di tanah
-        ctx.fillStyle = "rgba(0,0,0,0.25)";
-        ctx.beginPath();
-        ctx.ellipse(x, y + 14, 12, 6, 0, 0, Math.PI * 2);
-        ctx.fill();
-
-        if (isAhao) {
-            // Badan Ahao (Baju hijau/merah chibi melengkung)
-            ctx.fillStyle = "#e74c3c";
-            ctx.beginPath();
-            ctx.roundRect(x - 9, y - 2, 18, 16, [6, 6, 4, 4]);
-            ctx.fill();
-
-            // Kepala Bulat Chibi (Warna kulit mulus)
-            ctx.fillStyle = "#fde3a7";
-            ctx.beginPath();
-            ctx.arc(x, y - 12, 11, 0, Math.PI * 2);
-            ctx.fill();
-
-            // Topi Khas Ahao (Hijau melengkung)
-            ctx.fillStyle = "#27ae60";
-            ctx.beginPath();
-            ctx.arc(x, y - 16, 11, Math.PI, Math.PI * 2);
-            ctx.fill();
-            ctx.fillRect(x - 13, y - 16, 26, 4);
-        } else {
-            // NPC Chibi Umum
-            ctx.fillStyle = "#2980b9";
-            ctx.beginPath();
-            ctx.roundRect(x - 9, y - 2, 18, 16, [6, 6, 4, 4]);
-            ctx.fill();
-
-            // Kepala Bulat NPC
-            ctx.fillStyle = "#fde3a7";
-            ctx.beginPath();
-            ctx.arc(x, y - 12, 11, 0, Math.PI * 2);
-            ctx.fill();
-
-            // Rambut NPC
-            ctx.fillStyle = "#5d6d7e";
-            ctx.beginPath();
-            ctx.arc(x, y - 15, 10, Math.PI, Math.PI * 2);
-            ctx.fill();
+    function toggleVocab(show) {
+        let modal = document.getElementById('vocabModal');
+        modal.style.display = show ? 'flex' : 'none';
+        if(show) {
+            let container = document.getElementById('vocabListContainer');
+            container.innerHTML = '';
+            vocabList.forEach(v => {
+                container.innerHTML += `
+                    <div class="vocab-item">
+                        <span class="vocab-cn">${v.cn}</span>
+                        <span class="vocab-en">${v.en}</span>
+                    </div>
+                `;
+            });
         }
     }
-
-    function draw() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-        // Jalan Setapak Desa (Warna tanah cokelat hangat melengkung estetik)
-        ctx.fillStyle = '#d2b48c';
-        ctx.beginPath();
-        ctx.roundRect(0, 140, canvas.width, 100, 20);
-        ctx.fill();
-
-        // Gambar NPC Chibi
-        npcs.forEach(npc => {
-            drawChibiCharacter(npc.x, npc.y, false);
-            // Label nama NPC
-            ctx.fillStyle = '#2c3e50';
-            ctx.font = 'bold 11px Segoe UI';
-            ctx.textAlign = 'center';
-            ctx.fillText(npc.name, npc.x, npc.y - 30);
-        });
-
-        // Gambar Ahao Chibi
-        drawChibiCharacter(ahao.x, ahao.y, true);
-        ctx.fillStyle = '#c86d51';
-        ctx.font = 'bold 10px Segoe UI';
-        ctx.textAlign = 'center';
-        ctx.fillText("▼ AHAO", ahao.x, ahao.y - 28);
-    }
-
-    function checkInteraction() {
-        npcs.forEach(npc => {
-            let dist = Math.hypot(ahao.x - npc.x, ahao.y - npc.y);
-            if (dist < 45) {
-                triggerDialogue(npc.id);
-            }
-        });
-    }
-
-    function triggerDialogue(id) {
-        let speaker = document.getElementById('speakerName');
-        let pinyin = document.getElementById('uiPinyin');
-        let text = document.getElementById('uiText');
-
-        if (id === 1 && gameState === 0) {
-            speaker.innerText = "Warga Desa (Pemberi Arah Bus)";
-            pinyin.innerText = "Nǐ xiǎng qù chēzhàn ma? Dā 105 gōngchē, xiàchē zài yínháng...";
-            text.innerHTML = "Warga: 'Mau ke stasiun? Naik <b>105 公車 (gōngchē)</b>, turun di depan <b>銀行 (yínháng - bank)</b>, terus naik GR!'<br><span style='color:#c86d51; cursor:pointer; font-weight:bold;' onclick='nextStage(1)'>[Klik di sini untuk lanjut naik kereta 火車]</span>";
-        } else if (id === 2 && gameState === 1) {
-            speaker.innerText = "Petugas Stasiun Taipei";
-            pinyin.innerText = "Qù Dànshuǐ? Nǐ děi zhuǎnchéng hóng xiàn jiéyùn.";
-            text.innerHTML = "Petugas: 'Mau ke Tamsui? Kamu harus <b>轉乘 (zhuǎnchéng - transfer)</b> ke <b>紅線 (hóng xiàn - Red Line)</b> <b>捷運 (jiéyùn - MRT)</b>.'<br><span style='color:#c86d51; cursor:pointer; font-weight:bold;' onclick='nextStage(2)'>[Klik di sini untuk naik MRT ke Tamsui]</span>";
-        } else if (id === 3 && gameState === 2) {
-            speaker.innerText = "Warga Tamsui (Dekat Restoran)";
-            pinyin.innerText = "Xiān xiàng zuǒ, rùhòu guǎi yòu. Shēngrì kuàilè!";
-            text.innerHTML = "Warga: 'Restonya dekat! Pertama ke <b>左 (zuǒ - kiri)</b>, lalu belok ke <b>右 (yòu - kanan)</b>.'<br>🎉 <b>Selamat! Ahao berhasil sampai di Tamsui merayakan ulang tahun Xiaomei!</b>";
-        }
-    }
-
-    function nextStage(stage) {
-        gameState = stage;
-        if (stage === 1) {
-            npcs[0].name = "Selesai (Naik Huoche)";
-            document.getElementById('speakerName').innerText = "Ahao (阿豪)";
-            document.getElementById('uiPinyin').innerText = "Wǒ zài zuò huǒchē qù Táiběi.";
-            document.getElementById('uiText').innerText = "Ahao berada di dalam 火車 (huǒchē - kereta) menuju Taipei Main Station. (Dekati NPC Petugas Stasiun di atas map!)";
-        } else if (stage === 2) {
-            npcs[1].name = "Selesai (Naik MRT)";
-            document.getElementById('speakerName').innerText = "Ahao (阿豪)";
-            document.getElementById('uiPinyin').innerText = "Zài hóng xiàn jiéyùn shàng.";
-            document.getElementById('uiText').innerText = "Ahao naik MRT Red Line menuju utara. (Dekati Warga Tamsui di sebelah kanan map!)";
-            gameState = 2;
-        }
-    }
-
-    function openVocab() {
-        document.getElementById('vocabModal').style.display = 'flex';
-        let tbody = document.getElementById('vocabBody');
-        tbody.innerHTML = '';
-        vocabData.forEach(v => {
-            tbody.innerHTML += `<tr><td><strong>${v.cn}</strong></td><td>${v.pinyin}</td><td>${v.en}</td></tr>`;
-        });
-    }
-
-    function closeVocab() { document.getElementById('vocabModal').style.display = 'none'; }
-
-    function loop() {
-        update();
-        draw();
-        requestAnimationFrame(loop);
-    }
-    loop();
 </script>
 
 </body>
