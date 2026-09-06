@@ -2134,9 +2134,95 @@ answer: ["銀行", "在", "郵局", "的", "哪裡"]
             answer: ["她", "知道", "了", "嗎"]
         }
     ]
+},
+
+
+// ========================================================
+// LESSON 23
+// ========================================================
+23: {
+    grammar: [
+        {
+            id: "g23-1",
+            name: "會 (huì)",
+            category: "Modal Verb - Learned Skill",
+            explanation: "會 is used to talk about a skill that someone has learned. It means 'know how to' or 'can.' Pattern: Subject + 會 + Verb.",
+            examples: [
+                { hanzi: "我會說英文。", pinyin: "Wǒ huì shuō Yīngwén.", english: "I can speak English." },
+                { hanzi: "小美會說中文。", pinyin: "Xiǎoměi huì shuō Zhōngwén.", english: "Xiaomei can speak Chinese." },
+                { hanzi: "我不會游泳。", pinyin: "Wǒ bú huì yóuyǒng.", english: "I can't swim." }
+            ]
+        },
+        {
+            id: "g23-2",
+            name: "能 (néng)",
+            category: "Modal Verb - Ability Based on Circumstances",
+            explanation: "能 means 'to be able to.' It is used when the ability to do something depends on a person's situation, physical condition, time, or other circumstances. Pattern: Subject + 能 + Verb.",
+            examples: [
+                { hanzi: "我明天能跟你一起學嗎？", pinyin: "Wǒ míngtiān néng gēn nǐ yìqǐ xué ma?", english: "Can I study with you tomorrow?" },
+                { hanzi: "我下午不能來。", pinyin: "Wǒ xiàwǔ bù néng lái.", english: "I can't come in the afternoon." },
+                { hanzi: "我晚上能來。", pinyin: "Wǒ wǎnshàng néng lái.", english: "I can come in the evening." }
+            ]
+        },
+        {
+            id: "g23-3",
+            name: "可以 (kěyǐ)",
+            category: "Modal Verb - Permission",
+            explanation: "可以 is commonly used to ask for or give permission. It can mean 'may,' 'be allowed to,' or sometimes 'can.' Pattern: Subject + 可以 + Verb.",
+            examples: [
+                { hanzi: "我可以出去嗎？", pinyin: "Wǒ kěyǐ chūqù ma?", english: "May I go out?" },
+                { hanzi: "媽媽說我可以出去。", pinyin: "Māma shuō wǒ kěyǐ chūqù.", english: "Mom said that I can go out." },
+                { hanzi: "你可以來我家。", pinyin: "Nǐ kěyǐ lái wǒ jiā.", english: "You are allowed to come to my house." }
+            ]
+        },
+        {
+            id: "g23-4",
+            name: "的話 (de huà)",
+            category: "Conditional",
+            explanation: "的話 is placed at the end of a conditional clause to mean 'if' or 'in that case.' It can be used together with 如果 (rúguǒ, 'if') at the beginning of the sentence, or on its own. Pattern: (如果) + Clause + 的話 + Result.",
+            examples: [
+                { hanzi: "你可以來的話，再跟我說。", pinyin: "Nǐ kěyǐ lái de huà, zài gēn wǒ shuō.", english: "If you can come, let me know." }
+            ]
+        },
+        {
+            id: "g23-5",
+            name: "再 (zài)",
+            category: "Adverb - Sequence / Repetition",
+            explanation: "再 placed before a verb means the action happens afterward or as a next step — often 'then' in English, especially after a condition. It can also mean 'again,' referring to a repeated action. Pattern: Subject + 再 + Verb.",
+            examples: [
+                { hanzi: "你可以來的話，再跟我說。", pinyin: "Nǐ kěyǐ lái de huà, zài gēn wǒ shuō.", english: "If you can come, tell me then." },
+                { hanzi: "先問媽媽，再來我家。", pinyin: "Xiān wèn māma, zài lái wǒ jiā.", english: "Ask mom first, then come to my house." }
+            ]
+        }
+    ],
+    vocabulary: [
+        { word: "會", pinyin: "huì", meaning: "can / know how to" },
+        { word: "可以", pinyin: "kěyǐ", meaning: "can / may (permission)" },
+        { word: "啊", pinyin: "a", meaning: "softening particle" },
+        { word: "事情", pinyin: "shìqíng", meaning: "matter / thing (to do)" },
+        { word: "能", pinyin: "néng", meaning: "can / to be able to" },
+        { word: "先", pinyin: "xiān", meaning: "first" },
+        { word: "的話", pinyin: "de huà", meaning: "if / in that case" },
+        { word: "再", pinyin: "zài", meaning: "then / again" },
+        { word: "別", pinyin: "bié", meaning: "other / another" },
+        { word: "語言", pinyin: "yǔyán", meaning: "language" },
+        { word: "日文", pinyin: "Rìwén", meaning: "Japanese (language)" },
+        { word: "厲害", pinyin: "lìhài", meaning: "amazing / impressive" },
+        { word: "只", pinyin: "zhǐ", meaning: "only" }
+    ],
+    reviewQuestions: [
+        { meaning: "I can speak a little English.", answer: ["我","會","說","一","點","英","文"] },
+        { meaning: "I can't come tomorrow afternoon.", answer: ["我","明","天","下","午","不","能","來"] },
+        { meaning: "Can you come to my house?", answer: ["你","可","以","來","我","家","嗎"] },
+        { meaning: "I need to ask mom first.", answer: ["我","要","先","問","媽","媽"] },
+        { meaning: "If you can come, tell me then.", answer: ["你","可","以","來","的","話","再","跟","我","說"] },
+        { meaning: "Can you speak another language?", answer: ["你","會","說","別","的","語","言","嗎"] },
+        { meaning: "I can also speak a little Japanese.", answer: ["我","也","會","說","一","點","日","文"] },
+        { meaning: "I can only speak Chinese.", answer: ["我","只","會","說","中","文"] },
+        { meaning: "You are so impressive!", answer: ["你","真","厲","害"] },
+        { meaning: "I have something tomorrow.", answer: ["我","明","天","有","事","情"] }
+    ]
 }
-
-
 };
 
 // ============================================================
