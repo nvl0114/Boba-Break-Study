@@ -1,165 +1,2428 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Boba Break Study - Mobile Isometric Game</title>
-    <style>
-        * { box-sizing: border-box; touch-action: manipulation; }
-        body {
-            background-color: #121212;
-            color: #fff;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0; padding: 0;
-            display: flex; justify-content: center; align-items: center;
-            min-height: 100vh;
-        }
-        .game-card {
-            width: 100%; max-width: 420px; height: 100vh; max-height: 750px;
-            background: #231f20; display: flex; flex-direction: column;
-            position: relative; overflow: hidden; border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-        }
-        
-        /* Area Peta Isometrik */
-        .map-viewport {
-            flex: 1;
-            /* Latar Belakang Desaku Isometric 3D Estetik */
-            background: url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=800&auto=format&fit=crop') center/cover;
-            position: relative; overflow: hidden;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        /* Overlay karakter & NPC */
-        .entity {
-            position: absolute; transform: translate(-50%, -50%);
-            transition: all 0.2s linear; display: flex; flex-direction: column; align-items: center;
-        }
-        .entity-label {
-            background: rgba(0,0,0,0.7); color: #fff; font-size: 10px; font-weight: bold;
-            padding: 2px 6px; border-radius: 10px; white-space: nowrap; margin-bottom: 2px;
-            border: 1px solid #e67e22;
-        }
-        .avatar {
-            width: 36px; height: 36px; border-radius: 50%;
-            display: flex; justify-content: center; align-items: center; font-size: 18px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.5);
-        }
-        #player { z-index: 10; }
-        #player .avatar { background: #e74c3c; border: 2px solid #fff; }
-        
-        .npc .avatar { background: #3498db; border: 2px solid #f1c40f; }
+<title>阿豪的淡水生日任務</title>
 
-        /* Dialog Box HP */
-        .dialogue-panel {
-            background: rgba(28, 25, 23, 0.95);
-            border-top: 3px solid #e67e22; padding: 12px 16px; min-height: 140px;
-            display: flex; flex-direction: column; justify-content: space-between;
-        }
-        .speaker { color: #f39c12; font-weight: bold; font-size: 14px; margin-bottom: 2px; }
-        .pinyin { color: #bdc3c7; font-size: 11px; font-style: italic; }
-        .text { font-size: 13px; line-height: 1.3; margin: 4px 0; }
+<style>
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
 
-        /* Tombol D-Pad Layar Sentuh HP */
-        .dpad-container {
-            position: absolute; bottom: 150px; left: 15px;
-            width: 100px; height: 100px; display: grid;
-            grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(3, 1fr);
-            gap: 2px; opacity: 0.8;
-        }
-        .dbtn {
-            background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.3);
-            color: white; border-radius: 6px; display: flex;
-            justify-content: center; align-items: center; font-weight: bold;
-            user-select: none;
-        }
-        .dbtn:active { background: #e67e22; }
+body {
+    margin: 0;
+    font-family: Arial, "Microsoft JhengHei", sans-serif;
+    background: #f5eee8;
+    color: #332821;
+    overflow-x: hidden;
+}
 
-        .top-btn {
-            position: absolute; top: 12px; right: 12px;
-            background: #e67e22; color: white; border: none; padding: 6px 12px;
-            border-radius: 15px; font-size: 12px; font-weight: bold; z-index: 20;
-        }
-    </style>
+header {
+    background: #5c4033;
+    color: white;
+    text-align: center;
+    padding: 15px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 22px;
+}
+
+header p {
+    margin: 5px 0 0;
+    font-size: 12px;
+    opacity: .8;
+}
+
+.game-container {
+    width: min(100%, 850px);
+    margin: auto;
+    padding: 15px;
+}
+
+/* =========================
+   HUD
+========================= */
+
+.hud {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+}
+
+.hud-box {
+    background: white;
+    border-radius: 14px;
+    padding: 10px 14px;
+    box-shadow: 0 3px 10px rgba(0,0,0,.08);
+    flex: 1;
+    min-width: 140px;
+}
+
+.hud-label {
+    font-size: 10px;
+    color: #999;
+    text-transform: uppercase;
+}
+
+.hud-value {
+    margin-top: 3px;
+    font-weight: bold;
+}
+
+.vocab-btn {
+    background: #78a58c;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 10px 15px;
+    font-weight: bold;
+}
+
+/* =========================
+   OBJECTIVE
+========================= */
+
+.objective {
+    background: #ffe7ae;
+    border: 2px solid #e4bd5d;
+    border-radius: 15px;
+    padding: 13px;
+    margin-bottom: 12px;
+}
+
+.objective small {
+    color: #87651b;
+    font-weight: bold;
+}
+
+#objectiveText {
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+/* =========================
+   GAME WORLD
+========================= */
+
+#gameWorld {
+    position: relative;
+    width: 100%;
+    height: min(65vh, 600px);
+    min-height: 450px;
+
+    overflow: hidden;
+    border-radius: 22px;
+    border: 4px solid white;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #a8ddf4 0%,
+            #a8ddf4 25%,
+            #8ac57c 25%,
+            #8ac57c 100%
+        );
+
+    box-shadow: 0 8px 20px rgba(0,0,0,.12);
+}
+
+/* =========================
+   ROAD
+========================= */
+
+.road-horizontal {
+    position: absolute;
+    left: 0;
+    top: 48%;
+    width: 100%;
+    height: 22%;
+    background: #777;
+    z-index: 1;
+}
+
+.road-horizontal::after {
+    content: "";
+    position: absolute;
+    top: 48%;
+    width: 100%;
+    border-top: 4px dashed #f3dc66;
+}
+
+.road-vertical {
+    position: absolute;
+    left: 43%;
+    top: 20%;
+    width: 18%;
+    height: 80%;
+    background: #777;
+    z-index: 1;
+}
+
+.road-vertical::after {
+    content: "";
+    position: absolute;
+    left: 48%;
+    height: 100%;
+    border-left: 4px dashed #f3dc66;
+}
+
+/* =========================
+   BUILDINGS
+========================= */
+
+.building {
+    position: absolute;
+    z-index: 3;
+
+    width: 115px;
+    min-height: 95px;
+
+    background: white;
+    border: 3px solid #ddd;
+
+    border-radius: 14px;
+    padding: 10px;
+
+    text-align: center;
+
+    box-shadow: 0 5px 10px rgba(0,0,0,.15);
+}
+
+.building .emoji {
+    font-size: 36px;
+}
+
+.building .cn {
+    font-weight: bold;
+    margin-top: 4px;
+}
+
+.building .py {
+    font-size: 10px;
+    color: #b16c47;
+}
+
+.building .en {
+    font-size: 10px;
+    color: #777;
+}
+
+/* =========================
+   NPC
+========================= */
+
+.npc {
+    position: absolute;
+    z-index: 6;
+    text-align: center;
+}
+
+.npc-character {
+    font-size: 45px;
+}
+
+.npc-name {
+    background: white;
+    border-radius: 10px;
+    padding: 3px 7px;
+    font-size: 10px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+/* =========================
+   PLAYER
+========================= */
+
+#player {
+    position: absolute;
+    width: 45px;
+    height: 60px;
+
+    z-index: 10;
+
+    font-size: 44px;
+    text-align: center;
+
+    transition: transform .1s;
+
+    user-select: none;
+}
+
+#playerName {
+    position: absolute;
+    top: -22px;
+    left: -5px;
+
+    background: white;
+    padding: 3px 6px;
+
+    border-radius: 8px;
+
+    font-size: 10px;
+    font-weight: bold;
+
+    white-space: nowrap;
+}
+
+/* =========================
+   INTERACT BUTTON
+========================= */
+
+#interactButton {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    z-index: 30;
+
+    display: none;
+
+    background: #ff8a65;
+    color: white;
+
+    border: none;
+    border-radius: 20px;
+
+    padding: 12px 25px;
+
+    font-size: 15px;
+    font-weight: bold;
+
+    box-shadow: 0 4px 10px rgba(0,0,0,.2);
+}
+
+/* =========================
+   DIALOGUE
+========================= */
+
+#dialoguePanel {
+    display: none;
+
+    position: absolute;
+    z-index: 50;
+
+    left: 15px;
+    right: 15px;
+    bottom: 15px;
+
+    background: rgba(255,255,255,.97);
+
+    border-radius: 18px;
+    padding: 18px;
+
+    box-shadow: 0 5px 20px rgba(0,0,0,.25);
+}
+
+.dialogue-speaker {
+    color: #b56842;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.dialogue-cn {
+    font-size: 21px;
+    font-weight: bold;
+    line-height: 1.5;
+}
+
+.dialogue-pinyin {
+    margin-top: 5px;
+    color: #b56842;
+}
+
+.dialogue-en {
+    margin-top: 5px;
+    font-size: 13px;
+    color: #777;
+}
+
+.dialogue-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 15px;
+}
+
+.dialogue-actions button {
+    border: none;
+    border-radius: 10px;
+
+    padding: 10px 14px;
+
+    font-weight: bold;
+
+    background: #eee;
+    color: #444;
+}
+
+.dialogue-actions button.primary {
+    background: #5c4033;
+    color: white;
+}
+
+/* =========================
+   MOBILE CONTROLS
+========================= */
+
+.controls {
+    margin-top: 15px;
+
+    display: grid;
+
+    grid-template-columns:
+        70px 70px 70px;
+
+    grid-template-rows:
+        60px 60px;
+
+    justify-content: center;
+
+    gap: 6px;
+}
+
+.control-btn {
+    border: none;
+    border-radius: 15px;
+
+    background: white;
+
+    font-size: 23px;
+
+    box-shadow: 0 3px 8px rgba(0,0,0,.12);
+
+    touch-action: none;
+}
+
+.control-up {
+    grid-column: 2;
+    grid-row: 1;
+}
+
+.control-left {
+    grid-column: 1;
+    grid-row: 2;
+}
+
+.control-down {
+    grid-column: 2;
+    grid-row: 2;
+}
+
+.control-right {
+    grid-column: 3;
+    grid-row: 2;
+}
+
+/* =========================
+   VOCAB MODAL
+========================= */
+
+.modal {
+    display: none;
+
+    position: fixed;
+    inset: 0;
+
+    z-index: 100;
+
+    background: rgba(0,0,0,.5);
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 15px;
+}
+
+.modal-content {
+    width: min(650px, 100%);
+    max-height: 85vh;
+
+    overflow-y: auto;
+
+    background: white;
+
+    padding: 25px;
+
+    border-radius: 25px;
+}
+
+.vocab-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(150px, 1fr));
+
+    gap: 10px;
+}
+
+.vocab-card {
+    background: #f7f1ed;
+
+    padding: 12px;
+
+    border-radius: 12px;
+}
+
+.vocab-card .cn {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.vocab-card .py {
+    color: #b56842;
+    margin: 4px 0;
+}
+
+.vocab-card .en {
+    font-size: 12px;
+    color: #777;
+}
+
+.close-btn {
+    width: 100%;
+    margin-top: 20px;
+
+    padding: 12px;
+
+    border: none;
+    border-radius: 12px;
+
+    background: #5c4033;
+    color: white;
+
+    font-weight: bold;
+}
+
+/* =========================
+   MESSAGE
+========================= */
+
+#toast {
+    position: fixed;
+
+    top: 20px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    z-index: 200;
+
+    display: none;
+
+    background: white;
+
+    padding: 12px 20px;
+
+    border-radius: 15px;
+
+    box-shadow: 0 5px 20px rgba(0,0,0,.2);
+
+    font-weight: bold;
+}
+
+@media (min-width: 800px) {
+    .controls {
+        display: none;
+    }
+}
+
+@media (max-width: 600px) {
+
+    #gameWorld {
+        height: 500px;
+    }
+
+    .building {
+        width: 90px;
+        min-height: 75px;
+        padding: 6px;
+    }
+
+    .building .emoji {
+        font-size: 28px;
+    }
+
+    .building .cn {
+        font-size: 13px;
+    }
+
+    .road-vertical {
+        left: 39%;
+        width: 22%;
+    }
+
+}
+</style>
 </head>
+
 <body>
 
-<div class="game-card">
-    <button class="top-btn" onclick="alert('Kosakata Tamsui:\n• 公車 (gōngchē) = Bus\n• 火車 (huǒchē) = Kereta\n• 捷運 (jiéyùn) = MRT\n• 左 (zuǒ) = Kiri | 右 (yòu) = Kanan')">📖 Vocab</button>
+<header>
+    <h1>🧋 Boba Break Adventure</h1>
+    <p>阿豪的淡水生日任務</p>
+</header>
 
-    <!-- Layar Game Isometrik -->
-    <div class="map-viewport" id="mapView" onclick="moveByTap(event)">
-        <!-- Karakter Ahao -->
-        <div class="entity" id="player" style="left: 20%; top: 70%;">
-            <div class="entity-label">Ahao (阿豪)</div>
-            <div class="avatar">👦</div>
-        </div>
+<div class="game-container">
 
-        <!-- NPC 1: Warga Desa -->
-        <div class="entity npc" id="npc1" style="left: 45%; top: 50%;">
-            <div class="entity-label">Warga Desa</div>
-            <div class="avatar">👨‍🌾</div>
-        </div>
+<div class="hud">
 
-        <!-- NPC 2: Petugas Stasiun -->
-        <div class="entity npc" id="npc2" style="left: 80%; top: 30%;">
-            <div class="entity-label">Petugas Stasiun</div>
-            <div class="avatar">👮</div>
+    <div class="hud-box">
+        <div class="hud-label">Character</div>
+        <div class="hud-value">👦 阿豪 Āháo</div>
+    </div>
+
+    <div class="hud-box">
+        <div class="hud-label">Location</div>
+        <div class="hud-value" id="locationText">
+            Shopping Street
         </div>
     </div>
 
-    <!-- D-Pad Kontrol HP -->
-    <div class="dpad-container">
-        <div></div><div class="dbtn" onclick="move(0, -5)">▲</div><div></div>
-        <div class="dbtn" onclick="move(-5, 0)">◀</div><div></div><div class="dbtn" onclick="move(5, 0)">▶</div>
-        <div></div><div class="dbtn" onclick="move(0, 5)">▼</div><div></div>
+    <div class="hud-box">
+        <div class="hud-label">Phone</div>
+        <div class="hud-value">🔋 0%</div>
     </div>
 
-    <!-- Kotak Dialog Teks -->
-    <div class="dialogue-panel">
-        <div>
-            <div class="speaker" id="spk">Petunjuk Navigasi</div>
-            <div class="pinyin" id="pyn">Pencet D-Pad Panah atau Sentuh Layar untuk Menggerakkan Ahao.</div>
-            <div class="text" id="txt">Misi: Dekati Warga Desa 👨‍🌾 di tengah peta untuk bertanya jalan ke Tamsui!</div>
-        </div>
-    </div>
+    <button class="vocab-btn" onclick="openVocab()">
+        📖 VOCAB
+    </button>
+
 </div>
 
+
+<div class="objective">
+
+    <small>🎯 CURRENT OBJECTIVE</small>
+
+    <div id="objectiveText">
+        Go to the gift shop and buy a birthday gift for 小美.
+    </div>
+
+</div>
+
+
+<div id="gameWorld">
+
+    <!-- ROADS -->
+
+    <div class="road-horizontal"></div>
+    <div class="road-vertical"></div>
+
+
+    <!-- BUILDINGS -->
+
+    <div class="building"
+         data-name="giftShop"
+         style="left:5%; top:8%;">
+
+        <div class="emoji">🎁</div>
+
+        <div class="cn">禮物店</div>
+        <div class="py">lǐwù diàn</div>
+        <div class="en">Gift Shop</div>
+
+    </div>
+
+
+    <div class="building"
+         data-name="bank"
+         style="right:6%; top:8%;">
+
+        <div class="emoji">🏦</div>
+
+        <div class="cn">銀行</div>
+        <div class="py">yínháng</div>
+        <div class="en">Bank</div>
+
+    </div>
+
+
+    <div class="building"
+         data-name="store"
+         style="left:5%; bottom:8%;">
+
+        <div class="emoji">🏪</div>
+
+        <div class="cn">便利商店</div>
+        <div class="py">biànlì shāngdiàn</div>
+        <div class="en">Convenience Store</div>
+
+    </div>
+
+
+    <div class="building"
+         data-name="busStop"
+         style="right:5%; bottom:7%;">
+
+        <div class="emoji">🚏</div>
+
+        <div class="cn">公車站</div>
+        <div class="py">gōngchē zhàn</div>
+        <div class="en">Bus Stop</div>
+
+    </div>
+
+
+    <!-- NPC -->
+
+    <div class="npc"
+         id="npcDirections"
+         style="left:30%; top:36%;">
+
+        <div class="npc-character">👩</div>
+
+        <div class="npc-name">
+            路人 Lùrén
+        </div>
+
+    </div>
+
+
+    <!-- PLAYER -->
+
+    <div id="player">
+
+        <div id="playerName">
+            阿豪
+        </div>
+
+        👦
+
+    </div>
+
+
+    <!-- INTERACT -->
+
+    <button id="interactButton">
+        💬 INTERACT
+    </button>
+
+
+    <!-- DIALOGUE -->
+
+    <div id="dialoguePanel">
+
+        <div class="dialogue-speaker"
+             id="dialogueSpeaker">
+        </div>
+
+        <div class="dialogue-cn"
+             id="dialogueCN">
+        </div>
+
+        <div class="dialogue-pinyin"
+             id="dialoguePinyin">
+        </div>
+
+        <div class="dialogue-en"
+             id="dialogueEN">
+        </div>
+
+        <div class="dialogue-actions"
+             id="dialogueActions">
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- MOBILE CONTROLS -->
+
+<div class="controls">
+
+    <button class="control-btn control-up"
+            data-direction="up">
+        ⬆️
+    </button>
+
+    <button class="control-btn control-left"
+            data-direction="left">
+        ⬅️
+    </button>
+
+    <button class="control-btn control-down"
+            data-direction="down">
+        ⬇️
+    </button>
+
+    <button class="control-btn control-right"
+            data-direction="right">
+        ➡️
+    </button>
+
+</div>
+
+</div>
+
+
+<!-- VOCABULARY -->
+
+<div class="modal" id="vocabModal">
+
+<div class="modal-content">
+
+<h2>📖 Survival Vocabulary</h2>
+
+<h3>🧭 Directions</h3>
+
+<div class="vocab-grid">
+
+<div class="vocab-card">
+<div class="cn">左邊</div>
+<div class="py">zuǒbiān</div>
+<div class="en">left side</div>
+</div>
+
+<div class="vocab-card">
+<div class="cn">右邊</div>
+<div class="py">yòubiān</div>
+<div class="en">right side</div>
+</div>
+
+<div class="vocab-card">
+<div class="cn">往左轉</div>
+<div class="py">wǎng zuǒ zhuǎn</div>
+<div class="en">turn left</div>
+</div>
+
+<div class="vocab-card">
+<div class="cn">往右轉</div>
+<div class="py">wǎng yòu zhuǎn</div>
+<div class="en">turn right</div>
+</div>
+
+<div class="vocab-card">
+<div class="cn">一直走</div>
+<div class="py">yìzhí zǒu</div>
+<div class="en">go straight</div>
+</div>
+
+</div>
+
+
+<h3>🚌 Transportation</h3>
+
+<div class="vocab-grid">
+
+<div class="vocab-card">
+<div class="cn">公車</div>
+<div class="py">gōngchē</div>
+<div class="en">bus</div>
+</div>
+
+<div class="vocab-card">
+<div class="cn">轉車</div>
+<div class="py">zhuǎn chē</div>
+<div class="en">transfer vehicles</div>
+</div>
+
+<div class="vocab-card">
+<div class="cn">火車</div>
+<div class="py">huǒchē</div>
+<div class="en">train</div>
+</div>
+
+<div class="vocab-card">
+<div class="cn">捷運</div>
+<div class="py">jiéyùn</div>
+<div class="en">MRT</div>
+</div>
+
+<div class="vocab-card">
+<div class="cn">轉乘</div>
+<div class="py">zhuǎnchéng</div>
+<div class="en">transfer</div>
+</div>
+
+<div class="vocab-card">
+<div class="cn">紅線</div>
+<div class="py">hóngxiàn</div>
+<div class="en">Red Line</div>
+</div>
+
+</div>
+
+
+<h3>🏙️ Places</h3>
+
+<div class="vocab-grid">
+
+<div class="vocab-card">
+<div class="cn">銀行</div>
+<div class="py">yínháng</div>
+<div class="en">bank</div>
+</div>
+
+<div class="vocab-card">
+<div class="cn">便利商店</div>
+<div class="py">biànlì shāngdiàn</div>
+<div class="en">convenience store</div>
+</div>
+
+<div class="vocab-card">
+<div class="cn">公車站</div>
+<div class="py">gōngchē zhàn</div>
+<div class="en">bus stop</div>
+</div>
+
+<div class="vocab-card">
+<div class="cn">車站</div>
+<div class="py">chēzhàn</div>
+<div class="en">station</div>
+</div>
+
+<div class="vocab-card">
+<div class="cn">台北車站</div>
+<div class="py">Táiběi Chēzhàn</div>
+<div class="en">Taipei Main Station</div>
+</div>
+
+<div class="vocab-card">
+<div class="cn">淡水</div>
+<div class="py">Dànshuǐ</div>
+<div class="en">Tamsui</div>
+</div>
+
+</div>
+
+<button class="close-btn" onclick="closeVocab()">
+Close Vocabulary
+</button>
+
+</div>
+</div>
+
+
+<div id="toast"></div>
+
+
 <script>
-    let posX = 20;
-    let posY = 70;
-    const player = document.getElementById('player');
 
-    function move(dx, dy) {
-        posX = Math.max(10, Math.min(90, posX + dx));
-        posY = Math.max(20, Math.min(85, posY + dy));
-        player.style.left = posX + '%';
-        player.style.top = posY + '%';
-        checkDistance();
-    }
+/* =========================================
+   GAME VARIABLES
+========================================= */
 
-    function moveByTap(e) {
-        const rect = document.getElementById('mapView').getBoundingClientRect();
-        posX = ((e.clientX - rect.left) / rect.width) * 100;
-        posY = ((e.clientY - rect.top) / rect.height) * 100;
-        player.style.left = posX + '%';
-        player.style.top = posY + '%';
-        checkDistance();
-    }
+const player = document.getElementById("player");
+const world = document.getElementById("gameWorld");
 
-    function checkDistance() {
-        // Dekat NPC 1 (Warga Desa)
-        if(Math.abs(posX - 45) < 12 && Math.abs(posY - 50) < 12) {
-            document.getElementById('spk').innerText = "Warga Desa";
-            document.getElementById('pyn').innerText = "Nǐ xiǎng qù chēzhàn ma? Dā 105 gōngchē...";
-            document.getElementById('txt').innerHTML = "Mau ke Tamsui? Naik <b>105 公車 (gōngchē - bus)</b>, turun di depan <b>銀行 (yínháng - bank)</b> lalu naik kereta <b>火車 (huǒchē)</b> ke Stasiun Taipei!";
-        } 
-        // Dekat NPC 2 (Petugas Stasiun)
-        else if(Math.abs(posX - 80) < 12 && Math.abs(posY - 30) < 12) {
-            document.getElementById('spk').innerText = "Petugas Stasiun Taipei";
-            document.getElementById('pyn').innerText = "Qù Dànshuǐ? Nǐ děi zhuǎnchéng hóng xiàn jiéyùn.";
-            document.getElementById('txt').innerHTML = "Di Stasiun Taipei, kamu harus <b>轉乘 (zhuǎnchéng - transfer)</b> ke <b>紅線 (hóng xiàn - Jalur Merah)</b> <b>捷運 (jiéyùn - MRT)</b> menuju Tamsui!";
+const interactButton =
+    document.getElementById("interactButton");
+
+const dialoguePanel =
+    document.getElementById("dialoguePanel");
+
+const objectiveText =
+    document.getElementById("objectiveText");
+
+const locationText =
+    document.getElementById("locationText");
+
+
+let playerX = 380;
+let playerY = 330;
+
+const speed = 5;
+
+let gameStage = 1;
+
+let nearObject = null;
+
+let movement = {
+    up: false,
+    down: false,
+    left: false,
+    right: false
+};
+
+
+/* =========================================
+   PLAYER POSITION
+========================================= */
+
+function updatePlayer() {
+
+    player.style.left = playerX + "px";
+    player.style.top = playerY + "px";
+
+}
+
+updatePlayer();
+
+
+/* =========================================
+   KEYBOARD
+========================================= */
+
+document.addEventListener("keydown", function(e) {
+
+    if (dialoguePanel.style.display === "block") {
+
+        if (e.key === "e" || e.key === "E") {
+            return;
         }
+
+        return;
     }
+
+    if (
+        e.key === "ArrowUp" ||
+        e.key === "w" ||
+        e.key === "W"
+    ) {
+        movement.up = true;
+    }
+
+    if (
+        e.key === "ArrowDown" ||
+        e.key === "s" ||
+        e.key === "S"
+    ) {
+        movement.down = true;
+    }
+
+    if (
+        e.key === "ArrowLeft" ||
+        e.key === "a" ||
+        e.key === "A"
+    ) {
+        movement.left = true;
+    }
+
+    if (
+        e.key === "ArrowRight" ||
+        e.key === "d" ||
+        e.key === "D"
+    ) {
+        movement.right = true;
+    }
+
+    if (
+        e.key === "e" ||
+        e.key === "E"
+    ) {
+        interact();
+    }
+
+});
+
+
+document.addEventListener("keyup", function(e) {
+
+    if (
+        e.key === "ArrowUp" ||
+        e.key === "w" ||
+        e.key === "W"
+    ) {
+        movement.up = false;
+    }
+
+    if (
+        e.key === "ArrowDown" ||
+        e.key === "s" ||
+        e.key === "S"
+    ) {
+        movement.down = false;
+    }
+
+    if (
+        e.key === "ArrowLeft" ||
+        e.key === "a" ||
+        e.key === "A"
+    ) {
+        movement.left = false;
+    }
+
+    if (
+        e.key === "ArrowRight" ||
+        e.key === "d" ||
+        e.key === "D"
+    ) {
+        movement.right = false;
+    }
+
+});
+
+
+/* =========================================
+   MOBILE CONTROLS
+========================================= */
+
+document.querySelectorAll(".control-btn")
+.forEach(button => {
+
+    const direction =
+        button.dataset.direction;
+
+    function startMove(e) {
+
+        e.preventDefault();
+
+        movement[direction] = true;
+
+    }
+
+    function stopMove(e) {
+
+        e.preventDefault();
+
+        movement[direction] = false;
+
+    }
+
+    button.addEventListener(
+        "pointerdown",
+        startMove
+    );
+
+    button.addEventListener(
+        "pointerup",
+        stopMove
+    );
+
+    button.addEventListener(
+        "pointerleave",
+        stopMove
+    );
+
+    button.addEventListener(
+        "pointercancel",
+        stopMove
+    );
+
+});
+
+
+/* =========================================
+   GAME LOOP
+========================================= */
+
+function gameLoop() {
+
+    if (
+        dialoguePanel.style.display !== "block"
+    ) {
+
+        let newX = playerX;
+        let newY = playerY;
+
+        if (movement.up) {
+            newY -= speed;
+        }
+
+        if (movement.down) {
+            newY += speed;
+        }
+
+        if (movement.left) {
+            newX -= speed;
+        }
+
+        if (movement.right) {
+            newX += speed;
+        }
+
+        const worldWidth =
+            world.clientWidth;
+
+        const worldHeight =
+            world.clientHeight;
+
+        /* World boundaries */
+
+        if (newX >= 0 &&
+            newX <= worldWidth - 45 &&
+            newY >= 20 &&
+            newY <= worldHeight - 60
+        ) {
+
+            if (!isColliding(newX, newY)) {
+
+                playerX = newX;
+                playerY = newY;
+
+            }
+
+        }
+
+        updatePlayer();
+
+        checkNearbyObjects();
+
+    }
+
+    requestAnimationFrame(gameLoop);
+
+}
+
+gameLoop();
+
+
+/* =========================================
+   COLLISION
+========================================= */
+
+function isColliding(x, y) {
+
+    const playerRect = {
+        left: x,
+        right: x + 35,
+        top: y + 10,
+        bottom: y + 55
+    };
+
+    const buildings =
+        document.querySelectorAll(".building");
+
+    for (const building of buildings) {
+
+        const rect =
+            building.getBoundingClientRect();
+
+        const worldRect =
+            world.getBoundingClientRect();
+
+        const bLeft =
+            rect.left - worldRect.left;
+
+        const bTop =
+            rect.top - worldRect.top;
+
+        const bRight =
+            bLeft + rect.width;
+
+        const bBottom =
+            bTop + rect.height;
+
+        if (
+            playerRect.left < bRight &&
+            playerRect.right > bLeft &&
+            playerRect.top < bBottom &&
+            playerRect.bottom > bTop
+        ) {
+            return true;
+        }
+
+    }
+
+    return false;
+
+}
+
+
+/* =========================================
+   DISTANCE DETECTION
+========================================= */
+
+function distanceTo(element) {
+
+    const rect =
+        element.getBoundingClientRect();
+
+    const worldRect =
+        world.getBoundingClientRect();
+
+    const objectX =
+        rect.left -
+        worldRect.left +
+        rect.width / 2;
+
+    const objectY =
+        rect.top -
+        worldRect.top +
+        rect.height / 2;
+
+    const playerCenterX =
+        playerX + 22;
+
+    const playerCenterY =
+        playerY + 30;
+
+    return Math.sqrt(
+        Math.pow(
+            objectX - playerCenterX,
+            2
+        ) +
+        Math.pow(
+            objectY - playerCenterY,
+            2
+        )
+    );
+
+}
+
+
+/* =========================================
+   FIND INTERACTION
+========================================= */
+
+function checkNearbyObjects() {
+
+    nearObject = null;
+
+    const npc =
+        document.getElementById(
+            "npcDirections"
+        );
+
+    const giftShop =
+        document.querySelector(
+            '[data-name="giftShop"]'
+        );
+
+    const busStop =
+        document.querySelector(
+            '[data-name="busStop"]'
+        );
+
+    if (
+        gameStage === 1 &&
+        distanceTo(giftShop) < 100
+    ) {
+
+        nearObject = "giftShop";
+
+    }
+
+    else if (
+        gameStage === 2 &&
+        distanceTo(npc) < 80
+    ) {
+
+        nearObject = "npc";
+
+    }
+
+    else if (
+        gameStage === 3 &&
+        distanceTo(busStop) < 100
+    ) {
+
+        nearObject = "busStop";
+
+    }
+
+
+    if (nearObject) {
+
+        interactButton.style.display =
+            "block";
+
+    }
+
+    else {
+
+        interactButton.style.display =
+            "none";
+
+    }
+
+}
+
+
+interactButton.addEventListener(
+    "click",
+    interact
+);
+
+
+/* =========================================
+   INTERACTION SYSTEM
+========================================= */
+
+function interact() {
+
+    if (!nearObject) return;
+
+    if (nearObject === "giftShop") {
+        giftShopInteraction();
+    }
+
+    if (nearObject === "npc") {
+        npcInteraction();
+    }
+
+    if (nearObject === "busStop") {
+        busStopInteraction();
+    }
+
+}
+
+
+/* =========================================
+   DIALOGUE FUNCTIONS
+========================================= */
+
+function showDialogue(
+    speaker,
+    cn,
+    py,
+    en,
+    buttons = []
+) {
+
+    document.getElementById(
+        "dialogueSpeaker"
+    ).textContent = speaker;
+
+    document.getElementById(
+        "dialogueCN"
+    ).textContent = cn;
+
+    document.getElementById(
+        "dialoguePinyin"
+    ).textContent = py;
+
+    document.getElementById(
+        "dialogueEN"
+    ).textContent = en;
+
+
+    const actions =
+        document.getElementById(
+            "dialogueActions"
+        );
+
+    actions.innerHTML = "";
+
+
+    buttons.forEach(item => {
+
+        const button =
+            document.createElement("button");
+
+        button.textContent = item.text;
+
+        if (item.primary) {
+            button.classList.add("primary");
+        }
+
+        button.onclick = item.action;
+
+        actions.appendChild(button);
+
+    });
+
+
+    dialoguePanel.style.display =
+        "block";
+
+}
+
+
+function closeDialogue() {
+
+    dialoguePanel.style.display =
+        "none";
+
+}
+
+
+/* =========================================
+   GIFT SHOP
+========================================= */
+
+function giftShopInteraction() {
+
+    showDialogue(
+
+        "店員 Diànyuán",
+
+        "你好！你想買什麼？",
+
+        "Nǐ hǎo! Nǐ xiǎng mǎi shénme?",
+
+        "Hello! What would you like to buy?",
+
+        [
+            {
+                text: "🎁 我想買生日禮物",
+                primary: true,
+
+                action: giftQuestion
+            },
+
+            {
+                text: "Close",
+
+                action: closeDialogue
+            }
+        ]
+
+    );
+
+}
+
+
+function giftQuestion() {
+
+    showDialogue(
+
+        "店員 Diànyuán",
+
+        "這個怎麼樣？三百塊。",
+
+        "Zhège zěnmeyàng? Sānbǎi kuài.",
+
+        "How about this one? It costs 300 dollars.",
+
+        [
+            {
+                text: "我要這個！",
+                primary: true,
+
+                action: buyGift
+            },
+
+            {
+                text: "太貴了",
+
+                action: () => {
+
+                    showDialogue(
+
+                        "店員 Diànyuán",
+
+                        "這是送給朋友的生日禮物喔！",
+
+                        "Zhè shì sòng gěi péngyǒu de shēngrì lǐwù o!",
+
+                        "It's a birthday gift for your friend!",
+
+                        [
+                            {
+                                text: "我要這個",
+                                primary: true,
+
+                                action: buyGift
+                            }
+                        ]
+
+                    );
+
+                }
+            }
+        ]
+
+    );
+
+}
+
+
+function buyGift() {
+
+    gameStage = 2;
+
+    closeDialogue();
+
+    showToast(
+        "🎁 You bought a birthday gift!"
+    );
+
+    objectiveText.textContent =
+        "Find someone and ask how to get to the station.";
+
+}
+
+
+/* =========================================
+   ASK NPC
+========================================= */
+
+function npcInteraction() {
+
+    showDialogue(
+
+        "阿豪 Āháo",
+
+        "不好意思，請問怎麼去車站？",
+
+        "Bù hǎoyìsi, qǐngwèn zěnme qù chēzhàn?",
+
+        "Excuse me, how do I get to the station?",
+
+        [
+            {
+                text: "Ask",
+
+                primary: true,
+
+                action: npcDirections1
+            },
+
+            {
+                text: "Close",
+
+                action: closeDialogue
+            }
+        ]
+
+    );
+
+}
+
+
+function npcDirections1() {
+
+    showDialogue(
+
+        "路人 Lùrén",
+
+        "你先搭一零五號公車。",
+
+        "Nǐ xiān dā yī líng wǔ hào gōngchē.",
+
+        "First, take Bus 105.",
+
+        [
+            {
+                text: "Next →",
+
+                primary: true,
+
+                action: npcDirections2
+            }
+        ]
+
+    );
+
+}
+
+
+function npcDirections2() {
+
+    showDialogue(
+
+        "路人 Lùrén",
+
+        "在銀行前面的公車站下車，然後轉車搭 GR。",
+
+        "Zài yínháng qiánmiàn de gōngchē zhàn xià chē, ránhòu zhuǎn chē dā GR.",
+
+        "Get off at the bus stop in front of the bank, then transfer and take GR.",
+
+        [
+            {
+                text: "我明白了！",
+
+                primary: true,
+
+                action: npcComplete
+            }
+        ]
+
+    );
+
+}
+
+
+function npcComplete() {
+
+    gameStage = 3;
+
+    closeDialogue();
+
+    objectiveText.textContent =
+        "Go to the bus stop and take Bus 105.";
+
+    showToast(
+        "🚌 New objective unlocked!"
+    );
+
+}
+
+
+/* =========================================
+   BUS STOP
+========================================= */
+
+function busStopInteraction() {
+
+    showDialogue(
+
+        "公車站 Bus Stop",
+
+        "哪一台公車？",
+
+        "Nǎ yì tái gōngchē?",
+
+        "Which bus should Ahao take?",
+
+        [
+            {
+                text: "101",
+                action: () =>
+                    showToast(
+                        "❌ The NPC said Bus 105!"
+                    )
+            },
+
+            {
+                text: "105",
+
+                primary: true,
+
+                action: correctBus
+            },
+
+            {
+                text: "307",
+
+                action: () =>
+                    showToast(
+                        "❌ The NPC said Bus 105!"
+                    )
+            }
+        ]
+
+    );
+
+}
+
+
+function correctBus() {
+
+    closeDialogue();
+
+    gameStage = 4;
+
+    showToast(
+        "🚌 Ahao got on Bus 105!"
+    );
+
+    objectiveText.textContent =
+        "You got off near the bank. Now transfer to the GR bus.";
+
+    setTimeout(() => {
+
+        loadStationMap();
+
+    }, 1200);
+
+}
+
+
+/* =========================================
+   NEXT MAP
+========================================= */
+
+function loadStationMap() {
+
+    locationText.textContent =
+        "Train Station";
+
+    world.innerHTML = `
+
+        <div class="road-horizontal"></div>
+
+        <div class="building"
+             style="left:8%;top:8%;">
+
+            <div class="emoji">🚉</div>
+
+            <div class="cn">
+                車站
+            </div>
+
+            <div class="py">
+                chēzhàn
+            </div>
+
+            <div class="en">
+                Station
+            </div>
+
+        </div>
+
+
+        <div class="npc"
+             id="stationNPC"
+             style="right:20%;bottom:20%;">
+
+            <div class="npc-character">
+                👨
+            </div>
+
+            <div class="npc-name">
+                Station Staff
+            </div>
+
+        </div>
+
+
+        <div id="player">
+
+            <div id="playerName">
+                阿豪
+            </div>
+
+            👦
+
+        </div>
+
+
+        <button id="interactButton">
+            💬 INTERACT
+        </button>
+
+
+        <div id="dialoguePanel">
+
+            <div class="dialogue-speaker"
+                 id="dialogueSpeaker">
+            </div>
+
+            <div class="dialogue-cn"
+                 id="dialogueCN">
+            </div>
+
+            <div class="dialogue-pinyin"
+                 id="dialoguePinyin">
+            </div>
+
+            <div class="dialogue-en"
+                 id="dialogueEN">
+            </div>
+
+            <div class="dialogue-actions"
+                 id="dialogueActions">
+            </div>
+
+        </div>
+
+    `;
+
+
+    player =
+        document.getElementById("player");
+
+    interactButton =
+        document.getElementById(
+            "interactButton"
+        );
+
+    dialoguePanel =
+        document.getElementById(
+            "dialoguePanel"
+        );
+
+
+    playerX = 400;
+    playerY = 300;
+
+    updatePlayer();
+
+
+    interactButton.addEventListener(
+        "click",
+        stationInteraction
+    );
+
+
+    gameStage = 5;
+
+    objectiveText.textContent =
+        "Find the station staff and ask how to get to 台北車站.";
+
+}
+
+
+/* =========================================
+   STATION NPC
+========================================= */
+
+function stationInteraction() {
+
+    showDialogue(
+
+        "阿豪 Āháo",
+
+        "請問哪一班車去台北車站？",
+
+        "Qǐngwèn nǎ yì bān chē qù Táiběi Chēzhàn?",
+
+        "Excuse me, which train goes to Taipei Main Station?",
+
+        [
+            {
+                text: "Continue",
+                primary: true,
+
+                action: () => {
+
+                    showDialogue(
+
+                        "車站人員",
+
+                        "搭這班車到台北車站。",
+
+                        "Dā zhè bān chē dào Táiběi Chēzhàn.",
+
+                        "Take this train to Taipei Main Station.",
+
+                        [
+                            {
+                                text: "🚆 Board Train",
+
+                                primary: true,
+
+                                action: () => {
+
+                                    closeDialogue();
+
+                                    showToast(
+                                        "🚆 Going to 台北車站..."
+                                    );
+
+                                    setTimeout(
+                                        loadTaipeiMap,
+                                        1000
+                                    );
+
+                                }
+                            }
+                        ]
+
+                    );
+
+                }
+            }
+        ]
+
+    );
+
+}
+
+
+/* =========================================
+   TAIPEI MAP
+========================================= */
+
+function loadTaipeiMap() {
+
+    locationText.textContent =
+        "台北車站";
+
+    objectiveText.textContent =
+        "Find someone and ask how to get to 淡水.";
+
+    world.innerHTML = `
+
+        <div class="road-horizontal"></div>
+        <div class="road-vertical"></div>
+
+        <div class="building"
+             style="left:6%;top:8%;">
+
+            <div class="emoji">🚇</div>
+
+            <div class="cn">
+                捷運站
+            </div>
+
+            <div class="py">
+                jiéyùn zhàn
+            </div>
+
+            <div class="en">
+                MRT Station
+            </div>
+
+        </div>
+
+
+        <div class="npc"
+             id="taipeiNPC"
+             style="right:18%;top:38%;">
+
+            <div class="npc-character">
+                👩
+            </div>
+
+            <div class="npc-name">
+                路人
+            </div>
+
+        </div>
+
+
+        <div id="player">
+
+            <div id="playerName">
+                阿豪
+            </div>
+
+            👦
+
+        </div>
+
+
+        <button id="interactButton">
+            💬 INTERACT
+        </button>
+
+
+        <div id="dialoguePanel">
+
+            <div class="dialogue-speaker"
+                 id="dialogueSpeaker">
+            </div>
+
+            <div class="dialogue-cn"
+                 id="dialogueCN">
+            </div>
+
+            <div class="dialogue-pinyin"
+                 id="dialoguePinyin">
+            </div>
+
+            <div class="dialogue-en"
+                 id="dialogueEN">
+            </div>
+
+            <div class="dialogue-actions"
+                 id="dialogueActions">
+            </div>
+
+        </div>
+
+    `;
+
+
+    player =
+        document.getElementById("player");
+
+    interactButton =
+        document.getElementById(
+            "interactButton"
+        );
+
+    dialoguePanel =
+        document.getElementById(
+            "dialoguePanel"
+        );
+
+
+    playerX = 380;
+    playerY = 330;
+
+    updatePlayer();
+
+
+    interactButton.addEventListener(
+        "click",
+        taipeiInteraction
+    );
+
+}
+
+
+/* =========================================
+   TAIPEI DIALOGUE
+========================================= */
+
+function taipeiInteraction() {
+
+    showDialogue(
+
+        "阿豪 Āháo",
+
+        "不好意思，請問怎麼去淡水？",
+
+        "Bù hǎoyìsi, qǐngwèn zěnme qù Dànshuǐ?",
+
+        "Excuse me, how do I get to Tamsui?",
+
+        [
+            {
+                text: "Ask",
+                primary: true,
+
+                action: () => {
+
+                    showDialogue(
+
+                        "路人 Lùrén",
+
+                        "你要轉乘捷運紅線。",
+
+                        "Nǐ yào zhuǎnchéng jiéyùn hóngxiàn.",
+
+                        "You need to transfer to the MRT Red Line.",
+
+                        [
+                            {
+                                text: "Next →",
+
+                                primary: true,
+
+                                action: chooseRedLine
+                            }
+                        ]
+
+                    );
+
+                }
+            }
+        ]
+
+    );
+
+}
+
+
+function chooseRedLine() {
+
+    showDialogue(
+
+        "捷運路線 MRT Lines",
+
+        "你要找哪一條線？",
+
+        "Nǐ yào zhǎo nǎ yì tiáo xiàn?",
+
+        "Which line do you need?",
+
+        [
+            {
+                text: "🔵 藍線",
+
+                action: () =>
+                    showToast(
+                        "❌ The person said 紅線!"
+                    )
+            },
+
+            {
+                text: "🔴 紅線",
+
+                primary: true,
+
+                action: () => {
+
+                    closeDialogue();
+
+                    showToast(
+                        "🚇 Correct! Going to 淡水!"
+                    );
+
+                    setTimeout(
+                        loadTamsuiMap,
+                        1000
+                    );
+
+                }
+            }
+        ]
+
+    );
+
+}
+
+
+/* =========================================
+   FINAL TAMSUI MAP
+========================================= */
+
+function loadTamsuiMap() {
+
+    locationText.textContent =
+        "淡水";
+
+    objectiveText.textContent =
+        "Find 海風餐廳 by following Mandarin directions.";
+
+    world.innerHTML = `
+
+        <div class="road-horizontal"></div>
+        <div class="road-vertical"></div>
+
+
+        <div class="building"
+             style="left:5%;top:7%;">
+
+            <div class="emoji">🏪</div>
+
+            <div class="cn">
+                便利商店
+            </div>
+
+            <div class="py">
+                biànlì shāngdiàn
+            </div>
+
+            <div class="en">
+                Convenience Store
+            </div>
+
+        </div>
+
+
+        <div class="building"
+             style="right:5%;top:7%;">
+
+            <div class="emoji">🏦</div>
+
+            <div class="cn">
+                銀行
+            </div>
+
+            <div class="py">
+                yínháng
+            </div>
+
+            <div class="en">
+                Bank
+            </div>
+
+        </div>
+
+
+        <div class="building"
+             id="restaurant"
+             style="right:7%;bottom:8%;">
+
+            <div class="emoji">🌊</div>
+
+            <div class="cn">
+                海風餐廳
+            </div>
+
+            <div class="py">
+                Hǎifēng Cāntīng
+            </div>
+
+            <div class="en">
+                Sea Breeze Restaurant
+            </div>
+
+        </div>
+
+
+        <div class="npc"
+             id="tamsuiNPC"
+             style="left:40%;top:38%;">
+
+            <div class="npc-character">
+                👵
+            </div>
+
+            <div class="npc-name">
+                路人
+            </div>
+
+        </div>
+
+
+        <div id="player">
+
+            <div id="playerName">
+                阿豪
+            </div>
+
+            👦
+
+        </div>
+
+
+        <button id="interactButton">
+            💬 INTERACT
+        </button>
+
+
+        <div id="dialoguePanel">
+
+            <div class="dialogue-speaker"
+                 id="dialogueSpeaker">
+            </div>
+
+            <div class="dialogue-cn"
+                 id="dialogueCN">
+            </div>
+
+            <div class="dialogue-pinyin"
+                 id="dialoguePinyin">
+            </div>
+
+            <div class="dialogue-en"
+                 id="dialogueEN">
+            </div>
+
+            <div class="dialogue-actions"
+                 id="dialogueActions">
+            </div>
+
+        </div>
+
+    `;
+
+
+    player =
+        document.getElementById("player");
+
+    interactButton =
+        document.getElementById(
+            "interactButton"
+        );
+
+    dialoguePanel =
+        document.getElementById(
+            "dialoguePanel"
+        );
+
+
+    playerX = 370;
+    playerY = 330;
+
+    updatePlayer();
+
+
+    interactButton.addEventListener(
+        "click",
+        tamsuiInteraction
+    );
+
+}
+
+
+/* =========================================
+   FINAL DIRECTIONS
+========================================= */
+
+function tamsuiInteraction() {
+
+    showDialogue(
+
+        "阿豪 Āháo",
+
+        "不好意思，請問海風餐廳怎麼走？",
+
+        "Bù hǎoyìsi, qǐngwèn Hǎifēng Cāntīng zěnme zǒu?",
+
+        "Excuse me, how do I get to Sea Breeze Restaurant?",
+
+        [
+            {
+                text: "Ask",
+                primary: true,
+
+                action: () => {
+
+                    showDialogue(
+
+                        "路人 Lùrén",
+
+                        "從這裡一直走，看到便利商店以後，往右轉。",
+
+                        "Cóng zhèlǐ yìzhí zǒu, kàndào biànlì shāngdiàn yǐhòu, wǎng yòu zhuǎn.",
+
+                        "Go straight. After you see the convenience store, turn right.",
+
+                        [
+                            {
+                                text: "Next →",
+
+                                primary: true,
+
+                                action: () => {
+
+                                    showDialogue(
+
+                                        "路人 Lùrén",
+
+                                        "然後一直走到銀行，在銀行前面往左轉。餐廳就在右邊。",
+
+                                        "Ránhòu yìzhí zǒu dào yínháng, zài yínháng qiánmiàn wǎng zuǒ zhuǎn. Cāntīng jiù zài yòubiān.",
+
+                                        "Then walk straight to the bank. Turn left at the bank. The restaurant is on your right.",
+
+                                        [
+                                            {
+                                                text: "我明白了！",
+
+                                                primary: true,
+
+                                                action: () => {
+
+                                                    closeDialogue();
+
+                                                    objectiveText.textContent =
+                                                        "Use the landmarks and find 海風餐廳!";
+
+                                                }
+                                            }
+                                        ]
+
+                                    );
+
+                                }
+                            }
+                        ]
+
+                    );
+
+                }
+            }
+        ]
+
+    );
+
+}
+
+
+/* =========================================
+   VOCABULARY
+========================================= */
+
+function openVocab() {
+
+    document.getElementById(
+        "vocabModal"
+    ).style.display = "flex";
+
+}
+
+
+function closeVocab() {
+
+    document.getElementById(
+        "vocabModal"
+    ).style.display = "none";
+
+}
+
+
+/* =========================================
+   TOAST
+========================================= */
+
+function showToast(text) {
+
+    const toast =
+        document.getElementById("toast");
+
+    toast.textContent = text;
+
+    toast.style.display = "block";
+
+    setTimeout(() => {
+
+        toast.style.display = "none";
+
+    }, 2500);
+
+}
+
 </script>
 
 </body>
