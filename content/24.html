@@ -2,3379 +2,2100 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Ahao's Birthday Mission | Boba Break Study</title>
+<meta name="viewport"
+      content="width=device-width,initial-scale=1.0,user-scalable=no">
+<title>Ahao's Birthday Mission</title>
 
 <style>
-
-/* =========================================================
-   RESET
-========================================================= */
-
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  -webkit-tap-highlight-color:transparent;
 }
 
-html,
-body {
-    width: 100%;
-    min-height: 100%;
+html,body{
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  background:#111;
+  font-family:Arial,sans-serif;
 }
 
-body {
-    background: #151515;
-    color: #fff;
-    font-family: "Courier New", monospace;
-    image-rendering: pixelated;
+#game{
+  position:fixed;
+  inset:0;
 }
 
-button {
-    font-family: inherit;
+canvas{
+  display:block;
+  width:100%;
+  height:100%;
+  image-rendering:auto;
 }
 
+/* =========================
+   TOP UI
+========================= */
 
-/* =========================================================
-   MAIN GAME
-========================================================= */
-
-.game {
-    width: min(1100px, 100%);
-    margin: auto;
-    min-height: 100vh;
-    background: #202020;
-    border-left: 5px solid #0d0d0d;
-    border-right: 5px solid #0d0d0d;
+#hud{
+  position:fixed;
+  top:14px;
+  left:14px;
+  right:14px;
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  pointer-events:none;
+  z-index:20;
 }
 
-
-/* =========================================================
-   HEADER
-========================================================= */
-
-.header {
-    min-height: 65px;
-    background: #f3c875;
-    color: #2b2117;
-
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    padding: 12px 18px;
-
-    border-bottom: 5px solid #111;
+.panel{
+  background:rgba(15,15,20,.78);
+  border:2px solid rgba(255,255,255,.25);
+  border-radius:12px;
+  padding:10px 14px;
+  color:white;
+  box-shadow:0 5px 20px rgba(0,0,0,.25);
+  backdrop-filter:blur(5px);
 }
 
-.logo {
-    font-weight: 900;
-    font-size: clamp(15px, 3vw, 23px);
+#missionTitle{
+  font-weight:bold;
+  font-size:15px;
 }
 
-.header-info {
-    font-size: 12px;
-    font-weight: bold;
+#mission{
+  margin-top:3px;
+  font-size:13px;
+  opacity:.9;
 }
 
-
-/* =========================================================
-   STORY
-========================================================= */
-
-.story {
-    padding: 16px;
-    background: #292929;
-    border-bottom: 4px solid #111;
+#location{
+  font-size:13px;
+  font-weight:bold;
 }
 
-.story-title {
-    color: #f3c875;
-    font-size: 18px;
-    margin-bottom: 8px;
-}
-
-.story-text {
-    font-family: Arial, sans-serif;
-    font-size: 14px;
-    line-height: 1.65;
-    color: #ddd;
-}
-
-
-/* =========================================================
-   GAME AREA
-========================================================= */
-
-.game-area {
-    padding: 15px;
-}
-
-
-/* =========================================================
-   SCREEN
-========================================================= */
-
-.screen {
-    position: relative;
-
-    width: 100%;
-    height: min(620px, 72vh);
-    min-height: 430px;
-
-    overflow: hidden;
-
-    border: 6px solid #0d0d0d;
-
-    background: #8ac8dc;
-}
-
-
-/* =========================================================
-   COMMON PIXEL OBJECTS
-========================================================= */
-
-.pixel-shadow {
-    box-shadow: 6px 6px 0 #111;
-}
-
-
-/* =========================================================
-   PLAYER
-========================================================= */
-
-.player {
-    position: absolute;
-
-    width: 70px;
-    height: 125px;
-
-    left: 50%;
-    bottom: 7%;
-
-    transform: translateX(-50%);
-
-    z-index: 30;
-}
-
-.player-head {
-    position: absolute;
-
-    width: 38px;
-    height: 38px;
-
-    left: 16px;
-    top: 0;
-
-    background: #dda071;
-    border: 4px solid #222;
-}
-
-.player-head::before {
-    content: "";
-
-    position: absolute;
-
-    width: 40px;
-    height: 14px;
-
-    left: -5px;
-    top: -10px;
-
-    background: #34251e;
-
-    border: 4px solid #222;
-}
-
-.player-body {
-    position: absolute;
-
-    width: 54px;
-    height: 57px;
-
-    left: 8px;
-    top: 39px;
-
-    background: #3970a5;
-
-    border: 4px solid #151515;
-}
-
-.player-body::after {
-    content: "A";
-
-    position: absolute;
-
-    left: 18px;
-    top: 13px;
-
-    font-size: 20px;
-    font-weight: bold;
-    color: white;
-}
-
-.player-leg {
-    position: absolute;
-
-    width: 18px;
-    height: 34px;
-
-    bottom: 0;
-
-    background: #282828;
-
-    border: 4px solid #111;
-}
-
-.player-leg.left {
-    left: 12px;
-}
-
-.player-leg.right {
-    right: 12px;
-}
-
-
-/* =========================================================
+/* =========================
    DIALOGUE
-========================================================= */
+========================= */
 
-.dialogue {
-    position: absolute;
-
-    left: 20px;
-    right: 20px;
-    bottom: 20px;
-
-    z-index: 80;
-
-    background: rgba(15,15,15,.95);
-
-    border: 5px solid #f3c875;
-
-    padding: 13px;
-
-    box-shadow: 8px 8px 0 #111;
-}
-
-.speaker {
-    color: #f3c875;
-
-    font-size: 14px;
-    font-weight: bold;
-
-    margin-bottom: 7px;
-}
-
-.dialogue-text {
-    font-family: Arial, sans-serif;
-
-    font-size: 18px;
-    line-height: 1.55;
-}
-
-.dialogue-note {
-    margin-top: 8px;
-
-    color: #999;
-
-    font-size: 11px;
-}
-
-
-/* =========================================================
-   ENVIRONMENT 1
-   DEPARTMENT STORE
-========================================================= */
-
-.environment-department {
-    position: absolute;
-    inset: 0;
-
-    background:
-        linear-gradient(
-            #9bd4e5 0 43%,
-            #c9c9c9 43% 100%
-        );
-}
-
-.department-building {
-    position: absolute;
-
-    left: 10%;
-    right: 10%;
-    bottom: 17%;
-
-    height: 58%;
-
-    background: #dedede;
-
-    border: 7px solid #222;
-}
-
-.department-top {
-    height: 24%;
-
-    background: #b83e4b;
-
-    border-bottom: 6px solid #222;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    color: white;
-
-    font-size: clamp(18px, 4vw, 32px);
-    font-weight: bold;
-}
-
-.department-windows {
-    position: absolute;
-
-    left: 7%;
-    right: 7%;
-    top: 32%;
-    bottom: 9%;
-
-    display: grid;
-
-    grid-template-columns: repeat(4, 1fr);
-
-    gap: 10px;
-}
-
-.department-window {
-    background: #6da7bb;
-
-    border: 5px solid #222;
-}
-
-.department-door {
-    position: absolute;
-
-    width: 120px;
-    height: 37%;
-
-    bottom: 0;
-    left: 50%;
-
-    transform: translateX(-50%);
-
-    background: #4f7078;
-
-    border: 6px solid #222;
-}
-
-.department-logo {
-    position: absolute;
-
-    top: 8%;
-    left: 50%;
-
-    transform: translateX(-50%);
-
-    color: #222;
-
-    font-weight: bold;
-}
-
-
-/* =========================================================
-   ENVIRONMENT 2
-   CITY STREET
-========================================================= */
-
-.environment-city {
-    position: absolute;
-    inset: 0;
-
-    background:
-        linear-gradient(
-            #8fcce3 0 46%,
-            #79a45d 46% 65%,
-            #696969 65% 100%
-        );
-}
-
-.city-building {
-    position: absolute;
-
-    bottom: 35%;
-
-    width: 150px;
-    height: 220px;
-
-    border: 6px solid #222;
-}
-
-.city-building.left {
-    left: 3%;
-    background: #d69a68;
-}
-
-.city-building.right {
-    right: 3%;
-    background: #c97979;
-}
-
-.city-sign {
-    position: absolute;
-
-    top: 10px;
-    left: 50%;
-
-    transform: translateX(-50%);
-
-    background: #fff;
-
-    color: #222;
-
-    padding: 7px 9px;
-
-    border: 4px solid #222;
-
-    font-size: 12px;
-
-    white-space: nowrap;
-
-    font-weight: bold;
-}
-
-.city-road {
-    position: absolute;
-
-    left: 0;
-    right: 0;
-    bottom: 0;
-
-    height: 35%;
-
-    background: #595959;
-
-    border-top: 5px solid #333;
-}
-
-.crosswalk {
-    position: absolute;
-
-    left: 34%;
-    right: 34%;
-
-    bottom: 7%;
-
-    height: 75px;
-
-    background:
-        repeating-linear-gradient(
-            90deg,
-            #eee 0 14px,
-            transparent 14px 27px
-        );
-}
-
-.traffic-light {
-    position: absolute;
-
-    right: 24%;
-
-    bottom: 33%;
-
-    width: 24px;
-    height: 105px;
-
-    background: #222;
-
-    border: 4px solid #111;
-}
-
-.traffic-light::before {
-    content: "";
-
-    position: absolute;
-
-    width: 12px;
-    height: 12px;
-
-    left: 2px;
-    top: 10px;
-
-    background: #d83d3d;
-
-    box-shadow:
-        0 28px #e6c43e,
-        0 56px #4eaf63;
-}
-
-
-/* =========================================================
-   ENVIRONMENT 3
-   CONVENIENCE STORE
-========================================================= */
-
-.environment-convenience {
-    position: absolute;
-    inset: 0;
-
-    background:
-        linear-gradient(
-            #91d0e4 0 48%,
-            #777 48% 100%
-        );
-}
-
-.convenience-store {
-    position: absolute;
-
-    left: 8%;
-    right: 8%;
-
-    bottom: 13%;
-
-    height: 60%;
-
-    background: #e9e9e9;
-
-    border: 7px solid #222;
-}
-
-.convenience-sign {
-    position: absolute;
-
-    top: 0;
-    left: 0;
-    right: 0;
-
-    height: 25%;
-
-    background: #67a950;
-
-    border-bottom: 6px solid #222;
-
-    color: white;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    font-size: 25px;
-    font-weight: bold;
-}
-
-.convenience-windows {
-    position: absolute;
-
-    left: 6%;
-    right: 6%;
-
-    top: 32%;
-    bottom: 9%;
-
-    background: #75b8c7;
-
-    border: 5px solid #222;
-}
-
-.convenience-door {
-    position: absolute;
-
-    bottom: 0;
-
-    left: 50%;
-
-    transform: translateX(-50%);
-
-    width: 95px;
-    height: 62%;
-
-    background: #426b72;
-
-    border: 5px solid #222;
-}
-
-.convenience-awning {
-    position: absolute;
-
-    left: 4%;
-    right: 4%;
-
-    top: 25%;
-
-    height: 15px;
-
-    background:
-        repeating-linear-gradient(
-            90deg,
-            #e45c5c 0 30px,
-            #eee 30px 60px
-        );
-}
-
-
-/* =========================================================
-   ENVIRONMENT 4
-   TRAIN STATION
-========================================================= */
-
-.environment-station {
-    position: absolute;
-    inset: 0;
-
-    background: #3b3b3b;
-}
-
-.station-ceiling {
-    position: absolute;
-
-    top: 0;
-    left: 0;
-    right: 0;
-
-    height: 18%;
-
-    background: #d8d8d8;
-
-    border-bottom: 6px solid #111;
-}
-
-.station-sign {
-    position: absolute;
-
-    top: 6%;
-    left: 50%;
-
-    transform: translateX(-50%);
-
-    background: #fff;
-
-    color: #222;
-
-    border: 5px solid #111;
-
-    padding: 10px 20px;
-
-    font-size: 20px;
-
-    font-weight: bold;
-}
-
-.station-floor {
-    position: absolute;
-
-    bottom: 0;
-
-    left: 0;
-    right: 0;
-
-    height: 55%;
-
-    background:
-        repeating-linear-gradient(
-            90deg,
-            #777 0 50px,
-            #686868 50px 100px
-        );
-}
-
-.ticket-gate {
-    position: absolute;
-
-    bottom: 10%;
-
-    left: 12%;
-
-    width: 150px;
-    height: 120px;
-
-    background: #9d9d9d;
-
-    border: 6px solid #111;
-}
-
-.ticket-gate::after {
-    content: "IC CARD";
-
-    position: absolute;
-
-    top: 15px;
-    left: 25px;
-
-    background: #333;
-
-    padding: 8px;
-
-    font-size: 10px;
-}
-
-.platform-sign {
-    position: absolute;
-
-    bottom: 40%;
-
-    right: 12%;
-
-    background: #c72f36;
-
-    color: white;
-
-    padding: 12px 20px;
-
-    border: 5px solid #111;
-
-    font-weight: bold;
-}
-
-
-/* =========================================================
-   ENVIRONMENT 5
-   TRAIN INTERIOR
-========================================================= */
-
-.environment-train {
-    position: absolute;
-    inset: 0;
-
-    background: #272727;
-}
-
-.train-ceiling {
-    position: absolute;
-
-    top: 0;
-    left: 0;
-    right: 0;
-
-    height: 17%;
-
-    background: #ddd;
-
-    border-bottom: 6px solid #111;
-}
-
-.train-window {
-    position: absolute;
-
-    top: 18%;
-    left: 8%;
-    right: 8%;
-
-    height: 39%;
-
-    overflow: hidden;
-
-    background: #111;
-
-    border: 8px solid #555;
-}
-
-.train-view {
-    position: absolute;
-
-    inset: 0;
-
-    background:
-        linear-gradient(
-            #75b8d0 0 48%,
-            #5e9858 48% 73%,
-            #555 73%
-        );
-
-    animation: trainMove .8s linear infinite;
-}
-
-.train-building {
-    position: absolute;
-
-    width: 100px;
-    height: 120px;
-
-    bottom: 27%;
-
-    left: 25%;
-
-    background: #b87b68;
-
-    border: 5px solid #222;
-}
-
-.train-building.two {
-    left: 70%;
-    height: 150px;
-}
-
-@keyframes trainMove {
-    from {
-        transform: translateX(0);
-    }
-
-    to {
-        transform: translateX(-180px);
-    }
-}
-
-.train-seat {
-    position: absolute;
-
-    left: 12%;
-    right: 12%;
-
-    bottom: 0;
-
-    height: 29%;
-
-    background: #a25c64;
-
-    border: 6px solid #111;
-}
-
-.train-seat-back {
-    position: absolute;
-
-    left: 14%;
-    right: 14%;
-
-    bottom: 22%;
-
-    height: 18%;
-
-    background: #a25c64;
-
-    border: 6px solid #111;
-}
-
-.train-handle {
-    position: absolute;
-
-    top: 14%;
-
-    width: 45px;
-    height: 75px;
-
-    border-left: 5px solid #aaa;
-    border-right: 5px solid #aaa;
-}
-
-.train-handle.left {
-    left: 22%;
-}
-
-.train-handle.right {
-    right: 22%;
-}
-
-.train-display {
-    position: absolute;
-
-    top: 3%;
-    left: 50%;
-
-    transform: translateX(-50%);
-
-    background: #222;
-
-    color: #fff;
-
-    border: 4px solid #111;
-
-    padding: 7px 15px;
-
-    font-weight: bold;
-}
-
-
-/* =========================================================
-   ENVIRONMENT 6
-   TAIPEI MAIN STATION
-========================================================= */
-
-.environment-taipei {
-    position: absolute;
-    inset: 0;
-
-    background:
-        linear-gradient(
-            #ddd 0 22%,
-            #8a8a8a 22% 100%
-        );
-}
-
-.taipei-hall {
-    position: absolute;
-
-    top: 5%;
-    left: 5%;
-    right: 5%;
-
-    height: 30%;
-
-    background: #eee;
-
-    border: 7px solid #222;
-}
-
-.taipei-logo {
-    position: absolute;
-
-    top: 18%;
-    left: 50%;
-
-    transform: translateX(-50%);
-
-    font-size: clamp(20px, 5vw, 38px);
-
-    color: #222;
-
-    font-weight: bold;
-}
-
-.taipei-floor {
-    position: absolute;
-
-    left: 0;
-    right: 0;
-    bottom: 0;
-
-    height: 64%;
-
-    background:
-        repeating-linear-gradient(
-            90deg,
-            #888 0 65px,
-            #777 65px 130px
-        );
-}
-
-.red-line-sign {
-    position: absolute;
-
-    top: 42%;
-    left: 9%;
-
-    width: 260px;
-
-    background: #c52f36;
-
-    color: white;
-
-    border: 6px solid #111;
-
-    padding: 16px;
-
-    font-size: 18px;
-
-    font-weight: bold;
-
-    text-align: center;
-}
-
-.station-arrow {
-    position: absolute;
-
-    top: 58%;
-    left: 20%;
-
-    color: white;
-
-    font-size: 45px;
-}
-
-
-/* =========================================================
-   ENVIRONMENT 7
-   MRT INTERIOR
-========================================================= */
-
-.environment-mrt {
-    position: absolute;
-    inset: 0;
-
-    background: #292929;
-}
-
-.mrt-map {
-    position: absolute;
-
-    top: 4%;
-    left: 12%;
-    right: 12%;
-
-    height: 12%;
-
-    background: #eee;
-
-    color: #222;
-
-    border: 5px solid #111;
-
-    text-align: center;
-
-    padding: 12px;
-
-    font-weight: bold;
-}
-
-.mrt-window {
-    position: absolute;
-
-    top: 20%;
-    left: 10%;
-    right: 10%;
-
-    height: 39%;
-
-    overflow: hidden;
-
-    background: #050505;
-
-    border: 9px solid #555;
-}
-
-.mrt-tunnel {
-    position: absolute;
-
-    inset: 0;
-
-    background:
-        radial-gradient(
-            ellipse at center,
-            #777 0 13%,
-            #333 32%,
-            #111 68%
-        );
-
-    animation: tunnelMove .55s linear infinite;
-}
-
-@keyframes tunnelMove {
-
-    from {
-        transform: scale(1);
-    }
-
-    to {
-        transform: scale(1.35);
-    }
-
-}
-
-.mrt-seat {
-    position: absolute;
-
-    left: 9%;
-    right: 9%;
-    bottom: 0;
-
-    height: 29%;
-
-    background: #984e67;
-
-    border: 6px solid #111;
-}
-
-.mrt-pole {
-    position: absolute;
-
-    bottom: 20%;
-
-    width: 8px;
-    height: 60%;
-
-    background: #bbb;
-
-    border: 2px solid #222;
-}
-
-.mrt-pole.left {
-    left: 13%;
-}
-
-.mrt-pole.right {
-    right: 13%;
-}
-
-
-/* =========================================================
-   ENVIRONMENT 8
-   TAMSUI STREET
-========================================================= */
-
-.environment-tamsui {
-    position: absolute;
-    inset: 0;
-
-    background:
-        linear-gradient(
-            #91cee1 0 45%,
-            #76a35d 45% 63%,
-            #696969 63% 100%
-        );
-}
-
-.tamsui-shop {
-    position: absolute;
-
-    bottom: 37%;
-
-    width: 180px;
-    height: 180px;
-
-    border: 6px solid #222;
-}
-
-.tamsui-shop.left {
-    left: 4%;
-    background: #d8a66b;
-}
-
-.tamsui-shop.right {
-    right: 4%;
-    background: #df8375;
-}
-
-.tamsui-shop-sign {
-    position: absolute;
-
-    top: 10px;
-
-    left: 10px;
-    right: 10px;
-
-    background: #fff;
-
-    color: #222;
-
-    padding: 8px;
-
-    text-align: center;
-
-    border: 4px solid #222;
-
-    font-weight: bold;
-}
-
-.tamsui-shop-door {
-    position: absolute;
-
-    width: 65px;
-    height: 85px;
-
-    bottom: 0;
-    left: 50%;
-
-    transform: translateX(-50%);
-
-    background: #426a72;
-
-    border: 5px solid #222;
-}
-
-.tamsui-street {
-    position: absolute;
-
-    bottom: 0;
-
-    left: 0;
-    right: 0;
-
-    height: 38%;
-
-    background: #696969;
-
-    border-top: 5px solid #333;
-}
-
-.tamsui-crossing {
-    position: absolute;
-
-    left: 30%;
-    right: 30%;
-
-    bottom: 7%;
-
-    height: 60px;
-
-    background:
-        repeating-linear-gradient(
-            90deg,
-            white 0 16px,
-            transparent 16px 30px
-        );
-}
-
-
-/* =========================================================
-   ENVIRONMENT 9
-   BUS STOP
-========================================================= */
-
-.environment-busstop {
-    position: absolute;
-    inset: 0;
-
-    background:
-        linear-gradient(
-            #9bd3e3 0 48%,
-            #6d9c59 48% 65%,
-            #666 65% 100%
-        );
-}
-
-.busstop-road {
-    position: absolute;
-
-    left: 0;
-    right: 0;
-    bottom: 0;
-
-    height: 35%;
-
-    background: #5c5c5c;
-}
-
-.busstop-pole {
-    position: absolute;
-
-    bottom: 25%;
-    left: 28%;
-
-    width: 14px;
-    height: 220px;
-
-    background: #555;
-
-    border: 4px solid #222;
-}
-
-.busstop-sign {
-    position: absolute;
-
-    top: -10px;
-    left: -70px;
-
-    width: 150px;
-
-    background: #fff;
-
-    color: #222;
-
-    border: 5px solid #222;
-
-    text-align: center;
-
-    padding: 10px;
-
-    font-weight: bold;
-}
-
-.busstop-bench {
-    position: absolute;
-
-    bottom: 23%;
-    right: 20%;
-
-    width: 180px;
-    height: 25px;
-
-    background: #8d6343;
-
-    border: 5px solid #222;
-}
-
-.busstop-bench::before,
-.busstop-bench::after {
-    content: "";
-
-    position: absolute;
-
-    bottom: -55px;
-
-    width: 15px;
-    height: 55px;
-
-    background: #333;
-
-    border: 3px solid #111;
-}
-
-.busstop-bench::before {
-    left: 20px;
-}
-
-.busstop-bench::after {
-    right: 20px;
-}
-
-
-/* =========================================================
-   ENVIRONMENT 10
-   BUS INTERIOR
-========================================================= */
-
-.environment-bus {
-    position: absolute;
-    inset: 0;
-
-    background: #242424;
-}
-
-.bus-window {
-    position: absolute;
-
-    top: 12%;
-    left: 7%;
-    right: 7%;
-
-    height: 47%;
-
-    overflow: hidden;
-
-    background: #8ec9dc;
-
-    border: 9px solid #555;
-}
-
-.bus-view {
-    position: absolute;
-
-    inset: 0;
-
-    background:
-        linear-gradient(
-            #8bcce0 0 48%,
-            #76a45d 48% 75%,
-            #666 75%
-        );
-
-    animation: busMove 1s linear infinite;
-}
-
-.bus-building {
-    position: absolute;
-
-    bottom: 25%;
-
-    left: 20%;
-
-    width: 90px;
-    height: 110px;
-
-    background: #d18b6e;
-
-    border: 5px solid #222;
-}
-
-.bus-building.two {
-    left: 68%;
-    height: 145px;
-}
-
-@keyframes busMove {
-
-    from {
-        transform: translateX(0);
-    }
-
-    to {
-        transform: translateX(-190px);
-    }
-
-}
-
-.bus-seat {
-    position: absolute;
-
-    left: 10%;
-    right: 10%;
-
-    bottom: 0;
-
-    height: 30%;
-
-    background: #4c70a1;
-
-    border: 6px solid #111;
-}
-
-.bus-pole {
-    position: absolute;
-
-    bottom: 20%;
-
-    width: 9px;
-    height: 65%;
-
-    background: #bbb;
-
-    border: 2px solid #222;
-}
-
-.bus-pole.left {
-    left: 13%;
-}
-
-.bus-pole.right {
-    right: 13%;
-}
-
-.bus-display {
-    position: absolute;
-
-    top: 3%;
-    left: 50%;
-
-    transform: translateX(-50%);
-
-    background: #222;
-
-    color: white;
-
-    border: 4px solid #111;
-
-    padding: 7px 15px;
-
-    font-weight: bold;
-}
-
-
-/* =========================================================
-   ENVIRONMENT 11
-   BUS TRANSFER
-========================================================= */
-
-.environment-transfer {
-    position: absolute;
-    inset: 0;
-
-    background:
-        linear-gradient(
-            #9bd3e2 0 47%,
-            #6c9858 47% 65%,
-            #656565 65% 100%
-        );
-}
-
-.transfer-road {
-    position: absolute;
-
-    left: 0;
-    right: 0;
-    bottom: 0;
-
-    height: 35%;
-
-    background: #5a5a5a;
-}
-
-.transfer-sign {
-    position: absolute;
-
-    top: 13%;
-    left: 50%;
-
-    transform: translateX(-50%);
-
-    background: #fff;
-
-    color: #222;
-
-    border: 6px solid #111;
-
-    padding: 16px 28px;
-
-    font-size: 20px;
-
-    font-weight: bold;
-
-    text-align: center;
-}
-
-.transfer-arrow {
-    display: block;
-
-    margin-top: 8px;
-
-    color: #d43b3b;
-
-    font-size: 35px;
-}
-
-.transfer-bus {
-    position: absolute;
-
-    bottom: 28%;
-
-    right: 7%;
-
-    width: 240px;
-    height: 105px;
-
-    background: #f0c84b;
-
-    border: 7px solid #222;
-}
-
-.transfer-bus::before {
-    content: "26";
-
-    position: absolute;
-
-    top: 10px;
-    left: 20px;
-
-    background: #222;
-
-    color: white;
-
-    padding: 8px 15px;
-
-    font-size: 20px;
-
-    font-weight: bold;
-}
-
-
-/* =========================================================
-   ENVIRONMENT 12
-   PHARMACY
-========================================================= */
-
-.environment-pharmacy {
-    position: absolute;
-    inset: 0;
-
-    background:
-        linear-gradient(
-            #9dd5e4 0 46%,
-            #8c8c8c 46% 100%
-        );
-}
-
-.pharmacy-building {
-    position: absolute;
-
-    left: 15%;
-    right: 15%;
-
-    bottom: 16%;
-
-    height: 60%;
-
-    background: #f0f0f0;
-
-    border: 7px solid #222;
+#dialogue{
+  position:fixed;
+  left:50%;
+  bottom:105px;
+  transform:translateX(-50%);
+  width:min(760px,calc(100% - 30px));
+  z-index:30;
+  display:none;
 }
 
-.pharmacy-sign {
-    position: absolute;
-
-    top: 0;
-    left: 0;
-    right: 0;
-
-    height: 25%;
-
-    background: #fff;
-
-    border-bottom: 6px solid #222;
-
-    color: #39a05c;
-
-    display: flex;
-
-    justify-content: center;
-    align-items: center;
-
-    font-size: 27px;
-
-    font-weight: bold;
-}
-
-.pharmacy-cross {
-    color: #d33b3b;
-
-    margin-right: 12px;
-
-    font-size: 35px;
-}
-
-.pharmacy-window {
-    position: absolute;
-
-    left: 9%;
-    right: 9%;
-
-    top: 34%;
-    bottom: 9%;
-
-    background: #75b9c8;
-
-    border: 5px solid #222;
-}
-
-.pharmacy-door {
-    position: absolute;
-
-    left: 50%;
-    bottom: 0;
-
-    transform: translateX(-50%);
-
-    width: 85px;
-    height: 62%;
-
-    background: #4b7077;
-
-    border: 5px solid #222;
-}
-
-
-/* =========================================================
-   ENVIRONMENT 13
-   RESTAURANT
-========================================================= */
-
-.environment-restaurant {
-    position: absolute;
-    inset: 0;
-
-    background:
-        linear-gradient(
-            #382923 0 40%,
-            #a46f46 40% 100%
-        );
-}
-
-.restaurant-building {
-    position: absolute;
-
-    left: 15%;
-    right: 15%;
-
-    bottom: 0;
-
-    height: 72%;
-
-    background: #c68c57;
-
-    border: 8px solid #211814;
-}
-
-.restaurant-sign {
-    position: absolute;
-
-    top: 8%;
-    left: 50%;
-
-    transform: translateX(-50%);
-
-    background: #f3c875;
-
-    color: #382319;
-
-    border: 6px solid #111;
-
-    padding: 14px 25px;
-
-    font-size: clamp(17px, 4vw, 27px);
-
-    font-weight: bold;
-
-    white-space: nowrap;
+.dialogueBox{
+  background:rgba(18,18,25,.94);
+  color:white;
+  border:3px solid #eee;
+  border-radius:15px;
+  padding:18px 20px;
+  box-shadow:0 8px 30px rgba(0,0,0,.45);
 }
-
-.restaurant-window {
-    position: absolute;
-
-    left: 10%;
-    right: 10%;
-
-    top: 35%;
 
-    height: 30%;
-
-    background: #5c8585;
-
-    border: 6px solid #222;
+.speaker{
+  color:#ffd45c;
+  font-weight:bold;
+  margin-bottom:7px;
+  font-size:14px;
 }
-
-.restaurant-door {
-    position: absolute;
-
-    left: 50%;
-    bottom: 0;
 
-    transform: translateX(-50%);
-
-    width: 120px;
-    height: 48%;
-
-    background: #405f65;
-
-    border: 6px solid #222;
+.dialogueText{
+  font-size:20px;
+  line-height:1.5;
 }
-
-.restaurant-light {
-    position: absolute;
 
-    top: 10px;
-    left: 50%;
-
-    transform: translateX(-50%);
-
-    width: 70px;
-    height: 18px;
-
-    background: #f3c875;
-
-    border: 4px solid #222;
+.dialogueHint{
+  margin-top:10px;
+  font-size:12px;
+  opacity:.55;
 }
-
 
-/* =========================================================
+/* =========================
    CONTROLS
-========================================================= */
+========================= */
 
-.controls-area {
-    display: grid;
-
-    grid-template-columns: 1fr 1fr;
-
-    gap: 15px;
-
-    margin-top: 15px;
+#controls{
+  position:fixed;
+  left:20px;
+  bottom:20px;
+  z-index:40;
+  display:grid;
+  grid-template-columns:58px 58px 58px;
+  grid-template-rows:58px 58px;
+  gap:6px;
 }
 
-.panel {
-    background: #292929;
-
-    border: 4px solid #111;
-
-    padding: 14px;
+.ctrl{
+  border:2px solid rgba(255,255,255,.45);
+  background:rgba(20,20,25,.72);
+  color:white;
+  border-radius:12px;
+  font-size:24px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  user-select:none;
+  touch-action:none;
 }
 
-.panel-title {
-    color: #f3c875;
-
-    font-weight: bold;
-
-    margin-bottom: 12px;
+.ctrl:active{
+  background:rgba(255,255,255,.3);
 }
 
-.dpad {
-    width: 190px;
+.up{grid-column:2}
+.left{grid-column:1;grid-row:2}
+.down{grid-column:2;grid-row:2}
+.right{grid-column:3;grid-row:2}
 
-    margin: auto;
+/* camera buttons */
 
-    display: grid;
-
-    grid-template-columns: repeat(3, 60px);
-    grid-template-rows: repeat(3, 60px);
-
-    gap: 5px;
-
-    justify-content: center;
+#cameraControls{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  z-index:40;
+  display:flex;
+  gap:7px;
 }
 
-.dpad button {
-    border: 4px solid #111;
-
-    background: #555;
-
-    color: white;
-
-    font-size: 24px;
-
-    font-weight: bold;
-
-    cursor: pointer;
-
-    box-shadow: 4px 4px 0 #111;
+.cam{
+  width:55px;
+  height:55px;
+  border-radius:12px;
+  border:2px solid rgba(255,255,255,.4);
+  background:rgba(20,20,25,.72);
+  color:white;
+  font-size:18px;
 }
 
-.dpad button:active {
-    transform: translate(3px, 3px);
+/* =========================
+   START SCREEN
+========================= */
 
-    box-shadow: 1px 1px 0 #111;
+#startScreen{
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(circle at 50% 40%,#526b82,#151922 70%);
+  z-index:100;
+  color:white;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:20px;
 }
 
-.up {
-    grid-column: 2;
-    grid-row: 1;
+.startInner{
+  max-width:620px;
 }
 
-.left {
-    grid-column: 1;
-    grid-row: 2;
+.logo{
+  font-size:clamp(35px,8vw,70px);
+  font-weight:900;
+  letter-spacing:-3px;
+  text-shadow:5px 5px 0 #202530;
 }
 
-.down {
-    grid-column: 2;
-    grid-row: 3;
+.subtitle{
+  margin-top:8px;
+  font-size:17px;
+  opacity:.8;
 }
 
-.right {
-    grid-column: 3;
-    grid-row: 2;
+.story{
+  margin:28px auto;
+  line-height:1.7;
+  max-width:540px;
+  color:#ddd;
 }
 
-.keyboard {
-    margin-top: 12px;
-
-    text-align: center;
-
-    color: #999;
-
-    font-size: 11px;
+#startBtn{
+  border:0;
+  background:#ffd45c;
+  color:#27220f;
+  padding:16px 32px;
+  border-radius:12px;
+  font-size:18px;
+  font-weight:bold;
+  cursor:pointer;
+  box-shadow:0 5px 0 #a98420;
 }
 
-
-/* =========================================================
-   LOCATION
-========================================================= */
-
-.location-name {
-    font-family: Arial, sans-serif;
-
-    font-size: 17px;
-
-    color: #fff;
+#startBtn:active{
+  transform:translateY(4px);
+  box-shadow:0 1px 0 #a98420;
 }
 
-.progress-number {
-    font-size: 22px;
+/* =========================
+   MOBILE
+========================= */
 
-    color: #f3c875;
+@media(max-width:600px){
+  #hud{
+    top:8px;
+    left:8px;
+    right:8px;
+  }
 
-    font-weight: bold;
+  .panel{
+    padding:7px 9px;
+  }
+
+  #missionTitle{
+    font-size:12px;
+  }
+
+  #mission,
+  #location{
+    font-size:11px;
+  }
+
+  #dialogue{
+    bottom:165px;
+  }
+
+  .dialogueText{
+    font-size:17px;
+  }
+
+  #controls{
+    left:10px;
+    bottom:10px;
+  }
+
+  #cameraControls{
+    right:10px;
+    bottom:10px;
+  }
 }
-
-
-/* =========================================================
-   MISSION
-========================================================= */
-
-.mission {
-    margin-top: 15px;
-
-    background: #292929;
-
-    border: 4px solid #111;
-
-    padding: 14px;
-}
-
-.mission-title {
-    color: #f3c875;
-
-    margin-bottom: 10px;
-}
-
-.mission-list {
-    list-style: none;
-}
-
-.mission-list li {
-    padding: 7px 0;
-
-    border-bottom: 1px solid #444;
-
-    font-family: Arial, sans-serif;
-
-    font-size: 13px;
-
-    color: #aaa;
-}
-
-.mission-list li.done {
-    color: #83d883;
-}
-
-.mission-list li.current {
-    color: #fff;
-
-    font-weight: bold;
-}
-
-
-/* =========================================================
-   STATUS
-========================================================= */
-
-.status {
-    margin-top: 15px;
-
-    padding: 12px;
-
-    background: #111;
-
-    border: 4px solid #333;
-
-    text-align: center;
-
-    font-family: Arial, sans-serif;
-}
-
-.status.correct {
-    color: #8ce28c;
-}
-
-.status.wrong {
-    color: #ff9c9c;
-}
-
-
-/* =========================================================
-   SUCCESS
-========================================================= */
-
-.success {
-    position: absolute;
-
-    inset: 0;
-
-    z-index: 200;
-
-    display: none;
-
-    align-items: center;
-
-    justify-content: center;
-
-    padding: 25px;
-
-    background: rgba(8,8,8,.96);
-
-    text-align: center;
-}
-
-.success.show {
-    display: flex;
-}
-
-.success-box {
-    max-width: 600px;
-
-    background: #222;
-
-    border: 6px solid #f3c875;
-
-    padding: 30px;
-
-    box-shadow: 10px 10px 0 #111;
-}
-
-.success-box h1 {
-    color: #f3c875;
-
-    margin-bottom: 15px;
-}
-
-.success-box p {
-    font-family: Arial, sans-serif;
-
-    line-height: 1.6;
-
-    color: #ddd;
-}
-
-.restart {
-    margin-top: 20px;
-
-    background: #f3c875;
-
-    color: #222;
-
-    border: 4px solid #111;
-
-    padding: 12px 20px;
-
-    font-weight: bold;
-
-    cursor: pointer;
-}
-
-
-/* =========================================================
-   RESPONSIVE
-========================================================= */
-
-@media (max-width: 700px) {
-
-    .controls-area {
-        grid-template-columns: 1fr;
-    }
-
-    .screen {
-        min-height: 440px;
-        height: 67vh;
-    }
-
-    .dialogue {
-        left: 9px;
-        right: 9px;
-        bottom: 9px;
-    }
-
-    .dialogue-text {
-        font-size: 16px;
-    }
-
-    .city-building {
-        width: 105px;
-        height: 170px;
-    }
-
-    .department-building {
-        left: 5%;
-        right: 5%;
-    }
-
-    .tamsui-shop {
-        width: 125px;
-        height: 155px;
-    }
-
-    .red-line-sign {
-        width: 190px;
-        font-size: 14px;
-    }
-
-    .restaurant-building {
-        left: 7%;
-        right: 7%;
-    }
-
-}
-
 </style>
 </head>
 
-
 <body>
 
-<div class="game">
+<div id="game"></div>
 
-<!-- =====================================================
-     HEADER
-===================================================== -->
+<div id="hud">
+  <div class="panel">
+    <div id="missionTitle">🎂 Ahao's Birthday Mission</div>
+    <div id="mission">離開百貨公司</div>
+  </div>
 
-<header class="header">
-
-    <div class="logo">
-        🧋 BOBA BREAK STUDY
-    </div>
-
-    <div class="header-info">
-        AHAO'S BIRTHDAY MISSION
-    </div>
-
-</header>
-
-
-<!-- =====================================================
-     STORY
-===================================================== -->
-
-<section class="story">
-
-    <div class="story-title">
-        🎂 Today's Mission
-    </div>
-
-    <div class="story-text">
-
-        Today is Xiaomei's birthday.
-
-        She invited all of her school friends to dinner
-        at a restaurant in Tamsui.
-
-        Ahao wants to buy her a present before going there.
-
-        But his phone battery suddenly dies.
-
-        No Google Maps.
-
-        No navigation.
-
-        He has to ask people for directions and understand
-        Mandarin to find his way to the restaurant.
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-     GAME
-===================================================== -->
-
-<section class="game-area">
-
-
-<div class="screen" id="screen">
-
-    <div id="environment"></div>
-
-
-    <!-- PLAYER -->
-
-    <div class="player">
-
-        <div class="player-head"></div>
-
-        <div class="player-body"></div>
-
-        <div class="player-leg left"></div>
-
-        <div class="player-leg right"></div>
-
-    </div>
-
-
-    <!-- DIALOGUE -->
-
-    <div class="dialogue">
-
-        <div class="speaker" id="speaker">
-            🧑 Stranger
-        </div>
-
-        <div class="dialogue-text" id="dialogue">
-            一直走，經過銀行和醫院。
-        </div>
-
-        <div class="dialogue-note">
-            聽懂對方的方向，選擇正確的方向。
-        </div>
-
-    </div>
-
-
-    <!-- SUCCESS -->
-
-    <div class="success" id="success">
-
-        <div class="success-box">
-
-            <h1>
-                🎂 Mission Complete!
-            </h1>
-
-            <p>
-                You finally arrived at 海風小館.
-                Xiaomei and your friends are waiting for you.
-
-                You successfully navigated the city
-                using Mandarin.
-            </p>
-
-            <button class="restart" onclick="restartGame()">
-                PLAY AGAIN
-            </button>
-
-        </div>
-
-    </div>
-
+  <div class="panel">
+    <div id="location">百貨公司</div>
+  </div>
 </div>
 
-
-<!-- =====================================================
-     CONTROLS
-===================================================== -->
-
-<div class="controls-area">
-
-
-<div class="panel">
-
-    <div class="panel-title">
-        🕹️ MOVE
-    </div>
-
-    <div class="dpad">
-
-        <button
-            class="up"
-            onclick="move('up')">
-            ↑
-        </button>
-
-        <button
-            class="left"
-            onclick="move('left')">
-            ←
-        </button>
-
-        <button
-            class="down"
-            onclick="move('down')">
-            ↓
-        </button>
-
-        <button
-            class="right"
-            onclick="move('right')">
-            →
-        </button>
-
-    </div>
-
-    <div class="keyboard">
-        Keyboard: Arrow Keys
-    </div>
-
+<div id="dialogue">
+  <div class="dialogueBox">
+    <div class="speaker" id="speaker">路人</div>
+    <div class="dialogueText" id="dialogueText"></div>
+    <div class="dialogueHint">按 ↑ 繼續</div>
+  </div>
 </div>
 
-
-<div class="panel">
-
-    <div class="panel-title">
-        📍 CURRENT LOCATION
-    </div>
-
-    <div
-        class="location-name"
-        id="location">
-        Department Store
-    </div>
-
-    <br>
-
-    <div class="panel-title">
-        🧭 PROGRESS
-    </div>
-
-    <div
-        class="progress-number"
-        id="progress">
-        0 / 15
-    </div>
-
+<div id="controls">
+  <div class="ctrl up" data-key="ArrowUp">▲</div>
+  <div class="ctrl left" data-key="ArrowLeft">◀</div>
+  <div class="ctrl down" data-key="ArrowDown">▼</div>
+  <div class="ctrl right" data-key="ArrowRight">▶</div>
 </div>
 
-
+<div id="cameraControls">
+  <button class="cam" id="camLeft">↶</button>
+  <button class="cam" id="camRight">↷</button>
 </div>
 
+<div id="startScreen">
+  <div class="startInner">
+    <div class="logo">AHAO</div>
+    <div class="subtitle">A Birthday Mission</div>
 
-<!-- =====================================================
-     MISSION
-===================================================== -->
-
-<div class="mission">
-
-    <div class="mission-title">
-        📋 Mission
+    <div class="story">
+      今天是小美的生日。<br>
+      阿豪要去買生日禮物，晚上還要去餐廳跟大家一起吃飯。<br><br>
+      可是他的手機沒電了。<br>
+      他只能問路人，自己找到目的地。
     </div>
 
-    <ul class="mission-list">
+    <button id="startBtn">開始遊戲</button>
 
-        <li id="m0">
-            ⬜ Leave the department store
-        </li>
-
-        <li id="m1">
-            ⬜ Find the convenience store
-        </li>
-
-        <li id="m2">
-            ⬜ Find the train station
-        </li>
-
-        <li id="m3">
-            ⬜ Take the train
-        </li>
-
-        <li id="m4">
-            ⬜ Find Taipei Main Station
-        </li>
-
-        <li id="m5">
-            ⬜ Transfer to the Red Line
-        </li>
-
-        <li id="m6">
-            ⬜ Take the MRT to Tamsui
-        </li>
-
-        <li id="m7">
-            ⬜ Find the bus stop
-        </li>
-
-        <li id="m8">
-            ⬜ Transfer to another bus
-        </li>
-
-        <li id="m9">
-            ⬜ Find the pharmacy
-        </li>
-
-        <li id="m10">
-            ⬜ Find the restaurant
-        </li>
-
-    </ul>
-
+    <div style="margin-top:20px;font-size:12px;opacity:.6">
+      Arrow Keys / Touch Controls
+    </div>
+  </div>
 </div>
 
+<script type="module">
+
+import * as THREE from
+'https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js';
+
+/* ============================================================
+   BASIC SETUP
+============================================================ */
+
+const game = document.getElementById("game");
+
+const scene = new THREE.Scene();
+
+scene.background = new THREE.Color(0x8fb0c5);
+scene.fog = new THREE.Fog(0x8fb0c5,35,95);
+
+const camera = new THREE.PerspectiveCamera(
+  55,
+  innerWidth / innerHeight,
+  .1,
+  250
+);
+
+const renderer = new THREE.WebGLRenderer({
+  antialias:false
+});
+
+renderer.setPixelRatio(1);
+renderer.setSize(innerWidth,innerHeight);
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+game.appendChild(renderer.domElement);
+
+/* ============================================================
+   LIGHT
+============================================================ */
+
+const hemi = new THREE.HemisphereLight(
+  0xbddcff,
+  0x4a4a4a,
+  1.6
+);
+
+scene.add(hemi);
+
+const sun = new THREE.DirectionalLight(
+  0xffe4ba,
+  2.0
+);
+
+sun.position.set(-30,60,30);
+sun.castShadow = true;
+sun.shadow.mapSize.width = 1024;
+sun.shadow.mapSize.height = 1024;
 
-<div
-    class="status"
-    id="status">
+scene.add(sun);
+
+/* ============================================================
+   MATERIAL HELPERS
+============================================================ */
+
+function mat(color){
+  return new THREE.MeshLambertMaterial({
+    color,
+    flatShading:true
+  });
+}
+
+const M = {
+  road:mat(0x44464d),
+  sidewalk:mat(0xaaa8a0),
+  grass:mat(0x667a51),
+  wall:mat(0xb5a58f),
+  roof:mat(0x5b4540),
+  glass:mat(0x6d9db1),
+  white:mat(0xf1eee2),
+  red:mat(0xc94c43),
+  blue:mat(0x4777a7),
+  green:mat(0x4d8052),
+  yellow:mat(0xe0b84f),
+  black:mat(0x202126),
+  skin:mat(0xe2ae87),
+  hair:mat(0x342b2a),
+  shirt:mat(0x4f78a8),
+  pants:mat(0x333e61),
+  shoe:mat(0x252525),
+  train:mat(0xd8d8d0),
+  metro:mat(0xd45b48),
+  bus:mat(0x4c78a7)
+};
 
-    聽懂對方的指示，選擇方向。
+/* ============================================================
+   GLOBAL WORLD
+============================================================ */
 
-</div>
+let world = new THREE.Group();
+scene.add(world);
 
+let player;
+let playerGroup;
 
-</section>
+let keys = {};
 
-</div>
+let currentScene = 0;
+let sceneObjects = [];
 
+let dialogueOpen = false;
+let dialogueIndex = 0;
+let currentDialogue = [];
 
-<script>
+let cameraAngle = 0;
 
-/* =========================================================
-   SCENE DATA
-========================================================= */
+const clock = new THREE.Clock();
 
-const scenes = [
+/* ============================================================
+   UI
+============================================================ */
 
-    /* 0 */
+const missionEl = document.getElementById("mission");
+const locationEl = document.getElementById("location");
 
-    {
-        environment: "department",
-        location: "Department Store",
+function updateUI(){
 
-        speaker: "🧑 Stranger",
+  const s = scenes[currentScene];
 
-        text:
-        "一直走，先離開百貨公司。",
+  missionEl.textContent = s.mission;
+  locationEl.textContent = s.location;
+}
 
-        correct: "up",
+/* ============================================================
+   BOX CREATOR
+============================================================ */
 
-        mission: 0
-    },
+function box(
+  x,y,z,
+  w,h,d,
+  material,
+  parent=world
+){
 
+  const mesh = new THREE.Mesh(
+    new THREE.BoxGeometry(w,h,d),
+    material
+  );
 
-    /* 1 */
+  mesh.position.set(x,y,z);
 
-    {
-        environment: "city",
-        location: "City Street",
+  mesh.castShadow=true;
+  mesh.receiveShadow=true;
 
-        speaker: "🧑 Stranger",
+  parent.add(mesh);
 
-        text:
-        "一直走，看到便利商店以後往左轉。",
+  sceneObjects.push(mesh);
 
-        correct: "up",
+  return mesh;
+}
 
-        mission: 0
-    },
+/* ============================================================
+   CYLINDER
+============================================================ */
 
+function cyl(
+  x,y,z,
+  r,h,
+  material,
+  parent=world
+){
 
-    /* 2 */
+  const mesh = new THREE.Mesh(
+    new THREE.CylinderGeometry(
+      r,r,h,8
+    ),
+    material
+  );
 
-    {
-        environment: "convenience",
-        location: "Convenience Store",
+  mesh.position.set(x,y,z);
 
-        speaker: "🧑 Stranger",
+  mesh.castShadow=true;
+  mesh.receiveShadow=true;
 
-        text:
-        "看到便利商店以後，往左轉。",
+  parent.add(mesh);
 
-        correct: "left",
+  sceneObjects.push(mesh);
 
-        mission: 1
-    },
+  return mesh;
+}
 
+/* ============================================================
+   TREE
+============================================================ */
 
-    /* 3 */
+function tree(x,z,parent=world){
 
-    {
-        environment: "city",
-        location: "Street",
+  box(
+    x,1.7,z,
+    .45,3.4,.45,
+    M.roof,
+    parent
+  );
 
-        speaker: "🧑 Stranger",
+  cyl(
+    x,4,z,
+    1.5,2.7,
+    M.green,
+    parent
+  );
+}
 
-        text:
-        "往前走，車站就在前面。",
+/* ============================================================
+   STREET
+============================================================ */
 
-        correct: "up",
+function street(length=90){
 
-        mission: 2
-    },
+  box(
+    0,-.15,0,
+    10,.3,length,
+    M.road
+  );
 
+  box(
+    -7,.05,0,
+    3,.4,length,
+    M.sidewalk
+  );
 
-    /* 4 */
+  box(
+    7,.05,0,
+    3,.4,length,
+    M.sidewalk
+  );
 
-    {
-        environment: "station",
-        location: "Train Station",
+  for(let z=-length/2;z<length/2;z+=7){
 
-        speaker: "🧑 Station Staff",
+    box(
+      0,.02,z,
+      .25,.04,3,
+      M.yellow
+    );
+  }
+}
 
-        text:
-        "往前走，進入車站。",
+/* ============================================================
+   BUILDING
+============================================================ */
 
-        correct: "up",
+function building(
+  x,z,
+  w,h,d,
+  wallMaterial=M.wall
+){
 
-        mission: 2
-    },
+  box(
+    x,h/2,z,
+    w,h,d,
+    wallMaterial
+  );
 
+  const floors=Math.max(1,Math.floor(h/3));
 
-    /* 5 */
+  for(let f=0;f<floors;f++){
 
-    {
-        environment: "train",
-        location: "Train",
+    for(let xx=x-w/2+1.2;xx<x+w/2-1;xx+=2.3){
 
-        speaker: "🚆 車內廣播",
+      box(
+        xx,
+        1.5+f*3,
+        z-d/2-.04,
+        1.1,
+        1.25,
+        .08,
+        M.glass
+      );
 
-        text:
-        "下一站：台北車站。",
-
-        correct: "up",
-
-        mission: 3
-    },
-
-
-    /* 6 */
-
-    {
-        environment: "taipei",
-        location: "Taipei Main Station",
-
-        speaker: "🧑 Station Staff",
-
-        text:
-        "往左走，然後一直走。",
-
-        correct: "left",
-
-        mission: 4
-    },
-
-
-    /* 7 */
-
-    {
-        environment: "taipei",
-        location: "Taipei Main Station",
-
-        speaker: "🧑 Station Staff",
-
-        text:
-        "看到紅色的標誌以後往右轉。",
-
-        correct: "right",
-
-        mission: 5
-    },
-
-
-    /* 8 */
-
-    {
-        environment: "mrt",
-        location: "Red Line",
-
-        speaker: "🚇 車內廣播",
-
-        text:
-        "淡水信義線。下一站：淡水。",
-
-        correct: "up",
-
-        mission: 6
-    },
-
-
-    /* 9 */
-
-    {
-        environment: "tamsui",
-        location: "Tamsui",
-
-        speaker: "🧑 Stranger",
-
-        text:
-        "出站以後，過馬路，然後一直走。",
-
-        correct: "up",
-
-        mission: 6
-    },
-
-
-    /* 10 */
-
-    {
-        environment: "busstop",
-        location: "Bus Stop",
-
-        speaker: "🧑 Stranger",
-
-        text:
-        "公車站在右邊。往右轉。",
-
-        correct: "right",
-
-        mission: 7
-    },
-
-
-    /* 11 */
-
-    {
-        environment: "bus",
-        location: "Bus",
-
-        speaker: "🚌 公車廣播",
-
-        text:
-        "下一站：轉車站。請準備下車。",
-
-        correct: "up",
-
-        mission: 8
-    },
-
-
-    /* 12 */
-
-    {
-        environment: "transfer",
-        location: "Bus Transfer Stop",
-
-        speaker: "🧑 Stranger",
-
-        text:
-        "在這裡下車。轉搭二十六號公車。",
-
-        correct: "right",
-
-        mission: 8
-    },
-
-
-    /* 13 */
-
-    {
-        environment: "bus",
-        location: "Bus 26",
-
-        speaker: "🚌 公車廣播",
-
-        text:
-        "下一站：藥局。",
-
-        correct: "up",
-
-        mission: 9
-    },
-
-
-    /* 14 */
-
-    {
-        environment: "pharmacy",
-        location: "Pharmacy",
-
-        speaker: "🧑 Stranger",
-
-        text:
-        "看到藥局以後，往左轉。",
-
-        correct: "left",
-
-        mission: 9
-    },
-
-
-    /* 15 */
-
-    {
-        environment: "restaurant",
-        location: "海風小館",
-
-        speaker: "👩 小美",
-
-        text:
-        "阿豪！你終於到了！",
-
-        correct: "up",
-
-        mission: 10
     }
+  }
+}
+
+/* ============================================================
+   SIGN
+============================================================ */
+
+function sign(
+  text,
+  x,y,z,
+  color=M.red,
+  rotationY=0
+){
+
+  const canvas=document.createElement("canvas");
+  canvas.width=512;
+  canvas.height=128;
+
+  const ctx=canvas.getContext("2d");
+
+  ctx.fillStyle="#ffffff";
+  ctx.fillRect(0,0,512,128);
+
+  ctx.fillStyle=
+    "#" + color.color.getHexString();
+
+  ctx.font="bold 55px Arial";
+  ctx.textAlign="center";
+  ctx.textBaseline="middle";
+
+  ctx.fillText(text,256,64);
+
+  const texture=
+    new THREE.CanvasTexture(canvas);
+
+  const mesh=new THREE.Mesh(
+    new THREE.PlaneGeometry(4,1),
+    new THREE.MeshBasicMaterial({
+      map:texture,
+      transparent:true
+    })
+  );
+
+  mesh.position.set(x,y,z);
+  mesh.rotation.y=rotationY;
+
+  world.add(mesh);
+
+  return mesh;
+}
+
+/* ============================================================
+   AHAO CHARACTER
+============================================================ */
+
+function createAhao(){
+
+  const g=new THREE.Group();
+
+  const body=new THREE.Group();
+
+  g.add(body);
+
+  /* torso */
+
+  const torso=box(
+    0,1.35,0,
+    .9,1.45,.55,
+    M.shirt,
+    body
+  );
+
+  /* head */
+
+  const head=box(
+    0,2.55,0,
+    .75,.75,.7,
+    M.skin,
+    body
+  );
+
+  /* hair */
+
+  box(
+    0,2.95,-.02,
+    .78,.25,.72,
+    M.hair,
+    body
+  );
+
+  /* arms */
+
+  const armL=box(
+    -.58,1.4,0,
+    .25,1.15,.3,
+    M.skin,
+    body
+  );
+
+  const armR=box(
+    .58,1.4,0,
+    .25,1.15,.3,
+    M.skin,
+    body
+  );
+
+  /* pants */
+
+  const legL=box(
+    -.24,.45,0,
+    .32,.9,.42,
+    M.pants,
+    body
+  );
+
+  const legR=box(
+    .24,.45,0,
+    .32,.9,.42,
+    M.pants,
+    body
+  );
+
+  /* shoes */
+
+  box(
+    -.24,-.02,-.08,
+    .4,.22,.55,
+    M.shoe,
+    body
+  );
+
+  box(
+    .24,-.02,-.08,
+    .4,.22,.55,
+    M.shoe,
+    body
+  );
+
+  g.userData={
+    armL,
+    armR,
+    legL,
+    legR
+  };
+
+  return g;
+}
+
+/* ============================================================
+   NPC
+============================================================ */
+
+function npc(
+  x,z,
+  shirt=M.red
+){
+
+  const g=new THREE.Group();
+
+  box(
+    0,1.3,0,
+    .75,1.35,.5,
+    shirt,
+    g
+  );
+
+  box(
+    0,2.35,0,
+    .62,.65,.62,
+    M.skin,
+    g
+  );
+
+  box(
+    0,2.68,0,
+    .65,.2,.62,
+    M.hair,
+    g
+  );
+
+  box(
+    -.47,1.35,0,
+    .22,1,.25,
+    M.skin,
+    g
+  );
+
+  box(
+    .47,1.35,0,
+    .22,1,.25,
+    M.skin,
+    g
+  );
+
+  box(
+    -.2,.45,0,
+    .3,.8,.35,
+    M.pants,
+    g
+  );
+
+  box(
+    .2,.45,0,
+    .3,.8,.35,
+    M.pants,
+    g
+  );
+
+  g.position.set(x,0,z);
+
+  world.add(g);
+
+  return g;
+}
+
+/* ============================================================
+   SCENE CLEAR
+============================================================ */
+
+function clearWorld(){
+
+  while(world.children.length){
+
+    world.remove(world.children[0]);
+
+  }
+
+  sceneObjects=[];
+
+}
+
+/* ============================================================
+   PLAYER RESET
+============================================================ */
+
+function resetPlayer(x=0,z=25){
+
+  playerGroup.position.set(x,0,z);
+
+  playerGroup.rotation.y=0;
+
+}
+
+/* ============================================================
+   ENVIRONMENT SCENES
+============================================================ */
+
+const scenes=[
+
+/* 0 */
+
+{
+ location:"百貨公司",
+ mission:"離開百貨公司，往前走。",
+ dialogue:[
+  ["路人","一直走，先離開百貨公司。"]
+ ],
+ build(){
+
+  box(0,5,-35,28,10,8,M.wall);
+
+  box(
+    0,2,-30.8,
+    5,4,.3,
+    M.glass
+  );
+
+  sign(
+    "百貨公司",
+    0,7,-30.7,
+    M.red
+  );
+
+  street(100);
+
+  building(-13,-10,8,12,14,M.wall);
+  building(13,-5,8,10,14,M.blue);
+
+  tree(-11,8);
+  tree(11,18);
+
+ }
+},
+
+/* 1 */
+
+{
+ location:"城市街道",
+ mission:"看到便利商店以後往左轉。",
+ dialogue:[
+  ["路人","一直走，看到便利商店以後往左轉。"]
+ ],
+ build(){
+
+  street(100);
+
+  building(-13,-12,9,15,16,M.wall);
+  building(13,-8,9,12,16,M.blue);
+
+  building(-13,18,9,9,16,M.red);
+  building(13,25,9,16,16,M.wall);
+
+  tree(-10,5);
+  tree(10,12);
+
+  /* convenience store */
+
+  box(
+    12,2,38,
+    9,4,8,
+    M.white
+  );
+
+  box(
+    12,2,33.9,
+    8,3,.15,
+    M.glass
+  );
+
+  sign(
+    "便利商店",
+    12,4.3,33.8,
+    M.green
+  );
+
+ }
+},
+
+/* 2 */
+
+{
+ location:"便利商店",
+ mission:"往左轉。",
+ dialogue:[
+  ["路人","看到便利商店以後，往左轉。"]
+ ],
+ build(){
+
+  /* L shaped road */
+
+  box(0,-.15,0,10,.3,80,M.road);
+
+  box(
+    -30,-.15,38,
+    60,.3,10,
+    M.road
+  );
+
+  box(-7,.05,0,3,.4,80,M.sidewalk);
+  box(7,.05,0,3,.4,80,M.sidewalk);
+
+  box(
+    -30,.05,31,
+    60,.4,3,
+    M.sidewalk
+  );
+
+  box(
+    -30,.05,45,
+    60,.4,3,
+    M.sidewalk
+  );
+
+  /* store */
+
+  box(
+    14,2,25,
+    10,4,10,
+    M.white
+  );
+
+  sign(
+    "便利商店",
+    14,4.4,19.8,
+    M.green
+  );
+
+  /* traffic */
+
+  box(
+    -10,2,-15,
+    5,4,8,
+    M.red
+  );
+
+  box(
+    10,2,-25,
+    5,4,8,
+    M.blue
+  );
+
+  tree(-12,15);
+
+ }
+},
+
+/* 3 */
+
+{
+ location:"城市街道",
+ mission:"一直走，車站就在前面。",
+ dialogue:[
+  ["路人","往前走，車站就在前面。"]
+ ],
+ build(){
+
+  street(110);
+
+  building(-13,-5,9,12,16,M.wall);
+  building(13,-10,9,14,16,M.blue);
+
+  tree(-11,10);
+  tree(11,20);
+
+  /* station visible ahead */
+
+  box(
+    0,5,-38,
+    25,10,7,
+    M.white
+  );
+
+  sign(
+    "車站",
+    0,8,-34.4,
+    M.red
+  );
+
+ }
+},
+
+/* 4 */
+
+{
+ location:"火車站",
+ mission:"往前走，進入車站。",
+ dialogue:[
+  ["站務員","往前走，進入車站。"]
+ ],
+ build(){
+
+  box(
+    0,4,-10,
+    24,8,18,
+    M.white
+  );
+
+  /* station entrance */
+
+  box(
+    -5,3,-19.2,
+    6,6,.3,
+    M.glass
+  );
+
+  box(
+    5,3,-19.2,
+    6,6,.3,
+    M.glass
+  );
+
+  sign(
+    "車站",
+    0,7,-19,
+    M.red
+  );
+
+  /* ticket gates */
+
+  for(let x=-7;x<=7;x+=3.5){
+
+    box(
+      x,1,-5,
+      1.2,2,.7,
+      M.blue
+    );
+
+  }
+
+  /* platform */
+
+  box(
+    -14,-.1,10,
+    5,.2,60,
+    M.sidewalk
+  );
+
+  box(
+    14,-.1,10,
+    5,.2,60,
+    M.sidewalk
+  );
+
+ }
+},
+
+/* 5 */
+
+{
+ location:"火車上",
+ mission:"搭火車到台北車站。",
+ dialogue:[
+  ["廣播","下一站：台北車站。"]
+ ],
+ build(){
+
+  /* train floor */
+
+  box(
+    0,-.3,0,
+    8,.3,70,
+    M.train
+  );
+
+  /* walls */
+
+  box(
+    -4,2,0,
+    .3,4,70,
+    M.train
+  );
+
+  box(
+    4,2,0,
+    .3,4,70,
+    M.train
+  );
+
+  /* windows */
+
+  for(let z=-25;z<30;z+=8){
+
+    box(
+      -3.8,2.3,z,
+      .08,1.6,5,
+      M.glass
+    );
+
+    box(
+      3.8,2.3,z,
+      .08,1.6,5,
+      M.glass
+    );
+
+  }
+
+  /* seats */
+
+  for(let z=-20;z<25;z+=8){
+
+    box(
+      -2.8,.9,z,
+      1.5,.8,3,
+      M.red
+    );
+
+    box(
+      2.8,.9,z,
+      1.5,.8,3,
+      M.red
+    );
+
+  }
+
+ }
+},
+
+/* 6 */
+
+{
+ location:"台北車站",
+ mission:"往左走，找到紅色標誌。",
+ dialogue:[
+  ["旅客","往左走，然後一直走。"]
+ ],
+ build(){
+
+  /* huge station hall */
+
+  box(
+    0,4,-10,
+    35,8,25,
+    M.wall
+  );
+
+  /* floor */
+
+  box(
+    0,-.3,20,
+    50,.4,80,
+    M.sidewalk
+  );
+
+  /* pillars */
+
+  for(let x=-15;x<=15;x+=7){
+
+    box(
+      x,5,-8,
+      1.2,10,1.2,
+      M.white
+    );
+
+  }
+
+  sign(
+    "台北車站",
+    0,8,-22,
+    M.blue
+  );
+
+  sign(
+    "紅線",
+    13,5,5,
+    M.red
+  );
+
+ }
+},
+
+/* 7 */
+
+{
+ location:"台北車站",
+ mission:"看到紅色標誌以後往右轉。",
+ dialogue:[
+  ["旅客","看到紅色的標誌以後往右轉。"]
+ ],
+ build(){
+
+  box(
+    0,-.2,0,
+    50,.4,80,
+    M.sidewalk
+  );
+
+  for(let x=-20;x<=20;x+=8){
+
+    box(
+      x,4,-15,
+      1.2,8,1.2,
+      M.white
+    );
+
+  }
+
+  /* red line sign */
+
+  box(
+    13,3,0,
+    .8,6,.8,
+    M.red
+  );
+
+  sign(
+    "紅線",
+    13,6,-.5,
+    M.red
+  );
+
+  box(
+    -12,2,-10,
+    7,4,5,
+    M.blue
+  );
+
+ }
+},
+
+/* 8 */
+
+{
+ location:"淡水信義線",
+ mission:"搭紅線到淡水。",
+ dialogue:[
+  ["廣播","淡水信義線。下一站：淡水。"]
+ ],
+ build(){
+
+  box(
+    0,-.3,0,
+    8,.3,70,
+    M.metro
+  );
+
+  box(
+    -4,2,0,
+    .3,4,70,
+    M.metro
+  );
+
+  box(
+    4,2,0,
+    .3,4,70,
+    M.metro
+  );
+
+  for(let z=-28;z<30;z+=7){
+
+    box(
+      -3.8,2.3,z,
+      .08,1.6,4.5,
+      M.glass
+    );
+
+    box(
+      3.8,2.3,z,
+      .08,1.6,4.5,
+      M.glass
+    );
+
+    box(
+      -2.5,.8,z,
+      2,.8,2.8,
+      M.blue
+    );
+
+    box(
+      2.5,.8,z,
+      2,.8,2.8,
+      M.blue
+    );
+
+  }
+
+ }
+},
+
+/* 9 */
+
+{
+ location:"淡水",
+ mission:"出站以後過馬路，然後一直走。",
+ dialogue:[
+  ["路人","出站以後，過馬路，然後一直走。"]
+ ],
+ build(){
+
+  street(110);
+
+  /* old street */
+
+  building(-13,-5,9,7,16,M.wall);
+  building(13,3,9,8,16,M.red);
+
+  building(-13,25,9,10,16,M.yellow);
+  building(13,30,9,9,16,M.blue);
+
+  tree(-10,13);
+  tree(11,20);
+
+  /* sea */
+
+  box(
+    30,0,10,
+    18,.3,100,
+    M.blue
+  );
+
+  sign(
+    "淡水",
+    0,5,-35,
+    M.red
+  );
+
+ }
+},
+
+/* 10 */
+
+{
+ location:"公車站",
+ mission:"公車站在右邊，往右轉。",
+ dialogue:[
+  ["路人","公車站在右邊。往右轉。"]
+ ],
+ build(){
+
+  /* main road */
+
+  box(
+    0,-.2,0,
+    70,.4,12,
+    M.road
+  );
+
+  /* side road */
+
+  box(
+    28,-.2,25,
+    12,.4,55,
+    M.road
+  );
+
+  /* bus stop */
+
+  box(
+    20,2,9,
+    7,4,.5,
+    M.glass
+  );
+
+  box(
+    20,4,9,
+    7,.5,.6,
+    M.yellow
+  );
+
+  sign(
+    "公車站",
+    20,5,8.5,
+    M.bus
+  );
+
+  tree(5,-10);
+  tree(-12,10);
+
+ }
+},
+
+/* 11 */
+
+{
+ location:"公車上",
+ mission:"搭公車，準備下車。",
+ dialogue:[
+  ["公車廣播","下一站：轉車站。請準備下車。"]
+ ],
+ build(){
+
+  box(
+    0,-.3,0,
+    7,.3,60,
+    M.bus
+  );
+
+  box(
+    -3.5,2,0,
+    .3,4,60,
+    M.bus
+  );
+
+  box(
+    3.5,2,0,
+    .3,4,60,
+    M.bus
+  );
+
+  for(let z=-25;z<30;z+=7){
+
+    box(
+      -2.5,.8,z,
+      1.6,.8,2.5,
+      M.yellow
+    );
+
+    box(
+      2.5,.8,z,
+      1.6,.8,2.5,
+      M.yellow
+    );
+
+  }
+
+ }
+},
+
+/* 12 */
+
+{
+ location:"轉車站",
+ mission:"在這裡下車，轉搭二十六號公車。",
+ dialogue:[
+  ["站務員","在這裡下車。轉搭二十六號公車。"]
+ ],
+ build(){
+
+  box(
+    0,-.2,0,
+    50,.4,70,
+    M.sidewalk
+  );
+
+  /* bus bays */
+
+  box(
+    -15,1,0,
+    10,2,40,
+    M.road
+  );
+
+  box(
+    15,1,0,
+    10,2,40,
+    M.road
+  );
+
+  sign(
+    "26號公車",
+    15,5,-10,
+    M.bus
+  );
+
+  box(
+    0,3,-15,
+    20,6,1,
+    M.white
+  );
+
+  sign(
+    "轉車站",
+    0,6,-15.7,
+    M.red
+  );
+
+ }
+},
+
+/* 13 */
+
+{
+ location:"公車上",
+ mission:"下一站是藥局。",
+ dialogue:[
+  ["公車廣播","下一站：藥局。"]
+ ],
+ build(){
+
+  box(
+    0,-.3,0,
+    7,.3,70,
+    M.bus
+  );
+
+  box(
+    -3.5,2,0,
+    .3,4,70,
+    M.bus
+  );
+
+  box(
+    3.5,2,0,
+    .3,4,70,
+    M.bus
+  );
+
+  for(let z=-25;z<30;z+=7){
+
+    box(
+      -2.5,.8,z,
+      1.6,.8,2.5,
+      M.yellow
+    );
+
+    box(
+      2.5,.8,z,
+      1.6,.8,2.5,
+      M.yellow
+    );
+
+  }
+
+ }
+},
+
+/* 14 */
+
+{
+ location:"藥局附近",
+ mission:"看到藥局以後往左轉。",
+ dialogue:[
+  ["路人","看到藥局以後，往左轉。"]
+ ],
+ build(){
+
+  street(90);
+
+  /* pharmacy */
+
+  box(
+    13,3,-15,
+    10,6,10,
+    M.white
+  );
+
+  sign(
+    "藥局",
+    13,6,-20.2,
+    M.green
+  );
+
+  building(
+    -13,-10,
+    9,11,16,
+    M.wall
+  );
+
+  building(
+    13,15,
+    9,9,16,
+    M.blue
+  );
+
+  tree(-11,20);
+
+ }
+},
+
+/* 15 */
+
+{
+ location:"海風小館",
+ mission:"你到了！小美正在等你。",
+ dialogue:[
+  ["小美","阿豪！你終於到了！"],
+  ["阿豪","小美，生日快樂！"],
+  ["小美","謝謝你！我們一起吃飯吧！"]
+ ],
+ build(){
+
+  /* restaurant courtyard */
+
+  box(
+    0,-.3,0,
+    50,.4,60,
+    M.grass
+  );
+
+  /* building */
+
+  box(
+    0,4,-15,
+    28,8,12,
+    M.wall
+  );
+
+  box(
+    0,2,-8.8,
+    7,4,.2,
+    M.glass
+  );
+
+  sign(
+    "海風小館",
+    0,8,-8.7,
+    M.red
+  );
+
+  tree(-18,-3);
+  tree(18,-3);
+
+  /* tables */
+
+  for(let x=-8;x<=8;x+=8){
+
+    cyl(
+      x,.7,5,
+      1.5,.3,
+      M.wood || M.roof
+    );
+
+  }
+
+  /* Xiaomei */
+
+  npc(
+    0,5,
+    M.red
+  );
+
+ }
+}
 
 ];
 
+/* ============================================================
+   SCENE BUILD
+============================================================ */
 
-/* =========================================================
-   ELEMENTS
-========================================================= */
+function loadScene(index){
 
-const environment =
-    document.getElementById("environment");
+  currentScene=index;
 
-const speaker =
-    document.getElementById("speaker");
+  clearWorld();
 
-const dialogue =
-    document.getElementById("dialogue");
+  const s=scenes[index];
 
-const location =
-    document.getElementById("location");
+  s.build();
 
-const progress =
-    document.getElementById("progress");
+  resetPlayer();
 
-const status =
-    document.getElementById("status");
+  updateUI();
 
-const success =
-    document.getElementById("success");
+  if(index===15){
 
+    showDialogue();
 
-let currentScene = 0;
+  }else{
 
+    currentDialogue=s.dialogue;
+    dialogueIndex=0;
+    showDialogue();
 
-/* =========================================================
-   ENVIRONMENT RENDERER
-========================================================= */
-
-function renderEnvironment(type) {
-
-
-    /* -----------------------------------------------
-       DEPARTMENT STORE
-    ----------------------------------------------- */
-
-    if (type === "department") {
-
-        environment.className =
-            "environment-department";
-
-        environment.innerHTML = `
-
-            <div class="department-building">
-
-                <div class="department-top">
-                    百貨公司
-                </div>
-
-                <div class="department-logo">
-                    🛍️ SHOPPING MALL
-                </div>
-
-                <div class="department-windows">
-
-                    <div class="department-window"></div>
-                    <div class="department-window"></div>
-                    <div class="department-window"></div>
-                    <div class="department-window"></div>
-
-                </div>
-
-                <div class="department-door"></div>
-
-            </div>
-
-        `;
-
-    }
-
-
-    /* -----------------------------------------------
-       CITY
-    ----------------------------------------------- */
-
-    else if (type === "city") {
-
-        environment.className =
-            "environment-city";
-
-        environment.innerHTML = `
-
-            <div class="city-building left">
-
-                <div class="city-sign">
-                    餐廳
-                </div>
-
-            </div>
-
-            <div class="city-building right">
-
-                <div class="city-sign">
-                    書店
-                </div>
-
-            </div>
-
-            <div class="city-road"></div>
-
-            <div class="crosswalk"></div>
-
-            <div class="traffic-light"></div>
-
-        `;
-
-    }
-
-
-    /* -----------------------------------------------
-       CONVENIENCE STORE
-    ----------------------------------------------- */
-
-    else if (type === "convenience") {
-
-        environment.className =
-            "environment-convenience";
-
-        environment.innerHTML = `
-
-            <div class="convenience-store">
-
-                <div class="convenience-sign">
-                    便利商店
-                </div>
-
-                <div class="convenience-awning"></div>
-
-                <div class="convenience-windows"></div>
-
-                <div class="convenience-door"></div>
-
-            </div>
-
-        `;
-
-    }
-
-
-    /* -----------------------------------------------
-       STATION
-    ----------------------------------------------- */
-
-    else if (type === "station") {
-
-        environment.className =
-            "environment-station";
-
-        environment.innerHTML = `
-
-            <div class="station-ceiling"></div>
-
-            <div class="station-sign">
-                🚆 車站
-            </div>
-
-            <div class="station-floor"></div>
-
-            <div class="ticket-gate"></div>
-
-            <div class="platform-sign">
-                台北車站
-            </div>
-
-        `;
-
-    }
-
-
-    /* -----------------------------------------------
-       TRAIN
-    ----------------------------------------------- */
-
-    else if (type === "train") {
-
-        environment.className =
-            "environment-train";
-
-        environment.innerHTML = `
-
-            <div class="train-ceiling"></div>
-
-            <div class="train-display">
-                🚆 台北車站
-            </div>
-
-            <div class="train-window">
-
-                <div class="train-view">
-
-                    <div class="train-building"></div>
-
-                    <div class="train-building two"></div>
-
-                </div>
-
-            </div>
-
-            <div class="train-handle left"></div>
-            <div class="train-handle right"></div>
-
-            <div class="train-seat"></div>
-
-            <div class="train-seat-back"></div>
-
-        `;
-
-    }
-
-
-    /* -----------------------------------------------
-       TAIPEI MAIN STATION
-    ----------------------------------------------- */
-
-    else if (type === "taipei") {
-
-        environment.className =
-            "environment-taipei";
-
-        environment.innerHTML = `
-
-            <div class="taipei-hall">
-
-                <div class="taipei-logo">
-                    台北車站
-                </div>
-
-            </div>
-
-            <div class="taipei-floor"></div>
-
-            <div class="red-line-sign">
-                🔴 紅線
-                <br>
-                淡水信義線
-            </div>
-
-            <div class="station-arrow">
-                →
-            </div>
-
-        `;
-
-    }
-
-
-    /* -----------------------------------------------
-       MRT
-    ----------------------------------------------- */
-
-    else if (type === "mrt") {
-
-        environment.className =
-            "environment-mrt";
-
-        environment.innerHTML = `
-
-            <div class="mrt-map">
-                🔴 淡水信義線　→　淡水
-            </div>
-
-            <div class="mrt-window">
-
-                <div class="mrt-tunnel"></div>
-
-            </div>
-
-            <div class="mrt-pole left"></div>
-            <div class="mrt-pole right"></div>
-
-            <div class="mrt-seat"></div>
-
-        `;
-
-    }
-
-
-    /* -----------------------------------------------
-       TAMSUI
-    ----------------------------------------------- */
-
-    else if (type === "tamsui") {
-
-        environment.className =
-            "environment-tamsui";
-
-        environment.innerHTML = `
-
-            <div class="tamsui-shop left">
-
-                <div class="tamsui-shop-sign">
-                    小吃店
-                </div>
-
-                <div class="tamsui-shop-door"></div>
-
-            </div>
-
-            <div class="tamsui-shop right">
-
-                <div class="tamsui-shop-sign">
-                    飲料店
-                </div>
-
-                <div class="tamsui-shop-door"></div>
-
-            </div>
-
-            <div class="tamsui-street"></div>
-
-            <div class="tamsui-crossing"></div>
-
-        `;
-
-    }
-
-
-    /* -----------------------------------------------
-       BUS STOP
-    ----------------------------------------------- */
-
-    else if (type === "busstop") {
-
-        environment.className =
-            "environment-busstop";
-
-        environment.innerHTML = `
-
-            <div class="busstop-road"></div>
-
-            <div class="busstop-pole">
-
-                <div class="busstop-sign">
-                    🚌 公車站
-                </div>
-
-            </div>
-
-            <div class="busstop-bench"></div>
-
-        `;
-
-    }
-
-
-    /* -----------------------------------------------
-       BUS
-    ----------------------------------------------- */
-
-    else if (type === "bus") {
-
-        environment.className =
-            "environment-bus";
-
-        environment.innerHTML = `
-
-            <div class="bus-display">
-                🚌 ${scenes[currentScene].location}
-            </div>
-
-            <div class="bus-window">
-
-                <div class="bus-view">
-
-                    <div class="bus-building"></div>
-
-                    <div class="bus-building two"></div>
-
-                </div>
-
-            </div>
-
-            <div class="bus-pole left"></div>
-            <div class="bus-pole right"></div>
-
-            <div class="bus-seat"></div>
-
-        `;
-
-    }
-
-
-    /* -----------------------------------------------
-       BUS TRANSFER
-    ----------------------------------------------- */
-
-    else if (type === "transfer") {
-
-        environment.className =
-            "environment-transfer";
-
-        environment.innerHTML = `
-
-            <div class="transfer-road"></div>
-
-            <div class="transfer-sign">
-
-                轉車站
-
-                <span class="transfer-arrow">
-                    → 26號公車
-                </span>
-
-            </div>
-
-            <div class="transfer-bus"></div>
-
-        `;
-
-    }
-
-
-    /* -----------------------------------------------
-       PHARMACY
-    ----------------------------------------------- */
-
-    else if (type === "pharmacy") {
-
-        environment.className =
-            "environment-pharmacy";
-
-        environment.innerHTML = `
-
-            <div class="pharmacy-building">
-
-                <div class="pharmacy-sign">
-
-                    <span class="pharmacy-cross">
-                        ✚
-                    </span>
-
-                    藥局
-
-                </div>
-
-                <div class="pharmacy-window"></div>
-
-                <div class="pharmacy-door"></div>
-
-            </div>
-
-        `;
-
-    }
-
-
-    /* -----------------------------------------------
-       RESTAURANT
-    ----------------------------------------------- */
-
-    else if (type === "restaurant") {
-
-        environment.className =
-            "environment-restaurant";
-
-        environment.innerHTML = `
-
-            <div class="restaurant-building">
-
-                <div class="restaurant-sign">
-                    🍜 海風小館
-                </div>
-
-                <div class="restaurant-window"></div>
-
-                <div class="restaurant-door">
-
-                    <div class="restaurant-light"></div>
-
-                </div>
-
-            </div>
-
-        `;
-
-    }
+  }
 
 }
 
+/* ============================================================
+   DIALOGUE
+============================================================ */
 
-/* =========================================================
-   RENDER CURRENT SCENE
-========================================================= */
+function showDialogue(){
 
-function renderScene() {
+  if(!currentDialogue || !currentDialogue.length)
+    return;
 
-    const scene =
-        scenes[currentScene];
+  dialogueOpen=true;
 
-    renderEnvironment(
-        scene.environment
-    );
+  document.getElementById("dialogue").style.display="block";
 
-    speaker.textContent =
-        scene.speaker;
+  const d=currentDialogue[dialogueIndex];
 
-    dialogue.textContent =
-        scene.text;
-
-    location.textContent =
-        scene.location;
-
-    progress.textContent =
-        currentScene +
-        " / " +
-        (scenes.length - 1);
-
-    updateMission();
+  document.getElementById("speaker").textContent=d[0];
+  document.getElementById("dialogueText").textContent=d[1];
 
 }
 
+function nextDialogue(){
 
-/* =========================================================
-   MOVE
-========================================================= */
+  if(!dialogueOpen)
+    return;
 
-function move(direction) {
+  dialogueIndex++;
 
-    const scene =
-        scenes[currentScene];
+  if(dialogueIndex>=currentDialogue.length){
 
+    dialogueOpen=false;
 
-    /* CORRECT */
+    document.getElementById("dialogue").style.display="none";
 
-    if (direction === scene.correct) {
+    return;
 
-        status.className =
-            "status correct";
+  }
 
-        status.textContent =
-            "✓ 正確！";
-
-        currentScene++;
-
-
-        /* FINISH */
-
-        if (currentScene >= scenes.length) {
-
-            success.classList.add("show");
-
-            return;
-
-        }
-
-
-        setTimeout(() => {
-
-            renderScene();
-
-        }, 300);
-
-    }
-
-
-    /* WRONG */
-
-    else {
-
-        status.className =
-            "status wrong";
-
-        status.textContent =
-            "再想一想：「" +
-            scene.text +
-            "」";
-
-        shake();
-
-    }
+  showDialogue();
 
 }
 
+/* ============================================================
+   PLAYER
+============================================================ */
 
-/* =========================================================
-   SCREEN SHAKE
-========================================================= */
+playerGroup=new THREE.Group();
 
-function shake() {
+player=createAhao();
 
-    const screen =
-        document.getElementById("screen");
+playerGroup.add(player);
 
-    screen.animate(
+world.add(playerGroup);
 
-        [
-            {
-                transform:
-                "translateX(0)"
-            },
+/* ============================================================
+   MOVEMENT
+============================================================ */
 
-            {
-                transform:
-                "translateX(-8px)"
-            },
+function movePlayer(dt){
 
-            {
-                transform:
-                "translateX(8px)"
-            },
+  if(dialogueOpen) return;
 
-            {
-                transform:
-                "translateX(-5px)"
-            },
+  let dx=0;
+  let dz=0;
 
-            {
-                transform:
-                "translateX(5px)"
-            },
+  if(keys.ArrowUp) dz-=1;
+  if(keys.ArrowDown) dz+=1;
+  if(keys.ArrowLeft) dx-=1;
+  if(keys.ArrowRight) dx+=1;
 
-            {
-                transform:
-                "translateX(0)"
-            }
-        ],
+  if(dx===0 && dz===0){
 
-        {
-            duration: 250
-        }
+    animatePlayer(false);
 
-    );
+    return;
+  }
 
-}
+  const len=Math.hypot(dx,dz);
 
+  dx/=len;
+  dz/=len;
 
-/* =========================================================
-   MISSION UPDATE
-========================================================= */
+  const speed=8;
 
-function updateMission() {
+  playerGroup.position.x += dx*speed*dt;
+  playerGroup.position.z += dz*speed*dt;
 
-    const currentMission =
-        scenes[currentScene]
-        ? scenes[currentScene].mission
-        : 10;
+  /* face direction */
 
+  playerGroup.rotation.y=
+    Math.atan2(dx,dz);
 
-    for (
-        let i = 0;
-        i <= 10;
-        i++
-    ) {
+  animatePlayer(true);
 
-        const item =
-            document.getElementById("m" + i);
-
-        item.classList.remove("done");
-        item.classList.remove("current");
-
-        const original =
-            item.textContent
-            .replace("⬜", "")
-            .replace("✅", "")
-            .trim();
-
-
-        if (i < currentMission) {
-
-            item.textContent =
-                "✅ " + original;
-
-            item.classList.add("done");
-
-        }
-
-        else {
-
-            item.textContent =
-                "⬜ " + original;
-
-        }
-
-    }
-
-
-    if (
-        currentMission >= 0 &&
-        currentMission <= 10
-    ) {
-
-        const current =
-            document.getElementById(
-                "m" + currentMission
-            );
-
-        if (current) {
-
-            current.classList.add("current");
-
-        }
-
-    }
+  checkSceneProgress();
 
 }
 
+/* ============================================================
+   WALK ANIMATION
+============================================================ */
 
-/* =========================================================
-   KEYBOARD CONTROLS
-========================================================= */
+let walkTime=0;
 
-document.addEventListener(
-    "keydown",
-    function(event) {
+function animatePlayer(walking){
 
-        const keys = {
+  if(!walking){
 
-            ArrowUp: "up",
-            ArrowDown: "down",
-            ArrowLeft: "left",
-            ArrowRight: "right"
+    player.userData.armL.rotation.x*=.8;
+    player.userData.armR.rotation.x*=.8;
+    player.userData.legL.rotation.x*=.8;
+    player.userData.legR.rotation.x*=.8;
 
-        };
+    return;
+  }
 
-        if (keys[event.key]) {
+  walkTime+=.22;
 
-            event.preventDefault();
+  const swing=Math.sin(walkTime)*.55;
 
-            move(
-                keys[event.key]
-            );
+  player.userData.armL.rotation.x=swing;
+  player.userData.armR.rotation.x=-swing;
 
-        }
-
-    }
-);
-
-
-/* =========================================================
-   RESTART
-========================================================= */
-
-function restartGame() {
-
-    currentScene = 0;
-
-    success.classList.remove(
-        "show"
-    );
-
-    status.className =
-        "status";
-
-    status.textContent =
-        "聽懂對方的指示，選擇方向。";
-
-    renderScene();
+  player.userData.legL.rotation.x=-swing;
+  player.userData.legR.rotation.x=swing;
 
 }
 
+/* ============================================================
+   SCENE PROGRESS
+============================================================ */
 
-/* =========================================================
-   START GAME
-========================================================= */
+function checkSceneProgress(){
 
-renderScene();
+  const p=playerGroup.position;
+
+  /* forward transition */
+
+  if(currentScene===0 && p.z<-25){
+    loadScene(1);
+  }
+
+  else if(currentScene===1 && p.z>30 && p.x>6){
+    loadScene(2);
+  }
+
+  else if(currentScene===2 && p.x<-20){
+    loadScene(3);
+  }
+
+  else if(currentScene===3 && p.z<-30){
+    loadScene(4);
+  }
+
+  else if(currentScene===4 && p.z<-18){
+    loadScene(5);
+  }
+
+  else if(currentScene===5 && p.z<-28){
+    loadScene(6);
+  }
+
+  else if(currentScene===6 && p.x>10){
+    loadScene(7);
+  }
+
+  else if(currentScene===7 && p.x>18){
+    loadScene(8);
+  }
+
+  else if(currentScene===8 && p.z<-30){
+    loadScene(9);
+  }
+
+  else if(currentScene===9 && p.z>35){
+    loadScene(10);
+  }
+
+  else if(currentScene===10 && p.x>20){
+    loadScene(11);
+  }
+
+  else if(currentScene===11 && p.z<-28){
+    loadScene(12);
+  }
+
+  else if(currentScene===12 && p.x>18){
+    loadScene(13);
+  }
+
+  else if(currentScene===13 && p.z<-28){
+    loadScene(14);
+  }
+
+  else if(currentScene===14 && p.x<-8){
+    loadScene(15);
+  }
+
+}
+
+/* ============================================================
+   CAMERA
+============================================================ */
+
+function updateCamera(){
+
+  const target=playerGroup.position.clone();
+
+  const distance=10;
+
+  const angle=cameraAngle;
+
+  const camX=
+    target.x+
+    Math.sin(angle)*distance;
+
+  const camZ=
+    target.z+
+    Math.cos(angle)*distance;
+
+  camera.position.x +=
+    (camX-camera.position.x)*.1;
+
+  camera.position.y +=
+    (7-camera.position.y)*.1;
+
+  camera.position.z +=
+    (camZ-camera.position.z)*.1;
+
+  const look=
+    target.clone();
+
+  look.y+=1.4;
+
+  camera.lookAt(look);
+
+}
+
+/* ============================================================
+   KEYBOARD
+============================================================ */
+
+window.addEventListener("keydown",e=>{
+
+  if([
+    "ArrowUp",
+    "ArrowDown",
+    "ArrowLeft",
+    "ArrowRight"
+  ].includes(e.key)){
+
+    e.preventDefault();
+
+    keys[e.key]=true;
+
+  }
+
+  if(e.key==="Enter" || e.key===" "){
+
+    nextDialogue();
+
+  }
+
+});
+
+window.addEventListener("keyup",e=>{
+
+  keys[e.key]=false;
+
+});
+
+/* ============================================================
+   TOUCH
+============================================================ */
+
+document.querySelectorAll(".ctrl")
+.forEach(btn=>{
+
+  const key=btn.dataset.key;
+
+  btn.addEventListener(
+    "pointerdown",
+    e=>{
+      e.preventDefault();
+      keys[key]=true;
+    }
+  );
+
+  btn.addEventListener(
+    "pointerup",
+    e=>{
+      e.preventDefault();
+      keys[key]=false;
+    }
+  );
+
+  btn.addEventListener(
+    "pointercancel",
+    ()=>{
+      keys[key]=false;
+    }
+  );
+
+  btn.addEventListener(
+    "pointerleave",
+    ()=>{
+      keys[key]=false;
+    }
+  );
+
+});
+
+/* ============================================================
+   CAMERA BUTTONS
+============================================================ */
+
+document.getElementById("camLeft")
+.addEventListener("pointerdown",()=>{
+  cameraAngle-=.3;
+});
+
+document.getElementById("camRight")
+.addEventListener("pointerdown",()=>{
+  cameraAngle+=.3;
+});
+
+/* ============================================================
+   START
+============================================================ */
+
+document.getElementById("startBtn")
+.addEventListener("click",()=>{
+
+  document.getElementById("startScreen").style.display="none";
+
+  loadScene(0);
+
+});
+
+/* ============================================================
+   RESIZE
+============================================================ */
+
+window.addEventListener("resize",()=>{
+
+  camera.aspect=
+    innerWidth/innerHeight;
+
+  camera.updateProjectionMatrix();
+
+  renderer.setSize(
+    innerWidth,
+    innerHeight
+  );
+
+});
+
+/* ============================================================
+   LOOP
+============================================================ */
+
+function animate(){
+
+  requestAnimationFrame(animate);
+
+  const dt=
+    Math.min(clock.getDelta(),.05);
+
+  movePlayer(dt);
+
+  updateCamera();
+
+  renderer.render(
+    scene,
+    camera
+  );
+
+}
+
+animate();
 
 </script>
 
