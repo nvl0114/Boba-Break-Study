@@ -3,278 +3,276 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport"
-      content="width=device-width,initial-scale=1.0,user-scalable=no">
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
 <title>Ahao's Birthday Mission</title>
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
 
 <style>
 *{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-  -webkit-tap-highlight-color:transparent;
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
+    user-select:none;
 }
 
 html,body{
-  width:100%;
-  height:100%;
-  overflow:hidden;
-  background:#111;
-  font-family:Arial,sans-serif;
+    margin:0;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    background:#111;
+    font-family:Arial, sans-serif;
 }
 
 #game{
-  position:fixed;
-  inset:0;
+    position:fixed;
+    inset:0;
 }
 
 canvas{
-  display:block;
-  width:100%;
-  height:100%;
-  image-rendering:auto;
+    display:block;
+    width:100%;
+    height:100%;
+    image-rendering:pixelated;
 }
 
-/* =========================
-   TOP UI
-========================= */
+#startScreen{
+    position:fixed;
+    inset:0;
+    z-index:50;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:
+        linear-gradient(rgba(20,20,30,.82),rgba(20,20,30,.92)),
+        #222;
+}
+
+.startBox{
+    width:min(90%,500px);
+    padding:30px;
+    text-align:center;
+    color:white;
+    background:#292733;
+    border:4px solid #777;
+    box-shadow:8px 8px 0 #111;
+}
+
+.startBox h1{
+    margin:0 0 12px;
+    font-size:30px;
+    color:#ffd75a;
+    text-shadow:3px 3px #111;
+}
+
+.startBox p{
+    line-height:1.7;
+    color:#ddd;
+}
+
+.startBox button{
+    margin-top:15px;
+    padding:15px 35px;
+    border:3px solid #111;
+    background:#ffd75a;
+    color:#222;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+    box-shadow:5px 5px 0 #111;
+}
 
 #hud{
-  position:fixed;
-  top:14px;
-  left:14px;
-  right:14px;
-  display:flex;
-  justify-content:space-between;
-  align-items:flex-start;
-  pointer-events:none;
-  z-index:20;
+    position:fixed;
+    z-index:10;
+    top:12px;
+    left:12px;
+    right:12px;
+    pointer-events:none;
 }
 
-.panel{
-  background:rgba(15,15,20,.78);
-  border:2px solid rgba(255,255,255,.25);
-  border-radius:12px;
-  padding:10px 14px;
-  color:white;
-  box-shadow:0 5px 20px rgba(0,0,0,.25);
-  backdrop-filter:blur(5px);
-}
-
-#missionTitle{
-  font-weight:bold;
-  font-size:15px;
-}
-
-#mission{
-  margin-top:3px;
-  font-size:13px;
-  opacity:.9;
+.hudBox{
+    display:inline-block;
+    max-width:500px;
+    padding:10px 14px;
+    color:white;
+    background:rgba(20,20,25,.78);
+    border:2px solid rgba(255,255,255,.5);
+    box-shadow:4px 4px 0 rgba(0,0,0,.35);
 }
 
 #location{
-  font-size:13px;
-  font-weight:bold;
+    font-weight:bold;
+    color:#ffd75a;
 }
 
-/* =========================
-   DIALOGUE
-========================= */
+#mission{
+    margin-top:4px;
+    font-size:13px;
+    color:#eee;
+}
 
 #dialogue{
-  position:fixed;
-  left:50%;
-  bottom:105px;
-  transform:translateX(-50%);
-  width:min(760px,calc(100% - 30px));
-  z-index:30;
-  display:none;
+    position:fixed;
+    z-index:20;
+    left:50%;
+    bottom:120px;
+    transform:translateX(-50%);
+    width:min(92%,700px);
+    display:none;
 }
 
 .dialogueBox{
-  background:rgba(18,18,25,.94);
-  color:white;
-  border:3px solid #eee;
-  border-radius:15px;
-  padding:18px 20px;
-  box-shadow:0 8px 30px rgba(0,0,0,.45);
+    padding:15px;
+    background:rgba(18,18,23,.94);
+    border:3px solid white;
+    color:white;
+    box-shadow:6px 6px 0 rgba(0,0,0,.5);
 }
 
 .speaker{
-  color:#ffd45c;
-  font-weight:bold;
-  margin-bottom:7px;
-  font-size:14px;
+    color:#ffd75a;
+    font-weight:bold;
+    margin-bottom:7px;
 }
 
-.dialogueText{
-  font-size:20px;
-  line-height:1.5;
+.text{
+    font-size:18px;
+    line-height:1.55;
 }
 
-.dialogueHint{
-  margin-top:10px;
-  font-size:12px;
-  opacity:.55;
+.next{
+    margin-top:10px;
+    text-align:right;
+    color:#aaa;
+    font-size:12px;
 }
-
-/* =========================
-   CONTROLS
-========================= */
 
 #controls{
-  position:fixed;
-  left:20px;
-  bottom:20px;
-  z-index:40;
-  display:grid;
-  grid-template-columns:58px 58px 58px;
-  grid-template-rows:58px 58px;
-  gap:6px;
+    position:fixed;
+    z-index:30;
+    bottom:18px;
+    left:18px;
+    width:190px;
+    height:145px;
 }
 
-.ctrl{
-  border:2px solid rgba(255,255,255,.45);
-  background:rgba(20,20,25,.72);
-  color:white;
-  border-radius:12px;
-  font-size:24px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  user-select:none;
-  touch-action:none;
+.control{
+    position:absolute;
+    width:58px;
+    height:58px;
+    border:3px solid #111;
+    background:rgba(245,245,245,.82);
+    color:#222;
+    font-size:25px;
+    font-weight:bold;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow:4px 4px 0 rgba(0,0,0,.4);
+    touch-action:none;
 }
 
-.ctrl:active{
-  background:rgba(255,255,255,.3);
+.control:active{
+    transform:translate(3px,3px);
+    box-shadow:1px 1px 0 rgba(0,0,0,.4);
+    background:#ffd75a;
 }
 
-.up{grid-column:2}
-.left{grid-column:1;grid-row:2}
-.down{grid-column:2;grid-row:2}
-.right{grid-column:3;grid-row:2}
-
-/* camera buttons */
-
-#cameraControls{
-  position:fixed;
-  right:20px;
-  bottom:20px;
-  z-index:40;
-  display:flex;
-  gap:7px;
+#up{
+    left:66px;
+    top:0;
 }
 
-.cam{
-  width:55px;
-  height:55px;
-  border-radius:12px;
-  border:2px solid rgba(255,255,255,.4);
-  background:rgba(20,20,25,.72);
-  color:white;
-  font-size:18px;
+#down{
+    left:66px;
+    bottom:0;
 }
 
-/* =========================
-   START SCREEN
-========================= */
-
-#startScreen{
-  position:fixed;
-  inset:0;
-  background:
-    radial-gradient(circle at 50% 40%,#526b82,#151922 70%);
-  z-index:100;
-  color:white;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  padding:20px;
+#left{
+    left:0;
+    top:67px;
 }
 
-.startInner{
-  max-width:620px;
+#right{
+    right:0;
+    top:67px;
 }
 
-.logo{
-  font-size:clamp(35px,8vw,70px);
-  font-weight:900;
-  letter-spacing:-3px;
-  text-shadow:5px 5px 0 #202530;
+#help{
+    position:fixed;
+    z-index:30;
+    right:15px;
+    bottom:18px;
+    width:200px;
+    padding:10px;
+    background:rgba(20,20,25,.72);
+    border:2px solid rgba(255,255,255,.35);
+    color:white;
+    font-size:12px;
+    line-height:1.5;
 }
 
-.subtitle{
-  margin-top:8px;
-  font-size:17px;
-  opacity:.8;
+#blackFade{
+    position:fixed;
+    z-index:40;
+    inset:0;
+    background:#000;
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .4s;
 }
 
-.story{
-  margin:28px auto;
-  line-height:1.7;
-  max-width:540px;
-  color:#ddd;
+#finish{
+    position:fixed;
+    inset:0;
+    z-index:60;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    background:rgba(0,0,0,.82);
 }
 
-#startBtn{
-  border:0;
-  background:#ffd45c;
-  color:#27220f;
-  padding:16px 32px;
-  border-radius:12px;
-  font-size:18px;
-  font-weight:bold;
-  cursor:pointer;
-  box-shadow:0 5px 0 #a98420;
+.finishBox{
+    width:min(90%,520px);
+    padding:30px;
+    text-align:center;
+    background:#302c38;
+    color:white;
+    border:4px solid #ffd75a;
+    box-shadow:8px 8px 0 #111;
 }
 
-#startBtn:active{
-  transform:translateY(4px);
-  box-shadow:0 1px 0 #a98420;
+.finishBox h2{
+    color:#ffd75a;
+    font-size:30px;
 }
 
-/* =========================
-   MOBILE
-========================= */
+.finishBox button{
+    margin-top:15px;
+    padding:12px 28px;
+    border:3px solid #111;
+    background:#ffd75a;
+    font-weight:bold;
+    font-size:16px;
+}
 
 @media(max-width:600px){
-  #hud{
-    top:8px;
-    left:8px;
-    right:8px;
-  }
+    .text{
+        font-size:16px;
+    }
 
-  .panel{
-    padding:7px 9px;
-  }
+    #help{
+        display:none;
+    }
 
-  #missionTitle{
-    font-size:12px;
-  }
-
-  #mission,
-  #location{
-    font-size:11px;
-  }
-
-  #dialogue{
-    bottom:165px;
-  }
-
-  .dialogueText{
-    font-size:17px;
-  }
-
-  #controls{
-    left:10px;
-    bottom:10px;
-  }
-
-  #cameraControls{
-    right:10px;
-    bottom:10px;
-  }
+    #controls{
+        transform:scale(.88);
+        transform-origin:bottom left;
+        bottom:10px;
+        left:8px;
+    }
 }
 </style>
 </head>
@@ -283,1816 +281,1729 @@ canvas{
 
 <div id="game"></div>
 
-<div id="hud">
-  <div class="panel">
-    <div id="missionTitle">🎂 Ahao's Birthday Mission</div>
-    <div id="mission">離開百貨公司</div>
-  </div>
+<div id="startScreen">
+    <div class="startBox">
+        <h1>🎂 Ahao's Birthday Mission</h1>
 
-  <div class="panel">
-    <div id="location">百貨公司</div>
-  </div>
+        <p>
+            今天是小美的生日！<br>
+            阿豪要去買生日禮物，<br>
+            然後去淡水跟大家一起吃飯。
+        </p>
+
+        <p>
+            Help Ahao follow the directions,<br>
+            transfer trains and buses,<br>
+            and reach the restaurant!
+        </p>
+
+        <button id="startBtn">START MISSION</button>
+    </div>
+</div>
+
+<div id="hud">
+    <div class="hudBox">
+        <div id="location">百貨公司</div>
+        <div id="mission">買生日禮物</div>
+    </div>
 </div>
 
 <div id="dialogue">
-  <div class="dialogueBox">
-    <div class="speaker" id="speaker">路人</div>
-    <div class="dialogueText" id="dialogueText"></div>
-    <div class="dialogueHint">按 ↑ 繼續</div>
-  </div>
+    <div class="dialogueBox">
+        <div class="speaker" id="speaker"></div>
+        <div class="text" id="dialogueText"></div>
+        <div class="next">點擊對話框繼續</div>
+    </div>
 </div>
 
 <div id="controls">
-  <div class="ctrl up" data-key="ArrowUp">▲</div>
-  <div class="ctrl left" data-key="ArrowLeft">◀</div>
-  <div class="ctrl down" data-key="ArrowDown">▼</div>
-  <div class="ctrl right" data-key="ArrowRight">▶</div>
+    <div class="control" id="up">▲</div>
+    <div class="control" id="down">▼</div>
+    <div class="control" id="left">◀</div>
+    <div class="control" id="right">▶</div>
 </div>
 
-<div id="cameraControls">
-  <button class="cam" id="camLeft">↶</button>
-  <button class="cam" id="camRight">↷</button>
+<div id="help">
+    ▲ 前進<br>
+    ▼ 後退<br>
+    ◀ 向左轉<br>
+    ▶ 向右轉<br>
+    <br>
+    Keyboard: W/S/A/D or Arrow Keys
 </div>
 
-<div id="startScreen">
-  <div class="startInner">
-    <div class="logo">AHAO</div>
-    <div class="subtitle">A Birthday Mission</div>
+<div id="blackFade"></div>
 
-    <div class="story">
-      今天是小美的生日。<br>
-      阿豪要去買生日禮物，晚上還要去餐廳跟大家一起吃飯。<br><br>
-      可是他的手機沒電了。<br>
-      他只能問路人，自己找到目的地。
+<div id="finish">
+    <div class="finishBox">
+        <h2>🎉 Mission Complete!</h2>
+        <p>
+            阿豪終於到了海風小館！<br>
+            小美的生日派對成功了！
+        </p>
+        <p>
+            你完成了整條路線：
+        </p>
+        <p>
+            百貨公司 → 火車站 → 台北車站<br>
+            → 淡水信義線 → 淡水 → 公車<br>
+            → 轉車 → 海風小館
+        </p>
+
+        <button onclick="location.reload()">PLAY AGAIN</button>
     </div>
-
-    <button id="startBtn">開始遊戲</button>
-
-    <div style="margin-top:20px;font-size:12px;opacity:.6">
-      Arrow Keys / Touch Controls
-    </div>
-  </div>
 </div>
 
-<script type="module">
-
-import * as THREE from
-'https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js';
-
-/* ============================================================
+<script>
+/* =========================================================
    BASIC SETUP
-============================================================ */
-
-const game = document.getElementById("game");
+========================================================= */
 
 const scene = new THREE.Scene();
 
-scene.background = new THREE.Color(0x8fb0c5);
-scene.fog = new THREE.Fog(0x8fb0c5,35,95);
+scene.background = new THREE.Color(0x9bb7d4);
+scene.fog = new THREE.Fog(0x9bb7d4, 35, 100);
 
 const camera = new THREE.PerspectiveCamera(
-  55,
-  innerWidth / innerHeight,
-  .1,
-  250
+    65,
+    window.innerWidth / window.innerHeight,
+    0.1,
+    300
 );
 
 const renderer = new THREE.WebGLRenderer({
-  antialias:false
+    antialias:false,
+    powerPreference:"high-performance"
 });
 
-renderer.setPixelRatio(1);
-renderer.setSize(innerWidth,innerHeight);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.shadowMap.enabled = true;
-renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.shadowMap.type = THREE.BasicShadowMap;
 
-game.appendChild(renderer.domElement);
+document.getElementById("game").appendChild(renderer.domElement);
 
-/* ============================================================
-   LIGHT
-============================================================ */
 
-const hemi = new THREE.HemisphereLight(
-  0xbddcff,
-  0x4a4a4a,
-  1.6
+/* =========================================================
+   LIGHTING
+========================================================= */
+
+const ambient = new THREE.HemisphereLight(
+    0xffffff,
+    0x445566,
+    1.5
 );
 
-scene.add(hemi);
+scene.add(ambient);
 
 const sun = new THREE.DirectionalLight(
-  0xffe4ba,
-  2.0
+    0xffffff,
+    2
 );
 
-sun.position.set(-30,60,30);
+sun.position.set(30,50,20);
 sun.castShadow = true;
-sun.shadow.mapSize.width = 1024;
-sun.shadow.mapSize.height = 1024;
 
 scene.add(sun);
 
-/* ============================================================
-   MATERIAL HELPERS
-============================================================ */
+
+/* =========================================================
+   MATERIALS
+========================================================= */
 
 function mat(color){
-  return new THREE.MeshLambertMaterial({
-    color,
-    flatShading:true
-  });
+    return new THREE.MeshLambertMaterial({
+        color:color
+    });
 }
 
-const M = {
-  road:mat(0x44464d),
-  sidewalk:mat(0xaaa8a0),
-  grass:mat(0x667a51),
-  wall:mat(0xb5a58f),
-  roof:mat(0x5b4540),
-  glass:mat(0x6d9db1),
-  white:mat(0xf1eee2),
-  red:mat(0xc94c43),
-  blue:mat(0x4777a7),
-  green:mat(0x4d8052),
-  yellow:mat(0xe0b84f),
-  black:mat(0x202126),
-  skin:mat(0xe2ae87),
-  hair:mat(0x342b2a),
-  shirt:mat(0x4f78a8),
-  pants:mat(0x333e61),
-  shoe:mat(0x252525),
-  train:mat(0xd8d8d0),
-  metro:mat(0xd45b48),
-  bus:mat(0x4c78a7)
+const materials = {
+    road:mat(0x55565c),
+    sidewalk:mat(0x9b9b9b),
+    grass:mat(0x5c8a50),
+    wall:mat(0xc8bda8),
+    white:mat(0xffffff),
+    red:mat(0xc54b4b),
+    blue:mat(0x4169a1),
+    yellow:mat(0xe2b63d),
+    dark:mat(0x25252b),
+    green:mat(0x4e8757),
+    glass:mat(0x79a8b8),
+    purple:mat(0x75569c),
+    orange:mat(0xd47c3e)
 };
 
-/* ============================================================
-   GLOBAL WORLD
-============================================================ */
 
-let world = new THREE.Group();
-scene.add(world);
+/* =========================================================
+   UTILITY OBJECTS
+========================================================= */
 
-let player;
-let playerGroup;
+function cube(w,h,d,material,x,y,z){
+    const geo = new THREE.BoxGeometry(w,h,d);
+    const mesh = new THREE.Mesh(geo,material);
 
-let keys = {};
+    mesh.position.set(x,y,z);
+    mesh.castShadow = true;
+    mesh.receiveShadow = true;
 
-let currentScene = 0;
-let sceneObjects = [];
+    scene.add(mesh);
 
-let dialogueOpen = false;
-let dialogueIndex = 0;
-let currentDialogue = [];
-
-let cameraAngle = 0;
-
-const clock = new THREE.Clock();
-
-/* ============================================================
-   UI
-============================================================ */
-
-const missionEl = document.getElementById("mission");
-const locationEl = document.getElementById("location");
-
-function updateUI(){
-
-  const s = scenes[currentScene];
-
-  missionEl.textContent = s.mission;
-  locationEl.textContent = s.location;
+    return mesh;
 }
 
-/* ============================================================
-   BOX CREATOR
-============================================================ */
+function cylinder(r,h,material,x,y,z){
+    const geo = new THREE.CylinderGeometry(r,r,h,8);
+    const mesh = new THREE.Mesh(geo,material);
 
-function box(
-  x,y,z,
-  w,h,d,
-  material,
-  parent=world
-){
+    mesh.position.set(x,y,z);
+    mesh.castShadow = true;
+    mesh.receiveShadow = true;
 
-  const mesh = new THREE.Mesh(
-    new THREE.BoxGeometry(w,h,d),
-    material
-  );
+    scene.add(mesh);
 
-  mesh.position.set(x,y,z);
-
-  mesh.castShadow=true;
-  mesh.receiveShadow=true;
-
-  parent.add(mesh);
-
-  sceneObjects.push(mesh);
-
-  return mesh;
+    return mesh;
 }
-
-/* ============================================================
-   CYLINDER
-============================================================ */
-
-function cyl(
-  x,y,z,
-  r,h,
-  material,
-  parent=world
-){
-
-  const mesh = new THREE.Mesh(
-    new THREE.CylinderGeometry(
-      r,r,h,8
-    ),
-    material
-  );
-
-  mesh.position.set(x,y,z);
-
-  mesh.castShadow=true;
-  mesh.receiveShadow=true;
-
-  parent.add(mesh);
-
-  sceneObjects.push(mesh);
-
-  return mesh;
-}
-
-/* ============================================================
-   TREE
-============================================================ */
-
-function tree(x,z,parent=world){
-
-  box(
-    x,1.7,z,
-    .45,3.4,.45,
-    M.roof,
-    parent
-  );
-
-  cyl(
-    x,4,z,
-    1.5,2.7,
-    M.green,
-    parent
-  );
-}
-
-/* ============================================================
-   STREET
-============================================================ */
-
-function street(length=90){
-
-  box(
-    0,-.15,0,
-    10,.3,length,
-    M.road
-  );
-
-  box(
-    -7,.05,0,
-    3,.4,length,
-    M.sidewalk
-  );
-
-  box(
-    7,.05,0,
-    3,.4,length,
-    M.sidewalk
-  );
-
-  for(let z=-length/2;z<length/2;z+=7){
-
-    box(
-      0,.02,z,
-      .25,.04,3,
-      M.yellow
-    );
-  }
-}
-
-/* ============================================================
-   BUILDING
-============================================================ */
-
-function building(
-  x,z,
-  w,h,d,
-  wallMaterial=M.wall
-){
-
-  box(
-    x,h/2,z,
-    w,h,d,
-    wallMaterial
-  );
-
-  const floors=Math.max(1,Math.floor(h/3));
-
-  for(let f=0;f<floors;f++){
-
-    for(let xx=x-w/2+1.2;xx<x+w/2-1;xx+=2.3){
-
-      box(
-        xx,
-        1.5+f*3,
-        z-d/2-.04,
-        1.1,
-        1.25,
-        .08,
-        M.glass
-      );
-
-    }
-  }
-}
-
-/* ============================================================
-   SIGN
-============================================================ */
-
-function sign(
-  text,
-  x,y,z,
-  color=M.red,
-  rotationY=0
-){
-
-  const canvas=document.createElement("canvas");
-  canvas.width=512;
-  canvas.height=128;
-
-  const ctx=canvas.getContext("2d");
-
-  ctx.fillStyle="#ffffff";
-  ctx.fillRect(0,0,512,128);
-
-  ctx.fillStyle=
-    "#" + color.color.getHexString();
-
-  ctx.font="bold 55px Arial";
-  ctx.textAlign="center";
-  ctx.textBaseline="middle";
-
-  ctx.fillText(text,256,64);
-
-  const texture=
-    new THREE.CanvasTexture(canvas);
-
-  const mesh=new THREE.Mesh(
-    new THREE.PlaneGeometry(4,1),
-    new THREE.MeshBasicMaterial({
-      map:texture,
-      transparent:true
-    })
-  );
-
-  mesh.position.set(x,y,z);
-  mesh.rotation.y=rotationY;
-
-  world.add(mesh);
-
-  return mesh;
-}
-
-/* ============================================================
-   AHAO CHARACTER
-============================================================ */
-
-function createAhao(){
-
-  const g=new THREE.Group();
-
-  const body=new THREE.Group();
-
-  g.add(body);
-
-  /* torso */
-
-  const torso=box(
-    0,1.35,0,
-    .9,1.45,.55,
-    M.shirt,
-    body
-  );
-
-  /* head */
-
-  const head=box(
-    0,2.55,0,
-    .75,.75,.7,
-    M.skin,
-    body
-  );
-
-  /* hair */
-
-  box(
-    0,2.95,-.02,
-    .78,.25,.72,
-    M.hair,
-    body
-  );
-
-  /* arms */
-
-  const armL=box(
-    -.58,1.4,0,
-    .25,1.15,.3,
-    M.skin,
-    body
-  );
-
-  const armR=box(
-    .58,1.4,0,
-    .25,1.15,.3,
-    M.skin,
-    body
-  );
-
-  /* pants */
-
-  const legL=box(
-    -.24,.45,0,
-    .32,.9,.42,
-    M.pants,
-    body
-  );
-
-  const legR=box(
-    .24,.45,0,
-    .32,.9,.42,
-    M.pants,
-    body
-  );
-
-  /* shoes */
-
-  box(
-    -.24,-.02,-.08,
-    .4,.22,.55,
-    M.shoe,
-    body
-  );
-
-  box(
-    .24,-.02,-.08,
-    .4,.22,.55,
-    M.shoe,
-    body
-  );
-
-  g.userData={
-    armL,
-    armR,
-    legL,
-    legR
-  };
-
-  return g;
-}
-
-/* ============================================================
-   NPC
-============================================================ */
-
-function npc(
-  x,z,
-  shirt=M.red
-){
-
-  const g=new THREE.Group();
-
-  box(
-    0,1.3,0,
-    .75,1.35,.5,
-    shirt,
-    g
-  );
-
-  box(
-    0,2.35,0,
-    .62,.65,.62,
-    M.skin,
-    g
-  );
-
-  box(
-    0,2.68,0,
-    .65,.2,.62,
-    M.hair,
-    g
-  );
-
-  box(
-    -.47,1.35,0,
-    .22,1,.25,
-    M.skin,
-    g
-  );
-
-  box(
-    .47,1.35,0,
-    .22,1,.25,
-    M.skin,
-    g
-  );
-
-  box(
-    -.2,.45,0,
-    .3,.8,.35,
-    M.pants,
-    g
-  );
-
-  box(
-    .2,.45,0,
-    .3,.8,.35,
-    M.pants,
-    g
-  );
-
-  g.position.set(x,0,z);
-
-  world.add(g);
-
-  return g;
-}
-
-/* ============================================================
-   SCENE CLEAR
-============================================================ */
 
 function clearWorld(){
-
-  while(world.children.length){
-
-    world.remove(world.children[0]);
-
-  }
-
-  sceneObjects=[];
-
+    while(scene.children.length > 2){
+        scene.remove(scene.children[2]);
+    }
 }
 
-/* ============================================================
-   PLAYER RESET
-============================================================ */
 
-function resetPlayer(x=0,z=25){
+/* =========================================================
+   AHAO CHARACTER
+========================================================= */
 
-  playerGroup.position.set(x,0,z);
+const player = new THREE.Group();
 
-  playerGroup.rotation.y=0;
+function buildAhao(){
 
+    player.clear();
+
+    // legs
+    cube(0.35,0.8,0.35,materials.dark,-0.22,0.45,0);
+    cube(0.35,0.8,0.35,materials.dark,0.22,0.45,0);
+
+    // body
+    cube(0.85,1.05,0.55,materials.blue,0,1.25,0);
+
+    // arms
+    cube(0.25,0.85,0.25,materials.skin,-0.57,1.25,0);
+    cube(0.25,0.85,0.25,materials.skin,0.57,1.25,0);
+
+    // neck
+    cylinder(0.16,0.18,materials.skin,0,1.82,0);
+
+    // head
+    cube(0.68,0.65,0.65,materials.skin,0,2.15,0);
+
+    // hair
+    cube(0.72,0.24,0.68,materials.dark,0,2.47,0);
+
+    // eyes
+    cube(0.08,0.1,0.04,materials.dark,-0.15,2.18,-0.34);
+    cube(0.08,0.1,0.04,materials.dark,0.15,2.18,-0.34);
+
+    player.position.set(0,0,10);
+    player.rotation.y = 0;
+
+    scene.add(player);
 }
 
-/* ============================================================
-   ENVIRONMENT SCENES
-============================================================ */
+buildAhao();
 
-const scenes=[
 
-/* 0 */
+/* =========================================================
+   NPC
+========================================================= */
 
-{
- location:"百貨公司",
- mission:"離開百貨公司，往前走。",
- dialogue:[
-  ["路人","一直走，先離開百貨公司。"]
- ],
- build(){
+function npc(x,z,color=0xc46b58){
 
-  box(0,5,-35,28,10,8,M.wall);
+    const g = new THREE.Group();
 
-  box(
-    0,2,-30.8,
-    5,4,.3,
-    M.glass
-  );
-
-  sign(
-    "百貨公司",
-    0,7,-30.7,
-    M.red
-  );
-
-  street(100);
-
-  building(-13,-10,8,12,14,M.wall);
-  building(13,-5,8,10,14,M.blue);
-
-  tree(-11,8);
-  tree(11,18);
-
- }
-},
-
-/* 1 */
-
-{
- location:"城市街道",
- mission:"看到便利商店以後往左轉。",
- dialogue:[
-  ["路人","一直走，看到便利商店以後往左轉。"]
- ],
- build(){
-
-  street(100);
-
-  building(-13,-12,9,15,16,M.wall);
-  building(13,-8,9,12,16,M.blue);
-
-  building(-13,18,9,9,16,M.red);
-  building(13,25,9,16,16,M.wall);
-
-  tree(-10,5);
-  tree(10,12);
-
-  /* convenience store */
-
-  box(
-    12,2,38,
-    9,4,8,
-    M.white
-  );
-
-  box(
-    12,2,33.9,
-    8,3,.15,
-    M.glass
-  );
-
-  sign(
-    "便利商店",
-    12,4.3,33.8,
-    M.green
-  );
-
- }
-},
-
-/* 2 */
-
-{
- location:"便利商店",
- mission:"往左轉。",
- dialogue:[
-  ["路人","看到便利商店以後，往左轉。"]
- ],
- build(){
-
-  /* L shaped road */
-
-  box(0,-.15,0,10,.3,80,M.road);
-
-  box(
-    -30,-.15,38,
-    60,.3,10,
-    M.road
-  );
-
-  box(-7,.05,0,3,.4,80,M.sidewalk);
-  box(7,.05,0,3,.4,80,M.sidewalk);
-
-  box(
-    -30,.05,31,
-    60,.4,3,
-    M.sidewalk
-  );
-
-  box(
-    -30,.05,45,
-    60,.4,3,
-    M.sidewalk
-  );
-
-  /* store */
-
-  box(
-    14,2,25,
-    10,4,10,
-    M.white
-  );
-
-  sign(
-    "便利商店",
-    14,4.4,19.8,
-    M.green
-  );
-
-  /* traffic */
-
-  box(
-    -10,2,-15,
-    5,4,8,
-    M.red
-  );
-
-  box(
-    10,2,-25,
-    5,4,8,
-    M.blue
-  );
-
-  tree(-12,15);
-
- }
-},
-
-/* 3 */
-
-{
- location:"城市街道",
- mission:"一直走，車站就在前面。",
- dialogue:[
-  ["路人","往前走，車站就在前面。"]
- ],
- build(){
-
-  street(110);
-
-  building(-13,-5,9,12,16,M.wall);
-  building(13,-10,9,14,16,M.blue);
-
-  tree(-11,10);
-  tree(11,20);
-
-  /* station visible ahead */
-
-  box(
-    0,5,-38,
-    25,10,7,
-    M.white
-  );
-
-  sign(
-    "車站",
-    0,8,-34.4,
-    M.red
-  );
-
- }
-},
-
-/* 4 */
-
-{
- location:"火車站",
- mission:"往前走，進入車站。",
- dialogue:[
-  ["站務員","往前走，進入車站。"]
- ],
- build(){
-
-  box(
-    0,4,-10,
-    24,8,18,
-    M.white
-  );
-
-  /* station entrance */
-
-  box(
-    -5,3,-19.2,
-    6,6,.3,
-    M.glass
-  );
-
-  box(
-    5,3,-19.2,
-    6,6,.3,
-    M.glass
-  );
-
-  sign(
-    "車站",
-    0,7,-19,
-    M.red
-  );
-
-  /* ticket gates */
-
-  for(let x=-7;x<=7;x+=3.5){
-
-    box(
-      x,1,-5,
-      1.2,2,.7,
-      M.blue
+    const body = new THREE.Mesh(
+        new THREE.BoxGeometry(.7,1,.5),
+        mat(color)
     );
 
-  }
+    body.position.y = 1.1;
+    g.add(body);
 
-  /* platform */
-
-  box(
-    -14,-.1,10,
-    5,.2,60,
-    M.sidewalk
-  );
-
-  box(
-    14,-.1,10,
-    5,.2,60,
-    M.sidewalk
-  );
-
- }
-},
-
-/* 5 */
-
-{
- location:"火車上",
- mission:"搭火車到台北車站。",
- dialogue:[
-  ["廣播","下一站：台北車站。"]
- ],
- build(){
-
-  /* train floor */
-
-  box(
-    0,-.3,0,
-    8,.3,70,
-    M.train
-  );
-
-  /* walls */
-
-  box(
-    -4,2,0,
-    .3,4,70,
-    M.train
-  );
-
-  box(
-    4,2,0,
-    .3,4,70,
-    M.train
-  );
-
-  /* windows */
-
-  for(let z=-25;z<30;z+=8){
-
-    box(
-      -3.8,2.3,z,
-      .08,1.6,5,
-      M.glass
+    const head = new THREE.Mesh(
+        new THREE.BoxGeometry(.6,.6,.6),
+        materials.skin
     );
 
-    box(
-      3.8,2.3,z,
-      .08,1.6,5,
-      M.glass
+    head.position.y = 1.85;
+    g.add(head);
+
+    const hair = new THREE.Mesh(
+        new THREE.BoxGeometry(.63,.2,.62),
+        materials.dark
     );
 
-  }
+    hair.position.y = 2.15;
+    g.add(hair);
 
-  /* seats */
+    g.position.set(x,0,z);
 
-  for(let z=-20;z<25;z+=8){
+    scene.add(g);
 
-    box(
-      -2.8,.9,z,
-      1.5,.8,3,
-      M.red
-    );
-
-    box(
-      2.8,.9,z,
-      1.5,.8,3,
-      M.red
-    );
-
-  }
-
- }
-},
-
-/* 6 */
-
-{
- location:"台北車站",
- mission:"往左走，找到紅色標誌。",
- dialogue:[
-  ["旅客","往左走，然後一直走。"]
- ],
- build(){
-
-  /* huge station hall */
-
-  box(
-    0,4,-10,
-    35,8,25,
-    M.wall
-  );
-
-  /* floor */
-
-  box(
-    0,-.3,20,
-    50,.4,80,
-    M.sidewalk
-  );
-
-  /* pillars */
-
-  for(let x=-15;x<=15;x+=7){
-
-    box(
-      x,5,-8,
-      1.2,10,1.2,
-      M.white
-    );
-
-  }
-
-  sign(
-    "台北車站",
-    0,8,-22,
-    M.blue
-  );
-
-  sign(
-    "紅線",
-    13,5,5,
-    M.red
-  );
-
- }
-},
-
-/* 7 */
-
-{
- location:"台北車站",
- mission:"看到紅色標誌以後往右轉。",
- dialogue:[
-  ["旅客","看到紅色的標誌以後往右轉。"]
- ],
- build(){
-
-  box(
-    0,-.2,0,
-    50,.4,80,
-    M.sidewalk
-  );
-
-  for(let x=-20;x<=20;x+=8){
-
-    box(
-      x,4,-15,
-      1.2,8,1.2,
-      M.white
-    );
-
-  }
-
-  /* red line sign */
-
-  box(
-    13,3,0,
-    .8,6,.8,
-    M.red
-  );
-
-  sign(
-    "紅線",
-    13,6,-.5,
-    M.red
-  );
-
-  box(
-    -12,2,-10,
-    7,4,5,
-    M.blue
-  );
-
- }
-},
-
-/* 8 */
-
-{
- location:"淡水信義線",
- mission:"搭紅線到淡水。",
- dialogue:[
-  ["廣播","淡水信義線。下一站：淡水。"]
- ],
- build(){
-
-  box(
-    0,-.3,0,
-    8,.3,70,
-    M.metro
-  );
-
-  box(
-    -4,2,0,
-    .3,4,70,
-    M.metro
-  );
-
-  box(
-    4,2,0,
-    .3,4,70,
-    M.metro
-  );
-
-  for(let z=-28;z<30;z+=7){
-
-    box(
-      -3.8,2.3,z,
-      .08,1.6,4.5,
-      M.glass
-    );
-
-    box(
-      3.8,2.3,z,
-      .08,1.6,4.5,
-      M.glass
-    );
-
-    box(
-      -2.5,.8,z,
-      2,.8,2.8,
-      M.blue
-    );
-
-    box(
-      2.5,.8,z,
-      2,.8,2.8,
-      M.blue
-    );
-
-  }
-
- }
-},
-
-/* 9 */
-
-{
- location:"淡水",
- mission:"出站以後過馬路，然後一直走。",
- dialogue:[
-  ["路人","出站以後，過馬路，然後一直走。"]
- ],
- build(){
-
-  street(110);
-
-  /* old street */
-
-  building(-13,-5,9,7,16,M.wall);
-  building(13,3,9,8,16,M.red);
-
-  building(-13,25,9,10,16,M.yellow);
-  building(13,30,9,9,16,M.blue);
-
-  tree(-10,13);
-  tree(11,20);
-
-  /* sea */
-
-  box(
-    30,0,10,
-    18,.3,100,
-    M.blue
-  );
-
-  sign(
-    "淡水",
-    0,5,-35,
-    M.red
-  );
-
- }
-},
-
-/* 10 */
-
-{
- location:"公車站",
- mission:"公車站在右邊，往右轉。",
- dialogue:[
-  ["路人","公車站在右邊。往右轉。"]
- ],
- build(){
-
-  /* main road */
-
-  box(
-    0,-.2,0,
-    70,.4,12,
-    M.road
-  );
-
-  /* side road */
-
-  box(
-    28,-.2,25,
-    12,.4,55,
-    M.road
-  );
-
-  /* bus stop */
-
-  box(
-    20,2,9,
-    7,4,.5,
-    M.glass
-  );
-
-  box(
-    20,4,9,
-    7,.5,.6,
-    M.yellow
-  );
-
-  sign(
-    "公車站",
-    20,5,8.5,
-    M.bus
-  );
-
-  tree(5,-10);
-  tree(-12,10);
-
- }
-},
-
-/* 11 */
-
-{
- location:"公車上",
- mission:"搭公車，準備下車。",
- dialogue:[
-  ["公車廣播","下一站：轉車站。請準備下車。"]
- ],
- build(){
-
-  box(
-    0,-.3,0,
-    7,.3,60,
-    M.bus
-  );
-
-  box(
-    -3.5,2,0,
-    .3,4,60,
-    M.bus
-  );
-
-  box(
-    3.5,2,0,
-    .3,4,60,
-    M.bus
-  );
-
-  for(let z=-25;z<30;z+=7){
-
-    box(
-      -2.5,.8,z,
-      1.6,.8,2.5,
-      M.yellow
-    );
-
-    box(
-      2.5,.8,z,
-      1.6,.8,2.5,
-      M.yellow
-    );
-
-  }
-
- }
-},
-
-/* 12 */
-
-{
- location:"轉車站",
- mission:"在這裡下車，轉搭二十六號公車。",
- dialogue:[
-  ["站務員","在這裡下車。轉搭二十六號公車。"]
- ],
- build(){
-
-  box(
-    0,-.2,0,
-    50,.4,70,
-    M.sidewalk
-  );
-
-  /* bus bays */
-
-  box(
-    -15,1,0,
-    10,2,40,
-    M.road
-  );
-
-  box(
-    15,1,0,
-    10,2,40,
-    M.road
-  );
-
-  sign(
-    "26號公車",
-    15,5,-10,
-    M.bus
-  );
-
-  box(
-    0,3,-15,
-    20,6,1,
-    M.white
-  );
-
-  sign(
-    "轉車站",
-    0,6,-15.7,
-    M.red
-  );
-
- }
-},
-
-/* 13 */
-
-{
- location:"公車上",
- mission:"下一站是藥局。",
- dialogue:[
-  ["公車廣播","下一站：藥局。"]
- ],
- build(){
-
-  box(
-    0,-.3,0,
-    7,.3,70,
-    M.bus
-  );
-
-  box(
-    -3.5,2,0,
-    .3,4,70,
-    M.bus
-  );
-
-  box(
-    3.5,2,0,
-    .3,4,70,
-    M.bus
-  );
-
-  for(let z=-25;z<30;z+=7){
-
-    box(
-      -2.5,.8,z,
-      1.6,.8,2.5,
-      M.yellow
-    );
-
-    box(
-      2.5,.8,z,
-      1.6,.8,2.5,
-      M.yellow
-    );
-
-  }
-
- }
-},
-
-/* 14 */
-
-{
- location:"藥局附近",
- mission:"看到藥局以後往左轉。",
- dialogue:[
-  ["路人","看到藥局以後，往左轉。"]
- ],
- build(){
-
-  street(90);
-
-  /* pharmacy */
-
-  box(
-    13,3,-15,
-    10,6,10,
-    M.white
-  );
-
-  sign(
-    "藥局",
-    13,6,-20.2,
-    M.green
-  );
-
-  building(
-    -13,-10,
-    9,11,16,
-    M.wall
-  );
-
-  building(
-    13,15,
-    9,9,16,
-    M.blue
-  );
-
-  tree(-11,20);
-
- }
-},
-
-/* 15 */
-
-{
- location:"海風小館",
- mission:"你到了！小美正在等你。",
- dialogue:[
-  ["小美","阿豪！你終於到了！"],
-  ["阿豪","小美，生日快樂！"],
-  ["小美","謝謝你！我們一起吃飯吧！"]
- ],
- build(){
-
-  /* restaurant courtyard */
-
-  box(
-    0,-.3,0,
-    50,.4,60,
-    M.grass
-  );
-
-  /* building */
-
-  box(
-    0,4,-15,
-    28,8,12,
-    M.wall
-  );
-
-  box(
-    0,2,-8.8,
-    7,4,.2,
-    M.glass
-  );
-
-  sign(
-    "海風小館",
-    0,8,-8.7,
-    M.red
-  );
-
-  tree(-18,-3);
-  tree(18,-3);
-
-  /* tables */
-
-  for(let x=-8;x<=8;x+=8){
-
-    cyl(
-      x,.7,5,
-      1.5,.3,
-      M.wood || M.roof
-    );
-
-  }
-
-  /* Xiaomei */
-
-  npc(
-    0,5,
-    M.red
-  );
-
- }
+    return g;
 }
 
+
+/* =========================================================
+   TREES
+========================================================= */
+
+function tree(x,z){
+
+    cylinder(.22,1.4,materials.orange,x,.7,z);
+
+    const crown = new THREE.Mesh(
+        new THREE.DodecahedronGeometry(1.2,0),
+        materials.green
+    );
+
+    crown.position.set(x,2,z);
+    crown.castShadow = true;
+
+    scene.add(crown);
+}
+
+
+/* =========================================================
+   BUILDINGS
+========================================================= */
+
+function building(x,z,w,d,h,color){
+
+    cube(w,h,d,mat(color),x,h/2,z);
+
+    // windows
+    for(let xx=-w/2+1; xx<w/2-0.5; xx+=1.5){
+
+        for(let yy=1.5; yy<h; yy+=1.8){
+
+            cube(
+                .55,
+                .65,
+                .04,
+                materials.glass,
+                x+xx,
+                yy,
+                z-d/2-.025
+            );
+        }
+    }
+}
+
+
+/* =========================================================
+   ROAD
+========================================================= */
+
+function road(length=80,width=12){
+
+    cube(
+        width,
+        .12,
+        length,
+        materials.road,
+        0,
+        -.06,
+        0
+    );
+
+    cube(
+        2,
+        .15,
+        length,
+        materials.yellow,
+        0,
+        .02,
+        0
+    );
+
+    cube(
+        2,
+        .18,
+        length,
+        materials.sidewalk,
+        -width/2-2,
+        .04,
+        0
+    );
+
+    cube(
+        2,
+        .18,
+        length,
+        materials.sidewalk,
+        width/2+2,
+        .04,
+        0
+    );
+}
+
+
+/* =========================================================
+   SCENE 0 - DEPARTMENT STORE
+========================================================= */
+
+function sceneDepartment(){
+
+    scene.background.set(0x6c6a72);
+    scene.fog.color.set(0x6c6a72);
+
+    cube(50,0.2,50,materials.sidewalk,0,-.1,0);
+
+    building(0,-10,24,10,9,0xb8a69a);
+
+    cube(20,4,0.3,materials.glass,0,4.5,-15.1);
+
+    // entrance
+    cube(5,4,0.5,materials.dark,0,2,-15.4);
+
+    // sign
+    cube(12,1.2,.3,materials.red,0,7,-15.5);
+
+    npc(-7,-4,0x4775a8);
+
+    cube(3,1.2,3,materials.yellow,7,0.6,-4);
+
+    player.position.set(0,0,8);
+    player.rotation.y = 0;
+}
+
+
+/* =========================================================
+   SCENE 1 - CITY
+========================================================= */
+
+function sceneCity(){
+
+    scene.background.set(0x91acc3);
+    scene.fog.color.set(0x91acc3);
+
+    road();
+
+    building(-13,-8,12,18,15,0xb7a99b);
+    building(13,-20,12,20,12,0xa48f85);
+
+    tree(-10,15);
+    tree(10,20);
+    tree(-12,35);
+    tree(12,38);
+
+    // crosswalk
+    for(let z=-4; z<5; z+=1){
+        cube(10,.03,.45,materials.white,0,.08,z);
+    }
+
+    npc(6,5,0xd18a62);
+
+    player.position.set(0,30,0);
+    player.rotation.y = Math.PI;
+}
+
+
+/* =========================================================
+   SCENE 2 - CONVENIENCE STORE
+========================================================= */
+
+function sceneConvenience(){
+
+    scene.background.set(0x92a4b3);
+    scene.fog.color.set(0x92a4b3);
+
+    road(65,12);
+
+    // convenience store
+    cube(13,5,10,materials.white,-13,2.5,-10);
+
+    cube(13,1,10,materials.blue,-13,5.5,-10);
+
+    cube(10,2,.3,materials.glass,-13,3,-15.1);
+
+    // sign
+    cube(8,1,.3,materials.red,-13,6,-15.2);
+
+    // ATM
+    cube(1.1,1.8,.5,materials.dark,-5,0.9,-14);
+
+    npc(-4,-4,0x6b9d6b);
+
+    player.position.set(15,0,20);
+    player.rotation.y = Math.PI;
+}
+
+
+/* =========================================================
+   SCENE 3 - STREET
+========================================================= */
+
+function sceneStreet2(){
+
+    scene.background.set(0x88a6bd);
+    scene.fog.color.set(0x88a6bd);
+
+    road(100,14);
+
+    building(-15,-15,14,20,14,0xbda88e);
+    building(15,-5,14,20,17,0x918d9e);
+
+    tree(-10,20);
+    tree(11,25);
+    tree(-11,40);
+    tree(12,45);
+
+    // station sign in distance
+    cube(7,3,.5,materials.red,0,-45,.2);
+
+    player.position.set(0,40,0);
+    player.rotation.y = Math.PI;
+}
+
+
+/* =========================================================
+   SCENE 4 - TRAIN STATION
+========================================================= */
+
+function sceneStation(){
+
+    scene.background.set(0x555d68);
+    scene.fog.color.set(0x555d68);
+
+    cube(45,.2,40,materials.sidewalk,0,-.1,0);
+
+    // station hall
+    cube(26,8,14,materials.wall,0,4,-12);
+
+    cube(20,3,.5,materials.glass,0,4,-19.1);
+
+    cube(15,1,.4,materials.red,0,8,-19.3);
+
+    // entrance
+    cube(5,4,.5,materials.dark,0,2,-19.5);
+
+    // ticket machines
+    for(let x=-6;x<=6;x+=3){
+        cube(1,2,0.5,materials.blue,x,1,-10);
+    }
+
+    // platform
+    cube(35,.3,10,materials.dark,0,.15,8);
+
+    // rails
+    cube(35,.15,.25,materials.yellow,-3,0,14);
+    cube(35,.15,.25,materials.yellow,3,0,14);
+
+    npc(8,0,0xc86e63);
+
+    player.position.set(0,16,0);
+    player.rotation.y = Math.PI;
+}
+
+
+/* =========================================================
+   TRAIN
+========================================================= */
+
+function buildTrain(){
+
+    const train = new THREE.Group();
+
+    cube(18,3,5,materials.red,0,2,0);
+    cube(16,1.5,5.2,materials.white,0,4.2,0);
+
+    for(let x=-6;x<=6;x+=4){
+        cube(2.4,1.2,.1,materials.glass,x,3.3,-2.6);
+    }
+
+    for(let x=-6;x<=6;x+=4){
+        cube(2.4,1.2,.1,materials.glass,x,3.3,2.6);
+    }
+
+    for(let x=-7;x<=7;x+=7){
+        cylinder(.7,.4,materials.dark,x,.3,-1.7);
+        cylinder(.7,.4,materials.dark,x,.3,1.7);
+    }
+
+    train.position.set(0,0,-10);
+
+    scene.add(train);
+
+    return train;
+}
+
+
+/* =========================================================
+   SCENE 5 - TRAIN
+========================================================= */
+
+function sceneTrain(){
+
+    scene.background.set(0x20232b);
+    scene.fog.color.set(0x20232b);
+
+    // interior floor
+    cube(18,.2,8,materials.dark,0,0,0);
+
+    // seats
+    for(let x=-6;x<=6;x+=3){
+
+        cube(2,.8,1.5,materials.red,x,.45,-2);
+        cube(2,.8,1.5,materials.red,x,.45,2);
+    }
+
+    // windows
+    for(let x=-6;x<=6;x+=3){
+        cube(2,2,.1,materials.glass,x,2.3,-3.8);
+        cube(2,2,.1,materials.glass,x,2.3,3.8);
+    }
+
+    // poles
+    for(let x=-7;x<=7;x+=3.5){
+        cylinder(.08,3,materials.white,x,1.5,0);
+    }
+
+    player.position.set(0,0,0);
+    player.rotation.y = Math.PI;
+}
+
+
+/* =========================================================
+   SCENE 6 - TAIPEI MAIN STATION
+========================================================= */
+
+function sceneTaipeiStation(){
+
+    scene.background.set(0x7d8793);
+    scene.fog.color.set(0x7d8793);
+
+    cube(50,.2,50,materials.sidewalk,0,-.1,0);
+
+    // huge station
+    cube(34,12,16,materials.wall,0,6,-15);
+
+    cube(28,3,.4,materials.red,0,9,-23.1);
+
+    cube(12,5,.5,materials.dark,0,2,-23.4);
+
+    // MRT signs
+    cube(8,1.5,.3,materials.red,-13,4,-23);
+    cube(8,1.5,.3,materials.red,13,4,-23);
+
+    // pillars
+    for(let x=-14;x<=14;x+=7){
+        cube(1,7,1,materials.dark,x,3,-21);
+    }
+
+    npc(-8,0,0x6e89b3);
+    npc(9,3,0xc7796c);
+
+    player.position.set(0,18,0);
+    player.rotation.y = Math.PI;
+}
+
+
+/* =========================================================
+   SCENE 7 - TRANSFER CORRIDOR
+========================================================= */
+
+function sceneTransferTaipei(){
+
+    scene.background.set(0x373a42);
+    scene.fog.color.set(0x373a42);
+
+    cube(16,.2,70,materials.dark,0,-.1,0);
+
+    // walls
+    cube(1,7,70,materials.wall,-8,3.5,0);
+    cube(1,7,70,materials.wall,8,3.5,0);
+
+    // ceiling lights
+    for(let z=-30;z<=30;z+=8){
+        cube(3,.2,1,materials.white,0,7,z);
+    }
+
+    // RED LINE signs
+    for(let z=-25;z<=25;z+=12){
+
+        cube(6,1,.25,materials.red,0,5,z);
+
+        // little white station marker
+        cube(1,.5,.3,materials.white,0,5.8,z);
+    }
+
+    npc(-4,-10,0xd18d66);
+
+    player.position.set(0,28,0);
+    player.rotation.y = Math.PI;
+}
+
+
+/* =========================================================
+   SCENE 8 - RED LINE TRAIN
+========================================================= */
+
+function sceneRedLine(){
+
+    scene.background.set(0x242933);
+    scene.fog.color.set(0x242933);
+
+    cube(20,.2,50,materials.dark,0,-.1,0);
+
+    // red line identity
+    cube(18,.4,1,materials.red,0,.2,-20);
+    cube(18,.4,1,materials.red,0,.2,20);
+
+    // platform signs
+    for(let z=-18;z<=18;z+=9){
+
+        cube(6,1,.3,materials.red,0,4,z);
+
+        cube(1.5,.5,.4,materials.white,0,4.8,z);
+    }
+
+    // seats
+    for(let z=-12;z<=12;z+=4){
+        cube(3,.7,1.2,materials.red,-5,.45,z);
+        cube(3,.7,1.2,materials.red,5,.45,z);
+    }
+
+    player.position.set(0,0,15);
+    player.rotation.y = Math.PI;
+}
+
+
+/* =========================================================
+   SCENE 9 - TAMSUI
+========================================================= */
+
+function sceneTamsui(){
+
+    scene.background.set(0x91bdd0);
+    scene.fog.color.set(0x91bdd0);
+
+    // waterfront
+    cube(60,.2,50,materials.grass,0,-.1,0);
+
+    cube(60,.3,12,materials.blue,0,.05,-22);
+
+    // promenade
+    cube(60,.2,5,materials.sidewalk,0,.1,-14);
+
+    // buildings
+    building(-17,8,14,15,12,0xd5b88f);
+    building(17,5,14,15,10,0xa99aa2);
+
+    tree(-10,25);
+    tree(12,28);
+    tree(-20,35);
+    tree(20,35);
+
+    // ferry-ish structure
+    cube(8,3,5,materials.white,0,1.5,-25);
+    cube(10,1,.5,materials.red,0,3.2,-27.5);
+
+    npc(6,-8,0xc97763);
+
+    player.position.set(0,18,0);
+    player.rotation.y = Math.PI;
+}
+
+
+/* =========================================================
+   SCENE 10 - BUS STOP
+========================================================= */
+
+function sceneBusStop(){
+
+    scene.background.set(0x9db7bd);
+    scene.fog.color.set(0x9db7bd);
+
+    road(80,14);
+
+    building(-16,-15,14,20,12,0xb8a38e);
+
+    // bus shelter
+    cube(6,2.5,.3,materials.glass,7,-2,-12);
+    cube(6,.2,2,materials.dark,7,.1,-12);
+    cube(.2,3,2,materials.dark,4,1.5,-12);
+    cube(.2,3,2,materials.dark,10,1.5,-12);
+
+    // bus sign
+    cube(1,4,.3,materials.red,12,2,-12);
+    cube(3,1,.3,materials.white,12,4.5,-12);
+
+    npc(8,-5,0x477ca8);
+
+    player.position.set(-3,25,0);
+    player.rotation.y = Math.PI;
+}
+
+
+/* =========================================================
+   BUS
+========================================================= */
+
+function createBus(){
+
+    const bus = new THREE.Group();
+
+    cube(16,3,5,materials.yellow,0,2,0);
+
+    cube(15,1.5,5.1,materials.white,0,4.2,0);
+
+    for(let x=-6;x<=6;x+=3){
+        cube(2.1,1.2,.1,materials.glass,x,3.4,-2.6);
+        cube(2.1,1.2,.1,materials.glass,x,3.4,2.6);
+    }
+
+    for(let x=-6;x<=6;x+=6){
+        cylinder(.8,.5,materials.dark,x,.4,-1.8);
+        cylinder(.8,.5,materials.dark,x,.4,1.8);
+    }
+
+    bus.position.set(0,0,0);
+
+    scene.add(bus);
+
+    return bus;
+}
+
+
+/* =========================================================
+   SCENE 11 - BUS
+========================================================= */
+
+function sceneBus(){
+
+    scene.background.set(0x262b31);
+    scene.fog.color.set(0x262b31);
+
+    cube(18,.2,10,materials.dark,0,-.1,0);
+
+    // bus windows
+    for(let x=-6;x<=6;x+=3){
+
+        cube(2.2,2,.1,materials.glass,x,2.4,-4.8);
+        cube(2.2,2,.1,materials.glass,x,2.4,4.8);
+    }
+
+    // seats
+    for(let x=-6;x<=6;x+=3){
+        cube(2,.7,1.4,materials.red,x,.45,-2.5);
+        cube(2,.7,1.4,materials.red,x,.45,2.5);
+    }
+
+    // poles
+    for(let x=-6;x<=6;x+=3){
+        cylinder(.08,3,materials.white,x,1.5,0);
+    }
+
+    player.position.set(0,0,4);
+    player.rotation.y = Math.PI;
+}
+
+
+/* =========================================================
+   SCENE 12 - BUS TRANSFER
+========================================================= */
+
+function sceneBusTransfer(){
+
+    scene.background.set(0x82949c);
+    scene.fog.color.set(0x82949c);
+
+    cube(50,.2,50,materials.sidewalk,0,-.1,0);
+
+    // intersection
+    cube(12,.1,50,materials.road,0,.01,0);
+    cube(50,.1,12,materials.road,0,.02,0);
+
+    // bus stop A
+    cube(5,3,.2,materials.glass,-12,1.5,-10);
+    cube(5,.2,2,materials.dark,-12,.1,-10);
+
+    // bus stop B
+    cube(5,3,.2,materials.glass,12,1.5,10);
+    cube(5,.2,2,materials.dark,12,.1,10);
+
+    // pharmacy
+    cube(12,5,10,materials.white,-13,2.5,17);
+    cube(8,1,.3,materials.red,-13,5.5,11.8);
+
+    // crosswalk
+    for(let x=-5;x<6;x+=1){
+        cube(.5,.03,7,materials.white,x,.08,0);
+    }
+
+    npc(-5,8,0x6785ad);
+
+    player.position.set(0,-15,0);
+    player.rotation.y = 0;
+}
+
+
+/* =========================================================
+   SCENE 13 - SECOND BUS
+========================================================= */
+
+function sceneSecondBus(){
+
+    scene.background.set(0x292d35);
+    scene.fog.color.set(0x292d35);
+
+    cube(18,.2,10,materials.dark,0,-.1,0);
+
+    for(let x=-6;x<=6;x+=3){
+
+        cube(2.2,2,.1,materials.glass,x,2.4,-4.8);
+        cube(2.2,2,.1,materials.glass,x,2.4,4.8);
+
+        cube(2,.7,1.3,materials.orange,x,.45,-2.5);
+        cube(2,.7,1.3,materials.orange,x,.45,2.5);
+    }
+
+    player.position.set(0,0,4);
+    player.rotation.y = Math.PI;
+}
+
+
+/* =========================================================
+   SCENE 14 - PHARMACY AREA
+========================================================= */
+
+function scenePharmacy(){
+
+    scene.background.set(0xa0b8b0);
+    scene.fog.color.set(0xa0b8b0);
+
+    road(80,14);
+
+    // pharmacy
+    cube(14,5,12,materials.white,-13,2.5,-12);
+
+    cube(9,1,.3,materials.red,-13,5.7,-18.1);
+
+    // pharmacy cross
+    cube(2,5,.2,materials.green,-13,2.8,-18.3);
+    cube(5,2,.2,materials.green,-13,2.8,-18.3);
+
+    // residential area
+    building(14,-10,12,18,13,0xbca68d);
+
+    tree(12,18);
+    tree(-10,18);
+    tree(15,30);
+
+    npc(-6,-3,0xc57d69);
+
+    player.position.set(0,30,0);
+    player.rotation.y = Math.PI;
+}
+
+
+/* =========================================================
+   SCENE 15 - RESTAURANT
+========================================================= */
+
+function sceneRestaurant(){
+
+    scene.background.set(0x5c6877);
+    scene.fog.color.set(0x5c6877);
+
+    cube(55,.2,55,materials.sidewalk,0,-.1,0);
+
+    // sea
+    cube(55,.2,12,materials.blue,0,0,-24);
+
+    // restaurant building
+    cube(20,7,13,materials.wall,0,3.5,-13);
+
+    // roof
+    cube(22,.8,15,materials.red,0,7.4,-13);
+
+    // windows
+    cube(5,3,.2,materials.glass,-6,3,-19.6);
+    cube(5,3,.2,materials.glass,6,3,-19.6);
+
+    // entrance
+    cube(4,4,.4,materials.dark,0,2,-19.8);
+
+    // restaurant sign
+    cube(12,1.5,.3,materials.yellow,0,6.3,-20);
+
+    // tables
+    for(let x=-6;x<=6;x+=6){
+
+        cylinder(.25,1.5,materials.dark,x,.75,-5);
+
+        cube(3,.15,2,materials.wall,x,1.55,-5);
+    }
+
+    // Xiaomei
+    npc(-4,-1,0xe08aa5);
+
+    player.position.set(0,20,0);
+    player.rotation.y = Math.PI;
+}
+
+
+/* =========================================================
+   SCENE SYSTEM
+========================================================= */
+
+const scenes = [
+    {
+        name:"百貨公司",
+        mission:"買生日禮物",
+        build:sceneDepartment
+    },
+    {
+        name:"城市街道",
+        mission:"找到火車站",
+        build:sceneCity
+    },
+    {
+        name:"便利商店附近",
+        mission:"繼續往前走",
+        build:sceneConvenience
+    },
+    {
+        name:"城市街道",
+        mission:"往火車站走",
+        build:sceneStreet2
+    },
+    {
+        name:"火車站",
+        mission:"搭火車去台北車站",
+        build:sceneStation
+    },
+    {
+        name:"火車上",
+        mission:"搭火車",
+        build:sceneTrain
+    },
+    {
+        name:"台北車站",
+        mission:"找淡水信義線",
+        build:sceneTaipeiStation
+    },
+    {
+        name:"台北車站轉乘通道",
+        mission:"轉搭紅線",
+        build:sceneTransferTaipei
+    },
+    {
+        name:"淡水信義線",
+        mission:"搭車前往淡水",
+        build:sceneRedLine
+    },
+    {
+        name:"淡水",
+        mission:"找到公車站",
+        build:sceneTamsui
+    },
+    {
+        name:"公車站",
+        mission:"搭公車",
+        build:sceneBusStop
+    },
+    {
+        name:"公車上",
+        mission:"坐公車",
+        build:sceneBus
+    },
+    {
+        name:"轉車站",
+        mission:"下車並轉乘另一班公車",
+        build:sceneBusTransfer
+    },
+    {
+        name:"第二班公車",
+        mission:"搭公車前往目的地",
+        build:sceneSecondBus
+    },
+    {
+        name:"藥局附近",
+        mission:"找到海風小館",
+        build:scenePharmacy
+    },
+    {
+        name:"海風小館",
+        mission:"完成任務！",
+        build:sceneRestaurant
+    }
 ];
 
-/* ============================================================
-   SCENE BUILD
-============================================================ */
+let currentScene = 0;
+
+
+/* =========================================================
+   LOAD SCENE
+========================================================= */
 
 function loadScene(index){
 
-  currentScene=index;
+    currentScene = index;
 
-  clearWorld();
+    clearWorld();
 
-  const s=scenes[index];
+    scenes[index].build();
 
-  s.build();
+    document.getElementById("location").textContent =
+        scenes[index].name;
 
-  resetPlayer();
+    document.getElementById("mission").textContent =
+        scenes[index].mission;
 
-  updateUI();
-
-  if(index===15){
-
-    showDialogue();
-
-  }else{
-
-    currentDialogue=s.dialogue;
-    dialogueIndex=0;
-    showDialogue();
-
-  }
-
+    showSceneDialogue(index);
 }
 
-/* ============================================================
+
+/* =========================================================
    DIALOGUE
-============================================================ */
+========================================================= */
 
-function showDialogue(){
+const dialogueData = {
 
-  if(!currentDialogue || !currentDialogue.length)
-    return;
+0:[
+    ["阿豪","今天是小美的生日！我要買一個生日禮物。"],
+    ["阿豪","買好禮物以後，我要去火車站。"]
+],
 
-  dialogueOpen=true;
+1:[
+    ["路人","火車站？往前走，然後往右轉。"],
+    ["阿豪","好，謝謝你！"]
+],
 
-  document.getElementById("dialogue").style.display="block";
+2:[
+    ["店員","火車站在前面。一直走就到了。"],
+    ["阿豪","好的！"]
+],
 
-  const d=currentDialogue[dialogueIndex];
+3:[
+    ["路人","火車站就在前面。繼續往前走。"],
+    ["阿豪","我知道了！"]
+],
 
-  document.getElementById("speaker").textContent=d[0];
-  document.getElementById("dialogueText").textContent=d[1];
+4:[
+    ["站務員","請進站搭火車。"],
+    ["站務員","到了台北車站以後，要轉淡水信義線。"],
+    ["阿豪","好的，謝謝！"]
+],
 
+5:[
+    ["阿豪","我現在在火車上。"],
+    ["阿豪","下一站就是台北車站。"]
+],
+
+6:[
+    ["站務員","淡水信義線在那邊。"],
+    ["站務員","往左走，然後一直走。"],
+    ["阿豪","我要搭紅線去淡水。"]
+],
+
+7:[
+    ["站務員","請往前走。紅線就在前面。"],
+    ["阿豪","好的！"]
+],
+
+8:[
+    ["廣播","下一站，淡水。"],
+    ["阿豪","終於到了淡水！"]
+],
+
+9:[
+    ["路人","公車站在前面。一直走就到了。"],
+    ["阿豪","我要去找公車站。"]
+],
+
+10:[
+    ["司機","請上車。"],
+    ["阿豪","謝謝！"]
+],
+
+11:[
+    ["廣播","下一站，請準備下車。"],
+    ["阿豪","我要下車轉另一班公車。"]
+],
+
+12:[
+    ["路人","你要去海風小館嗎？"],
+    ["路人","先過馬路，然後往左走。"],
+    ["阿豪","好的，謝謝你！"]
+],
+
+13:[
+    ["阿豪","快到了！"],
+    ["阿豪","我要去海風小館。"]
+],
+
+14:[
+    ["路人","海風小館就在附近。"],
+    ["路人","往右轉，然後一直走。"],
+    ["阿豪","找到了！"]
+],
+
+15:[
+    ["小美","阿豪！你終於到了！"],
+    ["小美","謝謝你的生日禮物！"],
+    ["阿豪","生日快樂，小美！"]
+]
+
+};
+
+let dialogueIndex = 0;
+let dialogueOpen = false;
+
+function showSceneDialogue(index){
+
+    if(!dialogueData[index]){
+        return;
+    }
+
+    dialogueIndex = 0;
+    dialogueOpen = true;
+
+    const box = document.getElementById("dialogue");
+
+    box.style.display = "block";
+
+    updateDialogue();
+}
+
+function updateDialogue(){
+
+    const data = dialogueData[currentScene];
+
+    if(!data) return;
+
+    const item = data[dialogueIndex];
+
+    document.getElementById("speaker").textContent =
+        item[0];
+
+    document.getElementById("dialogueText").textContent =
+        item[1];
 }
 
 function nextDialogue(){
 
-  if(!dialogueOpen)
-    return;
+    const data = dialogueData[currentScene];
 
-  dialogueIndex++;
+    if(!data) return;
 
-  if(dialogueIndex>=currentDialogue.length){
+    dialogueIndex++;
 
-    dialogueOpen=false;
+    if(dialogueIndex >= data.length){
 
-    document.getElementById("dialogue").style.display="none";
+        dialogueOpen = false;
 
-    return;
+        document.getElementById("dialogue").style.display =
+            "none";
 
-  }
+        return;
+    }
 
-  showDialogue();
-
+    updateDialogue();
 }
 
-/* ============================================================
-   PLAYER
-============================================================ */
+document.getElementById("dialogue")
+    .addEventListener("click",nextDialogue);
 
-playerGroup=new THREE.Group();
 
-player=createAhao();
-
-playerGroup.add(player);
-
-world.add(playerGroup);
-
-/* ============================================================
+/* =========================================================
    MOVEMENT
-============================================================ */
+========================================================= */
 
-function movePlayer(dt){
+const keys = {
+    forward:false,
+    backward:false,
+    left:false,
+    right:false
+};
 
-  if(dialogueOpen) return;
+const SPEED = 0.09;
+const TURN_SPEED = 0.045;
 
-  let dx=0;
-  let dz=0;
+function movePlayer(){
 
-  if(keys.ArrowUp) dz-=1;
-  if(keys.ArrowDown) dz+=1;
-  if(keys.ArrowLeft) dx-=1;
-  if(keys.ArrowRight) dx+=1;
+    if(dialogueOpen) return;
 
-  if(dx===0 && dz===0){
+    if(keys.left){
+        player.rotation.y += TURN_SPEED;
+    }
 
-    animatePlayer(false);
+    if(keys.right){
+        player.rotation.y -= TURN_SPEED;
+    }
 
-    return;
-  }
+    let movement = 0;
 
-  const len=Math.hypot(dx,dz);
+    if(keys.forward) movement += SPEED;
+    if(keys.backward) movement -= SPEED;
 
-  dx/=len;
-  dz/=len;
+    if(movement !== 0){
 
-  const speed=8;
+        // Character's forward direction
+        const angle = player.rotation.y;
 
-  playerGroup.position.x += dx*speed*dt;
-  playerGroup.position.z += dz*speed*dt;
+        player.position.x -= Math.sin(angle) * movement;
+        player.position.z -= Math.cos(angle) * movement;
+    }
 
-  /* face direction */
-
-  playerGroup.rotation.y=
-    Math.atan2(dx,dz);
-
-  animatePlayer(true);
-
-  checkSceneProgress();
-
+    keepPlayerInside();
 }
 
-/* ============================================================
-   WALK ANIMATION
-============================================================ */
 
-let walkTime=0;
+/* =========================================================
+   KEEP PLAYER IN WORLD
+========================================================= */
 
-function animatePlayer(walking){
+function keepPlayerInside(){
 
-  if(!walking){
+    player.position.x =
+        THREE.MathUtils.clamp(
+            player.position.x,
+            -24,
+            24
+        );
 
-    player.userData.armL.rotation.x*=.8;
-    player.userData.armR.rotation.x*=.8;
-    player.userData.legL.rotation.x*=.8;
-    player.userData.legR.rotation.x*=.8;
-
-    return;
-  }
-
-  walkTime+=.22;
-
-  const swing=Math.sin(walkTime)*.55;
-
-  player.userData.armL.rotation.x=swing;
-  player.userData.armR.rotation.x=-swing;
-
-  player.userData.legL.rotation.x=-swing;
-  player.userData.legR.rotation.x=swing;
-
+    player.position.z =
+        THREE.MathUtils.clamp(
+            player.position.z,
+            -45,
+            45
+        );
 }
 
-/* ============================================================
-   SCENE PROGRESS
-============================================================ */
 
-function checkSceneProgress(){
+/* =========================================================
+   SCENE PROGRESSION
+========================================================= */
 
-  const p=playerGroup.position;
+let transitionLock = false;
 
-  /* forward transition */
+function nextScene(){
 
-  if(currentScene===0 && p.z<-25){
-    loadScene(1);
-  }
+    if(transitionLock) return;
 
-  else if(currentScene===1 && p.z>30 && p.x>6){
-    loadScene(2);
-  }
+    transitionLock = true;
 
-  else if(currentScene===2 && p.x<-20){
-    loadScene(3);
-  }
+    const fade = document.getElementById("blackFade");
 
-  else if(currentScene===3 && p.z<-30){
-    loadScene(4);
-  }
+    fade.style.opacity = "1";
 
-  else if(currentScene===4 && p.z<-18){
-    loadScene(5);
-  }
+    setTimeout(()=>{
 
-  else if(currentScene===5 && p.z<-28){
-    loadScene(6);
-  }
+        if(currentScene < scenes.length-1){
 
-  else if(currentScene===6 && p.x>10){
-    loadScene(7);
-  }
+            loadScene(currentScene+1);
 
-  else if(currentScene===7 && p.x>18){
-    loadScene(8);
-  }
+        }else{
 
-  else if(currentScene===8 && p.z<-30){
-    loadScene(9);
-  }
+            document.getElementById("finish")
+                .style.display = "flex";
+        }
 
-  else if(currentScene===9 && p.z>35){
-    loadScene(10);
-  }
+        setTimeout(()=>{
+            fade.style.opacity = "0";
+        },100);
 
-  else if(currentScene===10 && p.x>20){
-    loadScene(11);
-  }
+        setTimeout(()=>{
+            transitionLock = false;
+        },500);
 
-  else if(currentScene===11 && p.z<-28){
-    loadScene(12);
-  }
-
-  else if(currentScene===12 && p.x>18){
-    loadScene(13);
-  }
-
-  else if(currentScene===13 && p.z<-28){
-    loadScene(14);
-  }
-
-  else if(currentScene===14 && p.x<-8){
-    loadScene(15);
-  }
-
+    },450);
 }
 
-/* ============================================================
-   CAMERA
-============================================================ */
 
-function updateCamera(){
+/* =========================================================
+   ROUTE TRIGGERS
+========================================================= */
 
-  const target=playerGroup.position.clone();
+function checkProgress(){
 
-  const distance=10;
+    if(dialogueOpen) return;
 
-  const angle=cameraAngle;
+    const x = player.position.x;
+    const z = player.position.z;
 
-  const camX=
-    target.x+
-    Math.sin(angle)*distance;
+    /*
+       Every scene has a clear destination zone.
+       The zone is deliberately broad so the game
+       remains playable on mobile.
+    */
 
-  const camZ=
-    target.z+
-    Math.cos(angle)*distance;
+    switch(currentScene){
 
-  camera.position.x +=
-    (camX-camera.position.x)*.1;
+        case 0:
 
-  camera.position.y +=
-    (7-camera.position.y)*.1;
+            // Exit department store
+            if(z < -12){
+                nextScene();
+            }
 
-  camera.position.z +=
-    (camZ-camera.position.z)*.1;
+            break;
 
-  const look=
-    target.clone();
 
-  look.y+=1.4;
+        case 1:
 
-  camera.lookAt(look);
+            // Reach right side of street
+            if(x > 17){
+                nextScene();
+            }
 
+            break;
+
+
+        case 2:
+
+            // Leave convenience store area
+            if(x < -18){
+                nextScene();
+            }
+
+            break;
+
+
+        case 3:
+
+            // Reach station
+            if(z < -35){
+                nextScene();
+            }
+
+            break;
+
+
+        case 4:
+
+            // Enter train
+            if(z < -10){
+                nextScene();
+            }
+
+            break;
+
+
+        case 5:
+
+            // Finish train ride
+            if(Math.abs(player.position.x) > 7){
+                nextScene();
+            }
+
+            break;
+
+
+        case 6:
+
+            // Go toward transfer area
+            if(z < -12){
+                nextScene();
+            }
+
+            break;
+
+
+        case 7:
+
+            // Continue through transfer corridor
+            if(z < -28){
+                nextScene();
+            }
+
+            break;
+
+
+        case 8:
+
+            // Reach Tamsui
+            if(z < -15){
+                nextScene();
+            }
+
+            break;
+
+
+        case 9:
+
+            // Reach bus stop
+            if(z < -8){
+                nextScene();
+            }
+
+            break;
+
+
+        case 10:
+
+            // Enter bus
+            if(x > 4 && z < -8){
+                nextScene();
+            }
+
+            break;
+
+
+        case 11:
+
+            // Leave bus
+            if(Math.abs(player.position.z) > 3.5){
+                nextScene();
+            }
+
+            break;
+
+
+        case 12:
+
+            // Reach second bus
+            if(
+                player.position.x > 7 &&
+                player.position.z > 5
+            ){
+                nextScene();
+            }
+
+            break;
+
+
+        case 13:
+
+            // Exit second bus
+            if(Math.abs(player.position.z) > 3.5){
+                nextScene();
+            }
+
+            break;
+
+
+        case 14:
+
+            // Reach restaurant direction
+            if(z < -15){
+                nextScene();
+            }
+
+            break;
+
+
+        case 15:
+
+            // Final
+            break;
+    }
 }
 
-/* ============================================================
+
+/* =========================================================
    KEYBOARD
-============================================================ */
+========================================================= */
+
+function setKey(code,value){
+
+    switch(code){
+
+        case "ArrowUp":
+        case "KeyW":
+            keys.forward = value;
+            break;
+
+        case "ArrowDown":
+        case "KeyS":
+            keys.backward = value;
+            break;
+
+        case "ArrowLeft":
+        case "KeyA":
+            keys.left = value;
+            break;
+
+        case "ArrowRight":
+        case "KeyD":
+            keys.right = value;
+            break;
+    }
+}
 
 window.addEventListener("keydown",e=>{
 
-  if([
-    "ArrowUp",
-    "ArrowDown",
-    "ArrowLeft",
-    "ArrowRight"
-  ].includes(e.key)){
+    if([
+        "ArrowUp",
+        "ArrowDown",
+        "ArrowLeft",
+        "ArrowRight",
+        "KeyW",
+        "KeyA",
+        "KeyS",
+        "KeyD"
+    ].includes(e.code)){
+        e.preventDefault();
+    }
 
-    e.preventDefault();
-
-    keys[e.key]=true;
-
-  }
-
-  if(e.key==="Enter" || e.key===" "){
-
-    nextDialogue();
-
-  }
-
+    setKey(e.code,true);
 });
 
 window.addEventListener("keyup",e=>{
-
-  keys[e.key]=false;
-
+    setKey(e.code,false);
 });
 
-/* ============================================================
-   TOUCH
-============================================================ */
+window.addEventListener("blur",()=>{
 
-document.querySelectorAll(".ctrl")
-.forEach(btn=>{
-
-  const key=btn.dataset.key;
-
-  btn.addEventListener(
-    "pointerdown",
-    e=>{
-      e.preventDefault();
-      keys[key]=true;
-    }
-  );
-
-  btn.addEventListener(
-    "pointerup",
-    e=>{
-      e.preventDefault();
-      keys[key]=false;
-    }
-  );
-
-  btn.addEventListener(
-    "pointercancel",
-    ()=>{
-      keys[key]=false;
-    }
-  );
-
-  btn.addEventListener(
-    "pointerleave",
-    ()=>{
-      keys[key]=false;
-    }
-  );
-
+    keys.forward=false;
+    keys.backward=false;
+    keys.left=false;
+    keys.right=false;
 });
 
-/* ============================================================
-   CAMERA BUTTONS
-============================================================ */
 
-document.getElementById("camLeft")
-.addEventListener("pointerdown",()=>{
-  cameraAngle-=.3;
-});
+/* =========================================================
+   MOBILE TOUCH CONTROLS
+========================================================= */
 
-document.getElementById("camRight")
-.addEventListener("pointerdown",()=>{
-  cameraAngle+=.3;
-});
+function setupTouchButton(id,key){
 
-/* ============================================================
-   START
-============================================================ */
+    const button = document.getElementById(id);
+
+    button.addEventListener("pointerdown",e=>{
+
+        e.preventDefault();
+
+        if(button.setPointerCapture){
+            try{
+                button.setPointerCapture(e.pointerId);
+            }catch(err){}
+        }
+
+        keys[key] = true;
+    });
+
+    button.addEventListener("pointerup",e=>{
+
+        e.preventDefault();
+
+        keys[key] = false;
+    });
+
+    button.addEventListener("pointercancel",e=>{
+
+        e.preventDefault();
+
+        keys[key] = false;
+    });
+
+    button.addEventListener("lostpointercapture",()=>{
+
+        keys[key] = false;
+    });
+}
+
+setupTouchButton("up","forward");
+setupTouchButton("down","backward");
+setupTouchButton("left","left");
+setupTouchButton("right","right");
+
+
+/* =========================================================
+   CAMERA
+========================================================= */
+
+function updateCamera(){
+
+    const distance = 7;
+
+    const angle = player.rotation.y;
+
+    const targetX =
+        player.position.x +
+        Math.sin(angle) * distance;
+
+    const targetZ =
+        player.position.z +
+        Math.cos(angle) * distance;
+
+    const desiredCamera = new THREE.Vector3(
+        targetX,
+        player.position.y + 4.2,
+        targetZ
+    );
+
+    camera.position.lerp(
+        desiredCamera,
+        .08
+    );
+
+    const lookTarget = new THREE.Vector3(
+        player.position.x,
+        player.position.y + 1.5,
+        player.position.z
+    );
+
+    camera.lookAt(lookTarget);
+}
+
+
+/* =========================================================
+   START GAME
+========================================================= */
 
 document.getElementById("startBtn")
 .addEventListener("click",()=>{
 
-  document.getElementById("startScreen").style.display="none";
+    document.getElementById("startScreen")
+        .style.display = "none";
 
-  loadScene(0);
+    loadScene(0);
 
 });
 
-/* ============================================================
+
+/* =========================================================
    RESIZE
-============================================================ */
+========================================================= */
 
 window.addEventListener("resize",()=>{
 
-  camera.aspect=
-    innerWidth/innerHeight;
+    camera.aspect =
+        window.innerWidth /
+        window.innerHeight;
 
-  camera.updateProjectionMatrix();
+    camera.updateProjectionMatrix();
 
-  renderer.setSize(
-    innerWidth,
-    innerHeight
-  );
-
+    renderer.setSize(
+        window.innerWidth,
+        window.innerHeight
+    );
 });
 
-/* ============================================================
-   LOOP
-============================================================ */
+
+/* =========================================================
+   GAME LOOP
+========================================================= */
 
 function animate(){
 
-  requestAnimationFrame(animate);
+    requestAnimationFrame(animate);
 
-  const dt=
-    Math.min(clock.getDelta(),.05);
+    movePlayer();
 
-  movePlayer(dt);
+    checkProgress();
 
-  updateCamera();
+    updateCamera();
 
-  renderer.render(
-    scene,
-    camera
-  );
-
+    renderer.render(
+        scene,
+        camera
+    );
 }
 
 animate();
