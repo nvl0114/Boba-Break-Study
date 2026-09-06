@@ -1,0 +1,1153 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Ahao's Birthday Journey | Boba Break Study</title><style>
+
+/* =========================
+   BASIC
+========================= */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: "Courier New", monospace;
+    background: #dcefd8;
+    color: #2f3b2f;
+    image-rendering: pixelated;
+}
+
+button {
+    font-family: inherit;
+}
+
+.game {
+    width: min(1000px, 95%);
+    margin: 25px auto;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.header {
+    text-align: center;
+    background: #fff8df;
+    border: 5px solid #5d4534;
+    box-shadow: 7px 7px 0 #5d4534;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.header h1 {
+    margin: 0 0 10px;
+    font-size: clamp(1.4rem, 5vw, 2.5rem);
+}
+
+.header p {
+    margin: 0;
+}
+
+
+/* =========================
+   PROGRESS
+========================= */
+
+.progress-wrap {
+    height: 25px;
+    background: #ffffff;
+    border: 4px solid #5d4534;
+    margin-bottom: 20px;
+}
+
+.progress {
+    height: 100%;
+    width: 0%;
+    background: #ef8e6e;
+    transition: width 0.4s;
+}
+
+
+/* =========================
+   GAME SCREEN
+========================= */
+
+.game-screen {
+    background: #fff8df;
+    border: 5px solid #5d4534;
+    box-shadow: 8px 8px 0 #5d4534;
+    padding: 15px;
+}
+
+
+/* =========================
+   STORY BOX
+========================= */
+
+.story-box {
+    min-height: 100px;
+    background: #ffffff;
+    border: 4px solid #5d4534;
+    padding: 15px;
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+
+/* =========================
+   MAP
+========================= */
+
+.map-wrapper {
+    position: relative;
+    width: 100%;
+    height: 460px;
+    overflow: hidden;
+    border: 5px solid #5d4534;
+    background: #88bf7a;
+}
+
+
+/* =========================
+   ROAD
+========================= */
+
+.road-h {
+    position: absolute;
+    left: 0;
+    top: 42%;
+    width: 100%;
+    height: 90px;
+    background: #b7aa9a;
+    border-top: 5px solid #82766b;
+    border-bottom: 5px solid #82766b;
+}
+
+.road-v {
+    position: absolute;
+    top: 0;
+    left: 45%;
+    width: 110px;
+    height: 100%;
+    background: #b7aa9a;
+    border-left: 5px solid #82766b;
+    border-right: 5px solid #82766b;
+}
+
+
+/* =========================
+   BUILDINGS
+========================= */
+
+.building {
+    position: absolute;
+    padding: 10px;
+    background: #fff8df;
+    border: 4px solid #5d4534;
+    box-shadow: 5px 5px 0 #5d4534;
+    text-align: center;
+    font-size: 13px;
+    min-width: 95px;
+}
+
+.mall {
+    left: 5%;
+    bottom: 6%;
+}
+
+.bank {
+    left: 7%;
+    top: 8%;
+}
+
+.hospital {
+    left: 30%;
+    top: 7%;
+}
+
+.store {
+    right: 7%;
+    top: 8%;
+}
+
+.station {
+    right: 5%;
+    bottom: 7%;
+}
+
+
+/* =========================
+   CHARACTER
+========================= */
+
+.player {
+    position: absolute;
+    width: 42px;
+    height: 52px;
+    z-index: 10;
+    transition: left 0.25s linear, top 0.25s linear;
+}
+
+/* Pixel-style character */
+
+.player .hair {
+    width: 30px;
+    height: 15px;
+    background: #39281d;
+    margin: auto;
+}
+
+.player .face {
+    width: 26px;
+    height: 16px;
+    background: #f2c49a;
+    margin: auto;
+}
+
+.player .body {
+    width: 30px;
+    height: 20px;
+    background: #4d8ad8;
+    margin: auto;
+}
+
+.player .legs {
+    width: 26px;
+    height: 12px;
+    background: #4c5b72;
+    margin: auto;
+}
+
+
+/* =========================
+   OBJECTIVE
+========================= */
+
+.objective {
+    background: #fff3c9;
+    border: 4px solid #5d4534;
+    padding: 15px;
+    margin-top: 15px;
+    text-align: center;
+    font-weight: bold;
+}
+
+
+/* =========================
+   CONTROLS
+========================= */
+
+.controls {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.dpad {
+    display: grid;
+    grid-template-columns: repeat(3, 65px);
+    grid-template-rows: repeat(2, 60px);
+    gap: 7px;
+}
+
+.control-btn {
+    border: 4px solid #5d4534;
+    background: #ffffff;
+    box-shadow: 4px 4px 0 #5d4534;
+    cursor: pointer;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.control-btn:hover {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 #5d4534;
+}
+
+.up {
+    grid-column: 2;
+}
+
+.left {
+    grid-column: 1;
+    grid-row: 2;
+}
+
+.down {
+    grid-column: 2;
+    grid-row: 2;
+}
+
+.right {
+    grid-column: 3;
+    grid-row: 2;
+}
+
+
+/* =========================
+   MESSAGE
+========================= */
+
+.message {
+    min-height: 55px;
+    margin-top: 15px;
+    padding: 12px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.message.success {
+    background: #bfe3b6;
+    border: 4px solid #487342;
+}
+
+.message.error {
+    background: #f2b8ae;
+    border: 4px solid #8d4338;
+}
+
+
+/* =========================
+   TRANSPORT SCENE
+========================= */
+
+.transport-scene {
+    display: none;
+    min-height: 460px;
+    position: relative;
+    background: #90b5d8;
+    border: 5px solid #5d4534;
+    overflow: hidden;
+}
+
+.transport-title {
+    position: absolute;
+    top: 20px;
+    width: 100%;
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+
+/* Train */
+
+.train {
+    position: absolute;
+    width: 260px;
+    height: 120px;
+    background: #dce5ed;
+    border: 6px solid #3d4b59;
+    bottom: 70px;
+    left: -280px;
+    transition: left 3s linear;
+}
+
+.train::before {
+    content: "";
+    position: absolute;
+    top: 25px;
+    left: 20px;
+    width: 45px;
+    height: 40px;
+    background: #72b5d6;
+    box-shadow:
+        65px 0 #72b5d6,
+        130px 0 #72b5d6,
+        195px 0 #72b5d6;
+}
+
+.train.active {
+    left: 110%;
+}
+
+
+/* Bus */
+
+.bus {
+    position: absolute;
+    width: 210px;
+    height: 110px;
+    background: #e6a73f;
+    border: 6px solid #59472f;
+    bottom: 70px;
+    left: -230px;
+    transition: left 3s linear;
+}
+
+.bus::before {
+    content: "";
+    position: absolute;
+    top: 20px;
+    left: 25px;
+    width: 35px;
+    height: 35px;
+    background: #92c3dc;
+    box-shadow:
+        50px 0 #92c3dc,
+        100px 0 #92c3dc;
+}
+
+.bus.active {
+    left: 110%;
+}
+
+
+/* =========================
+   FINAL SCREEN
+========================= */
+
+.final-screen {
+    display: none;
+    text-align: center;
+    background: #fff8df;
+    border: 5px solid #5d4534;
+    box-shadow: 8px 8px 0 #5d4534;
+    padding: 30px;
+}
+
+.restart {
+    margin-top: 20px;
+    padding: 14px 25px;
+    background: #ef8e6e;
+    border: 4px solid #5d4534;
+    box-shadow: 5px 5px 0 #5d4534;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+
+    .map-wrapper,
+    .transport-scene {
+        height: 380px;
+    }
+
+    .building {
+        font-size: 10px;
+        min-width: 70px;
+        padding: 6px;
+    }
+
+}
+
+</style></head><body><div class="game"><div class="header">
+    <h1>🎂 AHAO'S BIRTHDAY JOURNEY</h1>
+    <p>Help Ahao find Xiaomei's birthday party!</p>
+</div>
+
+<div class="progress-wrap">
+    <div class="progress" id="progress"></div>
+</div>
+
+
+<!-- MAIN GAME -->
+
+<div class="game-screen" id="gameScreen">
+
+    <div class="story-box" id="storyBox"></div>
+
+
+    <!-- WALKING MAP -->
+
+    <div class="map-wrapper" id="walkingMap">
+
+        <div class="road-h"></div>
+        <div class="road-v"></div>
+
+        <div class="building mall">
+            🏬<br>MALL
+        </div>
+
+        <div class="building bank">
+            🏦<br>BANK
+        </div>
+
+        <div class="building hospital">
+            🏥<br>HOSPITAL
+        </div>
+
+        <div class="building store">
+            🏪<br>STORE
+        </div>
+
+        <div class="building station">
+            🚉<br>STATION
+        </div>
+
+
+        <!-- AHAO -->
+
+        <div class="player" id="player">
+
+            <div class="hair"></div>
+            <div class="face"></div>
+            <div class="body"></div>
+            <div class="legs"></div>
+
+        </div>
+
+    </div>
+
+
+    <!-- TRANSPORT -->
+
+    <div class="transport-scene" id="transportScene">
+
+        <div class="transport-title" id="transportTitle"></div>
+
+        <div class="train" id="train"></div>
+
+        <div class="bus" id="bus"></div>
+
+    </div>
+
+
+    <div class="objective" id="objective"></div>
+
+
+    <div class="controls">
+
+        <div class="dpad">
+
+            <button class="control-btn up" onclick="move('up')">
+                ↑
+            </button>
+
+            <button class="control-btn left" onclick="move('left')">
+                ←
+            </button>
+
+            <button class="control-btn down" onclick="move('down')">
+                ↓
+            </button>
+
+            <button class="control-btn right" onclick="move('right')">
+                →
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div class="message" id="message"></div>
+
+</div>
+
+
+<!-- FINAL -->
+
+<div class="final-screen" id="finalScreen">
+
+    <h1>🎉 HAPPY BIRTHDAY, XIAOMEI! 🎂</h1>
+
+    <div style="font-size:70px;">
+        🎂 🥳 🎁 🎉
+    </div>
+
+    <h2>Ahao made it to 海風小館!</h2>
+
+    <p>
+        After walking, taking a train, transferring to the MRT,
+        taking two buses, and finding the restaurant...
+        Ahao finally arrives at Xiaomei's birthday party!
+    </p>
+
+    <button class="restart" onclick="restartGame()">
+        PLAY AGAIN
+    </button>
+
+</div>
+
+</div><script>
+
+/* =========================
+   GAME STATE
+========================= */
+
+let stage = 0;
+
+let playerX = 14;
+let playerY = 67;
+
+let locked = false;
+
+
+/* =========================
+   STORY DATA
+========================= */
+
+const stages = [
+
+    {
+        type: "walk",
+
+        story: `
+            🎁 Today is Xiaomei's birthday!<br><br>
+
+            Xiaomei invited all her school friends to have dinner at
+            <strong>海風小館</strong> in Tamsui.<br><br>
+
+            Ahao bought her a birthday present at the mall. But when
+            he leaves the mall... his phone runs out of battery! 🔋<br><br>
+
+            He can't use Google Maps anymore.<br><br>
+
+            A stranger tells him:<br><br>
+
+            <strong>「一直走，經過銀行和醫院。」</strong>
+        `,
+
+        objective: "Go straight and pass the bank and hospital.",
+
+        answer: "right",
+
+        success: "Great! Ahao walks past the bank and hospital.",
+
+        position: {
+            x: 34,
+            y: 67
+        }
+    },
+
+
+    {
+        type: "walk",
+
+        story: `
+            Ahao arrives at an intersection.<br><br>
+
+            The stranger says:<br><br>
+
+            <strong>「看到便利商店以後，往左轉。」</strong>
+        `,
+
+        objective: "Turn left after reaching the convenience store.",
+
+        answer: "up",
+
+        success: "Correct! Ahao turns toward the next road.",
+
+        position: {
+            x: 44,
+            y: 37
+        }
+    },
+
+
+    {
+        type: "walk",
+
+        story: `
+            Now Ahao can see the train station on the other side of
+            the road.<br><br>
+
+            The stranger says:<br><br>
+
+            <strong>「過馬路，然後往右轉。」</strong>
+        `,
+
+        objective: "Cross the road.",
+
+        answer: "right",
+
+        success: "Ahao safely crosses the road!",
+
+        position: {
+            x: 58,
+            y: 37
+        }
+    },
+
+
+    {
+        type: "walk",
+
+        story: `
+            The train station is nearby.<br><br>
+
+            <strong>「現在往右走。」</strong>
+        `,
+
+        objective: "Find the train station.",
+
+        answer: "right",
+
+        success: "🎉 Ahao finds the train station!",
+
+        position: {
+            x: 78,
+            y: 67
+        }
+    },
+
+
+    {
+        type: "train",
+
+        story: `
+            🚉 Ahao enters the train station.<br><br>
+
+            He needs to take a train to Taipei Main Station.
+        `,
+
+        objective: "Take the train to Taipei Main Station.",
+
+        answer: "right",
+
+        success: "🚆 The train is leaving for Taipei Main Station!"
+    },
+
+
+    {
+        type: "station",
+
+        story: `
+            🏙️ Ahao arrives at Taipei Main Station.<br><br>
+
+            The station is huge! He asks a staff member how to find
+            the MRT Red Line.<br><br>
+
+            The staff member says:<br><br>
+
+            <strong>「一直走，然後往左轉。」</strong>
+        `,
+
+        objective: "Follow the signs and find the Red Line.",
+
+        answer: "left",
+
+        success: "🔴 Ahao finds the MRT Red Line!"
+    },
+
+
+    {
+        type: "mrt",
+
+        story: `
+            Ahao is standing on the MRT platform.<br><br>
+
+            He needs to go toward Tamsui.
+        `,
+
+        objective: "Take the MRT toward Tamsui.",
+
+        answer: "up",
+
+        success: "🚇 The MRT is going to Tamsui!"
+    },
+
+
+    {
+        type: "bus",
+
+        story: `
+            🌊 Ahao arrives at Tamsui Station.<br><br>
+
+            海風小館 is still too far away, so he needs to take a bus.
+        `,
+
+        objective: "Take Bus 857.",
+
+        answer: "right",
+
+        success: "🚌 Ahao gets on Bus 857!"
+    },
+
+
+    {
+        type: "transfer",
+
+        story: `
+            After a while, Ahao arrives at a transfer stop.<br><br>
+
+            He needs to get off and transfer to another bus.
+        `,
+
+        objective: "Transfer to another bus.",
+
+        answer: "down",
+
+        success: "🔄 Ahao successfully transfers to another bus!"
+    },
+
+
+    {
+        type: "bus2",
+
+        story: `
+            Ahao finds the second bus.<br><br>
+
+            This bus will take him closer to the restaurant.
+        `,
+
+        objective: "Take Bus 26.",
+
+        answer: "right",
+
+        success: "🚌 Bus 26 is heading toward the restaurant!"
+    },
+
+
+    {
+        type: "restaurant",
+
+        story: `
+            🏮 Ahao gets off the bus.<br><br>
+
+            The restaurant is nearby!<br><br>
+
+            Xiaomei told him:<br><br>
+
+            <strong>「一直走，看到藥局以後往左轉。」</strong>
+        `,
+
+        objective: "Find 海風小館.",
+
+        answer: "left",
+
+        success: "🎉 Ahao finds 海風小館!"
+    }
+
+];
+
+
+/* =========================
+   RENDER STAGE
+========================= */
+
+function renderStage() {
+
+    const data = stages[stage];
+
+    document.getElementById("storyBox").innerHTML = data.story;
+
+    document.getElementById("objective").textContent =
+        "🎯 OBJECTIVE: " + data.objective;
+
+    document.getElementById("message").textContent = "";
+    document.getElementById("message").className = "message";
+
+
+    const walkingMap =
+        document.getElementById("walkingMap");
+
+    const transportScene =
+        document.getElementById("transportScene");
+
+
+    /* WALKING */
+
+    if (data.type === "walk") {
+
+        walkingMap.style.display = "block";
+
+        transportScene.style.display = "none";
+
+        playerX = data.position.x;
+        playerY = data.position.y;
+
+        updatePlayer();
+
+    }
+
+
+    /* TRANSPORT */
+
+    else {
+
+        walkingMap.style.display = "none";
+
+        transportScene.style.display = "block";
+
+        document.getElementById("transportTitle").textContent =
+            data.objective;
+
+        const train = document.getElementById("train");
+
+        const bus = document.getElementById("bus");
+
+        train.classList.remove("active");
+
+        bus.classList.remove("active");
+
+
+        if (
+            data.type === "train" ||
+            data.type === "mrt"
+        ) {
+
+            train.style.display = "block";
+
+            bus.style.display = "none";
+
+        }
+
+        else {
+
+            train.style.display = "none";
+
+            bus.style.display = "block";
+
+        }
+
+    }
+
+
+    updateProgress();
+
+}
+
+
+/* =========================
+   MOVE
+========================= */
+
+function move(direction) {
+
+    if (locked) return;
+
+    const data = stages[stage];
+
+
+    if (direction === data.answer) {
+
+        correctMove();
+
+    }
+
+    else {
+
+        wrongMove();
+
+    }
+
+}
+
+
+/* =========================
+   CORRECT
+========================= */
+
+function correctMove() {
+
+    locked = true;
+
+    const data = stages[stage];
+
+    const message =
+        document.getElementById("message");
+
+    message.textContent =
+        "✅ " + data.success;
+
+    message.className =
+        "message success";
+
+
+    /* Animate train */
+
+    if (
+        data.type === "train" ||
+        data.type === "mrt"
+    ) {
+
+        setTimeout(() => {
+
+            document
+                .getElementById("train")
+                .classList
+                .add("active");
+
+        }, 200);
+
+    }
+
+
+    /* Animate bus */
+
+    if (
+        data.type === "bus" ||
+        data.type === "transfer" ||
+        data.type === "bus2"
+    ) {
+
+        setTimeout(() => {
+
+            document
+                .getElementById("bus")
+                .classList
+                .add("active");
+
+        }, 200);
+
+    }
+
+
+    setTimeout(() => {
+
+        stage++;
+
+        locked = false;
+
+
+        if (stage >= stages.length) {
+
+            finishGame();
+
+        }
+
+        else {
+
+            renderStage();
+
+        }
+
+    }, 1800);
+
+}
+
+
+/* =========================
+   WRONG
+========================= */
+
+function wrongMove() {
+
+    const message =
+        document.getElementById("message");
+
+    message.textContent =
+        "❌ Wrong direction! Try again.";
+
+    message.className =
+        "message error";
+
+}
+
+
+/* =========================
+   UPDATE PLAYER
+========================= */
+
+function updatePlayer() {
+
+    const player =
+        document.getElementById("player");
+
+    player.style.left = playerX + "%";
+
+    player.style.top = playerY + "%";
+
+}
+
+
+/* =========================
+   PROGRESS
+========================= */
+
+function updateProgress() {
+
+    const percentage =
+        (stage / stages.length) * 100;
+
+    document
+        .getElementById("progress")
+        .style
+        .width = percentage + "%";
+
+}
+
+
+/* =========================
+   FINISH
+========================= */
+
+function finishGame() {
+
+    document
+        .getElementById("gameScreen")
+        .style
+        .display = "none";
+
+    document
+        .getElementById("finalScreen")
+        .style
+        .display = "block";
+
+    document
+        .getElementById("progress")
+        .style
+        .width = "100%";
+
+}
+
+
+/* =========================
+   RESTART
+========================= */
+
+function restartGame() {
+
+    stage = 0;
+
+    locked = false;
+
+    document
+        .getElementById("gameScreen")
+        .style
+        .display = "block";
+
+    document
+        .getElementById("finalScreen")
+        .style
+        .display = "none";
+
+    renderStage();
+
+}
+
+
+/* =========================
+   KEYBOARD CONTROL
+========================= */
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (event.key === "ArrowUp") {
+            move("up");
+        }
+
+        if (event.key === "ArrowDown") {
+            move("down");
+        }
+
+        if (event.key === "ArrowLeft") {
+            move("left");
+        }
+
+        if (event.key === "ArrowRight") {
+            move("right");
+        }
+
+    }
+);
+
+
+/* START GAME */
+
+renderStage();
+
+</script></body>
+</html>
