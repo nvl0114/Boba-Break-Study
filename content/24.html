@@ -3,17 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+      content="width=device-width, initial-scale=1.0,
+               maximum-scale=1.0, user-scalable=no,
+               viewport-fit=cover">
 
 <title>Ahao's Birthday Mission</title>
-
-<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
 
 <style>
 *{
     box-sizing:border-box;
     -webkit-tap-highlight-color:transparent;
-    user-select:none;
 }
 
 html,body{
@@ -23,9 +22,12 @@ html,body{
     overflow:hidden;
     background:#111;
     font-family:Arial, sans-serif;
+    touch-action:none;
+    user-select:none;
+    -webkit-user-select:none;
 }
 
-#game{
+body{
     position:fixed;
     inset:0;
 }
@@ -34,244 +36,299 @@ canvas{
     display:block;
     width:100%;
     height:100%;
-    image-rendering:pixelated;
+    touch-action:none;
 }
+
+/* =========================
+   LOADING
+========================= */
+
+#loading{
+    position:fixed;
+    inset:0;
+    z-index:1000;
+    background:#111;
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:30px;
+}
+
+#loadingBox{
+    max-width:420px;
+}
+
+#loadingTitle{
+    font-size:28px;
+    font-weight:bold;
+    margin-bottom:12px;
+}
+
+#loadingText{
+    color:#ccc;
+    line-height:1.6;
+}
+
+/* =========================
+   START SCREEN
+========================= */
 
 #startScreen{
     position:fixed;
     inset:0;
-    z-index:50;
+    z-index:900;
     display:flex;
     align-items:center;
     justify-content:center;
+    padding:20px;
     background:
-        linear-gradient(rgba(20,20,30,.82),rgba(20,20,30,.92)),
-        #222;
+        linear-gradient(
+            rgba(20,20,40,.35),
+            rgba(20,20,40,.85)
+        );
 }
 
 .startBox{
-    width:min(90%,500px);
-    padding:30px;
+    width:min(92vw,520px);
+    padding:30px 24px;
+    background:#f7e9c8;
+    border:5px solid #4d3828;
+    box-shadow:10px 10px 0 #211a15;
     text-align:center;
-    color:white;
-    background:#292733;
-    border:4px solid #777;
-    box-shadow:8px 8px 0 #111;
 }
 
 .startBox h1{
-    margin:0 0 12px;
-    font-size:30px;
-    color:#ffd75a;
-    text-shadow:3px 3px #111;
+    margin:0 0 10px;
+    font-size:clamp(25px,7vw,42px);
+    color:#38271d;
+}
+
+.startBox h2{
+    margin:0 0 20px;
+    font-size:16px;
+    color:#74563d;
 }
 
 .startBox p{
-    line-height:1.7;
-    color:#ddd;
+    line-height:1.6;
+    color:#44352b;
 }
 
-.startBox button{
+#startButton{
     margin-top:15px;
-    padding:15px 35px;
-    border:3px solid #111;
-    background:#ffd75a;
-    color:#222;
-    font-size:18px;
+    width:100%;
+    min-height:58px;
+    border:4px solid #38271d;
+    background:#e4a34d;
+    color:#21170f;
+    font-size:20px;
     font-weight:bold;
     cursor:pointer;
-    box-shadow:5px 5px 0 #111;
+    box-shadow:5px 5px 0 #38271d;
+    touch-action:manipulation;
 }
+
+#startButton:active{
+    transform:translate(4px,4px);
+    box-shadow:1px 1px 0 #38271d;
+}
+
+/* =========================
+   HUD
+========================= */
 
 #hud{
     position:fixed;
-    z-index:10;
-    top:12px;
-    left:12px;
-    right:12px;
+    top:env(safe-area-inset-top,10px);
+    left:10px;
+    right:10px;
+    z-index:100;
     pointer-events:none;
+    display:none;
 }
 
 .hudBox{
     display:inline-block;
-    max-width:500px;
-    padding:10px 14px;
+    background:rgba(20,20,20,.82);
     color:white;
-    background:rgba(20,20,25,.78);
-    border:2px solid rgba(255,255,255,.5);
-    box-shadow:4px 4px 0 rgba(0,0,0,.35);
+    border:2px solid rgba(255,255,255,.7);
+    padding:8px 12px;
+    font-size:13px;
+    max-width:90%;
 }
 
 #location{
     font-weight:bold;
-    color:#ffd75a;
+    font-size:15px;
 }
 
 #mission{
-    margin-top:4px;
-    font-size:13px;
-    color:#eee;
+    margin-top:3px;
+    color:#ffe9a8;
 }
+
+/* =========================
+   DIALOGUE
+========================= */
 
 #dialogue{
     position:fixed;
-    z-index:20;
     left:50%;
-    bottom:120px;
+    bottom:18px;
     transform:translateX(-50%);
-    width:min(92%,700px);
+    width:min(92vw,650px);
+    z-index:200;
     display:none;
 }
 
 .dialogueBox{
-    padding:15px;
-    background:rgba(18,18,23,.94);
-    border:3px solid white;
-    color:white;
-    box-shadow:6px 6px 0 rgba(0,0,0,.5);
+    background:#f7e9c8;
+    color:#251b15;
+    border:4px solid #38271d;
+    box-shadow:7px 7px 0 #1c1713;
+    padding:14px;
 }
 
-.speaker{
-    color:#ffd75a;
+#speaker{
     font-weight:bold;
+    font-size:16px;
+    color:#9a5b22;
     margin-bottom:7px;
 }
 
-.text{
-    font-size:18px;
-    line-height:1.55;
+#dialogueText{
+    font-size:16px;
+    line-height:1.65;
+    min-height:55px;
 }
 
-.next{
+#dialogueButton{
     margin-top:10px;
-    text-align:right;
-    color:#aaa;
-    font-size:12px;
+    width:100%;
+    min-height:45px;
+    border:3px solid #38271d;
+    background:#fff5d9;
+    color:#38271d;
+    font-weight:bold;
+    font-size:15px;
+    touch-action:manipulation;
 }
+
+/* =========================
+   MOBILE CONTROLS
+========================= */
 
 #controls{
     position:fixed;
-    z-index:30;
-    bottom:18px;
-    left:18px;
-    width:190px;
-    height:145px;
+    left:0;
+    right:0;
+    bottom:
+        max(15px, env(safe-area-inset-bottom, 15px));
+    z-index:150;
+    display:none;
+    pointer-events:none;
 }
 
-.control{
-    position:absolute;
-    width:58px;
-    height:58px;
-    border:3px solid #111;
-    background:rgba(245,245,245,.82);
-    color:#222;
-    font-size:25px;
-    font-weight:bold;
+.controlRow{
     display:flex;
-    align-items:center;
     justify-content:center;
-    box-shadow:4px 4px 0 rgba(0,0,0,.4);
+    gap:12px;
+}
+
+.controlButton{
+    pointer-events:auto;
+    width:68px;
+    height:58px;
+    border-radius:15px;
+    border:3px solid rgba(255,255,255,.9);
+    background:rgba(30,30,30,.78);
+    color:white;
+    font-size:27px;
+    font-weight:bold;
+    box-shadow:0 4px 0 rgba(0,0,0,.5);
     touch-action:none;
 }
 
-.control:active{
-    transform:translate(3px,3px);
-    box-shadow:1px 1px 0 rgba(0,0,0,.4);
-    background:#ffd75a;
+.controlButton:active,
+.controlButton.active{
+    transform:translateY(3px);
+    background:rgba(230,160,70,.95);
 }
 
-#up{
-    left:66px;
-    top:0;
-}
-
-#down{
-    left:66px;
-    bottom:0;
-}
-
-#left{
-    left:0;
-    top:67px;
-}
-
-#right{
-    right:0;
-    top:67px;
-}
-
-#help{
-    position:fixed;
-    z-index:30;
-    right:15px;
-    bottom:18px;
-    width:200px;
-    padding:10px;
-    background:rgba(20,20,25,.72);
-    border:2px solid rgba(255,255,255,.35);
+#controlHint{
+    text-align:center;
     color:white;
-    font-size:12px;
-    line-height:1.5;
+    font-size:11px;
+    margin-top:8px;
+    text-shadow:0 2px 4px #000;
 }
 
-#blackFade{
-    position:fixed;
-    z-index:40;
-    inset:0;
-    background:#000;
-    opacity:0;
-    pointer-events:none;
-    transition:opacity .4s;
-}
+/* =========================
+   ERROR
+========================= */
 
-#finish{
+#errorScreen{
     position:fixed;
     inset:0;
-    z-index:60;
+    z-index:2000;
     display:none;
+    background:#181818;
+    color:white;
+    padding:30px;
     align-items:center;
     justify-content:center;
-    background:rgba(0,0,0,.82);
-}
-
-.finishBox{
-    width:min(90%,520px);
-    padding:30px;
     text-align:center;
-    background:#302c38;
-    color:white;
-    border:4px solid #ffd75a;
-    box-shadow:8px 8px 0 #111;
 }
 
-.finishBox h2{
-    color:#ffd75a;
-    font-size:30px;
+#errorBox{
+    max-width:500px;
 }
 
-.finishBox button{
-    margin-top:15px;
-    padding:12px 28px;
-    border:3px solid #111;
-    background:#ffd75a;
-    font-weight:bold;
-    font-size:16px;
+#errorBox h2{
+    color:#ff8a8a;
 }
 
-@media(max-width:600px){
-    .text{
-        font-size:16px;
+/* Desktop */
+@media (min-width:800px){
+    #controls{
+        display:none !important;
     }
 
-    #help{
+    #controlHint{
         display:none;
     }
+}
 
+/* Mobile */
+@media (max-width:799px){
     #controls{
-        transform:scale(.88);
-        transform-origin:bottom left;
-        bottom:10px;
-        left:8px;
+        display:block;
+    }
+
+    #dialogue{
+        bottom:145px;
+    }
+}
+
+@media (max-height:600px){
+    #dialogue{
+        bottom:105px;
+    }
+
+    .dialogueBox{
+        padding:9px;
+    }
+
+    #dialogueText{
+        font-size:14px;
+        min-height:40px;
+    }
+
+    .controlButton{
+        width:58px;
+        height:50px;
     }
 }
 </style>
@@ -279,90 +336,144 @@ canvas{
 
 <body>
 
-<div id="game"></div>
+<div id="loading">
+    <div id="loadingBox">
+        <div id="loadingTitle">Ahao's Birthday Mission</div>
+        <div id="loadingText">
+            Loading game...
+        </div>
+    </div>
+</div>
 
-<div id="startScreen">
+<div id="startScreen" style="display:none;">
     <div class="startBox">
         <h1>🎂 Ahao's Birthday Mission</h1>
+        <h2>台灣城市冒險</h2>
 
         <p>
-            今天是小美的生日！<br>
-            阿豪要去買生日禮物，<br>
-            然後去淡水跟大家一起吃飯。
+            Today is Xiaomei's birthday.<br>
+            Ahao needs to buy a present and find the restaurant.
         </p>
 
         <p>
-            Help Ahao follow the directions,<br>
-            transfer trains and buses,<br>
-            and reach the restaurant!
+            Use the controls to walk, turn and follow the directions.
         </p>
 
-        <button id="startBtn">START MISSION</button>
+        <button id="startButton">
+            START MISSION
+        </button>
     </div>
 </div>
 
 <div id="hud">
     <div class="hudBox">
         <div id="location">百貨公司</div>
-        <div id="mission">買生日禮物</div>
+        <div id="mission">任務開始</div>
     </div>
 </div>
 
 <div id="dialogue">
     <div class="dialogueBox">
-        <div class="speaker" id="speaker"></div>
-        <div class="text" id="dialogueText"></div>
-        <div class="next">點擊對話框繼續</div>
+        <div id="speaker">NPC</div>
+        <div id="dialogueText"></div>
+        <button id="dialogueButton">
+            TAP TO CONTINUE
+        </button>
     </div>
 </div>
 
 <div id="controls">
-    <div class="control" id="up">▲</div>
-    <div class="control" id="down">▼</div>
-    <div class="control" id="left">◀</div>
-    <div class="control" id="right">▶</div>
-</div>
 
-<div id="help">
-    ▲ 前進<br>
-    ▼ 後退<br>
-    ◀ 向左轉<br>
-    ▶ 向右轉<br>
-    <br>
-    Keyboard: W/S/A/D or Arrow Keys
-</div>
+    <div class="controlRow">
+        <button
+            class="controlButton"
+            id="btnForward"
+            type="button">▲</button>
+    </div>
 
-<div id="blackFade"></div>
+    <div class="controlRow" style="margin-top:8px;">
+        <button
+            class="controlButton"
+            id="btnLeft"
+            type="button">◀</button>
 
-<div id="finish">
-    <div class="finishBox">
-        <h2>🎉 Mission Complete!</h2>
-        <p>
-            阿豪終於到了海風小館！<br>
-            小美的生日派對成功了！
-        </p>
-        <p>
-            你完成了整條路線：
-        </p>
-        <p>
-            百貨公司 → 火車站 → 台北車站<br>
-            → 淡水信義線 → 淡水 → 公車<br>
-            → 轉車 → 海風小館
-        </p>
+        <button
+            class="controlButton"
+            id="btnBack"
+            type="button">▼</button>
 
-        <button onclick="location.reload()">PLAY AGAIN</button>
+        <button
+            class="controlButton"
+            id="btnRight"
+            type="button">▶</button>
+    </div>
+
+    <div id="controlHint">
+        按住按鈕移動
     </div>
 </div>
 
+<div id="errorScreen">
+    <div id="errorBox">
+        <h2>Game could not start</h2>
+        <p>
+            Your browser could not load the 3D engine.
+            Please make sure you are connected to the internet
+            and try Chrome or Safari.
+        </p>
+    </div>
+</div>
+
+<!-- Three.js -->
+<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+
 <script>
+
 /* =========================================================
-   BASIC SETUP
+   BASIC CHECK
+========================================================= */
+
+if(!window.THREE){
+    document.getElementById("loading").style.display="none";
+    document.getElementById("errorScreen").style.display="flex";
+    throw new Error("Three.js failed to load.");
+}
+
+/* =========================================================
+   GAME STATE
+========================================================= */
+
+const game = {
+    started:false,
+    sceneIndex:0,
+    checkpoint:0,
+    dialogueOpen:false,
+    dialogueIndex:0,
+    dialogueLines:[],
+    speed:0.075,
+    turnSpeed:0.045
+};
+
+const keys = {
+    forward:false,
+    backward:false,
+    left:false,
+    right:false
+};
+
+/* =========================================================
+   THREE.JS
 ========================================================= */
 
 const scene = new THREE.Scene();
 
-scene.background = new THREE.Color(0x9bb7d4);
-scene.fog = new THREE.Fog(0x9bb7d4, 35, 100);
+scene.background = new THREE.Color(0x9dc8df);
+
+scene.fog = new THREE.Fog(
+    0x9dc8df,
+    25,
+    110
+);
 
 const camera = new THREE.PerspectiveCamera(
     65,
@@ -376,21 +487,25 @@ const renderer = new THREE.WebGLRenderer({
     powerPreference:"high-performance"
 });
 
-renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
-renderer.setSize(window.innerWidth, window.innerHeight);
-renderer.shadowMap.enabled = true;
-renderer.shadowMap.type = THREE.BasicShadowMap;
+renderer.setPixelRatio(
+    Math.min(window.devicePixelRatio || 1,1.5)
+);
 
-document.getElementById("game").appendChild(renderer.domElement);
+renderer.setSize(
+    window.innerWidth,
+    window.innerHeight
+);
 
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+
+document.body.appendChild(renderer.domElement);
 
 /* =========================================================
-   LIGHTING
+   LIGHT
 ========================================================= */
 
-const ambient = new THREE.HemisphereLight(
+const ambient = new THREE.AmbientLight(
     0xffffff,
-    0x445566,
     1.5
 );
 
@@ -398,654 +513,535 @@ scene.add(ambient);
 
 const sun = new THREE.DirectionalLight(
     0xffffff,
-    2
+    1.8
 );
 
 sun.position.set(30,50,20);
-sun.castShadow = true;
-
 scene.add(sun);
-
 
 /* =========================================================
    MATERIALS
 ========================================================= */
 
-function mat(color){
-    return new THREE.MeshLambertMaterial({
-        color:color
-    });
-}
-
-const materials = {
-    road:mat(0x55565c),
-    sidewalk:mat(0x9b9b9b),
-    grass:mat(0x5c8a50),
-    wall:mat(0xc8bda8),
-    white:mat(0xffffff),
-    red:mat(0xc54b4b),
-    blue:mat(0x4169a1),
-    yellow:mat(0xe2b63d),
-    dark:mat(0x25252b),
-    green:mat(0x4e8757),
-    glass:mat(0x79a8b8),
-    purple:mat(0x75569c),
-    orange:mat(0xd47c3e)
+const mat = {
+    grass:new THREE.MeshLambertMaterial({color:0x6c9b5a}),
+    road:new THREE.MeshLambertMaterial({color:0x777777}),
+    sidewalk:new THREE.MeshLambertMaterial({color:0xb8b1a5}),
+    concrete:new THREE.MeshLambertMaterial({color:0xaaa69f}),
+    building:new THREE.MeshLambertMaterial({color:0xc58c65}),
+    building2:new THREE.MeshLambertMaterial({color:0x8b9bb5}),
+    glass:new THREE.MeshLambertMaterial({
+        color:0x7fb9ca,
+        transparent:true,
+        opacity:.65
+    }),
+    white:new THREE.MeshLambertMaterial({color:0xf4f0df}),
+    red:new THREE.MeshLambertMaterial({color:0xc95b4a}),
+    blue:new THREE.MeshLambertMaterial({color:0x426b9b}),
+    green:new THREE.MeshLambertMaterial({color:0x4f8c59}),
+    yellow:new THREE.MeshLambertMaterial({color:0xe1b94f}),
+    dark:new THREE.MeshLambertMaterial({color:0x333333}),
+    skin:new THREE.MeshLambertMaterial({color:0xd99c72}),
+    hair:new THREE.MeshLambertMaterial({color:0x33241e}),
+    shirt:new THREE.MeshLambertMaterial({color:0x4e75a5}),
+    pants:new THREE.MeshLambertMaterial({color:0x38435d})
 };
 
-
 /* =========================================================
-   UTILITY OBJECTS
-========================================================= */
-
-function cube(w,h,d,material,x,y,z){
-    const geo = new THREE.BoxGeometry(w,h,d);
-    const mesh = new THREE.Mesh(geo,material);
-
-    mesh.position.set(x,y,z);
-    mesh.castShadow = true;
-    mesh.receiveShadow = true;
-
-    scene.add(mesh);
-
-    return mesh;
-}
-
-function cylinder(r,h,material,x,y,z){
-    const geo = new THREE.CylinderGeometry(r,r,h,8);
-    const mesh = new THREE.Mesh(geo,material);
-
-    mesh.position.set(x,y,z);
-    mesh.castShadow = true;
-    mesh.receiveShadow = true;
-
-    scene.add(mesh);
-
-    return mesh;
-}
-
-function clearWorld(){
-    while(scene.children.length > 2){
-        scene.remove(scene.children[2]);
-    }
-}
-
-
-/* =========================================================
-   AHAO CHARACTER
+   PLAYER
 ========================================================= */
 
 const player = new THREE.Group();
 
-function buildAhao(){
+function box(
+    w,h,d,
+    material,
+    x=0,y=0,z=0
+){
+    const geometry =
+        new THREE.BoxGeometry(w,h,d);
 
-    player.clear();
+    const mesh =
+        new THREE.Mesh(geometry,material);
 
-    // legs
-    cube(0.35,0.8,0.35,materials.dark,-0.22,0.45,0);
-    cube(0.35,0.8,0.35,materials.dark,0.22,0.45,0);
+    mesh.position.set(x,y,z);
 
-    // body
-    cube(0.85,1.05,0.55,materials.blue,0,1.25,0);
-
-    // arms
-    cube(0.25,0.85,0.25,materials.skin,-0.57,1.25,0);
-    cube(0.25,0.85,0.25,materials.skin,0.57,1.25,0);
-
-    // neck
-    cylinder(0.16,0.18,materials.skin,0,1.82,0);
-
-    // head
-    cube(0.68,0.65,0.65,materials.skin,0,2.15,0);
-
-    // hair
-    cube(0.72,0.24,0.68,materials.dark,0,2.47,0);
-
-    // eyes
-    cube(0.08,0.1,0.04,materials.dark,-0.15,2.18,-0.34);
-    cube(0.08,0.1,0.04,materials.dark,0.15,2.18,-0.34);
-
-    player.position.set(0,0,10);
-    player.rotation.y = 0;
-
-    scene.add(player);
+    return mesh;
 }
 
-buildAhao();
+function cylinder(
+    rTop,rBottom,h,
+    material,
+    x=0,y=0,z=0
+){
+    const geometry =
+        new THREE.CylinderGeometry(
+            rTop,
+            rBottom,
+            h,
+            8
+        );
 
+    const mesh =
+        new THREE.Mesh(geometry,material);
 
-/* =========================================================
-   NPC
-========================================================= */
+    mesh.position.set(x,y,z);
 
-function npc(x,z,color=0xc46b58){
+    return mesh;
+}
+
+function createAhao(){
 
     const g = new THREE.Group();
 
-    const body = new THREE.Mesh(
-        new THREE.BoxGeometry(.7,1,.5),
-        mat(color)
+    const legs = box(
+        .65,
+        .9,
+        .45,
+        mat.pants,
+        0,
+        .45,
+        0
     );
 
-    body.position.y = 1.1;
+    g.add(legs);
+
+    const body = box(
+        .85,
+        .85,
+        .55,
+        mat.shirt,
+        0,
+        1.25,
+        0
+    );
+
     g.add(body);
 
     const head = new THREE.Mesh(
-        new THREE.BoxGeometry(.6,.6,.6),
-        materials.skin
+        new THREE.BoxGeometry(.7,.7,.7),
+        mat.skin
     );
 
-    head.position.y = 1.85;
+    head.position.y=2.05;
+
     g.add(head);
 
     const hair = new THREE.Mesh(
-        new THREE.BoxGeometry(.63,.2,.62),
-        materials.dark
+        new THREE.BoxGeometry(.72,.25,.72),
+        mat.hair
     );
 
-    hair.position.y = 2.15;
+    hair.position.y=2.42;
+
     g.add(hair);
 
-    g.position.set(x,0,z);
+    const leftArm = box(
+        .22,
+        .75,
+        .25,
+        mat.shirt,
+        -.55,
+        1.25,
+        0
+    );
 
-    scene.add(g);
+    const rightArm = box(
+        .22,
+        .75,
+        .25,
+        mat.shirt,
+        .55,
+        1.25,
+        0
+    );
+
+    g.add(leftArm,rightArm);
+
+    g.position.y=0;
 
     return g;
 }
 
+player.add(createAhao());
+scene.add(player);
 
 /* =========================================================
-   TREES
+   WORLD HELPERS
+========================================================= */
+
+let worldObjects=[];
+
+function addWorld(obj){
+    scene.add(obj);
+    worldObjects.push(obj);
+    return obj;
+}
+
+function clearWorld(){
+
+    for(const obj of worldObjects){
+        scene.remove(obj);
+    }
+
+    worldObjects=[];
+}
+
+/* =========================================================
+   GROUND
+========================================================= */
+
+function ground(
+    width,
+    depth,
+    material,
+    y=0
+){
+    const m = new THREE.Mesh(
+        new THREE.BoxGeometry(
+            width,
+            .2,
+            depth
+        ),
+        material
+    );
+
+    m.position.y=y;
+
+    addWorld(m);
+
+    return m;
+}
+
+/* =========================================================
+   TREE
 ========================================================= */
 
 function tree(x,z){
 
-    cylinder(.22,1.4,materials.orange,x,.7,z);
+    const g = new THREE.Group();
 
-    const crown = new THREE.Mesh(
-        new THREE.DodecahedronGeometry(1.2,0),
-        materials.green
+    const trunk = cylinder(
+        .18,.22,1.4,
+        new THREE.MeshLambertMaterial({
+            color:0x79523b
+        }),
+        0,.7,0
     );
 
-    crown.position.set(x,2,z);
-    crown.castShadow = true;
+    g.add(trunk);
 
-    scene.add(crown);
+    const leaves = new THREE.Mesh(
+        new THREE.ConeGeometry(
+            1.1,
+            2.4,
+            7
+        ),
+        mat.green
+    );
+
+    leaves.position.y=2.1;
+
+    g.add(leaves);
+
+    g.position.set(x,0,z);
+
+    addWorld(g);
 }
-
 
 /* =========================================================
-   BUILDINGS
+   BUILDING
 ========================================================= */
 
-function building(x,z,w,d,h,color){
+function building(
+    x,z,
+    w=6,
+    h=5,
+    d=6,
+    material=mat.building,
+    label=""
+){
 
-    cube(w,h,d,mat(color),x,h/2,z);
+    const g = new THREE.Group();
 
-    // windows
-    for(let xx=-w/2+1; xx<w/2-0.5; xx+=1.5){
+    const body = box(
+        w,h,d,
+        material,
+        0,h/2,0
+    );
 
-        for(let yy=1.5; yy<h; yy+=1.8){
+    g.add(body);
 
-            cube(
-                .55,
-                .65,
-                .04,
-                materials.glass,
-                x+xx,
-                yy,
-                z-d/2-.025
-            );
-        }
+    const roof = box(
+        w+.2,
+        .3,
+        d+.2,
+        mat.dark,
+        0,h+.15,0
+    );
+
+    g.add(roof);
+
+    if(label){
+
+        const canvas =
+            document.createElement("canvas");
+
+        canvas.width=512;
+        canvas.height=128;
+
+        const ctx =
+            canvas.getContext("2d");
+
+        ctx.fillStyle="#fff";
+        ctx.fillRect(0,0,512,128);
+
+        ctx.fillStyle="#222";
+        ctx.font="bold 50px Arial";
+        ctx.textAlign="center";
+        ctx.textBaseline="middle";
+
+        ctx.fillText(
+            label,
+            256,
+            64
+        );
+
+        const texture =
+            new THREE.CanvasTexture(canvas);
+
+        const sign = new THREE.Mesh(
+            new THREE.PlaneGeometry(
+                Math.min(w*.9,5),
+                1
+            ),
+            new THREE.MeshBasicMaterial({
+                map:texture
+            })
+        );
+
+        sign.position.set(
+            0,
+            h*.65,
+            d/2+.03
+        );
+
+        g.add(sign);
     }
-}
 
+    g.position.set(x,0,z);
+
+    addWorld(g);
+
+    return g;
+}
 
 /* =========================================================
    ROAD
 ========================================================= */
 
-function road(length=80,width=12){
+function roadHorizontal(z=0){
 
-    cube(
-        width,
-        .12,
-        length,
-        materials.road,
-        0,
-        -.06,
-        0
-    );
+    ground(
+        100,
+        8,
+        mat.road,
+        .08
+    ).position.z=z;
 
-    cube(
-        2,
-        .15,
-        length,
-        materials.yellow,
-        0,
-        .02,
-        0
-    );
+    for(let x=-48;x<48;x+=8){
 
-    cube(
-        2,
-        .18,
-        length,
-        materials.sidewalk,
-        -width/2-2,
-        .04,
-        0
-    );
+        const line=box(
+            4,
+            .03,
+            .15,
+            mat.yellow,
+            x,
+            .2,
+            z
+        );
 
-    cube(
-        2,
-        .18,
-        length,
-        materials.sidewalk,
-        width/2+2,
-        .04,
-        0
-    );
+        addWorld(line);
+    }
 }
 
+function roadVertical(x=0){
 
-/* =========================================================
-   SCENE 0 - DEPARTMENT STORE
-========================================================= */
+    const r=ground(
+        8,
+        100,
+        mat.road,
+        .08
+    );
 
-function sceneDepartment(){
+    r.position.x=x;
 
-    scene.background.set(0x6c6a72);
-    scene.fog.color.set(0x6c6a72);
+    for(let z=-48;z<48;z+=8){
 
-    cube(50,0.2,50,materials.sidewalk,0,-.1,0);
+        const line=box(
+            .15,
+            .03,
+            4,
+            mat.yellow,
+            x,
+            .2,
+            z
+        );
 
-    building(0,-10,24,10,9,0xb8a69a);
-
-    cube(20,4,0.3,materials.glass,0,4.5,-15.1);
-
-    // entrance
-    cube(5,4,0.5,materials.dark,0,2,-15.4);
-
-    // sign
-    cube(12,1.2,.3,materials.red,0,7,-15.5);
-
-    npc(-7,-4,0x4775a8);
-
-    cube(3,1.2,3,materials.yellow,7,0.6,-4);
-
-    player.position.set(0,0,8);
-    player.rotation.y = 0;
+        addWorld(line);
+    }
 }
 
-
 /* =========================================================
-   SCENE 1 - CITY
+   CROSSWALK
 ========================================================= */
 
-function sceneCity(){
+function crosswalk(x,z,rotation=0){
 
-    scene.background.set(0x91acc3);
-    scene.fog.color.set(0x91acc3);
+    const g=new THREE.Group();
 
-    road();
+    for(let i=-3;i<=3;i++){
 
-    building(-13,-8,12,18,15,0xb7a99b);
-    building(13,-20,12,20,12,0xa48f85);
+        const stripe=box(
+            .6,
+            .04,
+            4,
+            mat.white,
+            i*.9,
+            .22,
+            0
+        );
 
-    tree(-10,15);
-    tree(10,20);
-    tree(-12,35);
-    tree(12,38);
-
-    // crosswalk
-    for(let z=-4; z<5; z+=1){
-        cube(10,.03,.45,materials.white,0,.08,z);
+        g.add(stripe);
     }
 
-    npc(6,5,0xd18a62);
+    g.rotation.y=rotation;
 
-    player.position.set(0,30,0);
-    player.rotation.y = Math.PI;
+    g.position.set(x,0,z);
+
+    addWorld(g);
 }
-
 
 /* =========================================================
-   SCENE 2 - CONVENIENCE STORE
+   NPC
 ========================================================= */
 
-function sceneConvenience(){
+function createNPC(
+    x,z,
+    shirt=mat.red
+){
 
-    scene.background.set(0x92a4b3);
-    scene.fog.color.set(0x92a4b3);
+    const g=new THREE.Group();
 
-    road(65,12);
+    g.add(
+        box(
+            .75,.85,.5,
+            shirt,
+            0,1.1,0
+        )
+    );
 
-    // convenience store
-    cube(13,5,10,materials.white,-13,2.5,-10);
+    g.add(
+        box(
+            .6,.6,.6,
+            mat.skin,
+            0,1.85,0
+        )
+    );
 
-    cube(13,1,10,materials.blue,-13,5.5,-10);
+    g.add(
+        box(
+            .62,.2,.62,
+            mat.hair,
+            0,2.16,0
+        )
+    );
 
-    cube(10,2,.3,materials.glass,-13,3,-15.1);
+    g.position.set(x,0,z);
 
-    // sign
-    cube(8,1,.3,materials.red,-13,6,-15.2);
+    addWorld(g);
 
-    // ATM
-    cube(1.1,1.8,.5,materials.dark,-5,0.9,-14);
-
-    npc(-4,-4,0x6b9d6b);
-
-    player.position.set(15,0,20);
-    player.rotation.y = Math.PI;
+    return g;
 }
-
-
-/* =========================================================
-   SCENE 3 - STREET
-========================================================= */
-
-function sceneStreet2(){
-
-    scene.background.set(0x88a6bd);
-    scene.fog.color.set(0x88a6bd);
-
-    road(100,14);
-
-    building(-15,-15,14,20,14,0xbda88e);
-    building(15,-5,14,20,17,0x918d9e);
-
-    tree(-10,20);
-    tree(11,25);
-    tree(-11,40);
-    tree(12,45);
-
-    // station sign in distance
-    cube(7,3,.5,materials.red,0,-45,.2);
-
-    player.position.set(0,40,0);
-    player.rotation.y = Math.PI;
-}
-
-
-/* =========================================================
-   SCENE 4 - TRAIN STATION
-========================================================= */
-
-function sceneStation(){
-
-    scene.background.set(0x555d68);
-    scene.fog.color.set(0x555d68);
-
-    cube(45,.2,40,materials.sidewalk,0,-.1,0);
-
-    // station hall
-    cube(26,8,14,materials.wall,0,4,-12);
-
-    cube(20,3,.5,materials.glass,0,4,-19.1);
-
-    cube(15,1,.4,materials.red,0,8,-19.3);
-
-    // entrance
-    cube(5,4,.5,materials.dark,0,2,-19.5);
-
-    // ticket machines
-    for(let x=-6;x<=6;x+=3){
-        cube(1,2,0.5,materials.blue,x,1,-10);
-    }
-
-    // platform
-    cube(35,.3,10,materials.dark,0,.15,8);
-
-    // rails
-    cube(35,.15,.25,materials.yellow,-3,0,14);
-    cube(35,.15,.25,materials.yellow,3,0,14);
-
-    npc(8,0,0xc86e63);
-
-    player.position.set(0,16,0);
-    player.rotation.y = Math.PI;
-}
-
 
 /* =========================================================
    TRAIN
 ========================================================= */
 
-function buildTrain(){
+function createTrain(){
 
-    const train = new THREE.Group();
+    const g=new THREE.Group();
 
-    cube(18,3,5,materials.red,0,2,0);
-    cube(16,1.5,5.2,materials.white,0,4.2,0);
+    const body=box(
+        6,
+        3.5,
+        16,
+        mat.white,
+        0,
+        2,
+        0
+    );
 
-    for(let x=-6;x<=6;x+=4){
-        cube(2.4,1.2,.1,materials.glass,x,3.3,-2.6);
+    g.add(body);
+
+    const stripe=box(
+        6.05,
+        .5,
+        16.1,
+        mat.red,
+        0,
+        2,
+        0
+    );
+
+    g.add(stripe);
+
+    /* windows */
+
+    for(let z=-6;z<=6;z+=3){
+
+        const win=box(
+            6.08,
+            1.3,
+            1.8,
+            mat.glass,
+            0,
+            2.4,
+            z
+        );
+
+        g.add(win);
     }
 
-    for(let x=-6;x<=6;x+=4){
-        cube(2.4,1.2,.1,materials.glass,x,3.3,2.6);
+    /* seats */
+
+    for(let z=-5;z<=5;z+=2.5){
+
+        const seat1=box(
+            1.3,
+            .6,
+            1,
+            mat.blue,
+            -1.7,
+            .8,
+            z
+        );
+
+        const seat2=box(
+            1.3,
+            .6,
+            1,
+            mat.blue,
+            1.7,
+            .8,
+            z
+        );
+
+        g.add(seat1,seat2);
     }
 
-    for(let x=-7;x<=7;x+=7){
-        cylinder(.7,.4,materials.dark,x,.3,-1.7);
-        cylinder(.7,.4,materials.dark,x,.3,1.7);
-    }
-
-    train.position.set(0,0,-10);
-
-    scene.add(train);
-
-    return train;
+    return g;
 }
-
-
-/* =========================================================
-   SCENE 5 - TRAIN
-========================================================= */
-
-function sceneTrain(){
-
-    scene.background.set(0x20232b);
-    scene.fog.color.set(0x20232b);
-
-    // interior floor
-    cube(18,.2,8,materials.dark,0,0,0);
-
-    // seats
-    for(let x=-6;x<=6;x+=3){
-
-        cube(2,.8,1.5,materials.red,x,.45,-2);
-        cube(2,.8,1.5,materials.red,x,.45,2);
-    }
-
-    // windows
-    for(let x=-6;x<=6;x+=3){
-        cube(2,2,.1,materials.glass,x,2.3,-3.8);
-        cube(2,2,.1,materials.glass,x,2.3,3.8);
-    }
-
-    // poles
-    for(let x=-7;x<=7;x+=3.5){
-        cylinder(.08,3,materials.white,x,1.5,0);
-    }
-
-    player.position.set(0,0,0);
-    player.rotation.y = Math.PI;
-}
-
-
-/* =========================================================
-   SCENE 6 - TAIPEI MAIN STATION
-========================================================= */
-
-function sceneTaipeiStation(){
-
-    scene.background.set(0x7d8793);
-    scene.fog.color.set(0x7d8793);
-
-    cube(50,.2,50,materials.sidewalk,0,-.1,0);
-
-    // huge station
-    cube(34,12,16,materials.wall,0,6,-15);
-
-    cube(28,3,.4,materials.red,0,9,-23.1);
-
-    cube(12,5,.5,materials.dark,0,2,-23.4);
-
-    // MRT signs
-    cube(8,1.5,.3,materials.red,-13,4,-23);
-    cube(8,1.5,.3,materials.red,13,4,-23);
-
-    // pillars
-    for(let x=-14;x<=14;x+=7){
-        cube(1,7,1,materials.dark,x,3,-21);
-    }
-
-    npc(-8,0,0x6e89b3);
-    npc(9,3,0xc7796c);
-
-    player.position.set(0,18,0);
-    player.rotation.y = Math.PI;
-}
-
-
-/* =========================================================
-   SCENE 7 - TRANSFER CORRIDOR
-========================================================= */
-
-function sceneTransferTaipei(){
-
-    scene.background.set(0x373a42);
-    scene.fog.color.set(0x373a42);
-
-    cube(16,.2,70,materials.dark,0,-.1,0);
-
-    // walls
-    cube(1,7,70,materials.wall,-8,3.5,0);
-    cube(1,7,70,materials.wall,8,3.5,0);
-
-    // ceiling lights
-    for(let z=-30;z<=30;z+=8){
-        cube(3,.2,1,materials.white,0,7,z);
-    }
-
-    // RED LINE signs
-    for(let z=-25;z<=25;z+=12){
-
-        cube(6,1,.25,materials.red,0,5,z);
-
-        // little white station marker
-        cube(1,.5,.3,materials.white,0,5.8,z);
-    }
-
-    npc(-4,-10,0xd18d66);
-
-    player.position.set(0,28,0);
-    player.rotation.y = Math.PI;
-}
-
-
-/* =========================================================
-   SCENE 8 - RED LINE TRAIN
-========================================================= */
-
-function sceneRedLine(){
-
-    scene.background.set(0x242933);
-    scene.fog.color.set(0x242933);
-
-    cube(20,.2,50,materials.dark,0,-.1,0);
-
-    // red line identity
-    cube(18,.4,1,materials.red,0,.2,-20);
-    cube(18,.4,1,materials.red,0,.2,20);
-
-    // platform signs
-    for(let z=-18;z<=18;z+=9){
-
-        cube(6,1,.3,materials.red,0,4,z);
-
-        cube(1.5,.5,.4,materials.white,0,4.8,z);
-    }
-
-    // seats
-    for(let z=-12;z<=12;z+=4){
-        cube(3,.7,1.2,materials.red,-5,.45,z);
-        cube(3,.7,1.2,materials.red,5,.45,z);
-    }
-
-    player.position.set(0,0,15);
-    player.rotation.y = Math.PI;
-}
-
-
-/* =========================================================
-   SCENE 9 - TAMSUI
-========================================================= */
-
-function sceneTamsui(){
-
-    scene.background.set(0x91bdd0);
-    scene.fog.color.set(0x91bdd0);
-
-    // waterfront
-    cube(60,.2,50,materials.grass,0,-.1,0);
-
-    cube(60,.3,12,materials.blue,0,.05,-22);
-
-    // promenade
-    cube(60,.2,5,materials.sidewalk,0,.1,-14);
-
-    // buildings
-    building(-17,8,14,15,12,0xd5b88f);
-    building(17,5,14,15,10,0xa99aa2);
-
-    tree(-10,25);
-    tree(12,28);
-    tree(-20,35);
-    tree(20,35);
-
-    // ferry-ish structure
-    cube(8,3,5,materials.white,0,1.5,-25);
-    cube(10,1,.5,materials.red,0,3.2,-27.5);
-
-    npc(6,-8,0xc97763);
-
-    player.position.set(0,18,0);
-    player.rotation.y = Math.PI;
-}
-
-
-/* =========================================================
-   SCENE 10 - BUS STOP
-========================================================= */
-
-function sceneBusStop(){
-
-    scene.background.set(0x9db7bd);
-    scene.fog.color.set(0x9db7bd);
-
-    road(80,14);
-
-    building(-16,-15,14,20,12,0xb8a38e);
-
-    // bus shelter
-    cube(6,2.5,.3,materials.glass,7,-2,-12);
-    cube(6,.2,2,materials.dark,7,.1,-12);
-    cube(.2,3,2,materials.dark,4,1.5,-12);
-    cube(.2,3,2,materials.dark,10,1.5,-12);
-
-    // bus sign
-    cube(1,4,.3,materials.red,12,2,-12);
-    cube(3,1,.3,materials.white,12,4.5,-12);
-
-    npc(8,-5,0x477ca8);
-
-    player.position.set(-3,25,0);
-    player.rotation.y = Math.PI;
-}
-
 
 /* =========================================================
    BUS
@@ -1053,297 +1049,928 @@ function sceneBusStop(){
 
 function createBus(){
 
-    const bus = new THREE.Group();
+    const g=new THREE.Group();
 
-    cube(16,3,5,materials.yellow,0,2,0);
+    const body=box(
+        5,
+        3.4,
+        12,
+        mat.red,
+        0,
+        2,
+        0
+    );
 
-    cube(15,1.5,5.1,materials.white,0,4.2,0);
+    g.add(body);
 
-    for(let x=-6;x<=6;x+=3){
-        cube(2.1,1.2,.1,materials.glass,x,3.4,-2.6);
-        cube(2.1,1.2,.1,materials.glass,x,3.4,2.6);
+    const windows=box(
+        5.05,
+        1.35,
+        11.5,
+        mat.glass,
+        0,
+        2.55,
+        0
+    );
+
+    g.add(windows);
+
+    for(let z=-4;z<=4;z+=2){
+
+        g.add(
+            box(
+                1.1,
+                .5,
+                .8,
+                mat.blue,
+                -1.5,
+                .75,
+                z
+            )
+        );
+
+        g.add(
+            box(
+                1.1,
+                .5,
+                .8,
+                mat.blue,
+                1.5,
+                .75,
+                z
+            )
+        );
     }
 
-    for(let x=-6;x<=6;x+=6){
-        cylinder(.8,.5,materials.dark,x,.4,-1.8);
-        cylinder(.8,.5,materials.dark,x,.4,1.8);
-    }
-
-    bus.position.set(0,0,0);
-
-    scene.add(bus);
-
-    return bus;
+    return g;
 }
 
-
 /* =========================================================
-   SCENE 11 - BUS
+   SCENE DEFINITIONS
 ========================================================= */
 
-function sceneBus(){
+const scenes=[
 
-    scene.background.set(0x262b31);
-    scene.fog.color.set(0x262b31);
+{
+    name:"百貨公司",
+    mission:"買生日禮物",
+    setup:setupDepartmentStore,
+    start:{x:0,z:12,rot:Math.PI},
+    checkpoint:{x:0,z:-16,radius:5}
+},
 
-    cube(18,.2,10,materials.dark,0,-.1,0);
+{
+    name:"城市街道",
+    mission:"走到火車站",
+    setup:setupCityStreet,
+    start:{x:0,z:18,rot:Math.PI},
+    checkpoint:{x:0,z:-22,radius:5}
+},
 
-    // bus windows
-    for(let x=-6;x<=6;x+=3){
+{
+    name:"火車站入口",
+    mission:"找到火車站",
+    setup:setupStationEntrance,
+    start:{x:0,z:18,rot:Math.PI},
+    checkpoint:{x:0,z:-15,radius:5}
+},
 
-        cube(2.2,2,.1,materials.glass,x,2.4,-4.8);
-        cube(2.2,2,.1,materials.glass,x,2.4,4.8);
-    }
+{
+    name:"火車月台",
+    mission:"搭火車",
+    setup:setupPlatform,
+    start:{x:-8,z:8,rot:0},
+    checkpoint:{x:0,z:-4,radius:4}
+},
 
-    // seats
-    for(let x=-6;x<=6;x+=3){
-        cube(2,.7,1.4,materials.red,x,.45,-2.5);
-        cube(2,.7,1.4,materials.red,x,.45,2.5);
-    }
+{
+    name:"火車上",
+    mission:"搭火車去台北車站",
+    setup:setupTrain,
+    start:{x:0,z:5,rot:Math.PI},
+    checkpoint:{x:0,z:-5,radius:4}
+},
 
-    // poles
-    for(let x=-6;x<=6;x+=3){
-        cylinder(.08,3,materials.white,x,1.5,0);
-    }
+{
+    name:"台北車站",
+    mission:"下車",
+    setup:setupTaipeiStation,
+    start:{x:0,z:8,rot:Math.PI},
+    checkpoint:{x:0,z:-12,radius:5}
+},
 
-    player.position.set(0,0,4);
-    player.rotation.y = Math.PI;
+{
+    name:"台北車站轉乘通道",
+    mission:"找淡水信義線",
+    setup:setupTransfer,
+    start:{x:0,z:18,rot:Math.PI},
+    checkpoint:{x:0,z:-20,radius:5}
+},
+
+{
+    name:"淡水信義線",
+    mission:"搭紅線往淡水",
+    setup:setupRedLine,
+    start:{x:0,z:5,rot:Math.PI},
+    checkpoint:{x:0,z:-5,radius:4}
+},
+
+{
+    name:"淡水",
+    mission:"到淡水站",
+    setup:setupTamsui,
+    start:{x:0,z:15,rot:Math.PI},
+    checkpoint:{x:0,z:-18,radius:5}
+},
+
+{
+    name:"公車站",
+    mission:"搭公車",
+    setup:setupBusStop,
+    start:{x:-10,z:12,rot:0},
+    checkpoint:{x:0,z:-5,radius:4}
+},
+
+{
+    name:"公車上",
+    mission:"搭公車",
+    setup:setupBus,
+    start:{x:0,z:5,rot:Math.PI},
+    checkpoint:{x:0,z:-5,radius:4}
+},
+
+{
+    name:"轉車站",
+    mission:"下車轉乘",
+    setup:setupTransferBus,
+    start:{x:0,z:12,rot:Math.PI},
+    checkpoint:{x:0,z:-15,radius:5}
+},
+
+{
+    name:"第二班公車",
+    mission:"繼續搭公車",
+    setup:setupBus2,
+    start:{x:0,z:5,rot:Math.PI},
+    checkpoint:{x:0,z:-5,radius:4}
+},
+
+{
+    name:"藥局附近",
+    mission:"找到藥局",
+    setup:setupPharmacy,
+    start:{x:0,z:18,rot:Math.PI},
+    checkpoint:{x:0,z:-18,radius:5}
+},
+
+{
+    name:"海風小館",
+    mission:"到達餐廳",
+    setup:setupRestaurant,
+    start:{x:0,z:20,rot:Math.PI},
+    checkpoint:{x:0,z:-18,radius:5}
 }
 
-
-/* =========================================================
-   SCENE 12 - BUS TRANSFER
-========================================================= */
-
-function sceneBusTransfer(){
-
-    scene.background.set(0x82949c);
-    scene.fog.color.set(0x82949c);
-
-    cube(50,.2,50,materials.sidewalk,0,-.1,0);
-
-    // intersection
-    cube(12,.1,50,materials.road,0,.01,0);
-    cube(50,.1,12,materials.road,0,.02,0);
-
-    // bus stop A
-    cube(5,3,.2,materials.glass,-12,1.5,-10);
-    cube(5,.2,2,materials.dark,-12,.1,-10);
-
-    // bus stop B
-    cube(5,3,.2,materials.glass,12,1.5,10);
-    cube(5,.2,2,materials.dark,12,.1,10);
-
-    // pharmacy
-    cube(12,5,10,materials.white,-13,2.5,17);
-    cube(8,1,.3,materials.red,-13,5.5,11.8);
-
-    // crosswalk
-    for(let x=-5;x<6;x+=1){
-        cube(.5,.03,7,materials.white,x,.08,0);
-    }
-
-    npc(-5,8,0x6785ad);
-
-    player.position.set(0,-15,0);
-    player.rotation.y = 0;
-}
-
-
-/* =========================================================
-   SCENE 13 - SECOND BUS
-========================================================= */
-
-function sceneSecondBus(){
-
-    scene.background.set(0x292d35);
-    scene.fog.color.set(0x292d35);
-
-    cube(18,.2,10,materials.dark,0,-.1,0);
-
-    for(let x=-6;x<=6;x+=3){
-
-        cube(2.2,2,.1,materials.glass,x,2.4,-4.8);
-        cube(2.2,2,.1,materials.glass,x,2.4,4.8);
-
-        cube(2,.7,1.3,materials.orange,x,.45,-2.5);
-        cube(2,.7,1.3,materials.orange,x,.45,2.5);
-    }
-
-    player.position.set(0,0,4);
-    player.rotation.y = Math.PI;
-}
-
-
-/* =========================================================
-   SCENE 14 - PHARMACY AREA
-========================================================= */
-
-function scenePharmacy(){
-
-    scene.background.set(0xa0b8b0);
-    scene.fog.color.set(0xa0b8b0);
-
-    road(80,14);
-
-    // pharmacy
-    cube(14,5,12,materials.white,-13,2.5,-12);
-
-    cube(9,1,.3,materials.red,-13,5.7,-18.1);
-
-    // pharmacy cross
-    cube(2,5,.2,materials.green,-13,2.8,-18.3);
-    cube(5,2,.2,materials.green,-13,2.8,-18.3);
-
-    // residential area
-    building(14,-10,12,18,13,0xbca68d);
-
-    tree(12,18);
-    tree(-10,18);
-    tree(15,30);
-
-    npc(-6,-3,0xc57d69);
-
-    player.position.set(0,30,0);
-    player.rotation.y = Math.PI;
-}
-
-
-/* =========================================================
-   SCENE 15 - RESTAURANT
-========================================================= */
-
-function sceneRestaurant(){
-
-    scene.background.set(0x5c6877);
-    scene.fog.color.set(0x5c6877);
-
-    cube(55,.2,55,materials.sidewalk,0,-.1,0);
-
-    // sea
-    cube(55,.2,12,materials.blue,0,0,-24);
-
-    // restaurant building
-    cube(20,7,13,materials.wall,0,3.5,-13);
-
-    // roof
-    cube(22,.8,15,materials.red,0,7.4,-13);
-
-    // windows
-    cube(5,3,.2,materials.glass,-6,3,-19.6);
-    cube(5,3,.2,materials.glass,6,3,-19.6);
-
-    // entrance
-    cube(4,4,.4,materials.dark,0,2,-19.8);
-
-    // restaurant sign
-    cube(12,1.5,.3,materials.yellow,0,6.3,-20);
-
-    // tables
-    for(let x=-6;x<=6;x+=6){
-
-        cylinder(.25,1.5,materials.dark,x,.75,-5);
-
-        cube(3,.15,2,materials.wall,x,1.55,-5);
-    }
-
-    // Xiaomei
-    npc(-4,-1,0xe08aa5);
-
-    player.position.set(0,20,0);
-    player.rotation.y = Math.PI;
-}
-
-
-/* =========================================================
-   SCENE SYSTEM
-========================================================= */
-
-const scenes = [
-    {
-        name:"百貨公司",
-        mission:"買生日禮物",
-        build:sceneDepartment
-    },
-    {
-        name:"城市街道",
-        mission:"找到火車站",
-        build:sceneCity
-    },
-    {
-        name:"便利商店附近",
-        mission:"繼續往前走",
-        build:sceneConvenience
-    },
-    {
-        name:"城市街道",
-        mission:"往火車站走",
-        build:sceneStreet2
-    },
-    {
-        name:"火車站",
-        mission:"搭火車去台北車站",
-        build:sceneStation
-    },
-    {
-        name:"火車上",
-        mission:"搭火車",
-        build:sceneTrain
-    },
-    {
-        name:"台北車站",
-        mission:"找淡水信義線",
-        build:sceneTaipeiStation
-    },
-    {
-        name:"台北車站轉乘通道",
-        mission:"轉搭紅線",
-        build:sceneTransferTaipei
-    },
-    {
-        name:"淡水信義線",
-        mission:"搭車前往淡水",
-        build:sceneRedLine
-    },
-    {
-        name:"淡水",
-        mission:"找到公車站",
-        build:sceneTamsui
-    },
-    {
-        name:"公車站",
-        mission:"搭公車",
-        build:sceneBusStop
-    },
-    {
-        name:"公車上",
-        mission:"坐公車",
-        build:sceneBus
-    },
-    {
-        name:"轉車站",
-        mission:"下車並轉乘另一班公車",
-        build:sceneBusTransfer
-    },
-    {
-        name:"第二班公車",
-        mission:"搭公車前往目的地",
-        build:sceneSecondBus
-    },
-    {
-        name:"藥局附近",
-        mission:"找到海風小館",
-        build:scenePharmacy
-    },
-    {
-        name:"海風小館",
-        mission:"完成任務！",
-        build:sceneRestaurant
-    }
 ];
 
-let currentScene = 0;
+/* =========================================================
+   SCENE SETUPS
+========================================================= */
 
+function baseCity(){
+
+    ground(
+        100,
+        100,
+        mat.grass
+    );
+
+    roadHorizontal(0);
+
+    for(let x=-40;x<=40;x+=12){
+
+        tree(
+            x,
+            -12
+        );
+
+        tree(
+            x,
+            12
+        );
+    }
+}
+
+/* ================= DEPARTMENT STORE ================= */
+
+function setupDepartmentStore(){
+
+    ground(60,60,mat.sidewalk);
+
+    building(
+        -8,
+        -8,
+        22,
+        8,
+        18,
+        mat.building2,
+        "百貨公司"
+    );
+
+    building(
+        16,
+        -5,
+        8,
+        5,
+        10,
+        mat.building,
+        "商店"
+    );
+
+    roadHorizontal(15);
+
+    createNPC(
+        5,
+        8,
+        mat.red
+    );
+
+    createNPC(
+        -18,
+        10,
+        mat.green
+    );
+}
+
+/* ================= CITY ================= */
+
+function setupCityStreet(){
+
+    baseCity();
+
+    building(
+        -12,
+        -10,
+        8,
+        6,
+        8,
+        mat.building
+    );
+
+    building(
+        14,
+        -12,
+        8,
+        7,
+        8,
+        mat.building2
+    );
+
+    crosswalk(
+        0,
+        -5
+    );
+
+    createNPC(
+        5,
+        -8,
+        mat.yellow
+    );
+}
+
+/* ================= STATION ================= */
+
+function setupStationEntrance(){
+
+    ground(
+        60,
+        60,
+        mat.concrete
+    );
+
+    building(
+        0,
+        -12,
+        24,
+        9,
+        12,
+        mat.building2,
+        "火車站"
+    );
+
+    roadHorizontal(8);
+
+    createNPC(
+        9,
+        3,
+        mat.red
+    );
+
+    createNPC(
+        -10,
+        0,
+        mat.green
+    );
+}
+
+/* ================= PLATFORM ================= */
+
+function setupPlatform(){
+
+    ground(
+        40,
+        40,
+        mat.concrete
+    );
+
+    const rail1=box(
+        1,
+        .5,
+        40,
+        mat.dark,
+        -6,
+        .4,
+        0
+    );
+
+    const rail2=box(
+        1,
+        .5,
+        40,
+        mat.dark,
+        6,
+        .4,
+        0
+    );
+
+    addWorld(rail1,rail2);
+
+    const train=box(
+        12,
+        4,
+        10,
+        mat.white,
+        0,
+        2,
+        -14
+    );
+
+    addWorld(train);
+
+    createNPC(
+        9,
+        5,
+        mat.red
+    );
+}
+
+/* ================= TRAIN ================= */
+
+function setupTrain(){
+
+    ground(
+        20,
+        20,
+        mat.concrete
+    );
+
+    const train=createTrain();
+
+    addWorld(train);
+
+    player.position.set(
+        0,
+        0,
+        5
+    );
+}
+
+/* ================= TAIPEI STATION ================= */
+
+function setupTaipeiStation(){
+
+    ground(
+        60,
+        60,
+        mat.concrete
+    );
+
+    building(
+        -12,
+        -10,
+        18,
+        8,
+        12,
+        mat.building2,
+        "台北車站"
+    );
+
+    building(
+        15,
+        -5,
+        10,
+        5,
+        10,
+        mat.white,
+        "出口"
+    );
+
+    createNPC(
+        5,
+        5,
+        mat.yellow
+    );
+
+    createNPC(
+        -7,
+        8,
+        mat.red
+    );
+}
+
+/* ================= TRANSFER ================= */
+
+function setupTransfer(){
+
+    ground(
+        25,
+        70,
+        mat.concrete
+    );
+
+    for(let z=-30;z<=30;z+=6){
+
+        const tile=box(
+            20,
+            .05,
+            4,
+            z%12===0
+                ? mat.white
+                : mat.concrete,
+            0,
+            .2,
+            z
+        );
+
+        addWorld(tile);
+    }
+
+    building(
+        14,
+        -15,
+        5,
+        5,
+        25,
+        mat.red,
+        "紅線"
+    );
+
+    createNPC(
+        -7,
+        -5,
+        mat.green
+    );
+}
+
+/* ================= RED LINE ================= */
+
+function setupRedLine(){
+
+    ground(
+        22,
+        25,
+        mat.concrete
+    );
+
+    const train=createTrain();
+
+    train.scale.set(
+        .8,
+        .8,
+        .8
+    );
+
+    train.position.z=-10;
+
+    addWorld(train);
+
+    createNPC(
+        4,
+        4,
+        mat.yellow
+    );
+}
+
+/* ================= TAMSUI ================= */
+
+function setupTamsui(){
+
+    ground(
+        70,
+        70,
+        mat.grass
+    );
+
+    roadHorizontal(0);
+
+    /* waterfront */
+
+    const water=box(
+        70,
+        .15,
+        20,
+        new THREE.MeshLambertMaterial({
+            color:0x4c9fc2
+        }),
+        0,
+        .1,
+        -22
+    );
+
+    addWorld(water);
+
+    building(
+        -12,
+        8,
+        9,
+        6,
+        8,
+        mat.building
+    );
+
+    building(
+        12,
+        8,
+        9,
+        7,
+        8,
+        mat.building2
+    );
+
+    for(let x=-30;x<=30;x+=10){
+        tree(x,12);
+    }
+
+    createNPC(
+        6,
+        -4,
+        mat.green
+    );
+}
+
+/* ================= BUS STOP ================= */
+
+function setupBusStop(){
+
+    ground(
+        50,
+        50,
+        mat.sidewalk
+    );
+
+    roadHorizontal(0);
+
+    const shelter=box(
+        8,
+        3,
+        3,
+        mat.glass,
+        0,
+        1.5,
+        -8
+    );
+
+    addWorld(shelter);
+
+    const sign=box(
+        1,
+        4,
+        1,
+        mat.yellow,
+        5,
+        2,
+        -8
+    );
+
+    addWorld(sign);
+
+    createNPC(
+        -5,
+        -6,
+        mat.red
+    );
+}
+
+/* ================= BUS ================= */
+
+function setupBus(){
+
+    ground(
+        18,
+        20,
+        mat.road
+    );
+
+    const bus=createBus();
+
+    addWorld(bus);
+
+    createNPC(
+        -3,
+        2,
+        mat.yellow
+    );
+}
+
+/* ================= TRANSFER BUS ================= */
+
+function setupTransferBus(){
+
+    ground(
+        55,
+        55,
+        mat.sidewalk
+    );
+
+    roadHorizontal(0);
+
+    building(
+        -12,
+        -10,
+        10,
+        6,
+        8,
+        mat.building2,
+        "轉車站"
+    );
+
+    const sign=box(
+        1,
+        4,
+        1,
+        mat.yellow,
+        5,
+        2,
+        2
+    );
+
+    addWorld(sign);
+
+    createNPC(
+        6,
+        -7,
+        mat.green
+    );
+}
+
+/* ================= SECOND BUS ================= */
+
+function setupBus2(){
+
+    ground(
+        18,
+        20,
+        mat.road
+    );
+
+    const bus=createBus();
+
+    bus.position.z=-2;
+
+    addWorld(bus);
+
+    createNPC(
+        3,
+        2,
+        mat.red
+    );
+}
+
+/* ================= PHARMACY ================= */
+
+function setupPharmacy(){
+
+    ground(
+        70,
+        70,
+        mat.sidewalk
+    );
+
+    roadHorizontal(0);
+
+    building(
+        -10,
+        -12,
+        12,
+        6,
+        9,
+        mat.white,
+        "藥局"
+    );
+
+    building(
+        14,
+        -10,
+        8,
+        5,
+        8,
+        mat.building
+    );
+
+    const cross=crosswalk(
+        0,
+        -2
+    );
+
+    createNPC(
+        5,
+        5,
+        mat.yellow
+    );
+}
+
+/* ================= RESTAURANT ================= */
+
+function setupRestaurant(){
+
+    ground(
+        70,
+        70,
+        mat.grass
+    );
+
+    roadHorizontal(0);
+
+    building(
+        0,
+        -15,
+        18,
+        7,
+        12,
+        mat.building,
+        "海風小館"
+    );
+
+    const table=box(
+        5,
+        .6,
+        3,
+        mat.dark,
+        0,
+        .8,
+        5
+    );
+
+    addWorld(table);
+
+    createNPC(
+        -6,
+        3,
+        mat.red
+    );
+
+    createNPC(
+        6,
+        3,
+        mat.green
+    );
+}
+
+/* =========================================================
+   DIALOGUE
+========================================================= */
+
+const dialogues={
+
+0:[
+    {
+        speaker:"小美",
+        text:"今天是我的生日！晚上一起吃飯吧！"
+    },
+    {
+        speaker:"小美",
+        text:"記得來海風小館喔！"
+    }
+],
+
+1:[
+    {
+        speaker:"路人",
+        text:"火車站在前面。一直走就到了。"
+    }
+],
+
+2:[
+    {
+        speaker:"站務員",
+        text:"往前走，火車站入口就在前面。"
+    }
+],
+
+3:[
+    {
+        speaker:"站務員",
+        text:"火車來了！快上車吧。"
+    }
+],
+
+4:[
+    {
+        speaker:"乘客",
+        text:"到台北車站再下車。"
+    }
+],
+
+5:[
+    {
+        speaker:"站務員",
+        text:"這裡是台北車站。"
+    },
+    {
+        speaker:"站務員",
+        text:"要去淡水，請找紅線。"
+    }
+],
+
+6:[
+    {
+        speaker:"路人",
+        text:"往右走就是淡水信義線。"
+    }
+],
+
+7:[
+    {
+        speaker:"站務員",
+        text:"搭紅線，往淡水方向。"
+    }
+],
+
+8:[
+    {
+        speaker:"乘客",
+        text:"下一站就是淡水。"
+    }
+],
+
+9:[
+    {
+        speaker:"路人",
+        text:"公車站在前面。一直走。"
+    }
+],
+
+10:[
+    {
+        speaker:"公車司機",
+        text:"上車吧！"
+    }
+],
+
+11:[
+    {
+        speaker:"乘客",
+        text:"下一站下車，再轉另一班公車。"
+    }
+],
+
+12:[
+    {
+        speaker:"路人",
+        text:"往左走可以看到另一個公車站。"
+    }
+],
+
+13:[
+    {
+        speaker:"乘客",
+        text:"快到了，再坐一下。"
+    }
+],
+
+14:[
+    {
+        speaker:"路人",
+        text:"海風小館就在藥局後面。"
+    }
+],
+
+15:[
+    {
+        speaker:"小美",
+        text:"阿浩！你終於到了！"
+    },
+    {
+        speaker:"小美",
+        text:"謝謝你來參加我的生日！"
+    },
+    {
+        speaker:"阿浩",
+        text:"生日快樂！這是送你的禮物。"
+    }
+]
+
+};
 
 /* =========================================================
    LOAD SCENE
@@ -1351,567 +1978,432 @@ let currentScene = 0;
 
 function loadScene(index){
 
-    currentScene = index;
+    if(index>=scenes.length){
 
-    clearWorld();
+        showEnd();
 
-    scenes[index].build();
-
-    document.getElementById("location").textContent =
-        scenes[index].name;
-
-    document.getElementById("mission").textContent =
-        scenes[index].mission;
-
-    showSceneDialogue(index);
-}
-
-
-/* =========================================================
-   DIALOGUE
-========================================================= */
-
-const dialogueData = {
-
-0:[
-    ["阿豪","今天是小美的生日！我要買一個生日禮物。"],
-    ["阿豪","買好禮物以後，我要去火車站。"]
-],
-
-1:[
-    ["路人","火車站？往前走，然後往右轉。"],
-    ["阿豪","好，謝謝你！"]
-],
-
-2:[
-    ["店員","火車站在前面。一直走就到了。"],
-    ["阿豪","好的！"]
-],
-
-3:[
-    ["路人","火車站就在前面。繼續往前走。"],
-    ["阿豪","我知道了！"]
-],
-
-4:[
-    ["站務員","請進站搭火車。"],
-    ["站務員","到了台北車站以後，要轉淡水信義線。"],
-    ["阿豪","好的，謝謝！"]
-],
-
-5:[
-    ["阿豪","我現在在火車上。"],
-    ["阿豪","下一站就是台北車站。"]
-],
-
-6:[
-    ["站務員","淡水信義線在那邊。"],
-    ["站務員","往左走，然後一直走。"],
-    ["阿豪","我要搭紅線去淡水。"]
-],
-
-7:[
-    ["站務員","請往前走。紅線就在前面。"],
-    ["阿豪","好的！"]
-],
-
-8:[
-    ["廣播","下一站，淡水。"],
-    ["阿豪","終於到了淡水！"]
-],
-
-9:[
-    ["路人","公車站在前面。一直走就到了。"],
-    ["阿豪","我要去找公車站。"]
-],
-
-10:[
-    ["司機","請上車。"],
-    ["阿豪","謝謝！"]
-],
-
-11:[
-    ["廣播","下一站，請準備下車。"],
-    ["阿豪","我要下車轉另一班公車。"]
-],
-
-12:[
-    ["路人","你要去海風小館嗎？"],
-    ["路人","先過馬路，然後往左走。"],
-    ["阿豪","好的，謝謝你！"]
-],
-
-13:[
-    ["阿豪","快到了！"],
-    ["阿豪","我要去海風小館。"]
-],
-
-14:[
-    ["路人","海風小館就在附近。"],
-    ["路人","往右轉，然後一直走。"],
-    ["阿豪","找到了！"]
-],
-
-15:[
-    ["小美","阿豪！你終於到了！"],
-    ["小美","謝謝你的生日禮物！"],
-    ["阿豪","生日快樂，小美！"]
-]
-
-};
-
-let dialogueIndex = 0;
-let dialogueOpen = false;
-
-function showSceneDialogue(index){
-
-    if(!dialogueData[index]){
         return;
     }
 
-    dialogueIndex = 0;
-    dialogueOpen = true;
+    game.sceneIndex=index;
+    game.checkpoint=0;
 
-    const box = document.getElementById("dialogue");
+    clearWorld();
 
-    box.style.display = "block";
+    const data=scenes[index];
 
-    updateDialogue();
+    data.setup();
+
+    player.position.set(
+        data.start.x,
+        0,
+        data.start.z
+    );
+
+    player.rotation.y=data.start.rot;
+
+    updateHUD();
+
+    /* show dialogue */
+
+    if(dialogues[index]){
+
+        setDialogue(
+            dialogues[index]
+        );
+
+    }else{
+        closeDialogue();
+    }
 }
 
-function updateDialogue(){
+/* =========================================================
+   HUD
+========================================================= */
 
-    const data = dialogueData[currentScene];
+function updateHUD(){
 
-    if(!data) return;
+    const data=scenes[game.sceneIndex];
 
-    const item = data[dialogueIndex];
+    document.getElementById(
+        "location"
+    ).textContent=data.name;
 
-    document.getElementById("speaker").textContent =
-        item[0];
+    document.getElementById(
+        "mission"
+    ).textContent=data.mission;
+}
 
-    document.getElementById("dialogueText").textContent =
-        item[1];
+/* =========================================================
+   DIALOGUE SYSTEM
+========================================================= */
+
+function setDialogue(lines){
+
+    game.dialogueLines=lines;
+    game.dialogueIndex=0;
+    game.dialogueOpen=true;
+
+    renderDialogue();
+}
+
+function renderDialogue(){
+
+    const line=
+        game.dialogueLines[
+            game.dialogueIndex
+        ];
+
+    if(!line){
+
+        closeDialogue();
+
+        return;
+    }
+
+    document.getElementById(
+        "speaker"
+    ).textContent=line.speaker;
+
+    document.getElementById(
+        "dialogueText"
+    ).textContent=line.text;
+
+    document.getElementById(
+        "dialogue"
+    ).style.display="block";
 }
 
 function nextDialogue(){
 
-    const data = dialogueData[currentScene];
-
-    if(!data) return;
-
-    dialogueIndex++;
-
-    if(dialogueIndex >= data.length){
-
-        dialogueOpen = false;
-
-        document.getElementById("dialogue").style.display =
-            "none";
-
+    if(!game.dialogueOpen)
         return;
-    }
 
-    updateDialogue();
+    game.dialogueIndex++;
+
+    if(
+        game.dialogueIndex >=
+        game.dialogueLines.length
+    ){
+
+        closeDialogue();
+
+    }else{
+
+        renderDialogue();
+    }
 }
 
-document.getElementById("dialogue")
-    .addEventListener("click",nextDialogue);
+function closeDialogue(){
 
+    game.dialogueOpen=false;
+
+    document.getElementById(
+        "dialogue"
+    ).style.display="none";
+}
+
+document
+.getElementById("dialogueButton")
+.addEventListener(
+    "click",
+    function(e){
+        e.preventDefault();
+        nextDialogue();
+    }
+);
+
+/* =========================================================
+   INPUT
+========================================================= */
+
+/* Keyboard */
+
+window.addEventListener(
+    "keydown",
+    function(e){
+
+        if(
+            ["ArrowUp","ArrowDown",
+             "ArrowLeft","ArrowRight",
+             " "].includes(e.key)
+        ){
+            e.preventDefault();
+        }
+
+        if(e.key==="ArrowUp")
+            keys.forward=true;
+
+        if(e.key==="ArrowDown")
+            keys.backward=true;
+
+        if(e.key==="ArrowLeft")
+            keys.left=true;
+
+        if(e.key==="ArrowRight")
+            keys.right=true;
+    },
+    {passive:false}
+);
+
+window.addEventListener(
+    "keyup",
+    function(e){
+
+        if(e.key==="ArrowUp")
+            keys.forward=false;
+
+        if(e.key==="ArrowDown")
+            keys.backward=false;
+
+        if(e.key==="ArrowLeft")
+            keys.left=false;
+
+        if(e.key==="ArrowRight")
+            keys.right=false;
+    }
+);
+
+/* =========================================================
+   MOBILE TOUCH CONTROLS
+   Native touch events for compatibility
+========================================================= */
+
+function bindTouchButton(
+    id,
+    key
+){
+
+    const button=
+        document.getElementById(id);
+
+    function start(e){
+
+        e.preventDefault();
+
+        if(game.dialogueOpen)
+            return;
+
+        keys[key]=true;
+
+        button.classList.add(
+            "active"
+        );
+    }
+
+    function stop(e){
+
+        e.preventDefault();
+
+        keys[key]=false;
+
+        button.classList.remove(
+            "active"
+        );
+    }
+
+    button.addEventListener(
+        "touchstart",
+        start,
+        {
+            passive:false
+        }
+    );
+
+    button.addEventListener(
+        "touchend",
+        stop,
+        {
+            passive:false
+        }
+    );
+
+    button.addEventListener(
+        "touchcancel",
+        stop,
+        {
+            passive:false
+        }
+    );
+
+    /* Mouse fallback */
+
+    button.addEventListener(
+        "mousedown",
+        start
+    );
+
+    button.addEventListener(
+        "mouseup",
+        stop
+    );
+
+    button.addEventListener(
+        "mouseleave",
+        stop
+    );
+}
+
+bindTouchButton(
+    "btnForward",
+    "forward"
+);
+
+bindTouchButton(
+    "btnBack",
+    "backward"
+);
+
+bindTouchButton(
+    "btnLeft",
+    "left"
+);
+
+bindTouchButton(
+    "btnRight",
+    "right"
+);
+
+/* Prevent browser scrolling */
+
+document.addEventListener(
+    "touchmove",
+    function(e){
+        e.preventDefault();
+    },
+    {
+        passive:false
+    }
+);
+
+/* Release everything when touch ends */
+
+document.addEventListener(
+    "touchend",
+    function(){
+
+        keys.forward=false;
+        keys.backward=false;
+        keys.left=false;
+        keys.right=false;
+
+        document
+        .querySelectorAll(".controlButton")
+        .forEach(
+            b=>b.classList.remove("active")
+        );
+    },
+    {
+        passive:true
+    }
+);
 
 /* =========================================================
    MOVEMENT
 ========================================================= */
 
-const keys = {
-    forward:false,
-    backward:false,
-    left:false,
-    right:false
-};
+function updatePlayer(){
 
-const SPEED = 0.09;
-const TURN_SPEED = 0.045;
+    if(!game.started)
+        return;
 
-function movePlayer(){
+    if(game.dialogueOpen)
+        return;
 
-    if(dialogueOpen) return;
+    /* Turn */
 
     if(keys.left){
-        player.rotation.y += TURN_SPEED;
+
+        player.rotation.y +=
+            game.turnSpeed;
     }
 
     if(keys.right){
-        player.rotation.y -= TURN_SPEED;
+
+        player.rotation.y -=
+            game.turnSpeed;
     }
 
-    let movement = 0;
+    /* Forward */
 
-    if(keys.forward) movement += SPEED;
-    if(keys.backward) movement -= SPEED;
+    let move=0;
 
-    if(movement !== 0){
+    if(keys.forward)
+        move+=game.speed;
 
-        // Character's forward direction
-        const angle = player.rotation.y;
+    if(keys.backward)
+        move-=game.speed;
 
-        player.position.x -= Math.sin(angle) * movement;
-        player.position.z -= Math.cos(angle) * movement;
+    if(move!==0){
+
+        player.position.x +=
+            Math.sin(player.rotation.y)
+            * move;
+
+        player.position.z +=
+            Math.cos(player.rotation.y)
+            * move;
     }
 
-    keepPlayerInside();
+    checkCheckpoint();
 }
 
-
 /* =========================================================
-   KEEP PLAYER IN WORLD
+   CHECKPOINTS
 ========================================================= */
 
-function keepPlayerInside(){
+function distanceToCheckpoint(){
 
-    player.position.x =
-        THREE.MathUtils.clamp(
-            player.position.x,
-            -24,
-            24
-        );
+    const cp=
+        scenes[game.sceneIndex]
+        .checkpoint;
 
-    player.position.z =
-        THREE.MathUtils.clamp(
-            player.position.z,
-            -45,
-            45
-        );
+    const dx=
+        player.position.x-cp.x;
+
+    const dz=
+        player.position.z-cp.z;
+
+    return Math.sqrt(
+        dx*dx+dz*dz
+    );
 }
 
+function checkCheckpoint(){
 
-/* =========================================================
-   SCENE PROGRESSION
-========================================================= */
+    const distance=
+        distanceToCheckpoint();
 
-let transitionLock = false;
+    if(
+        distance <=
+        scenes[game.sceneIndex]
+        .checkpoint.radius
+    ){
 
-function nextScene(){
-
-    if(transitionLock) return;
-
-    transitionLock = true;
-
-    const fade = document.getElementById("blackFade");
-
-    fade.style.opacity = "1";
-
-    setTimeout(()=>{
-
-        if(currentScene < scenes.length-1){
-
-            loadScene(currentScene+1);
-
-        }else{
-
-            document.getElementById("finish")
-                .style.display = "flex";
-        }
-
-        setTimeout(()=>{
-            fade.style.opacity = "0";
-        },100);
-
-        setTimeout(()=>{
-            transitionLock = false;
-        },500);
-
-    },450);
-}
-
-
-/* =========================================================
-   ROUTE TRIGGERS
-========================================================= */
-
-function checkProgress(){
-
-    if(dialogueOpen) return;
-
-    const x = player.position.x;
-    const z = player.position.z;
-
-    /*
-       Every scene has a clear destination zone.
-       The zone is deliberately broad so the game
-       remains playable on mobile.
-    */
-
-    switch(currentScene){
-
-        case 0:
-
-            // Exit department store
-            if(z < -12){
-                nextScene();
-            }
-
-            break;
-
-
-        case 1:
-
-            // Reach right side of street
-            if(x > 17){
-                nextScene();
-            }
-
-            break;
-
-
-        case 2:
-
-            // Leave convenience store area
-            if(x < -18){
-                nextScene();
-            }
-
-            break;
-
-
-        case 3:
-
-            // Reach station
-            if(z < -35){
-                nextScene();
-            }
-
-            break;
-
-
-        case 4:
-
-            // Enter train
-            if(z < -10){
-                nextScene();
-            }
-
-            break;
-
-
-        case 5:
-
-            // Finish train ride
-            if(Math.abs(player.position.x) > 7){
-                nextScene();
-            }
-
-            break;
-
-
-        case 6:
-
-            // Go toward transfer area
-            if(z < -12){
-                nextScene();
-            }
-
-            break;
-
-
-        case 7:
-
-            // Continue through transfer corridor
-            if(z < -28){
-                nextScene();
-            }
-
-            break;
-
-
-        case 8:
-
-            // Reach Tamsui
-            if(z < -15){
-                nextScene();
-            }
-
-            break;
-
-
-        case 9:
-
-            // Reach bus stop
-            if(z < -8){
-                nextScene();
-            }
-
-            break;
-
-
-        case 10:
-
-            // Enter bus
-            if(x > 4 && z < -8){
-                nextScene();
-            }
-
-            break;
-
-
-        case 11:
-
-            // Leave bus
-            if(Math.abs(player.position.z) > 3.5){
-                nextScene();
-            }
-
-            break;
-
-
-        case 12:
-
-            // Reach second bus
-            if(
-                player.position.x > 7 &&
-                player.position.z > 5
-            ){
-                nextScene();
-            }
-
-            break;
-
-
-        case 13:
-
-            // Exit second bus
-            if(Math.abs(player.position.z) > 3.5){
-                nextScene();
-            }
-
-            break;
-
-
-        case 14:
-
-            // Reach restaurant direction
-            if(z < -15){
-                nextScene();
-            }
-
-            break;
-
-
-        case 15:
-
-            // Final
-            break;
+        advanceScene();
     }
 }
 
+let transitionLock=false;
 
-/* =========================================================
-   KEYBOARD
-========================================================= */
+function advanceScene(){
 
-function setKey(code,value){
+    if(transitionLock)
+        return;
 
-    switch(code){
+    transitionLock=true;
 
-        case "ArrowUp":
-        case "KeyW":
-            keys.forward = value;
-            break;
+    setTimeout(
+        ()=>{
+            loadScene(
+                game.sceneIndex+1
+            );
 
-        case "ArrowDown":
-        case "KeyS":
-            keys.backward = value;
-            break;
-
-        case "ArrowLeft":
-        case "KeyA":
-            keys.left = value;
-            break;
-
-        case "ArrowRight":
-        case "KeyD":
-            keys.right = value;
-            break;
-    }
+            transitionLock=false;
+        },
+        400
+    );
 }
-
-window.addEventListener("keydown",e=>{
-
-    if([
-        "ArrowUp",
-        "ArrowDown",
-        "ArrowLeft",
-        "ArrowRight",
-        "KeyW",
-        "KeyA",
-        "KeyS",
-        "KeyD"
-    ].includes(e.code)){
-        e.preventDefault();
-    }
-
-    setKey(e.code,true);
-});
-
-window.addEventListener("keyup",e=>{
-    setKey(e.code,false);
-});
-
-window.addEventListener("blur",()=>{
-
-    keys.forward=false;
-    keys.backward=false;
-    keys.left=false;
-    keys.right=false;
-});
-
-
-/* =========================================================
-   MOBILE TOUCH CONTROLS
-========================================================= */
-
-function setupTouchButton(id,key){
-
-    const button = document.getElementById(id);
-
-    button.addEventListener("pointerdown",e=>{
-
-        e.preventDefault();
-
-        if(button.setPointerCapture){
-            try{
-                button.setPointerCapture(e.pointerId);
-            }catch(err){}
-        }
-
-        keys[key] = true;
-    });
-
-    button.addEventListener("pointerup",e=>{
-
-        e.preventDefault();
-
-        keys[key] = false;
-    });
-
-    button.addEventListener("pointercancel",e=>{
-
-        e.preventDefault();
-
-        keys[key] = false;
-    });
-
-    button.addEventListener("lostpointercapture",()=>{
-
-        keys[key] = false;
-    });
-}
-
-setupTouchButton("up","forward");
-setupTouchButton("down","backward");
-setupTouchButton("left","left");
-setupTouchButton("right","right");
-
 
 /* =========================================================
    CAMERA
@@ -1919,72 +2411,152 @@ setupTouchButton("right","right");
 
 function updateCamera(){
 
-    const distance = 7;
+    const distance=8;
 
-    const angle = player.rotation.y;
+    const behindX=
+        player.position.x
+        - Math.sin(player.rotation.y)
+        * distance;
 
-    const targetX =
-        player.position.x +
-        Math.sin(angle) * distance;
+    const behindZ=
+        player.position.z
+        - Math.cos(player.rotation.y)
+        * distance;
 
-    const targetZ =
-        player.position.z +
-        Math.cos(angle) * distance;
-
-    const desiredCamera = new THREE.Vector3(
-        targetX,
-        player.position.y + 4.2,
-        targetZ
-    );
+    const targetCamera=
+        new THREE.Vector3(
+            behindX,
+            5,
+            behindZ
+        );
 
     camera.position.lerp(
-        desiredCamera,
-        .08
+        targetCamera,
+        .12
     );
 
-    const lookTarget = new THREE.Vector3(
-        player.position.x,
-        player.position.y + 1.5,
-        player.position.z
-    );
+    const lookTarget=
+        new THREE.Vector3(
+            player.position.x,
+            1.4,
+            player.position.z
+        );
 
-    camera.lookAt(lookTarget);
+    camera.lookAt(
+        lookTarget
+    );
 }
 
-
 /* =========================================================
-   START GAME
+   START
 ========================================================= */
 
-document.getElementById("startBtn")
-.addEventListener("click",()=>{
+document
+.getElementById("startButton")
+.addEventListener(
+    "click",
+    function(){
 
-    document.getElementById("startScreen")
-        .style.display = "none";
+        game.started=true;
 
-    loadScene(0);
+        document
+        .getElementById("startScreen")
+        .style.display="none";
 
-});
+        document
+        .getElementById("hud")
+        .style.display="block";
 
+        loadScene(0);
+    }
+);
+
+/* =========================================================
+   END SCREEN
+========================================================= */
+
+function showEnd(){
+
+    game.started=false;
+
+    document
+    .getElementById("controls")
+    .style.display="none";
+
+    document
+    .getElementById("dialogue")
+    .style.display="block";
+
+    document
+    .getElementById("speaker")
+    .textContent="🎂 Mission Complete";
+
+    document
+    .getElementById("dialogueText")
+    .textContent=
+        "生日快樂！今天的任務完成了！";
+
+    document
+    .getElementById("dialogueButton")
+    .textContent="PLAY AGAIN";
+
+    document
+    .getElementById("dialogueButton")
+    .onclick=function(){
+
+        location.reload();
+
+    };
+}
 
 /* =========================================================
    RESIZE
 ========================================================= */
 
-window.addEventListener("resize",()=>{
+window.addEventListener(
+    "resize",
+    function(){
 
-    camera.aspect =
-        window.innerWidth /
-        window.innerHeight;
+        camera.aspect=
+            window.innerWidth /
+            window.innerHeight;
 
-    camera.updateProjectionMatrix();
+        camera.updateProjectionMatrix();
 
-    renderer.setSize(
-        window.innerWidth,
-        window.innerHeight
-    );
-});
+        renderer.setSize(
+            window.innerWidth,
+            window.innerHeight
+        );
+    }
+);
 
+/* =========================================================
+   MOBILE ORIENTATION
+========================================================= */
+
+window.addEventListener(
+    "orientationchange",
+    function(){
+
+        setTimeout(
+            function(){
+
+                camera.aspect=
+                    window.innerWidth /
+                    window.innerHeight;
+
+                camera.updateProjectionMatrix();
+
+                renderer.setSize(
+                    window.innerWidth,
+                    window.innerHeight
+                );
+
+            },
+            250
+        );
+    }
+);
 
 /* =========================================================
    GAME LOOP
@@ -1992,11 +2564,11 @@ window.addEventListener("resize",()=>{
 
 function animate(){
 
-    requestAnimationFrame(animate);
+    requestAnimationFrame(
+        animate
+    );
 
-    movePlayer();
-
-    checkProgress();
+    updatePlayer();
 
     updateCamera();
 
@@ -2007,6 +2579,18 @@ function animate(){
 }
 
 animate();
+
+/* =========================================================
+   INITIAL
+========================================================= */
+
+document
+.getElementById("loading")
+.style.display="none";
+
+document
+.getElementById("startScreen")
+.style.display="flex";
 
 </script>
 
