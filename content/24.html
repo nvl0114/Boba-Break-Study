@@ -195,9 +195,7 @@ canvas{
     font-weight:bold;
 }
 
-#vocabModal,
-#story,
-#success{
+#vocabModal, #story, #success{
     position:fixed;
     inset:0;
     z-index:100;
@@ -331,6 +329,7 @@ canvas{
 <div id="story">
     <div class="modalBox">
         <div class="storyText">
+
             <h1>📱 阿豪的迷路任務</h1>
 
             <p>
@@ -357,33 +356,47 @@ canvas{
             </p>
 
             <button id="startBtn">開始遊戲</button>
+
         </div>
     </div>
 </div>
 
 <div id="vocabModal" class="hidden">
     <div class="modalBox">
+
         <h2>📖 Route Vocabulary</h2>
+
         <div id="vocabList"></div>
-        <button id="closeVocab">Close</button>
+
+        <button id="closeVocab">
+            Close
+        </button>
+
     </div>
 </div>
 
 <div id="success">
+
     <div class="successBox">
+
         <h1>🎉 到達目的地！</h1>
+
         <p style="margin-top:12px;line-height:1.7;">
             你成功靠中文方向找到海風餐廳了！
         </p>
+
         <p style="margin-top:10px;">
             阿豪終於可以參加小美的生日聚會。
         </p>
+
     </div>
+
 </div>
 
 <script type="module">
 
 import * as THREE from "three";
+
 
 /* =========================================================
    BASIC SETUP
@@ -391,24 +404,28 @@ import * as THREE from "three";
 
 const scene = new THREE.Scene();
 
-scene.background = new THREE.Color(0x9fc9e8);
+scene.background =
+    new THREE.Color(0x9fc9e8);
 
-scene.fog = new THREE.Fog(
-    0x9fc9e8,
-    45,
-    250
-);
+scene.fog =
+    new THREE.Fog(
+        0x9fc9e8,
+        45,
+        250
+    );
 
-const camera = new THREE.PerspectiveCamera(
-    65,
-    innerWidth / innerHeight,
-    .1,
-    500
-);
+const camera =
+    new THREE.PerspectiveCamera(
+        65,
+        innerWidth / innerHeight,
+        .1,
+        500
+    );
 
-const renderer = new THREE.WebGLRenderer({
-    antialias:true
-});
+const renderer =
+    new THREE.WebGLRenderer({
+        antialias:true
+    });
 
 renderer.setPixelRatio(
     Math.min(devicePixelRatio,2)
@@ -419,22 +436,26 @@ renderer.setSize(
     innerHeight
 );
 
-document.body.appendChild(renderer.domElement);
+document.body.appendChild(
+    renderer.domElement
+);
 
 
 /* =========================================================
    LIGHTS
 ========================================================= */
 
-const ambient = new THREE.AmbientLight(
-    0xffffff,
-    1.8
-);
+const ambient =
+    new THREE.AmbientLight(
+        0xffffff,
+        1.8
+    );
 
-const sun = new THREE.DirectionalLight(
-    0xffffff,
-    2
-);
+const sun =
+    new THREE.DirectionalLight(
+        0xffffff,
+        2
+    );
 
 sun.position.set(
     80,
@@ -453,7 +474,13 @@ scene.add(
 ========================================================= */
 
 const player = {
-    position:new THREE.Vector3(0,2,105),
+
+    position:
+        new THREE.Vector3(
+            0,
+            2,
+            105
+        ),
 
     /*
        IMPORTANT:
@@ -463,7 +490,6 @@ const player = {
 
        ▲ = move toward -Z
        ▼ = move toward +Z
-
        ◀ / ▶ only rotate.
     */
 
@@ -480,121 +506,233 @@ const player = {
 ========================================================= */
 
 const keys = {
+
     forward:false,
     backward:false,
     left:false,
     right:false
+
 };
 
-function setKey(action,value){
+function setKey(
+    action,
+    value
+){
+
     keys[action] = value;
+
 }
 
-window.addEventListener("keydown",e=>{
+window.addEventListener(
+    "keydown",
+    e=>{
 
-    if(
-        e.key === "ArrowUp" ||
-        e.key.toLowerCase() === "w"
-    ){
-        e.preventDefault();
-        setKey("forward",true);
+        if(
+            e.key === "ArrowUp" ||
+            e.key.toLowerCase() === "w"
+        ){
+
+            e.preventDefault();
+
+            setKey(
+                "forward",
+                true
+            );
+
+        }
+
+        if(
+            e.key === "ArrowDown" ||
+            e.key.toLowerCase() === "s"
+        ){
+
+            e.preventDefault();
+
+            setKey(
+                "backward",
+                true
+            );
+
+        }
+
+        if(
+            e.key === "ArrowLeft" ||
+            e.key.toLowerCase() === "a"
+        ){
+
+            e.preventDefault();
+
+            setKey(
+                "left",
+                true
+            );
+
+        }
+
+        if(
+            e.key === "ArrowRight" ||
+            e.key.toLowerCase() === "d"
+        ){
+
+            e.preventDefault();
+
+            setKey(
+                "right",
+                true
+            );
+
+        }
+
+        if(
+            e.key === "e" ||
+            e.key === "Enter"
+        ){
+
+            interact();
+
+        }
+
     }
+);
 
-    if(
-        e.key === "ArrowDown" ||
-        e.key.toLowerCase() === "s"
-    ){
-        e.preventDefault();
-        setKey("backward",true);
+window.addEventListener(
+    "keyup",
+    e=>{
+
+        if(
+            e.key === "ArrowUp" ||
+            e.key.toLowerCase() === "w"
+        ){
+
+            setKey(
+                "forward",
+                false
+            );
+
+        }
+
+        if(
+            e.key === "ArrowDown" ||
+            e.key.toLowerCase() === "s"
+        ){
+
+            setKey(
+                "backward",
+                false
+            );
+
+        }
+
+        if(
+            e.key === "ArrowLeft" ||
+            e.key.toLowerCase() === "a"
+        ){
+
+            setKey(
+                "left",
+                false
+            );
+
+        }
+
+        if(
+            e.key === "ArrowRight" ||
+            e.key.toLowerCase() === "d"
+        ){
+
+            setKey(
+                "right",
+                false
+            );
+
+        }
+
     }
-
-    if(
-        e.key === "ArrowLeft" ||
-        e.key.toLowerCase() === "a"
-    ){
-        e.preventDefault();
-        setKey("left",true);
-    }
-
-    if(
-        e.key === "ArrowRight" ||
-        e.key.toLowerCase() === "d"
-    ){
-        e.preventDefault();
-        setKey("right",true);
-    }
-
-    if(e.key === "e" || e.key === "Enter"){
-        interact();
-    }
-
-});
-
-window.addEventListener("keyup",e=>{
-
-    if(
-        e.key === "ArrowUp" ||
-        e.key.toLowerCase() === "w"
-    ){
-        setKey("forward",false);
-    }
-
-    if(
-        e.key === "ArrowDown" ||
-        e.key.toLowerCase() === "s"
-    ){
-        setKey("backward",false);
-    }
-
-    if(
-        e.key === "ArrowLeft" ||
-        e.key.toLowerCase() === "a"
-    ){
-        setKey("left",false);
-    }
-
-    if(
-        e.key === "ArrowRight" ||
-        e.key.toLowerCase() === "d"
-    ){
-        setKey("right",false);
-    }
-
-});
+);
 
 
 /* =========================================================
    TOUCH BUTTONS
 ========================================================= */
 
-function holdButton(id,action){
+function holdButton(
+    id,
+    action
+){
 
-    const button = document.getElementById(id);
+    const button =
+        document.getElementById(id);
 
-    button.addEventListener("pointerdown",e=>{
-        e.preventDefault();
+    button.addEventListener(
+        "pointerdown",
+        e=>{
 
-        setKey(action,true);
+            e.preventDefault();
 
-        try{
-            button.setPointerCapture(e.pointerId);
-        }catch(err){}
-    });
+            setKey(
+                action,
+                true
+            );
 
-    const release=e=>{
-        e.preventDefault();
-        setKey(action,false);
-    };
+            try{
 
-    button.addEventListener("pointerup",release);
-    button.addEventListener("pointercancel",release);
-    button.addEventListener("pointerleave",release);
+                button.setPointerCapture(
+                    e.pointerId
+                );
+
+            }catch(err){}
+
+        }
+    );
+
+    const release =
+        e=>{
+
+            e.preventDefault();
+
+            setKey(
+                action,
+                false
+            );
+
+        };
+
+    button.addEventListener(
+        "pointerup",
+        release
+    );
+
+    button.addEventListener(
+        "pointercancel",
+        release
+    );
+
+    button.addEventListener(
+        "pointerleave",
+        release
+    );
+
 }
 
-holdButton("up","forward");
-holdButton("down","backward");
-holdButton("left","left");
-holdButton("right","right");
+holdButton(
+    "up",
+    "forward"
+);
+
+holdButton(
+    "down",
+    "backward"
+);
+
+holdButton(
+    "left",
+    "left"
+);
+
+holdButton(
+    "right",
+    "right"
+);
 
 
 /* =========================================================
@@ -608,20 +746,28 @@ function box(
     color
 ){
 
-    const mesh = new THREE.Mesh(
-        new THREE.BoxGeometry(w,h,d),
-        new THREE.MeshStandardMaterial({
-            color
-        })
-    );
+    const mesh =
+        new THREE.Mesh(
+            new THREE.BoxGeometry(
+                w,
+                h,
+                d
+            ),
+            new THREE.MeshStandardMaterial({
+                color
+            })
+        );
 
     mesh.position.set(
-        x,y,z
+        x,
+        y,
+        z
     );
 
     parent.add(mesh);
 
     return mesh;
+
 }
 
 
@@ -633,25 +779,29 @@ function cylinder(
     color
 ){
 
-    const mesh = new THREE.Mesh(
-        new THREE.CylinderGeometry(
-            radius,
-            radius,
-            height,
-            16
-        ),
-        new THREE.MeshStandardMaterial({
-            color
-        })
-    );
+    const mesh =
+        new THREE.Mesh(
+            new THREE.CylinderGeometry(
+                radius,
+                radius,
+                height,
+                16
+            ),
+            new THREE.MeshStandardMaterial({
+                color
+            })
+        );
 
     mesh.position.set(
-        x,y,z
+        x,
+        y,
+        z
     );
 
     parent.add(mesh);
 
     return mesh;
+
 }
 
 
@@ -661,23 +811,41 @@ function makeLabel(
     x,y,z
 ){
 
-    const canvas = document.createElement("canvas");
+    const canvas =
+        document.createElement(
+            "canvas"
+        );
 
     canvas.width = 512;
     canvas.height = 128;
 
-    const ctx = canvas.getContext("2d");
+    const ctx =
+        canvas.getContext("2d");
 
-    ctx.fillStyle = "rgba(255,255,255,.94)";
+    ctx.fillStyle =
+        "rgba(255,255,255,.94)";
+
     ctx.roundRect(
-        5,5,502,118,25
+        5,
+        5,
+        502,
+        118,
+        25
     );
+
     ctx.fill();
 
-    ctx.fillStyle = "#222";
-    ctx.font = "bold 42px Arial";
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
+    ctx.fillStyle =
+        "#222";
+
+    ctx.font =
+        "bold 42px Arial";
+
+    ctx.textAlign =
+        "center";
+
+    ctx.textBaseline =
+        "middle";
 
     ctx.fillText(
         text,
@@ -685,14 +853,21 @@ function makeLabel(
         64
     );
 
-    const texture = new THREE.CanvasTexture(canvas);
+    const texture =
+        new THREE.CanvasTexture(
+            canvas
+        );
 
-    const material = new THREE.SpriteMaterial({
-        map:texture,
-        transparent:true
-    });
+    const material =
+        new THREE.SpriteMaterial({
+            map:texture,
+            transparent:true
+        });
 
-    const sprite = new THREE.Sprite(material);
+    const sprite =
+        new THREE.Sprite(
+            material
+        );
 
     sprite.scale.set(
         7,
@@ -701,12 +876,15 @@ function makeLabel(
     );
 
     sprite.position.set(
-        x,y,z
+        x,
+        y,
+        z
     );
 
     parent.add(sprite);
 
     return sprite;
+
 }
 
 
@@ -718,19 +896,22 @@ function road(
     rotation=0
 ){
 
-    const mesh = new THREE.Mesh(
-        new THREE.PlaneGeometry(
-            width,
-            length
-        ),
-        new THREE.MeshStandardMaterial({
-            color:0x555555
-        })
-    );
+    const mesh =
+        new THREE.Mesh(
+            new THREE.PlaneGeometry(
+                width,
+                length
+            ),
+            new THREE.MeshStandardMaterial({
+                color:0x555555
+            })
+        );
 
-    mesh.rotation.x = -Math.PI/2;
+    mesh.rotation.x =
+        -Math.PI/2;
 
-    mesh.rotation.z = rotation;
+    mesh.rotation.z =
+        rotation;
 
     mesh.position.set(
         x,
@@ -741,6 +922,7 @@ function road(
     parent.add(mesh);
 
     return mesh;
+
 }
 
 
@@ -760,6 +942,7 @@ function grass(
         d,
         0x77a95a
     );
+
 }
 
 
@@ -778,16 +961,17 @@ function tree(
         0x76502e
     );
 
-    const crown = new THREE.Mesh(
-        new THREE.SphereGeometry(
-            1.7,
-            12,
-            12
-        ),
-        new THREE.MeshStandardMaterial({
-            color:0x43894b
-        })
-    );
+    const crown =
+        new THREE.Mesh(
+            new THREE.SphereGeometry(
+                1.7,
+                12,
+                12
+            ),
+            new THREE.MeshStandardMaterial({
+                color:0x43894b
+            })
+        );
 
     crown.position.set(
         x,
@@ -796,6 +980,7 @@ function tree(
     );
 
     parent.add(crown);
+
 }
 
 
@@ -809,7 +994,8 @@ function createNPC(
     name="路人"
 ){
 
-    const group = new THREE.Group();
+    const group =
+        new THREE.Group();
 
     group.position.set(
         x,
@@ -829,16 +1015,17 @@ function createNPC(
         0x4267a9
     );
 
-    const head = new THREE.Mesh(
-        new THREE.SphereGeometry(
-            .55,
-            16,
-            16
-        ),
-        new THREE.MeshStandardMaterial({
-            color:0xffd0aa
-        })
-    );
+    const head =
+        new THREE.Mesh(
+            new THREE.SphereGeometry(
+                .55,
+                16,
+                16
+            ),
+            new THREE.MeshStandardMaterial({
+                color:0xffd0aa
+            })
+        );
 
     head.position.y = 4;
 
@@ -853,6 +1040,7 @@ function createNPC(
     );
 
     return group;
+
 }
 
 
@@ -870,12 +1058,14 @@ function addInteraction(
 ){
 
     interactions.push({
+
         x,
         z,
         label,
         callback,
         range,
         used:false
+
     });
 
 }
@@ -884,16 +1074,24 @@ function addInteraction(
 function getNearestInteraction(){
 
     let nearest = null;
+
     let distance = Infinity;
 
-    for(const item of interactions){
+    for(
+        const item of interactions
+    ){
 
-        if(item.used) continue;
+        if(item.used)
+            continue;
 
-        const d = Math.hypot(
-            player.position.x-item.x,
-            player.position.z-item.z
-        );
+        const d =
+            Math.hypot(
+                player.position.x -
+                    item.x,
+
+                player.position.z -
+                    item.z
+            );
 
         if(
             d < item.range &&
@@ -901,33 +1099,49 @@ function getNearestInteraction(){
         ){
 
             distance = d;
+
             nearest = item;
+
         }
+
     }
 
     return nearest;
+
 }
 
 
 function updateInteractionUI(){
 
-    const item = getNearestInteraction();
+    const item =
+        getNearestInteraction();
 
     const button =
-        document.getElementById("interact");
+        document.getElementById(
+            "interact"
+        );
 
     const hint =
-        document.getElementById("hint");
+        document.getElementById(
+            "hint"
+        );
 
     if(item){
 
-        button.style.display="block";
-        hint.style.display="block";
+        button.style.display =
+            "block";
+
+        hint.style.display =
+            "block";
 
     }else{
 
-        button.style.display="none";
-        hint.style.display="none";
+        button.style.display =
+            "none";
+
+        hint.style.display =
+            "none";
+
     }
 
 }
@@ -935,16 +1149,19 @@ function updateInteractionUI(){
 
 function interact(){
 
-    if(dialogueActive) return;
+    if(dialogueActive)
+        return;
 
     const item =
         getNearestInteraction();
 
-    if(!item) return;
+    if(!item)
+        return;
 
-    item.used=true;
+    item.used = true;
 
     item.callback();
+
 }
 
 
@@ -953,9 +1170,13 @@ function interact(){
 ========================================================= */
 
 let dialogueActive=false;
+
 let dialogueLines=[];
+
 let dialogueIndex=0;
+
 let dialogueCallback=null;
+
 
 function speak(
     lines,
@@ -964,34 +1185,46 @@ function speak(
 
     dialogueActive=true;
 
-    dialogueLines=lines;
+    dialogueLines =
+        lines;
+
     dialogueIndex=0;
-    dialogueCallback=callback;
+
+    dialogueCallback =
+        callback;
 
     document.getElementById(
         "dialogue"
-    ).style.display="block";
+    ).style.display =
+        "block";
 
     showDialogueLine();
+
 }
 
 
 function showDialogueLine(){
 
     const line =
-        dialogueLines[dialogueIndex];
+        dialogueLines[
+            dialogueIndex
+        ];
 
     document.getElementById(
         "speaker"
-    ).textContent=line.speaker;
+    ).textContent =
+        line.speaker;
 
     document.getElementById(
         "zh"
-    ).textContent=line.zh;
+    ).textContent =
+        line.zh;
 
     document.getElementById(
         "pinyin"
-    ).textContent=line.pinyin;
+    ).textContent =
+        line.pinyin;
+
 }
 
 
@@ -1002,24 +1235,33 @@ document.getElementById(
     dialogueIndex++;
 
     if(
-        dialogueIndex >= dialogueLines.length
+        dialogueIndex >=
+        dialogueLines.length
     ){
 
         document.getElementById(
             "dialogue"
-        ).style.display="none";
+        ).style.display =
+            "none";
 
         dialogueActive=false;
 
         if(dialogueCallback){
-            const cb=dialogueCallback;
-            dialogueCallback=null;
+
+            const cb =
+                dialogueCallback;
+
+            dialogueCallback =
+                null;
+
             cb();
+
         }
 
     }else{
 
         showDialogueLine();
+
     }
 
 };
@@ -1033,7 +1275,8 @@ function objective(text){
 
     document.getElementById(
         "objective"
-    ).innerHTML="🎯 "+text;
+    ).innerHTML =
+        "🎯 "+text;
 
 }
 
@@ -1051,15 +1294,29 @@ function landmarkMessage(text){
             "landmarkMessage"
         );
 
-    el.textContent=text;
+    el.textContent =
+        text;
 
-    el.classList.add("show");
+    el.classList.add(
+        "show"
+    );
 
-    clearTimeout(messageTimer);
+    clearTimeout(
+        messageTimer
+    );
 
-    messageTimer=setTimeout(()=>{
-        el.classList.remove("show");
-    },2600);
+    messageTimer =
+        setTimeout(
+            ()=>{
+
+                el.classList.remove(
+                    "show"
+                );
+
+            },
+            2600
+        );
+
 }
 
 
@@ -1069,11 +1326,14 @@ function landmarkMessage(text){
 
 function clearWorld(){
 
-    while(scene.children.length){
+    while(
+        scene.children.length
+    ){
 
         scene.remove(
             scene.children[0]
         );
+
     }
 
     scene.add(
@@ -1082,6 +1342,7 @@ function clearWorld(){
     );
 
     interactions=[];
+
 }
 
 
@@ -1094,7 +1355,9 @@ function loadGiftArea(){
     clearWorld();
 
     player.position.set(
-        0,2,20
+        0,
+        2,
+        20
     );
 
     player.angle=0;
@@ -1153,26 +1416,35 @@ function loadGiftArea(){
         ()=>{
 
             speak([
+
                 {
                     speaker:"店員",
                     zh:"你好！你想買什麼？",
-                    pinyin:"Nǐ hǎo! Nǐ xiǎng mǎi shénme?"
+                    pinyin:
+                        "Nǐ hǎo! Nǐ xiǎng mǎi shénme?"
                 },
+
                 {
                     speaker:"阿豪",
                     zh:"我想買一個生日禮物。",
-                    pinyin:"Wǒ xiǎng mǎi yí ge shēngrì lǐwù."
+                    pinyin:
+                        "Wǒ xiǎng mǎi yí ge shēngrì lǐwù."
                 },
+
                 {
                     speaker:"店員",
                     zh:"這個怎麼樣？",
-                    pinyin:"Zhège zěnmeyàng?"
+                    pinyin:
+                        "Zhège zěnmeyàng?"
                 },
+
                 {
                     speaker:"阿豪",
                     zh:"好，我要這個。",
-                    pinyin:"Hǎo, wǒ yào zhège."
+                    pinyin:
+                        "Hǎo, wǒ yào zhège."
                 }
+
             ],()=>{
 
                 objective(
@@ -1180,6 +1452,7 @@ function loadGiftArea(){
                 );
 
                 loadFirstStreet();
+
             });
 
         }
@@ -1188,6 +1461,7 @@ function loadGiftArea(){
     objective(
         "先去禮物店買小美的生日禮物。"
     );
+
 }
 
 
@@ -1201,7 +1475,9 @@ function loadFirstStreet(){
     clearWorld();
 
     player.position.set(
-        0,2,100
+        0,
+        2,
+        100
     );
 
     player.angle=0;
@@ -1240,21 +1516,28 @@ function loadFirstStreet(){
         ()=>{
 
             speak([
+
                 {
                     speaker:"阿豪",
                     zh:"請問，怎麼去車站？",
-                    pinyin:"Qǐngwèn, zěnme qù chēzhàn?"
+                    pinyin:
+                        "Qǐngwèn, zěnme qù chēzhàn?"
                 },
+
                 {
                     speaker:"路人",
                     zh:"你可以搭105號公車。",
-                    pinyin:"Nǐ kěyǐ dā yī líng wǔ hào gōngchē."
+                    pinyin:
+                        "Nǐ kěyǐ dā yī líng wǔ hào gōngchē."
                 },
+
                 {
                     speaker:"路人",
                     zh:"在銀行前面下車。",
-                    pinyin:"Zài yínháng qiánmiàn xià chē."
+                    pinyin:
+                        "Zài yínháng qiánmiàn xià chē."
                 }
+
             ],()=>{
 
                 load105Area();
@@ -1268,6 +1551,7 @@ function loadFirstStreet(){
     objective(
         "一直往前走，找到路人。"
     );
+
 }
 
 
@@ -1280,7 +1564,9 @@ function load105Area(){
     clearWorld();
 
     player.position.set(
-        0,2,80
+        0,
+        2,
+        80
     );
 
     player.angle=0;
@@ -1340,6 +1626,7 @@ function load105Area(){
     objective(
         "找到105號公車並搭車。"
     );
+
 }
 
 
@@ -1352,7 +1639,9 @@ function loadBankArea(){
     clearWorld();
 
     player.position.set(
-        0,2,80
+        0,
+        2,
+        80
     );
 
     player.angle=0;
@@ -1397,6 +1686,12 @@ function loadBankArea(){
         10
     );
 
+    /*
+       Keep the person away from Ahao's
+       starting position so Ahao has to
+       walk toward the person first.
+    */
+
     createNPC(
         scene,
         10,
@@ -1419,49 +1714,66 @@ function loadBankArea(){
     objective(
         "在銀行附近找到路人，問 GR 公車站怎麼走。"
     );
+
 }
 
 
 /* =========================================================
    GR ROUTE
-=========================================================
 
-   THIS IS THE IMPORTANT PART.
+   NEW ROUTE:
 
-                         🌳 公園
-                            ↑
-                            │
-                         FAR AWAY
-                            │
-                            │
-🏃 Ahao → 🏪 便利商店 ───────┼────────────── ☕ 咖啡店
-                            │
-                         十字路口
-                            │
-                            │
-                         FAR AWAY
-                            │
-                            ↓
-                          🚌 GR
+                    🌳 公園
+                       ↑
+                       │
+                    FAR AWAY
+                       │
+                       │
+ Ahao → 🏪 便利商店 → 十字路口 → ☕ 咖啡店
+                             
+                              │
+                              │
+                           FAR AWAY
+                              │
+                              ↓
+                            🚌 GR
 
+   IMPORTANT:
+
+   便利商店 = BEFORE intersection
+
+   公園 = LEFT branch, far away
+
+   咖啡店 = STRAIGHT ahead, far away
+
+   GR = RIGHT branch
 ========================================================= */
 
 let parkGroup;
+
 let cafeGroup;
+
 let crossroadGroup;
+
 let grGroup;
 
 let parkFound=false;
+
 let cafeFound=false;
+
 let crossroadFound=false;
+
 let grFound=false;
+
 
 function loadGRRoute(){
 
     clearWorld();
 
     player.position.set(
-        0,2,75
+        0,
+        2,
+        75
     );
 
     player.angle=0;
@@ -1495,13 +1807,25 @@ function loadGRRoute(){
 
     /* ============================================
        CONVENIENCE STORE
-       BEFORE THE INTERSECTION
+
+       STILL BEFORE THE INTERSECTION.
+
+       Store:
+       z = -55
+
+       Intersection:
+       z = -100
+
+       Ahao must walk past the store
+       before reaching the intersection.
     ============================================ */
 
     const convenience =
         new THREE.Group();
 
-    scene.add(convenience);
+    scene.add(
+        convenience
+    );
 
     box(
         convenience,
@@ -1522,32 +1846,56 @@ function loadGRRoute(){
         -55
     );
 
+
     /*
-       Trees hide the intersection slightly.
+       Trees make the route feel less empty
+       and slightly hide the intersection.
     */
 
-    tree(scene,-22,-65);
-    tree(scene,22,-65);
+    tree(
+        scene,
+        -22,
+        -65
+    );
+
+    tree(
+        scene,
+        22,
+        -65
+    );
 
 
     /* ============================================
        INTERSECTION
-       CENTER = z -100
 
-       It is NOT immediately at the store.
+       CENTER:
+       z = -100
+
+       It is deliberately separated
+       from the convenience store.
     ============================================ */
+
+    /*
+       Main road reaching intersection.
+    */
 
     road(
         scene,
         0,
-        -125,
+        -100,
         18,
-        60
+        90
     );
 
+
     /*
-       Left branch
-       Goes toward park.
+       LEFT BRANCH
+
+       Goes toward PARK.
+
+       The road extends far enough
+       that the park is not immediately
+       visible from the intersection.
     */
 
     road(
@@ -1559,9 +1907,11 @@ function loadGRRoute(){
         Math.PI/2
     );
 
+
     /*
-       Right branch
-       Goes toward GR.
+       RIGHT BRANCH
+
+       Correct route to GR.
     */
 
     road(
@@ -1573,9 +1923,13 @@ function loadGRRoute(){
         Math.PI/2
     );
 
+
     /*
-       Straight branch
-       Goes toward café.
+       STRAIGHT BRANCH
+
+       Goes toward CAFE.
+
+       Cafe is far away.
     */
 
     road(
@@ -1589,15 +1943,14 @@ function loadGRRoute(){
 
     /* ============================================
        CROSSROAD GROUP
-
-       Label exists but is hidden until player
-       gets reasonably close.
     ============================================ */
 
     crossroadGroup =
         new THREE.Group();
 
-    scene.add(crossroadGroup);
+    scene.add(
+        crossroadGroup
+    );
 
     makeLabel(
         crossroadGroup,
@@ -1610,12 +1963,21 @@ function loadGRRoute(){
 
     /* ============================================
        PARK
-       FAR TO THE LEFT
 
+       LEFT OF INTERSECTION
+
+       FAR AWAY:
+
+       Intersection:
+       x = 0
+       z = -100
+
+       Park:
        x = -105
        z = -100
 
-       Cannot be seen from intersection.
+       Ahao has to actually turn LEFT
+       and walk quite far before seeing it.
     ============================================ */
 
     parkGroup =
@@ -1623,7 +1985,9 @@ function loadGRRoute(){
 
     parkGroup.visible=false;
 
-    scene.add(parkGroup);
+    scene.add(
+        parkGroup
+    );
 
     box(
         parkGroup,
@@ -1635,6 +1999,7 @@ function loadGRRoute(){
         70,
         0x6da55c
     );
+
 
     for(
         let i=0;
@@ -1650,6 +2015,7 @@ function loadGRRoute(){
 
     }
 
+
     makeLabel(
         parkGroup,
         "🌳 公園",
@@ -1661,11 +2027,19 @@ function loadGRRoute(){
 
     /* ============================================
        CAFE
-       FAR STRAIGHT AHEAD
 
+       STRAIGHT AHEAD
+
+       FAR AWAY:
+
+       Intersection:
+       z = -100
+
+       Cafe:
        z = -220
 
-       Not visible from intersection.
+       So it will NOT be visible
+       immediately at the intersection.
     ============================================ */
 
     cafeGroup =
@@ -1673,7 +2047,9 @@ function loadGRRoute(){
 
     cafeGroup.visible=false;
 
-    scene.add(cafeGroup);
+    scene.add(
+        cafeGroup
+    );
 
     box(
         cafeGroup,
@@ -1697,12 +2073,19 @@ function loadGRRoute(){
 
     /* ============================================
        GR BUS STOP
-       FAR TO THE RIGHT
 
+       RIGHT OF INTERSECTION
+
+       FAR AWAY:
+
+       Intersection:
+       x = 0
+
+       GR:
        x = 145
-       z = -100
 
-       Not visible from intersection.
+       Ahao must turn RIGHT
+       and continue walking.
     ============================================ */
 
     grGroup =
@@ -1710,7 +2093,9 @@ function loadGRRoute(){
 
     grGroup.visible=false;
 
-    scene.add(grGroup);
+    scene.add(
+        grGroup
+    );
 
     box(
         grGroup,
@@ -1734,13 +2119,14 @@ function loadGRRoute(){
 
     /* ============================================
        INTERACTION WITH GR
+
        ADDED ONLY WHEN GR IS DISCOVERED
     ============================================ */
-
 
     objective(
         "先一直走。找到路人說的 便利商店。"
     );
+
 }
 
 
@@ -1750,10 +2136,25 @@ function loadGRRoute(){
 
 function updateGRRouteDiscovery(){
 
+
+    /* ============================================
+       PARK
+
+       PARK IS ON THE LEFT BRANCH.
+
+       It only appears after Ahao has
+       actually turned left and walked
+       a considerable distance.
+
+       This prevents it from appearing
+       immediately at the intersection.
+    ============================================ */
+
     if(
         !parkFound &&
-        player.position.z < -105 &&
-        player.position.x < -20
+        player.position.x < -75 &&
+        player.position.z < -75 &&
+        player.position.z > -125
     ){
 
         parkFound=true;
@@ -1763,13 +2164,18 @@ function updateGRRouteDiscovery(){
         landmarkMessage(
             "🌳 你發現公園了！"
         );
+
     }
 
 
-    /*
-       Cafe only appears when player walks
-       a long distance straight.
-    */
+    /* ============================================
+       CAFE
+
+       CAFE IS STRAIGHT AHEAD.
+
+       It only appears after walking
+       a long distance.
+    ============================================ */
 
     if(
         !cafeFound &&
@@ -1784,13 +2190,16 @@ function updateGRRouteDiscovery(){
         landmarkMessage(
             "☕ 你發現咖啡店了！"
         );
+
     }
 
 
-    /*
-       Intersection becomes obvious only
-       after player reaches it.
-    */
+    /* ============================================
+       INTERSECTION
+
+       It becomes obvious only after
+       Ahao reaches the intersection.
+    ============================================ */
 
     if(
         !crossroadFound &&
@@ -1810,21 +2219,24 @@ function updateGRRouteDiscovery(){
         objective(
             "到了十字路口，往右轉。"
         );
+
     }
 
 
-    /*
-       Correct route:
-       player must actually move to the RIGHT.
+    /* ============================================
+       CORRECT ROUTE = RIGHT
 
-       x must become positive.
-    */
+       Player must actually move
+       to the positive X direction.
+    ============================================ */
 
     if(
         crossroadFound &&
         !grFound &&
         player.position.x > 100 &&
-        Math.abs(player.position.z + 100) < 25
+        Math.abs(
+            player.position.z + 100
+        ) < 25
     ){
 
         grFound=true;
@@ -1850,13 +2262,16 @@ function updateGRRouteDiscovery(){
         objective(
             "找到 GR 公車站，按 E 搭車。"
         );
+
     }
 
 
-    /*
-       Before intersection, remind player about
-       convenience store only.
-    */
+    /* ============================================
+       BEFORE INTERSECTION
+
+       Remind player about the
+       convenience store.
+    ============================================ */
 
     if(
         !crossroadFound &&
@@ -1867,6 +2282,7 @@ function updateGRRouteDiscovery(){
         objective(
             "看到 便利商店 以後繼續走。"
         );
+
     }
 
 }
@@ -1881,7 +2297,9 @@ function loadGRBusArea(){
     clearWorld();
 
     player.position.set(
-        0,2,30
+        0,
+        2,
+        30
     );
 
     player.angle=0;
@@ -1941,6 +2359,7 @@ function loadGRBusArea(){
     objective(
         "搭 GR 公車前往火車站。"
     );
+
 }
 
 
@@ -1953,7 +2372,9 @@ function loadTrainStation(){
     clearWorld();
 
     player.position.set(
-        0,2,30
+        0,
+        2,
+        30
     );
 
     player.angle=0;
@@ -2013,6 +2434,7 @@ function loadTrainStation(){
     objective(
         "找到車站，進去搭火車。"
     );
+
 }
 
 
@@ -2025,7 +2447,9 @@ function loadTaipeiMain(){
     clearWorld();
 
     player.position.set(
-        0,2,30
+        0,
+        2,
+        30
     );
 
     player.angle=0;
@@ -2076,21 +2500,28 @@ function loadTaipeiMain(){
         ()=>{
 
             speak([
+
                 {
                     speaker:"阿豪",
                     zh:"請問，怎麼去淡水？",
-                    pinyin:"Qǐngwèn, zěnme qù Dànshuǐ?"
+                    pinyin:
+                        "Qǐngwèn, zěnme qù Dànshuǐ?"
                 },
+
                 {
                     speaker:"路人",
                     zh:"你可以轉乘紅線捷運。",
-                    pinyin:"Nǐ kěyǐ zhuǎnchéng hóng xiàn jiéyùn."
+                    pinyin:
+                        "Nǐ kěyǐ zhuǎnchéng hóng xiàn jiéyùn."
                 },
+
                 {
                     speaker:"路人",
                     zh:"搭紅線到淡水。",
-                    pinyin:"Dā hóng xiàn dào Dànshuǐ."
+                    pinyin:
+                        "Dā hóng xiàn dào Dànshuǐ."
                 }
+
             ],()=>{
 
                 loadMRT();
@@ -2104,6 +2535,7 @@ function loadTaipeiMain(){
     objective(
         "在台北車站問路，找到去淡水的方法。"
     );
+
 }
 
 
@@ -2116,7 +2548,9 @@ function loadMRT(){
     clearWorld();
 
     player.position.set(
-        0,2,30
+        0,
+        2,
+        30
     );
 
     player.angle=0;
@@ -2176,6 +2610,7 @@ function loadMRT(){
     objective(
         "找到紅線捷運，轉乘到淡水。"
     );
+
 }
 
 
@@ -2188,7 +2623,9 @@ function loadTamsui(){
     clearWorld();
 
     player.position.set(
-        0,2,60
+        0,
+        2,
+        60
     );
 
     player.angle=0;
@@ -2247,36 +2684,49 @@ function loadTamsui(){
         ()=>{
 
             speak([
+
                 {
                     speaker:"阿豪",
                     zh:"請問，海風餐廳怎麼走？",
-                    pinyin:"Qǐngwèn, Hǎifēng cāntīng zěnme zǒu?"
+                    pinyin:
+                        "Qǐngwèn, Hǎifēng cāntīng zěnme zǒu?"
                 },
+
                 {
                     speaker:"路人",
                     zh:"先一直走。",
-                    pinyin:"Xiān yìzhí zǒu."
+                    pinyin:
+                        "Xiān yìzhí zǒu."
                 },
+
                 {
                     speaker:"路人",
                     zh:"看到便利商店以後繼續走。",
-                    pinyin:"Kàndào biànlì shāngdiàn yǐhòu jìxù zǒu."
+                    pinyin:
+                        "Kàndào biànlì shāngdiàn yǐhòu jìxù zǒu."
                 },
+
                 {
                     speaker:"路人",
                     zh:"到了三叉路口往左轉。",
-                    pinyin:"Dào le sānchā lùkǒu wǎng zuǒ zhuǎn."
+                    pinyin:
+                        "Dào le sānchā lùkǒu wǎng zuǒ zhuǎn."
                 },
+
                 {
                     speaker:"路人",
                     zh:"左轉以後一直走。",
-                    pinyin:"Zuǒ zhuǎn yǐhòu yìzhí zǒu."
+                    pinyin:
+                        "Zuǒ zhuǎn yǐhòu yìzhí zǒu."
                 },
+
                 {
                     speaker:"路人",
                     zh:"走一段路就會看到海風餐廳。",
-                    pinyin:"Zǒu yí duàn lù jiù huì kàndào Hǎifēng cāntīng."
+                    pinyin:
+                        "Zǒu yí duàn lù jiù huì kàndào Hǎifēng cāntīng."
                 }
+
             ],()=>{
 
                 loadRestaurant();
@@ -2290,6 +2740,7 @@ function loadTamsui(){
     objective(
         "下車後找路人，問海風餐廳怎麼走。"
     );
+
 }
 
 
@@ -2302,7 +2753,9 @@ function loadRestaurant(){
     clearWorld();
 
     player.position.set(
-        0,2,80
+        0,
+        2,
+        80
     );
 
     player.angle=0;
@@ -2358,7 +2811,9 @@ function loadRestaurant(){
 
     restaurant.visible=false;
 
-    scene.add(restaurant);
+    scene.add(
+        restaurant
+    );
 
     box(
         restaurant,
@@ -2416,15 +2871,17 @@ function loadRestaurant(){
             objective(
                 "找到海風餐廳，按 E 進去。"
             );
+
         }
 
     }
 
-    restaurant.userData.update=
+    restaurant.userData.update =
         updateRestaurant;
 
-    window.currentRestaurantUpdate=
+    window.currentRestaurantUpdate =
         updateRestaurant;
+
 }
 
 
@@ -2436,7 +2893,9 @@ function showSuccess(){
 
     document.getElementById(
         "success"
-    ).style.display="flex";
+    ).style.display =
+        "flex";
+
 }
 
 
@@ -2461,27 +2920,43 @@ function getForward(){
     */
 
     return new THREE.Vector3(
-        Math.sin(player.angle),
+
+        Math.sin(
+            player.angle
+        ),
+
         0,
-        -Math.cos(player.angle)
+
+        -Math.cos(
+            player.angle
+        )
+
     );
+
 }
 
 
 function updateMovement(){
 
-    if(dialogueActive) return;
+    if(dialogueActive)
+        return;
 
     /*
        LEFT / RIGHT = ROTATION ONLY
     */
 
     if(keys.left){
-        player.angle -= player.rotateSpeed;
+
+        player.angle -=
+            player.rotateSpeed;
+
     }
 
     if(keys.right){
-        player.angle += player.rotateSpeed;
+
+        player.angle +=
+            player.rotateSpeed;
+
     }
 
 
@@ -2498,6 +2973,7 @@ function updateMovement(){
             forward,
             player.speed
         );
+
     }
 
 
@@ -2514,6 +2990,7 @@ function updateMovement(){
             forward,
             -player.speed
         );
+
     }
 
 
@@ -2522,6 +2999,7 @@ function updateMovement(){
     */
 
     player.position.y=2;
+
 }
 
 
@@ -2537,11 +3015,14 @@ function updateCamera(){
     const cameraTarget =
         player.position.clone()
             .add(
-                forward.clone().multiplyScalar(8)
+                forward.clone()
+                    .multiplyScalar(8)
             );
 
     camera.position.lerp(
+
         new THREE.Vector3(
+
             player.position.x -
                 forward.x*8,
 
@@ -2549,15 +3030,23 @@ function updateCamera(){
 
             player.position.z -
                 forward.z*8
+
         ),
+
         .12
+
     );
 
     camera.lookAt(
+
         cameraTarget.x,
+
         cameraTarget.y + 1.5,
+
         cameraTarget.z
+
     );
+
 }
 
 
@@ -2573,6 +3062,7 @@ function update(){
 
     updateInteractionUI();
 
+
     if(
         typeof updateGRRouteDiscovery ===
         "function"
@@ -2586,7 +3076,9 @@ function update(){
             updateGRRouteDiscovery();
 
         }
+
     }
+
 
     if(
         typeof window.currentRestaurantUpdate ===
@@ -2605,35 +3097,65 @@ function update(){
 ========================================================= */
 
 const vocab=[
+
     ["左","zuǒ","left"],
+
     ["右","yòu","right"],
+
     ["左轉","zuǒ zhuǎn","turn left"],
+
     ["右轉","yòu zhuǎn","turn right"],
+
     ["一直走","yìzhí zǒu","go straight"],
+
     ["繼續走","jìxù zǒu","continue walking"],
+
     ["十字路口","shízì lùkǒu","crossroad / four-way intersection"],
+
     ["三叉路口","sānchā lùkǒu","three-way intersection"],
+
     ["公車","gōngchē","bus"],
+
     ["公車站","gōngchē zhàn","bus stop"],
+
     ["搭公車","dā gōngchē","take a bus"],
+
     ["轉車","zhuǎn chē","transfer vehicles"],
+
     ["轉乘","zhuǎnchéng","transfer"],
+
     ["火車","huǒchē","train"],
+
     ["車站","chēzhàn","station"],
+
     ["捷運","jiéyùn","MRT"],
+
     ["紅線","hóng xiàn","Red Line"],
+
     ["淡水信義線","Dànshuǐ Xìnyì xiàn","Tamsui-Xinyi Line"],
+
     ["銀行","yínháng","bank"],
+
     ["便利商店","biànlì shāngdiàn","convenience store"],
+
     ["咖啡店","kāfēidiàn","café"],
+
     ["公園","gōngyuán","park"],
+
     ["台北車站","Táiběi chēzhàn","Taipei Main Station"],
+
     ["淡水","Dànshuǐ","Tamsui"],
+
     ["下車","xià chē","get off"],
+
     ["前面","qiánmiàn","in front / ahead"],
+
     ["方向","fāngxiàng","direction"],
+
     ["生日禮物","shēngrì lǐwù","birthday present"],
+
     ["餐廳","cāntīng","restaurant"]
+
 ];
 
 
@@ -2646,23 +3168,37 @@ function loadVocab(){
 
     list.innerHTML="";
 
-    vocab.forEach(item=>{
+    vocab.forEach(
+        item=>{
 
-        const div =
-            document.createElement("div");
+            const div =
+                document.createElement(
+                    "div"
+                );
 
-        div.className="vocabItem";
+            div.className =
+                "vocabItem";
 
-        div.innerHTML=`
-            <div>
-                <b>${item[0]}</b>
-                <small>${item[1]}</small>
-            </div>
-            <div>${item[2]}</div>
-        `;
+            div.innerHTML=`
 
-        list.appendChild(div);
-    });
+                <div>
+                    <b>${item[0]}</b>
+                    <small>${item[1]}</small>
+                </div>
+
+                <div>
+                    ${item[2]}
+                </div>
+
+            `;
+
+            list.appendChild(
+                div
+            );
+
+        }
+    );
+
 }
 
 loadVocab();
@@ -2674,7 +3210,9 @@ document.getElementById(
 
     document.getElementById(
         "vocabModal"
-    ).classList.remove("hidden");
+    ).classList.remove(
+        "hidden"
+    );
 
 };
 
@@ -2685,7 +3223,9 @@ document.getElementById(
 
     document.getElementById(
         "vocabModal"
-    ).classList.add("hidden");
+    ).classList.add(
+        "hidden"
+    );
 
 };
 
@@ -2700,7 +3240,8 @@ document.getElementById(
 
     document.getElementById(
         "story"
-    ).style.display="none";
+    ).style.display =
+        "none";
 
     loadGiftArea();
 
@@ -2716,7 +3257,8 @@ window.addEventListener(
     ()=>{
 
         camera.aspect =
-            innerWidth / innerHeight;
+            innerWidth /
+            innerHeight;
 
         camera.updateProjectionMatrix();
 
@@ -2745,6 +3287,7 @@ function animate(){
         scene,
         camera
     );
+
 }
 
 animate();
