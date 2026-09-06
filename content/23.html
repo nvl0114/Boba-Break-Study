@@ -1,0 +1,2053 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Talking About Ability & Permission (會 / 能 / 可以) | Boba Break Study</title>
+
+<link rel="icon" type="image/png" href="/favicon.png">
+
+<link rel="stylesheet" href="../style.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<!-- Hanzi Writer CDN -->
+<script src="https://cdn.jsdelivr.net/npm/hanzi-writer@3.5.0/dist/hanzi-writer.min.js"></script>
+
+<!-- Lesson Database Script (used ONLY for the Grammar Master review pool) -->
+<script src="lesson.js"></script>
+
+<style>
+
+/* =====================================================
+   GENERAL
+===================================================== */
+
+.lesson-card,
+.grammar-card,
+.game-card,
+.writing-card,
+.final-card {
+    background: white;
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.06);
+    margin: 25px auto;
+    max-width: 750px;
+}
+
+h2 {
+    color: #b8865c;
+    font-size: 24px;
+    margin-bottom: 12px;
+}
+
+h3 {
+    color: #5c4033;
+}
+
+p {
+    color: #666;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+
+/* =====================================================
+   LESSON HEADER
+===================================================== */
+
+.lesson-title {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.lesson-title .badge {
+    display: inline-block;
+    background: #fff8ef;
+    color: #b8865c;
+    border: 1px solid #d7b89c;
+    padding: 6px 13px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.lesson-title h1 {
+    color: #5c4033;
+    font-size: 28px;
+    margin: 12px 0 5px;
+}
+
+.lesson-title p {
+    margin: 0;
+}
+
+
+/* =====================================================
+   CHATROOM (LINE STYLE - COMPACT & SCROLLABLE)
+===================================================== */
+
+.line-chat-box {
+    max-width: 750px;
+    margin: 15px auto;
+    background: #7494c0;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: 2px solid #5c7ba8;
+}
+
+.line-chat-header {
+    background: #5c7ba8;
+    color: white;
+    padding: 12px 16px;
+    font-size: 14px;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.line-chat-scroll {
+    padding: 15px 12px;
+    max-height: 380px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.line-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    max-width: 80%;
+}
+
+.line-row.left {
+    align-self: flex-start;
+}
+
+.line-row.right {
+    align-self: flex-end;
+    flex-direction: row-reverse;
+}
+
+.line-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: #fff;
+    border: 1px solid #ddd;
+    flex-shrink: 0;
+}
+
+.line-content-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.line-row.right .line-content-group {
+    align-items: flex-end;
+}
+
+.line-sender-name {
+    font-size: 11px;
+    color: #e2ecff;
+    margin-bottom: 2px;
+    margin-left: 2px;
+    margin-right: 2px;
+}
+
+.line-bubble-wrapper {
+    display: flex;
+    align-items: flex-end;
+    gap: 6px;
+}
+
+.line-row.right .line-bubble-wrapper {
+    flex-direction: row-reverse;
+}
+
+.line-bubble {
+    background: #ffffff;
+    padding: 10px 30px 10px 12px;
+    border-radius: 12px;
+    position: relative;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    max-width: 280px;
+}
+
+.line-row.right .line-bubble {
+    background: #85e249;
+}
+
+.line-hanzi {
+    font-size: 16px;
+    font-weight: bold;
+    color: #222;
+    line-height: 1.9;
+}
+
+.line-row.right .line-hanzi {
+    color: #111;
+}
+
+.line-hanzi ruby rt {
+    font-size: 9.5px;
+    font-weight: normal;
+    color: #8c5d35;
+}
+
+.line-row.right .line-hanzi ruby rt {
+    color: #2d6a4f;
+}
+
+.line-meaning {
+    font-size: 10.5px;
+    color: #888;
+    margin-top: 2px;
+    font-style: italic;
+}
+
+.line-row.right .line-meaning {
+    color: #444;
+}
+
+.line-sound-btn {
+    position: absolute;
+    right: 6px;
+    top: 6px;
+    width: 22px;
+    height: 22px;
+    font-size: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,0.1);
+    color: #333;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.line-sound-btn:hover {
+    background: rgba(0,0,0,0.2);
+}
+
+.line-time {
+    font-size: 9px;
+    color: #dbe4f0;
+    align-self: flex-end;
+    margin-bottom: 1px;
+    white-space: nowrap;
+}
+
+
+/* =====================================================
+   GRAMMAR CAROUSEL / SLIDER
+===================================================== */
+
+.grammar-slider-container {
+    position: relative;
+    background: #fff8ef;
+    border: 1.5px solid #d7b89c;
+    border-radius: 15px;
+    padding: 24px;
+    min-height: 220px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.grammar-slide {
+    display: none;
+}
+
+.grammar-slide.active {
+    display: block;
+}
+
+.grammar-slide h3 {
+    font-size: 17px;
+    color: #8c5d35;
+    margin-bottom: 14px;
+    border-bottom: 2px dashed #d7b89c;
+    padding-bottom: 8px;
+}
+
+.grammar-box-content {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.grammar-point-item {
+    background: white;
+    border: 1px solid #e7d6c4;
+    border-radius: 12px;
+    padding: 14px 16px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+}
+
+.grammar-point-item p {
+    margin: 6px 0 0 0;
+    color: #555;
+    font-size: 13.5px;
+}
+
+.grammar-point-item strong {
+    color: #b8865c;
+    font-size: 14px;
+}
+
+.grammar-example-box {
+    margin-top: 8px;
+    background: #fffaf5;
+    border-left: 3px solid #b8865c;
+    padding: 6px 10px;
+    border-radius: 4px;
+    font-size: 13px;
+    color: #444;
+}
+
+.grammar-nav-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    border-top: 1px solid #e7d6c4;
+    padding-top: 15px;
+}
+
+.grammar-btn {
+    background: #b8865c;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.grammar-btn:hover {
+    background: #a0724f;
+}
+
+.grammar-btn:disabled {
+    opacity: 0.4;
+    cursor: default;
+}
+
+.grammar-counter {
+    font-size: 13px;
+    font-weight: bold;
+    color: #8c7355;
+}
+
+
+/* =====================================================
+   VOCABULARY
+===================================================== */
+
+.vocab-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.vocab-pill {
+    position: relative;
+    background: #fff8ef;
+    border-radius: 14px;
+    padding: 9px 10px;
+    width: 105px;
+    text-align: center;
+    border: 1.5px solid #d7b89c;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.vocab-pill:hover {
+    transform: translateY(-2px);
+    background: #faedcd;
+}
+
+.vocab-pill:active {
+    transform: scale(0.95);
+}
+
+.vocab-pill .hanzi {
+    font-size: 20px;
+    font-weight: bold;
+    color: #b8865c;
+}
+
+.vocab-pill .pinyin {
+    font-size: 11px;
+    color: #555;
+}
+
+.vocab-pill .meaning {
+    font-size: 10px;
+    color: #777;
+    margin-top: 2px;
+}
+
+
+/* =====================================================
+   GAME
+===================================================== */
+
+.game-card {
+    position: relative;
+}
+
+.game-number {
+    display: inline-block;
+    background: #fff8ef;
+    color: #b8865c;
+    border: 1px solid #d7b89c;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.game-description {
+    margin-bottom: 15px;
+}
+
+.question-box {
+    text-align: center;
+    background: #fff8ef;
+    border: 1.5px dashed #d7b89c;
+    padding: 15px;
+    border-radius: 15px;
+    margin-bottom: 15px;
+}
+
+.question-label {
+    font-size: 11px;
+    color: #999;
+    margin-bottom: 5px;
+}
+
+.question-meaning {
+    font-size: 17px;
+    color: #5c4033;
+    font-weight: bold;
+}
+
+.answer-area {
+    min-height: 65px;
+    padding: 12px;
+    border: 2px dashed #d7b89c;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 7px;
+    background: #fdfbf7;
+    margin-bottom: 12px;
+}
+
+.answer-placeholder {
+    color: #aaa;
+    font-size: 13px;
+}
+
+.word-bank {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.word-btn {
+    border: 1.5px solid #d7b89c;
+    background: white;
+    color: #5c4033;
+    padding: 9px 14px;
+    border-radius: 12px;
+    font-size: 17px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.word-btn:hover {
+    background: #fff8ef;
+    transform: translateY(-2px);
+}
+
+.word-btn.selected {
+    background: #faedcd;
+    border-color: #b8865c;
+    color: #8c5d35;
+}
+
+.word-btn:disabled {
+    opacity: 0.4;
+    cursor: default;
+}
+
+.selected-word {
+    background: #b8865c;
+    color: white;
+    padding: 8px 13px;
+    border-radius: 10px;
+    font-size: 17px;
+    cursor: pointer;
+}
+
+.selected-word:hover {
+    background: #a0724f;
+}
+
+.game-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.check-btn,
+.reset-btn,
+.listen-btn,
+.next-game-btn {
+    flex: 1;
+    border: none;
+    border-radius: 12px;
+    padding: 11px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+.check-btn {
+    background: #b8865c;
+    color: white;
+}
+
+.check-btn:hover {
+    background: #a0724f;
+}
+
+.reset-btn {
+    background: #fff8ef;
+    color: #8c7355;
+    border: 1px solid #d7b89c;
+}
+
+.listen-btn {
+    background: #f0f7f4;
+    color: #2d6a4f;
+    border: 1px solid #b7e4c7;
+}
+
+.next-game-btn {
+    background: #5c4033;
+    color: white;
+    display: none;
+    margin-top: 12px;
+}
+
+.feedback {
+    text-align: center;
+    min-height: 30px;
+    margin-top: 12px;
+    font-weight: bold;
+}
+
+.correct {
+    color: #2d6a4f;
+}
+
+.incorrect {
+    color: #9b2226;
+}
+
+
+/* =====================================================
+   QUESTION COUNTER
+===================================================== */
+
+.game-progress {
+    font-size: 12px;
+    color: #8c7355;
+    text-align: right;
+    margin-bottom: 8px;
+}
+
+
+/* =====================================================
+   SENTENCE WRITING (FREE TYPING PRACTICE)
+===================================================== */
+
+.sentence-writing-box {
+    margin-bottom: 6px;
+}
+
+.sentence-input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px;
+    border: 1.5px solid #d7b89c;
+    border-radius: 12px;
+    font-size: 19px;
+    margin-bottom: 12px;
+    text-align: center;
+    font-family: inherit;
+}
+
+.sentence-input:focus {
+    outline: none;
+    border-color: #b8865c;
+}
+
+.sentence-answer-reveal {
+    text-align: center;
+    font-size: 16px;
+    color: #b8865c;
+    font-weight: bold;
+    min-height: 24px;
+    margin-top: 10px;
+}
+
+
+/* =====================================================
+   WRITING
+===================================================== */
+
+.writing-card {
+    text-align: center;
+}
+
+.writing-mode-buttons {
+    display: flex;
+    gap: 8px;
+    margin: 15px 0;
+}
+
+.mode-btn {
+    flex: 1;
+    border: 1.5px solid #d7b89c;
+    background: #fff8ef;
+    color: #8c7355;
+    padding: 10px 5px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+.mode-btn.active {
+    background: #b8865c;
+    color: white;
+    border-color: #b8865c;
+}
+
+.writing-info {
+    color: #777;
+    font-size: 13px;
+    margin-bottom: 15px;
+}
+
+.canvas-wrapper {
+    margin: 15px auto;
+    width: 280px;
+    max-width: 100%;
+    height: 280px;
+    background:
+        linear-gradient(#eadac7 1px, transparent 1px),
+        linear-gradient(90deg, #eadac7 1px, transparent 1px),
+        linear-gradient(#eadac7 1px, transparent 1px),
+        linear-gradient(90deg, #eadac7 1px, transparent 1px);
+    background-size: 70px 70px;
+    background-position: center;
+    border: 2px solid #d7b89c;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+    touch-action: none;
+}
+
+#target-div {
+    width: 260px;
+    height: 260px;
+}
+
+.writing-buttons {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.write-btn {
+    border: none;
+    padding: 10px 15px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.clear-btn {
+    background: #fff8ef;
+    color: #8c7355;
+    border: 1px solid #d7b89c;
+}
+
+.next-write-btn {
+    background: #b8865c;
+    color: white;
+}
+
+
+/* =====================================================
+   FINAL CHALLENGE
+===================================================== */
+
+.final-card {
+    text-align: center;
+}
+
+.final-score {
+    font-size: 40px;
+    font-weight: bold;
+    color: #b8865c;
+}
+
+.unlock {
+    background: #fff8ef;
+    padding: 15px;
+    border-radius: 15px;
+    border: 1.5px solid #d7b89c;
+    margin-top: 15px;
+}
+
+.grammar-master-error {
+    display: none;
+    background: #fdecea;
+    color: #9b2226;
+    border: 1.5px solid #f5c2c0;
+    padding: 16px;
+    border-radius: 14px;
+    font-size: 13.5px;
+    margin-bottom: 15px;
+    text-align: center;
+    line-height: 1.6;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:700px){
+
+    .lesson-card,
+    .grammar-card,
+    .game-card,
+    .writing-card,
+    .final-card {
+        padding: 15px;
+        margin: 15px;
+    }
+
+    .lesson-title h1 {
+        font-size: 23px;
+    }
+
+    .word-btn {
+        padding: 8px 12px;
+        font-size: 16px;
+    }
+
+    .writing-mode-buttons {
+        flex-wrap: wrap;
+    }
+
+    .mode-btn {
+        min-width: 45%;
+    }
+
+    .game-buttons {
+        flex-wrap: wrap;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="app-container">
+
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
+
+<div id="sidebar-container"></div>
+
+<main class="main-content">
+
+
+<!-- =====================================================
+     TITLE
+===================================================== -->
+
+<div class="lesson-title">
+
+    <span class="badge">
+        SPEAKING SKILLS • 能力與許可
+    </span>
+
+    <h1>Ability & Permission (會 / 能 / 可以)</h1>
+
+    <p>
+        Learn how to talk about learned skills, situational ability, and permission in Mandarin — plus how to link two ideas together with "if" and "then"!
+    </p>
+
+</div>
+
+
+<!-- =====================================================
+     CONVERSATION CHAT (LINE STYLE)
+===================================================== -->
+
+<div class="lesson-card">
+
+    <h2>💬 Conversation: A-Hao & Xiaomei</h2>
+
+    <p>Tap the sound button on any bubble to listen. Pinyin is only shown above the key vocabulary words.</p>
+
+    <div class="line-chat-box">
+        <div class="line-chat-header">
+            <span>💬 Language Practice Chatroom</span>
+            <span style="font-size:11px; opacity:0.8;">Online</span>
+        </div>
+
+        <div class="line-chat-scroll">
+
+            <!-- Turn 1 (A-Hao - Left) -->
+            <div class="line-row left">
+                <img src="https://img.icons8.com/?size=100&id=108652&format=png&color=000000" class="line-avatar" alt="A-Hao">
+                <div class="line-content-group">
+                    <span class="line-sender-name">阿豪 (A-Hao)</span>
+                    <div class="line-bubble-wrapper">
+                        <div class="line-bubble">
+                            <div class="line-hanzi">小美，你<ruby>會<rt>huì</rt></ruby>講英文嗎？</div>
+                            <div class="line-meaning">Xiaomei, can you speak English?</div>
+                            <button class="line-sound-btn" onclick="playAudio('小美，你會講英文嗎？')">🔊</button>
+                        </div>
+                        <span class="line-time">19:00</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Turn 2 (Xiaomei - Right) -->
+            <div class="line-row right">
+                <img src="https://img.icons8.com/?size=100&id=68478&format=png&color=000000" class="line-avatar" alt="Xiaomei">
+                <div class="line-content-group">
+                    <span class="line-sender-name">小美 (Xiaomei)</span>
+                    <div class="line-bubble-wrapper">
+                        <div class="line-bubble">
+                            <div class="line-hanzi"><ruby>會<rt>huì</rt></ruby><ruby>啊<rt>a</rt></ruby>！我<ruby>會<rt>huì</rt></ruby>說一點英文。你呢？</div>
+                            <div class="line-meaning">Yes! I can speak a little English. How about you?</div>
+                            <button class="line-sound-btn" onclick="playAudio('會啊！我會說一點英文。你呢？')">🔊</button>
+                        </div>
+                        <span class="line-time">19:01</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Turn 3 (A-Hao - Left) -->
+            <div class="line-row left">
+                <img src="https://img.icons8.com/?size=100&id=108652&format=png&color=000000" class="line-avatar" alt="A-Hao">
+                <div class="line-content-group">
+                    <span class="line-sender-name">阿豪 (A-Hao)</span>
+                    <div class="line-bubble-wrapper">
+                        <div class="line-bubble">
+                            <div class="line-hanzi">我也<ruby>會<rt>huì</rt></ruby>說英文，但是我不<ruby>會<rt>huì</rt></ruby>說很多。</div>
+                            <div class="line-meaning">I can speak English too, but I can't speak much.</div>
+                            <button class="line-sound-btn" onclick="playAudio('我也會說英文，但是我不會說很多。')">🔊</button>
+                        </div>
+                        <span class="line-time">19:01</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Turn 4 (Xiaomei - Right) -->
+            <div class="line-row right">
+                <img src="https://img.icons8.com/?size=100&id=68478&format=png&color=000000" class="line-avatar" alt="Xiaomei">
+                <div class="line-content-group">
+                    <span class="line-sender-name">小美 (Xiaomei)</span>
+                    <div class="line-bubble-wrapper">
+                        <div class="line-bubble">
+                            <div class="line-hanzi">沒關係，我們<ruby>可以<rt>kěyǐ</rt></ruby>一起學習<ruby>啊<rt>a</rt></ruby>！</div>
+                            <div class="line-meaning">It's okay, we can study together!</div>
+                            <button class="line-sound-btn" onclick="playAudio('沒關係，我們可以一起學習啊！')">🔊</button>
+                        </div>
+                        <span class="line-time">19:02</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Turn 5 (A-Hao - Left) -->
+            <div class="line-row left">
+                <img src="https://img.icons8.com/?size=100&id=108652&format=png&color=000000" class="line-avatar" alt="A-Hao">
+                <div class="line-content-group">
+                    <span class="line-sender-name">阿豪 (A-Hao)</span>
+                    <div class="line-bubble-wrapper">
+                        <div class="line-bubble">
+                            <div class="line-hanzi">好<ruby>啊<rt>a</rt></ruby>！可是我明天有<ruby>事情<rt>shìqíng</rt></ruby>，不知道<ruby>能<rt>néng</rt></ruby>不<ruby>能<rt>néng</rt></ruby>跟你一起學。</div>
+                            <div class="line-meaning">Okay! But I have something tomorrow, I'm not sure if I can study with you.</div>
+                            <button class="line-sound-btn" onclick="playAudio('好啊！可是我明天有事情，不知道能不能跟你一起學。')">🔊</button>
+                        </div>
+                        <span class="line-time">19:03</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Turn 6 (Xiaomei - Right) -->
+            <div class="line-row right">
+                <img src="https://img.icons8.com/?size=100&id=68478&format=png&color=000000" class="line-avatar" alt="Xiaomei">
+                <div class="line-content-group">
+                    <span class="line-sender-name">小美 (Xiaomei)</span>
+                    <div class="line-bubble-wrapper">
+                        <div class="line-bubble">
+                            <div class="line-hanzi">你明天不<ruby>能<rt>néng</rt></ruby>來嗎？</div>
+                            <div class="line-meaning">Can't you come tomorrow?</div>
+                            <button class="line-sound-btn" onclick="playAudio('你明天不能來嗎？')">🔊</button>
+                        </div>
+                        <span class="line-time">19:03</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Turn 7 (A-Hao - Left) -->
+            <div class="line-row left">
+                <img src="https://img.icons8.com/?size=100&id=108652&format=png&color=000000" class="line-avatar" alt="A-Hao">
+                <div class="line-content-group">
+                    <span class="line-sender-name">阿豪 (A-Hao)</span>
+                    <div class="line-bubble-wrapper">
+                        <div class="line-bubble">
+                            <div class="line-hanzi">我下午不<ruby>能<rt>néng</rt></ruby>，但是晚上應該<ruby>能<rt>néng</rt></ruby>。</div>
+                            <div class="line-meaning">I can't in the afternoon, but I should be able to in the evening.</div>
+                            <button class="line-sound-btn" onclick="playAudio('我下午不能，但是晚上應該能。')">🔊</button>
+                        </div>
+                        <span class="line-time">19:04</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Turn 8 (Xiaomei - Right) -->
+            <div class="line-row right">
+                <img src="https://img.icons8.com/?size=100&id=68478&format=png&color=000000" class="line-avatar" alt="Xiaomei">
+                <div class="line-content-group">
+                    <span class="line-sender-name">小美 (Xiaomei)</span>
+                    <div class="line-bubble-wrapper">
+                        <div class="line-bubble">
+                            <div class="line-hanzi">那你<ruby>可以<rt>kěyǐ</rt></ruby>晚上來我家嗎？</div>
+                            <div class="line-meaning">Then can you come to my house in the evening?</div>
+                            <button class="line-sound-btn" onclick="playAudio('那你可以晚上來我家嗎？')">🔊</button>
+                        </div>
+                        <span class="line-time">19:04</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Turn 9 (A-Hao - Left) -->
+            <div class="line-row left">
+                <img src="https://img.icons8.com/?size=100&id=108652&format=png&color=000000" class="line-avatar" alt="A-Hao">
+                <div class="line-content-group">
+                    <span class="line-sender-name">阿豪 (A-Hao)</span>
+                    <div class="line-bubble-wrapper">
+                        <div class="line-bubble">
+                            <div class="line-hanzi">我不知道，我要<ruby>先<rt>xiān</rt></ruby>問媽媽。</div>
+                            <div class="line-meaning">I don't know, I need to ask my mom first.</div>
+                            <button class="line-sound-btn" onclick="playAudio('我不知道，我要先問媽媽。')">🔊</button>
+                        </div>
+                        <span class="line-time">19:05</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Turn 10 (Xiaomei - Right) -->
+            <div class="line-row right">
+                <img src="https://img.icons8.com/?size=100&id=68478&format=png&color=000000" class="line-avatar" alt="Xiaomei">
+                <div class="line-content-group">
+                    <span class="line-sender-name">小美 (Xiaomei)</span>
+                    <div class="line-bubble-wrapper">
+                        <div class="line-bubble">
+                            <div class="line-hanzi">好<ruby>啊<rt>a</rt></ruby>！你問媽媽，你<ruby>可以<rt>kěyǐ</rt></ruby>來<ruby>的話<rt>de huà</rt></ruby>，<ruby>再<rt>zài</rt></ruby>跟我說。</div>
+                            <div class="line-meaning">Okay! Ask your mom, and if you can come, let me know.</div>
+                            <button class="line-sound-btn" onclick="playAudio('好啊！你問媽媽，你可以來的話，再跟我說。')">🔊</button>
+                        </div>
+                        <span class="line-time">19:05</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Turn 11 (A-Hao - Left) -->
+            <div class="line-row left">
+                <img src="https://img.icons8.com/?size=100&id=108652&format=png&color=000000" class="line-avatar" alt="A-Hao">
+                <div class="line-content-group">
+                    <span class="line-sender-name">阿豪 (A-Hao)</span>
+                    <div class="line-bubble-wrapper">
+                        <div class="line-bubble">
+                            <div class="line-hanzi">好！對了，你還<ruby>會<rt>huì</rt></ruby>說<ruby>別<rt>bié</rt></ruby>的<ruby>語言<rt>yǔyán</rt></ruby>嗎？</div>
+                            <div class="line-meaning">Okay! By the way, can you speak any other languages?</div>
+                            <button class="line-sound-btn" onclick="playAudio('好！對了，你還會說別的語言嗎？')">🔊</button>
+                        </div>
+                        <span class="line-time">19:06</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Turn 12 (Xiaomei - Right) -->
+            <div class="line-row right">
+                <img src="https://img.icons8.com/?size=100&id=68478&format=png&color=000000" class="line-avatar" alt="Xiaomei">
+                <div class="line-content-group">
+                    <span class="line-sender-name">小美 (Xiaomei)</span>
+                    <div class="line-bubble-wrapper">
+                        <div class="line-bubble">
+                            <div class="line-hanzi">我<ruby>會<rt>huì</rt></ruby>說中文和英文，也<ruby>會<rt>huì</rt></ruby>說一點<ruby>日文<rt>Rìwén</rt></ruby>。</div>
+                            <div class="line-meaning">I can speak Chinese and English, and I can also speak a little Japanese.</div>
+                            <button class="line-sound-btn" onclick="playAudio('我會說中文和英文，也會說一點日文。')">🔊</button>
+                        </div>
+                        <span class="line-time">19:06</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Turn 13 (A-Hao - Left) -->
+            <div class="line-row left">
+                <img src="https://img.icons8.com/?size=100&id=108652&format=png&color=000000" class="line-avatar" alt="A-Hao">
+                <div class="line-content-group">
+                    <span class="line-sender-name">阿豪 (A-Hao)</span>
+                    <div class="line-bubble-wrapper">
+                        <div class="line-bubble">
+                            <div class="line-hanzi">真<ruby>厲害<rt>lìhài</rt></ruby>！我<ruby>只<rt>zhǐ</rt></ruby><ruby>會<rt>huì</rt></ruby>說中文和一點英文。😅</div>
+                            <div class="line-meaning">Wow, impressive! I can only speak Chinese and a little English. 😅</div>
+                            <button class="line-sound-btn" onclick="playAudio('真厲害！我只會說中文和一點英文。')">🔊</button>
+                        </div>
+                        <span class="line-time">19:07</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Turn 14 (Xiaomei - Right) -->
+            <div class="line-row right">
+                <img src="https://img.icons8.com/?size=100&id=68478&format=png&color=000000" class="line-avatar" alt="Xiaomei">
+                <div class="line-content-group">
+                    <span class="line-sender-name">小美 (Xiaomei)</span>
+                    <div class="line-bubble-wrapper">
+                        <div class="line-bubble">
+                            <div class="line-hanzi">沒關係，我們<ruby>可以<rt>kěyǐ</rt></ruby>一起學！</div>
+                            <div class="line-meaning">It's okay, we can learn together!</div>
+                            <button class="line-sound-btn" onclick="playAudio('沒關係，我們可以一起學！')">🔊</button>
+                        </div>
+                        <span class="line-time">19:07</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Turn 15 (A-Hao - Left) -->
+            <div class="line-row left">
+                <img src="https://img.icons8.com/?size=100&id=108652&format=png&color=000000" class="line-avatar" alt="A-Hao">
+                <div class="line-content-group">
+                    <span class="line-sender-name">阿豪 (A-Hao)</span>
+                    <div class="line-bubble-wrapper">
+                        <div class="line-bubble">
+                            <div class="line-hanzi">好<ruby>啊<rt>a</rt></ruby>！😊</div>
+                            <div class="line-meaning">Okay! 😊</div>
+                            <button class="line-sound-btn" onclick="playAudio('好啊！')">🔊</button>
+                        </div>
+                        <span class="line-time">19:08</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     GRAMMAR CARD (SLIDER)
+===================================================== -->
+
+<div class="grammar-card">
+
+    <h2>🧠 Grammar & Sentence Explanations</h2>
+
+    <div class="grammar-slider-container">
+
+        <!-- Slide 1 -->
+        <div class="grammar-slide active" id="gSlide0">
+            <h3>1. 會 (huì) — Learned Skills</h3>
+            <div class="grammar-box-content">
+                <div class="grammar-point-item">
+                    <strong>Pattern: Subject + 會 + Verb</strong>
+                    <p>會 is used to talk about a skill that someone has learned. It means "know how to" or "can."</p>
+                    <div class="grammar-example-box">💡 我會說英文。 (I can speak English.)</div>
+                    <div class="grammar-example-box" style="margin-top:4px;">💡 我不會游泳。 (I can't swim.)</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="grammar-slide" id="gSlide1">
+            <h3>2. 能 (néng) — Ability Based on Circumstances</h3>
+            <div class="grammar-box-content">
+                <div class="grammar-point-item">
+                    <strong>Pattern: Subject + 能 + Verb</strong>
+                    <p>能 means "to be able to." It is used when the ability to do something depends on a person's situation, physical condition, time, or other circumstances — not on a learned skill.</p>
+                    <div class="grammar-example-box">💡 我下午不能來。 (I can't come in the afternoon.)</div>
+                    <div class="grammar-example-box" style="margin-top:4px;">💡 我晚上能來。 (I can come in the evening.)</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="grammar-slide" id="gSlide2">
+            <h3>3. 可以 (kěyǐ) — Permission</h3>
+            <div class="grammar-box-content">
+                <div class="grammar-point-item">
+                    <strong>Pattern: Subject + 可以 + Verb</strong>
+                    <p>可以 is commonly used to ask for or give permission. It can mean "may," "be allowed to," or sometimes "can."</p>
+                    <div class="grammar-example-box">💡 我可以出去嗎？ (May I go out?)</div>
+                    <div class="grammar-example-box" style="margin-top:4px;">💡 你可以來我家。 (You are allowed to come to my house.)</div>
+                </div>
+                <div class="grammar-point-item">
+                    <strong>Quick memory trick:</strong>
+                    <p>會 → a learned skill. 能 → depends on circumstances. 可以 → permission.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4 -->
+        <div class="grammar-slide" id="gSlide3">
+            <h3>4. 的話 (de huà) — "If..."</h3>
+            <div class="grammar-box-content">
+                <div class="grammar-point-item">
+                    <strong>Pattern: (如果) + Clause + 的話 + Result</strong>
+                    <p>的話 is placed at the end of a conditional clause to mean "if" or "in that case." It can be used together with 如果 (rúguǒ, "if") at the beginning of the sentence, or on its own — 的話 alone is very common in everyday speech.</p>
+                    <div class="grammar-example-box">💡 你可以來的話，再跟我說。 (If you can come, let me know.)</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5 -->
+        <div class="grammar-slide" id="gSlide4">
+            <h3>5. 再 (zài) — "Then" / "Again"</h3>
+            <div class="grammar-box-content">
+                <div class="grammar-point-item">
+                    <strong>Pattern: Subject + 再 + Verb</strong>
+                    <p>再 placed before a verb means the action happens afterward, or as a next step — often "then" in English, especially after a condition. It can also mean "again," referring to a repeated action.</p>
+                    <div class="grammar-example-box">💡 你可以來的話，再跟我說。 (If you can come, tell me then.)</div>
+                    <div class="grammar-example-box" style="margin-top:4px;">💡 先問媽媽，再來我家。 (Ask mom first, then come to my house.)</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grammar-nav-row">
+            <button class="grammar-btn" id="prevGrammarBtn" onclick="changeGrammarSlide(-1)" disabled>← Previous</button>
+            <span class="grammar-counter" id="grammarCounter">1 / 5</span>
+            <button class="grammar-btn" id="nextGrammarBtn" onclick="changeGrammarSlide(1)">Next →</button>
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     VOCABULARY CARDS
+===================================================== -->
+
+<div class="lesson-card">
+
+    <h2>📚 Vocabulary List</h2>
+
+    <p>Tap any word to hear its pronunciation.</p>
+
+    <div class="vocab-container">
+
+        <div class="vocab-pill" onclick="playAudio('會')">
+            <div class="hanzi">會</div>
+            <div class="pinyin">huì</div>
+            <div class="meaning">can / know how to</div>
+        </div>
+
+        <div class="vocab-pill" onclick="playAudio('可以')">
+            <div class="hanzi">可以</div>
+            <div class="pinyin">kěyǐ</div>
+            <div class="meaning">can / may (permission)</div>
+        </div>
+
+        <div class="vocab-pill" onclick="playAudio('啊')">
+            <div class="hanzi">啊</div>
+            <div class="pinyin">a</div>
+            <div class="meaning">softening particle</div>
+        </div>
+
+        <div class="vocab-pill" onclick="playAudio('事情')">
+            <div class="hanzi">事情</div>
+            <div class="pinyin">shìqíng</div>
+            <div class="meaning">matter / thing (to do)</div>
+        </div>
+
+        <div class="vocab-pill" onclick="playAudio('能')">
+            <div class="hanzi">能</div>
+            <div class="pinyin">néng</div>
+            <div class="meaning">can / to be able to</div>
+        </div>
+
+        <div class="vocab-pill" onclick="playAudio('先')">
+            <div class="hanzi">先</div>
+            <div class="pinyin">xiān</div>
+            <div class="meaning">first</div>
+        </div>
+
+        <div class="vocab-pill" onclick="playAudio('的話')">
+            <div class="hanzi">的話</div>
+            <div class="pinyin">de huà</div>
+            <div class="meaning">if / in that case</div>
+        </div>
+
+        <div class="vocab-pill" onclick="playAudio('再')">
+            <div class="hanzi">再</div>
+            <div class="pinyin">zài</div>
+            <div class="meaning">then / again</div>
+        </div>
+
+        <div class="vocab-pill" onclick="playAudio('別')">
+            <div class="hanzi">別</div>
+            <div class="pinyin">bié</div>
+            <div class="meaning">other / another</div>
+        </div>
+
+        <div class="vocab-pill" onclick="playAudio('語言')">
+            <div class="hanzi">語言</div>
+            <div class="pinyin">yǔyán</div>
+            <div class="meaning">language</div>
+        </div>
+
+        <div class="vocab-pill" onclick="playAudio('日文')">
+            <div class="hanzi">日文</div>
+            <div class="pinyin">Rìwén</div>
+            <div class="meaning">Japanese (language)</div>
+        </div>
+
+        <div class="vocab-pill" onclick="playAudio('厲害')">
+            <div class="hanzi">厲害</div>
+            <div class="pinyin">lìhài</div>
+            <div class="meaning">amazing / impressive</div>
+        </div>
+
+        <div class="vocab-pill" onclick="playAudio('只')">
+            <div class="hanzi">只</div>
+            <div class="pinyin">zhǐ</div>
+            <div class="meaning">only</div>
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     GAME 1: SENTENCE BUILDER — 會 / 能 / 可以
+===================================================== -->
+
+<div class="game-card">
+
+    <span class="game-number">GAME 1</span>
+
+    <h2>🧩 Sentence Builder: 會 / 能 / 可以</h2>
+
+    <p class="game-description">
+        Build the correct sentence using the right word for skill, circumstance, or permission.
+    </p>
+
+    <div class="game-progress">
+        Question <span id="g1Num">1</span> / 4
+    </div>
+
+    <div class="question-box">
+        <div class="question-label">Translate:</div>
+        <div class="question-meaning" id="g1Meaning"></div>
+    </div>
+
+    <div class="answer-area" id="g1Answer">
+        <span class="answer-placeholder">Tap the words below</span>
+    </div>
+
+    <div class="word-bank" id="g1Bank"></div>
+
+    <div class="game-buttons">
+        <button class="check-btn" onclick="checkGame(1)">✓ Check</button>
+        <button class="reset-btn" onclick="resetGame(1)">↻ Reset</button>
+        <button class="listen-btn" onclick="listenCurrent(1)">🔊</button>
+    </div>
+
+    <div class="feedback" id="g1Feedback"></div>
+
+    <button class="next-game-btn" id="g1Next" onclick="nextGameQuestion(1)">Next →</button>
+
+</div>
+
+
+<!-- =====================================================
+     GAME 2: SENTENCE BUILDER — 先 / 再 / 的話 / 別
+===================================================== -->
+
+<div class="game-card">
+
+    <span class="game-number">GAME 2</span>
+
+    <h2>🧩 Sentence Builder: Sequence & Conditions</h2>
+
+    <p class="game-description">
+        Practice linking ideas together with "first," "if," and "then."
+    </p>
+
+    <div class="game-progress">
+        Question <span id="g2Num">1</span> / 3
+    </div>
+
+    <div class="question-box">
+        <div class="question-label">Translate:</div>
+        <div class="question-meaning" id="g2Meaning"></div>
+    </div>
+
+    <div class="answer-area" id="g2Answer">
+        <span class="answer-placeholder">Tap the words below</span>
+    </div>
+
+    <div class="word-bank" id="g2Bank"></div>
+
+    <div class="game-buttons">
+        <button class="check-btn" onclick="checkGame(2)">✓ Check</button>
+        <button class="reset-btn" onclick="resetGame(2)">↻ Reset</button>
+        <button class="listen-btn" onclick="listenCurrent(2)">🔊</button>
+    </div>
+
+    <div class="feedback" id="g2Feedback"></div>
+
+    <button class="next-game-btn" id="g2Next" onclick="nextGameQuestion(2)">Next →</button>
+
+</div>
+
+
+<!-- =====================================================
+     GAME 3: SENTENCE BUILDER — 日文 / 厲害 / 只 / 事情
+===================================================== -->
+
+<div class="game-card">
+
+    <span class="game-number">GAME 3</span>
+
+    <h2>🧩 Sentence Builder: More Vocabulary</h2>
+
+    <p class="game-description">
+        Use the remaining vocabulary in full sentences.
+    </p>
+
+    <div class="game-progress">
+        Question <span id="g3Num">1</span> / 4
+    </div>
+
+    <div class="question-box">
+        <div class="question-label">Translate:</div>
+        <div class="question-meaning" id="g3Meaning"></div>
+    </div>
+
+    <div class="answer-area" id="g3Answer">
+        <span class="answer-placeholder">Tap the words below</span>
+    </div>
+
+    <div class="word-bank" id="g3Bank"></div>
+
+    <div class="game-buttons">
+        <button class="check-btn" onclick="checkGame(3)">✓ Check</button>
+        <button class="reset-btn" onclick="resetGame(3)">↻ Reset</button>
+        <button class="listen-btn" onclick="listenCurrent(3)">🔊</button>
+    </div>
+
+    <div class="feedback" id="g3Feedback"></div>
+
+    <button class="next-game-btn" id="g3Next" onclick="nextGameQuestion(3)">Next →</button>
+
+</div>
+
+
+<!-- =====================================================
+     SENTENCE WRITING PRACTICE
+===================================================== -->
+
+<div class="game-card">
+
+    <span class="game-number">SENTENCE WRITING</span>
+
+    <h2>✏️ Type the Sentence</h2>
+
+    <p class="game-description">
+        Type the full Mandarin sentence for the English prompt below. Punctuation and spacing don't need to be exact.
+    </p>
+
+    <div class="game-progress">
+        Prompt <span id="swNum">1</span> / 4
+    </div>
+
+    <div class="question-box">
+        <div class="question-label">Translate:</div>
+        <div class="question-meaning" id="swMeaning"></div>
+    </div>
+
+    <div class="sentence-writing-box">
+        <input type="text" id="swInput" class="sentence-input" placeholder="Type your answer here...">
+    </div>
+
+    <div class="game-buttons">
+        <button class="check-btn" onclick="checkSentenceWriting()">✓ Check</button>
+        <button class="reset-btn" onclick="revealSentenceWriting()">👁 Reveal Answer</button>
+        <button class="listen-btn" onclick="listenSentenceWriting()">🔊</button>
+    </div>
+
+    <div class="feedback" id="swFeedback"></div>
+    <div class="sentence-answer-reveal" id="swReveal"></div>
+
+    <button class="next-game-btn" id="swNext" onclick="nextSentenceWriting()">Next →</button>
+
+</div>
+
+
+<!-- =====================================================
+     HANZI WRITING
+===================================================== -->
+
+<div class="writing-card">
+
+    <h2>✍️ Hanzi Writing Practice</h2>
+
+    <p>Practice correct stroke orders by hand for all lesson vocabulary characters.</p>
+
+    <div class="writing-mode-buttons">
+        <button class="mode-btn active" onclick="setWritingMode('quiz',this)">✍️ Quiz (Stroke Order)</button>
+        <button class="mode-btn" onclick="setWritingMode('animate',this)">👀 Animate</button>
+    </div>
+
+    <div class="writing-info" id="writingInfo">
+        Write the character following the correct stroke order!
+    </div>
+
+    <div class="canvas-wrapper">
+        <div id="target-div"></div>
+    </div>
+
+    <div class="feedback" id="writingFeedback"></div>
+
+    <div class="writing-buttons">
+        <button class="write-btn clear-btn" onclick="resetWritingQuiz()">↻ Retry</button>
+        <button class="write-btn" style="background:#f0f7f4;color:#2d6a4f;" onclick="playCurrentWriting()">🔊 Listen</button>
+        <button class="write-btn next-write-btn" onclick="nextWritingCharacter()">Next →</button>
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     FINAL CHALLENGE (GRAMMAR MASTER - 10 QUESTIONS)
+===================================================== -->
+
+<div class="final-card">
+
+    <span class="game-number">FINAL CHALLENGE</span>
+
+    <h2>🧋 Grammar Master</h2>
+
+    <p>
+        A quick review to test what you've learned and help you remember the key vocabulary, grammar, and expressions from this lesson — plus a few surprises from earlier lessons! 🧋📚
+    </p>
+
+    <div class="grammar-master-error" id="grammarMasterError"></div>
+
+    <div class="question-box">
+        <div class="question-label">
+            Question (<span id="finalNum">1</span> / <span id="finalTotal">10</span>)
+        </div>
+        <div class="question-meaning" id="finalMeaning"></div>
+    </div>
+
+    <div class="answer-area" id="finalAnswer">
+        <span class="answer-placeholder">Build your answer</span>
+    </div>
+
+    <div class="word-bank" id="finalBank"></div>
+
+    <button class="check-btn" style="width:100%;" onclick="checkFinal()">
+        ✓ Check Final Answer
+    </button>
+
+    <button class="reset-btn" id="finalResetBtn" onclick="resetFinal()" style="width:100%; margin-top:8px;">
+        ↻ Reset Answer
+    </button>
+
+    <div class="feedback" id="finalFeedback"></div>
+
+    <div class="final-score" id="finalScore">0 / 10</div>
+
+    <div class="unlock" id="unlockBox" style="display:none;">
+        🎉 <strong>Mastery Unlocked!</strong>
+        <p>You have successfully completed all 10 comprehensive review questions!</p>
+    </div>
+
+</div>
+
+</main>
+</div>
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script>
+
+/* =====================================================
+   AUDIO
+===================================================== */
+
+function playAudio(text){
+    if(!('speechSynthesis' in window)) return;
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = "zh-TW";
+    utterance.rate = 0.82;
+    utterance.pitch = 1;
+    window.speechSynthesis.speak(utterance);
+}
+
+function shuffle(array){
+    return [...array].sort(() => Math.random() - 0.5);
+}
+
+
+/* =====================================================
+   GRAMMAR CAROUSEL CONTROLLER
+===================================================== */
+
+let currentGrammarSlide = 0;
+const totalGrammarSlides = 5;
+
+function changeGrammarSlide(direction){
+    currentGrammarSlide += direction;
+    if(currentGrammarSlide < 0) currentGrammarSlide = 0;
+    if(currentGrammarSlide >= totalGrammarSlides) currentGrammarSlide = totalGrammarSlides - 1;
+
+    for(let i = 0; i < totalGrammarSlides; i++){
+        document.getElementById("gSlide" + i).classList.remove("active");
+    }
+    document.getElementById("gSlide" + currentGrammarSlide).classList.add("active");
+    document.getElementById("grammarCounter").textContent = (currentGrammarSlide + 1) + " / " + totalGrammarSlides;
+
+    document.getElementById("prevGrammarBtn").disabled = (currentGrammarSlide === 0);
+    document.getElementById("nextGrammarBtn").disabled = (currentGrammarSlide === totalGrammarSlides - 1);
+}
+
+
+/* =====================================================
+   GAMES 1–3: SENTENCE BUILDING
+===================================================== */
+
+const games = {
+    1: [
+        { meaning: "I can speak a little English.", answer: ["我","會","說","一","點","英","文"] },
+        { meaning: "I can't come tomorrow afternoon.", answer: ["我","明","天","下","午","不","能","來"] },
+        { meaning: "Can you come to my house?", answer: ["你","可","以","來","我","家","嗎"] },
+        { meaning: "Yes, I can speak!", answer: ["我","會","說","啊"] }
+    ],
+    2: [
+        { meaning: "I need to ask mom first.", answer: ["我","要","先","問","媽","媽"] },
+        { meaning: "If you can come, tell me then.", answer: ["你","可","以","來","的","話","再","跟","我","說"] },
+        { meaning: "Can you speak another language?", answer: ["你","會","說","別","的","語","言","嗎"] }
+    ],
+    3: [
+        { meaning: "I can also speak a little Japanese.", answer: ["我","也","會","說","一","點","日","文"] },
+        { meaning: "I can only speak Chinese.", answer: ["我","只","會","說","中","文"] },
+        { meaning: "You are so impressive!", answer: ["你","真","厲","害"] },
+        { meaning: "I have something tomorrow.", answer: ["我","明","天","有","事","情"] }
+    ]
+};
+
+const gameState = {
+    1: { index: 0, selected: [], done: false },
+    2: { index: 0, selected: [], done: false },
+    3: { index: 0, selected: [], done: false }
+};
+
+function loadGame(gameNumber){
+    const state = gameState[gameNumber];
+    const data = games[gameNumber][state.index];
+    state.selected = [];
+    state.done = false;
+
+    document.getElementById("g" + gameNumber + "Num").textContent = state.index + 1;
+    document.getElementById("g" + gameNumber + "Meaning").textContent = data.meaning;
+
+    const answer = document.getElementById("g" + gameNumber + "Answer");
+    answer.innerHTML = '<span class="answer-placeholder">Tap the words below</span>';
+
+    const bank = document.getElementById("g" + gameNumber + "Bank");
+    bank.innerHTML = "";
+
+    shuffle(data.answer).forEach((word) => {
+        const button = document.createElement("button");
+        button.className = "word-btn";
+        button.textContent = word;
+        button.onclick = function(){
+            if(this.disabled) return;
+            selectWord(gameNumber, this, word);
+        };
+        bank.appendChild(button);
+    });
+
+    document.getElementById("g" + gameNumber + "Feedback").textContent = "";
+    document.getElementById("g" + gameNumber + "Next").style.display = "none";
+}
+
+function selectWord(gameNumber, button, word){
+    gameState[gameNumber].selected.push(word);
+    button.disabled = true;
+    button.classList.add("selected");
+    playAudio(word);
+    renderSelected(gameNumber);
+}
+
+function renderSelected(gameNumber){
+    const answer = document.getElementById("g" + gameNumber + "Answer");
+    answer.innerHTML = "";
+    gameState[gameNumber].selected.forEach(word => {
+        const span = document.createElement("span");
+        span.className = "selected-word";
+        span.textContent = word;
+        span.onclick = () => playAudio(word);
+        answer.appendChild(span);
+    });
+}
+
+function checkGame(gameNumber){
+    const state = gameState[gameNumber];
+    const correct = games[gameNumber][state.index].answer;
+    const selected = state.selected;
+    const feedback = document.getElementById("g" + gameNumber + "Feedback");
+
+    if(selected.length !== correct.length){
+        feedback.textContent = "⚠️ Complete the sentence first.";
+        feedback.className = "feedback incorrect";
+        return;
+    }
+
+    const isCorrect = selected.every((word, index) => word === correct[index]);
+
+    if(isCorrect){
+        feedback.textContent = "🎉 Correct!";
+        feedback.className = "feedback correct";
+        state.done = true;
+        playAudio(correct.join(""));
+        document.getElementById("g" + gameNumber + "Next").style.display = "block";
+    } else {
+        feedback.textContent = "❌ Not quite. Try again!";
+        feedback.className = "feedback incorrect";
+    }
+}
+
+function resetGame(gameNumber){
+    loadGame(gameNumber);
+}
+
+function nextGameQuestion(gameNumber){
+    const state = gameState[gameNumber];
+    if(!state.done) return;
+    state.index++;
+    if(state.index >= games[gameNumber].length){
+        state.index = 0;
+    }
+    loadGame(gameNumber);
+}
+
+function listenCurrent(gameNumber){
+    const state = gameState[gameNumber];
+    playAudio(games[gameNumber][state.index].answer.join(""));
+}
+
+
+/* =====================================================
+   SENTENCE WRITING PRACTICE
+===================================================== */
+
+const sentenceWritingPrompts = [
+    { meaning: "Can you speak Chinese?", answer: "你會說中文嗎？" },
+    { meaning: "I can't come in the afternoon.", answer: "我下午不能來。" },
+    { meaning: "If you can come, tell me then.", answer: "你可以來的話，再跟我說。" },
+    { meaning: "I can only speak a little Japanese.", answer: "我只會說一點日文。" }
+];
+
+let swIndex = 0;
+
+function normalizeForCompare(str){
+    return str
+        .replace(/[，,。.！!？?\s]/g, "")
+        .trim();
+}
+
+function loadSentenceWriting(){
+    const item = sentenceWritingPrompts[swIndex];
+    document.getElementById("swNum").textContent = swIndex + 1;
+    document.getElementById("swMeaning").textContent = item.meaning;
+    document.getElementById("swInput").value = "";
+    document.getElementById("swFeedback").textContent = "";
+    document.getElementById("swReveal").textContent = "";
+    document.getElementById("swNext").style.display = "none";
+}
+
+function checkSentenceWriting(){
+    const item = sentenceWritingPrompts[swIndex];
+    const input = document.getElementById("swInput").value;
+    const feedback = document.getElementById("swFeedback");
+
+    if(normalizeForCompare(input) === normalizeForCompare(item.answer)){
+        feedback.textContent = "🎉 Correct!";
+        feedback.className = "feedback correct";
+        playAudio(item.answer);
+        document.getElementById("swNext").style.display = "block";
+    } else {
+        feedback.textContent = "❌ Not quite. Check your word order and try again!";
+        feedback.className = "feedback incorrect";
+    }
+}
+
+function revealSentenceWriting(){
+    document.getElementById("swReveal").textContent = sentenceWritingPrompts[swIndex].answer;
+}
+
+function listenSentenceWriting(){
+    playAudio(sentenceWritingPrompts[swIndex].answer);
+}
+
+function nextSentenceWriting(){
+    swIndex++;
+    if(swIndex >= sentenceWritingPrompts.length){
+        swIndex = 0;
+    }
+    loadSentenceWriting();
+}
+
+
+/* =====================================================
+   HANZI WRITING PRACTICE (ALL VOCABULARY CHARACTERS)
+===================================================== */
+
+const writingCharacters = [
+    { hanzi: "會", pinyin: "huì", meaning: "can / know how to" },
+    { hanzi: "可", pinyin: "kě", meaning: "can (part of 可以)" },
+    { hanzi: "以", pinyin: "yǐ", meaning: "by means of (part of 可以)" },
+    { hanzi: "啊", pinyin: "a", meaning: "softening particle" },
+    { hanzi: "事", pinyin: "shì", meaning: "matter" },
+    { hanzi: "情", pinyin: "qíng", meaning: "feeling / situation" },
+    { hanzi: "能", pinyin: "néng", meaning: "can / able to" },
+    { hanzi: "先", pinyin: "xiān", meaning: "first" },
+    { hanzi: "的", pinyin: "de", meaning: "possessive / structural particle" },
+    { hanzi: "話", pinyin: "huà", meaning: "speech / words" },
+    { hanzi: "再", pinyin: "zài", meaning: "then / again" },
+    { hanzi: "別", pinyin: "bié", meaning: "other / don't" },
+    { hanzi: "語", pinyin: "yǔ", meaning: "language" },
+    { hanzi: "言", pinyin: "yán", meaning: "speech" },
+    { hanzi: "日", pinyin: "rì", meaning: "sun / day" },
+    { hanzi: "文", pinyin: "wén", meaning: "writing / language" },
+    { hanzi: "厲", pinyin: "lì", meaning: "severe (part of 厲害)" },
+    { hanzi: "害", pinyin: "hài", meaning: "harm (part of 厲害)" },
+    { hanzi: "只", pinyin: "zhǐ", meaning: "only" }
+];
+
+let writingIndex = 0;
+let writingMode = "quiz";
+let writer = null;
+
+function initWriter(){
+    const item = writingCharacters[writingIndex];
+    const container = document.getElementById("target-div");
+    container.innerHTML = "";
+    const info = document.getElementById("writingInfo");
+
+    if(writingMode === "quiz"){
+        info.innerHTML = `Write <strong>${item.hanzi}</strong> (${item.pinyin} - ${item.meaning}) following correct stroke order! (${writingIndex + 1}/${writingCharacters.length})`;
+    } else {
+        info.innerHTML = `Watch animated stroke order for <strong>${item.hanzi}</strong> (${item.pinyin} - ${item.meaning}). (${writingIndex + 1}/${writingCharacters.length})`;
+    }
+
+    writer = HanziWriter.create(
+        "target-div",
+        item.hanzi,
+        {
+            width: 260,
+            height: 260,
+            padding: 10,
+            showOutline: true,
+            strokeAnimationSpeed: 1,
+            drawingColor: "#5c4033",
+            strokeHighlightColor: "#b8865c",
+            showCharacter: writingMode === "animate"
+        }
+    );
+
+    if(writingMode === "quiz"){
+        startQuiz();
+    } else {
+        writer.animateCharacter();
+    }
+}
+
+function startQuiz(){
+    const feedback = document.getElementById("writingFeedback");
+    feedback.textContent = "";
+
+    writer.quiz({
+        onMistake: function(){
+            feedback.textContent = "❌ Incorrect stroke order! Try again.";
+            feedback.className = "feedback incorrect";
+        },
+        onCorrectStroke: function(){
+            feedback.textContent = "✨ Great! Continue with the next stroke.";
+            feedback.className = "feedback correct";
+        },
+        onComplete: function(){
+            feedback.textContent = "🎉 Perfect! Correct stroke order.";
+            feedback.className = "feedback correct";
+        }
+    });
+}
+
+function setWritingMode(mode, button){
+    writingMode = mode;
+    document.querySelectorAll(".writing-card .mode-btn").forEach(btn => btn.classList.remove("active"));
+    button.classList.add("active");
+    initWriter();
+}
+
+function resetWritingQuiz(){
+    initWriter();
+}
+
+function nextWritingCharacter(){
+    writingIndex++;
+    if(writingIndex >= writingCharacters.length){
+        writingIndex = 0;
+    }
+    initWriter();
+}
+
+function playCurrentWriting(){
+    playAudio(writingCharacters[writingIndex].hanzi);
+}
+
+
+/* =====================================================
+   GRAMMAR MASTER (FINAL CHALLENGE - 10 QUESTIONS)
+   5 questions are built for this lesson, 5 are pulled at
+   random from the shared review database (earlier lessons
+   only). Everything below is generic on purpose so it
+   never reveals internal lesson numbering in the UI.
+===================================================== */
+
+const currentLessonQuestions = [
+    { meaning: "Can you speak Chinese?", answer: ["你","會","說","中","文","嗎"] },
+    { meaning: "I can't come today.", answer: ["我","今","天","不","能","來"] },
+    { meaning: "May I come to your house?", answer: ["我","可","以","來","你","家","嗎"] },
+    { meaning: "Ask first, then come.", answer: ["先","問","再","來"] },
+    { meaning: "I can only speak a little Japanese.", answer: ["我","只","會","說","一","點","日","文"] }
+];
+
+// The internal review database (lesson.js) may label its fields differently
+// from lesson to lesson, so this normalizes a handful of common shapes into
+// { meaning, answer: [...] } used everywhere else in this file.
+function normalizeReviewQuestion(rawQuestion){
+    if(!rawQuestion || typeof rawQuestion !== "object") return null;
+
+    const meaning = rawQuestion.meaning || rawQuestion.question || rawQuestion.prompt || rawQuestion.english || "";
+    let answer = rawQuestion.answer || rawQuestion.correct || rawQuestion.words || rawQuestion.tokens || rawQuestion.hanzi;
+
+    if(typeof answer === "string"){
+        answer = answer.replace(/[，,。.！!？?\s]/g, "").split("");
+    }
+
+    if(!meaning || !Array.isArray(answer) || answer.length === 0) return null;
+
+    return { meaning: meaning, answer: answer };
+}
+
+// Gathers every review question from the shared database, excluding this
+// lesson's own review pool, so the Grammar Master can pull from any earlier
+// lesson that is available — not just a fixed few.
+function collectReviewPool(excludeLessonNumber, upToLessonNumber){
+    if(typeof allLessonsData === "undefined" || !allLessonsData) return null;
+
+    let pool = [];
+
+    for(let i = 1; i <= upToLessonNumber; i++){
+        if(i === excludeLessonNumber) continue;
+
+        const lesson = allLessonsData[i];
+        if(lesson && Array.isArray(lesson.reviewQuestions)){
+            lesson.reviewQuestions.forEach(function(rawQuestion){
+                const normalized = normalizeReviewQuestion(rawQuestion);
+                if(normalized) pool.push(normalized);
+            });
+        }
+    }
+
+    return pool;
+}
+
+let finalQuestions = [];
+let finalIndex = 0;
+let finalScore = 0;
+let finalSelected = [];
+
+function setupGrammarMaster(){
+    const errorBox = document.getElementById("grammarMasterError");
+    const pool = collectReviewPool(23, 22);
+
+    if(!pool || pool.length < 5){
+        errorBox.style.display = "block";
+        errorBox.textContent = "⚠️ The review question set couldn't be loaded right now, so the Grammar Master challenge is unavailable. Please make sure the shared lesson database is properly connected, then refresh the page.";
+
+        document.querySelector(".final-card .question-box").style.display = "none";
+        document.getElementById("finalAnswer").style.display = "none";
+        document.getElementById("finalBank").style.display = "none";
+        document.querySelector(".final-card .check-btn").style.display = "none";
+        document.getElementById("finalResetBtn").style.display = "none";
+        return;
+    }
+
+    const reviewPicks = shuffle(pool).slice(0, 5);
+    finalQuestions = shuffle([...currentLessonQuestions, ...reviewPicks]);
+    document.getElementById("finalTotal").textContent = finalQuestions.length;
+    document.getElementById("finalScore").textContent = "0 / " + finalQuestions.length;
+
+    loadFinal();
+}
+
+function loadFinal(){
+    if(finalIndex >= finalQuestions.length) return;
+
+    const q = finalQuestions[finalIndex];
+
+    document.getElementById("finalNum").textContent = finalIndex + 1;
+    document.getElementById("finalMeaning").textContent = q.meaning;
+
+    finalSelected = [];
+    document.getElementById("finalAnswer").innerHTML = '<span class="answer-placeholder">Build your answer</span>';
+
+    const bank = document.getElementById("finalBank");
+    bank.innerHTML = "";
+
+    shuffle(q.answer).forEach(word => {
+        const button = document.createElement("button");
+        button.className = "word-btn";
+        button.textContent = word;
+        button.onclick = () => {
+            if(button.disabled) return;
+            finalSelected.push(word);
+            button.disabled = true;
+            button.classList.add("selected");
+            playAudio(word);
+            renderFinal();
+        };
+        bank.appendChild(button);
+    });
+
+    document.getElementById("finalFeedback").textContent = "";
+}
+
+function renderFinal(){
+    const area = document.getElementById("finalAnswer");
+    area.innerHTML = "";
+    finalSelected.forEach(word => {
+        const span = document.createElement("span");
+        span.className = "selected-word";
+        span.textContent = word;
+        span.onclick = () => playAudio(word);
+        area.appendChild(span);
+    });
+}
+
+function resetFinal(){
+    loadFinal();
+}
+
+function checkFinal(){
+    const correct = finalQuestions[finalIndex].answer;
+    const feedback = document.getElementById("finalFeedback");
+
+    const isCorrect = finalSelected.length === correct.length &&
+        finalSelected.every((word, index) => word === correct[index]);
+
+    if(isCorrect){
+        feedback.textContent = "🎉 Correct!";
+        feedback.className = "feedback correct";
+        finalScore++;
+
+        document.getElementById("finalScore").textContent = finalScore + " / " + finalQuestions.length;
+        finalIndex++;
+
+        if(finalIndex < finalQuestions.length){
+            setTimeout(loadFinal, 700);
+        } else {
+            document.getElementById("unlockBox").style.display = "block";
+            playAudio("太棒了");
+        }
+    } else {
+        feedback.textContent = "❌ Check the word order.";
+        feedback.className = "feedback incorrect";
+    }
+}
+
+
+/* =====================================================
+   INITIALIZE
+===================================================== */
+
+loadGame(1);
+loadGame(2);
+loadGame(3);
+loadSentenceWriting();
+initWriter();
+setupGrammarMaster();
+
+</script>
+
+<!-- SIDEBAR SCRIPT -->
+<script src="../script.js"></script>
+
+</body>
+</html>
