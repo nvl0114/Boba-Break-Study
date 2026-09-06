@@ -1,29 +1,33 @@
 <!DOCTYPE html><html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<title>阿豪的晚餐冒險</title><style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>阿豪的晚餐冒險</title><style>
 *{
     box-sizing:border-box;
     -webkit-tap-highlight-color:transparent;
 }
 
-html,body{
+html,
+body{
     margin:0;
     width:100%;
     height:100%;
     overflow:hidden;
-    font-family:Arial,"Microsoft JhengHei",sans-serif;
     background:#9edcff;
+    font-family:
+        Arial,
+        "Microsoft JhengHei",
+        "Noto Sans TC",
+        sans-serif;
 }
 
 canvas{
     display:block;
 }
 
-/* =========================
+/* =========================================
    HUD
-========================= */
+========================================= */
 
 #hud{
     position:fixed;
@@ -37,19 +41,19 @@ canvas{
 
 #topbar{
     display:flex;
-    justify-content:space-between;
     align-items:center;
-    gap:10px;
+    justify-content:space-between;
+    gap:8px;
 }
 
 #title{
     background:rgba(255,250,242,.96);
     border:3px solid #5b4037;
     border-radius:16px;
-    padding:10px 15px;
+    padding:9px 14px;
     color:#5b4037;
+    font-size:clamp(14px,4vw,20px);
     font-weight:900;
-    font-size:clamp(15px,4vw,21px);
     box-shadow:0 5px 15px rgba(0,0,0,.18);
 }
 
@@ -57,153 +61,201 @@ canvas{
     pointer-events:auto;
     border:3px solid #5b4037;
     background:#fff;
-    border-radius:13px;
-    padding:10px 13px;
-    font-weight:bold;
     color:#5b4037;
+    border-radius:13px;
+    padding:9px 12px;
+    font-weight:bold;
     cursor:pointer;
 }
 
-/* =========================
+/* =========================================
    OBJECTIVE
-========================= */
+========================================= */
 
 #objectiveBox{
-    margin-top:9px;
+    margin-top:8px;
     background:rgba(255,255,255,.95);
     border-left:6px solid #ff8da8;
     border-radius:14px;
-    padding:11px 14px;
+    padding:10px 13px;
     box-shadow:0 5px 15px rgba(0,0,0,.14);
 }
 
 #objectiveLabel{
-    font-size:10px;
     color:#999;
-    font-weight:bold;
+    font-size:9px;
     letter-spacing:1.5px;
+    font-weight:bold;
 }
 
 #objectiveText{
     margin-top:4px;
     color:#49332d;
     font-weight:bold;
-    font-size:clamp(13px,3.5vw,16px);
+    font-size:clamp(12px,3.5vw,16px);
 }
 
-/* =========================
+/* =========================================
    MESSAGE
-========================= */
+========================================= */
 
 #message{
     position:fixed;
     top:140px;
     left:50%;
     transform:translateX(-50%);
-    z-index:40;
-    max-width:85%;
-    padding:10px 18px;
-    background:rgba(48,36,32,.92);
-    color:#fff;
-    border-radius:999px;
-    text-align:center;
-    font-weight:bold;
+    z-index:50;
+
     display:none;
+
+    max-width:88%;
+
+    padding:10px 17px;
+
+    background:rgba(48,36,32,.93);
+    color:#fff;
+
+    border-radius:999px;
+
+    text-align:center;
+
+    font-size:14px;
+    font-weight:bold;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.2);
 }
 
-/* =========================
+/* =========================================
    INTERACTION HINT
-========================= */
+========================================= */
 
 #interactionHint{
     position:fixed;
+
     left:50%;
-    bottom:145px;
+    bottom:150px;
+
     transform:translateX(-50%);
+
     z-index:35;
+
     display:none;
-    padding:10px 16px;
-    background:rgba(255,255,255,.96);
-    color:#513b33;
+
+    background:rgba(255,255,255,.97);
+
     border:3px solid #5b4037;
-    border-radius:15px;
-    text-align:center;
+    border-radius:14px;
+
+    padding:9px 15px;
+
+    color:#513b33;
+
     font-weight:bold;
-    box-shadow:0 4px 14px rgba(0,0,0,.2);
+    font-size:13px;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.2);
 }
 
-/* =========================
+/* =========================================
    CROSSHAIR
-========================= */
+========================================= */
 
 #crosshair{
     position:fixed;
+
     left:50%;
     top:50%;
+
     width:16px;
     height:16px;
+
     transform:translate(-50%,-50%);
+
     z-index:10;
+
     pointer-events:none;
 }
 
-#crosshair:before,
-#crosshair:after{
+#crosshair::before,
+#crosshair::after{
     content:"";
+
     position:absolute;
+
     background:#fff;
+
     box-shadow:0 0 3px #000;
 }
 
-#crosshair:before{
+#crosshair::before{
     width:16px;
     height:2px;
     top:7px;
 }
 
-#crosshair:after{
+#crosshair::after{
     width:2px;
     height:16px;
     left:7px;
 }
 
-/* =========================
+/* =========================================
    CONTROLS
-========================= */
+========================================= */
 
 #controls{
     position:fixed;
-    bottom:16px;
+
     left:50%;
+    bottom:15px;
+
     transform:translateX(-50%);
-    width:min(95%,680px);
+
+    width:min(95%,700px);
+
     display:flex;
-    justify-content:space-between;
+
     align-items:flex-end;
+    justify-content:space-between;
+
     z-index:40;
 }
 
 #movePad{
     display:grid;
-    grid-template-columns:repeat(3,58px);
-    grid-template-rows:repeat(2,55px);
+
+    grid-template-columns:
+        repeat(3,58px);
+
+    grid-template-rows:
+        repeat(2,55px);
+
     gap:6px;
 }
 
 .ctrl{
     border:3px solid #5b4037;
-    background:rgba(255,255,255,.96);
+
+    background:rgba(255,255,255,.97);
+
     color:#5b4037;
+
     border-radius:14px;
+
     font-size:20px;
+
     font-weight:bold;
-    touch-action:none;
+
     cursor:pointer;
+
+    touch-action:none;
+
+    user-select:none;
 }
 
 .ctrl:active{
+    transform:scale(.94);
     background:#ffe1e8;
-    transform:scale(.95);
 }
 
 #forward{
@@ -226,16 +278,26 @@ canvas{
 }
 
 #interactBtn{
-    width:105px;
-    height:105px;
+    width:102px;
+    height:102px;
+
     border-radius:50%;
+
     border:4px solid #5b4037;
+
     background:#ff8fab;
+
     color:#51362f;
+
+    font-size:13px;
     font-weight:900;
-    font-size:14px;
+
     cursor:pointer;
-    box-shadow:0 5px 0 #c9687d;
+
+    box-shadow:
+        0 5px 0 #c9687d;
+
+    touch-action:none;
 }
 
 #interactBtn:active{
@@ -243,213 +305,349 @@ canvas{
     box-shadow:0 1px 0 #c9687d;
 }
 
-/* =========================
+/* =========================================
+   STORY
+========================================= */
+
+#storyOverlay{
+    position:fixed;
+    inset:0;
+
+    z-index:200;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    padding:20px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffc6d5,
+            #fff0d2
+        );
+}
+
+#storyCard{
+    width:min(610px,100%);
+
+    background:rgba(255,255,255,.97);
+
+    border:4px solid #5b4037;
+
+    border-radius:30px;
+
+    padding:27px;
+
+    text-align:center;
+
+    box-shadow:
+        0 15px 45px rgba(0,0,0,.23);
+}
+
+#storyEmoji{
+    font-size:58px;
+}
+
+#storyTitle{
+    margin-top:8px;
+
+    color:#5b4037;
+
+    font-weight:900;
+
+    font-size:
+        clamp(
+            25px,
+            7vw,
+            39px
+        );
+}
+
+#storyText{
+    margin-top:14px;
+
+    color:#5e4740;
+
+    line-height:1.8;
+
+    font-size:
+        clamp(
+            14px,
+            3.8vw,
+            18px
+        );
+}
+
+#startBtn{
+    margin-top:20px;
+
+    border:3px solid #5b4037;
+
+    background:#ff91aa;
+
+    color:#51362f;
+
+    border-radius:14px;
+
+    padding:12px 23px;
+
+    font-size:16px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+}
+
+/* =========================================
    DIALOGUE
-========================= */
+========================================= */
 
 #dialogueOverlay{
     position:fixed;
     inset:0;
+
     z-index:100;
+
     display:none;
+
     align-items:flex-end;
     justify-content:center;
+
     padding:18px;
-    background:rgba(0,0,0,.12);
+
+    background:rgba(0,0,0,.13);
 }
 
 #dialogueBox{
     width:min(720px,100%);
+
     background:#fffaf0;
+
     border:4px solid #5b4037;
+
     border-radius:23px;
-    padding:18px;
-    box-shadow:0 12px 30px rgba(0,0,0,.35);
+
+    padding:17px;
+
+    box-shadow:
+        0 12px 30px rgba(0,0,0,.35);
 }
 
 #dialogueTop{
     display:flex;
-    justify-content:space-between;
+
     align-items:center;
+    justify-content:space-between;
+
     gap:10px;
 }
 
 #speaker{
     display:inline-block;
+
     background:#ff9db3;
+
     border:2px solid #5b4037;
+
     border-radius:999px;
+
     padding:5px 13px;
-    margin-bottom:10px;
+
     font-weight:bold;
 }
 
 #soundBtn{
     border:2px solid #5b4037;
+
     background:#fff;
+
     color:#5b4037;
-    border-radius:12px;
-    padding:7px 11px;
-    cursor:pointer;
-    font-weight:bold;
+
+    border-radius:11px;
+
+    padding:7px 10px;
+
     font-size:13px;
+
+    font-weight:bold;
+
+    cursor:pointer;
 }
 
 #chinese{
+    margin-top:10px;
+
     color:#402d27;
-    font-size:clamp(20px,5vw,29px);
+
+    font-size:
+        clamp(
+            20px,
+            5vw,
+            29px
+        );
+
     line-height:1.5;
+
     font-weight:bold;
 }
 
 #pinyin{
-    margin-top:7px;
+    margin-top:6px;
+
     color:#777;
-    font-size:clamp(14px,3.5vw,18px);
+
+    font-size:
+        clamp(
+            14px,
+            3.5vw,
+            18px
+        );
+
     line-height:1.6;
 }
 
 #nextBtn{
     float:right;
-    margin-top:15px;
+
+    margin-top:14px;
+
     border:none;
+
     border-radius:10px;
+
     background:#5b4037;
-    color:white;
+
+    color:#fff;
+
     padding:10px 18px;
+
     font-weight:bold;
+
     cursor:pointer;
 }
 
-/* =========================
-   STORY
-========================= */
-
-#storyOverlay{
-    position:fixed;
-    inset:0;
-    z-index:200;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    padding:22px;
-    background:linear-gradient(135deg,#ffc6d5,#fff0d2);
-}
-
-#storyCard{
-    width:min(610px,100%);
-    background:rgba(255,255,255,.96);
-    border:4px solid #5b4037;
-    border-radius:30px;
-    padding:28px;
-    text-align:center;
-    box-shadow:0 15px 45px rgba(0,0,0,.22);
-}
-
-#storyEmoji{
-    font-size:65px;
-}
-
-#storyTitle{
-    margin-top:10px;
-    font-size:clamp(26px,7vw,39px);
-    color:#5b4037;
-    font-weight:900;
-}
-
-#storyText{
-    margin-top:15px;
-    color:#5e4740;
-    line-height:1.8;
-    font-size:clamp(14px,3.7vw,18px);
-}
-
-#startBtn{
-    margin-top:20px;
-    border:3px solid #5b4037;
-    background:#ff91aa;
-    color:#51362f;
-    border-radius:14px;
-    padding:13px 23px;
-    font-weight:bold;
-    cursor:pointer;
-    font-size:16px;
-}
-
-/* =========================
+/* =========================================
    VOCABULARY
-========================= */
+========================================= */
 
 #vocabModal{
     position:fixed;
     inset:0;
+
     z-index:150;
+
     display:none;
-    justify-content:center;
+
     align-items:center;
+    justify-content:center;
+
     padding:18px;
+
     background:rgba(0,0,0,.5);
 }
 
 #vocabContent{
     width:min(850px,100%);
+
     max-height:85vh;
+
     overflow:auto;
+
     background:#fff9ee;
+
     border:4px solid #5b4037;
+
     border-radius:25px;
+
     padding:20px;
 }
 
 #vocabHeader{
     display:flex;
-    justify-content:space-between;
+
     align-items:center;
+    justify-content:space-between;
+}
+
+#vocabHeader h2{
+    margin:0;
+
+    color:#5b4037;
 }
 
 #closeVocab{
     border:none;
+
     background:none;
+
+    color:#5b4037;
+
     font-size:26px;
+
     cursor:pointer;
 }
 
 #vocabGrid{
     margin-top:15px;
+
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(180px,1fr)
+        );
+
     gap:10px;
 }
 
 .vocabCard{
     background:#fff;
+
     border:2px solid #ead9c9;
+
     border-radius:14px;
+
     padding:12px;
 }
 
 .vocabChinese{
-    font-size:22px;
-    font-weight:bold;
     color:#4b352d;
+
+    font-size:22px;
+
+    font-weight:bold;
 }
 
 .vocabPinyin{
-    color:#e2748c;
     margin-top:4px;
+
+    color:#e2748c;
 }
 
 .vocabMeaning{
-    color:#777;
     margin-top:5px;
+
+    color:#777;
+
     font-size:13px;
 }
+
+/* =========================================
+   MOBILE
+========================================= */
 
 @media(max-width:500px){
 
     #movePad{
-        grid-template-columns:repeat(3,51px);
-        grid-template-rows:repeat(2,48px);
+        grid-template-columns:
+            repeat(3,51px);
+
+        grid-template-rows:
+            repeat(2,48px);
     }
 
     #interactBtn{
@@ -462,60 +660,121 @@ canvas{
         bottom:130px;
         font-size:12px;
     }
+
 }
 </style><script type="importmap">
 {
     "imports":{
-        "three":"https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js"
+        "three":
+        "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js"
     }
 }
-</script></head><body><div id="hud">
-    <div id="topbar">
-        <div id="title">🚶 阿豪的晚餐冒險</div>
-        <button id="vocabBtn">📚 Vocabulary</button>
-    </div><div id="objectiveBox">
-    <div id="objectiveLabel">CURRENT OBJECTIVE</div>
-    <div id="objectiveText">準備出發...</div>
+</script></head><body><!-- =========================================
+     HUD
+========================================= --><div id="hud"><div id="topbar">
+
+    <div id="title">
+        🚶 阿豪的晚餐冒險
+    </div>
+
+    <button id="vocabBtn">
+        📚 Vocabulary
+    </button>
+
 </div>
 
-</div><div id="message"></div>
-<div id="interactionHint"></div>
-<div id="crosshair"></div><div id="controls"><div id="movePad">
-    <button class="ctrl" id="forward">▲</button>
-    <button class="ctrl" id="left">◀</button>
-    <button class="ctrl" id="backward">▼</button>
-    <button class="ctrl" id="right">▶</button>
+<div id="objectiveBox">
+
+    <div id="objectiveLabel">
+        CURRENT OBJECTIVE
+    </div>
+
+    <div id="objectiveText">
+        準備出發...
+    </div>
+
 </div>
 
-<button id="interactBtn">💬<br>INTERACT</button>
+</div><div id="message"></div><div id="interactionHint"></div><div id="crosshair"></div><!-- =========================================
+     CONTROLS
+========================================= --><div id="controls"><div id="movePad">
 
-</div><div id="dialogueOverlay"><div id="dialogueBox">
+    <button
+        class="ctrl"
+        id="forward">
+        ▲
+    </button>
+
+    <button
+        class="ctrl"
+        id="left">
+        ◀
+    </button>
+
+    <button
+        class="ctrl"
+        id="backward">
+        ▼
+    </button>
+
+    <button
+        class="ctrl"
+        id="right">
+        ▶
+    </button>
+
+</div>
+
+<button id="interactBtn">
+    💬<br>
+    INTERACT
+</button>
+
+</div><!-- =========================================
+     DIALOGUE
+========================================= --><div id="dialogueOverlay"><div id="dialogueBox">
 
     <div id="dialogueTop">
+
         <div id="speaker"></div>
-        <button id="soundBtn">🔊 再聽一次</button>
+
+        <button id="soundBtn">
+            🔊 再聽一次
+        </button>
+
     </div>
 
     <div id="chinese"></div>
+
     <div id="pinyin"></div>
 
-    <button id="nextBtn">繼續</button>
+    <button id="nextBtn">
+        繼續
+    </button>
 
 </div>
 
-</div><div id="storyOverlay"><div id="storyCard">
+</div><!-- =========================================
+     STORY
+========================================= --><div id="storyOverlay"><div id="storyCard">
 
-    <div id="storyEmoji">🔋📱</div>
+    <div id="storyEmoji">
+        🔋📱
+    </div>
 
     <div id="storyTitle">
         阿豪的晚餐冒險
     </div>
 
     <div id="storyText">
-        今天是小美的生日。<br>
-        阿豪答應晚上去淡水跟小美一起吃飯。<br><br>
 
-        餐廳叫做：<strong>海風餐廳</strong><br><br>
+        今天是小美的生日。<br>
+
+        阿豪答應晚上去淡水，
+        跟小美一起吃飯。<br><br>
+
+        餐廳叫做：
+        <strong>海風餐廳</strong><br><br>
 
         可是在路上……<br><br>
 
@@ -524,7 +783,9 @@ canvas{
         ⚫ 手機沒電了！<br><br>
 
         糟糕！Google Maps不能用了！<br>
+
         看來只能靠問路人了……
+
     </div>
 
     <button id="startBtn">
@@ -533,18 +794,29 @@ canvas{
 
 </div>
 
-</div><div id="vocabModal"><div id="vocabContent">
+</div><!-- =========================================
+     VOCAB
+========================================= --><div id="vocabModal"><div id="vocabContent">
 
     <div id="vocabHeader">
-        <h2>📚 Keyword Vocabulary</h2>
-        <button id="closeVocab">✕</button>
+
+        <h2>
+            📚 Keyword Vocabulary
+        </h2>
+
+        <button id="closeVocab">
+            ✕
+        </button>
+
     </div>
 
     <div id="vocabGrid"></div>
 
 </div>
 
-</div><script type="module">
+</div><!-- =========================================
+     THREE.JS
+========================================= --><script type="module">
 
 import * as THREE from "three";
 
@@ -553,55 +825,75 @@ import * as THREE from "three";
 ========================================= */
 
 const objectiveText =
-    document.getElementById("objectiveText");
+    document.getElementById(
+        "objectiveText"
+    );
 
 const message =
-    document.getElementById("message");
+    document.getElementById(
+        "message"
+    );
 
-const hint =
-    document.getElementById("interactionHint");
+const interactionHint =
+    document.getElementById(
+        "interactionHint"
+    );
 
 const dialogueOverlay =
-    document.getElementById("dialogueOverlay");
+    document.getElementById(
+        "dialogueOverlay"
+    );
 
 const speakerEl =
-    document.getElementById("speaker");
+    document.getElementById(
+        "speaker"
+    );
 
 const chineseEl =
-    document.getElementById("chinese");
+    document.getElementById(
+        "chinese"
+    );
 
 const pinyinEl =
-    document.getElementById("pinyin");
+    document.getElementById(
+        "pinyin"
+    );
 
 const nextBtn =
-    document.getElementById("nextBtn");
+    document.getElementById(
+        "nextBtn"
+    );
 
 const soundBtn =
-    document.getElementById("soundBtn");
+    document.getElementById(
+        "soundBtn"
+    );
 
 /* =========================================
-   THREE SETUP
+   THREE
 ========================================= */
 
 const scene =
     new THREE.Scene();
 
 scene.background =
-    new THREE.Color(0x9edcff);
+    new THREE.Color(
+        0x9edcff
+    );
 
 scene.fog =
     new THREE.Fog(
         0x9edcff,
-        45,
-        180
+        55,
+        230
     );
 
 const camera =
     new THREE.PerspectiveCamera(
         70,
         innerWidth / innerHeight,
-        0.1,
-        500
+        .1,
+        600
     );
 
 const renderer =
@@ -615,7 +907,10 @@ renderer.setSize(
 );
 
 renderer.setPixelRatio(
-    Math.min(devicePixelRatio,2)
+    Math.min(
+        devicePixelRatio,
+        2
+    )
 );
 
 renderer.shadowMap.enabled=true;
@@ -625,17 +920,15 @@ document.body.appendChild(
 );
 
 /* =========================================
-   LIGHTS
+   LIGHT
 ========================================= */
 
 const hemi =
     new THREE.HemisphereLight(
         0xffffff,
-        0x7aa85e,
-        2.2
+        0x6e9b59,
+        2.3
     );
-
-scene.add(hemi);
 
 const sun =
     new THREE.DirectionalLight(
@@ -649,10 +942,11 @@ sun.position.set(
     30
 );
 
+scene.add(hemi);
 scene.add(sun);
 
 /* =========================================
-   MATERIALS
+   MATERIAL
 ========================================= */
 
 const mat={
@@ -700,44 +994,54 @@ const mat={
 };
 
 /* =========================================
-   GAME STATE
+   GAME
 ========================================= */
 
-let interactables=[];
-let blocked=[];
-
 let stage=1;
+
 let paused=false;
+
+let interactables=[];
+
+let blocked=[];
 
 const player={
 
     x:0,
+
     z:30,
 
-    angle:Math.PI,
+    angle:0,
 
-    speed:0.24,
+    speed:.27,
 
-    turnSpeed:0.032
+    turnSpeed:.045
 
 };
 
 const keys={
 
     forward:false,
+
     backward:false,
+
     left:false,
+
     right:false
 
 };
 
 /* =========================================
-   HELPERS
+   WORLD HELPERS
 ========================================= */
 
 function addBox(
-    x,y,z,
-    w,h,d,
+    x,
+    y,
+    z,
+    w,
+    h,
+    d,
     material
 ){
 
@@ -745,7 +1049,9 @@ function addBox(
         new THREE.Mesh(
 
             new THREE.BoxGeometry(
-                w,h,d
+                w,
+                h,
+                d
             ),
 
             material
@@ -753,7 +1059,9 @@ function addBox(
         );
 
     mesh.position.set(
-        x,y,z
+        x,
+        y,
+        z
     );
 
     scene.add(mesh);
@@ -762,7 +1070,10 @@ function addBox(
 }
 
 function addRoad(
-    x,z,w,d
+    x,
+    z,
+    w,
+    d
 ){
 
     return addBox(
@@ -772,7 +1083,7 @@ function addRoad(
         z,
 
         w,
-        0.1,
+        .1,
         d,
 
         mat.road
@@ -781,7 +1092,10 @@ function addRoad(
 }
 
 function addBlocked(
-    x,z,w,d
+    x,
+    z,
+    w,
+    d
 ){
 
     blocked.push({
@@ -795,19 +1109,24 @@ function addBlocked(
     });
 }
 
-function isBlocked(x,z){
+function isBlocked(
+    x,
+    z
+){
 
-    for(const b of blocked){
+    for(
+        const b of blocked
+    ){
 
         if(
 
             x>b.minX &&
             x<b.maxX &&
-
             z>b.minZ &&
             z<b.maxZ
 
         ){
+
             return true;
         }
     }
@@ -819,21 +1138,28 @@ function isBlocked(x,z){
    SIGN
 ========================================= */
 
-function createSign(text){
+function createSign(
+    text
+){
 
     const canvas =
-        document.createElement("canvas");
+        document.createElement(
+            "canvas"
+        );
 
     canvas.width=512;
     canvas.height=150;
 
-    const ctx=
+    const ctx =
         canvas.getContext("2d");
 
     ctx.fillStyle="#ffffff";
 
     ctx.fillRect(
-        0,0,512,150
+        0,
+        0,
+        512,
+        150
     );
 
     ctx.strokeStyle="#5b4037";
@@ -841,7 +1167,10 @@ function createSign(text){
     ctx.lineWidth=9;
 
     ctx.strokeRect(
-        5,5,502,140
+        5,
+        5,
+        502,
+        140
     );
 
     ctx.fillStyle="#49332d";
@@ -868,9 +1197,7 @@ function createSign(text){
         new THREE.Sprite(
 
             new THREE.SpriteMaterial({
-
                 map:texture
-
             })
 
         );
@@ -885,14 +1212,19 @@ function createSign(text){
 }
 
 function sign(
-    text,x,y,z
+    text,
+    x,
+    y,
+    z
 ){
 
     const s =
         createSign(text);
 
     s.position.set(
-        x,y,z
+        x,
+        y,
+        z
     );
 
     scene.add(s);
@@ -906,52 +1238,50 @@ function sign(
 
 function building(
     name,
-    x,z,
+    x,
+    z,
     w=12,
     d=10,
-    material=mat.wall
+    material=mat.wall,
+    showSign=true
 ){
 
     addBox(
-
         x,
         4,
         z,
-
         w,
         8,
         d,
-
         material
-
     );
 
     addBox(
-
         x,
         8.5,
         z,
-
         w+1,
         1,
         d+1,
-
         mat.roof
-
     );
 
-    sign(
+    if(showSign){
 
-        name,
+        sign(
+            name,
+            x,
+            10,
+            z+d/2+1
+        );
 
-        x,
-        10,
-        z+d/2+1
-
-    );
+    }
 
     addBlocked(
-        x,z,w,d
+        x,
+        z,
+        w,
+        d
     );
 }
 
@@ -961,14 +1291,15 @@ function building(
 
 function npc(
     name,
-    x,z,
+    x,
+    z,
     type
 ){
 
-    const group=
+    const group =
         new THREE.Group();
 
-    const body=
+    const body =
         new THREE.Mesh(
 
             new THREE.BoxGeometry(
@@ -983,7 +1314,7 @@ function npc(
 
     body.position.y=1.2;
 
-    const head=
+    const head =
         new THREE.Mesh(
 
             new THREE.SphereGeometry(
@@ -993,9 +1324,7 @@ function npc(
             ),
 
             new THREE.MeshStandardMaterial({
-
                 color:0xf2b98f
-
             })
 
         );
@@ -1006,7 +1335,9 @@ function npc(
     group.add(head);
 
     group.position.set(
-        x,0,z
+        x,
+        0,
+        z
     );
 
     scene.add(group);
@@ -1022,7 +1353,7 @@ function npc(
 
         object:group,
 
-        type,
+        type:type,
 
         range:5
 
@@ -1030,17 +1361,18 @@ function npc(
 }
 
 /* =========================================
-   INTERACTIVE POINT
+   INTERACTIVE OBJECT
 ========================================= */
 
 function interactivePoint(
     name,
-    x,z,
-    type
+    x,
+    z,
+    type,
+    visible=true
 ){
 
-    const marker=
-
+    const marker =
         addBox(
 
             x,
@@ -1055,24 +1387,77 @@ function interactivePoint(
 
         );
 
-    sign(
-        name,
-        x,
-        4,
-        z
-    );
+    const s =
+        sign(
+            name,
+            x,
+            4,
+            z
+        );
+
+    if(!visible){
+
+        marker.visible=false;
+        s.visible=false;
+
+    }
 
     interactables.push({
 
         object:marker,
 
-        type,
+        sign:s,
+
+        type:type,
 
         range:6
 
     });
 
     return marker;
+}
+
+/* =========================================
+   HIDE DISTANT DESTINATIONS
+========================================= */
+
+function updateDestinationVisibility(){
+
+    for(
+        const item of interactables
+    ){
+
+        if(
+            !item.sign ||
+            !item.object.userData.destination
+        ){
+
+            continue;
+        }
+
+        const dx=
+            player.x -
+            item.object.position.x;
+
+        const dz=
+            player.z -
+            item.object.position.z;
+
+        const distance=
+            Math.sqrt(
+                dx*dx+
+                dz*dz
+            );
+
+        const visible =
+            distance < 35;
+
+        item.object.visible=
+            visible;
+
+        item.sign.visible=
+            visible;
+    }
 }
 
 /* =========================================
@@ -1103,9 +1488,9 @@ function clearWorld(){
         -.5,
         0,
 
-        300,
+        500,
         1,
-        300,
+        500,
 
         mat.grass
 
@@ -1121,26 +1506,27 @@ function updateCamera(){
     camera.position.set(
 
         player.x,
-
-        2.2,
-
+        2.4,
         player.z
 
     );
 
-    camera.rotation.set(
+    /*
+       Player looks toward
+       +Z when angle = 0.
+    */
 
-        0,
+    camera.rotation.order=
+        "YXZ";
 
-        player.angle,
+    camera.rotation.y=
+        player.angle;
 
-        0
-
-    );
+    camera.rotation.x=0;
 }
 
 /* =========================================
-   AREA 1
+   STAGE 1
    GIFT SHOP
 ========================================= */
 
@@ -1152,12 +1538,12 @@ function loadGiftArea(){
         0,
         20,
         18,
-        100
+        110
     );
 
     building(
         "禮物店",
-        -15,
+        -16,
         15,
         13,
         12,
@@ -1166,7 +1552,7 @@ function loadGiftArea(){
 
     building(
         "咖啡店",
-        15,
+        16,
         0,
         13,
         12,
@@ -1183,14 +1569,13 @@ function loadGiftArea(){
     npc(
         "路人",
         0,
-        -8,
+        -15,
         "ask105"
     );
 
     player.x=0;
-    player.z=35;
-
-    player.angle=Math.PI;
+    player.z=55;
+    player.angle=0;
 
     setObjective(
         "先去禮物店買小美的生日禮物。"
@@ -1198,8 +1583,8 @@ function loadGiftArea(){
 }
 
 /* =========================================
-   AREA 2
-   105 BUS
+   STAGE 3
+   BUS 105
 ========================================= */
 
 function load105Area(){
@@ -1209,21 +1594,20 @@ function load105Area(){
     addRoad(
         0,
         0,
-        18,
-        110
+        20,
+        120
     );
 
     interactivePoint(
         "105號公車",
         0,
-        0,
+        -10,
         "bus105"
     );
 
     player.x=0;
-    player.z=30;
-
-    player.angle=Math.PI;
+    player.z=40;
+    player.angle=0;
 
     setObjective(
         "找到105號公車並搭車。"
@@ -1231,138 +1615,193 @@ function load105Area(){
 }
 
 /* =========================================
-   AREA 3
-   BANK → CROSSROAD → GR
-
-   DISTRACTION MAP:
-
-                     ↑
-                 錯誤道路
-                     │
-                     │
-       錯誤道路 ─── 十字路口 ─── 正確 → GR
-                     │
-                     │
-                     ↓
-                  便利商店
-                     │
-                     │
-                  銀行 / START
+   STAGE 4
+   BANK → CROSSROAD
 ========================================= */
 
 function loadBankArea(){
 
     clearWorld();
 
-    /* MAIN ROAD */
-
-    addRoad(
-        0,
-        25,
-        14,
-        90
-    );
-
     /*
-       CROSSROAD
-       horizontal road
+       =================================
+       MAIN ROAD
+       =================================
     */
 
     addRoad(
         0,
-        -8,
-        80,
-        14
+        65,
+        16,
+        150
     );
 
     /*
-       EXTRA NORTH ROAD
-       creates crossroad
+       =================================
+       REAL CROSSROAD
+       =================================
     */
 
     addRoad(
         0,
-        -35,
-        14,
-        45
+        -5,
+        180,
+        16
     );
 
     /*
+       =================================
+       STRAIGHT TRAP
+       =================================
+    */
+
+    addRoad(
+        0,
+        -75,
+        16,
+        150
+    );
+
+    /*
+       =================================
+       LEFT TRAP
+       =================================
+    */
+
+    addRoad(
+        -85,
+        -5,
+        170,
+        16
+    );
+
+    /*
+       =================================
+       RIGHT CORRECT ROAD
+       VERY LONG
+       =================================
+    */
+
+    addRoad(
+        105,
+        -5,
+        210,
+        16
+    );
+
+    /*
+       =================================
        BANK
+       =================================
     */
 
     building(
         "銀行",
         10,
-        25,
-        12,
+        58,
+        13,
         12,
         mat.white
     );
 
     /*
+       =================================
        CONVENIENCE STORE
-       before crossroad
+       =================================
     */
 
     building(
         "便利商店",
-        -8,
-        3,
-        10,
-        10,
+        -10,
+        27,
+        12,
+        11,
         mat.yellow
     );
 
     /*
+       =================================
        DISTRACTION BUILDINGS
+       =================================
     */
 
     building(
         "公園",
-        -30,
-        -22,
+        -55,
+        -5,
+        18,
         15,
-        12,
         mat.blue
     );
 
     building(
         "書店",
-        28,
-        -20,
-        14,
-        10,
+        40,
+        -45,
+        15,
+        12,
         mat.wall
     );
 
+    building(
+        "咖啡店",
+        -5,
+        -58,
+        15,
+        12,
+        mat.pink
+    );
+
     /*
+       =================================
        NPC
+       =================================
     */
 
     npc(
         "路人",
         -3,
-        18,
+        45,
         "askGR"
     );
 
     /*
-       GR STOP
-       FAR RIGHT
+       =================================
+       GR FAR AWAY
+       =================================
     */
 
-    interactivePoint(
-        "GR公車站",
-        36,
-        -8,
-        "grStop"
-    );
+    const gr =
+        interactivePoint(
+            "GR公車站",
+            190,
+            -5,
+            "grStop",
+            false
+        );
+
+    gr.userData.destination=true;
+
+    /*
+       Make sign destination too
+    */
+
+    const grItem =
+        interactables[
+            interactables.length-1
+        ];
+
+    grItem.object.userData.destination=true;
+
+    /*
+       =================================
+       PLAYER
+       =================================
+    */
 
     player.x=0;
-    player.z=38;
-
-    player.angle=Math.PI;
+    player.z=105;
+    player.angle=0;
 
     setObjective(
         "在銀行附近問路人GR公車站怎麼走。"
@@ -1370,7 +1809,7 @@ function loadBankArea(){
 }
 
 /* =========================================
-   AREA 4
+   STAGE 6
    GR BUS
 ========================================= */
 
@@ -1381,21 +1820,20 @@ function loadGRArea(){
     addRoad(
         0,
         0,
-        18,
+        20,
         100
     );
 
     interactivePoint(
         "GR公車",
         0,
-        -5,
+        -10,
         "takeGR"
     );
 
     player.x=0;
-    player.z=30;
-
-    player.angle=Math.PI;
+    player.z=40;
+    player.angle=0;
 
     setObjective(
         "搭GR公車去車站。"
@@ -1403,8 +1841,8 @@ function loadGRArea(){
 }
 
 /* =========================================
-   AREA 5
-   TRAIN
+   STAGE 7
+   TRAIN STATION
 ========================================= */
 
 function loadTrainStation(){
@@ -1414,30 +1852,29 @@ function loadTrainStation(){
     addRoad(
         0,
         0,
-        30,
-        100
+        32,
+        110
     );
 
     building(
         "車站",
         0,
-        -20,
-        24,
-        16,
+        -25,
+        25,
+        18,
         mat.blue
     );
 
     interactivePoint(
         "火車 → 台北車站",
         0,
-        -4,
+        -5,
         "train"
     );
 
     player.x=0;
-    player.z=30;
-
-    player.angle=Math.PI;
+    player.z=40;
+    player.angle=0;
 
     setObjective(
         "搭火車去台北車站。"
@@ -1445,8 +1882,8 @@ function loadTrainStation(){
 }
 
 /* =========================================
-   AREA 6
-   TAIPEI MAIN STATION
+   STAGE 8
+   TAIPEI MAIN
 ========================================= */
 
 function loadTaipeiArea(){
@@ -1456,15 +1893,15 @@ function loadTaipeiArea(){
     addRoad(
         0,
         0,
-        45,
-        110
+        48,
+        120
     );
 
     building(
         "台北車站",
-        -10,
-        -20,
-        25,
+        -12,
+        -25,
+        28,
         20,
         mat.yellow
     );
@@ -1472,21 +1909,20 @@ function loadTaipeiArea(){
     npc(
         "路人",
         0,
-        12,
+        20,
         "askRed"
     );
 
     interactivePoint(
         "捷運入口 🚇",
-        12,
+        15,
         -8,
         "mrtEntrance"
     );
 
     player.x=0;
-    player.z=35;
-
-    player.angle=Math.PI;
+    player.z=45;
+    player.angle=0;
 
     setObjective(
         "問路人怎麼去淡水。"
@@ -1494,8 +1930,8 @@ function loadTaipeiArea(){
 }
 
 /* =========================================
-   AREA 7
-   MRT RED LINE
+   STAGE 10
+   MRT
 ========================================= */
 
 function loadMRTArea(){
@@ -1505,14 +1941,14 @@ function loadMRTArea(){
     addRoad(
         0,
         0,
-        25,
-        80
+        26,
+        90
     );
 
     interactivePoint(
         "🔴 淡水信義線",
         0,
-        -8,
+        -10,
         "redLine"
     );
 
@@ -1520,13 +1956,12 @@ function loadMRTArea(){
         "往淡水",
         0,
         8,
-        -10
+        -25
     );
 
     player.x=0;
-    player.z=25;
-
-    player.angle=Math.PI;
+    player.z=35;
+    player.angle=0;
 
     setObjective(
         "搭淡水信義線（紅線）去淡水。"
@@ -1534,19 +1969,8 @@ function loadMRTArea(){
 }
 
 /* =========================================
-   AREA 8
-   TAMSUl → T-JUNCTION → RESTAURANT
-
-                     錯誤道路
-                        ↗
-                       /
-                      /
-       便利商店 ─── 三叉路口
-                       \
-                        \
-                         ← 正確
-                           \
-                         海風餐廳
+   STAGE 11
+   TAM SUI
 ========================================= */
 
 function loadTamsuiArea(){
@@ -1554,122 +1978,176 @@ function loadTamsuiArea(){
     clearWorld();
 
     /*
+       =================================
        MAIN ROAD
+       =================================
     */
 
     addRoad(
         0,
-        25,
-        14,
-        90
+        75,
+        16,
+        160
     );
+
+    /*
+       =================================
+       THREE-WAY INTERSECTION
+       =================================
+    */
 
     /*
        LEFT CORRECT ROAD
+       LONG
     */
 
     addRoad(
-        -25,
-        -8,
-        55,
-        14
+        -95,
+        -5,
+        190,
+        16
     );
 
     /*
-       DIAGONAL DISTRACTION
-       using several small roads
+       RIGHT TRAP
+       LONG
     */
 
-    const angle=Math.PI/4;
-
-    const fakeRoad=
-        addBox(
-            18,
-            0,
-            -20,
-            14,
-            .1,
-            55,
-            mat.road
-        );
-
-    fakeRoad.rotation.y=-angle;
+    addRoad(
+        95,
+        -5,
+        190,
+        16
+    );
 
     /*
-       BANK LANDMARK
+       =================================
+       CORRECT ROAD CONTINUES
+       =================================
+    */
+
+    addRoad(
+        -190,
+        -5,
+        190,
+        16
+    );
+
+    /*
+       =================================
+       DISTRACTION EXTENSION
+       =================================
+    */
+
+    addRoad(
+        190,
+        -5,
+        190,
+        16
+    );
+
+    /*
+       =================================
+       LANDMARKS
+       =================================
     */
 
     building(
         "銀行",
-        10,
-        15,
-        11,
-        11,
+        12,
+        55,
+        12,
+        12,
         mat.white
     );
 
-    /*
-       CONVENIENCE STORE
-    */
-
     building(
         "便利商店",
-        8,
-        0,
-        10,
-        10,
+        -10,
+        30,
+        12,
+        11,
         mat.yellow
     );
 
     /*
-       DISTRACTION BUILDING
+       DISTRACTION BUILDINGS
     */
 
     building(
         "咖啡店",
-        30,
-        -32,
-        13,
-        10,
+        115,
+        -45,
+        15,
+        12,
         mat.blue
     );
 
+    building(
+        "公園",
+        155,
+        -5,
+        18,
+        15,
+        mat.yellow
+    );
+
     /*
+       =================================
        NPC
+       =================================
     */
 
     npc(
         "路人",
         -3,
-        17,
+        50,
         "askRestaurant"
     );
 
     /*
-       RESTAURANT
-       FAR LEFT
+       =================================
+       RESTAURANT VERY FAR
+       =================================
     */
-
-    interactivePoint(
-        "海風餐廳",
-        -48,
-        -8,
-        "restaurant"
-    );
 
     building(
         "海風餐廳",
-        -48,
-        -24,
-        17,
-        13,
-        mat.pink
+        -185,
+        -30,
+        18,
+        15,
+        mat.pink,
+        false
     );
 
-    player.x=0;
-    player.z=38;
+    const restaurant =
+        interactivePoint(
+            "海風餐廳",
+            -185,
+            -18,
+            "restaurant",
+            false
+        );
 
-    player.angle=Math.PI;
+    restaurant.userData.destination=true;
+
+    const restaurantItem =
+        interactables[
+            interactables.length-1
+        ];
+
+    restaurantItem.object.userData.destination=true;
+
+    /*
+       =================================
+       PLAYER
+       =================================
+    */
+
+    player.x=0;
+    player.z=110;
+    player.angle=0;
 
     setObjective(
         "問路人海風餐廳怎麼走。"
@@ -1680,66 +2158,80 @@ function loadTamsuiArea(){
    UI
 ========================================= */
 
-function setObjective(text){
+function setObjective(
+    text
+){
 
-    objectiveText.textContent=text;
+    objectiveText.textContent=
+        text;
 }
 
 function showMessage(
     text,
-    time=2500
+    duration=2500
 ){
 
-    message.textContent=text;
+    message.textContent=
+        text;
 
-    message.style.display="block";
+    message.style.display=
+        "block";
 
     clearTimeout(
         showMessage.timer
     );
 
-    showMessage.timer=setTimeout(
-        ()=>{
-            message.style.display="none";
-        },
-        time
-    );
+    showMessage.timer=
+        setTimeout(
+            ()=>{
+                message.style.display=
+                    "none";
+            },
+            duration
+        );
 }
 
 /* =========================================
    SPEECH
 ========================================= */
 
-function speak(text){
+function speak(
+    text
+){
 
-    if(!("speechSynthesis" in window)){
+    if(
+        !("speechSynthesis" in window)
+    ){
+
         return;
     }
 
-    window.speechSynthesis.cancel();
+    speechSynthesis.cancel();
 
-    const utterance=
+    const utterance =
         new SpeechSynthesisUtterance(
             text
         );
 
     utterance.lang="zh-TW";
 
-    utterance.rate=0.82;
+    utterance.rate=.82;
 
     utterance.pitch=1;
 
-    window.speechSynthesis.speak(
+    speechSynthesis.speak(
         utterance
     );
 }
 
 /* =========================================
-   DIALOGUE SYSTEM
+   DIALOGUE
 ========================================= */
 
 let dialogue=[];
+
 let dialogueIndex=0;
+
 let dialogueCallback=null;
 
 function startDialogue(
@@ -1751,11 +2243,13 @@ function startDialogue(
 
     dialogueIndex=0;
 
-    dialogueCallback=callback;
+    dialogueCallback=
+        callback;
 
     paused=true;
 
-    dialogueOverlay.style.display="flex";
+    dialogueOverlay.style.display=
+        "flex";
 
     showDialogue();
 }
@@ -1763,7 +2257,9 @@ function startDialogue(
 function showDialogue(){
 
     const line=
-        dialogue[dialogueIndex];
+        dialogue[
+            dialogueIndex
+        ];
 
     speakerEl.textContent=
         line.speaker;
@@ -1780,17 +2276,20 @@ function showDialogue(){
 
     nextBtn.textContent=
 
-        dialogueIndex===dialogue.length-1
+        dialogueIndex ===
+        dialogue.length-1
 
-        ?"好的"
+        ? "好的"
 
-        :"繼續";
+        : "繼續";
 }
 
 soundBtn.onclick=()=>{
 
     if(
-        dialogue[dialogueIndex]
+        dialogue[
+            dialogueIndex
+        ]
     ){
 
         speak(
@@ -1798,20 +2297,24 @@ soundBtn.onclick=()=>{
                 dialogueIndex
             ].chinese
         );
+
     }
+
 };
 
 nextBtn.onclick=()=>{
 
-    window.speechSynthesis.cancel();
+    speechSynthesis.cancel();
 
     dialogueIndex++;
 
     if(
-        dialogueIndex>=dialogue.length
+        dialogueIndex >=
+        dialogue.length
     ){
 
-        dialogueOverlay.style.display="none";
+        dialogueOverlay.style.display=
+            "none";
 
         paused=false;
 
@@ -1829,19 +2332,26 @@ nextBtn.onclick=()=>{
 };
 
 /* =========================================
-   FIND NEAREST
+   NEAREST INTERACTION
 ========================================= */
 
 function getNearest(){
 
     let nearest=null;
 
-    let nearestDistance=
+    let distanceBest=
         Infinity;
 
     for(
         const item of interactables
     ){
+
+        if(
+            !item.object.visible
+        ){
+
+            continue;
+        }
 
         const p=
             item.object.position;
@@ -1860,17 +2370,21 @@ function getNearest(){
 
         if(
 
-            distance<item.range &&
+            distance<
+            item.range &&
 
-            distance<nearestDistance
+            distance<
+            distanceBest
 
         ){
 
             nearest=item;
 
-            nearestDistance=
+            distanceBest=
                 distance;
+
         }
+
     }
 
     return nearest;
@@ -1882,7 +2396,9 @@ function getNearest(){
 
 function interact(){
 
-    if(paused)return;
+    if(paused){
+        return;
+    }
 
     const target=
         getNearest();
@@ -1899,12 +2415,12 @@ function interact(){
     const type=
         target.type;
 
-    /* =====================
+    /* =====================================
        GIFT
-    ===================== */
+    ===================================== */
 
     if(
-        type==="gift"&&
+        type==="gift" &&
         stage===1
     ){
 
@@ -1961,17 +2477,18 @@ function interact(){
             showMessage(
                 "🎁 你買了生日禮物！"
             );
+
         });
 
         return;
     }
 
-    /* =====================
+    /* =====================================
        ASK 105
-    ===================== */
+    ===================================== */
 
     if(
-        type==="ask105"&&
+        type==="ask105" &&
         stage===2
     ){
 
@@ -2012,17 +2529,18 @@ function interact(){
             stage=3;
 
             load105Area();
+
         });
 
         return;
     }
 
-    /* =====================
-       105 BUS
-    ===================== */
+    /* =====================================
+       105
+    ===================================== */
 
     if(
-        type==="bus105"&&
+        type==="bus105" &&
         stage===3
     ){
 
@@ -2045,19 +2563,20 @@ function interact(){
             loadBankArea();
 
             showMessage(
-                "🚌 105號公車到了銀行附近。"
+                "🚌 105號公車把你帶到銀行附近。"
             );
+
         });
 
         return;
     }
 
-    /* =====================
+    /* =====================================
        ASK GR
-    ===================== */
+    ===================================== */
 
     if(
-        type==="askGR"&&
+        type==="askGR" &&
         stage===4
     ){
 
@@ -2087,30 +2606,40 @@ function interact(){
                 speaker:"路人",
 
                 chinese:
-                "看到便利商店以後往右轉。",
+                "看到便利商店以後繼續走。",
 
                 pinyin:
-                "Kàndào biànlì shāngdiàn yǐhòu wǎng yòu zhuǎn."
+                "Kàndào biànlì shāngdiàn yǐhòu jìxù zǒu."
             },
 
             {
                 speaker:"路人",
 
                 chinese:
-                "在十字路口右轉。",
+                "到了十字路口往右轉。",
 
                 pinyin:
-                "Zài shízì lùkǒu yòu zhuǎn."
+                "Dào le shízì lùkǒu wǎng yòu zhuǎn."
             },
 
             {
                 speaker:"路人",
 
                 chinese:
-                "然後一直走，GR公車站就在前面。",
+                "右轉以後一直走。",
 
                 pinyin:
-                "Ránhòu yìzhí zǒu, GR gōngchē zhàn jiù zài qiánmiàn."
+                "Yòu zhuǎn yǐhòu yìzhí zǒu."
+            },
+
+            {
+                speaker:"路人",
+
+                chinese:
+                "走一段路就會看到GR公車站。",
+
+                pinyin:
+                "Zǒu yí duàn lù jiù huì kàndào GR gōngchē zhàn."
             }
 
         ],()=>{
@@ -2120,17 +2649,18 @@ function interact(){
             setObjective(
                 "根據路人的指示找到GR公車站。"
             );
+
         });
 
         return;
     }
 
-    /* =====================
+    /* =====================================
        GR STOP
-    ===================== */
+    ===================================== */
 
     if(
-        type==="grStop"&&
+        type==="grStop" &&
         stage===5
     ){
 
@@ -2151,17 +2681,18 @@ function interact(){
             stage=6;
 
             loadGRArea();
+
         });
 
         return;
     }
 
-    /* =====================
-       TAKE GR
-    ===================== */
+    /* =====================================
+       GR BUS
+    ===================================== */
 
     if(
-        type==="takeGR"&&
+        type==="takeGR" &&
         stage===6
     ){
 
@@ -2182,17 +2713,18 @@ function interact(){
             stage=7;
 
             loadTrainStation();
+
         });
 
         return;
     }
 
-    /* =====================
+    /* =====================================
        TRAIN
-    ===================== */
+    ===================================== */
 
     if(
-        type==="train"&&
+        type==="train" &&
         stage===7
     ){
 
@@ -2217,17 +2749,18 @@ function interact(){
             showMessage(
                 "🚉 你到了台北車站！"
             );
+
         });
 
         return;
     }
 
-    /* =====================
+    /* =====================================
        ASK RED LINE
-    ===================== */
+    ===================================== */
 
     if(
-        type==="askRed"&&
+        type==="askRed" &&
         stage===8
     ){
 
@@ -2270,17 +2803,18 @@ function interact(){
             setObjective(
                 "找到捷運入口。"
             );
+
         });
 
         return;
     }
 
-    /* =====================
+    /* =====================================
        MRT ENTRANCE
-    ===================== */
+    ===================================== */
 
     if(
-        type==="mrtEntrance"&&
+        type==="mrtEntrance" &&
         stage===9
     ){
 
@@ -2301,17 +2835,18 @@ function interact(){
             stage=10;
 
             loadMRTArea();
+
         });
 
         return;
     }
 
-    /* =====================
+    /* =====================================
        RED LINE
-    ===================== */
+    ===================================== */
 
     if(
-        type==="redLine"&&
+        type==="redLine" &&
         stage===10
     ){
 
@@ -2336,17 +2871,18 @@ function interact(){
             showMessage(
                 "🚇 你到了淡水！"
             );
+
         });
 
         return;
     }
 
-    /* =====================
+    /* =====================================
        ASK RESTAURANT
-    ===================== */
+    ===================================== */
 
     if(
-        type==="askRestaurant"&&
+        type==="askRestaurant" &&
         stage===11
     ){
 
@@ -2376,30 +2912,40 @@ function interact(){
                 speaker:"路人",
 
                 chinese:
-                "看到便利商店以後往左轉。",
+                "看到便利商店以後繼續走。",
 
                 pinyin:
-                "Kàndào biànlì shāngdiàn yǐhòu wǎng zuǒ zhuǎn."
+                "Kàndào biànlì shāngdiàn yǐhòu jìxù zǒu."
             },
 
             {
                 speaker:"路人",
 
                 chinese:
-                "在三叉路口左轉。",
+                "到了三叉路口往左轉。",
 
                 pinyin:
-                "Zài sānchā lùkǒu zuǒ zhuǎn."
+                "Dào le sānchā lùkǒu wǎng zuǒ zhuǎn."
             },
 
             {
                 speaker:"路人",
 
                 chinese:
-                "然後一直走，海風餐廳就在前面。",
+                "左轉以後一直走。",
 
                 pinyin:
-                "Ránhòu yìzhí zǒu, Hǎifēng cāntīng jiù zài qiánmiàn."
+                "Zuǒ zhuǎn yǐhòu yìzhí zǒu."
+            },
+
+            {
+                speaker:"路人",
+
+                chinese:
+                "走一段路就會看到海風餐廳。",
+
+                pinyin:
+                "Zǒu yí duàn lù jiù huì kàndào Hǎifēng cāntīng."
             }
 
         ],()=>{
@@ -2409,17 +2955,18 @@ function interact(){
             setObjective(
                 "根據路人的指示找到海風餐廳。"
             );
+
         });
 
         return;
     }
 
-    /* =====================
+    /* =====================================
        RESTAURANT
-    ===================== */
+    ===================================== */
 
     if(
-        type==="restaurant"&&
+        type==="restaurant" &&
         stage===12
     ){
 
@@ -2474,9 +3021,10 @@ function interact(){
             paused=true;
 
             showMessage(
-                "🎉 恭喜！你成功靠著中文問路找到了海風餐廳！",
-                6000
+                "🎉 恭喜！你靠著中文問路成功找到了海風餐廳！",
+                7000
             );
+
         });
 
         return;
@@ -2495,7 +3043,8 @@ function updateHint(){
 
     if(paused){
 
-        hint.style.display="none";
+        interactionHint.style.display=
+            "none";
 
         return;
     }
@@ -2505,68 +3054,89 @@ function updateHint(){
 
     if(target){
 
-        hint.style.display="block";
+        interactionHint.style.display=
+            "block";
 
-        hint.textContent=
+        interactionHint.textContent=
             "💬 點擊 INTERACT";
 
     }else{
 
-        hint.style.display="none";
+        interactionHint.style.display=
+            "none";
+
     }
 }
 
 /* =========================================
-   PLAYER MOVEMENT
+   MOVEMENT
 ========================================= */
 
 function updatePlayer(){
 
-    if(paused)return;
+    if(paused){
+        return;
+    }
+
+    /*
+       LEFT / RIGHT
+       = ROTATE
+    */
 
     if(keys.left){
 
-        player.angle+=
+        player.angle +=
             player.turnSpeed;
+
     }
 
     if(keys.right){
 
-        player.angle-=
+        player.angle -=
             player.turnSpeed;
+
     }
 
-    let move=0;
+    /*
+       UP / DOWN
+       = FORWARD / BACKWARD
+    */
+
+    let movement=0;
 
     if(keys.forward){
 
-        move=
+        movement=
             player.speed;
+
     }
 
     if(keys.backward){
 
-        move=
+        movement=
             -player.speed;
+
     }
 
-    if(move!==0){
+    if(movement!==0){
 
         const nx=
-
             player.x+
-
             Math.sin(
                 player.angle
-            )*move;
+            )*
+            movement;
 
         const nz=
-
             player.z+
-
             Math.cos(
                 player.angle
-            )*move;
+            )*
+            movement;
+
+        /*
+           Collision X
+        */
 
         if(
             !isBlocked(
@@ -2576,7 +3146,12 @@ function updatePlayer(){
         ){
 
             player.x=nx;
+
         }
+
+        /*
+           Collision Z
+        */
 
         if(
             !isBlocked(
@@ -2586,14 +3161,16 @@ function updatePlayer(){
         ){
 
             player.z=nz;
+
         }
+
     }
 
     updateCamera();
 }
 
 /* =========================================
-   MOBILE CONTROLS
+   MOBILE HOLD
 ========================================= */
 
 function bindHold(
@@ -2601,41 +3178,52 @@ function bindHold(
     key
 ){
 
-    const el=
-        document.getElementById(id);
+    const button =
+        document.getElementById(
+            id
+        );
 
-    el.addEventListener(
-
+    button.addEventListener(
         "pointerdown",
+        event=>{
 
-        e=>{
+            event.preventDefault();
 
-            e.preventDefault();
+            button.setPointerCapture(
+                event.pointerId
+            );
 
             keys[key]=true;
-        }
 
+        }
     );
 
-    [
-
+    button.addEventListener(
         "pointerup",
-        "pointerleave",
-        "pointercancel"
+        ()=>{
 
-    ].forEach(event=>{
+            keys[key]=false;
 
-        el.addEventListener(
+        }
+    );
 
-            event,
+    button.addEventListener(
+        "pointercancel",
+        ()=>{
 
-            ()=>{
+            keys[key]=false;
 
-                keys[key]=false;
-            }
+        }
+    );
 
-        );
-    });
+    button.addEventListener(
+        "lostpointercapture",
+        ()=>{
+
+            keys[key]=false;
+
+        }
+    );
 }
 
 bindHold(
@@ -2664,90 +3252,120 @@ bindHold(
 
 window.addEventListener(
     "keydown",
-    e=>{
+    event=>{
 
         if(
-            e.key==="ArrowUp"
+            event.key==="ArrowUp" ||
+            event.key==="w" ||
+            event.key==="W"
         ){
 
             keys.forward=true;
+
         }
 
         if(
-            e.key==="ArrowDown"
+            event.key==="ArrowDown" ||
+            event.key==="s" ||
+            event.key==="S"
         ){
 
             keys.backward=true;
+
         }
 
         if(
-            e.key==="ArrowLeft"
+            event.key==="ArrowLeft" ||
+            event.key==="a" ||
+            event.key==="A"
         ){
 
             keys.left=true;
+
         }
 
         if(
-            e.key==="ArrowRight"
+            event.key==="ArrowRight" ||
+            event.key==="d" ||
+            event.key==="D"
         ){
 
             keys.right=true;
+
         }
 
         if(
-
-            e.key==="e" ||
-
-            e.key==="E" ||
-
-            e.key===" "
-
+            event.key==="e" ||
+            event.key==="E" ||
+            event.key===" "
         ){
 
             interact();
+
         }
+
     }
 );
 
 window.addEventListener(
     "keyup",
-    e=>{
+    event=>{
 
         if(
-            e.key==="ArrowUp"
+            event.key==="ArrowUp" ||
+            event.key==="w" ||
+            event.key==="W"
         ){
 
             keys.forward=false;
+
         }
 
         if(
-            e.key==="ArrowDown"
+            event.key==="ArrowDown" ||
+            event.key==="s" ||
+            event.key==="S"
         ){
 
             keys.backward=false;
+
         }
 
         if(
-            e.key==="ArrowLeft"
+            event.key==="ArrowLeft" ||
+            event.key==="a" ||
+            event.key==="A"
         ){
 
             keys.left=false;
+
         }
 
         if(
-            e.key==="ArrowRight"
+            event.key==="ArrowRight" ||
+            event.key==="d" ||
+            event.key==="D"
         ){
 
             keys.right=false;
+
         }
+
     }
 );
 
+/* =========================================
+   INTERACT BUTTON
+========================================= */
+
 document
-.getElementById(
-    "interactBtn"
-)
-.onclick=interact;
+    .getElementById(
+        "interactBtn"
+    )
+    .addEventListener(
+        "click",
+        interact
+    );
 
 /* =========================================
    VOCABULARY
@@ -2756,12 +3374,16 @@ document
 const vocab=[
 
     ["左","zuǒ","left"],
+
     ["右","yòu","right"],
 
     ["左轉","zuǒ zhuǎn","turn left"],
+
     ["右轉","yòu zhuǎn","turn right"],
 
     ["一直走","yìzhí zǒu","go straight"],
+
+    ["繼續走","jìxù zǒu","continue walking"],
 
     ["十字路口","shízì lùkǒu","crossroad / intersection"],
 
@@ -2775,6 +3397,8 @@ const vocab=[
 
     ["公車站","gōngchē zhàn","bus stop"],
 
+    ["搭公車","dā gōngchē","take a bus"],
+
     ["火車","huǒchē","train"],
 
     ["車站","chēzhàn","station"],
@@ -2782,6 +3406,8 @@ const vocab=[
     ["捷運","jiéyùn","MRT"],
 
     ["紅線","hóng xiàn","Red Line"],
+
+    ["淡水信義線","Dànshuǐ Xìnyì xiàn","Tamsui–Xinyi Line"],
 
     ["銀行","yínháng","bank"],
 
@@ -2793,119 +3419,144 @@ const vocab=[
 
     ["下車","xià chē","get off"],
 
-    ["前面","qiánmiàn","ahead / in front"],
+    ["前面","qiánmiàn","in front / ahead"],
 
-    ["方向","fāngxiàng","direction"]
+    ["方向","fāngxiàng","direction"],
+
+    ["生日禮物","shēngrì lǐwù","birthday present"],
+
+    ["餐廳","cāntīng","restaurant"]
 
 ];
 
-const vocabGrid=
+const vocabGrid =
     document.getElementById(
         "vocabGrid"
     );
 
-vocab.forEach(word=>{
+vocab.forEach(
+    word=>{
 
-    const card=
-        document.createElement(
-            "div"
+        const card=
+            document.createElement(
+                "div"
+            );
+
+        card.className=
+            "vocabCard";
+
+        card.innerHTML=`
+
+            <div class="vocabChinese">
+                ${word[0]}
+            </div>
+
+            <div class="vocabPinyin">
+                ${word[1]}
+            </div>
+
+            <div class="vocabMeaning">
+                ${word[2]}
+            </div>
+
+        `;
+
+        vocabGrid.appendChild(
+            card
         );
 
-    card.className=
-        "vocabCard";
+    }
+);
 
-    card.innerHTML=`
+/* =========================================
+   VOCAB MODAL
+========================================= */
 
-        <div class="vocabChinese">
-            ${word[0]}
-        </div>
-
-        <div class="vocabPinyin">
-            ${word[1]}
-        </div>
-
-        <div class="vocabMeaning">
-            ${word[2]}
-        </div>
-
-    `;
-
-    vocabGrid.appendChild(
-        card
-    );
-});
-
-const vocabModal=
+const vocabModal =
     document.getElementById(
         "vocabModal"
     );
 
 document
-.getElementById(
-    "vocabBtn"
-)
-.onclick=()=>{
+    .getElementById(
+        "vocabBtn"
+    )
+    .onclick=()=>{
 
-    vocabModal.style.display=
-        "flex";
+        vocabModal.style.display=
+            "flex";
 
-    paused=true;
-};
+        paused=true;
+
+    };
 
 document
-.getElementById(
-    "closeVocab"
-)
-.onclick=()=>{
+    .getElementById(
+        "closeVocab"
+    )
+    .onclick=()=>{
 
-    vocabModal.style.display=
-        "none";
+        vocabModal.style.display=
+            "none";
 
-    paused=false;
-};
+        paused=false;
+
+    };
 
 /* =========================================
-   STORY
+   START STORY
 ========================================= */
 
 document
-.getElementById(
-    "startBtn"
-)
-.onclick=()=>{
-
-    document
     .getElementById(
-        "storyOverlay"
+        "startBtn"
     )
-    .style.display="none";
+    .onclick=()=>{
 
-    loadGiftArea();
+        document
+            .getElementById(
+                "storyOverlay"
+            )
+            .style.display=
+                "none";
 
-    startDialogue([
+        loadGiftArea();
 
-        {
-            speaker:"阿豪",
+        startDialogue([
 
-            chinese:
-            "糟糕！我的手機沒電了！",
+            {
+                speaker:"阿豪",
 
-            pinyin:
-            "Zāogāo! Wǒ de shǒujī méi diàn le!"
-        },
+                chinese:
+                "糟糕！我的手機沒電了！",
 
-        {
-            speaker:"阿豪",
+                pinyin:
+                "Zāogāo! Wǒ de shǒujī méi diàn le!"
+            },
 
-            chinese:
-            "Google Maps不能用了。看來我只能問路人了。",
+            {
+                speaker:"阿豪",
 
-            pinyin:
-            "Google Maps bù néng yòng le. Kànlái wǒ zhǐ néng wèn lùrén le."
-        }
+                chinese:
+                "Google Maps不能用了。",
 
-    ]);
-};
+                pinyin:
+                "Google Maps bù néng yòng le."
+            },
+
+            {
+                speaker:"阿豪",
+
+                chinese:
+                "看來我只能問路人了。",
+
+                pinyin:
+                "Kànlái wǒ zhǐ néng wèn lùrén le."
+            }
+
+        ]);
+
+    };
 
 /* =========================================
    RESIZE
@@ -2925,6 +3576,7 @@ window.addEventListener(
             innerWidth,
             innerHeight
         );
+
     }
 );
 
@@ -2941,6 +3593,8 @@ function animate(){
     updatePlayer();
 
     updateHint();
+
+    updateDestinationVisibility();
 
     renderer.render(
         scene,
