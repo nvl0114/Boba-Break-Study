@@ -2222,7 +2222,265 @@ answer: ["銀行", "在", "郵局", "的", "哪裡"]
         { meaning: "You are so impressive!", answer: ["你","真","厲","害"] },
         { meaning: "I have something tomorrow.", answer: ["我","明","天","有","事","情"] }
     ]
+},
+
+// ========================================================
+// LESSON 24
+// ========================================================
+24: {
+    grammar: [
+        {
+            id: "24-1",
+            name: "Left & Right — 左邊 / 右邊",
+            category: "Location & Direction",
+            explanation: "Use 左邊 (zuǒbiān, 'the left side') and 右邊 (yòubiān, 'the right side') together with a location to describe where something is placed.",
+            examples: [
+                { hanzi: "左邊有銀行。", pinyin: "Zuǒbiān yǒu yínháng.", english: "There is a bank on the left." },
+                { hanzi: "右邊有咖啡店。", pinyin: "Yòubiān yǒu kāfēidiàn.", english: "There is a café on the right." }
+            ]
+        },
+        {
+            id: "24-2",
+            name: "Moving in a Direction — 往 + Direction + 走",
+            category: "Directions",
+            explanation: "往 (wǎng) indicates the direction of movement. It is used with a direction word plus 走 (zǒu, 'walk/go') to tell someone which direction to move.",
+            examples: [
+                { hanzi: "往左走。", pinyin: "Wǎng zuǒ zǒu.", english: "Go left." },
+                { hanzi: "往右邊走。", pinyin: "Wǎng yòubiān zǒu.", english: "Go to the right." }
+            ]
+        },
+        {
+            id: "24-3",
+            name: "Going Straight — 直走 / 一直走",
+            category: "Directions",
+            explanation: "直走 (zhí zǒu) means 'go straight.' 一直走 (yìzhí zǒu) emphasizes continuing straight without stopping or turning. 往前走 (wǎng qián zǒu) means 'go forward.'",
+            examples: [
+                { hanzi: "直走五分鐘。", pinyin: "Zhí zǒu wǔ fēnzhōng.", english: "Go straight for five minutes." }
+            ]
+        },
+        {
+            id: "24-4",
+            name: "Straight + Then Change Direction",
+            category: "Directions",
+            explanation: "Several direction instructions can be combined in one sentence using 直走 + time/distance + 再 (then) + another direction.",
+            examples: [
+                { hanzi: "直走三分鐘，再往左走。", pinyin: "Zhí zǒu sān fēnzhōng, zài wǎng zuǒ zǒu.", english: "Go straight for three minutes, then go left." }
+            ]
+        },
+        {
+            id: "24-5",
+            name: "Turning Left & Right — 左轉 / 右轉",
+            category: "Directions",
+            explanation: "左轉 (zuǒ zhuǎn, 'turn left') and 右轉 (yòu zhuǎn, 'turn right') are used with 到 or 在 + a place to say where to turn.",
+            examples: [
+                { hanzi: "到十字路口左轉。", pinyin: "Dào shízì lùkǒu zuǒ zhuǎn.", english: "Turn left when you reach the intersection." },
+                { hanzi: "在十字路口右轉。", pinyin: "Zài shízì lùkǒu yòu zhuǎn.", english: "Turn right at the intersection." }
+            ]
+        },
+        {
+            id: "24-6",
+            name: "From A to B — 從...到...",
+            category: "Location & Direction",
+            explanation: "從 (cóng) introduces the starting point and 到 (dào) introduces the destination, used together to describe movement from one place to another.",
+            examples: [
+                { hanzi: "從車站到餐廳。", pinyin: "Cóng chēzhàn dào cāntīng.", english: "From the station to the restaurant." },
+                { hanzi: "從淡水到台北。", pinyin: "Cóng Dànshuǐ dào Táiběi.", english: "From Tamsui to Taipei." }
+            ]
+        },
+        {
+            id: "24-7",
+            name: "Transferring Transportation — 轉車 / 換車",
+            category: "Transportation",
+            explanation: "轉車 is commonly used in Taiwan when transferring between buses, trains, or MRT lines, often in the pattern 從 A 轉 B.",
+            examples: [
+                { hanzi: "從紅線轉藍線。", pinyin: "Cóng hóngxiàn zhuǎn lánxiàn.", english: "Transfer from the Red Line to the Blue Line." },
+                { hanzi: "在台北車站轉車。", pinyin: "Zài Táiběi chēzhàn zhuǎn chē.", english: "Transfer at Taipei Main Station." }
+            ]
+        },
+        {
+            id: "24-8",
+            name: "Transfer Connection — 轉乘",
+            category: "Transportation",
+            explanation: "轉乘 means 'to transfer' or 'make a connection.' It is slightly more formal and commonly appears in Taiwan transportation information, e.g. 轉乘捷運, 轉乘公車, 轉乘火車.",
+            examples: [
+                { hanzi: "在車站轉乘捷運。", pinyin: "Zài chēzhàn zhuǎnchéng jiéyùn.", english: "Transfer to the MRT at the station." }
+            ]
+        },
+        {
+            id: "24-9",
+            name: "Giving Multiple Instructions — 先...然後...最後",
+            category: "Sequence Words",
+            explanation: "Sequence words 先 (first), 然後 (then), and 最後 (finally) are used together to give several directions clearly in one sentence.",
+            examples: [
+                { hanzi: "先直走，然後右轉，最後在車站轉車。", pinyin: "Xiān zhí zǒu, ránhòu yòu zhuǎn, zuìhòu zài chēzhàn zhuǎn chē.", english: "First go straight, then turn right, and finally transfer at the station." },
+                { hanzi: "先往左走，再直走，然後右轉。", pinyin: "Xiān wǎng zuǒ zǒu, zài zhí zǒu, ránhòu yòu zhuǎn.", english: "First go left, then go straight, and then turn right." }
+            ]
+        }
+    ],
+    vocabulary: [
+        { word: "冒險", pinyin: "màoxiǎn", meaning: "adventure" },
+        { word: "答應", pinyin: "dāying", meaning: "agree / promise" },
+        { word: "淡水", pinyin: "Dànshuǐ", meaning: "Tamsui" },
+        { word: "小美", pinyin: "Xiǎoměi", meaning: "Xiaomei" },
+        { word: "餐廳", pinyin: "cāntīng", meaning: "restaurant" },
+        { word: "海風餐廳", pinyin: "Hǎifēng Cāntīng", meaning: "Sea Breeze Restaurant" },
+        { word: "叫做", pinyin: "jiàozuò", meaning: "be called" },
+        { word: "路上", pinyin: "lùshàng", meaning: "on the way" },
+        { word: "沒電", pinyin: "méi diàn", meaning: "out of battery" },
+        { word: "糟糕", pinyin: "zāogāo", meaning: "oh no / terrible" },
+        { word: "看來", pinyin: "kànlái", meaning: "it seems" },
+        { word: "靠", pinyin: "kào", meaning: "rely on / depend on" },
+        { word: "路人", pinyin: "lùrén", meaning: "passerby" },
+        { word: "開始", pinyin: "kāishǐ", meaning: "begin / start" },
+        { word: "用", pinyin: "yòng", meaning: "use" },
+        { word: "禮物", pinyin: "lǐwù", meaning: "gift" },
+        { word: "點擊", pinyin: "diǎnjī", meaning: "click / tap" },
+        { word: "車站", pinyin: "chēzhàn", meaning: "station" },
+        { word: "火車站", pinyin: "huǒchēzhàn", meaning: "train station" },
+        { word: "公車", pinyin: "gōngchē", meaning: "bus" },
+        { word: "公車站", pinyin: "gōngchēzhàn", meaning: "bus stop" },
+        { word: "火車", pinyin: "huǒchē", meaning: "train" },
+        { word: "捷運", pinyin: "jiéyùn", meaning: "MRT" },
+        { word: "搭", pinyin: "dā", meaning: "take / ride" },
+        { word: "號", pinyin: "hào", meaning: "number" },
+        { word: "下車", pinyin: "xià chē", meaning: "get off a vehicle" },
+        { word: "找到", pinyin: "zhǎodào", meaning: "find" },
+        { word: "附近", pinyin: "fùjìn", meaning: "nearby" },
+        { word: "入口", pinyin: "rùkǒu", meaning: "entrance" },
+        { word: "怎麼走", pinyin: "zěnme zǒu", meaning: "how to get there" },
+        { word: "一直", pinyin: "yìzhí", meaning: "continuously / keep" },
+        { word: "走", pinyin: "zǒu", meaning: "walk / go" },
+        { word: "繼續", pinyin: "jìxù", meaning: "continue" },
+        { word: "十字路口", pinyin: "shízì lùkǒu", meaning: "intersection" },
+        { word: "三叉路口", pinyin: "sānchā lùkǒu", meaning: "three-way intersection" },
+        { word: "往", pinyin: "wǎng", meaning: "toward" },
+        { word: "左", pinyin: "zuǒ", meaning: "left" },
+        { word: "右", pinyin: "yòu", meaning: "right" },
+        { word: "左邊", pinyin: "zuǒbiān", meaning: "left side" },
+        { word: "右邊", pinyin: "yòubiān", meaning: "right side" },
+        { word: "左轉", pinyin: "zuǒ zhuǎn", meaning: "turn left" },
+        { word: "右轉", pinyin: "yòu zhuǎn", meaning: "turn right" },
+        { word: "往右轉", pinyin: "wǎng yòu zhuǎn", meaning: "turn toward the right" },
+        { word: "轉", pinyin: "zhuǎn", meaning: "turn / transfer" },
+        { word: "一段路", pinyin: "yí duàn lù", meaning: "a stretch of road" },
+        { word: "分鐘", pinyin: "fēnzhōng", meaning: "minute" },
+        { word: "找", pinyin: "zhǎo", meaning: "look for" },
+        { word: "方向", pinyin: "fāngxiàng", meaning: "direction" },
+        { word: "轉車", pinyin: "zhuǎn chē", meaning: "transfer vehicles" },
+        { word: "轉乘", pinyin: "zhuǎnchéng", meaning: "transfer / make a connection" },
+        { word: "紅線", pinyin: "hóngxiàn", meaning: "Red Line" },
+        { word: "藍線", pinyin: "lánxiàn", meaning: "Blue Line" },
+        { word: "線", pinyin: "xiàn", meaning: "line / route" },
+        { word: "信義線", pinyin: "Xìnyì xiàn", meaning: "Xinyi Line" },
+        { word: "紅色", pinyin: "hóngsè", meaning: "red color" },
+        { word: "藍色", pinyin: "lánsè", meaning: "blue color" },
+        { word: "從", pinyin: "cóng", meaning: "from" },
+        { word: "最後", pinyin: "zuìhòu", meaning: "finally / lastly" },
+        { word: "終於", pinyin: "zhōngyú", meaning: "finally / at last" },
+        { word: "生日快樂", pinyin: "shēngrì kuàilè", meaning: "happy birthday" },
+        { word: "根據", pinyin: "gēnjù", meaning: "according to / based on" },
+        { word: "指示", pinyin: "zhǐshì", meaning: "instruction" },
+        { word: "任務", pinyin: "rènwù", meaning: "mission / task" },
+        { word: "完成", pinyin: "wánchéng", meaning: "complete / finish" },
+        { word: "恭喜", pinyin: "gōngxǐ", meaning: "congratulations" },
+        { word: "者", pinyin: "zhě", meaning: "person / one who" },
+        { word: "問路", pinyin: "wèn lù", meaning: "ask for directions" },
+        { word: "成功", pinyin: "chénggōng", meaning: "success / succeed" }
+    ],
+    reviewQuestions: [
+        {
+            type: "arrange",
+            question: "There is a bank on the left.",
+            words: ["有", "左邊", "銀行"],
+            answer: "左邊有銀行"
+        },
+        {
+            type: "arrange",
+            question: "There is a café on the right.",
+            words: ["咖啡店", "有", "右邊"],
+            answer: "右邊有咖啡店"
+        },
+        {
+            type: "arrange",
+            question: "Go left.",
+            words: ["走", "左", "往"],
+            answer: "往左走"
+        },
+        {
+            type: "arrange",
+            question: "Go to the right.",
+            words: ["走", "右邊", "往"],
+            answer: "往右邊走"
+        },
+        {
+            type: "arrange",
+            question: "Go straight for five minutes.",
+            words: ["五分鐘", "直走"],
+            answer: "直走五分鐘"
+        },
+        {
+            type: "arrange",
+            question: "Go straight for three minutes, then go left.",
+            words: ["再往左走", "三分鐘", "直走"],
+            answer: "直走三分鐘，再往左走"
+        },
+        {
+            type: "arrange",
+            question: "Turn left when you reach the intersection.",
+            words: ["左轉", "十字路口", "到"],
+            answer: "到十字路口左轉"
+        },
+        {
+            type: "arrange",
+            question: "Turn right at the intersection.",
+            words: ["右轉", "十字路口", "在"],
+            answer: "在十字路口右轉"
+        },
+        {
+            type: "arrange",
+            question: "From the station to the restaurant.",
+            words: ["餐廳", "到", "車站", "從"],
+            answer: "從車站到餐廳"
+        },
+        {
+            type: "arrange",
+            question: "From Tamsui to Taipei.",
+            words: ["台北", "淡水", "從", "到"],
+            answer: "從淡水到台北"
+        },
+        {
+            type: "arrange",
+            question: "Transfer from the Red Line to the Blue Line.",
+            words: ["轉", "紅線", "藍線", "從"],
+            answer: "從紅線轉藍線"
+        },
+        {
+            type: "arrange",
+            question: "Transfer at Taipei Main Station.",
+            words: ["轉車", "台北車站", "在"],
+            answer: "在台北車站轉車"
+        },
+        {
+            type: "arrange",
+            question: "Transfer to the MRT at the station.",
+            words: ["捷運", "轉乘", "車站", "在"],
+            answer: "在車站轉乘捷運"
+        },
+        {
+            type: "arrange",
+            question: "First go straight, then turn right, and finally transfer at the station.",
+            words: ["最後在車站轉車", "先直走", "然後右轉"],
+            answer: "先直走，然後右轉，最後在車站轉車"
+        },
+        {
+            type: "arrange",
+            question: "First go left, then go straight, and then turn right.",
+            words: ["然後右轉", "先往左走", "再直走"],
+            answer: "先往左走，再直走，然後右轉"
+        }
+    ]
 }
+
 };
 
 // ============================================================
