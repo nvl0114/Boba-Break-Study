@@ -1,0 +1,1444 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Directions & Transportation | Boba Break Study</title><link rel="icon" type="image/png" href="/favicon.png">
+<link rel="stylesheet" href="../style.css"><link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"><style>
+
+/* =====================================================
+   GENERAL
+===================================================== */
+
+.lesson-card,
+.grammar-card,
+.game-card {
+    background: white;
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.06);
+    margin: 25px auto;
+    max-width: 850px;
+}
+
+h2 {
+    color: #b8865c;
+    font-size: 24px;
+    margin-bottom: 12px;
+}
+
+h3 {
+    color: #5c4033;
+    margin-bottom: 8px;
+}
+
+p {
+    color: #666;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+
+/* =====================================================
+   LESSON HEADER
+===================================================== */
+
+.lesson-title {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.lesson-title .badge {
+    display: inline-block;
+    background: #fff8ef;
+    color: #b8865c;
+    border: 1px solid #d7b89c;
+    padding: 6px 13px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.lesson-title h1 {
+    color: #5c4033;
+    font-size: 30px;
+    margin: 12px 0 5px;
+}
+
+.lesson-title p {
+    margin: 0;
+}
+
+
+/* =====================================================
+   GRAMMAR CAROUSEL
+===================================================== */
+
+.grammar-slider-container {
+    position: relative;
+}
+
+.grammar-slide {
+    display: none;
+    animation: fadeSlide 0.3s ease;
+}
+
+.grammar-slide.active-slide {
+    display: block;
+}
+
+@keyframes fadeSlide {
+
+    from {
+        opacity: 0;
+        transform: translateX(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+}
+
+
+.grammar-number {
+    display: inline-block;
+    background: #fff8ef;
+    color: #b8865c;
+    border: 1px solid #d7b89c;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+
+.pattern-display {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin: 22px 0;
+    flex-wrap: wrap;
+}
+
+.pattern-box {
+    padding: 12px 18px;
+    border-radius: 14px;
+    font-weight: bold;
+    font-size: 17px;
+    border: 1.5px solid #d7b89c;
+    background: #fff8ef;
+    color: #b8865c;
+    text-align: center;
+}
+
+.pattern-box small {
+    font-size: 11px;
+    color: #8c7355;
+}
+
+.pattern-symbol {
+    font-size: 20px;
+    color: #999;
+}
+
+
+.grammar-explanation {
+    background: #fff8ef;
+    border: 1.5px solid #d7b89c;
+    padding: 16px;
+    border-radius: 15px;
+    margin-top: 15px;
+}
+
+.grammar-explanation strong {
+    color: #b8865c;
+}
+
+
+.example-section {
+    margin-top: 20px;
+}
+
+.example-label {
+    font-size: 11px;
+    color: #999;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+}
+
+
+.example-sentence {
+    text-align: center;
+    margin-top: 10px;
+    padding: 16px;
+    background: white;
+    border-radius: 15px;
+    border: 1px dashed #d7b89c;
+}
+
+.example-hanzi {
+    font-size: 27px;
+    font-weight: bold;
+    color: #5c4033;
+    margin-bottom: 5px;
+}
+
+.example-pinyin {
+    font-size: 14px;
+    color: #b8865c;
+    margin-bottom: 5px;
+}
+
+.example-meaning {
+    font-size: 13px;
+    color: #777;
+}
+
+
+.slider-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-top: 25px;
+}
+
+.slider-btn {
+    background: #fff8ef;
+    border: 1.5px solid #d7b89c;
+    color: #8c7355;
+    padding: 9px 16px;
+    border-radius: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.slider-btn:hover {
+    background: #faedcd;
+}
+
+
+.slider-indicators {
+    display: flex;
+    gap: 7px;
+}
+
+.indicator {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #f0e4d5;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.indicator.active {
+    background: #b8865c;
+    transform: scale(1.15);
+}
+
+
+/* =====================================================
+   VOCABULARY
+===================================================== */
+
+.vocab-intro {
+    margin-bottom: 20px;
+}
+
+
+.vocab-section-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #5c4033;
+    margin: 28px 0 12px;
+    font-size: 17px;
+}
+
+.vocab-section-title:first-of-type {
+    margin-top: 18px;
+}
+
+
+.vocab-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 10px;
+}
+
+
+.vocab-pill {
+    background: #fff8ef;
+    border-radius: 14px;
+    padding: 12px 8px;
+    text-align: center;
+    border: 1.5px solid #d7b89c;
+    cursor: pointer;
+    transition: 0.2s;
+    min-height: 105px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.vocab-pill:hover {
+    transform: translateY(-3px);
+    background: #faedcd;
+    box-shadow: 0 5px 10px rgba(184,134,92,0.12);
+}
+
+.vocab-pill:active {
+    transform: scale(0.96);
+}
+
+
+.vocab-pill .hanzi {
+    font-size: 22px;
+    font-weight: bold;
+    color: #b8865c;
+    margin-bottom: 3px;
+}
+
+.vocab-pill .pinyin {
+    font-size: 11px;
+    color: #555;
+}
+
+.vocab-pill .meaning {
+    font-size: 11px;
+    color: #777;
+    margin-top: 3px;
+}
+
+
+/* =====================================================
+   GAME CTA
+===================================================== */
+
+.game-card {
+    text-align: center;
+}
+
+.game-number {
+    display: inline-block;
+    background: #fff8ef;
+    color: #b8865c;
+    border: 1px solid #d7b89c;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.game-intro {
+    background: #fff8ef;
+    border: 1.5px solid #d7b89c;
+    padding: 18px;
+    border-radius: 15px;
+    margin: 18px 0;
+}
+
+.game-intro-icon {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+
+.play-game-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+
+    text-decoration: none;
+
+    background: #b8865c;
+    color: white;
+
+    padding: 13px 25px;
+    border-radius: 14px;
+
+    font-weight: bold;
+
+    transition: 0.2s;
+}
+
+.play-game-btn:hover {
+    background: #a0724f;
+    transform: translateY(-2px);
+}
+
+
+/* =====================================================
+   SOUND
+===================================================== */
+
+.sound-btn {
+    margin-top: 10px;
+
+    background: #b8865c;
+    color: white;
+
+    border: none;
+
+    width: 34px;
+    height: 34px;
+
+    border-radius: 50%;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.sound-btn:hover {
+    background: #a0724f;
+    transform: scale(1.05);
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:700px){
+
+    .lesson-card,
+    .grammar-card,
+    .game-card {
+        padding: 16px;
+        margin: 15px;
+    }
+
+    .lesson-title h1 {
+        font-size: 24px;
+    }
+
+    .pattern-display {
+        gap: 5px;
+    }
+
+    .pattern-box {
+        padding: 9px 11px;
+        font-size: 15px;
+    }
+
+    .slider-btn {
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+
+    .vocab-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+</style></head><body><div class="app-container"><!-- =====================================================
+     SIDEBAR
+===================================================== --><div id="sidebar-container"></div><main class="main-content"><!-- =====================================================
+     TITLE
+===================================================== --><div class="lesson-title"><span class="badge">
+    TRANSPORTATION • DIRECTIONS
+</span>
+
+<h1>Directions & Getting Around</h1>
+
+<p>
+    Learn how to give directions, find places, and transfer transportation in Mandarin.
+</p>
+
+</div><!-- =====================================================
+     GRAMMAR CAROUSEL
+===================================================== --><div class="grammar-card"><h2>🧭 Grammar Patterns</h2><p>
+    Learn the essential Mandarin patterns you need to give and understand directions.
+</p><div class="grammar-slider-container"><!-- =====================================================
+     SLIDE 1 — LEFT & RIGHT
+===================================================== --><div class="grammar-slide active-slide" id="slide-1"><span class="grammar-number">GRAMMAR 1 OF 6</span>
+
+<h3>1. Left & Right — 左邊 / 右邊</h3>
+
+<p>
+    Use <strong>左邊</strong> and <strong>右邊</strong> to describe where something is located.
+</p>
+
+
+<div class="pattern-display">
+
+    <div class="pattern-box">
+        左邊 / 右邊
+        <br>
+        <small>left / right side</small>
+    </div>
+
+    <div class="pattern-symbol">+</div>
+
+    <div class="pattern-box">
+        Location
+    </div>
+
+</div>
+
+
+<div class="grammar-explanation">
+
+    <p>
+        <strong>左邊 (zuǒbiān)</strong> means "the left side."
+    </p>
+
+    <p>
+        <strong>右邊 (yòubiān)</strong> means "the right side."
+    </p>
+
+    <p>
+        You can use them to describe the location of a place.
+    </p>
+
+</div>
+
+
+<div class="example-section">
+
+    <div class="example-label">Example 1</div>
+
+    <div class="example-sentence">
+
+        <div class="example-hanzi">左邊有銀行。</div>
+
+        <div class="example-pinyin">
+            Zuǒbiān yǒu yínháng.
+        </div>
+
+        <div class="example-meaning">
+            There is a bank on the left.
+        </div>
+
+        <button class="sound-btn"
+        onclick="playAudio('左邊有銀行')">
+        🔊
+        </button>
+
+    </div>
+
+
+    <div class="example-label" style="margin-top:15px;">
+        Example 2
+    </div>
+
+    <div class="example-sentence">
+
+        <div class="example-hanzi">右邊有咖啡店。</div>
+
+        <div class="example-pinyin">
+            Yòubiān yǒu kāfēidiàn.
+        </div>
+
+        <div class="example-meaning">
+            There is a café on the right.
+        </div>
+
+        <button class="sound-btn"
+        onclick="playAudio('右邊有咖啡店')">
+        🔊
+        </button>
+
+    </div>
+
+</div>
+
+</div><!-- =====================================================
+     SLIDE 2 — GOING LEFT / RIGHT
+===================================================== --><div class="grammar-slide" id="slide-2"><span class="grammar-number">GRAMMAR 2 OF 6</span>
+
+<h3>2. Going Left or Right — 往 + Direction + 走</h3>
+
+<p>
+    Use <strong>往 (wǎng)</strong> to indicate the direction of movement.
+</p>
+
+
+<div class="pattern-display">
+
+    <div class="pattern-box">
+        往
+        <br>
+        <small>toward</small>
+    </div>
+
+    <div class="pattern-symbol">+</div>
+
+    <div class="pattern-box">
+        Direction
+    </div>
+
+    <div class="pattern-symbol">+</div>
+
+    <div class="pattern-box">
+        走
+        <br>
+        <small>walk / go</small>
+    </div>
+
+</div>
+
+
+<div class="grammar-explanation">
+
+    <p>
+        <strong>往 + direction + 走</strong> means "walk or go toward a direction."
+    </p>
+
+    <p>
+        This pattern is especially useful when giving directions.
+    </p>
+
+</div>
+
+
+<div class="example-sentence">
+
+    <div class="example-hanzi">往左走。</div>
+
+    <div class="example-pinyin">
+        Wǎng zuǒ zǒu.
+    </div>
+
+    <div class="example-meaning">
+        Go left.
+    </div>
+
+    <button class="sound-btn"
+    onclick="playAudio('往左走')">
+    🔊
+    </button>
+
+</div>
+
+
+<div class="example-sentence">
+
+    <div class="example-hanzi">往右邊走。</div>
+
+    <div class="example-pinyin">
+        Wǎng yòubiān zǒu.
+    </div>
+
+    <div class="example-meaning">
+        Go to the right.
+    </div>
+
+    <button class="sound-btn"
+    onclick="playAudio('往右邊走')">
+    🔊
+    </button>
+
+</div>
+
+</div><!-- =====================================================
+     SLIDE 3 — GO STRAIGHT
+===================================================== --><div class="grammar-slide" id="slide-3"><span class="grammar-number">GRAMMAR 3 OF 6</span>
+
+<h3>3. Going Straight — 直走</h3>
+
+<p>
+    <strong>直走 (zhí zǒu)</strong> means "go straight."
+</p>
+
+
+<div class="grammar-explanation">
+
+    <p>
+        You can combine <strong>直走</strong> with time or distance when giving more detailed directions.
+    </p>
+
+</div>
+
+
+<div class="example-sentence">
+
+    <div class="example-hanzi">一直走。</div>
+
+    <div class="example-pinyin">
+        Yìzhí zǒu.
+    </div>
+
+    <div class="example-meaning">
+        Keep going straight.
+    </div>
+
+    <button class="sound-btn"
+    onclick="playAudio('一直走')">
+    🔊
+    </button>
+
+</div>
+
+
+<div class="example-sentence">
+
+    <div class="example-hanzi">往前走。</div>
+
+    <div class="example-pinyin">
+        Wǎng qián zǒu.
+    </div>
+
+    <div class="example-meaning">
+        Go forward.
+    </div>
+
+    <button class="sound-btn"
+    onclick="playAudio('往前走')">
+    🔊
+    </button>
+
+</div>
+
+
+<div class="example-sentence">
+
+    <div class="example-hanzi">
+        直走三分鐘，再往左走。
+    </div>
+
+    <div class="example-pinyin">
+        Zhí zǒu sān fēnzhōng, zài wǎng zuǒ zǒu.
+    </div>
+
+    <div class="example-meaning">
+        Go straight for three minutes, then go left.
+    </div>
+
+    <button class="sound-btn"
+    onclick="playAudio('直走三分鐘，再往左走')">
+    🔊
+    </button>
+
+</div>
+
+</div><!-- =====================================================
+     SLIDE 4 — TURNING
+===================================================== --><div class="grammar-slide" id="slide-4"><span class="grammar-number">GRAMMAR 4 OF 6</span>
+
+<h3>4. Turning Left & Right — 左轉 / 右轉</h3>
+
+<p>
+    Use <strong>左轉</strong> and <strong>右轉</strong> when you need to turn at a particular location.
+</p>
+
+
+<div class="pattern-display">
+
+    <div class="pattern-box">
+        到 + Place
+        <br>
+        <small>when you reach...</small>
+    </div>
+
+    <div class="pattern-symbol">+</div>
+
+    <div class="pattern-box">
+        左轉 / 右轉
+        <br>
+        <small>turn left / right</small>
+    </div>
+
+</div>
+
+
+<div class="grammar-explanation">
+
+    <p>
+        Use <strong>到 (dào)</strong> to indicate that you should perform an action when you reach a place.
+    </p>
+
+    <p>
+        You can also use <strong>在 (zài)</strong> to describe the location where you should turn.
+    </p>
+
+</div>
+
+
+<div class="example-sentence">
+
+    <div class="example-hanzi">
+        到十字路口左轉。
+    </div>
+
+    <div class="example-pinyin">
+        Dào shízì lùkǒu zuǒ zhuǎn.
+    </div>
+
+    <div class="example-meaning">
+        Turn left when you reach the intersection.
+    </div>
+
+    <button class="sound-btn"
+    onclick="playAudio('到十字路口左轉')">
+    🔊
+    </button>
+
+</div>
+
+
+<div class="example-sentence">
+
+    <div class="example-hanzi">
+        在十字路口右轉。
+    </div>
+
+    <div class="example-pinyin">
+        Zài shízì lùkǒu yòu zhuǎn.
+    </div>
+
+    <div class="example-meaning">
+        Turn right at the intersection.
+    </div>
+
+    <button class="sound-btn"
+    onclick="playAudio('在十字路口右轉')">
+    🔊
+    </button>
+
+</div>
+
+</div><!-- =====================================================
+     SLIDE 5 — TRANSFERRING
+===================================================== --><div class="grammar-slide" id="slide-5"><span class="grammar-number">GRAMMAR 5 OF 6</span>
+
+<h3>5. Transferring Transportation — 轉車 / 轉乘</h3>
+
+<p>
+    When changing buses, trains, or MRT lines, the most useful word is <strong>轉</strong>.
+</p>
+
+
+<div class="grammar-explanation">
+
+    <p>
+        <strong>轉車 (zhuǎn chē)</strong> means "to transfer or change vehicles."
+    </p>
+
+    <p>
+        <strong>換車 (huàn chē)</strong> also means "change vehicles," with more emphasis on replacing one vehicle with another.
+    </p>
+
+    <p>
+        <strong>轉乘 (zhuǎnchéng)</strong> is a more formal word for "transfer" and is commonly used in transportation information in Taiwan.
+    </p>
+
+</div>
+
+
+<div class="example-sentence">
+
+    <div class="example-hanzi">
+        在台北車站轉車。
+    </div>
+
+    <div class="example-pinyin">
+        Zài Táiběi chēzhàn zhuǎn chē.
+    </div>
+
+    <div class="example-meaning">
+        Transfer at Taipei Main Station.
+    </div>
+
+    <button class="sound-btn"
+    onclick="playAudio('在台北車站轉車')">
+    🔊
+    </button>
+
+</div>
+
+
+<div class="example-sentence">
+
+    <div class="example-hanzi">
+        從紅線轉藍線。
+    </div>
+
+    <div class="example-pinyin">
+        Cóng hóngxiàn zhuǎn lánxiàn.
+    </div>
+
+    <div class="example-meaning">
+        Transfer from the Red Line to the Blue Line.
+    </div>
+
+    <button class="sound-btn"
+    onclick="playAudio('從紅線轉藍線')">
+    🔊
+    </button>
+
+</div>
+
+
+<div class="example-sentence">
+
+    <div class="example-hanzi">
+        在台北車站轉藍線。
+    </div>
+
+    <div class="example-pinyin">
+        Zài Táiběi chēzhàn zhuǎn lánxiàn.
+    </div>
+
+    <div class="example-meaning">
+        Transfer to the Blue Line at Taipei Main Station.
+    </div>
+
+    <button class="sound-btn"
+    onclick="playAudio('在台北車站轉藍線')">
+    🔊
+    </button>
+
+</div>
+
+</div><!-- =====================================================
+     SLIDE 6 — DIRECTION SEQUENCE
+===================================================== --><div class="grammar-slide" id="slide-6"><span class="grammar-number">GRAMMAR 6 OF 6</span>
+
+<h3>6. Giving Directions Step by Step</h3>
+
+<p>
+    Use sequence words to give clear directions in the correct order.
+</p>
+
+
+<div class="pattern-display">
+
+    <div class="pattern-box">
+        先
+        <br>
+        <small>first</small>
+    </div>
+
+    <div class="pattern-symbol">→</div>
+
+    <div class="pattern-box">
+        然後
+        <br>
+        <small>then</small>
+    </div>
+
+    <div class="pattern-symbol">→</div>
+
+    <div class="pattern-box">
+        最後
+        <br>
+        <small>finally</small>
+    </div>
+
+</div>
+
+
+<div class="grammar-explanation">
+
+    <p>
+        <strong>先 (xiān)</strong> introduces the first action.
+    </p>
+
+    <p>
+        <strong>然後 (ránhòu)</strong> introduces the next action.
+    </p>
+
+    <p>
+        <strong>最後 (zuìhòu)</strong> introduces the final action.
+    </p>
+
+    <p>
+        You can also use <strong>再 (zài)</strong> to mean "then" or "after that."
+    </p>
+
+</div>
+
+
+<div class="example-sentence">
+
+    <div class="example-hanzi">
+        先直走，然後右轉，最後在車站轉車。
+    </div>
+
+    <div class="example-pinyin">
+        Xiān zhí zǒu, ránhòu yòu zhuǎn, zuìhòu zài chēzhàn zhuǎn chē.
+    </div>
+
+    <div class="example-meaning">
+        First go straight, then turn right, and finally transfer at the station.
+    </div>
+
+    <button class="sound-btn"
+    onclick="playAudio('先直走，然後右轉，最後在車站轉車')">
+    🔊
+    </button>
+
+</div>
+
+
+<div class="example-sentence">
+
+    <div class="example-hanzi">
+        先往左走，再直走，然後右轉。
+    </div>
+
+    <div class="example-pinyin">
+        Xiān wǎng zuǒ zǒu, zài zhí zǒu, ránhòu yòu zhuǎn.
+    </div>
+
+    <div class="example-meaning">
+        First go left, then go straight, and then turn right.
+    </div>
+
+    <button class="sound-btn"
+    onclick="playAudio('先往左走，再直走，然後右轉')">
+    🔊
+    </button>
+
+</div>
+
+</div></div><!-- =====================================================
+     SLIDER NAVIGATION
+===================================================== --><div class="slider-nav"><button class="slider-btn" onclick="prevSlide()">
+    ← Prev
+</button>
+
+
+<div class="slider-indicators">
+
+    <span class="indicator active"
+    onclick="currentSlide(1)"></span>
+
+    <span class="indicator"
+    onclick="currentSlide(2)"></span>
+
+    <span class="indicator"
+    onclick="currentSlide(3)"></span>
+
+    <span class="indicator"
+    onclick="currentSlide(4)"></span>
+
+    <span class="indicator"
+    onclick="currentSlide(5)"></span>
+
+    <span class="indicator"
+    onclick="currentSlide(6)"></span>
+
+</div>
+
+
+<button class="slider-btn" onclick="nextSlide()">
+    Next →
+</button>
+
+</div></div><!-- =====================================================
+     VOCABULARY
+===================================================== --><div class="lesson-card"><h2>📚 Vocabulary List</h2><p class="vocab-intro">
+    Tap any word to hear its pronunciation.
+</p><!-- STORY --><div class="vocab-section-title">
+    📖 Story & Mission
+</div><div class="vocab-container"><div class="vocab-pill" onclick="playAudio('冒險')">
+<div class="hanzi">冒險</div>
+<div class="pinyin">màoxiǎn</div>
+<div class="meaning">adventure</div>
+</div><div class="vocab-pill" onclick="playAudio('答應')">
+<div class="hanzi">答應</div>
+<div class="pinyin">dāying</div>
+<div class="meaning">to agree / promise</div>
+</div><div class="vocab-pill" onclick="playAudio('任務')">
+<div class="hanzi">任務</div>
+<div class="pinyin">rènwù</div>
+<div class="meaning">mission / task</div>
+</div><div class="vocab-pill" onclick="playAudio('完成')">
+<div class="hanzi">完成</div>
+<div class="pinyin">wánchéng</div>
+<div class="meaning">to complete</div>
+</div><div class="vocab-pill" onclick="playAudio('成功')">
+<div class="hanzi">成功</div>
+<div class="pinyin">chénggōng</div>
+<div class="meaning">success / to succeed</div>
+</div><div class="vocab-pill" onclick="playAudio('恭喜')">
+<div class="hanzi">恭喜</div>
+<div class="pinyin">gōngxǐ</div>
+<div class="meaning">congratulations</div>
+</div><div class="vocab-pill" onclick="playAudio('根據')">
+<div class="hanzi">根據</div>
+<div class="pinyin">gēnjù</div>
+<div class="meaning">according to / based on</div>
+</div><div class="vocab-pill" onclick="playAudio('指示')">
+<div class="hanzi">指示</div>
+<div class="pinyin">zhǐshì</div>
+<div class="meaning">instruction / direction</div>
+</div><div class="vocab-pill" onclick="playAudio('禮物')">
+<div class="hanzi">禮物</div>
+<div class="pinyin">lǐwù</div>
+<div class="meaning">gift / present</div>
+</div><div class="vocab-pill" onclick="playAudio('生日快樂')">
+<div class="hanzi">生日快樂</div>
+<div class="pinyin">shēngrì kuàilè</div>
+<div class="meaning">happy birthday</div>
+</div></div><!-- PEOPLE & PLACES --><div class="vocab-section-title">
+    📍 People & Places
+</div><div class="vocab-container"><div class="vocab-pill" onclick="playAudio('小美')">
+<div class="hanzi">小美</div>
+<div class="pinyin">Xiǎoměi</div>
+<div class="meaning">Xiaomei</div>
+</div><div class="vocab-pill" onclick="playAudio('淡水')">
+<div class="hanzi">淡水</div>
+<div class="pinyin">Dànshuǐ</div>
+<div class="meaning">Tamsui</div>
+</div><div class="vocab-pill" onclick="playAudio('餐廳')">
+<div class="hanzi">餐廳</div>
+<div class="pinyin">cāntīng</div>
+<div class="meaning">restaurant</div>
+</div><div class="vocab-pill" onclick="playAudio('海風餐廳')">
+<div class="hanzi">海風餐廳</div>
+<div class="pinyin">Hǎifēng Cāntīng</div>
+<div class="meaning">Sea Breeze Restaurant</div>
+</div><div class="vocab-pill" onclick="playAudio('路人')">
+<div class="hanzi">路人</div>
+<div class="pinyin">lùrén</div>
+<div class="meaning">passerby</div>
+</div><div class="vocab-pill" onclick="playAudio('車站')">
+<div class="hanzi">車站</div>
+<div class="pinyin">chēzhàn</div>
+<div class="meaning">station</div>
+</div><div class="vocab-pill" onclick="playAudio('火車站')">
+<div class="hanzi">火車站</div>
+<div class="pinyin">huǒchēzhàn</div>
+<div class="meaning">train station</div>
+</div><div class="vocab-pill" onclick="playAudio('公車站')">
+<div class="hanzi">公車站</div>
+<div class="pinyin">gōngchē zhàn</div>
+<div class="meaning">bus stop</div>
+</div><div class="vocab-pill" onclick="playAudio('入口')">
+<div class="hanzi">入口</div>
+<div class="pinyin">rùkǒu</div>
+<div class="meaning">entrance</div>
+</div><div class="vocab-pill" onclick="playAudio('附近')">
+<div class="hanzi">附近</div>
+<div class="pinyin">fùjìn</div>
+<div class="meaning">nearby</div>
+</div></div><!-- MOVEMENT --><div class="vocab-section-title">
+    🧭 Directions & Movement
+</div><div class="vocab-container"><div class="vocab-pill" onclick="playAudio('左')">
+<div class="hanzi">左</div>
+<div class="pinyin">zuǒ</div>
+<div class="meaning">left</div>
+</div><div class="vocab-pill" onclick="playAudio('右')">
+<div class="hanzi">右</div>
+<div class="pinyin">yòu</div>
+<div class="meaning">right</div>
+</div><div class="vocab-pill" onclick="playAudio('往')">
+<div class="hanzi">往</div>
+<div class="pinyin">wǎng</div>
+<div class="meaning">toward</div>
+</div><div class="vocab-pill" onclick="playAudio('走')">
+<div class="hanzi">走</div>
+<div class="pinyin">zǒu</div>
+<div class="meaning">walk / go</div>
+</div><div class="vocab-pill" onclick="playAudio('一直')">
+<div class="hanzi">一直</div>
+<div class="pinyin">yìzhí</div>
+<div class="meaning">continuously / straight ahead</div>
+</div><div class="vocab-pill" onclick="playAudio('繼續')">
+<div class="hanzi">繼續</div>
+<div class="pinyin">jìxù</div>
+<div class="meaning">to continue</div>
+</div><div class="vocab-pill" onclick="playAudio('轉')">
+<div class="hanzi">轉</div>
+<div class="pinyin">zhuǎn</div>
+<div class="meaning">turn / transfer</div>
+</div><div class="vocab-pill" onclick="playAudio('方向')">
+<div class="hanzi">方向</div>
+<div class="pinyin">fāngxiàng</div>
+<div class="meaning">direction</div>
+</div><div class="vocab-pill" onclick="playAudio('一段路')">
+<div class="hanzi">一段路</div>
+<div class="pinyin">yí duàn lù</div>
+<div class="meaning">a stretch of road</div>
+</div><div class="vocab-pill" onclick="playAudio('十字路口')">
+<div class="hanzi">十字路口</div>
+<div class="pinyin">shízì lùkǒu</div>
+<div class="meaning">intersection</div>
+</div><div class="vocab-pill" onclick="playAudio('三叉路口')">
+<div class="hanzi">三叉路口</div>
+<div class="pinyin">sānchā lùkǒu</div>
+<div class="meaning">three-way intersection</div>
+</div></div><!-- TRANSPORTATION --><div class="vocab-section-title">
+    🚌 Transportation
+</div><div class="vocab-container"><div class="vocab-pill" onclick="playAudio('搭')">
+<div class="hanzi">搭</div>
+<div class="pinyin">dā</div>
+<div class="meaning">to take / ride</div>
+</div><div class="vocab-pill" onclick="playAudio('公車')">
+<div class="hanzi">公車</div>
+<div class="pinyin">gōngchē</div>
+<div class="meaning">bus</div>
+</div><div class="vocab-pill" onclick="playAudio('火車')">
+<div class="hanzi">火車</div>
+<div class="pinyin">huǒchē</div>
+<div class="meaning">train</div>
+</div><div class="vocab-pill" onclick="playAudio('捷運')">
+<div class="hanzi">捷運</div>
+<div class="pinyin">jiéyùn</div>
+<div class="meaning">MRT / metro</div>
+</div><div class="vocab-pill" onclick="playAudio('下車')">
+<div class="hanzi">下車</div>
+<div class="pinyin">xià chē</div>
+<div class="meaning">get off a vehicle</div>
+</div><div class="vocab-pill" onclick="playAudio('轉車')">
+<div class="hanzi">轉車</div>
+<div class="pinyin">zhuǎn chē</div>
+<div class="meaning">transfer / change vehicles</div>
+</div><div class="vocab-pill" onclick="playAudio('轉乘')">
+<div class="hanzi">轉乘</div>
+<div class="pinyin">zhuǎnchéng</div>
+<div class="meaning">transfer / make a connection</div>
+</div><div class="vocab-pill" onclick="playAudio('紅線')">
+<div class="hanzi">紅線</div>
+<div class="pinyin">hóngxiàn</div>
+<div class="meaning">Red Line</div>
+</div><div class="vocab-pill" onclick="playAudio('信義線')">
+<div class="hanzi">信義線</div>
+<div class="pinyin">Xìnyì Xiàn</div>
+<div class="meaning">Xinyi Line</div>
+</div><div class="vocab-pill" onclick="playAudio('線')">
+<div class="hanzi">線</div>
+<div class="pinyin">xiàn</div>
+<div class="meaning">line / route</div>
+</div><div class="vocab-pill" onclick="playAudio('號')">
+<div class="hanzi">號</div>
+<div class="pinyin">hào</div>
+<div class="meaning">number</div>
+</div><div class="vocab-pill" onclick="playAudio('從')">
+<div class="hanzi">從</div>
+<div class="pinyin">cóng</div>
+<div class="meaning">from</div>
+</div></div><!-- STORY EXPRESSIONS --><div class="vocab-section-title">
+    💬 Useful Story Expressions
+</div><div class="vocab-container"><div class="vocab-pill" onclick="playAudio('叫做')">
+<div class="hanzi">叫做</div>
+<div class="pinyin">jiàozuò</div>
+<div class="meaning">to be called</div>
+</div><div class="vocab-pill" onclick="playAudio('路上')">
+<div class="hanzi">路上</div>
+<div class="pinyin">lùshàng</div>
+<div class="meaning">on the way</div>
+</div><div class="vocab-pill" onclick="playAudio('沒電')">
+<div class="hanzi">沒電</div>
+<div class="pinyin">méi diàn</div>
+<div class="meaning">out of battery</div>
+</div><div class="vocab-pill" onclick="playAudio('糟糕')">
+<div class="hanzi">糟糕</div>
+<div class="pinyin">zāogāo</div>
+<div class="meaning">oh no / terrible</div>
+</div><div class="vocab-pill" onclick="playAudio('看來')">
+<div class="hanzi">看來</div>
+<div class="pinyin">kànlái</div>
+<div class="meaning">it seems / apparently</div>
+</div><div class="vocab-pill" onclick="playAudio('靠')">
+<div class="hanzi">靠</div>
+<div class="pinyin">kào</div>
+<div class="meaning">to rely on / near</div>
+</div><div class="vocab-pill" onclick="playAudio('開始')">
+<div class="hanzi">開始</div>
+<div class="pinyin">kāishǐ</div>
+<div class="meaning">to begin / start</div>
+</div><div class="vocab-pill" onclick="playAudio('用')">
+<div class="hanzi">用</div>
+<div class="pinyin">yòng</div>
+<div class="meaning">to use</div>
+</div><div class="vocab-pill" onclick="playAudio('找到')">
+<div class="hanzi">找到</div>
+<div class="pinyin">zhǎodào</div>
+<div class="meaning">to find</div>
+</div><div class="vocab-pill" onclick="playAudio('找')">
+<div class="hanzi">找</div>
+<div class="pinyin">zhǎo</div>
+<div class="meaning">to look for</div>
+</div><div class="vocab-pill" onclick="playAudio('怎麼走')">
+<div class="hanzi">怎麼走</div>
+<div class="pinyin">zěnme zǒu</div>
+<div class="meaning">how to get there</div>
+</div><div class="vocab-pill" onclick="playAudio('問路')">
+<div class="hanzi">問路</div>
+<div class="pinyin">wèn lù</div>
+<div class="meaning">to ask for directions</div>
+</div><div class="vocab-pill" onclick="playAudio('終於')">
+<div class="hanzi">終於</div>
+<div class="pinyin">zhōngyú</div>
+<div class="meaning">finally / at last</div>
+</div><div class="vocab-pill" onclick="playAudio('點擊')">
+<div class="hanzi">點擊</div>
+<div class="pinyin">diǎnjí</div>
+<div class="meaning">to click / tap</div>
+</div><div class="vocab-pill" onclick="playAudio('藍色')">
+<div class="hanzi">藍色</div>
+<div class="pinyin">lánsè</div>
+<div class="meaning">blue</div>
+</div><div class="vocab-pill" onclick="playAudio('者')">
+<div class="hanzi">者</div>
+<div class="pinyin">zhě</div>
+<div class="meaning">person / one who...</div>
+</div></div></div><!-- =====================================================
+     GAME CTA
+===================================================== --><div class="game-card"><span class="game-number">
+    READY TO PRACTICE?
+</span>
+
+<h2>🎮 Start the Adventure</h2>
+
+<div class="game-intro">
+
+    <div class="game-intro-icon">
+        🧋🗺️
+    </div>
+
+    <p>
+        You've learned how to give directions, turn at intersections,
+        find transportation, and transfer between buses and MRT lines.
+    </p>
+
+    <p>
+        Now it's time to use your Mandarin skills in the adventure!
+    </p>
+
+</div>
+
+
+<a href="24.html" class="play-game-btn">
+
+    <i class="fa-solid fa-play"></i>
+
+    Play the Direction Adventure
+
+</a>
+
+</div></main>
+</div><!-- =====================================================
+     JAVASCRIPT
+===================================================== --><script>
+
+/* =====================================================
+   AUDIO
+===================================================== */
+
+function playAudio(text){
+
+    if(!('speechSynthesis' in window)) return;
+
+    window.speechSynthesis.cancel();
+
+    const utterance =
+        new SpeechSynthesisUtterance(text);
+
+    utterance.lang = "zh-TW";
+    utterance.rate = 0.82;
+    utterance.pitch = 1;
+
+    window.speechSynthesis.speak(utterance);
+
+}
+
+
+/* =====================================================
+   GRAMMAR SLIDER
+===================================================== */
+
+let currentSlideIndex = 0;
+
+const totalSlides = 6;
+
+
+function showSlide(index){
+
+    if(index >= totalSlides){
+
+        currentSlideIndex = 0;
+
+    }
+
+    else if(index < 0){
+
+        currentSlideIndex =
+            totalSlides - 1;
+
+    }
+
+    else{
+
+        currentSlideIndex = index;
+
+    }
+
+
+    for(let i = 1; i <= totalSlides; i++){
+
+        document
+        .getElementById("slide-" + i)
+        .classList
+        .remove("active-slide");
+
+    }
+
+
+    document
+    .querySelectorAll(".indicator")
+    .forEach(indicator => {
+
+        indicator.classList.remove("active");
+
+    });
+
+
+    document
+    .getElementById(
+        "slide-" +
+        (currentSlideIndex + 1)
+    )
+    .classList
+    .add("active-slide");
+
+
+    document
+    .querySelectorAll(".indicator")
+    [currentSlideIndex]
+    .classList
+    .add("active");
+
+}
+
+
+function nextSlide(){
+
+    showSlide(
+        currentSlideIndex + 1
+    );
+
+}
+
+
+function prevSlide(){
+
+    showSlide(
+        currentSlideIndex - 1
+    );
+
+}
+
+
+function currentSlide(number){
+
+    showSlide(number - 1);
+
+}
+
+</script><!-- EXISTING SIDEBAR SCRIPT --><script src="../script.js"></script></body>
+</html>
