@@ -1,0 +1,3559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Distance & Travel Time | Boba Break Study</title>
+
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="stylesheet" href="../style.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/hanzi-writer@3.5.0/dist/hanzi-writer.min.js"></script>
+
+<!-- Master review database -->
+<script src="lesson.js"></script>
+
+<style>
+
+/* =====================================================
+   GENERAL
+===================================================== */
+
+.lesson-card,
+.grammar-card,
+.game-card,
+.writing-card,
+.final-card,
+.dialogue-card {
+    background: white;
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.06);
+    margin: 25px auto;
+    max-width: 750px;
+}
+
+h2 {
+    color: #b8865c;
+    font-size: 24px;
+    margin-bottom: 12px;
+}
+
+h3 {
+    color: #5c4033;
+}
+
+p {
+    color: #666;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+
+/* =====================================================
+   TITLE
+===================================================== */
+
+.lesson-title {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.lesson-title .badge {
+    display: inline-block;
+    background: #fff8ef;
+    color: #b8865c;
+    border: 1px solid #d7b89c;
+    padding: 6px 13px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.lesson-title h1 {
+    color: #5c4033;
+    font-size: 28px;
+    margin: 12px 0 5px;
+}
+
+.lesson-title p {
+    margin: 0;
+}
+
+
+/* =====================================================
+   DIALOGUE
+===================================================== */
+
+.dialogue-card {
+    padding-bottom: 28px;
+}
+
+.dialogue-intro {
+    background: #fff8ef;
+    border: 1.5px solid #d7b89c;
+    border-radius: 15px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.dialogue-line {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin: 18px 0;
+}
+
+.character-icon {
+    width: 45px;
+    height: 45px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: #fff8ef;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+.character-content {
+    flex: 1;
+}
+
+.character-name {
+    font-weight: bold;
+    color: #b8865c;
+    font-size: 13px;
+    margin-bottom: 4px;
+}
+
+.dialogue-hanzi {
+    color: #5c4033;
+    font-size: 19px;
+    line-height: 1.6;
+    font-weight: 500;
+}
+
+.dialogue-pinyin {
+    color: #8c7355;
+    font-size: 12px;
+    line-height: 1.6;
+    margin-top: 2px;
+}
+
+.dialogue-meaning {
+    color: #777;
+    font-size: 13px;
+    line-height: 1.5;
+    margin-top: 3px;
+}
+
+.dialogue-sound {
+    margin-top: 6px;
+}
+
+
+/* =====================================================
+   SOUND
+===================================================== */
+
+.sound-btn {
+    background: #b8865c;
+    color: white;
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.sound-btn:hover {
+    background: #a0724f;
+    transform: scale(1.05);
+}
+
+
+/* =====================================================
+   GRAMMAR SLIDER
+===================================================== */
+
+.grammar-slider-container {
+    position: relative;
+}
+
+.grammar-slide {
+    display: none;
+}
+
+.grammar-slide.active-slide {
+    display: block;
+}
+
+.pattern-display {
+    background: #fff8ef;
+    padding: 15px;
+    border-radius: 14px;
+    border: 1.5px solid #d7b89c;
+    margin: 15px 0;
+    text-align: center;
+}
+
+.pattern-code {
+    font-weight: bold;
+    color: #b8865c;
+    font-size: 18px;
+}
+
+.grammar-explanation {
+    background: #fff8ef;
+    border: 1.5px solid #d7b89c;
+    padding: 15px;
+    border-radius: 15px;
+    margin-top: 15px;
+}
+
+.grammar-explanation strong {
+    color: #b8865c;
+}
+
+.example-sentence {
+    text-align: center;
+    margin-top: 18px;
+    padding: 15px;
+    background: white;
+    border-radius: 15px;
+    border: 1px dashed #d7b89c;
+}
+
+.example-hanzi {
+    font-size: 28px;
+    font-weight: bold;
+    color: #5c4033;
+    margin-bottom: 5px;
+}
+
+.example-pinyin {
+    color: #8c7355;
+    font-size: 13px;
+}
+
+.example-meaning {
+    color: #777;
+    margin-top: 5px;
+}
+
+.slider-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.slider-btn {
+    background: #fff8ef;
+    border: 1.5px solid #d7b89c;
+    color: #8c7355;
+    padding: 8px 16px;
+    border-radius: 12px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.slider-btn:hover {
+    background: #faedcd;
+}
+
+.slider-indicators {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 400px;
+}
+
+.indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #f0e4d5;
+    cursor: pointer;
+}
+
+.indicator.active {
+    background: #b8865c;
+}
+
+
+/* =====================================================
+   VOCABULARY
+===================================================== */
+
+.vocab-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.vocab-pill {
+    position: relative;
+    background: #fff8ef;
+    border-radius: 14px;
+    padding: 9px 10px;
+    width: 105px;
+    text-align: center;
+    border: 1.5px solid #d7b89c;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.vocab-pill:hover {
+    transform: translateY(-2px);
+    background: #faedcd;
+}
+
+.vocab-pill .hanzi {
+    font-size: 20px;
+    font-weight: bold;
+    color: #b8865c;
+}
+
+.vocab-pill .pinyin {
+    font-size: 11px;
+    color: #555;
+}
+
+.vocab-pill .meaning {
+    font-size: 10px;
+    color: #777;
+    margin-top: 2px;
+}
+
+
+/* =====================================================
+   GAME
+===================================================== */
+
+.game-card {
+    position: relative;
+}
+
+.game-number {
+    display: inline-block;
+    background: #fff8ef;
+    color: #b8865c;
+    border: 1px solid #d7b89c;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.game-description {
+    margin-bottom: 15px;
+}
+
+.question-box {
+    text-align: center;
+    background: #fff8ef;
+    border: 1.5px dashed #d7b89c;
+    padding: 15px;
+    border-radius: 15px;
+    margin-bottom: 15px;
+}
+
+.question-label {
+    font-size: 11px;
+    color: #999;
+    margin-bottom: 5px;
+}
+
+.question-meaning {
+    font-size: 17px;
+    color: #5c4033;
+    font-weight: bold;
+}
+
+.answer-area {
+    min-height: 65px;
+    padding: 12px;
+    border: 2px dashed #d7b89c;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 7px;
+    background: #fdfbf7;
+    margin-bottom: 12px;
+}
+
+.answer-placeholder {
+    color: #aaa;
+    font-size: 13px;
+}
+
+.word-bank {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.word-btn {
+    border: 1.5px solid #d7b89c;
+    background: white;
+    color: #5c4033;
+    padding: 9px 14px;
+    border-radius: 12px;
+    font-size: 17px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.word-btn:hover {
+    background: #fff8ef;
+    transform: translateY(-2px);
+}
+
+.word-btn.selected {
+    background: #faedcd;
+    border-color: #b8865c;
+    color: #8c5d35;
+}
+
+.word-btn:disabled {
+    opacity: .4;
+    cursor: default;
+}
+
+.selected-word {
+    background: #b8865c;
+    color: white;
+    padding: 8px 13px;
+    border-radius: 10px;
+    font-size: 17px;
+    cursor: pointer;
+}
+
+.selected-word:hover {
+    background: #a0724f;
+}
+
+.game-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.check-btn,
+.reset-btn,
+.listen-btn,
+.next-game-btn {
+    flex: 1;
+    border: none;
+    border-radius: 12px;
+    padding: 11px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.check-btn {
+    background: #b8865c;
+    color: white;
+}
+
+.reset-btn {
+    background: #fff8ef;
+    color: #8c7355;
+    border: 1px solid #d7b89c;
+}
+
+.listen-btn {
+    background: #f0f7f4;
+    color: #2d6a4f;
+    border: 1px solid #b7e4c7;
+}
+
+.next-game-btn {
+    background: #5c4033;
+    color: white;
+    display: none;
+    margin-top: 12px;
+}
+
+.feedback {
+    text-align: center;
+    min-height: 30px;
+    margin-top: 12px;
+    font-weight: bold;
+}
+
+.correct {
+    color: #2d6a4f;
+}
+
+.incorrect {
+    color: #9b2226;
+}
+
+.game-progress {
+    font-size: 12px;
+    color: #8c7355;
+    text-align: right;
+    margin-bottom: 8px;
+}
+
+
+/* =====================================================
+   SENTENCE WRITING
+===================================================== */
+
+.sentence-writing {
+    background: #fff8ef;
+    border: 1.5px solid #d7b89c;
+    padding: 18px;
+    border-radius: 15px;
+    margin-top: 15px;
+}
+
+.sentence-prompt {
+    font-size: 18px;
+    font-weight: bold;
+    color: #5c4033;
+}
+
+.sentence-hint {
+    font-size: 12px;
+    color: #888;
+    margin: 8px 0;
+}
+
+#sentenceInput {
+    width: 100%;
+    padding: 12px;
+    border-radius: 12px;
+    border: 1.5px solid #d7b89c;
+    font-size: 20px;
+    text-align: center;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.check-writing {
+    width: 100%;
+    margin-top: 10px;
+    padding: 11px;
+    background: #b8865c;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+
+/* =====================================================
+   HANZI WRITING
+===================================================== */
+
+.writing-card {
+    text-align: center;
+}
+
+.writing-mode-buttons {
+    display: flex;
+    gap: 8px;
+    margin: 15px 0;
+}
+
+.mode-btn {
+    flex: 1;
+    border: 1.5px solid #d7b89c;
+    background: #fff8ef;
+    color: #8c7355;
+    padding: 10px 5px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.mode-btn.active {
+    background: #b8865c;
+    color: white;
+}
+
+.writing-info {
+    color: #777;
+    font-size: 13px;
+    margin-bottom: 15px;
+}
+
+.canvas-wrapper {
+    margin: 15px auto;
+    width: 280px;
+    max-width: 100%;
+    height: 280px;
+    background:
+        linear-gradient(#eadac7 1px, transparent 1px),
+        linear-gradient(90deg, #eadac7 1px, transparent 1px),
+        linear-gradient(#eadac7 1px, transparent 1px),
+        linear-gradient(90deg, #eadac7 1px, transparent 1px);
+    background-size: 70px 70px;
+    background-position: center;
+    border: 2px solid #d7b89c;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+    touch-action: none;
+}
+
+#target-div {
+    width: 260px;
+    height: 260px;
+}
+
+.writing-buttons {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.write-btn {
+    border: none;
+    padding: 10px 15px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.clear-btn {
+    background: #fff8ef;
+    color: #8c7355;
+    border: 1px solid #d7b89c;
+}
+
+.next-write-btn {
+    background: #b8865c;
+    color: white;
+}
+
+.recall-answer {
+    display: none;
+}
+
+
+/* =====================================================
+   FINAL CHALLENGE
+===================================================== */
+
+.final-card {
+    text-align: center;
+}
+
+.final-score {
+    font-size: 40px;
+    font-weight: bold;
+    color: #b8865c;
+}
+
+.unlock {
+    background: #fff8ef;
+    padding: 15px;
+    border-radius: 15px;
+    border: 1.5px solid #d7b89c;
+    margin-top: 15px;
+}
+
+.final-error {
+    background: #fff0f0;
+    color: #9b2226;
+    border: 1.5px solid #e5aaaa;
+    padding: 15px;
+    border-radius: 15px;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:700px){
+
+    .lesson-card,
+    .grammar-card,
+    .game-card,
+    .writing-card,
+    .final-card,
+    .dialogue-card {
+        padding: 15px;
+        margin: 15px;
+    }
+
+    .lesson-title h1 {
+        font-size: 23px;
+    }
+
+    .word-btn {
+        padding: 8px 12px;
+        font-size: 16px;
+    }
+
+    .writing-mode-buttons {
+        flex-wrap: wrap;
+    }
+
+    .mode-btn {
+        min-width: 45%;
+    }
+
+    .game-buttons {
+        flex-wrap: wrap;
+    }
+
+    .dialogue-hanzi {
+        font-size: 17px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="app-container">
+
+<div id="sidebar-container"></div>
+
+<main class="main-content">
+
+
+<!-- =====================================================
+     TITLE
+===================================================== -->
+
+<div class="lesson-title">
+
+    <span class="badge">
+        TIME & DISTANCE
+    </span>
+
+    <h1>How Far Is It?</h1>
+
+    <p>
+        Learn how to talk about distance, travel time, and how close or far places are.
+    </p>
+
+</div>
+
+
+<!-- =====================================================
+     DIALOGUE
+===================================================== -->
+
+<div class="dialogue-card">
+
+<h2>💬 Conversation</h2>
+
+<div class="dialogue-intro">
+
+<p>
+    Listen to the conversation and notice how the speakers use
+    <strong>離</strong> to describe distance.
+</p>
+
+<p>
+    The pinyin below focuses only on the vocabulary words from this lesson.
+</p>
+
+</div>
+
+
+<!-- 1 -->
+
+<div class="dialogue-line">
+
+<img
+class="character-icon"
+src="https://img.icons8.com/?size=100&id=68478&format=png&color=000000"
+alt="Xiaomei">
+
+<div class="character-content">
+
+<div class="character-name">小美</div>
+
+<div class="dialogue-hanzi">
+阿豪，你今天怎麼來淡水的？
+</div>
+
+<div class="dialogue-pinyin">
+</div>
+
+<div class="dialogue-meaning">
+Ahao, how did you come to Tamsui today?
+</div>
+
+<button class="sound-btn dialogue-sound"
+onclick="playAudio('阿豪，你今天怎麼來淡水的？')">
+🔊
+</button>
+
+</div>
+</div>
+
+
+<!-- 2 -->
+
+<div class="dialogue-line">
+
+<img
+class="character-icon"
+src="https://img.icons8.com/?size=100&id=108652&format=png&color=000000"
+alt="Ahao">
+
+<div class="character-content">
+
+<div class="character-name">阿豪</div>
+
+<div class="dialogue-hanzi">
+我坐了兩次公車，還坐了兩次火車。
+</div>
+
+<div class="dialogue-pinyin">
+</div>
+
+<div class="dialogue-meaning">
+I took the bus twice, and I also took the train twice.
+</div>
+
+<button class="sound-btn dialogue-sound"
+onclick="playAudio('我坐了兩次公車，還坐了兩次火車。')">
+🔊
+</button>
+
+</div>
+</div>
+
+
+<!-- 3 -->
+
+<div class="dialogue-line">
+
+<img
+class="character-icon"
+src="https://img.icons8.com/?size=100&id=68478&format=png&color=000000"
+alt="Xiaomei">
+
+<div class="character-content">
+
+<div class="character-name">小美</div>
+
+<div class="dialogue-hanzi">
+兩次公車，兩次火車？你家離淡水很遠嗎？
+</div>
+
+<div class="dialogue-pinyin">
+離 lí　遠 yuǎn
+</div>
+
+<div class="dialogue-meaning">
+Two buses and two trains? Is your home far from Tamsui?
+</div>
+
+<button class="sound-btn dialogue-sound"
+onclick="playAudio('兩次公車，兩次火車？你家離淡水很遠嗎？')">
+🔊
+</button>
+
+</div>
+</div>
+
+
+<!-- 4 -->
+
+<div class="dialogue-line">
+
+<img
+class="character-icon"
+src="https://img.icons8.com/?size=100&id=108652&format=png&color=000000"
+alt="Ahao">
+
+<div class="character-content">
+
+<div class="character-name">阿豪</div>
+
+<div class="dialogue-hanzi">
+很遠，大概三十公里。坐車要兩個小時。
+</div>
+
+<div class="dialogue-pinyin">
+遠 yuǎn　大概 dàgài　公里 gōnglǐ　小時 xiǎoshí
+</div>
+
+<div class="dialogue-meaning">
+Very far. About thirty kilometers. It takes two hours by vehicle.
+</div>
+
+<button class="sound-btn dialogue-sound"
+onclick="playAudio('很遠，大概三十公里。坐車要兩個小時。')">
+🔊
+</button>
+
+</div>
+</div>
+
+
+<!-- 5 -->
+
+<div class="dialogue-line">
+
+<img
+class="character-icon"
+src="https://img.icons8.com/?size=100&id=68478&format=png&color=000000"
+alt="Xiaomei">
+
+<div class="character-content">
+
+<div class="character-name">小美</div>
+
+<div class="dialogue-hanzi">
+其實我家離淡水也很遠。
+</div>
+
+<div class="dialogue-pinyin">
+其實 qíshí　離 lí　遠 yuǎn
+</div>
+
+<div class="dialogue-meaning">
+Actually, my home is also far from Tamsui.
+</div>
+
+<button class="sound-btn dialogue-sound"
+onclick="playAudio('其實我家離淡水也很遠。')">
+🔊
+</button>
+
+</div>
+</div>
+
+
+<!-- 6 -->
+
+<div class="dialogue-line">
+
+<img
+class="character-icon"
+src="https://img.icons8.com/?size=100&id=108652&format=png&color=000000"
+alt="Ahao">
+
+<div class="character-content">
+
+<div class="character-name">阿豪</div>
+
+<div class="dialogue-hanzi">
+我知道。那你怎麼來的？
+</div>
+
+<div class="dialogue-pinyin">
+</div>
+
+<div class="dialogue-meaning">
+I know. Then how did you come here?
+</div>
+
+<button class="sound-btn dialogue-sound"
+onclick="playAudio('我知道。那你怎麼來的？')">
+🔊
+</button>
+
+</div>
+</div>
+
+
+<!-- 7 -->
+
+<div class="dialogue-line">
+
+<img
+class="character-icon"
+src="https://img.icons8.com/?size=100&id=68478&format=png&color=000000"
+alt="Xiaomei">
+
+<div class="character-content">
+
+<div class="character-name">小美</div>
+
+<div class="dialogue-hanzi">
+我昨天住在我阿姨家。
+</div>
+
+<div class="dialogue-pinyin">
+</div>
+
+<div class="dialogue-meaning">
+I stayed at my aunt's home yesterday.
+</div>
+
+<button class="sound-btn dialogue-sound"
+onclick="playAudio('我昨天住在我阿姨家。')">
+🔊
+</button>
+
+</div>
+</div>
+
+
+<!-- 8 -->
+
+<div class="dialogue-line">
+
+<img
+class="character-icon"
+src="https://img.icons8.com/?size=100&id=108652&format=png&color=000000"
+alt="Ahao">
+
+<div class="character-content">
+
+<div class="character-name">阿豪</div>
+
+<div class="dialogue-hanzi">
+你阿姨家離這家餐廳很近嗎？
+</div>
+
+<div class="dialogue-pinyin">
+離 lí　近 jìn
+</div>
+
+<div class="dialogue-meaning">
+Is your aunt's home close to this restaurant?
+</div>
+
+<button class="sound-btn dialogue-sound"
+onclick="playAudio('你阿姨家離這家餐廳很近嗎？')">
+🔊
+</button>
+
+</div>
+</div>
+
+
+<!-- 9 -->
+
+<div class="dialogue-line">
+
+<img
+class="character-icon"
+src="https://img.icons8.com/?size=100&id=68478&format=png&color=000000"
+alt="Xiaomei">
+
+<div class="character-content">
+
+<div class="character-name">小美</div>
+
+<div class="dialogue-hanzi">
+對，很近，走路五分鐘就到了。
+</div>
+
+<div class="dialogue-pinyin">
+近 jìn　走路 zǒulù　分鐘 fēnzhōng
+</div>
+
+<div class="dialogue-meaning">
+Yes, very close. It only takes five minutes on foot.
+</div>
+
+<button class="sound-btn dialogue-sound"
+onclick="playAudio('對，很近，走路五分鐘就到了。')">
+🔊
+</button>
+
+</div>
+</div>
+
+
+<!-- 10 -->
+
+<div class="dialogue-line">
+
+<img
+class="character-icon"
+src="https://img.icons8.com/?size=100&id=108652&format=png&color=000000"
+alt="Ahao">
+
+<div class="character-content">
+
+<div class="character-name">阿豪</div>
+
+<div class="dialogue-hanzi">
+原來是這樣。
+</div>
+
+<div class="dialogue-pinyin">
+原來 yuánlái　這樣 zhèyàng
+</div>
+
+<div class="dialogue-meaning">
+Oh, I see. So that's how it is.
+</div>
+
+<button class="sound-btn dialogue-sound"
+onclick="playAudio('原來是這樣。')">
+🔊
+</button>
+
+</div>
+</div>
+
+
+<!-- 11 -->
+
+<div class="dialogue-line">
+
+<img
+class="character-icon"
+src="https://img.icons8.com/?size=100&id=68478&format=png&color=000000"
+alt="Xiaomei">
+
+<div class="character-content">
+
+<div class="character-name">小美</div>
+
+<div class="dialogue-hanzi">
+你為了我的生日，坐了這麼久的車……
+</div>
+
+<div class="dialogue-pinyin">
+為了 wèile　久 jiǔ
+</div>
+
+<div class="dialogue-meaning">
+You traveled for such a long time for my birthday...
+</div>
+
+<button class="sound-btn dialogue-sound"
+onclick="playAudio('你為了我的生日，坐了這麼久的車……')">
+🔊
+</button>
+
+</div>
+</div>
+
+
+<!-- 12 -->
+
+<div class="dialogue-line">
+
+<img
+class="character-icon"
+src="https://img.icons8.com/?size=100&id=108652&format=png&color=000000"
+alt="Ahao">
+
+<div class="character-content">
+
+<div class="character-name">阿豪</div>
+
+<div class="dialogue-hanzi">
+沒關係，生日快樂最重要。 🎂
+</div>
+
+<div class="dialogue-pinyin">
+重要 zhòngyào
+</div>
+
+<div class="dialogue-meaning">
+It's okay. Saying happy birthday is the most important thing. 🎂
+</div>
+
+<button class="sound-btn dialogue-sound"
+onclick="playAudio('沒關係，生日快樂最重要。')">
+🔊
+</button>
+
+</div>
+</div>
+
+</div>
+
+
+<!-- =====================================================
+     GRAMMAR
+===================================================== -->
+
+<div class="grammar-card">
+
+<h2>🧠 Grammar Patterns: 離 — Expressing Distance</h2>
+
+<div class="grammar-slider-container">
+
+
+<!-- SLIDE 1 -->
+
+<div class="grammar-slide active-slide" id="slide-1">
+
+<h3>1. Basic Distance Pattern</h3>
+
+<div class="pattern-display">
+<div class="pattern-code">
+A + 離 + B + 很遠 / 很近
+</div>
+</div>
+
+<div class="grammar-explanation">
+
+<p>
+<strong>離</strong> is used to express the distance between two places or things.
+</p>
+
+<p>
+<strong>A</strong> is the place or person you are talking about.
+<strong>B</strong> is the reference point.
+</p>
+
+<p>
+<strong>很遠</strong> means "very far" and
+<strong>很近</strong> means "very close."
+</p>
+
+</div>
+
+<div class="example-sentence">
+
+<div class="example-hanzi">
+我家離淡水很遠。
+</div>
+
+<div class="example-pinyin">
+離 lí　遠 yuǎn
+</div>
+
+<div class="example-meaning">
+My home is far from Tamsui.
+</div>
+
+<button class="sound-btn"
+onclick="playAudio('我家離淡水很遠。')">
+🔊
+</button>
+
+</div>
+
+</div>
+
+
+<!-- SLIDE 2 -->
+
+<div class="grammar-slide" id="slide-2">
+
+<h3>2. Asking About Distance</h3>
+
+<div class="pattern-display">
+<div class="pattern-code">
+A + 離 + B + 遠嗎？
+</div>
+</div>
+
+<div class="grammar-explanation">
+
+<p>
+Use this structure to ask whether one place is far from another.
+</p>
+
+<p>
+You can also use <strong>很近嗎？</strong> when asking whether something is close.
+</p>
+
+</div>
+
+<div class="example-sentence">
+
+<div class="example-hanzi">
+你家離淡水遠嗎？
+</div>
+
+<div class="example-pinyin">
+離 lí　遠 yuǎn
+</div>
+
+<div class="example-meaning">
+Is your home far from Tamsui?
+</div>
+
+<button class="sound-btn"
+onclick="playAudio('你家離淡水遠嗎？')">
+🔊
+</button>
+
+</div>
+
+</div>
+
+
+<!-- SLIDE 3 -->
+
+<div class="grammar-slide" id="slide-3">
+
+<h3>3. Giving an Exact Distance</h3>
+
+<div class="pattern-display">
+<div class="pattern-code">
+A + 離 + B + 有 + Number + 公里
+</div>
+</div>
+
+<div class="grammar-explanation">
+
+<p>
+Use this structure when you want to give a specific distance.
+</p>
+
+<p>
+You can add <strong>大概</strong> when the number is approximate.
+</p>
+
+</div>
+
+<div class="example-sentence">
+
+<div class="example-hanzi">
+我家離淡水大概三十公里。
+</div>
+
+<div class="example-pinyin">
+離 lí　大概 dàgài　公里 gōnglǐ
+</div>
+
+<div class="example-meaning">
+My home is about 30 kilometers from Tamsui.
+</div>
+
+<button class="sound-btn"
+onclick="playAudio('我家離淡水大概三十公里。')">
+🔊
+</button>
+
+</div>
+
+</div>
+
+
+<!-- SLIDE 4 -->
+
+<div class="grammar-slide" id="slide-4">
+
+<h3>4. Distance vs. Travel Time</h3>
+
+<div class="pattern-display">
+<div class="pattern-code">
+A + 離 + B + 很遠，V + 要 + Time
+</div>
+</div>
+
+<div class="grammar-explanation">
+
+<p>
+<strong>離</strong> describes physical distance.
+</p>
+
+<p>
+<strong>要 + time</strong> describes how long the trip takes.
+</p>
+
+<p>
+These two structures can be combined in one sentence.
+</p>
+
+</div>
+
+<div class="example-sentence">
+
+<div class="example-hanzi">
+我家離淡水很遠，坐車要兩個小時。
+</div>
+
+<div class="example-pinyin">
+離 lí　遠 yuǎn　小時 xiǎoshí
+</div>
+
+<div class="example-meaning">
+My home is far from Tamsui, and it takes two hours by car.
+</div>
+
+<button class="sound-btn"
+onclick="playAudio('我家離淡水很遠，坐車要兩個小時。')">
+🔊
+</button>
+
+</div>
+
+</div>
+
+
+<!-- SLIDE 5 -->
+
+<div class="grammar-slide" id="slide-5">
+
+<h3>5. Talking About a Nearby Place</h3>
+
+<div class="pattern-display">
+<div class="pattern-code">
+A + 離 + B + 很近
+</div>
+</div>
+
+<div class="grammar-explanation">
+
+<p>
+Use <strong>很近</strong> when two places are close to each other.
+</p>
+
+<p>
+You can add a walking time to make the sentence more specific.
+</p>
+
+</div>
+
+<div class="example-sentence">
+
+<div class="example-hanzi">
+我阿姨家離這家餐廳很近。
+</div>
+
+<div class="example-pinyin">
+離 lí　近 jìn
+</div>
+
+<div class="example-meaning">
+My aunt's home is close to this restaurant.
+</div>
+
+<button class="sound-btn"
+onclick="playAudio('我阿姨家離這家餐廳很近。')">
+🔊
+</button>
+
+</div>
+
+</div>
+
+
+<!-- SLIDE 6 -->
+
+<div class="grammar-slide" id="slide-6">
+
+<h3>6. Walking Time</h3>
+
+<div class="pattern-display">
+<div class="pattern-code">
+走路 + Number + 分鐘
+</div>
+</div>
+
+<div class="grammar-explanation">
+
+<p>
+When describing walking time, use <strong>走路</strong> followed by the number of minutes.
+</p>
+
+</div>
+
+<div class="example-sentence">
+
+<div class="example-hanzi">
+走路五分鐘就到了。
+</div>
+
+<div class="example-pinyin">
+走路 zǒulù　分鐘 fēnzhōng
+</div>
+
+<div class="example-meaning">
+It only takes five minutes on foot.
+</div>
+
+<button class="sound-btn"
+onclick="playAudio('走路五分鐘就到了。')">
+🔊
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="slider-nav">
+
+<button class="slider-btn"
+onclick="prevSlide()">
+← Prev
+</button>
+
+<div class="slider-indicators">
+
+<span class="indicator active"
+onclick="currentSlide(1)"></span>
+
+<span class="indicator"
+onclick="currentSlide(2)"></span>
+
+<span class="indicator"
+onclick="currentSlide(3)"></span>
+
+<span class="indicator"
+onclick="currentSlide(4)"></span>
+
+<span class="indicator"
+onclick="currentSlide(5)"></span>
+
+<span class="indicator"
+onclick="currentSlide(6)"></span>
+
+</div>
+
+<button class="slider-btn"
+onclick="nextSlide()">
+Next →
+</button>
+
+</div>
+
+</div>
+
+
+<!-- =====================================================
+     VOCABULARY
+===================================================== -->
+
+<div class="lesson-card">
+
+<h2>📚 Vocabulary</h2>
+
+<p>
+Tap any word to hear its pronunciation.
+</p>
+
+<div class="vocab-container">
+
+
+<div class="vocab-pill" onclick="playAudio('離')">
+<div class="hanzi">離</div>
+<div class="pinyin">lí</div>
+<div class="meaning">to be away from</div>
+</div>
+
+
+<div class="vocab-pill" onclick="playAudio('遠')">
+<div class="hanzi">遠</div>
+<div class="pinyin">yuǎn</div>
+<div class="meaning">far</div>
+</div>
+
+
+<div class="vocab-pill" onclick="playAudio('近')">
+<div class="hanzi">近</div>
+<div class="pinyin">jìn</div>
+<div class="meaning">near / close</div>
+</div>
+
+
+<div class="vocab-pill" onclick="playAudio('小時')">
+<div class="hanzi">小時</div>
+<div class="pinyin">xiǎoshí</div>
+<div class="meaning">hour</div>
+</div>
+
+
+<div class="vocab-pill" onclick="playAudio('其實')">
+<div class="hanzi">其實</div>
+<div class="pinyin">qíshí</div>
+<div class="meaning">actually</div>
+</div>
+
+
+<div class="vocab-pill" onclick="playAudio('大概')">
+<div class="hanzi">大概</div>
+<div class="pinyin">dàgài</div>
+<div class="meaning">approximately / about</div>
+</div>
+
+
+<div class="vocab-pill" onclick="playAudio('公里')">
+<div class="hanzi">公里</div>
+<div class="pinyin">gōnglǐ</div>
+<div class="meaning">kilometer</div>
+</div>
+
+
+<div class="vocab-pill" onclick="playAudio('走路')">
+<div class="hanzi">走路</div>
+<div class="pinyin">zǒulù</div>
+<div class="meaning">walk / on foot</div>
+</div>
+
+
+<div class="vocab-pill" onclick="playAudio('分鐘')">
+<div class="hanzi">分鐘</div>
+<div class="pinyin">fēnzhōng</div>
+<div class="meaning">minute</div>
+</div>
+
+
+<div class="vocab-pill" onclick="playAudio('原來')">
+<div class="hanzi">原來</div>
+<div class="pinyin">yuánlái</div>
+<div class="meaning">so that's how it is / I see</div>
+</div>
+
+
+<div class="vocab-pill" onclick="playAudio('這樣')">
+<div class="hanzi">這樣</div>
+<div class="pinyin">zhèyàng</div>
+<div class="meaning">like this / this way</div>
+</div>
+
+
+<div class="vocab-pill" onclick="playAudio('為了')">
+<div class="hanzi">為了</div>
+<div class="pinyin">wèile</div>
+<div class="meaning">for / in order to</div>
+</div>
+
+
+<div class="vocab-pill" onclick="playAudio('久')">
+<div class="hanzi">久</div>
+<div class="pinyin">jiǔ</div>
+<div class="meaning">long (time)</div>
+</div>
+
+
+<div class="vocab-pill" onclick="playAudio('重要')">
+<div class="hanzi">重要</div>
+<div class="pinyin">zhòngyào</div>
+<div class="meaning">important</div>
+</div>
+
+</div>
+
+</div>
+
+
+<!-- =====================================================
+     GAME 1
+===================================================== -->
+
+<div class="game-card">
+
+<span class="game-number">GAME 1</span>
+
+<h2>🧩 Far or Near?</h2>
+
+<p class="game-description">
+Build sentences using 離 to describe whether places are far or close.
+</p>
+
+<div class="game-progress">
+Question <span id="g1Num">1</span> / 4
+</div>
+
+<div class="question-box">
+<div class="question-label">Translate:</div>
+<div class="question-meaning" id="g1Meaning"></div>
+</div>
+
+<div class="answer-area" id="g1Answer">
+<span class="answer-placeholder">Tap the words below</span>
+</div>
+
+<div class="word-bank" id="g1Bank"></div>
+
+<div class="game-buttons">
+
+<button class="check-btn" onclick="checkGame(1)">
+✓ Check
+</button>
+
+<button class="reset-btn" onclick="resetGame(1)">
+↻ Reset
+</button>
+
+<button class="listen-btn" onclick="listenCurrent(1)">
+🔊
+</button>
+
+</div>
+
+<div class="feedback" id="g1Feedback"></div>
+
+<button class="next-game-btn"
+id="g1Next"
+onclick="nextGameQuestion(1)">
+Next →
+</button>
+
+</div>
+
+
+<!-- =====================================================
+     GAME 2
+===================================================== -->
+
+<div class="game-card">
+
+<span class="game-number">GAME 2</span>
+
+<h2>🧩 Distance & Time</h2>
+
+<p class="game-description">
+Practice talking about exact distance, approximate distance, and travel time.
+</p>
+
+<div class="game-progress">
+Question <span id="g2Num">1</span> / 4
+</div>
+
+<div class="question-box">
+<div class="question-label">Translate:</div>
+<div class="question-meaning" id="g2Meaning"></div>
+</div>
+
+<div class="answer-area" id="g2Answer">
+<span class="answer-placeholder">Tap the words below</span>
+</div>
+
+<div class="word-bank" id="g2Bank"></div>
+
+<div class="game-buttons">
+
+<button class="check-btn" onclick="checkGame(2)">
+✓ Check
+</button>
+
+<button class="reset-btn" onclick="resetGame(2)">
+↻ Reset
+</button>
+
+<button class="listen-btn" onclick="listenCurrent(2)">
+🔊
+</button>
+
+</div>
+
+<div class="feedback" id="g2Feedback"></div>
+
+<button class="next-game-btn"
+id="g2Next"
+onclick="nextGameQuestion(2)">
+Next →
+</button>
+
+</div>
+
+
+<!-- =====================================================
+     GAME 3
+===================================================== -->
+
+<div class="game-card">
+
+<span class="game-number">GAME 3</span>
+
+<h2>🧩 Real-Life Distance</h2>
+
+<p class="game-description">
+Put everything together and describe distance and walking time naturally.
+</p>
+
+<div class="game-progress">
+Question <span id="g3Num">1</span> / 4
+</div>
+
+<div class="question-box">
+<div class="question-label">Translate:</div>
+<div class="question-meaning" id="g3Meaning"></div>
+</div>
+
+<div class="answer-area" id="g3Answer">
+<span class="answer-placeholder">Tap the words below</span>
+</div>
+
+<div class="word-bank" id="g3Bank"></div>
+
+<div class="game-buttons">
+
+<button class="check-btn" onclick="checkGame(3)">
+✓ Check
+</button>
+
+<button class="reset-btn" onclick="resetGame(3)">
+↻ Reset
+</button>
+
+<button class="listen-btn" onclick="listenCurrent(3)">
+🔊
+</button>
+
+</div>
+
+<div class="feedback" id="g3Feedback"></div>
+
+<button class="next-game-btn"
+id="g3Next"
+onclick="nextGameQuestion(3)">
+Next →
+</button>
+
+</div>
+
+
+<!-- =====================================================
+     SENTENCE WRITING
+===================================================== -->
+
+<div class="writing-card">
+
+<h2>📝 Sentence Writing</h2>
+
+<p>
+Translate the English sentence into Traditional Chinese.
+</p>
+
+<div class="sentence-writing">
+
+<div class="sentence-prompt"
+id="sentencePrompt">
+My home is far from Tamsui.
+</div>
+
+<div class="sentence-hint">
+Write the Mandarin sentence in Hanzi.
+</div>
+
+<input
+type="text"
+id="sentenceInput"
+placeholder="Type Hanzi here..."
+autocomplete="off">
+
+<button class="check-writing"
+onclick="checkSentenceWriting()">
+Check Answer
+</button>
+
+<div class="feedback"
+id="sentenceFeedback">
+</div>
+
+<button
+class="next-game-btn"
+id="nextSentenceBtn"
+onclick="nextSentenceWriting()">
+Next →
+</button>
+
+</div>
+
+</div>
+
+
+<!-- =====================================================
+     HANZI WRITING
+===================================================== -->
+
+<div class="writing-card">
+
+<h2>✍️ Hanzi Writing Practice</h2>
+
+<p>
+Practice every vocabulary character from this lesson.
+</p>
+
+<div class="writing-mode-buttons">
+
+<button class="mode-btn active"
+onclick="setWritingMode('quiz',this)">
+✍️ Quiz
+</button>
+
+<button class="mode-btn"
+onclick="setWritingMode('animate',this)">
+👀 Animate
+</button>
+
+</div>
+
+<div class="writing-info"
+id="writingInfo">
+</div>
+
+<div class="canvas-wrapper">
+<div id="target-div"></div>
+</div>
+
+<div class="feedback"
+id="writingFeedback">
+</div>
+
+<div class="writing-buttons">
+
+<button class="write-btn clear-btn"
+onclick="resetWritingQuiz()">
+↻ Retry
+</button>
+
+<button class="write-btn"
+style="background:#f0f7f4;color:#2d6a4f;"
+onclick="playCurrentWriting()">
+🔊 Listen
+</button>
+
+<button class="write-btn next-write-btn"
+onclick="nextWritingCharacter()">
+Next →
+</button>
+
+</div>
+
+</div>
+
+
+<!-- =====================================================
+     FINAL CHALLENGE
+===================================================== -->
+
+<div class="final-card">
+
+<span class="game-number">
+FINAL CHALLENGE
+</span>
+
+<h2>🧋 Boba Quick Review</h2>
+
+<p>
+Test your understanding with 10 mixed questions.
+</p>
+
+<div class="grammar-explanation">
+
+<p>
+This challenge combines the grammar and vocabulary you just practiced
+with review questions from your earlier learning.
+</p>
+
+</div>
+
+<div
+class="final-error"
+id="finalError"
+style="display:none;">
+</div>
+
+<div id="finalContent">
+
+<div class="question-box">
+
+<div class="question-label">
+Question
+(<span id="finalNum">1</span> / 10)
+</div>
+
+<div class="question-meaning"
+id="finalMeaning">
+</div>
+
+</div>
+
+<div class="answer-area"
+id="finalAnswer">
+
+<span class="answer-placeholder">
+Build your answer
+</span>
+
+</div>
+
+<div class="word-bank"
+id="finalBank">
+</div>
+
+<button
+class="check-btn"
+style="width:100%;"
+onclick="checkFinal()">
+✓ Check Answer
+</button>
+
+<button
+class="reset-btn"
+onclick="resetFinal()"
+style="width:100%; margin-top:8px;">
+↻ Reset Answer
+</button>
+
+<div class="feedback"
+id="finalFeedback">
+</div>
+
+<div class="final-score"
+id="finalScore">
+0 / 10
+</div>
+
+<div class="unlock"
+id="unlockBox"
+style="display:none;">
+
+🎉 <strong>Grammar Master Complete!</strong>
+
+<p>
+Great job! You completed the full review challenge.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</main>
+</div>
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script>
+
+/* =====================================================
+   AUDIO
+===================================================== */
+
+function playAudio(text){
+
+    if(!("speechSynthesis" in window)){
+        return;
+    }
+
+    window.speechSynthesis.cancel();
+
+    const utterance =
+        new SpeechSynthesisUtterance(text);
+
+    utterance.lang = "zh-TW";
+    utterance.rate = 0.82;
+    utterance.pitch = 1;
+
+    window.speechSynthesis.speak(utterance);
+}
+
+
+/* =====================================================
+   GRAMMAR SLIDER
+===================================================== */
+
+let currentSlideIndex = 0;
+
+const totalSlides = 6;
+
+function showSlide(index){
+
+    if(index >= totalSlides){
+        currentSlideIndex = 0;
+    }
+    else if(index < 0){
+        currentSlideIndex = totalSlides - 1;
+    }
+    else{
+        currentSlideIndex = index;
+    }
+
+    document
+        .querySelectorAll(".grammar-slide")
+        .forEach(slide =>
+            slide.classList.remove("active-slide")
+        );
+
+    document
+        .querySelectorAll(".indicator")
+        .forEach(indicator =>
+            indicator.classList.remove("active")
+        );
+
+    document
+        .getElementById(
+            "slide-" + (currentSlideIndex + 1)
+        )
+        .classList
+        .add("active-slide");
+
+    document
+        .querySelectorAll(".indicator")
+        [currentSlideIndex]
+        .classList
+        .add("active");
+}
+
+function nextSlide(){
+    showSlide(currentSlideIndex + 1);
+}
+
+function prevSlide(){
+    showSlide(currentSlideIndex - 1);
+}
+
+function currentSlide(n){
+    showSlide(n - 1);
+}
+
+
+/* =====================================================
+   SHUFFLE
+===================================================== */
+
+function shuffle(array){
+
+    const result = [...array];
+
+    for(let i = result.length - 1; i > 0; i--){
+
+        const j =
+            Math.floor(Math.random() * (i + 1));
+
+        [
+            result[i],
+            result[j]
+        ] =
+        [
+            result[j],
+            result[i]
+        ];
+
+    }
+
+    return result;
+}
+
+
+/* =====================================================
+   LESSON PRACTICE DATA
+   All lesson-specific exercises are directly in HTML.
+===================================================== */
+
+const games = {
+
+1: [
+
+{
+    meaning: "My home is far from Tamsui.",
+    answer: ["我家","離","淡水","很遠"]
+},
+
+{
+    meaning: "My home is also far from Tamsui.",
+    answer: ["我家","離","淡水","也","很遠"]
+},
+
+{
+    meaning: "My aunt's home is close to this restaurant.",
+    answer: ["我阿姨家","離","這家餐廳","很近"]
+},
+
+{
+    meaning: "Is your home far from Tamsui?",
+    answer: ["你家","離","淡水","遠","嗎"]
+}
+
+],
+
+2: [
+
+{
+    meaning: "My home is about 30 kilometers from Tamsui.",
+    answer: ["我家","離","淡水","大概","三十","公里"]
+},
+
+{
+    meaning: "My home is 30 kilometers from Tamsui.",
+    answer: ["我家","離","淡水","有","三十","公里"]
+},
+
+{
+    meaning: "It takes two hours by car.",
+    answer: ["坐車","要","兩個","小時"]
+},
+
+{
+    meaning: "It takes five minutes on foot.",
+    answer: ["走路","五","分鐘","就到了"]
+}
+
+],
+
+3: [
+
+{
+    meaning: "Actually, my home is also far from Tamsui.",
+    answer: ["其實","我家","離","淡水","也","很遠"]
+},
+
+{
+    meaning: "Oh, I see. So that's how it is.",
+    answer: ["原來","是","這樣"]
+},
+
+{
+    meaning: "You traveled for such a long time for my birthday.",
+    answer: ["你","為了","我的生日","坐了","這麼","久","的車"]
+},
+
+{
+    meaning: "The most important thing is saying happy birthday.",
+    answer: ["生日快樂","最","重要"]
+}
+
+]
+
+};
+
+
+/* =====================================================
+   GAME STATE
+===================================================== */
+
+const gameState = {
+
+1:{
+    index:0,
+    selected:[],
+    done:false
+},
+
+2:{
+    index:0,
+    selected:[],
+    done:false
+},
+
+3:{
+    index:0,
+    selected:[],
+    done:false
+}
+
+};
+
+
+/* =====================================================
+   LOAD GAME
+===================================================== */
+
+function loadGame(gameNumber){
+
+    const state =
+        gameState[gameNumber];
+
+    const data =
+        games[gameNumber][state.index];
+
+    state.selected = [];
+    state.done = false;
+
+    document
+        .getElementById("g" + gameNumber + "Num")
+        .textContent =
+        state.index + 1;
+
+    document
+        .getElementById("g" + gameNumber + "Meaning")
+        .textContent =
+        data.meaning;
+
+    const answer =
+        document.getElementById(
+            "g" + gameNumber + "Answer"
+        );
+
+    answer.innerHTML =
+        '<span class="answer-placeholder">Tap the words below</span>';
+
+    const bank =
+        document.getElementById(
+            "g" + gameNumber + "Bank"
+        );
+
+    bank.innerHTML = "";
+
+    /*
+       Keep repeated answer chunks as separate buttons.
+       Each button receives its own internal ID.
+    */
+
+    shuffle(
+        data.answer.map(
+            (word,index) => ({
+                word,
+                id:index
+            })
+        )
+    )
+    .forEach(item => {
+
+        const button =
+            document.createElement("button");
+
+        button.className = "word-btn";
+
+        button.textContent = item.word;
+
+        button.dataset.word = item.word;
+        button.dataset.id = item.id;
+
+        button.onclick = function(){
+
+            if(this.disabled) return;
+
+            selectWord(
+                gameNumber,
+                this,
+                item.word,
+                item.id
+            );
+
+        };
+
+        bank.appendChild(button);
+
+    });
+
+    document
+        .getElementById(
+            "g" + gameNumber + "Feedback"
+        )
+        .textContent = "";
+
+    document
+        .getElementById(
+            "g" + gameNumber + "Next"
+        )
+        .style.display = "none";
+}
+
+
+/* =====================================================
+   SELECT WORD
+===================================================== */
+
+function selectWord(
+    gameNumber,
+    button,
+    word,
+    id
+){
+
+    gameState[gameNumber]
+        .selected
+        .push({
+            word:word,
+            id:id
+        });
+
+    button.disabled = true;
+
+    button.classList.add("selected");
+
+    playAudio(word);
+
+    renderSelected(gameNumber);
+}
+
+
+/* =====================================================
+   RENDER SELECTED
+===================================================== */
+
+function renderSelected(gameNumber){
+
+    const answer =
+        document.getElementById(
+            "g" + gameNumber + "Answer"
+        );
+
+    answer.innerHTML = "";
+
+    gameState[gameNumber]
+        .selected
+        .forEach(item => {
+
+            const span =
+                document.createElement("span");
+
+            span.className = "selected-word";
+
+            span.textContent = item.word;
+
+            span.onclick = function(){
+                playAudio(item.word);
+            };
+
+            answer.appendChild(span);
+
+        });
+}
+
+
+/* =====================================================
+   CHECK GAME
+===================================================== */
+
+function checkGame(gameNumber){
+
+    const state =
+        gameState[gameNumber];
+
+    const correct =
+        games[gameNumber]
+        [state.index]
+        .answer;
+
+    const selected =
+        state.selected.map(item => item.word);
+
+    const feedback =
+        document.getElementById(
+            "g" + gameNumber + "Feedback"
+        );
+
+    if(selected.length !== correct.length){
+
+        feedback.textContent =
+            "⚠️ Complete the sentence first.";
+
+        feedback.className =
+            "feedback incorrect";
+
+        return;
+    }
+
+    const isCorrect =
+        selected.every(
+            (word,index) =>
+                word === correct[index]
+        );
+
+    if(isCorrect){
+
+        feedback.textContent =
+            "🎉 Correct!";
+
+        feedback.className =
+            "feedback correct";
+
+        state.done = true;
+
+        playAudio(correct.join(""));
+
+        document
+            .getElementById(
+                "g" + gameNumber + "Next"
+            )
+            .style.display =
+            "block";
+
+    }
+    else{
+
+        feedback.textContent =
+            "❌ Not quite. Try again!";
+
+        feedback.className =
+            "feedback incorrect";
+
+    }
+}
+
+
+/* =====================================================
+   RESET GAME
+===================================================== */
+
+function resetGame(gameNumber){
+
+    loadGame(gameNumber);
+
+}
+
+
+/* =====================================================
+   NEXT GAME QUESTION
+===================================================== */
+
+function nextGameQuestion(gameNumber){
+
+    const state =
+        gameState[gameNumber];
+
+    if(!state.done) return;
+
+    state.index++;
+
+    if(
+        state.index >=
+        games[gameNumber].length
+    ){
+        state.index = 0;
+    }
+
+    loadGame(gameNumber);
+}
+
+
+/* =====================================================
+   LISTEN CURRENT
+===================================================== */
+
+function listenCurrent(gameNumber){
+
+    const state =
+        gameState[gameNumber];
+
+    const answer =
+        games[gameNumber]
+        [state.index]
+        .answer;
+
+    playAudio(
+        answer.join("")
+    );
+}
+
+
+/* =====================================================
+   SENTENCE WRITING
+===================================================== */
+
+const sentenceQuestions = [
+
+{
+    prompt:
+        "My home is far from Tamsui.",
+    answer:
+        "我家離淡水很遠"
+},
+
+{
+    prompt:
+        "My home is about 30 kilometers from Tamsui.",
+    answer:
+        "我家離淡水大概三十公里"
+},
+
+{
+    prompt:
+        "My aunt's home is close to this restaurant.",
+    answer:
+        "我阿姨家離這家餐廳很近"
+},
+
+{
+    prompt:
+        "It takes two hours by car.",
+    answer:
+        "坐車要兩個小時"
+},
+
+{
+    prompt:
+        "It takes five minutes on foot.",
+    answer:
+        "走路五分鐘就到了"
+},
+
+{
+    prompt:
+        "Actually, my home is also far from Tamsui.",
+    answer:
+        "其實我家離淡水也很遠"
+}
+
+];
+
+let sentenceIndex = 0;
+
+function loadSentenceWriting(){
+
+    document
+        .getElementById("sentencePrompt")
+        .textContent =
+        sentenceQuestions
+        [sentenceIndex]
+        .prompt;
+
+    document
+        .getElementById("sentenceInput")
+        .value = "";
+
+    document
+        .getElementById("sentenceFeedback")
+        .textContent = "";
+
+    document
+        .getElementById("nextSentenceBtn")
+        .style.display = "none";
+}
+
+function checkSentenceWriting(){
+
+    const input =
+        document
+        .getElementById("sentenceInput")
+        .value
+        .trim()
+        .replace(/[。？?！!]/g,"");
+
+    const correct =
+        sentenceQuestions
+        [sentenceIndex]
+        .answer;
+
+    const feedback =
+        document.getElementById(
+            "sentenceFeedback"
+        );
+
+    if(input === correct){
+
+        feedback.textContent =
+            "🎉 Perfect!";
+
+        feedback.className =
+            "feedback correct";
+
+        playAudio(correct);
+
+        document
+            .getElementById("nextSentenceBtn")
+            .style.display =
+            "block";
+
+    }
+    else{
+
+        feedback.textContent =
+            "❌ Try again. Check the sentence structure.";
+
+        feedback.className =
+            "feedback incorrect";
+    }
+}
+
+function nextSentenceWriting(){
+
+    sentenceIndex++;
+
+    if(
+        sentenceIndex >=
+        sentenceQuestions.length
+    ){
+        sentenceIndex = 0;
+    }
+
+    loadSentenceWriting();
+}
+
+
+/* =====================================================
+   HANZI WRITING
+   Every vocabulary item is represented here.
+===================================================== */
+
+const writingCharacters = [
+
+/* 離 */
+
+{
+    hanzi:"離",
+    pinyin:"lí",
+    meaning:"to be away from"
+},
+
+/* 遠 */
+
+{
+    hanzi:"遠",
+    pinyin:"yuǎn",
+    meaning:"far"
+},
+
+/* 近 */
+
+{
+    hanzi:"近",
+    pinyin:"jìn",
+    meaning:"near / close"
+},
+
+/* 小時 */
+
+{
+    hanzi:"小",
+    pinyin:"xiǎo",
+    meaning:"small / hour"
+},
+
+{
+    hanzi:"時",
+    pinyin:"shí",
+    meaning:"time / hour"
+},
+
+/* 其實 */
+
+{
+    hanzi:"其",
+    pinyin:"qí",
+    meaning:"its / that"
+},
+
+{
+    hanzi:"實",
+    pinyin:"shí",
+    meaning:"real / actual"
+},
+
+/* 大概 */
+
+{
+    hanzi:"大",
+    pinyin:"dà",
+    meaning:"big"
+},
+
+{
+    hanzi:"概",
+    pinyin:"gài",
+    meaning:"approximately / general idea"
+},
+
+/* 公里 */
+
+{
+    hanzi:"公",
+    pinyin:"gōng",
+    meaning:"public"
+},
+
+{
+    hanzi:"里",
+    pinyin:"lǐ",
+    meaning:"inside / unit"
+},
+
+/* 走路 */
+
+{
+    hanzi:"走",
+    pinyin:"zǒu",
+    meaning:"walk / go"
+},
+
+{
+    hanzi:"路",
+    pinyin:"lù",
+    meaning:"road"
+},
+
+/* 分鐘 */
+
+{
+    hanzi:"分",
+    pinyin:"fēn",
+    meaning:"minute / divide"
+},
+
+{
+    hanzi:"鐘",
+    pinyin:"zhōng",
+    meaning:"clock / bell"
+},
+
+/* 原來 */
+
+{
+    hanzi:"原",
+    pinyin:"yuán",
+    meaning:"original"
+},
+
+{
+    hanzi:"來",
+    pinyin:"lái",
+    meaning:"come"
+},
+
+/* 這樣 */
+
+{
+    hanzi:"這",
+    pinyin:"zhè",
+    meaning:"this"
+},
+
+{
+    hanzi:"樣",
+    pinyin:"yàng",
+    meaning:"way / appearance"
+},
+
+/* 為了 */
+
+{
+    hanzi:"為",
+    pinyin:"wèi",
+    meaning:"for / because of"
+},
+
+{
+    hanzi:"了",
+    pinyin:"le",
+    meaning:"completed-action particle"
+},
+
+/* 久 */
+
+{
+    hanzi:"久",
+    pinyin:"jiǔ",
+    meaning:"long time"
+},
+
+/* 重要 */
+
+{
+    hanzi:"重",
+    pinyin:"zhòng",
+    meaning:"important / heavy"
+},
+
+{
+    hanzi:"要",
+    pinyin:"yào",
+    meaning:"important / need / want"
+}
+
+];
+
+
+let writingIndex = 0;
+
+let writingMode = "quiz";
+
+let writer = null;
+
+
+function initWriter(){
+
+    const item =
+        writingCharacters[writingIndex];
+
+    const container =
+        document.getElementById("target-div");
+
+    container.innerHTML = "";
+
+    const info =
+        document.getElementById("writingInfo");
+
+    if(writingMode === "quiz"){
+
+        info.innerHTML =
+            `Write <strong>${item.hanzi}</strong>
+            (${item.pinyin} — ${item.meaning})
+            following the correct stroke order.
+            <br>
+            Character ${writingIndex + 1}
+            / ${writingCharacters.length}`;
+
+    }
+    else{
+
+        info.innerHTML =
+            `Watch the stroke order for
+            <strong>${item.hanzi}</strong>
+            (${item.pinyin} — ${item.meaning}).
+            <br>
+            Character ${writingIndex + 1}
+            / ${writingCharacters.length}`;
+    }
+
+    writer =
+        HanziWriter.create(
+            "target-div",
+            item.hanzi,
+            {
+                width:260,
+                height:260,
+                padding:10,
+                showOutline:true,
+                strokeAnimationSpeed:1,
+                drawingColor:"#5c4033",
+                strokeHighlightColor:"#b8865c",
+                showCharacter:
+                    writingMode === "animate"
+            }
+        );
+
+    if(writingMode === "quiz"){
+        startQuiz();
+    }
+    else{
+        writer.animateCharacter();
+    }
+}
+
+
+function startQuiz(){
+
+    const feedback =
+        document.getElementById(
+            "writingFeedback"
+        );
+
+    feedback.textContent = "";
+
+    writer.quiz({
+
+        onMistake:function(){
+
+            feedback.textContent =
+                "❌ Incorrect stroke order. Try again.";
+
+            feedback.className =
+                "feedback incorrect";
+
+        },
+
+        onCorrectStroke:function(){
+
+            feedback.textContent =
+                "✨ Great! Keep going.";
+
+            feedback.className =
+                "feedback correct";
+
+        },
+
+        onComplete:function(){
+
+            feedback.textContent =
+                "🎉 Perfect! Correct stroke order.";
+
+            feedback.className =
+                "feedback correct";
+
+        }
+
+    });
+}
+
+
+function setWritingMode(mode,button){
+
+    writingMode = mode;
+
+    document
+        .querySelectorAll(
+            ".writing-card .mode-btn"
+        )
+        .forEach(btn =>
+            btn.classList.remove("active")
+        );
+
+    button.classList.add("active");
+
+    initWriter();
+}
+
+
+function resetWritingQuiz(){
+
+    initWriter();
+
+}
+
+
+function nextWritingCharacter(){
+
+    writingIndex++;
+
+    if(
+        writingIndex >=
+        writingCharacters.length
+    ){
+        writingIndex = 0;
+    }
+
+    initWriter();
+}
+
+
+function playCurrentWriting(){
+
+    playAudio(
+        writingCharacters
+        [writingIndex]
+        .hanzi
+    );
+}
+
+
+/* =====================================================
+   FINAL CHALLENGE
+===================================================== */
+
+/*
+   Exactly 5 questions are defined directly in HTML.
+
+   Exactly 5 questions are retrieved from the master
+   review database.
+
+   The review pool is restricted to the specified
+   earlier material range.
+
+   No hard-coded fallback questions are used.
+*/
+
+const htmlFinalQuestions = [
+
+{
+    meaning: "My home is far from Tamsui.",
+    answer: ["我家","離","淡水","很遠"]
+},
+
+{
+    meaning: "My home is about 30 kilometers from Tamsui.",
+    answer: ["我家","離","淡水","大概","三十","公里"]
+},
+
+{
+    meaning: "Is your home far from Tamsui?",
+    answer: ["你家","離","淡水","遠","嗎"]
+},
+
+{
+    meaning: "My aunt's home is close to this restaurant.",
+    answer: ["我阿姨家","離","這家餐廳","很近"]
+},
+
+{
+    meaning: "It takes five minutes on foot.",
+    answer: ["走路","五","分鐘","就到了"]
+}
+
+];
+
+
+let finalQuestions = [];
+
+let finalIndex = 0;
+
+let finalScore = 0;
+
+let finalSelected = [];
+
+
+/* =====================================================
+   NORMALIZE DATABASE QUESTIONS
+===================================================== */
+
+function normalizeReviewQuestion(question){
+
+    if(!question){
+        return null;
+    }
+
+    /*
+       Expected master format:
+       {
+           meaning: "...",
+           answer: [...]
+       }
+
+       This normalization also accepts answer strings,
+       while keeping the master database itself untouched.
+    */
+
+    const meaning =
+        question.meaning ??
+        question.question ??
+        question.prompt ??
+        question.english;
+
+    let answer =
+        question.answer ??
+        question.correctAnswer ??
+        question.correct;
+
+    if(
+        !meaning ||
+        answer === undefined ||
+        answer === null
+    ){
+        return null;
+    }
+
+    if(typeof answer === "string"){
+
+        /*
+           The existing review database may store answers
+           as a Hanzi string. Split only when no explicit
+           array format exists.
+        */
+
+        answer =
+            [...answer]
+            .filter(char => char.trim() !== "");
+
+    }
+
+    if(!Array.isArray(answer)){
+        return null;
+    }
+
+    if(answer.length === 0){
+        return null;
+    }
+
+    return {
+        meaning:String(meaning),
+        answer:answer.map(String)
+    };
+}
+
+
+/* =====================================================
+   GET FIVE RANDOM REVIEW QUESTIONS
+===================================================== */
+
+function getRandomReviewQuestions(){
+
+    if(
+        typeof allLessonsData === "undefined" ||
+        !allLessonsData
+    ){
+
+        throw new Error(
+            "The review database could not be loaded."
+        );
+
+    }
+
+    let reviewPool = [];
+
+    /*
+       Only the requested earlier range is searched.
+       Nothing is taken from the current material.
+    */
+
+    for(let lessonNumber = 1; lessonNumber <= 7; lessonNumber++){
+
+        const data =
+            allLessonsData[lessonNumber];
+
+        if(
+            !data ||
+            !Array.isArray(data.reviewQuestions)
+        ){
+            continue;
+        }
+
+        data.reviewQuestions.forEach(question => {
+
+            const normalized =
+                normalizeReviewQuestion(question);
+
+            if(normalized){
+                reviewPool.push(normalized);
+            }
+
+        });
+
+    }
+
+    if(reviewPool.length < 5){
+
+        throw new Error(
+            "There are not enough valid review questions available in the review database. At least 5 are required."
+        );
+
+    }
+
+    return shuffle(reviewPool).slice(0,5);
+}
+
+
+/* =====================================================
+   INITIALIZE FINAL QUESTIONS
+===================================================== */
+
+function initFinalQuestions(){
+
+    const errorBox =
+        document.getElementById("finalError");
+
+    const content =
+        document.getElementById("finalContent");
+
+    errorBox.style.display = "none";
+
+    try{
+
+        /*
+           Exactly five current-material questions.
+        */
+
+        const currentQuestions =
+            htmlFinalQuestions.slice(0,5);
+
+        /*
+           Exactly five database review questions.
+        */
+
+        const reviewQuestions =
+            getRandomReviewQuestions();
+
+        /*
+           Exactly 10 total questions.
+           Shuffle their order so the two groups are mixed.
+        */
+
+        finalQuestions =
+            shuffle([
+                ...currentQuestions,
+                ...reviewQuestions
+            ]);
+
+        if(finalQuestions.length !== 10){
+
+            throw new Error(
+                "The review challenge could not create exactly 10 questions."
+            );
+
+        }
+
+        finalIndex = 0;
+        finalScore = 0;
+        finalSelected = [];
+
+        document
+            .getElementById("finalScore")
+            .textContent = "0 / 10";
+
+        content.style.display = "block";
+
+        return true;
+
+    }
+    catch(error){
+
+        console.error(error);
+
+        finalQuestions = [];
+
+        content.style.display = "none";
+
+        errorBox.style.display = "block";
+
+        errorBox.textContent =
+            "⚠️ Review Error: " +
+            error.message +
+            " Please check that the review database is available.";
+
+        return false;
+    }
+}
+
+
+/* =====================================================
+   LOAD FINAL QUESTION
+===================================================== */
+
+function loadFinal(){
+
+    if(finalQuestions.length !== 10){
+        return;
+    }
+
+    if(finalIndex >= 10){
+        return;
+    }
+
+    const q =
+        finalQuestions[finalIndex];
+
+    document
+        .getElementById("finalNum")
+        .textContent =
+        finalIndex + 1;
+
+    document
+        .getElementById("finalMeaning")
+        .textContent =
+        q.meaning;
+
+    finalSelected = [];
+
+    document
+        .getElementById("finalAnswer")
+        .innerHTML =
+        '<span class="answer-placeholder">Build your answer</span>';
+
+    const bank =
+        document.getElementById("finalBank");
+
+    bank.innerHTML = "";
+
+    /*
+       Preserve duplicate answer chunks safely.
+    */
+
+    shuffle(
+        q.answer.map(
+            (word,index) => ({
+                word,
+                id:index
+            })
+        )
+    )
+    .forEach(item => {
+
+        const button =
+            document.createElement("button");
+
+        button.className = "word-btn";
+
+        button.textContent = item.word;
+
+        button.dataset.id = item.id;
+
+        button.onclick = function(){
+
+            if(button.disabled){
+                return;
+            }
+
+            finalSelected.push({
+                word:item.word,
+                id:item.id
+            });
+
+            button.disabled = true;
+            button.classList.add("selected");
+
+            playAudio(item.word);
+
+            renderFinal();
+
+        };
+
+        bank.appendChild(button);
+
+    });
+
+    document
+        .getElementById("finalFeedback")
+        .textContent = "";
+}
+
+
+/* =====================================================
+   RENDER FINAL
+===================================================== */
+
+function renderFinal(){
+
+    const area =
+        document.getElementById("finalAnswer");
+
+    area.innerHTML = "";
+
+    if(finalSelected.length === 0){
+
+        area.innerHTML =
+            '<span class="answer-placeholder">Build your answer</span>';
+
+        return;
+    }
+
+    finalSelected.forEach(item => {
+
+        const span =
+            document.createElement("span");
+
+        span.className =
+            "selected-word";
+
+        span.textContent =
+            item.word;
+
+        span.onclick = function(){
+            playAudio(item.word);
+        };
+
+        area.appendChild(span);
+
+    });
+}
+
+
+/* =====================================================
+   RESET FINAL
+===================================================== */
+
+function resetFinal(){
+
+    if(finalQuestions.length !== 10){
+        return;
+    }
+
+    loadFinal();
+}
+
+
+/* =====================================================
+   CHECK FINAL
+===================================================== */
+
+function checkFinal(){
+
+    if(finalQuestions.length !== 10){
+        return;
+    }
+
+    const correct =
+        finalQuestions
+        [finalIndex]
+        .answer;
+
+    const selected =
+        finalSelected.map(
+            item => item.word
+        );
+
+    const feedback =
+        document.getElementById(
+            "finalFeedback"
+        );
+
+    if(selected.length !== correct.length){
+
+        feedback.textContent =
+            "⚠️ Complete the answer first.";
+
+        feedback.className =
+            "feedback incorrect";
+
+        return;
+    }
+
+    const isCorrect =
+        selected.every(
+            (word,index) =>
+                word === correct[index]
+        );
+
+    if(isCorrect){
+
+        feedback.textContent =
+            "🎉 Correct!";
+
+        feedback.className =
+            "feedback correct";
+
+        finalScore++;
+
+        document
+            .getElementById("finalScore")
+            .textContent =
+            finalScore + " / 10";
+
+        playAudio(
+            correct.join("")
+        );
+
+        finalIndex++;
+
+        if(finalIndex < 10){
+
+            setTimeout(
+                loadFinal,
+                700
+            );
+
+        }
+        else{
+
+            document
+                .getElementById("unlockBox")
+                .style.display =
+                "block";
+
+            feedback.textContent =
+                "🎉 Amazing! You completed all 10 questions.";
+
+            playAudio("太棒了");
+
+        }
+
+    }
+    else{
+
+        feedback.textContent =
+            "❌ Check the word order and try again.";
+
+        feedback.className =
+            "feedback incorrect";
+
+    }
+}
+
+
+/* =====================================================
+   INITIALIZATION
+===================================================== */
+
+loadGame(1);
+
+loadGame(2);
+
+loadGame(3);
+
+loadSentenceWriting();
+
+initWriter();
+
+if(initFinalQuestions()){
+
+    loadFinal();
+
+}
+
+loadScriptSidebar();
+
+</script>
+
+
+<script src="../script.js"></script>
+
+</body>
+</html>
