@@ -1,909 +1,595 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Boba Break Study - AI Speaking</title>
+
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* ================================
+           BASE
+        ================================= */
+
+        body {
+            background-color: #f8f9fa;
+            display: flex;
+            min-height: 100vh;
+            color: #5c4033;
+        }
+
+        .app-container {
+            display: flex;
+            width: 100%;
+            min-height: 100vh;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 20px;
+            min-width: 0;
+        }
+
+        /* ================================
+           CARD
+        ================================= */
+
+        .card {
+            background: #ffffff;
+            border: 1px solid #eaeaea;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+
+        /* ================================
+           HEADER
+        ================================= */
+
+        .page-header {
+            padding: 22px 24px;
+            margin-bottom: 16px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+        }
+
+        .page-title {
+            margin: 0;
+            font-size: 25px;
+            color: #5c4033;
+        }
+
+        .page-subtitle {
+            margin: 6px 0 0;
+            color: #8a7567;
+            font-size: 14px;
+        }
+
+        .status-box {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+
+            padding: 7px 11px;
+            border-radius: 20px;
+
+            background: #f3e5d8;
+            color: #765437;
+
+            font-size: 12px;
+            font-weight: 600;
+
+            white-space: nowrap;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #b5835a;
+        }
+
+        .status-box.thinking .status-dot {
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.3;
+            }
+        }
+
+        /* ================================
+           CHAT CARD
+        ================================= */
+
+        .chat-card {
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .chat-area {
+            height: calc(100vh - 330px);
+            min-height: 430px;
+            max-height: 760px;
+
+            overflow-y: auto;
+            padding: 22px;
+
+            scroll-behavior: smooth;
+        }
+
+        /* ================================
+           MESSAGE
+        ================================= */
+
+        .message-row {
+            display: flex;
+            margin-bottom: 17px;
+            width: 100%;
+        }
+
+        .message-row.ai {
+            justify-content: flex-start;
+        }
+
+        .message-row.user {
+            justify-content: flex-end;
+        }
+
+        .message {
+            max-width: 78%;
+            padding: 12px 15px;
+
+            border-radius: 13px;
+
+            font-size: 15px;
+            line-height: 1.65;
+
+            word-break: break-word;
+        }
+
+        .message.ai {
+            background: #ffffff;
+            border: 1px solid #e7e0db;
+            color: #5c4033;
+
+            border-top-left-radius: 4px;
+        }
+
+        .message.user {
+            background: #f3e5d8;
+            color: #5c4033;
+
+            border-top-right-radius: 4px;
+        }
+
+        .message-label {
+            display: block;
+            font-size: 11px;
+            font-weight: 700;
+            margin-bottom: 4px;
+            opacity: 0.65;
+        }
+
+        .message-text {
+            white-space: pre-wrap;
+        }
+
+        /* ================================
+           MESSAGE ACTIONS
+        ================================= */
+
+        .message-actions {
+            display: flex;
+            gap: 6px;
+            margin-top: 9px;
+        }
+
+        .listen-button {
+            border: none;
+            background: #f8f1eb;
+            color: #765437;
+
+            border-radius: 8px;
+            padding: 5px 9px;
+
+            cursor: pointer;
+            font-size: 12px;
+
+            transition: 0.15s;
+        }
+
+        .listen-button:hover {
+            background: #eee0d3;
+        }
+
+        /* ================================
+           TYPING
+        ================================= */
+
+        .typing-indicator {
+            display: none;
+            align-items: center;
+            gap: 5px;
+
+            padding: 11px 14px;
+            width: fit-content;
+
+            border: 1px solid #e7e0db;
+            border-radius: 13px;
+            border-top-left-radius: 4px;
+
+            background: #ffffff;
+        }
+
+        .typing-indicator.show {
+            display: flex;
+        }
+
+        .typing-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #b5835a;
 
-<link rel="stylesheet" href="style.css">
+            animation: typing 1.2s infinite;
+        }
 
-<link rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+        .typing-dot:nth-child(2) {
+            animation-delay: 0.15s;
+        }
 
-<meta charset="UTF-8">
+        .typing-dot:nth-child(3) {
+            animation-delay: 0.3s;
+        }
 
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
+        @keyframes typing {
+            0%, 60%, 100% {
+                transform: translateY(0);
+            }
 
-<title>Boba Break Study - AI Speaking</title>
+            30% {
+                transform: translateY(-4px);
+            }
+        }
 
-<link rel="icon" type="image/png" href="/favicon.png">
+        /* ================================
+           INPUT
+        ================================= */
 
-<style>
+        .input-section {
+            border-top: 1px solid #eeeeee;
+            padding: 15px;
+            background: #ffffff;
+        }
 
-/* =========================================
-   AI CHAT PAGE
-========================================= */
+        .input-row {
+            display: flex;
+            align-items: flex-end;
+            gap: 8px;
+        }
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-}
+        .input-button {
+            flex: 0 0 auto;
 
+            width: 43px;
+            height: 43px;
 
-/* =========================================
-   BODY
-========================================= */
+            border: none;
+            border-radius: 10px;
 
-body {
-    background-color: #f8f9fa;
-    display: flex;
-    min-height: 100vh;
-}
+            cursor: pointer;
 
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
-/* =========================================
-   MAIN CONTENT
-========================================= */
+            font-size: 16px;
+
+            transition: 0.15s;
+        }
 
-.main-content {
-    flex: 1;
-    padding: 20px;
-}
+        .mic-button {
+            background: #f3e5d8;
+            color: #765437;
+        }
 
+        .mic-button:hover {
+            background: #ead9c9;
+        }
 
-.card {
-    width: 100%;
-    background: #ffffff;
-    border-radius: 12px;
-    padding: 20px;
-    margin-bottom: 20px;
+        .mic-button.recording {
+            background: #765437;
+            color: #ffffff;
+        }
 
-    box-shadow:
-        0 2px 5px rgba(0,0,0,0.03);
+        .send-button {
+            background: #765437;
+            color: #ffffff;
+        }
 
-    border: 1px solid #eaeaea;
-}
+        .send-button:hover {
+            background: #5c4033;
+        }
 
+        .send-button:disabled {
+            opacity: 0.45;
+            cursor: not-allowed;
+        }
 
-/* =========================================
-   HEADER
-========================================= */
+        #messageInput {
+            flex: 1;
 
-.ai-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 15px;
-}
+            min-height: 43px;
+            max-height: 120px;
 
+            resize: none;
 
-.ai-title-area h2 {
-    font-size: 20px;
-    margin-bottom: 5px;
-    color: #111;
-}
+            border: 1px solid #ddd4cd;
+            border-radius: 10px;
 
+            padding: 11px 13px;
 
-.ai-subtitle {
-    font-size: 12px;
-    color: #666;
-}
+            font-family: inherit;
+            font-size: 15px;
 
+            color: #5c4033;
+            background: #ffffff;
 
-.ai-status {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
+            outline: none;
+        }
 
-    font-size: 12px;
-    color: #666;
+        #messageInput:focus {
+            border-color: #b5835a;
+        }
 
-    white-space: nowrap;
-}
+        #messageInput::placeholder {
+            color: #aaa09a;
+        }
 
+        .input-hint {
+            margin: 7px 4px 0;
 
-.ai-status-dot {
-    width: 8px;
-    height: 8px;
+            font-size: 11px;
+            color: #9a8c82;
+        }
 
-    border-radius: 50%;
+        /* ================================
+           SETTINGS
+        ================================= */
 
-    background-color: #b5835a;
-}
+        .settings-card {
+            margin-top: 16px;
+            padding: 17px 20px;
 
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
 
-/* =========================================
-   CHAT CARD
-========================================= */
+            flex-wrap: wrap;
+        }
 
-.chat-card {
-    padding: 0;
-    overflow: hidden;
-}
+        .settings-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
 
+        .setting-label {
+            font-size: 13px;
+            color: #765f50;
+            font-weight: 600;
+        }
 
-.chat-area {
-    height: calc(100vh - 260px);
+        .level-select {
+            border: 1px solid #ddd4cd;
+            border-radius: 8px;
 
-    min-height: 430px;
-    max-height: 760px;
+            background: #ffffff;
+            color: #5c4033;
 
-    padding: 25px 20px;
+            padding: 8px 11px;
 
-    overflow-y: auto;
+            font-family: inherit;
+            font-size: 13px;
 
-    background-color: #ffffff;
+            outline: none;
+        }
 
-    display: flex;
-    flex-direction: column;
+        .level-select:focus {
+            border-color: #b5835a;
+        }
 
-    gap: 16px;
-}
+        .new-chat-button {
+            border: none;
 
+            background: #f3e5d8;
+            color: #765437;
 
-/* =========================================
-   WELCOME
-========================================= */
+            padding: 9px 13px;
 
-.welcome-message {
-    text-align: center;
+            border-radius: 8px;
 
-    max-width: 600px;
+            font-family: inherit;
+            font-size: 13px;
+            font-weight: 600;
 
-    margin: 25px auto 10px auto;
+            cursor: pointer;
+        }
 
-    color: #555;
-}
+        .new-chat-button:hover {
+            background: #ead9c9;
+        }
 
+        /* ================================
+           HELP
+        ================================= */
 
-.welcome-icon {
-    width: 58px;
-    height: 58px;
+        .help-box {
+            margin-top: 12px;
+            padding: 13px 16px;
 
-    margin: 0 auto 12px auto;
+            background: #fffaf5;
+            border: 1px solid #eee2d8;
+            border-radius: 10px;
 
-    border-radius: 50%;
+            font-size: 12px;
+            color: #806e60;
 
-    background-color: #f3e5d8;
+            line-height: 1.6;
+        }
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+        .help-box i {
+            color: #b5835a;
+            margin-right: 5px;
+        }
 
-    font-size: 28px;
-}
+        /* ================================
+           MOBILE
+        ================================= */
 
+        @media (max-width: 768px) {
 
-.welcome-message h3 {
-    font-size: 18px;
+            .main-content {
+                padding: 12px;
+            }
 
-    color: #333;
+            .page-header {
+                padding: 17px;
+            }
 
-    margin-bottom: 8px;
-}
+            .page-title {
+                font-size: 21px;
+            }
 
+            .page-subtitle {
+                font-size: 12px;
+            }
 
-.welcome-message p {
-    font-size: 13px;
+            .status-box {
+                font-size: 10px;
+                padding: 6px 8px;
+            }
 
-    line-height: 1.6;
-}
+            .chat-area {
+                height: calc(100vh - 320px);
+                min-height: 400px;
+                padding: 15px;
+            }
 
+            .message {
+                max-width: 88%;
+                font-size: 14px;
+            }
 
-/* =========================================
-   MESSAGE ROW
-========================================= */
+            .settings-card {
+                align-items: flex-start;
+                flex-direction: column;
+            }
 
-.message-row {
-    display: flex;
+            .settings-left {
+                width: 100%;
+            }
 
-    width: 100%;
-}
-
-
-.message-row.ai {
-    justify-content: flex-start;
-}
-
-
-.message-row.user {
-    justify-content: flex-end;
-}
-
-
-/* =========================================
-   MESSAGE
-========================================= */
-
-.message {
-    max-width: 78%;
-
-    padding: 12px 15px;
-
-    border-radius: 12px;
-
-    line-height: 1.6;
-
-    font-size: 15px;
-
-    position: relative;
-}
-
-
-.message.ai {
-    background-color: #ffffff;
-
-    border: 1px solid #eaeaea;
-
-    color: #333;
-
-    border-top-left-radius: 4px;
-}
-
-
-.message.user {
-    background-color: #f3e5d8;
-
-    border: 1px solid #ead8c7;
-
-    color: #333;
-
-    border-top-right-radius: 4px;
-}
-
-
-/* =========================================
-   MESSAGE LABEL
-========================================= */
-
-.message-label {
-    display: block;
-
-    font-size: 11px;
-
-    font-weight: bold;
-
-    color: #b5835a;
-
-    margin-bottom: 4px;
-}
-
-
-.message.user .message-label {
-    color: #765437;
-}
-
-
-/* =========================================
-   MESSAGE TEXT
-========================================= */
-
-.message-text {
-    white-space: pre-wrap;
-
-    word-break: break-word;
-}
-
-
-/* =========================================
-   MESSAGE ACTIONS
-========================================= */
-
-.message-actions {
-    display: flex;
-
-    align-items: center;
-
-    gap: 6px;
-
-    margin-top: 8px;
-}
-
-
-.message-action-btn {
-    border: none;
-
-    background: transparent;
-
-    color: #888;
-
-    cursor: pointer;
-
-    font-size: 12px;
-
-    padding: 3px 6px;
-
-    border-radius: 15px;
-
-    transition:
-        background-color 0.2s ease,
-        color 0.2s ease;
-}
-
-
-.message-action-btn:hover {
-    background-color: #f5f5f5;
-
-    color: #765437;
-}
-
-
-/* =========================================
-   TYPING INDICATOR
-========================================= */
-
-.typing-message {
-    display: none;
-}
-
-
-.typing-dots {
-    display: flex;
-
-    gap: 4px;
-
-    align-items: center;
-}
-
-
-.typing-dots span {
-    width: 6px;
-    height: 6px;
-
-    background-color: #b5835a;
-
-    border-radius: 50%;
-
-    animation: typingBounce 1.2s infinite;
-}
-
-
-.typing-dots span:nth-child(2) {
-    animation-delay: 0.15s;
-}
-
-
-.typing-dots span:nth-child(3) {
-    animation-delay: 0.3s;
-}
-
-
-@keyframes typingBounce {
-
-    0%,
-    60%,
-    100% {
-        transform: translateY(0);
-        opacity: 0.45;
-    }
-
-    30% {
-        transform: translateY(-4px);
-        opacity: 1;
-    }
-
-}
-
-
-/* =========================================
-   INPUT AREA
-========================================= */
-
-.chat-input-area {
-    border-top: 1px solid #eaeaea;
-
-    padding: 14px;
-
-    background-color: #ffffff;
-}
-
-
-.input-row {
-    display: flex;
-
-    align-items: flex-end;
-
-    gap: 8px;
-}
-
-
-.chat-input {
-    flex: 1;
-
-    min-height: 44px;
-    max-height: 120px;
-
-    resize: none;
-
-    border: 1px solid #ddd;
-
-    border-radius: 22px;
-
-    outline: none;
-
-    padding: 11px 15px;
-
-    font-size: 14px;
-
-    line-height: 1.4;
-
-    color: #333;
-
-    background-color: #fff;
-}
-
-
-.chat-input:focus {
-    border-color: #b5835a;
-}
-
-
-/* =========================================
-   INPUT BUTTONS
-========================================= */
-
-.chat-button {
-    width: 44px;
-    height: 44px;
-
-    flex-shrink: 0;
-
-    border: none;
-
-    border-radius: 50%;
-
-    cursor: pointer;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    font-size: 17px;
-
-    transition:
-        background-color 0.2s ease,
-        transform 0.15s ease,
-        box-shadow 0.2s ease;
-}
-
-
-.mic-btn {
-    background-color: #b5835a;
-
-    color: white;
-}
-
-
-.mic-btn:hover {
-    background-color: #9d704c;
-
-    transform: translateY(-1px);
-}
-
-
-.send-btn {
-    background-color: #765437;
-
-    color: white;
-}
-
-
-.send-btn:hover {
-    background-color: #5d412a;
-
-    transform: translateY(-1px);
-}
-
-
-.chat-button:active {
-    transform: scale(0.96);
-}
-
-
-/* =========================================
-   MICROPHONE ACTIVE
-========================================= */
-
-.mic-btn.recording {
-    background-color: #765437;
-
-    animation: micPulse 1.2s infinite;
-}
-
-
-@keyframes micPulse {
-
-    0% {
-        box-shadow:
-            0 0 0 0
-            rgba(181, 131, 90, 0.55);
-    }
-
-    70% {
-        box-shadow:
-            0 0 0 12px
-            rgba(181, 131, 90, 0);
-    }
-
-    100% {
-        box-shadow:
-            0 0 0 0
-            rgba(181, 131, 90, 0);
-    }
-
-}
-
-
-/* =========================================
-   INPUT HINT
-========================================= */
-
-.input-hint {
-    text-align: center;
-
-    font-size: 11px;
-
-    color: #999;
-
-    margin-top: 7px;
-}
-
-
-/* =========================================
-   CONTROL CARD
-========================================= */
-
-.controls-card {
-    padding: 15px 20px;
-}
-
-
-.controls-row {
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    gap: 15px;
-}
-
-
-.control-group {
-    display: flex;
-
-    align-items: center;
-
-    gap: 8px;
-}
-
-
-.control-label {
-    font-size: 12px;
-
-    color: #666;
-}
-
-
-.level-select {
-    border: 1px solid #ddd;
-
-    border-radius: 6px;
-
-    background-color: white;
-
-    padding: 7px 10px;
-
-    outline: none;
-
-    font-size: 13px;
-
-    color: #333;
-
-    cursor: pointer;
-}
-
-
-.level-select:focus {
-    border-color: #b5835a;
-}
-
-
-.new-chat-btn {
-    border: none;
-
-    background-color: #b5835a;
-
-    color: white;
-
-    padding: 8px 15px;
-
-    border-radius: 20px;
-
-    cursor: pointer;
-
-    font-size: 13px;
-
-    font-weight: bold;
-
-    transition:
-        background-color 0.2s ease,
-        transform 0.15s ease;
-}
-
-
-.new-chat-btn:hover {
-    background-color: #9d704c;
-
-    transform: translateY(-1px);
-}
-
-
-/* =========================================
-   MOBILE
-========================================= */
-
-@media screen and (max-width: 768px) {
-
-    .main-content {
-        padding: 12px;
-    }
-
-
-    .ai-header {
-        align-items: flex-start;
-    }
-
-
-    .ai-title-area h2 {
-        font-size: 18px;
-    }
-
-
-    .chat-area {
-        height: calc(100vh - 235px);
-
-        min-height: 400px;
-
-        padding: 18px 12px;
-    }
-
-
-    .message {
-        max-width: 88%;
-
-        font-size: 14px;
-    }
-
-
-    .controls-row {
-        align-items: flex-start;
-
-        flex-direction: column;
-    }
-
-
-    .controls-card {
-        padding: 14px;
-    }
-
-
-    .chat-input-area {
-        padding: 10px;
-    }
-
-}
-
-
-/* =========================================
-   ACCESSIBILITY
-========================================= */
-
-button:focus-visible,
-textarea:focus-visible,
-select:focus-visible {
-
-    outline: 2px solid #b5835a;
-
-    outline-offset: 2px;
-}
-
-</style>
-
+            .new-chat-button {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
-
 
 <body>
 
-
 <div class="app-container">
 
-
-    <!-- =====================================
-         SIDEBAR
-    ====================================== -->
-
+    <!-- Sidebar -->
     <div id="sidebar-container"></div>
 
+    <!-- Main -->
+    <main class="main-content">
 
-    <!-- =====================================
-         MAIN CONTENT
-    ====================================== -->
+        <!-- Header -->
+        <div class="card page-header">
 
-    <div class="main-content">
+            <div>
+                <h1 class="page-title">
+                    🧋 Boba AI Speaking
+                </h1>
 
-
-        <!-- =====================================
-             HEADER CARD
-        ====================================== -->
-
-        <div class="card">
-
-
-            <div class="ai-header">
-
-
-                <div class="ai-title-area">
-
-                    <h2>
-                        🧋 Boba AI Speaking
-                    </h2>
-
-
-                    <p class="ai-subtitle">
-                        Practice Taiwan Mandarin through conversation.
-                    </p>
-
-                </div>
-
-
-                <div class="ai-status">
-
-                    <span class="ai-status-dot"></span>
-
-                    Ready
-
-                </div>
-
-
+                <p class="page-subtitle">
+                    Practice Taiwan Mandarin through conversation.
+                </p>
             </div>
 
+            <div class="status-box" id="statusBox">
+                <span class="status-dot"></span>
+                <span id="statusText">Ready</span>
+            </div>
 
         </div>
 
 
-
-        <!-- =====================================
-             CHAT CARD
-        ====================================== -->
-
+        <!-- Chat -->
         <div class="card chat-card">
 
+            <div class="chat-area" id="chatArea">
 
-            <div
-                class="chat-area"
-                id="chat-area"
-            >
-
-
-                <!-- =================================
-                     WELCOME
-                ================================== -->
-
-                <div
-                    class="welcome-message"
-                    id="welcome-message"
-                >
-
-                    <div class="welcome-icon">
-                        🧋
-                    </div>
-
-
-                    <h3>
-                        你好！ Let's practice Mandarin.
-                    </h3>
-
-
-                    <p>
-                        You can type or use the microphone
-                        to practice speaking Taiwan Mandarin.
-                    </p>
-
-                </div>
-
-
-                <!-- =================================
-                     EXAMPLE AI MESSAGE
-                ================================== -->
-
+                <!-- Welcome -->
                 <div class="message-row ai">
 
                     <div class="message ai">
 
                         <span class="message-label">
-                            Boba AI
+                            🧋 Boba AI
                         </span>
 
-
                         <div class="message-text">
+                            你好！我是 Boba AI。
+                            <br>
                             今天想聊什麼？
                         </div>
 
-
                         <div class="message-actions">
-
                             <button
-                                class="message-action-btn"
-                                type="button"
-                                onclick="speakMessage(this)"
-                                title="Listen"
-                            >
-
-                                🔊 Listen
-
+                                class="listen-button"
+                                onclick="speakText('你好！我是 Boba AI。今天想聊什麼？')">
+                                <i class="fa-solid fa-volume-high"></i>
+                                Listen
                             </button>
-
                         </div>
 
                     </div>
 
                 </div>
-
-
-                <!-- =================================
-                     TYPING INDICATOR
-                ================================== -->
-
-                <div
-                    class="message-row ai typing-message"
-                    id="typing-indicator"
-                >
-
-                    <div class="message ai">
-
-                        <span class="message-label">
-                            Boba AI
-                        </span>
-
-
-                        <div class="typing-dots">
-
-                            <span></span>
-                            <span></span>
-                            <span></span>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
 
             </div>
 
 
-
-            <!-- =====================================
-                 INPUT
-            ====================================== -->
-
-            <div class="chat-input-area">
-
+            <!-- Input -->
+            <div class="input-section">
 
                 <div class="input-row">
 
-
                     <button
-                        class="chat-button mic-btn"
-                        id="mic-btn"
-                        type="button"
-                        onclick="toggleRecording()"
+                        class="input-button mic-button"
+                        id="micButton"
                         title="Speak"
-                        aria-label="Speak"
-                    >
+                        onclick="toggleSpeechRecognition()">
 
                         <i class="fa-solid fa-microphone"></i>
 
@@ -911,734 +597,661 @@ select:focus-visible {
 
 
                     <textarea
-                        class="chat-input"
-                        id="chat-input"
+                        id="messageInput"
                         rows="1"
                         placeholder="Type in Mandarin..."
-                        aria-label="Message"
-                    ></textarea>
+                        autocomplete="off"></textarea>
 
 
                     <button
-                        class="chat-button send-btn"
-                        id="send-btn"
-                        type="button"
-                        onclick="sendMessage()"
+                        class="input-button send-button"
+                        id="sendButton"
                         title="Send"
-                        aria-label="Send"
-                    >
+                        onclick="sendMessage()">
 
                         <i class="fa-solid fa-paper-plane"></i>
 
                     </button>
 
-
                 </div>
 
-
-                <p
-                    class="input-hint"
-                    id="input-hint"
-                >
-                    Tap the microphone to practice speaking.
-                </p>
-
+                <div class="input-hint">
+                    Press Enter to send · Shift + Enter for a new line
+                </div>
 
             </div>
-
 
         </div>
 
 
+        <!-- Settings -->
+        <div class="card settings-card">
 
-        <!-- =====================================
-             SETTINGS CARD
-        ====================================== -->
+            <div class="settings-left">
 
-        <div class="card controls-card">
+                <span class="setting-label">
+                    <i class="fa-solid fa-sliders"></i>
+                    Level
+                </span>
 
+                <select
+                    id="levelSelect"
+                    class="level-select">
 
-            <div class="controls-row">
+                    <option value="Beginner">
+                        Beginner
+                    </option>
 
+                    <option value="Elementary">
+                        Elementary
+                    </option>
 
-                <div class="control-group">
+                    <option value="Intermediate">
+                        Intermediate
+                    </option>
 
-                    <span class="control-label">
-                        Level:
-                    </span>
-
-
-                    <select
-                        class="level-select"
-                        id="level-select"
-                    >
-
-                        <option value="beginner">
-                            Beginner
-                        </option>
-
-
-                        <option value="elementary">
-                            Elementary
-                        </option>
-
-
-                        <option value="intermediate">
-                            Intermediate
-                        </option>
-
-                    </select>
-
-                </div>
-
-
-                <button
-                    class="new-chat-btn"
-                    type="button"
-                    onclick="startNewChat()"
-                >
-
-                    <i class="fa-solid fa-rotate"></i>
-
-                    New Chat
-
-                </button>
-
+                </select>
 
             </div>
 
-
-        </div>
-
-
-    </div>
-
-</div>
-
-
-
-<script>
-
-/* =========================================================
-   Boba AI Chat
-   ---------------------------------------
-   UI prototype.
-
-   The AI/backend is not connected yet.
-========================================================= */
-
-
-/* =========================================================
-   ELEMENTS
-========================================================= */
-
-const chatArea =
-    document.getElementById(
-        "chat-area"
-    );
-
-
-const chatInput =
-    document.getElementById(
-        "chat-input"
-    );
-
-
-const micButton =
-    document.getElementById(
-        "mic-btn"
-    );
-
-
-const inputHint =
-    document.getElementById(
-        "input-hint"
-    );
-
-
-const typingIndicator =
-    document.getElementById(
-        "typing-indicator"
-    );
-
-
-const welcomeMessage =
-    document.getElementById(
-        "welcome-message"
-    );
-
-
-/* =========================================================
-   CHAT HISTORY
-========================================================= */
-
-let chatHistory = [];
-
-
-/* =========================================================
-   SEND MESSAGE
-========================================================= */
-
-function sendMessage() {
-
-    const text =
-        chatInput.value.trim();
-
-
-    if (!text) {
-        return;
-    }
-
-
-    if (welcomeMessage) {
-
-        welcomeMessage.style.display =
-            "none";
-
-    }
-
-
-    addUserMessage(
-        text
-    );
-
-
-    chatInput.value =
-        "";
-
-
-    autoResizeTextarea();
-
-
-    /*
-       TEMPORARY DEMO RESPONSE.
-
-       Later this part can be replaced with
-       a request to your backend / AI API.
-    */
-
-    showTyping();
-
-
-    setTimeout(
-        function() {
-
-            hideTyping();
-
-
-            addAIMessage(
-                "很好！你說得不錯。現在我們可以繼續聊天。"
-            );
-
-        },
-        700
-    );
-
-}
-
-
-/* =========================================================
-   ADD USER MESSAGE
-========================================================= */
-
-function addUserMessage(text) {
-
-    const row =
-        document.createElement(
-            "div"
-        );
-
-
-    row.className =
-        "message-row user";
-
-
-    const message =
-        document.createElement(
-            "div"
-        );
-
-
-    message.className =
-        "message user";
-
-
-    message.innerHTML = `
-
-        <span class="message-label">
-            You
-        </span>
-
-        <div class="message-text"></div>
-
-    `;
-
-
-    message
-        .querySelector(
-            ".message-text"
-        )
-        .textContent =
-            text;
-
-
-    row.appendChild(
-        message
-    );
-
-
-    chatArea.insertBefore(
-        row,
-        typingIndicator
-    );
-
-
-    scrollChatToBottom();
-
-
-    chatHistory.push({
-
-        role: "user",
-
-        content: text
-
-    });
-
-}
-
-
-/* =========================================================
-   ADD AI MESSAGE
-========================================================= */
-
-function addAIMessage(text) {
-
-    const row =
-        document.createElement(
-            "div"
-        );
-
-
-    row.className =
-        "message-row ai";
-
-
-    const message =
-        document.createElement(
-            "div"
-        );
-
-
-    message.className =
-        "message ai";
-
-
-    message.innerHTML = `
-
-        <span class="message-label">
-            Boba AI
-        </span>
-
-        <div class="message-text"></div>
-
-        <div class="message-actions">
 
             <button
-                class="message-action-btn"
-                type="button"
-                onclick="speakMessage(this)"
-                title="Listen"
-            >
+                class="new-chat-button"
+                onclick="newChat()">
 
-                🔊 Listen
+                <i class="fa-solid fa-rotate-left"></i>
+                New Chat
 
             </button>
 
         </div>
 
-    `;
+
+        <!-- Help -->
+        <div class="help-box">
+
+            <i class="fa-solid fa-lightbulb"></i>
+
+            Try writing simple Traditional Chinese sentences.
+            You can also press the microphone button and speak
+            Taiwan Mandarin.
+
+        </div>
+
+    </main>
+
+</div>
 
 
-    message
-        .querySelector(
-            ".message-text"
-        )
-        .textContent =
-            text;
+<script>
+
+    /* =========================================
+       CHAT STATE
+    ========================================= */
+
+    let chatHistory = [];
+
+    let isThinking = false;
+
+    let recognition = null;
+    let isRecording = false;
 
 
-    row.appendChild(
-        message
-    );
+    /* =========================================
+       ELEMENTS
+    ========================================= */
+
+    const chatArea = document.getElementById("chatArea");
+    const messageInput = document.getElementById("messageInput");
+    const sendButton = document.getElementById("sendButton");
+    const micButton = document.getElementById("micButton");
+
+    const levelSelect = document.getElementById("levelSelect");
+
+    const statusBox = document.getElementById("statusBox");
+    const statusText = document.getElementById("statusText");
 
 
-    chatArea.insertBefore(
-        row,
-        typingIndicator
-    );
+    /* =========================================
+       STATUS
+    ========================================= */
 
+    function setStatus(text, thinking = false) {
 
-    scrollChatToBottom();
+        statusText.textContent = text;
 
-
-    chatHistory.push({
-
-        role: "assistant",
-
-        content: text
-
-    });
-
-}
-
-
-/* =========================================================
-   TYPING INDICATOR
-========================================================= */
-
-function showTyping() {
-
-    typingIndicator.style.display =
-        "flex";
-
-
-    scrollChatToBottom();
-
-}
-
-
-function hideTyping() {
-
-    typingIndicator.style.display =
-        "none";
-
-}
-
-
-/* =========================================================
-   SCROLL CHAT
-========================================================= */
-
-function scrollChatToBottom() {
-
-    setTimeout(
-        function() {
-
-            chatArea.scrollTop =
-                chatArea.scrollHeight;
-
-        },
-        20
-    );
-
-}
-
-
-/* =========================================================
-   TEXT TO SPEECH
-   ---------------------------------------
-   Taiwan Mandarin voice.
-========================================================= */
-
-function speakMessage(button) {
-
-    if (
-        !("speechSynthesis" in window)
-    ) {
-
-        alert(
-            "Your browser does not support text-to-speech."
-        );
-
-        return;
-
+        if (thinking) {
+            statusBox.classList.add("thinking");
+        } else {
+            statusBox.classList.remove("thinking");
+        }
     }
 
 
-    const message =
-        button.closest(
-            ".message"
-        );
+    /* =========================================
+       ESCAPE HTML
+    ========================================= */
 
+    function escapeHTML(text) {
 
-    const textElement =
-        message
-            ? message.querySelector(
-                ".message-text"
-            )
-            : null;
-
-
-    if (!textElement) {
-        return;
+        return text
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
     }
 
 
-    const text =
-        textElement.textContent.trim();
+    /* =========================================
+       ADD USER MESSAGE
+    ========================================= */
 
+    function addUserMessage(text) {
 
-    if (!text) {
-        return;
+        const row = document.createElement("div");
+
+        row.className = "message-row user";
+
+        row.innerHTML = `
+            <div class="message user">
+                <span class="message-label">
+                    You
+                </span>
+
+                <div class="message-text">
+                    ${escapeHTML(text)}
+                </div>
+            </div>
+        `;
+
+        chatArea.appendChild(row);
+
+        scrollToBottom();
     }
 
 
-    speechSynthesis.cancel();
+    /* =========================================
+       ADD AI MESSAGE
+    ========================================= */
 
+    function addAIMessage(text) {
 
-    const utterance =
-        new SpeechSynthesisUtterance(
-            text
-        );
+        const row = document.createElement("div");
 
+        row.className = "message-row ai";
 
-    utterance.lang =
-        "zh-TW";
+        const safeText = escapeHTML(text);
 
+        row.innerHTML = `
+            <div class="message ai">
 
-    utterance.rate =
-        0.8;
+                <span class="message-label">
+                    🧋 Boba AI
+                </span>
 
+                <div class="message-text">
+                    ${safeText}
+                </div>
 
-    utterance.pitch =
-        1;
+                <div class="message-actions">
 
+                    <button
+                        class="listen-button"
+                        onclick="speakText(${JSON.stringify(text)})">
 
-    button.textContent =
-        "🔊 Speaking...";
+                        <i class="fa-solid fa-volume-high"></i>
+                        Listen
 
+                    </button>
 
-    utterance.onend =
-        function() {
+                </div>
 
-            button.textContent =
-                "🔊 Listen";
+            </div>
+        `;
 
-        };
+        chatArea.appendChild(row);
 
-
-    utterance.onerror =
-        function() {
-
-            button.textContent =
-                "🔊 Listen";
-
-        };
-
-
-    speechSynthesis.speak(
-        utterance
-    );
-
-}
-
-
-/* =========================================================
-   SPEECH RECOGNITION
-========================================================= */
-
-let recognition =
-    null;
-
-
-let isRecording =
-    false;
-
-
-function setupSpeechRecognition() {
-
-    const SpeechRecognition =
-        window.SpeechRecognition ||
-        window.webkitSpeechRecognition;
-
-
-    if (!SpeechRecognition) {
-
-        return false;
-
+        scrollToBottom();
     }
 
 
-    recognition =
-        new SpeechRecognition();
+    /* =========================================
+       TYPING INDICATOR
+    ========================================= */
+
+    function showTyping() {
+
+        if (document.getElementById("typingIndicator")) {
+            return;
+        }
+
+        const row = document.createElement("div");
+
+        row.className = "message-row ai";
+
+        row.id = "typingRow";
+
+        row.innerHTML = `
+            <div
+                class="typing-indicator show"
+                id="typingIndicator">
+
+                <span class="typing-dot"></span>
+                <span class="typing-dot"></span>
+                <span class="typing-dot"></span>
+
+            </div>
+        `;
+
+        chatArea.appendChild(row);
+
+        scrollToBottom();
+    }
 
 
-    recognition.lang =
-        "zh-TW";
+    function hideTyping() {
+
+        const row = document.getElementById("typingRow");
+
+        if (row) {
+            row.remove();
+        }
+    }
 
 
-    recognition.continuous =
-        false;
+    /* =========================================
+       SCROLL
+    ========================================= */
+
+    function scrollToBottom() {
+
+        setTimeout(() => {
+
+            chatArea.scrollTop = chatArea.scrollHeight;
+
+        }, 30);
+    }
 
 
-    recognition.interimResults =
-        true;
+    /* =========================================
+       SEND MESSAGE
+    ========================================= */
+
+    async function sendMessage() {
+
+        if (isThinking) {
+            return;
+        }
+
+        const message = messageInput.value.trim();
+
+        if (!message) {
+            return;
+        }
 
 
-    recognition.onstart =
-        function() {
-
-            isRecording =
-                true;
+        /* Add user message to UI */
+        addUserMessage(message);
 
 
-            micButton.classList.add(
-                "recording"
-            );
+        /* Clear input */
+        messageInput.value = "";
+
+        autoResize();
 
 
-            inputHint.textContent =
-                "Listening... Speak in Mandarin.";
+        /* Disable input */
+        isThinking = true;
 
-        };
+        sendButton.disabled = true;
 
-
-    recognition.onresult =
-        function(event) {
-
-            let transcript =
-                "";
+        messageInput.disabled = true;
 
 
-            for (
-                let i = event.resultIndex;
-                i < event.results.length;
-                i++
-            ) {
+        /* Add to conversation history */
+        chatHistory.push({
+            role: "user",
+            content: message
+        });
 
-                transcript +=
-                    event.results[i][0].transcript;
+
+        showTyping();
+
+        setStatus("Thinking...", true);
+
+
+        try {
+
+            const response = await fetch("/api/chat", {
+
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+
+                    message: message,
+
+                    level: levelSelect.value,
+
+                    history: chatHistory
+
+                })
+
+            });
+
+
+            let data = {};
+
+            try {
+                data = await response.json();
+            } catch (jsonError) {
+                throw new Error("The server returned an invalid response.");
+            }
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    data.error ||
+                    "Something went wrong with the AI server."
+                );
 
             }
 
 
-            chatInput.value =
-                transcript;
+            const aiReply = data.reply;
+
+            if (!aiReply) {
+                throw new Error("The AI returned an empty response.");
+            }
 
 
-            autoResizeTextarea();
+            /* Save AI response */
+            chatHistory.push({
+                role: "assistant",
+                content: aiReply
+            });
+
+
+            hideTyping();
+
+            addAIMessage(aiReply);
+
+
+            /* Automatically speak AI response */
+            speakText(aiReply);
+
+
+            setStatus("Online", false);
+
+
+        } catch (error) {
+
+            console.error(error);
+
+            hideTyping();
+
+            addAIMessage(
+                "抱歉，現在連不上 AI。請稍後再試一次。\n\n" +
+                "Sorry, I couldn't connect to the AI right now."
+            );
+
+            setStatus("Connection error", false);
+
+        } finally {
+
+            isThinking = false;
+
+            sendButton.disabled = false;
+
+            messageInput.disabled = false;
+
+            messageInput.focus();
+
+        }
+    }
+
+
+    /* =========================================
+       TEXT TO SPEECH
+    ========================================= */
+
+    function speakText(text) {
+
+        if (!("speechSynthesis" in window)) {
+            return;
+        }
+
+        window.speechSynthesis.cancel();
+
+
+        const utterance = new SpeechSynthesisUtterance(text);
+
+        utterance.lang = "zh-TW";
+
+        utterance.rate = 0.82;
+
+        utterance.pitch = 1;
+
+
+        /*
+         * Try to find a Taiwan Mandarin voice.
+         */
+
+        const voices = window.speechSynthesis.getVoices();
+
+        const taiwanVoice = voices.find(voice =>
+            voice.lang &&
+            (
+                voice.lang.toLowerCase() === "zh-tw" ||
+                voice.lang.toLowerCase().startsWith("zh-tw")
+            )
+        );
+
+
+        if (taiwanVoice) {
+            utterance.voice = taiwanVoice;
+        }
+
+
+        window.speechSynthesis.speak(utterance);
+    }
+
+
+    /* =========================================
+       SPEECH RECOGNITION
+    ========================================= */
+
+    function setupSpeechRecognition() {
+
+        const SpeechRecognition =
+            window.SpeechRecognition ||
+            window.webkitSpeechRecognition;
+
+
+        if (!SpeechRecognition) {
+
+            micButton.title =
+                "Speech recognition is not supported in this browser.";
+
+            return;
+
+        }
+
+
+        recognition = new SpeechRecognition();
+
+        recognition.lang = "zh-TW";
+
+        recognition.continuous = false;
+
+        recognition.interimResults = false;
+
+
+        recognition.onstart = function() {
+
+            isRecording = true;
+
+            micButton.classList.add("recording");
+
+            setStatus("Listening...", false);
 
         };
 
 
-    recognition.onerror =
-        function(event) {
+        recognition.onresult = function(event) {
 
-            console.log(
+            const transcript =
+                event.results[0][0].transcript;
+
+            messageInput.value =
+                transcript;
+
+            autoResize();
+
+        };
+
+
+        recognition.onerror = function(event) {
+
+            console.error(
                 "Speech recognition error:",
                 event.error
             );
 
-
-            inputHint.textContent =
-                "Microphone error. Please try again.";
-
         };
 
 
-    recognition.onend =
-        function() {
+        recognition.onend = function() {
 
-            isRecording =
-                false;
+            isRecording = false;
 
+            micButton.classList.remove("recording");
 
-            micButton.classList.remove(
-                "recording"
-            );
-
-
-            inputHint.textContent =
-                "Tap the microphone to practice speaking.";
+            setStatus("Online", false);
 
         };
 
-
-    return true;
-
-}
+    }
 
 
-/* =========================================================
-   TOGGLE RECORDING
-========================================================= */
+    function toggleSpeechRecognition() {
 
-function toggleRecording() {
-
-    if (!recognition) {
-
-        const supported =
-            setupSpeechRecognition();
-
-
-        if (!supported) {
+        if (!recognition) {
 
             alert(
-                "Speech recognition is not supported by this browser."
+                "Speech recognition is not supported in this browser."
             );
 
             return;
 
         }
 
-    }
 
+        if (isRecording) {
 
-    if (isRecording) {
+            recognition.stop();
 
-        recognition.stop();
+        } else {
 
-        return;
+            try {
 
-    }
+                recognition.start();
 
+            } catch (error) {
 
-    try {
+                console.error(error);
 
-        recognition.start();
+            }
 
-    }
-
-    catch(error) {
-
-        console.log(
-            "Recognition start error:",
-            error
-        );
+        }
 
     }
 
-}
+
+    /* =========================================
+       NEW CHAT
+    ========================================= */
+
+    function newChat() {
+
+        window.speechSynthesis.cancel();
+
+        chatHistory = [];
+
+        hideTyping();
 
 
-/* =========================================================
-   TEXTAREA AUTO RESIZE
-========================================================= */
+        chatArea.innerHTML = `
 
-function autoResizeTextarea() {
+            <div class="message-row ai">
 
-    chatInput.style.height =
-        "auto";
+                <div class="message ai">
+
+                    <span class="message-label">
+                        🧋 Boba AI
+                    </span>
+
+                    <div class="message-text">
+                        你好！我是 Boba AI。
+                        <br>
+                        今天想聊什麼？
+                    </div>
+
+                    <div class="message-actions">
+
+                        <button
+                            class="listen-button"
+                            onclick="speakText('你好！我是 Boba AI。今天想聊什麼？')">
+
+                            <i class="fa-solid fa-volume-high"></i>
+                            Listen
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        `;
 
 
-    chatInput.style.height =
-        Math.min(
-            chatInput.scrollHeight,
-            120
-        ) + "px";
+        setStatus("Ready", false);
 
-}
+        messageInput.value = "";
+
+        autoResize();
+
+        messageInput.focus();
+
+    }
 
 
-/* =========================================================
-   ENTER TO SEND
-   ---------------------------------------
-   Shift + Enter = new line
-========================================================= */
+    /* =========================================
+       TEXTAREA AUTO RESIZE
+    ========================================= */
 
-chatInput.addEventListener(
-    "keydown",
-    function(event) {
+    function autoResize() {
+
+        messageInput.style.height = "auto";
+
+        messageInput.style.height =
+            Math.min(messageInput.scrollHeight, 120) + "px";
+
+    }
+
+
+    /* =========================================
+       KEYBOARD
+    ========================================= */
+
+    messageInput.addEventListener("keydown", function(event) {
 
         if (
             event.key === "Enter" &&
@@ -1651,90 +1264,30 @@ chatInput.addEventListener(
 
         }
 
-    }
-);
+    });
 
 
-chatInput.addEventListener(
-    "input",
-    autoResizeTextarea
-);
+    messageInput.addEventListener(
+        "input",
+        autoResize
+    );
 
 
-/* =========================================================
-   NEW CHAT
-========================================================= */
+    /* =========================================
+       INITIALIZE
+    ========================================= */
 
-function startNewChat() {
+    setupSpeechRecognition();
 
-    speechSynthesis.cancel();
+    autoResize();
 
-
-    if (
-        recognition &&
-        isRecording
-    ) {
-
-        recognition.stop();
-
-    }
+    setStatus("Ready", false);
 
 
-    chatHistory = [];
-
-
-    chatArea
-        .querySelectorAll(
-            ".message-row.user, .message-row.ai:not(#typing-indicator)"
-        )
-        .forEach(
-            function(element) {
-
-                element.remove();
-
-            }
-        );
-
-
-    welcomeMessage.style.display =
-        "block";
-
-
-    chatInput.value =
-        "";
-
-
-    autoResizeTextarea();
-
-
-    inputHint.textContent =
-        "Tap the microphone to practice speaking.";
-
-
-    scrollChatToBottom();
-
-}
-
-
-/* =========================================================
-   INITIALIZE
-========================================================= */
-
-autoResizeTextarea();
-
+    /* Load sidebar */
 </script>
-
-
-<!-- =========================================
-     SIDEBAR SCRIPT
-     -----------------------------------------
-     Change this filename only if your
-     existing sidebar uses another script.
-========================================= -->
 
 <script src="script.js"></script>
 
-
 </body>
-
 </html>
