@@ -2479,6 +2479,172 @@ answer: ["銀行", "在", "郵局", "的", "哪裡"]
             answer: "先往左走，再直走，然後右轉"
         }
     ]
+},
+
+// ========================================================
+// LESSON 25
+// ========================================================
+25: {
+
+    grammar: [
+
+        {
+            id: "25-1",
+            name: "Basic Distance Pattern",
+            category: "distance-statement",
+            explanation: "離 is used to express the distance between two places or things. A is the place or person being talked about, and B is the reference point. 很遠 means 'very far' and 很近 means 'very close.'",
+            examples: [
+                {
+                    Hanzi: "我家離淡水很遠。",
+                    Pinyin: "Wǒ jiā lí Dànshuǐ hěn yuǎn.",
+                    English: "My home is far from Tamsui."
+                }
+            ]
+        },
+
+        {
+            id: "25-2",
+            name: "Asking About Distance",
+            category: "distance-question",
+            explanation: "Use A + 離 + B + 遠嗎？ to ask whether one place is far from another. 很近嗎？ can be used the same way to ask whether something is close.",
+            examples: [
+                {
+                    Hanzi: "你家離淡水遠嗎？",
+                    Pinyin: "Nǐ jiā lí Dànshuǐ yuǎn ma?",
+                    English: "Is your home far from Tamsui?"
+                }
+            ]
+        },
+
+        {
+            id: "25-3",
+            name: "Giving an Exact Distance",
+            category: "distance-exact",
+            explanation: "Use A + 離 + B + 有 + Number + 公里 to give a specific distance. 大概 can be added before the number when the distance is approximate.",
+            examples: [
+                {
+                    Hanzi: "我家離淡水大概三十公里。",
+                    Pinyin: "Wǒ jiā lí Dànshuǐ dàgài sānshí gōnglǐ.",
+                    English: "My home is about 30 kilometers from Tamsui."
+                }
+            ]
+        },
+
+        {
+            id: "25-4",
+            name: "Distance vs. Travel Time",
+            category: "distance-time",
+            explanation: "離 describes physical distance, while 要 + time describes how long a trip takes. These two structures can be combined in one sentence.",
+            examples: [
+                {
+                    Hanzi: "我家離淡水很遠，坐車要兩個小時。",
+                    Pinyin: "Wǒ jiā lí Dànshuǐ hěn yuǎn, zuò chē yào liǎng ge xiǎoshí.",
+                    English: "My home is far from Tamsui, and it takes two hours by car."
+                }
+            ]
+        },
+
+        {
+            id: "25-5",
+            name: "Talking About a Nearby Place",
+            category: "distance-near",
+            explanation: "Use A + 離 + B + 很近 when two places are close to each other. A walking time can be added to make the sentence more specific.",
+            examples: [
+                {
+                    Hanzi: "我阿姨家離這家餐廳很近。",
+                    Pinyin: "Wǒ āyí jiā lí zhè jiā cāntīng hěn jìn.",
+                    English: "My aunt's home is close to this restaurant."
+                }
+            ]
+        },
+
+        {
+            id: "25-6",
+            name: "Walking Time",
+            category: "time-duration",
+            explanation: "When describing walking time, use 走路 followed by the number of minutes.",
+            examples: [
+                {
+                    Hanzi: "走路五分鐘就到了。",
+                    Pinyin: "Zǒulù wǔ fēnzhōng jiù dào le.",
+                    English: "It only takes five minutes on foot."
+                }
+            ]
+        }
+
+    ],
+
+    vocabulary: [
+        { word: "離", pinyin: "lí", meaning: "to be away from" },
+        { word: "遠", pinyin: "yuǎn", meaning: "far" },
+        { word: "近", pinyin: "jìn", meaning: "near / close" },
+        { word: "小時", pinyin: "xiǎoshí", meaning: "hour" },
+        { word: "其實", pinyin: "qíshí", meaning: "actually" },
+        { word: "大概", pinyin: "dàgài", meaning: "approximately / about" },
+        { word: "公里", pinyin: "gōnglǐ", meaning: "kilometer" },
+        { word: "走路", pinyin: "zǒulù", meaning: "walk / on foot" },
+        { word: "分鐘", pinyin: "fēnzhōng", meaning: "minute" },
+        { word: "原來", pinyin: "yuánlái", meaning: "so that's how it is / I see" },
+        { word: "這樣", pinyin: "zhèyàng", meaning: "like this / this way" },
+        { word: "為了", pinyin: "wèile", meaning: "for / in order to" },
+        { word: "久", pinyin: "jiǔ", meaning: "long (time)" },
+        { word: "重要", pinyin: "zhòngyào", meaning: "important" }
+    ],
+
+    reviewQuestions: [
+
+        {
+            meaning: "This restaurant is close to Tamsui.",
+            answer: ["這家餐廳", "離", "淡水", "很近"]
+        },
+
+        {
+            meaning: "Is this restaurant far from your home?",
+            answer: ["這家餐廳", "離", "你家", "遠", "嗎"]
+        },
+
+        {
+            meaning: "My home is about ten kilometers from this restaurant.",
+            answer: ["我家", "離", "這家餐廳", "大概", "十", "公里"]
+        },
+
+        {
+            meaning: "My aunt's home is far from Tamsui; it takes three hours by car.",
+            answer: ["我阿姨家", "離", "淡水", "很遠", "坐車", "要", "三個", "小時"]
+        },
+
+        {
+            meaning: "My aunt's home is close to this restaurant.",
+            answer: ["我阿姨家", "離", "這家餐廳", "很近"]
+        },
+
+        {
+            meaning: "It only takes ten minutes on foot.",
+            answer: ["走路", "十", "分鐘", "就到了"]
+        },
+
+        {
+            meaning: "Actually, this restaurant is also very far.",
+            answer: ["其實", "這家餐廳", "也", "很遠"]
+        },
+
+        {
+            meaning: "Oh, I see. So that's how it is.",
+            answer: ["原來", "是", "這樣"]
+        },
+
+        {
+            meaning: "He rode in the car for a long time for his birthday.",
+            answer: ["他", "為了", "他的生日", "坐了", "很久", "的車"]
+        },
+
+        {
+            meaning: "The most important thing is saying happy birthday.",
+            answer: ["生日快樂", "最", "重要"]
+        }
+
+    ]
+
 }
 
 };
