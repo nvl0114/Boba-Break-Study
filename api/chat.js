@@ -280,12 +280,11 @@ Think of it as studying Mandarin while taking a small boba break.
                     contents: contents,
 
                     generationConfig: {
-
-                        temperature: 0.75,
-
-                        maxOutputTokens: 350
-
-                    }
+    maxOutputTokens: 800,
+    thinkingConfig: {
+        thinkingLevel: "low"
+    }
+}
 
                 })
 
