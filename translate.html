@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Boba Break Study - AI Translator</title>
+
+    <link
+        rel="icon"
+        href="/favicon.png"
+    >
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <style>
+
+        /* =========================================
+           TRANSLATOR PAGE
+        ========================================= */
+
+        .translator-page {
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .translator-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .translator-header h1 {
+            margin-bottom: 8px;
+        }
+
+        .translator-header p {
+            color: #6f6258;
+            margin: 0;
+        }
+
+        /* =========================================
+           LANGUAGE BAR
+        ========================================= */
+
+        .language-bar {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+
+        .language-box {
+            flex: 1;
+        }
+
+        .language-box label {
+            display: block;
+            font-weight: 700;
+            margin-bottom: 7px;
+            color: #5c4033;
+        }
+
+        .language-select {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #d8c3af;
+            border-radius: 12px;
+            background: #fff;
+            color: #5c4033;
+            font-size: 15px;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .language-select:focus {
+            border-color: #b8865c;
+        }
+
+        .swap-button {
+            width: 45px;
+            height: 45px;
+            border: none;
+            border-radius: 50%;
+            background: #b8865c;
+            color: white;
+            cursor: pointer;
+            font-size: 17px;
+            margin-top: 25px;
+            transition: 0.2s;
+        }
+
+        .swap-button:hover {
+            transform: rotate(180deg);
+        }
+
+        /* =========================================
+           TRANSLATION CARDS
+        ========================================= */
+
+        .translation-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        .translation-card {
+            background: #fff;
+            border-radius: 18px;
+            border: 1px solid #ead9c8;
+            padding: 18px;
+            box-shadow: 0 4px 15px rgba(92, 64, 51, 0.06);
+        }
+
+        .card-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .card-title {
+            font-weight: 700;
+            color: #5c4033;
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 6px;
+        }
+
+        .small-button {
+            width: 34px;
+            height: 34px;
+            border: none;
+            border-radius: 9px;
+            background: #f5eadf;
+            color: #5c4033;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .small-button:hover {
+            background: #ead6c3;
+        }
+
+        .translation-textarea {
+            width: 100%;
+            min-height: 230px;
+            resize: vertical;
+            border: none;
+            outline: none;
+            background: transparent;
+            color: #40342d;
+            font-size: 17px;
+            line-height: 1.7;
+            font-family: inherit;
+            box-sizing: border-box;
+        }
+
+        .translation-textarea::placeholder {
+            color: #b7aaa0;
+        }
+
+        .translation-result {
+            min-height: 230px;
+            white-space: pre-wrap;
+            word-break: break-word;
+            color: #40342d;
+            font-size: 17px;
+            line-height: 1.7;
+        }
+
+        .translation-result.empty {
+            color: #b7aaa0;
+        }
+
+        /* =========================================
+           BUTTONS
+        ========================================= */
+
+        .translate-button-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .translate-button {
+            border: none;
+            border-radius: 13px;
+            background: #b8865c;
+            color: white;
+            padding: 13px 28px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .translate-button:hover {
+            transform: translateY(-1px);
+            opacity: 0.95;
+        }
+
+        .translate-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .translate-button i {
+            margin-right: 7px;
+        }
+
+        /* =========================================
+           STATUS
+        ========================================= */
+
+        .translator-status {
+            text-align: center;
+            min-height: 24px;
+            margin: 5px 0 15px;
+            color: #806e61;
+            font-size: 14px;
+        }
+
+        .translator-status.error {
+            color: #a34b3f;
+        }
+
+        /* =========================================
+           INFO BOX
+        ========================================= */
+
+        .translator-info {
+            background: #fffaf4;
+            border: 1px solid #ead9c8;
+            border-radius: 15px;
+            padding: 16px 18px;
+            margin-top: 20px;
+            color: #6f6258;
+            line-height: 1.6;
+        }
+
+        .translator-info strong {
+            color: #5c4033;
+        }
+
+        /* =========================================
+           MOBILE
+        ========================================= */
+
+        @media (max-width: 700px) {
+
+            .translator-page {
+                padding: 14px;
+            }
+
+            .language-bar {
+                gap: 7px;
+            }
+
+            .swap-button {
+                width: 40px;
+                height: 40px;
+                font-size: 15px;
+            }
+
+            .translation-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .translation-card {
+                padding: 15px;
+            }
+
+            .translation-textarea,
+            .translation-result {
+                min-height: 180px;
+            }
+
+            .translator-header h1 {
+                font-size: 25px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================================
+         SIDEBAR
+    ========================================= -->
+
+    <div id="sidebar-container"></div>
+
+
+    <!-- =========================================
+         MAIN
+    ========================================= -->
+
+    <main>
+
+        <div class="translator-page">
+
+
+            <!-- HEADER -->
+
+            <header class="translator-header">
+
+                <h1>🌏 Boba AI Translator</h1>
+
+                <p>
+                    Translate naturally between languages.
+                </p>
+
+            </header>
+
+
+            <!-- =====================================
+                 LANGUAGE SELECTION
+            ====================================== -->
+
+            <div class="language-bar">
+
+
+                <div class="language-box">
+
+                    <label for="sourceLanguage">
+                        From
+                    </label>
+
+                    <select
+                        id="sourceLanguage"
+                        class="language-select"
+                    >
+
+                        <option value="Indonesian">
+                            🇮🇩 Indonesian
+                        </option>
+
+                        <option value="Traditional Chinese (Taiwan)">
+                            🇹🇼 Traditional Chinese (Taiwan)
+                        </option>
+
+                        <option value="Vietnamese">
+                            🇻🇳 Vietnamese
+                        </option>
+
+                        <option value="Tagalog">
+                            🇵🇭 Tagalog
+                        </option>
+
+                        <option value="Thai">
+                            🇹🇭 Thai
+                        </option>
+
+                        <option value="English">
+                            🇬🇧 English
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="swap-button"
+                    id="swapButton"
+                    title="Swap languages"
+                    aria-label="Swap languages"
+                >
+
+                    <i class="fa-solid fa-right-left"></i>
+
+                </button>
+
+
+                <div class="language-box">
+
+                    <label for="targetLanguage">
+                        To
+                    </label>
+
+                    <select
+                        id="targetLanguage"
+                        class="language-select"
+                    >
+
+                        <option value="Traditional Chinese (Taiwan)">
+                            🇹🇼 Traditional Chinese (Taiwan)
+                        </option>
+
+                        <option value="Indonesian">
+                            🇮🇩 Indonesian
+                        </option>
+
+                        <option value="Vietnamese">
+                            🇻🇳 Vietnamese
+                        </option>
+
+                        <option value="Tagalog">
+                            🇵🇭 Tagalog
+                        </option>
+
+                        <option value="Thai">
+                            🇹🇭 Thai
+                        </option>
+
+                        <option value="English">
+                            🇬🇧 English
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <!-- =====================================
+                 TRANSLATION AREA
+            ====================================== -->
+
+            <div class="translation-grid">
+
+
+                <!-- SOURCE -->
+
+                <section class="translation-card">
+
+                    <div class="card-top">
+
+                        <div
+                            class="card-title"
+                            id="sourceCardTitle"
+                        >
+                            Indonesian
+                        </div>
+
+                        <div class="card-actions">
+
+                            <button
+                                type="button"
+                                class="small-button"
+                                id="clearButton"
+                                title="Clear"
+                                aria-label="Clear"
+                            >
+
+                                <i class="fa-solid fa-xmark"></i>
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <textarea
+                        id="inputText"
+                        class="translation-textarea"
+                        placeholder="Type or paste your text here..."
+                        maxlength="8000"
+                    ></textarea>
+
+                </section>
+
+
+                <!-- RESULT -->
+
+                <section class="translation-card">
+
+                    <div class="card-top">
+
+                        <div
+                            class="card-title"
+                            id="targetCardTitle"
+                        >
+                            Traditional Chinese (Taiwan)
+                        </div>
+
+                        <div class="card-actions">
+
+                            <button
+                                type="button"
+                                class="small-button"
+                                id="speakButton"
+                                title="Listen"
+                                aria-label="Listen"
+                            >
+
+                                <i class="fa-solid fa-volume-high"></i>
+
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="small-button"
+                                id="copyButton"
+                                title="Copy"
+                                aria-label="Copy"
+                            >
+
+                                <i class="fa-regular fa-copy"></i>
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        id="translationResult"
+                        class="translation-result empty"
+                    >
+                        Your translation will appear here.
+                    </div>
+
+                </section>
+
+            </div>
+
+
+            <!-- =====================================
+                 TRANSLATE BUTTON
+            ====================================== -->
+
+            <div class="translate-button-container">
+
+                <button
+                    type="button"
+                    id="translateButton"
+                    class="translate-button"
+                >
+
+                    <i class="fa-solid fa-language"></i>
+
+                    Translate
+
+                </button>
+
+            </div>
+
+
+            <!-- STATUS -->
+
+            <div
+                id="translatorStatus"
+                class="translator-status"
+            ></div>
+
+
+            <!-- INFO -->
+
+            <div class="translator-info">
+
+                <strong>🧋 Boba Break Tip</strong><br>
+
+                This translator focuses on natural everyday language,
+                especially Taiwan Mandarin. It tries to preserve the
+                original meaning and tone instead of translating
+                word-for-word.
+
+            </div>
+
+
+        </div>
+
+    </main>
+
+
+    <!-- =========================================
+         SIDEBAR SCRIPT
+    ========================================= -->
+
+    <script src="script.js"></script>
+
+
+    <!-- =========================================
+         TRANSLATOR JAVASCRIPT
+    ========================================= -->
+
+    <script>
+
+        const API_URL =
+            "https://boba-break-study.vercel.app/api/translate";
+
+
+        const sourceLanguage =
+            document.getElementById("sourceLanguage");
+
+        const targetLanguage =
+            document.getElementById("targetLanguage");
+
+        const sourceCardTitle =
+            document.getElementById("sourceCardTitle");
+
+        const targetCardTitle =
+            document.getElementById("targetCardTitle");
+
+        const inputText =
+            document.getElementById("inputText");
+
+        const translationResult =
+            document.getElementById("translationResult");
+
+        const translateButton =
+            document.getElementById("translateButton");
+
+        const swapButton =
+            document.getElementById("swapButton");
+
+        const clearButton =
+            document.getElementById("clearButton");
+
+        const copyButton =
+            document.getElementById("copyButton");
+
+        const speakButton =
+            document.getElementById("speakButton");
+
+        const translatorStatus =
+            document.getElementById("translatorStatus");
+
+
+        /* =========================================
+           LANGUAGE DISPLAY
+        ========================================= */
+
+        function updateLanguageLabels() {
+
+            sourceCardTitle.textContent =
+                sourceLanguage.value;
+
+            targetCardTitle.textContent =
+                targetLanguage.value;
+
+        }
+
+
+        sourceLanguage.addEventListener(
+            "change",
+            updateLanguageLabels
+        );
+
+
+        targetLanguage.addEventListener(
+            "change",
+            updateLanguageLabels
+        );
+
+
+        /* =========================================
+           SWAP
+        ========================================= */
+
+        swapButton.addEventListener(
+            "click",
+            function () {
+
+                const oldSource =
+                    sourceLanguage.value;
+
+                const oldTarget =
+                    targetLanguage.value;
+
+                sourceLanguage.value =
+                    oldTarget;
+
+                targetLanguage.value =
+                    oldSource;
+
+                updateLanguageLabels();
+
+                if (
+                    translationResult.textContent.trim() &&
+                    !translationResult.classList.contains("empty")
+                ) {
+
+                    const oldInput =
+                        inputText.value;
+
+                    inputText.value =
+                        translationResult.textContent;
+
+                    translationResult.textContent =
+                        oldInput;
+
+                }
+
+            }
+        );
+
+
+        /* =========================================
+           TRANSLATE
+        ========================================= */
+
+        async function translateText() {
+
+            const text =
+                inputText.value.trim();
+
+            if (!text) {
+
+                translatorStatus.textContent =
+                    "Please enter some text first.";
+
+                translatorStatus.classList.add(
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            if (
+                sourceLanguage.value ===
+                targetLanguage.value
+            ) {
+
+                translatorStatus.textContent =
+                    "Please choose two different languages.";
+
+                translatorStatus.classList.add(
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            translateButton.disabled = true;
+
+            translatorStatus.classList.remove(
+                "error"
+            );
+
+            translatorStatus.textContent =
+                "Translating... 🧋";
+
+
+            translationResult.classList.add(
+                "empty"
+            );
+
+            translationResult.textContent =
+                "Thinking...";
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        API_URL,
+                        {
+
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json"
+                            },
+
+                            body: JSON.stringify({
+
+                                text: text,
+
+                                source:
+                                    sourceLanguage.value,
+
+                                target:
+                                    targetLanguage.value
+
+                            })
+
+                        }
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        data.error ||
+                        "Translation failed."
+                    );
+
+                }
+
+
+                if (
+                    !data.translation ||
+                    typeof data.translation !== "string"
+                ) {
+
+                    throw new Error(
+                        "The AI returned an empty translation."
+                    );
+
+                }
+
+
+                translationResult.classList.remove(
+                    "empty"
+                );
+
+                translationResult.textContent =
+                    data.translation.trim();
+
+
+                translatorStatus.textContent =
+                    "Translation complete ✨";
+
+
+            } catch (error) {
+
+                console.error(
+                    "Translation error:",
+                    error
+                );
+
+
+                translationResult.classList.add(
+                    "empty"
+                );
+
+                translationResult.textContent =
+                    "Translation failed.";
+
+
+                translatorStatus.classList.add(
+                    "error"
+                );
+
+                translatorStatus.textContent =
+                    error.message ||
+                    "Unable to connect to the translation server.";
+
+            } finally {
+
+                translateButton.disabled = false;
+
+            }
+
+        }
+
+
+        translateButton.addEventListener(
+            "click",
+            translateText
+        );
+
+
+        /* =========================================
+           ENTER KEY
+        ========================================= */
+
+        inputText.addEventListener(
+            "keydown",
+            function (event) {
+
+                if (
+                    event.key === "Enter" &&
+                    !event.shiftKey
+                ) {
+
+                    event.preventDefault();
+
+                    translateText();
+
+                }
+
+            }
+        );
+
+
+        /* =========================================
+           CLEAR
+        ========================================= */
+
+        clearButton.addEventListener(
+            "click",
+            function () {
+
+                inputText.value = "";
+
+                translationResult.textContent =
+                    "Your translation will appear here.";
+
+                translationResult.classList.add(
+                    "empty"
+                );
+
+                translatorStatus.textContent = "";
+
+                inputText.focus();
+
+            }
+        );
+
+
+        /* =========================================
+           COPY
+        ========================================= */
+
+        copyButton.addEventListener(
+            "click",
+            async function () {
+
+                const text =
+                    translationResult.textContent.trim();
+
+
+                if (
+                    !text ||
+                    translationResult.classList.contains("empty")
+                ) {
+
+                    return;
+
+                }
+
+
+                try {
+
+                    await navigator.clipboard.writeText(
+                        text
+                    );
+
+
+                    translatorStatus.classList.remove(
+                        "error"
+                    );
+
+                    translatorStatus.textContent =
+                        "Copied! 📋";
+
+
+                } catch (error) {
+
+                    translatorStatus.classList.add(
+                        "error"
+                    );
+
+                    translatorStatus.textContent =
+                        "Could not copy the translation.";
+
+                }
+
+            }
+        );
+
+
+        /* =========================================
+           TEXT TO SPEECH
+        ========================================= */
+
+        function getSpeechLanguage(
+            language
+        ) {
+
+            switch (language) {
+
+                case "Traditional Chinese (Taiwan)":
+                    return "zh-TW";
+
+                case "Indonesian":
+                    return "id-ID";
+
+                case "Vietnamese":
+                    return "vi-VN";
+
+                case "Tagalog":
+                    return "fil-PH";
+
+                case "Thai":
+                    return "th-TH";
+
+                case "English":
+                    return "en-US";
+
+                default:
+                    return "en-US";
+
+            }
+
+        }
+
+
+        function speakTranslation() {
+
+            const text =
+                translationResult.textContent.trim();
+
+
+            if (
+                !text ||
+                translationResult.classList.contains("empty")
+            ) {
+
+                return;
+
+            }
+
+
+            if (
+                !("speechSynthesis" in window)
+            ) {
+
+                translatorStatus.classList.add(
+                    "error"
+                );
+
+                translatorStatus.textContent =
+                    "Text-to-speech is not supported by this browser.";
+
+                return;
+
+            }
+
+
+            window.speechSynthesis.cancel();
+
+
+            const utterance =
+                new SpeechSynthesisUtterance(text);
+
+
+            utterance.lang =
+                getSpeechLanguage(
+                    targetLanguage.value
+                );
+
+            utterance.rate = 0.85;
+
+
+            const voices =
+                window.speechSynthesis.getVoices();
+
+
+            const matchingVoice =
+                voices.find(
+                    voice =>
+                        voice.lang.toLowerCase() ===
+                        utterance.lang.toLowerCase()
+                );
+
+
+            if (matchingVoice) {
+
+                utterance.voice =
+                    matchingVoice;
+
+            }
+
+
+            window.speechSynthesis.speak(
+                utterance
+            );
+
+        }
+
+
+        speakButton.addEventListener(
+            "click",
+            speakTranslation
+        );
+
+
+        /* =========================================
+           INITIALIZE
+        ========================================= */
+
+        updateLanguageLabels();
+
+    </script>
+
+
+</body>
+
+</html>
