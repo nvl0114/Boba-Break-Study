@@ -227,7 +227,7 @@ Think of it as studying Mandarin while taking a small boba break.
         ========================================= */
 
         const model =
-            "gemini-3.7-flash";
+            "gemini-2.5-flash";
 
 
         const endpoint =
