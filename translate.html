@@ -30,6 +30,32 @@
     <style>
 
         /* =========================================
+           PAGE LAYOUT (sidebar beside content)
+        ========================================= */
+
+        body {
+            display: flex;
+            align-items: flex-start;
+        }
+
+        #sidebar-container {
+            flex-shrink: 0;
+        }
+
+        main {
+            flex: 1;
+            min-width: 0;
+        }
+
+        @media (max-width: 900px) {
+
+            body {
+                display: block;
+            }
+
+        }
+
+        /* =========================================
            TRANSLATOR PAGE
         ========================================= */
 
@@ -51,6 +77,47 @@
         .translator-header p {
             color: #6f6258;
             margin: 0;
+        }
+
+        /* =========================================
+           INTRO BANNER
+        ========================================= */
+
+        .intro-banner {
+            background: linear-gradient(135deg, #fff8ef, #fbecdc);
+            border: 1px solid #ead9c8;
+            border-radius: 16px;
+            padding: 18px 22px;
+            margin: 16px auto 0;
+            max-width: 620px;
+            text-align: left;
+            box-shadow: 0 4px 15px rgba(92, 64, 51, 0.07);
+        }
+
+        .intro-banner .en-line {
+            display: block;
+            color: #5c4033;
+            font-size: 15px;
+            line-height: 1.65;
+        }
+
+        .intro-banner .zh-line {
+            display: block;
+            color: #8a7361;
+            font-size: 14px;
+            font-style: italic;
+            line-height: 1.75;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px dashed #ead9c8;
+        }
+
+        @media (max-width: 700px) {
+
+            .intro-banner {
+                padding: 15px 17px;
+            }
+
         }
 
         /* =========================================
@@ -331,6 +398,25 @@
                 <p>
                     Translate naturally between languages.
                 </p>
+
+                <div class="intro-banner">
+
+                    <span class="en-line">
+                        🧋 Ever tried chatting with friends abroad through
+                        a translation app, only to have it come out
+                        completely wrong and turn into an awkward
+                        misunderstanding? 😅 With a bit of AI help, we
+                        keep the conversation flowing naturally so your
+                        point actually gets across.
+                    </span>
+
+                    <span class="zh-line">
+                        你是不是也用過翻譯軟體跟國外朋友聊天，結果翻出來的意思整個歪掉，
+                        搞得雙方都尷尬又誤會?😅 有了AI的幫忙，我們讓溝通更順暢，
+                        你想表達的重點也能真正傳達出去。
+                    </span>
+
+                </div>
 
             </header>
 
