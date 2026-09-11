@@ -112,6 +112,33 @@
         }
 
         /* ================================
+           SERVER NOTICE
+        ================================= */
+
+        .server-notice {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            background: #fff3e0;
+            border: 1px solid #f0d9b5;
+            border-radius: 12px;
+
+            padding: 12px 16px;
+            margin-bottom: 16px;
+
+            font-size: 13px;
+            color: #8a5a2b;
+            line-height: 1.5;
+        }
+
+        .server-notice i {
+            font-size: 16px;
+            color: #d99a3d;
+            flex-shrink: 0;
+        }
+
+        /* ================================
            CHAT CARD
         ================================= */
 
@@ -139,6 +166,20 @@
             display: flex;
             margin-bottom: 17px;
             width: 100%;
+
+            animation: popIn 0.25s ease;
+        }
+
+        @keyframes popIn {
+            from {
+                opacity: 0;
+                transform: translateY(6px) scale(0.97);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
         }
 
         .message-row.ai {
@@ -162,18 +203,37 @@
         }
 
         .message.ai {
-            background: #ffffff;
-            border: 1px solid #e7e0db;
+            background: #fffaf3;
+            border: 1px solid #f0e2d0;
             color: #5c4033;
 
-            border-top-left-radius: 4px;
+            border-radius: 20px;
+            border-top-left-radius: 6px;
+
+            position: relative;
+            box-shadow: 0 3px 10px rgba(181, 131, 90, 0.12);
+        }
+
+        .message.ai::before {
+            content: "🧋";
+            position: absolute;
+            left: -14px;
+            bottom: -6px;
+            font-size: 18px;
         }
 
         .message.user {
-            background: #f3e5d8;
-            color: #5c4033;
+            background: #765437;
+            color: #fff8f0;
 
-            border-top-right-radius: 4px;
+            border-radius: 20px;
+            border-top-right-radius: 6px;
+
+            box-shadow: 0 3px 10px rgba(118, 84, 55, 0.2);
+        }
+
+        .message.user .message-label {
+            color: #f3e5d8;
         }
 
         .message-label {
@@ -541,6 +601,17 @@
                 <span id="statusText">Ready</span>
             </div>
 
+        </div>
+
+
+        <!-- Server Notice -->
+        <div class="server-notice">
+            <i class="fa-solid fa-mug-hot"></i>
+            <span>
+                Boba AI sometimes gets a lot of visitors at once 🧋 —
+                if a message fails to send, the AI server is just busy.
+                Please wait a moment and try again!
+            </span>
         </div>
 
 
