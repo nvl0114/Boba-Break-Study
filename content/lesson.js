@@ -863,7 +863,9 @@ const allLessonsData = {
         }
     ],
     vocabulary: [ 
-        { hanzi: "星期", pinyin: "xīngqí", meaning: "week; day of the week", category: "Time" }, 
+   { hanzi: "年", pinyin: "nián", meaning: "year", category: "Time" },
+{ hanzi: "日", pinyin: "rì", meaning: "day; date", category: "Time" },     
+{ hanzi: "星期", pinyin: "xīngqí", meaning: "week; day of the week", category: "Time" }, 
         { hanzi: "禮拜", pinyin: "lǐbài", meaning: "week; day of the week", category: "Time" }, 
         { hanzi: "週末", pinyin: "zhōumò", meaning: "weekend", category: "Time" }, 
         { hanzi: "週日", pinyin: "zhōurì", meaning: "Sunday", category: "Time" }, 
