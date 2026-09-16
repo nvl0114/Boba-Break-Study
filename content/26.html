@@ -880,7 +880,7 @@ p {
 <div class="character-content">
 <div class="character-name">小美</div>
 <div class="dialogue-hanzi">為什麼今天晚上<span class="hz">才<span class="py">cái</span></span>寫呢？昨天沒時間嗎？</div>
-<div class="dialogue-meaning">Why are you only writing it tonight? Didn't you have time yesterday?</div>
+<div class="dialogue-meaning">Why did you only get around to writing it tonight? Didn't you have time yesterday?</div>
 <button class="sound-btn dialogue-sound" onclick="playAudio('為什麼今天晚上才寫呢？昨天沒時間嗎？')">🔊</button>
 </div>
 </div>
@@ -974,16 +974,16 @@ p {
 
 <!-- SLIDE 1 -->
 <div class="grammar-slide active-slide" id="slide-1">
-<h3>1. 才 (cái) — "Not Until / Only Then"</h3>
+<h3>1. 才 (cái) — "Only Then / Later Than Expected"</h3>
 <div class="pattern-display"><div class="pattern-code">Time + 才 + Verb</div></div>
 <div class="grammar-explanation">
-<p><strong>才</strong> shows that something happens later than expected, or only under a certain condition — like saying "not until then."</p>
-<p>In the conversation: <strong>為什麼今天晚上才寫呢？</strong> (Why did you only write it tonight?)</p>
+<p><strong>才</strong> indicates that an action happens later than expected, or only after certain conditions are met — highlighting a delayed or belated occurrence.</p>
+<p>In the conversation: <strong>為什麼今天晚上才寫呢？</strong> (Why did you only get around to writing it tonight?)</p>
 </div>
 <div class="example-sentence">
 <div class="example-hanzi">我十點才到家。</div>
 <div class="example-pinyin">Wǒ shí diǎn cái dào jiā.</div>
-<div class="example-meaning">I didn't get home until 10 o'clock.</div>
+<div class="example-meaning">I didn't get home until 10 o'clock (later than usual).</div>
 <button class="sound-btn" onclick="playAudio('我十點才到家。')">🔊</button>
 </div>
 </div>
@@ -1006,10 +1006,10 @@ p {
 
 <!-- SLIDE 3 -->
 <div class="grammar-slide" id="slide-3">
-<h3>3. Verb + 著 (zháo) — Successfully Achieving a Result</h3>
-<div class="pattern-display"><div class="pattern-code">Verb + 著</div></div>
+<h3>3. Verb + 著 (zháo) — Resultative Complement of Success</h3>
+<div class="pattern-display"><div class="pattern-code">Verb + 著 (zháo)</div></div>
 <div class="grammar-explanation">
-<p><strong>著 (zháo)</strong> attached after certain verbs shows that the action successfully reached its result. <strong>睡著</strong> means "to fall asleep" (successfully drift into sleep), not just "to sleep."</p>
+<p><strong>著 (zháo)</strong> is attached after specific action verbs as a resultative complement to indicate the successful realization or attainment of an action (e.g., 睡<strong>著</strong> meaning to successfully drift into sleep, or 找<strong>zhǎo</strong> to successfully find something).</p>
 <p>In the conversation: <strong>結果後來睡著了。</strong> (As a result, I fell asleep afterward.)</p>
 </div>
 <div class="example-sentence">
@@ -1025,7 +1025,7 @@ p {
 <h3>4. 不用 + Verb — "No Need To"</h3>
 <div class="pattern-display"><div class="pattern-code">Subject + 不用 + Verb</div></div>
 <div class="grammar-explanation">
-<p><strong>不用</strong> means "there's no need to" or "don't have to." It's softer than saying someone "can't" or "may not," and is often used to reassure someone.</p>
+<p><strong>不用</strong> means "there is no need to" or "don't have to." It offers a gentle, reassuring tone rather than a strict prohibition.</p>
 <p>In the conversation: <strong>你不用這麼緊張。</strong> (You don't need to be so nervous.)</p>
 </div>
 <div class="example-sentence">
@@ -1703,15 +1703,6 @@ function playCurrentWriting(){
    FINAL CHALLENGE
 ===================================================== */
 
-/*
-   Exactly 5 questions are defined directly in HTML.
-   Exactly 5 questions are retrieved from the master
-   review database.
-   The review pool is restricted to the specified
-   earlier material range.
-   No hard-coded fallback questions are used.
-*/
-
 const htmlFinalQuestions = [
     { meaning: "Hello? What are you doing?", answer: ["喂","你","在","做","什麼"] },
     { meaning: "Why haven't you slept yet?", answer: ["你","為什麼","還","沒","睡"] },
@@ -1774,11 +1765,6 @@ function getRandomReviewQuestions(){
     }
 
     let reviewPool = [];
-
-    /*
-       Only the earlier material range is searched.
-       Nothing is taken from the current lesson's material.
-    */
 
     for(let lessonNumber = 1; lessonNumber <= 25; lessonNumber++){
 
