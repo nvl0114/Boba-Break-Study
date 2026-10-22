@@ -5,104 +5,91 @@
 const allLessonsData = {
 
 // ========================================================
-// LESSON 1 — Introducing Yourself
+// LESSON 1 — Daily Greetings & Polite Expressions
 // ========================================================
 1: {
     grammar: [
         {
-            id: "greeting-nin-hao",
-            name: "您好 / 你好",
+            id: "greeting-ni-hao",
+            name: "你好 / 妳好",
             category: "Greeting",
-            explanation: "您好 is the polite way to say hello. 你好 is the general way, and 妳 is the written form of 你 for girls.",
-            examples: ["您好！", "你好！", "妳好！"]
+            explanation: "你好 is the general way to say hello. 妳 is the form of 你 used for girls, and 好 means good.",
+            examples: ["你好！", "妳好！"]
         },
         {
-            id: "xing-gui-xing",
-            name: "我姓 + Last Name / 您貴姓？",
-            category: "Asking & Stating a Last Name",
-            explanation: "To politely ask someone's last name, say 您貴姓？ The answer is 我姓 + last name. Use 貴姓 only for the other person, never for yourself.",
-            examples: ["請問您貴姓？", "我姓林。", "您姓什麼？"]
+            id: "greeting-nin-hao",
+            name: "您好 / 你們好",
+            category: "Formal & Group Greeting",
+            explanation: "您好 is the polite, formal way to say hello. To greet more than one person, add 們 to 你 to make 你們好, meaning \"hello, everyone.\"",
+            examples: ["您好！", "你們好！"]
         },
         {
-            id: "shenme",
-            name: "什麼",
-            category: "Question Word",
-            explanation: "In Mandarin, the question word stays in the same spot where the answer will go. Just replace the answer with 什麼.",
-            examples: ["您姓什麼？ — 我姓林。", "您叫什麼名字？ — 我叫林美鈴。"]
+            id: "apologizing",
+            name: "對不起 / 不好意思",
+            category: "Apologizing",
+            explanation: "對不起 means \"I'm sorry.\" 不好意思 can mean \"sorry\" or \"excuse me,\" and is very common in everyday Taiwan conversation.",
+            examples: ["對不起！", "不好意思！"]
         },
         {
-            id: "jiao-mingzi",
-            name: "我叫 + Full Name / 您叫什麼名字？",
-            category: "Asking & Stating a Name",
-            explanation: "To ask for someone's name, say 您叫什麼名字？ The answer is 我叫 + full name (last name first, then given name).",
-            examples: ["您叫什麼名字？", "我叫陳小美。", "我叫林美鈴。"]
+            id: "meiguanxi",
+            name: "沒關係",
+            category: "Replying to an Apology",
+            explanation: "沒關係 means \"it's okay\" or \"no problem.\" Use it to reply when someone apologizes to you.",
+            examples: ["對不起！ — 沒關係。", "不好意思！ — 沒關係。"]
         },
         {
-            id: "shi-ren-nationality",
-            name: "我是 + Country + 人",
-            category: "Nationality",
-            explanation: "Put 人 after a country name to say where someone is from. To ask, say 你是哪國人？ (哪 = which, 國 = country).",
-            examples: ["請問你是哪國人？", "我是台灣人。", "我是美國人。"]
+            id: "xiexie",
+            name: "謝謝",
+            category: "Thanking",
+            explanation: "謝謝 means \"thank you.\" It is the basic way to thank someone in any situation.",
+            examples: ["謝謝！"]
         },
         {
-            id: "particle-ne",
-            name: "你呢？",
-            category: "Question Particle",
-            explanation: "Add 呢 after a word to bounce the same question back to the other person, like \"How about you?\" in English.",
-            examples: ["我是台灣人。你呢？"]
+            id: "bukeqi-buhui",
+            name: "不客氣 / 不會",
+            category: "Replying to Thanks",
+            explanation: "In Taiwan, both 不客氣 and 不會 can be used to respond to 謝謝. 不客氣 is the standard expression, while 不會 is more casual and commonly used in everyday conversation in Taiwan.",
+            examples: ["謝謝！ — 不客氣。", "謝謝！ — 不會。"]
         },
         {
-            id: "nice-to-meet-you",
-            name: "(我)也很高興認識你",
-            category: "Common Phrase",
-            explanation: "很高興認識你 means \"Nice to meet you.\" Add 也 (also) right before 很 to say \"Nice to meet you, too.\"",
-            examples: ["很高興認識你！", "我也很高興認識你！"]
+            id: "goodbye",
+            name: "再見 / 掰掰",
+            category: "Saying Goodbye",
+            explanation: "再見 is the more standard way to say goodbye, while 掰掰 is casual and commonly used in everyday conversations in Taiwan.",
+            examples: ["再見！", "掰掰！"]
         }
     ],
     vocabulary: [
-        { hanzi: "您", pinyin: "nín", meaning: "you (polite)", category: "Pronoun" },
         { hanzi: "你", pinyin: "nǐ", meaning: "you (general)", category: "Pronoun" },
         { hanzi: "妳", pinyin: "nǐ", meaning: "you (for girls)", category: "Pronoun" },
-        { hanzi: "我", pinyin: "wǒ", meaning: "I / me", category: "Pronoun" },
+        { hanzi: "您", pinyin: "nín", meaning: "you (formal)", category: "Pronoun" },
+        { hanzi: "你們", pinyin: "nǐmen", meaning: "you (plural) / you all", category: "Pronoun" },
         { hanzi: "好", pinyin: "hǎo", meaning: "good", category: "Adjective" },
-        { hanzi: "您好", pinyin: "nín hǎo", meaning: "hello (polite)", category: "Greeting" },
-        { hanzi: "請問", pinyin: "qǐngwèn", meaning: "may I ask", category: "Greeting" },
-        { hanzi: "貴姓", pinyin: "guìxìng", meaning: "your last name (polite)", category: "Self-Introduction" },
-        { hanzi: "姓", pinyin: "xìng", meaning: "last name / to be surnamed", category: "Verb" },
-        { hanzi: "叫", pinyin: "jiào", meaning: "to be called", category: "Verb" },
-        { hanzi: "什麼", pinyin: "shénme", meaning: "what", category: "Question Word" },
-        { hanzi: "名字", pinyin: "míngzi", meaning: "name", category: "Noun" },
-        { hanzi: "林", pinyin: "Lín", meaning: "Lin (a last name)", category: "Name" },
-        { hanzi: "陳", pinyin: "Chén", meaning: "Chen (a last name)", category: "Name" },
-        { hanzi: "小美", pinyin: "Xiǎoměi", meaning: "Xiaomei (a given name)", category: "Name" },
-        { hanzi: "美鈴", pinyin: "Měilíng", meaning: "Meiling (a given name)", category: "Name" },
-        { hanzi: "是", pinyin: "shì", meaning: "to be (am / is / are)", category: "Verb" },
-        { hanzi: "人", pinyin: "rén", meaning: "person", category: "People" },
-        { hanzi: "台灣", pinyin: "Táiwān", meaning: "Taiwan", category: "Place" },
-        { hanzi: "美國", pinyin: "Měiguó", meaning: "the United States", category: "Place" },
-        { hanzi: "哪", pinyin: "nǎ", meaning: "which", category: "Question Word" },
-        { hanzi: "國", pinyin: "guó", meaning: "country", category: "Place" },
-        { hanzi: "哪國人", pinyin: "nǎ guó rén", meaning: "which country (are you) from", category: "Question" },
-        { hanzi: "台灣人", pinyin: "Táiwān rén", meaning: "Taiwanese (person)", category: "People" },
-        { hanzi: "美國人", pinyin: "Měiguó rén", meaning: "American (person)", category: "People" },
-        { hanzi: "呢", pinyin: "ne", meaning: "question particle: \"and you?\"", category: "Grammar" },
-        { hanzi: "很", pinyin: "hěn", meaning: "very", category: "Adverb" },
-        { hanzi: "也", pinyin: "yě", meaning: "also / too", category: "Adverb" },
-        { hanzi: "高興", pinyin: "gāoxìng", meaning: "happy / glad", category: "Adjective" },
-        { hanzi: "認識", pinyin: "rènshi", meaning: "to know / to meet", category: "Verb" },
-        { hanzi: "很高興認識你", pinyin: "hěn gāoxìng rènshi nǐ", meaning: "nice to meet you", category: "Greeting" }
+        { hanzi: "你好", pinyin: "nǐ hǎo", meaning: "hello", category: "Greeting" },
+        { hanzi: "您好", pinyin: "nín hǎo", meaning: "hello (polite / formal)", category: "Greeting" },
+        { hanzi: "你們好", pinyin: "nǐmen hǎo", meaning: "hello, everyone", category: "Greeting" },
+        { hanzi: "對不起", pinyin: "duìbuqǐ", meaning: "I'm sorry", category: "Apology" },
+        { hanzi: "不好意思", pinyin: "bù hǎoyìsi", meaning: "excuse me / sorry", category: "Apology" },
+        { hanzi: "沒關係", pinyin: "méi guānxi", meaning: "it's okay / no problem", category: "Reply" },
+        { hanzi: "謝謝", pinyin: "xièxie", meaning: "thank you", category: "Thanks" },
+        { hanzi: "不客氣", pinyin: "bú kèqi", meaning: "you're welcome", category: "Reply" },
+        { hanzi: "不會", pinyin: "bú huì", meaning: "you're welcome (casual)", category: "Reply" },
+        { hanzi: "再見", pinyin: "zàijiàn", meaning: "goodbye", category: "Farewell" },
+        { hanzi: "掰掰", pinyin: "bāibāi", meaning: "bye-bye (casual)", category: "Farewell" }
     ],
     reviewQuestions: [
-        { meaning: "Hello (polite)", answer: ["您", "好"] },
-        { meaning: "May I ask…", answer: ["請", "問"] },
-        { meaning: "What is your last name? (polite)", answer: ["您", "貴姓"] },
-        { meaning: "My last name is Lin.", answer: ["我", "姓", "林"] },
-        { meaning: "What is your name? (to a girl)", answer: ["妳", "叫", "什麼", "名字"] },
-        { meaning: "My name is Chen Xiaomei.", answer: ["我", "叫", "陳", "小美"] },
-        { meaning: "What country are you from?", answer: ["你", "是", "哪國", "人"] },
-        { meaning: "I'm Taiwanese.", answer: ["我", "是", "台灣", "人"] },
-        { meaning: "I'm American.", answer: ["我", "是", "美國", "人"] },
-        { meaning: "My name is Lin Meiling.", answer: ["我", "叫", "林", "美鈴"] }
+        { meaning: "Hello.", answer: ["你", "好"] },
+        { meaning: "Hello. (to a girl)", answer: ["妳", "好"] },
+        { meaning: "Hello. (polite / formal)", answer: ["您", "好"] },
+        { meaning: "Hello, everyone.", answer: ["你們", "好"] },
+        { meaning: "I'm sorry.", answer: ["對不起"] },
+        { meaning: "Excuse me. / Sorry.", answer: ["不", "好意思"] },
+        { meaning: "It's okay. / No problem.", answer: ["沒", "關係"] },
+        { meaning: "Thank you.", answer: ["謝謝"] },
+        { meaning: "You're welcome.", answer: ["不", "客氣"] },
+        { meaning: "You're welcome. (casual)", answer: ["不", "會"] },
+        { meaning: "Goodbye.", answer: ["再", "見"] },
+        { meaning: "Bye-bye. (casual)", answer: ["掰", "掰"] }
     ]
 }
 
