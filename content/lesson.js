@@ -190,6 +190,64 @@ const allLessonsData = {
         { meaning: "I am American.", answer: ["我", "是", "美國人"] },
         { meaning: "Are you Taiwanese?", answer: ["你", "是", "台灣人", "嗎"] }
     ]
+},
+
+// ========================================================
+// LESSON 3 — Who Is He? 誰 & 的
+// ========================================================
+3: {
+    grammar: [
+        {
+            id: "shei-who",
+            name: "誰",
+            category: "Question Word: Who",
+            explanation: "誰 (shéi, also written shuí) means \"who\" or \"whom.\" Put 誰 in the spot where the answer would go. The word order does not change. It can be at the end (你是誰？) or at the beginning (誰是老師？). Don't add 嗎 to a question with 誰.",
+            examples: ["你是誰？", "他是誰？", "誰是老師？", "誰是你的朋友？"]
+        },
+        {
+            id: "ta-he-she",
+            name: "他 / 她",
+            category: "Pronoun: He / She",
+            explanation: "他 can mean \"he,\" \"she,\" \"his\" or \"her\" in a general way. 她 has the 女 (woman) radical and means \"she\" or \"her.\" Both are pronounced tā, so you can only see the difference when reading.",
+            examples: ["他是我的朋友。", "她是我同學。"]
+        },
+        {
+            id: "de-possessive",
+            name: "的",
+            category: "Possessive Particle",
+            explanation: "的 (de, neutral tone) connects the owner and the thing owned, like \"'s\" in English. Pattern: Owner + 的 + Thing. 的 can also end a sentence to mean \"mine / yours / his.\"",
+            examples: ["我的書", "你的手機", "老師的書", "這本書是我的。"]
+        },
+        {
+            id: "de-omit",
+            name: "Leaving out 的",
+            category: "Dropping 的",
+            explanation: "You can usually drop 的 when the thing belongs to you in a very close, natural way: family (我媽媽), close people (我朋友, 我同學), and groups or places you belong to (我們學校, 我家). Keep 的 for things you own (我的書, 我的手機) or when the owner is a noun (老師的手機). Adding 的 can also add emphasis, as in 她不是我的朋友. If unsure, use 的.",
+            examples: ["我媽媽", "我同學", "我們學校", "她不是我的朋友，她是我同學。"]
+        },
+        {
+            id: "shei-de-shei",
+            name: "你是我的誰？",
+            category: "Relationship Question",
+            explanation: "你是我的誰？ literally means \"you are my who?\" and asks \"Who are you to me?\" (what is our relationship).",
+            examples: ["你是我的誰？", "你是我的朋友。"]
+        }
+    ],
+    vocabulary: [
+        { hanzi: "他", pinyin: "tā", meaning: "he, she, his, her (in general)", category: "Pronoun" },
+        { hanzi: "她", pinyin: "tā", meaning: "she, her", category: "Pronoun" },
+        { hanzi: "誰", pinyin: "shéi (shuí)", meaning: "who, whom", category: "Question Word" },
+        { hanzi: "的", pinyin: "de", meaning: "'s / of (possessive marker)", category: "Particle" },
+        { hanzi: "朋友", pinyin: "péngyou", meaning: "friend", category: "Noun" },
+        { hanzi: "同學", pinyin: "tóngxué", meaning: "classmate", category: "Noun" }
+    ],
+    reviewQuestions: [
+        { meaning: "Who are you?", answer: ["你", "是", "誰"] },
+        { meaning: "You are my friend.", answer: ["你", "是", "我", "的", "朋友"] },
+        { meaning: "Who is she?", answer: ["她", "是", "誰"] },
+        { meaning: "He is my classmate.", answer: ["他", "是", "我", "的", "同學"] },
+        { meaning: "Who are you to me?", answer: ["你", "是", "我", "的", "誰"] }
+    ]
 }
 
 };
