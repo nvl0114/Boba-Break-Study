@@ -248,6 +248,75 @@ const allLessonsData = {
         { meaning: "He is my classmate.", answer: ["他", "是", "我", "的", "同學"] },
         { meaning: "Who are you to me?", answer: ["你", "是", "我", "的", "誰"] }
     ]
+},
+
+// ========================================================
+// LESSON 4 — Let's Count! Numbers 1–99
+// ========================================================
+4: {
+    grammar: [
+        {
+            id: "numbers-1-10",
+            name: "一 二 三 … 十",
+            category: "Numbers 1–10",
+            explanation: "These ten characters are the building blocks of every number up to 99. Learn them well, because everything else is made from them: 一 (1), 二 (2), 三 (3), 四 (4), 五 (5), 六 (6), 七 (7), 八 (8), 九 (9), 十 (10).",
+            examples: ["一、二、三", "四、五、六", "七、八、九、十"]
+        },
+        {
+            id: "numbers-11-19",
+            name: "十 + number",
+            category: "Numbers 11–19",
+            explanation: "To make 11–19, put 十 (shí) first, then add the number after it. Pattern: 十 + number. Think of 十 as the \"ten\" and the second character as the extra ones.",
+            examples: ["十一 (11)", "十五 (15)", "十九 (19)"]
+        },
+        {
+            id: "numbers-tens",
+            name: "number + 十",
+            category: "The Tens: 20–90",
+            explanation: "To make 20, 30, 40 and so on, put the number first, then 十 (shí). Pattern: number + 十. So 二十 means \"two tens\" = 20, 三十 means \"three tens\" = 30.",
+            examples: ["二十 (20)", "三十 (30)", "四十 (40)", "五十 (50)", "六十 (60)", "九十 (90)"]
+        },
+        {
+            id: "numbers-tens-ones",
+            name: "number + 十 + number",
+            category: "Tens + Ones: 21–99",
+            explanation: "For numbers like 21, 32 or 94, put the tens first, 十 in the middle, and the ones at the end. Pattern: number + 十 + number. For example, 52 = 五 (5) + 十 (10) + 二 (2) → 五十二.",
+            examples: ["二十一 (21)", "三十二 (32)", "五十二 (52)", "九十四 (94)"]
+        },
+        {
+            id: "numbers-reading-direction",
+            name: "Number → Hanzi, Hanzi → Number",
+            category: "Practice Tip",
+            explanation: "Practice both directions. To write a number in Mandarin, split it into tens and ones (64 → 六十 + 四 → 六十四). To read a number, find the 十 first, then read what is before it (tens) and after it (ones): 七十五 → 七十 + 五 → 75.",
+            examples: ["89 → 八十九", "六十四 → 64", "99 → 九十九"]
+        }
+    ],
+    vocabulary: [
+        { hanzi: "一", pinyin: "yī", meaning: "one (1)", category: "Number" },
+        { hanzi: "二", pinyin: "èr", meaning: "two (2)", category: "Number" },
+        { hanzi: "三", pinyin: "sān", meaning: "three (3)", category: "Number" },
+        { hanzi: "四", pinyin: "sì", meaning: "four (4)", category: "Number" },
+        { hanzi: "五", pinyin: "wǔ", meaning: "five (5)", category: "Number" },
+        { hanzi: "六", pinyin: "liù", meaning: "six (6)", category: "Number" },
+        { hanzi: "七", pinyin: "qī", meaning: "seven (7)", category: "Number" },
+        { hanzi: "八", pinyin: "bā", meaning: "eight (8)", category: "Number" },
+        { hanzi: "九", pinyin: "jiǔ", meaning: "nine (9)", category: "Number" },
+        { hanzi: "十", pinyin: "shí", meaning: "ten (10)", category: "Number" }
+    ],
+    reviewQuestions: [
+        { meaning: "Seven (7)", answer: ["七"] },
+        { meaning: "Fourteen (14)", answer: ["十", "四"] },
+        { meaning: "Eighteen (18)", answer: ["十", "八"] },
+        { meaning: "Thirty (30)", answer: ["三", "十"] },
+        { meaning: "Forty (40)", answer: ["四", "十"] },
+        { meaning: "Twenty-one (21)", answer: ["二", "十", "一"] },
+        { meaning: "Fifty-two (52)", answer: ["五", "十", "二"] },
+        { meaning: "Sixty-four (64)", answer: ["六", "十", "四"] },
+        { meaning: "Seventy-five (75)", answer: ["七", "十", "五"] },
+        { meaning: "Eighty-nine (89)", answer: ["八", "十", "九"] },
+        { meaning: "Ninety-four (94)", answer: ["九", "十", "四"] },
+        { meaning: "Ninety-nine (99)", answer: ["九", "十", "九"] }
+    ]
 }
 
 };
