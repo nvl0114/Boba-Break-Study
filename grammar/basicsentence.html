@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grammar Basic Sentence | Boba Break Study</title>
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+.lesson-card,.grammar-card,.game-card{background:white;padding:25px;border-radius:20px;box-shadow:0 6px 15px rgba(0,0,0,.06);margin:25px auto;max-width:850px}
+h2{color:#b8865c;font-size:24px;margin-bottom:12px}h3{color:#5c4033}p{color:#666;font-size:14px;line-height:1.65}
+.back-link{display:block;max-width:850px;margin:15px auto 0;color:#b8865c;font-size:13px;font-weight:bold;text-decoration:none}
+.lesson-title{text-align:center;margin-top:20px}.lesson-title .badge{display:inline-block;background:#fff8ef;color:#b8865c;border:1px solid #d7b89c;padding:6px 13px;border-radius:20px;font-size:12px;font-weight:bold}
+.lesson-title h1{color:#5c4033;font-size:28px;margin:12px 0 5px}.lesson-title p{margin:0}
+.pattern-block{background:#fff8ef;border:1.5px solid #d7b89c;padding:16px;border-radius:15px;margin:14px 0}
+.pattern-block strong{color:#9b6b3d}.pattern-line{display:flex;gap:8px;align-items:center;justify-content:center;flex-wrap:wrap;margin:12px 0}
+.pattern-box{padding:10px 14px;border-radius:12px;border:1.5px solid #d7b89c;background:white;color:#8c5d35;font-weight:bold;text-align:center}
+.pattern-box.focus{background:#faedcd}
+.example-row{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;background:#fff;border:1px dashed #d7b89c;border-radius:13px;padding:12px;margin:10px 0}
+.example-main{font-size:23px;font-weight:bold;color:#5c4033}.example-pinyin{font-size:12px;color:#8c7355}.example-meaning{font-size:13px;color:#666}
+.sound-btn{background:#b8865c;color:white;border:0;width:34px;height:34px;border-radius:50%;cursor:pointer}
+.note{background:#f0f7f4;border:1px solid #b7e4c7;border-radius:13px;padding:13px;margin-top:12px;color:#315f4c;font-size:13px;line-height:1.6}
+.warning{background:#fff1ef;border:1px solid #efc2bc;border-radius:13px;padding:13px;color:#8e3932;font-size:13px;line-height:1.6;margin-top:12px}
+.answer-guide{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:12px 0}
+.answer-chip{background:white;border:1.5px solid #d7b89c;border-radius:12px;padding:10px 16px;font-size:14px;color:#5c4033;font-weight:bold;text-align:center;line-height:1.6}
+.answer-chip small{font-weight:normal;font-size:12px}
+.answer-chip.yes{border-color:#b7e4c7;background:#f0f7f4;color:#2d6a4f}
+.answer-chip.no{border-color:#efc2bc;background:#fff1ef;color:#8e3932}
+.qa-label{display:inline-block;font-size:11px;font-weight:bold;color:#8c7355;margin:6px 0 0}
+.vocab-title{text-align:center;color:#5c4033;font-size:15px;margin:18px 0 10px}
+.vocab-container{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.vocab-pill{background:#fff8ef;border-radius:14px;padding:9px 10px;width:112px;text-align:center;border:1.5px solid #d7b89c;cursor:pointer;transition:.2s}
+.vocab-pill:hover{transform:translateY(-2px);background:#faedcd}
+.vocab-pill .hanzi{font-size:20px;font-weight:bold;color:#b8865c}.vocab-pill .pinyin{font-size:11px;color:#555}.vocab-pill .meaning{font-size:11px;color:#777;margin-top:2px}
+.game-number{display:inline-block;background:#fff8ef;color:#b8865c;border:1px solid #d7b89c;padding:5px 12px;border-radius:20px;font-size:12px;font-weight:bold}
+.game-progress{text-align:right;font-size:12px;color:#8c7355;margin-bottom:10px}
+.group-subtitle{font-size:12px;color:#8c7355;margin-bottom:6px}
+.challenge{border:1px solid #eadfd3;border-radius:15px;padding:13px;margin:13px 0;background:#fffdf9}
+.challenge-top{font-size:14px;color:#5c4033;font-weight:bold;margin-bottom:8px}
+.challenge-top small{display:block;font-weight:normal;color:#999;font-size:11px;margin-top:3px}
+.answer-area{min-height:48px;padding:9px;border:2px dashed #d7b89c;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:6px;background:#fdfbf7;margin-bottom:10px}
+.answer-placeholder{color:#aaa;font-size:12px}
+.word-bank{display:flex;justify-content:center;flex-wrap:wrap;gap:7px}
+.word-btn{border:1.5px solid #d7b89c;background:white;color:#5c4033;padding:8px 11px;border-radius:10px;font-size:16px;cursor:pointer}
+.word-btn:disabled{opacity:.35;cursor:default}
+.selected-word{background:#b8865c;color:white;padding:7px 10px;border-radius:9px;font-size:16px;cursor:pointer}
+.challenge-feedback{text-align:center;min-height:20px;font-size:12px;font-weight:bold;margin-top:8px}
+.correct{color:#2d6a4f}.incorrect{color:#9b2226}
+.game-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.action-btn{border:0;border-radius:11px;padding:10px 15px;cursor:pointer;font-weight:bold}
+.check-btn{background:#b8865c;color:white}.reset-btn{background:#fff8ef;color:#8c7355;border:1px solid #d7b89c}
+.next-btn{background:#5c4033;color:white}
+.game-note{font-size:12px;color:#8c7355;margin-top:10px}
+@media(max-width:700px){.lesson-card,.grammar-card,.game-card{padding:15px;margin:15px}.back-link{margin-left:15px}.lesson-title h1{font-size:23px}.example-main{font-size:20px}.challenge{padding:10px}}
+</style>
+</head>
+<body>
+<div class="app-container">
+<div id="sidebar-container"></div>
+<main class="main-content">
+<a class="back-link" href="../games.html">← Back to Grammar Games</a>
+
+<div class="lesson-title">
+<span class="badge">GRAMMAR GAME • BASIC SENTENCE</span>
+<h1>Basic Sentence: Subject + Verb + Object</h1>
+<p>Learn how to say what people do, make it negative, and ask yes/no questions.</p>
+</div>
+
+<div class="grammar-card">
+<h2>🧠 Grammar Pattern</h2>
+<p>A basic Chinese sentence is built like an English sentence: <strong>who</strong> (Subject, S) + <strong>does what</strong> (Verb, V) + <strong>to what</strong> (Object, O). Chinese verbs do not change form, so <strong>吃</strong> stays <strong>吃</strong> for I, you, he, she, we, and they.</p>
+
+<div class="pattern-block">
+<strong>Positive (+)</strong>
+<div class="pattern-line"><span class="pattern-box">S</span><b>+</b><span class="pattern-box focus">V</span><b>+</b><span class="pattern-box">O</span></div>
+<p>Put the subject first, then the verb, then the object.</p>
+</div>
+
+<div class="pattern-block">
+<strong>Negative (−)</strong>
+<div class="pattern-line"><span class="pattern-box">S</span><b>+</b><span class="pattern-box focus">不</span><b>+</b><span class="pattern-box">V</span><b>+</b><span class="pattern-box">O</span></div>
+<p>Put <strong>不 (bù)</strong> right before the verb. It means “do not / does not”.</p>
+</div>
+
+<div class="pattern-block">
+<strong>Questions (?) — Two ways</strong>
+<p><strong>Way 1: Add 嗎 (ma) at the end.</strong></p>
+<div class="pattern-line"><span class="pattern-box">S</span><b>+</b><span class="pattern-box">V</span><b>+</b><span class="pattern-box">O</span><b>+</b><span class="pattern-box focus">嗎？</span></div>
+<p><strong>嗎</strong> is a question particle. It turns a normal sentence into a yes/no question.</p>
+<p><strong>Way 2: Use V + 不 + V.</strong></p>
+<div class="pattern-line"><span class="pattern-box">S</span><b>+</b><span class="pattern-box focus">V</span><b>+</b><span class="pattern-box focus">不</span><b>+</b><span class="pattern-box focus">V</span><b>+</b><span class="pattern-box">O</span><b>?</b></div>
+<p>Say the verb, then 不, then the verb again: “eat or not eat?”. It also makes a yes/no question.</p>
+<div class="warning"><strong>Remember!</strong><br>Use either <strong>嗎</strong> or <strong>V + 不 + V</strong> — do not use both in the same question.<br>✓ 你吃飯嗎？<br>✓ 你吃不吃飯？<br>✗ 你吃不吃飯嗎？</div>
+</div>
+
+<div class="pattern-block">
+<strong>How to answer yes/no questions</strong>
+<p>In Chinese, we usually answer by repeating the verb. You do not need to say 是 here, because 是 is used for identity (like “I am a student”).</p>
+<div class="answer-guide">
+<div class="answer-chip yes">Yes = the verb<br><small>e.g. 吃 (chī)</small></div>
+<div class="answer-chip no">No = 不 + the verb<br><small>e.g. 不吃 (bù chī)</small></div>
+</div>
+<span class="qa-label">QUESTION (嗎)</span>
+<div class="example-row"><div><div class="example-main">你吃飯嗎？</div><div class="example-pinyin">Nǐ chī fàn ma?</div><div class="example-meaning">Do you eat?</div></div><button class="sound-btn" onclick="playAudio('你吃飯嗎')">🔊</button></div>
+<span class="qa-label">ANSWER (YES)</span>
+<div class="example-row"><div><div class="example-main">吃！</div><div class="example-pinyin">Chī!</div><div class="example-meaning">Yes, I do. (literally: eat)</div></div><button class="sound-btn" onclick="playAudio('吃')">🔊</button></div>
+<span class="qa-label">QUESTION (V不V)</span>
+<div class="example-row"><div><div class="example-main">你吃不吃飯？</div><div class="example-pinyin">Nǐ chī bu chī fàn?</div><div class="example-meaning">Do you eat?</div></div><button class="sound-btn" onclick="playAudio('你吃不吃飯')">🔊</button></div>
+<span class="qa-label">ANSWER (NO)</span>
+<div class="example-row"><div><div class="example-main">不吃！</div><div class="example-pinyin">Bù chī!</div><div class="example-meaning">No, I don't. (literally: not eat)</div></div><button class="sound-btn" onclick="playAudio('不吃')">🔊</button></div>
+<div class="note">Tip: The answers are the same for both question types (嗎 and V不V).</div>
+</div>
+
+<h3>Compare the four sentence forms</h3>
+<p>Listen to each sentence and notice how the meaning changes.</p>
+<div class="example-row"><div><div class="example-main">我吃飯</div><div class="example-pinyin">Wǒ chī fàn</div><div class="example-meaning">I eat.</div></div><button class="sound-btn" onclick="playAudio('我吃飯')">🔊</button></div>
+<div class="example-row"><div><div class="example-main">我不吃飯</div><div class="example-pinyin">Wǒ bù chī fàn</div><div class="example-meaning">I do not eat.</div></div><button class="sound-btn" onclick="playAudio('我不吃飯')">🔊</button></div>
+<div class="example-row"><div><div class="example-main">你吃飯嗎？</div><div class="example-pinyin">Nǐ chī fàn ma?</div><div class="example-meaning">Do you eat?</div></div><button class="sound-btn" onclick="playAudio('你吃飯嗎')">🔊</button></div>
+<div class="example-row"><div><div class="example-main">你吃不吃飯？</div><div class="example-pinyin">Nǐ chī bu chī fàn?</div><div class="example-meaning">Do you eat?</div></div><button class="sound-btn" onclick="playAudio('你吃不吃飯')">🔊</button></div>
+</div>
+
+<div class="lesson-card">
+<h2>📚 Vocabulary List</h2>
+<p>Tap any word to hear its pronunciation.</p>
+<h3 class="vocab-title">Verbs (Actions)</h3><div class="vocab-container" id="vocabVerbs"></div>
+<h3 class="vocab-title">Things & Places</h3><div class="vocab-container" id="vocabThings"></div>
+<h3 class="vocab-title">Activities & Purposes</h3><div class="vocab-container" id="vocabActivities"></div>
+</div>
+
+<div class="game-card">
+<span class="game-number">GAME 1</span>
+<h2>🧩 Build the Sentences</h2>
+<p>Read the English sentence, then tap the Chinese word tiles in the correct order. Each group shows the four sentence forms together so you can compare them.</p>
+<div class="game-progress" id="gameProgress">Group 1 / 7</div>
+<div id="gameChallenges"></div>
+<div class="game-actions">
+<button class="action-btn reset-btn" onclick="resetGroup()">↻ Reset group</button>
+<button class="action-btn next-btn" onclick="nextGroup()">Next group →</button>
+</div>
+<p class="game-note">Tip: Tap a selected word to return it to the word bank. Check each sentence before moving to the next group.</p>
+</div>
+
+<div class="game-card">
+<span class="game-number">GAME 2</span>
+<h2>✈️ Come to Taiwan to…</h2>
+<p>Use <strong>來 (lái, come)</strong> to say why someone is coming to a place. The pattern is simple: say where, then say the reason.</p>
+<div class="pattern-block">
+<div class="pattern-line"><span class="pattern-box">S</span><b>+</b><span class="pattern-box focus">來</span><b>+</b><span class="pattern-box">Place</span><b>+</b><span class="pattern-box">Purpose (V)</span></div>
+</div>
+<div id="singleChallenges"></div>
+</div>
+
+</main>
+</div>
+
+<script>
+function playAudio(text){
+  if(!('speechSynthesis' in window)) return;
+  window.speechSynthesis.cancel();
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.lang = 'zh-TW';
+  utterance.rate = 0.82;
+  window.speechSynthesis.speak(utterance);
+}
+
+const vocab = {
+  vocabVerbs: [
+    ['喝','hē','to drink'],['吃','chī','to eat'],
+    ['學習','xuéxí','to study / learn'],['買','mǎi','to buy'],
+    ['去','qù','to go'],['來','lái','to come']
+  ],
+  vocabThings: [
+    ['水','shuǐ','water'],['飯','fàn','rice / meal'],
+    ['中文','Zhōngwén','Chinese (language)'],['東西','dōngxi','things / stuff'],
+    ['學校','xuéxiào','school'],['台灣','Táiwān','Taiwan']
+  ],
+  vocabActivities: [
+    ['上課','shàngkè','attend class'],['上班','shàngbān','go to work'],
+    ['工作','gōngzuò','work / to work'],['讀書','dúshū','study (get an education)'],
+    ['結婚','jiéhūn','get married']
+  ]
+};
+
+function renderVocab(id, words){
+  const container = document.getElementById(id);
+  words.forEach(([hanzi,pinyin,meaning])=>{
+    const item = document.createElement('button');
+    item.type = 'button';
+    item.className = 'vocab-pill';
+    item.innerHTML = `<div class="hanzi">${hanzi}</div><div class="pinyin">${pinyin}</div><div class="meaning">${meaning}</div>`;
+    item.addEventListener('click',()=>playAudio(hanzi));
+    container.appendChild(item);
+  });
+}
+Object.entries(vocab).forEach(([id,words])=>renderVocab(id,words));
+
+const groups = [
+ {title:'I drink water',sentences:[
+  ['I drink water.','我喝水'],['I do not drink water.','我不喝水'],
+  ['Do I drink water? (嗎)','我喝水嗎？'],['Do I drink water? (V不V)','我喝不喝水？']]},
+ {title:'You study Chinese',note:'In 你學不學中文？, the verb 學習 is shortened to 學. This short form is very common in V不V questions.',sentences:[
+  ['You study Chinese.','你學習中文'],['You do not study Chinese.','你不學習中文'],
+  ['Do you study Chinese? (嗎)','你學習中文嗎？'],['Do you study Chinese? (V不V)','你學不學中文？']]},
+ {title:'He buys things',sentences:[
+  ['He buys things.','他買東西'],['He does not buy things.','他不買東西'],
+  ['Does he buy things? (嗎)','他買東西嗎？'],['Does he buy things? (V不V)','他買不買東西？']]},
+ {title:'She goes to school',sentences:[
+  ['She goes to school.','她去學校'],['She does not go to school.','她不去學校'],
+  ['Does she go to school? (嗎)','她去學校嗎？'],['Does she go to school? (V不V)','她去不去學校？']]},
+ {title:'We go to class',note:'<strong>去學校 vs 去上課</strong><br>去學校 = the focus is the <strong>place</strong> (school).<br>去上課 = the focus is the <strong>activity</strong> (going to study).<br>Easy way to remember: if you go to school because you have a class, say <strong>去上課</strong>. If you go to school outside class time (for a club activity, to pick up something you forgot, etc.), say <strong>去學校</strong>.',sentences:[
+  ['We go to class.','我們去上課'],['We do not go to class.','我們不去上課'],
+  ['Do we go to class? (嗎)','我們去上課嗎？'],['Do we go to class? (V不V)','我們去不去上課？']]},
+ {title:'You (plural) go to work',note:'<strong>上班 vs 工作</strong><br>上班 = going to work / being at work (the act of doing your job at that time).<br>工作 = work in general (your job, or the activity of working).',sentences:[
+  ['You (all) go to work.','你們去上班'],['You (all) do not go to work.','你們不去上班'],
+  ['Do you (all) go to work? (嗎)','你們去上班嗎？'],['Do you (all) go to work? (V不V)','你們去不去上班？']]},
+ {title:'They come to Taiwan',sentences:[
+  ['They come to Taiwan.','他們來台灣'],['They do not come to Taiwan.','他們不來台灣'],
+  ['Do they come to Taiwan? (嗎)','他們來台灣嗎？'],['Do they come to Taiwan? (V不V)','他們來不來台灣？']]}
+];
+
+const singles = [
+ {english:'I come to Taiwan to work.',answer:'我來台灣工作',note:'<strong>上班 vs 工作</strong><br>上班 = going to work / being at work (the act of doing your job at that time).<br>工作 = work in general (your job, or the activity of working).'},
+ {english:'You come to Taiwan to study.',answer:'你來台灣讀書',note:'<strong>上課 vs 讀書</strong><br>上課 = being in a class and learning at that moment.<br>讀書 = studying in general (getting an education).'},
+ {english:'He comes to Taiwan to get married.',answer:'他來台灣結婚',note:''}
+];
+
+let groupIndex = 0;
+
+function tokenize(sentence){
+  // Keep common multi-character words together so learners build meaningful chunks.
+  const tokens = sentence.match(/我們|你們|他們|學習|學校|中文|東西|上課|上班|台灣|工作|讀書|結婚|我|你|他|她|喝|水|吃|飯|買|去|來|學|不|嗎|？/g);
+  return tokens || Array.from(sentence);
+}
+function shuffle(arr){
+  const copy = [...arr];
+  for(let i=copy.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[copy[i],copy[j]]=[copy[j],copy[i]];}
+  return copy;
+}
+function buildChallenge(label, english, answer){
+  const tokens = tokenize(answer);
+  const state = {answer:tokens,selected:[],done:false};
+  const card = document.createElement('section');
+  card.className = 'challenge';
+  card.innerHTML = `<div class="challenge-top">${label}${english}<small>Tap the Chinese tiles below to build the sentence.</small></div><div class="answer-area"><span class="answer-placeholder">Your Chinese sentence will appear here</span></div><div class="word-bank"></div><div class="challenge-feedback"></div><div style="text-align:center;margin-top:8px"><button class="action-btn check-btn">✓ Check</button> <button class="action-btn reset-btn">↻ Reset</button></div>`;
+  const answerArea = card.querySelector('.answer-area');
+  const bank = card.querySelector('.word-bank');
+  const feedback = card.querySelector('.challenge-feedback');
+  const buttons = [];
+  shuffle(tokens).forEach((word)=>{
+    const btn = document.createElement('button');
+    btn.className = 'word-btn';btn.type='button';btn.textContent=word;
+    btn.addEventListener('click',()=>{
+      if(btn.disabled || state.done) return;
+      state.selected.push({word,btn});
+      btn.disabled=true;
+      drawAnswer();
+      playAudio(word);
+    });
+    buttons.push(btn);bank.appendChild(btn);
+  });
+  function drawAnswer(){
+    answerArea.innerHTML='';
+    if(!state.selected.length){answerArea.innerHTML='<span class="answer-placeholder">Your Chinese sentence will appear here</span>';return;}
+    state.selected.forEach((item,index)=>{
+      const tile=document.createElement('button');tile.type='button';tile.className='selected-word';tile.textContent=item.word;
+      tile.addEventListener('click',()=>{
+        if(state.done)return;
+        item.btn.disabled=false;state.selected.splice(index,1);drawAnswer();
+      });
+      answerArea.appendChild(tile);
+    });
+  }
+  card.querySelector('.check-btn').addEventListener('click',()=>{
+    if(state.done)return;
+    if(state.selected.length!==state.answer.length){feedback.textContent='Please use all the word tiles first.';feedback.className='challenge-feedback incorrect';return;}
+    const correct=state.selected.every((x,index)=>x.word===state.answer[index]);
+    if(correct){feedback.textContent='🎉 Correct!';feedback.className='challenge-feedback correct';state.done=true;playAudio(answer);}
+    else{feedback.textContent='Not quite. Check the word order and try again.';feedback.className='challenge-feedback incorrect';}
+  });
+  card.querySelector('.reset-btn').addEventListener('click',()=>{
+    state.selected=[];state.done=false;feedback.textContent='';feedback.className='challenge-feedback';
+    buttons.forEach(btn=>btn.disabled=false);drawAnswer();
+  });
+  return card;
+}
+function renderGroup(){
+  const group = groups[groupIndex];
+  document.getElementById('gameProgress').textContent = `Group ${groupIndex+1} / ${groups.length}`;
+  const root = document.getElementById('gameChallenges');
+  root.innerHTML = `<h3 class="group-title">${group.title}</h3><div class="group-subtitle">Build all four forms: positive, negative, 嗎 question, and V不V question.</div>`;
+  if(group.note){const n=document.createElement('div');n.className='note';n.innerHTML=group.note;root.appendChild(n);}
+  group.sentences.forEach(([english,answer],i)=>{
+    root.appendChild(buildChallenge(`${i+1}. `,english,answer));
+  });
+}
+function renderSingles(){
+  const root = document.getElementById('singleChallenges');
+  singles.forEach((item,i)=>{
+    root.appendChild(buildChallenge(`${i+1}. `,item.english,item.answer));
+    if(item.note){const n=document.createElement('div');n.className='note';n.innerHTML=item.note;root.appendChild(n);}
+  });
+}
+function resetGroup(){renderGroup();}
+function nextGroup(){groupIndex=(groupIndex+1)%groups.length;renderGroup();window.scrollTo({top:document.querySelector('.game-card').offsetTop-20,behavior:'smooth'});}
+renderGroup();
+renderSingles();
+</script>
+<script src="../script.js"></script>
+</body>
+</html>
