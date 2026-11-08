@@ -23,9 +23,10 @@ document.addEventListener("DOMContentLoaded", () => {
             const path = window.location.pathname;
 
             const isInSubfolder =
-                path.includes("/content/") ||
-                path.includes("/lifetw/") ||
-                path.includes("/zhuyin/");
+    path.includes("/content/") ||
+    path.includes("/lifetw/") ||
+    path.includes("/zhuyin/") ||
+    path.includes("/grammar/");
 
             if (isInSubfolder) {
 
