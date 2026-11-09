@@ -1,1640 +1,253 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Everyday Greetings | Boba Break Study</title>
-
+<title>Greetings & Introductions | Boba Break Study</title>
 <link rel="icon" type="image/png" href="/favicon.png">
 <link rel="stylesheet" href="../style.css">
-
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <script src="https://cdn.jsdelivr.net/npm/hanzi-writer@3.5.0/dist/hanzi-writer.min.js"></script>
-
 <style>
-
-/* =====================================================
-   GENERAL
-===================================================== */
-
-.lesson-card,
-.conversation-card,
-.writing-card {
-    background: white;
-    padding: 25px;
-    border-radius: 20px;
-    box-shadow: 0 6px 15px rgba(0,0,0,0.06);
-    margin: 25px auto;
-    max-width: 750px;
-}
-
-h2 {
-    color: #b8865c;
-    font-size: 24px;
-    margin-bottom: 12px;
-}
-
-h3 {
-    color: #5c4033;
-}
-
-p {
-    color: #666;
-    font-size: 14px;
-    line-height: 1.6;
-}
-
-
-/* =====================================================
-   HEADER
-===================================================== */
-
-.lesson-title {
-    text-align: center;
-    margin-top: 20px;
-}
-
-.lesson-title .badge {
-    display: inline-block;
-    background: #fff8ef;
-    color: #b8865c;
-    border: 1px solid #d7b89c;
-    padding: 6px 13px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: bold;
-}
-
-.lesson-title h1 {
-    color: #5c4033;
-    font-size: 28px;
-    margin: 12px 0 5px;
-}
-
-
-/* =====================================================
-   CONVERSATION CAROUSEL
-===================================================== */
-
-.conversation-slider {
-    position: relative;
-}
-
-.conversation-slide {
-    display: none;
-    animation: fadeIn 0.35s ease;
-}
-
-.conversation-slide.active {
-    display: block;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(8px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.conversation-number {
-    display: inline-block;
-    background: #fff8ef;
-    color: #b8865c;
-    border: 1px solid #d7b89c;
-    padding: 5px 12px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: bold;
-}
-
-.conversation-title {
-    text-align: center;
-    margin: 20px 0;
-    color: #5c4033;
-}
-
-.dialogue {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    margin-top: 20px;
-}
-
-.dialogue-line {
-    display: flex;
-    gap: 12px;
-    align-items: flex-start;
-    background: #fff8ef;
-    border: 1.5px solid #eadfd3;
-    padding: 15px;
-    border-radius: 16px;
-}
-
-.dialogue-line.person-b {
-    background: #fdf5f6;
-    border-color: #f0d5dc;
-}
-
-.speaker {
-    min-width: 35px;
-    height: 35px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    background: #b8865c;
-    color: white;
-    font-weight: bold;
-    font-size: 14px;
-}
-
-.person-b .speaker {
-    background: #d78f9d;
-}
-
-.dialogue-content {
-    flex: 1;
-    min-width: 0;
-}
-
-.dialogue-hanzi {
-    font-size: 25px;
-    font-weight: bold;
-    color: #5c4033;
-    margin-bottom: 5px;
-    line-height: 1.5;
-    overflow-wrap: anywhere;
-}
-
-.dialogue-pinyin {
-    font-size: 13px;
-    color: #b8865c;
-    margin-bottom: 4px;
-}
-
-.dialogue-meaning {
-    font-size: 13px;
-    color: #777;
-}
-
-.audio-btn {
-    width: 36px;
-    height: 36px;
-    min-width: 36px;
-    border: none;
-    border-radius: 50%;
-    background: white;
-    color: #b8865c;
-    cursor: pointer;
-    border: 1px solid #d7b89c;
-    transition: 0.2s;
-}
-
-.audio-btn:hover {
-    background: #faedcd;
-    transform: scale(1.08);
-}
-
-.person-b .audio-btn {
-    color: #c07889;
-    border-color: #e8c5ce;
-}
-
-.play-all-container {
-    text-align: center;
-    margin-top: 20px;
-}
-
-.play-all-btn {
-    background: #5c4033;
-    color: white;
-    border: none;
-    border-radius: 12px;
-    padding: 11px 20px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.2s;
-}
-
-.play-all-btn:hover {
-    background: #8b6b58;
-}
-
-.slider-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 10px;
-    margin-top: 25px;
-}
-
-.slider-btn {
-    background: #fff8ef;
-    border: 1.5px solid #d7b89c;
-    color: #8c7355;
-    padding: 10px 17px;
-    border-radius: 12px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.2s;
-}
-
-.slider-btn:hover {
-    background: #faedcd;
-}
-
-.slider-indicators {
-    display: flex;
-    gap: 7px;
-}
-
-.indicator {
-    width: 9px;
-    height: 9px;
-    border-radius: 50%;
-    background: #f0e4d5;
-    cursor: pointer;
-}
-
-.indicator.active {
-    background: #b8865c;
-}
-
-.slide-counter {
-    text-align: center;
-    color: #999;
-    font-size: 12px;
-    margin-top: 12px;
-}
-
-
-/* =====================================================
-   WRITING PRACTICE
-===================================================== */
-
-.writing-card {
-    text-align: center;
-}
-
-.writing-mode-buttons {
-    display: flex;
-    gap: 8px;
-    margin: 15px 0;
-}
-
-.mode-btn {
-    flex: 1;
-    border: 1.5px solid #d7b89c;
-    background: #fff8ef;
-    color: #8c7355;
-    padding: 11px 5px;
-    border-radius: 12px;
-    cursor: pointer;
-    font-size: 12px;
-    font-weight: bold;
-    transition: 0.2s;
-}
-
-.mode-btn.active {
-    background: #b8865c;
-    color: white;
-    border-color: #b8865c;
-}
-
-.writing-info {
-    color: #777;
-    font-size: 13px;
-    margin: 15px 0;
-}
-
-.writing-character {
-    font-size: 35px;
-    color: #5c4033;
-    font-weight: bold;
-    margin: 10px 0;
-}
-
-.writing-pinyin {
-    font-size: 15px;
-    color: #b8865c;
-}
-
-.writing-meaning {
-    font-size: 13px;
-    color: #888;
-    margin-top: 4px;
-}
-
-.writing-progress {
-    font-size: 12px;
-    color: #8c7355;
-    margin: 12px 0;
-}
-
-.canvas-wrapper {
-    margin: 15px auto;
-    width: 280px;
-    max-width: 100%;
-    height: 280px;
-
-    background:
-        linear-gradient(#eadac7 1px, transparent 1px),
-        linear-gradient(90deg, #eadac7 1px, transparent 1px);
-
-    background-size: 70px 70px;
-    background-position: center;
-
-    border: 2px solid #d7b89c;
-    border-radius: 15px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    overflow: hidden;
-    touch-action: none;
-}
-
-#target-div {
-    width: 260px;
-    height: 260px;
-}
-
-.writing-feedback {
-    min-height: 30px;
-    margin-top: 12px;
-    font-weight: bold;
-    font-size: 14px;
-}
-
-.correct {
-    color: #2d6a4f;
-}
-
-.incorrect {
-    color: #9b2226;
-}
-
-.writing-buttons {
-    display: flex;
-    gap: 8px;
-    justify-content: center;
-    margin-top: 15px;
-}
-
-.write-btn {
-    flex: 1;
-    border: none;
-    padding: 11px 10px;
-    border-radius: 12px;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 12px;
-}
-
-.clear-btn {
-    background: #fff8ef;
-    color: #8c7355;
-    border: 1px solid #d7b89c;
-}
-
-.listen-btn {
-    background: #f0f7f4;
-    color: #2d6a4f;
-    border: 1px solid #b7e4c7;
-}
-
-.next-write-btn {
-    background: #b8865c;
-    color: white;
-}
-
-
-/* =====================================================
-   VOCABULARY NOTE
-===================================================== */
-
-.note-box {
-    background: #fff8ef;
-    border: 1px solid #eadfd3;
-    border-radius: 15px;
-    padding: 15px;
-    margin-top: 15px;
-    text-align: left;
-}
-
-.note-box strong {
-    color: #b8865c;
-}
-
-
-/* =====================================================
-   MOBILE
-===================================================== */
-
-@media(max-width:700px) {
-
-    .conversation-card,
-    .writing-card,
-    .lesson-card {
-        padding: 15px;
-        margin: 15px;
-    }
-
-    .lesson-title h1 {
-        font-size: 23px;
-    }
-
-    .dialogue-line {
-        padding: 12px;
-        gap: 9px;
-    }
-
-    .dialogue-hanzi {
-        font-size: 22px;
-    }
-
-    .slider-btn {
-        padding: 9px 12px;
-        font-size: 12px;
-    }
-
-    .writing-mode-buttons {
-        flex-wrap: wrap;
-    }
-
-    .mode-btn {
-        min-width: 45%;
-    }
-
-    .writing-buttons {
-        flex-wrap: wrap;
-    }
-}
-
+:root{--cream:#fff8ef;--beige:#faedcd;--brown:#5c4033;--tan:#b8865c;--line:#d7b89c;--green:#2d6a4f;--red:#9b2226}
+*{box-sizing:border-box}
+.lesson-title{text-align:center;margin:22px 15px}
+.lesson-title .badge,.game-number{display:inline-block;background:var(--cream);color:var(--tan);border:1px solid var(--line);padding:6px 13px;border-radius:20px;font-size:12px;font-weight:bold}
+.lesson-title h1{color:var(--brown);font-size:28px;margin:12px 0 5px}
+.lesson-title p,p{color:#666;font-size:14px;line-height:1.65}
+.lesson-card,.conversation-card,.writing-card{background:#fff;padding:24px;border-radius:20px;box-shadow:0 6px 15px #0000000f;margin:24px auto;max-width:750px}
+h2{color:var(--tan);font-size:23px;margin:0 0 12px}
+h3{color:var(--brown)}
+.carousel-top{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:16px}
+.slide-count{font-size:12px;color:#8c7355;background:var(--cream);padding:6px 11px;border-radius:20px}
+.slide{display:none}.slide.active{display:block}
+.dialogue{display:grid;gap:12px;margin:18px 0}
+.dialogue-line{background:var(--cream);border:1.5px solid var(--line);border-radius:16px;padding:14px;display:grid;grid-template-columns:34px 1fr auto;gap:10px;align-items:center}
+.speaker{width:32px;height:32px;border-radius:50%;background:var(--tan);color:white;display:grid;place-items:center;font-weight:bold}
+.hanzi{font-size:27px;font-weight:bold;color:var(--brown);line-height:1.3}
+.pinyin{font-size:13px;color:#8c7355;margin-top:4px}
+.meaning{font-size:13px;color:#666;margin-top:3px}
+.sound-btn{width:36px;height:36px;border:0;border-radius:50%;background:var(--tan);color:white;cursor:pointer}
+.explanation{display:none;background:#fff8ef;border:1.5px solid var(--line);border-radius:15px;padding:15px;margin:14px 0}
+.explanation.show{display:block}
+.explanation p{margin:7px 0}
+.explain-btn,.nav-btn,.mode-btn,.write-btn{border:1.5px solid var(--line);border-radius:12px;padding:10px 15px;font-weight:bold;cursor:pointer}
+.explain-btn{background:var(--beige);color:#805b38}
+.carousel-nav{display:flex;justify-content:space-between;gap:12px;margin-top:18px}
+.nav-btn{background:var(--cream);color:#8c7355;min-width:115px}
+.nav-btn.primary{background:var(--brown);color:white;border-color:var(--brown)}
+.nav-btn:disabled{opacity:.4;cursor:default}
+.writing-card{text-align:center}
+.mode-buttons{display:flex;gap:8px;margin:16px 0}
+.mode-btn{flex:1;background:var(--cream);color:#8c7355}
+.mode-btn.active{background:var(--tan);color:white;border-color:var(--tan)}
+.writing-info{font-size:13px;color:#777;margin:12px 0}
+.recall-answer{font-size:30px;color:var(--tan);font-weight:bold;margin:10px}
+.canvas-wrapper{margin:15px auto;width:280px;max-width:100%;height:280px;background:linear-gradient(#eadac7 1px,transparent 1px),linear-gradient(90deg,#eadac7 1px,transparent 1px);background-size:70px 70px;border:2px solid var(--line);border-radius:15px;display:flex;align-items:center;justify-content:center;overflow:hidden;touch-action:none}
+#target-div{width:260px;height:260px}
+.feedback{min-height:26px;margin:10px 0;font-weight:bold}
+.correct{color:var(--green)}.incorrect{color:var(--red)}
+.writing-buttons{display:flex;justify-content:center;gap:8px;flex-wrap:wrap}
+.write-btn{background:var(--cream);color:#8c7355}
+.write-btn.primary{background:var(--tan);color:white;border-color:var(--tan)}
+.character-list{display:flex;flex-wrap:wrap;justify-content:center;gap:7px;margin-top:12px}
+.character-chip{background:var(--cream);border:1px solid var(--line);border-radius:9px;padding:6px 9px;color:var(--brown);font-size:17px}
+@media(max-width:700px){.lesson-card,.conversation-card,.writing-card{padding:16px;margin:15px}.lesson-title h1{font-size:23px}.dialogue-line{padding:11px}.hanzi{font-size:24px}.carousel-nav{gap:8px}.nav-btn{min-width:0;flex:1}}
 </style>
 </head>
-
 <body>
-
 <div class="app-container">
-
-<!-- SIDEBAR -->
-
 <div id="sidebar-container"></div>
-
 <main class="main-content">
+<header class="lesson-title">
+<span class="badge">BEGINNER • EVERYDAY MANDARIN</span>
+<h1>Greetings & Introductions</h1>
+<p>Learn simple greetings and polite expressions in Taiwanese Mandarin.</p>
+</header>
 
-
-<!-- =====================================================
-     LESSON HEADER
-===================================================== -->
-
-<div class="lesson-title">
-
-    <span class="badge">
-        INTRODUCTORY LESSON • EVERYDAY CHINESE
-    </span>
-
-    <h1>Greetings & Introductions</h1>
-
-    <p>
-        Learn simple Mandarin conversations for everyday life.
-    </p>
-
-</div>
-
-
-<!-- =====================================================
-     CONVERSATION CAROUSEL
-===================================================== -->
-
-<div class="conversation-card">
-
+<section class="conversation-card">
+<div class="carousel-top">
 <h2>💬 Let's Talk!</h2>
+<span class="slide-count" id="slideCount">Conversation 1 / 5</span>
+</div>
 
-<p>
-    Read the conversation between two people.
-    Listen and practice speaking!
-</p>
-
-<div class="conversation-slider">
-
-
-<!-- CONVERSATION 1 -->
-
-<div class="conversation-slide active">
-
-<span class="conversation-number">
-    CONVERSATION 1
-</span>
-
-<h3 class="conversation-title">
-    👋 Saying Hello
-</h3>
-
+<div class="slide active" data-title="Saying Hello">
+<h3>1. Saying Hello</h3>
 <div class="dialogue">
-
-    <div class="dialogue-line">
-
-        <div class="speaker">A</div>
-
-        <div class="dialogue-content">
-
-            <div class="dialogue-hanzi">您好</div>
-            <div class="dialogue-pinyin">Nín hǎo</div>
-            <div class="dialogue-meaning">Hello. (Polite)</div>
-
-        </div>
-
-        <button class="audio-btn"
-                onclick="playAudio('您好')">
-            <i class="fas fa-volume-up"></i>
-        </button>
-
-    </div>
-
-
-    <div class="dialogue-line person-b">
-
-        <div class="speaker">B</div>
-
-        <div class="dialogue-content">
-
-            <div class="dialogue-hanzi">你好</div>
-            <div class="dialogue-pinyin">Nǐ hǎo</div>
-            <div class="dialogue-meaning">Hello.</div>
-
-        </div>
-
-        <button class="audio-btn"
-                onclick="playAudio('你好')">
-            <i class="fas fa-volume-up"></i>
-        </button>
-
-    </div>
-
+<div class="dialogue-line"><span class="speaker">A</span><div><div class="hanzi">您好</div><div class="pinyin">Nín hǎo</div><div class="meaning">Hello. (Polite)</div></div><button class="sound-btn" onclick="playAudio('您好')" aria-label="Listen to 您好">🔊</button></div>
+<div class="dialogue-line"><span class="speaker">B</span><div><div class="hanzi">你好</div><div class="pinyin">Nǐ hǎo</div><div class="meaning">Hello.</div></div><button class="sound-btn" onclick="playAudio('你好')" aria-label="Listen to 你好">🔊</button></div>
+</div>
+<div class="explanation"><p><strong>您好 (Nín hǎo)</strong><br>A polite way to say hello. Use it when speaking to someone you don't know well or someone older.</p><p><strong>你好 (Nǐ hǎo)</strong><br>A common and friendly way to say hello.</p></div>
 </div>
 
-</div>
-
-
-<!-- CONVERSATION 2 -->
-
-<div class="conversation-slide">
-
-<span class="conversation-number">
-    CONVERSATION 2
-</span>
-
-<h3 class="conversation-title">
-    🙏 Saying Thank You
-</h3>
-
+<div class="slide" data-title="Saying Thank You">
+<h3>2. Saying Thank You</h3>
 <div class="dialogue">
-
-    <div class="dialogue-line">
-
-        <div class="speaker">A</div>
-
-        <div class="dialogue-content">
-
-            <div class="dialogue-hanzi">謝謝</div>
-            <div class="dialogue-pinyin">Xiè xie</div>
-            <div class="dialogue-meaning">Thank you.</div>
-
-        </div>
-
-        <button class="audio-btn"
-                onclick="playAudio('謝謝')">
-            <i class="fas fa-volume-up"></i>
-        </button>
-
-    </div>
-
-
-    <div class="dialogue-line person-b">
-
-        <div class="speaker">B</div>
-
-        <div class="dialogue-content">
-
-            <div class="dialogue-hanzi">不客氣</div>
-            <div class="dialogue-pinyin">Bú kè qì</div>
-            <div class="dialogue-meaning">You're welcome.</div>
-
-        </div>
-
-        <button class="audio-btn"
-                onclick="playAudio('不客氣')">
-            <i class="fas fa-volume-up"></i>
-        </button>
-
-    </div>
-
+<div class="dialogue-line"><span class="speaker">A</span><div><div class="hanzi">謝謝</div><div class="pinyin">Xiè xie</div><div class="meaning">Thank you.</div></div><button class="sound-btn" onclick="playAudio('謝謝')" aria-label="Listen to 謝謝">🔊</button></div>
+<div class="dialogue-line"><span class="speaker">B</span><div><div class="hanzi">不客氣</div><div class="pinyin">Bú kè qi</div><div class="meaning">You're welcome.</div></div><button class="sound-btn" onclick="playAudio('不客氣')" aria-label="Listen to 不客氣">🔊</button></div>
+</div>
+<div class="explanation"><p><strong>謝謝 (Xiè xie)</strong><br>Say this when you want to thank someone.</p><p><strong>不客氣 (Bú kè qi)</strong><br>Use this expression to reply to someone who says thank you. It means "You're welcome."</p></div>
 </div>
 
-</div>
-
-
-<!-- CONVERSATION 3 -->
-
-<div class="conversation-slide">
-
-<span class="conversation-number">
-    CONVERSATION 3
-</span>
-
-<h3 class="conversation-title">
-    👋 Saying Goodbye
-</h3>
-
+<div class="slide" data-title="Saying Goodbye">
+<h3>3. Saying Goodbye</h3>
 <div class="dialogue">
-
-    <div class="dialogue-line">
-
-        <div class="speaker">A</div>
-
-        <div class="dialogue-content">
-
-            <div class="dialogue-hanzi">再見</div>
-            <div class="dialogue-pinyin">Zài jiàn</div>
-            <div class="dialogue-meaning">Goodbye.</div>
-
-        </div>
-
-        <button class="audio-btn"
-                onclick="playAudio('再見')">
-            <i class="fas fa-volume-up"></i>
-        </button>
-
-    </div>
-
-
-    <div class="dialogue-line person-b">
-
-        <div class="speaker">B</div>
-
-        <div class="dialogue-content">
-
-            <div class="dialogue-hanzi">掰掰</div>
-            <div class="dialogue-pinyin">Bāi bāi</div>
-            <div class="dialogue-meaning">Bye-bye. (Casual)</div>
-
-        </div>
-
-        <button class="audio-btn"
-                onclick="playAudio('掰掰')">
-            <i class="fas fa-volume-up"></i>
-        </button>
-
-    </div>
-
+<div class="dialogue-line"><span class="speaker">A</span><div><div class="hanzi">再見</div><div class="pinyin">Zài jiàn</div><div class="meaning">Goodbye.</div></div><button class="sound-btn" onclick="playAudio('再見')" aria-label="Listen to 再見">🔊</button></div>
+<div class="dialogue-line"><span class="speaker">B</span><div><div class="hanzi">掰掰</div><div class="pinyin">Bāi bāi</div><div class="meaning">Bye-bye.</div></div><button class="sound-btn" onclick="playAudio('掰掰')" aria-label="Listen to 掰掰">🔊</button></div>
+</div>
+<div class="explanation"><p><strong>再見 (Zài jiàn)</strong><br>A common way to say goodbye. It is suitable in many situations.</p><p><strong>掰掰 (Bāi bāi)</strong><br>A casual way to say goodbye. It is very common in Taiwan.</p></div>
 </div>
 
-</div>
-
-
-<!-- CONVERSATION 4 -->
-
-<div class="conversation-slide">
-
-<span class="conversation-number">
-    CONVERSATION 4
-</span>
-
-<h3 class="conversation-title">
-    💗 Saying Sorry
-</h3>
-
+<div class="slide" data-title="Saying Sorry">
+<h3>4. Saying Sorry</h3>
 <div class="dialogue">
-
-    <div class="dialogue-line">
-
-        <div class="speaker">A</div>
-
-        <div class="dialogue-content">
-
-            <div class="dialogue-hanzi">對不起</div>
-            <div class="dialogue-pinyin">Duì bu qǐ</div>
-            <div class="dialogue-meaning">I'm sorry.</div>
-
-        </div>
-
-        <button class="audio-btn"
-                onclick="playAudio('對不起')">
-            <i class="fas fa-volume-up"></i>
-        </button>
-
-    </div>
-
-
-    <div class="dialogue-line person-b">
-
-        <div class="speaker">B</div>
-
-        <div class="dialogue-content">
-
-            <div class="dialogue-hanzi">沒關係</div>
-            <div class="dialogue-pinyin">Méi guān xì</div>
-            <div class="dialogue-meaning">It's okay. / No problem.</div>
-
-        </div>
-
-        <button class="audio-btn"
-                onclick="playAudio('沒關係')">
-            <i class="fas fa-volume-up"></i>
-        </button>
-
-    </div>
-
+<div class="dialogue-line"><span class="speaker">A</span><div><div class="hanzi">對不起</div><div class="pinyin">Duì bù qǐ</div><div class="meaning">I'm sorry.</div></div><button class="sound-btn" onclick="playAudio('對不起')" aria-label="Listen to 對不起">🔊</button></div>
+<div class="dialogue-line"><span class="speaker">B</span><div><div class="hanzi">沒關係</div><div class="pinyin">Méi guān xì</div><div class="meaning">It's okay. / No problem.</div></div><button class="sound-btn" onclick="playAudio('沒關係')" aria-label="Listen to 沒關係">🔊</button></div>
+</div>
+<div class="explanation"><p><strong>對不起 (Duì bù qǐ)</strong><br>Use this expression to say "I'm sorry."</p><p><strong>沒關係 (Méi guān xì)</strong><br>Use this expression when someone says sorry. It means "It's okay."</p><p><strong>沒問題 (Méi wèn tí)</strong><br>This means "No problem." It is also a useful everyday expression.</p></div>
 </div>
 
-</div>
-
-
-<!-- CONVERSATION 5 -->
-
-<div class="conversation-slide">
-
-<span class="conversation-number">
-    CONVERSATION 5
-</span>
-
-<h3 class="conversation-title">
-    😊 Meeting Someone
-</h3>
-
+<div class="slide" data-title="Meeting Someone">
+<h3>5. Meeting Someone</h3>
 <div class="dialogue">
-
-    <div class="dialogue-line">
-
-        <div class="speaker">A</div>
-
-        <div class="dialogue-content">
-
-            <div class="dialogue-hanzi">
-                很高興認識你
-            </div>
-
-            <div class="dialogue-pinyin">
-                Hěn gāo xìng rèn shí nǐ
-            </div>
-
-            <div class="dialogue-meaning">
-                Nice to meet you.
-            </div>
-
-        </div>
-
-        <button class="audio-btn"
-                onclick="playAudio('很高興認識你')">
-            <i class="fas fa-volume-up"></i>
-        </button>
-
-    </div>
-
-
-    <div class="dialogue-line person-b">
-
-        <div class="speaker">B</div>
-
-        <div class="dialogue-content">
-
-            <div class="dialogue-hanzi">
-                我也很高興認識你
-            </div>
-
-            <div class="dialogue-pinyin">
-                Wǒ yě hěn gāo xìng rèn shí nǐ
-            </div>
-
-            <div class="dialogue-meaning">
-                Nice to meet you too.
-            </div>
-
-        </div>
-
-        <button class="audio-btn"
-                onclick="playAudio('我也很高興認識你')">
-            <i class="fas fa-volume-up"></i>
-        </button>
-
-    </div>
-
+<div class="dialogue-line"><span class="speaker">A</span><div><div class="hanzi">很高興認識你</div><div class="pinyin">Hěn gāo xìng rèn shí nǐ</div><div class="meaning">Nice to meet you.</div></div><button class="sound-btn" onclick="playAudio('很高興認識你')" aria-label="Listen to 很高興認識你">🔊</button></div>
+<div class="dialogue-line"><span class="speaker">B</span><div><div class="hanzi">我也很高興認識你</div><div class="pinyin">Wǒ yě hěn gāo xìng rèn shí nǐ</div><div class="meaning">Nice to meet you, too.</div></div><button class="sound-btn" onclick="playAudio('我也很高興認識你')" aria-label="Listen to 我也很高興認識你">🔊</button></div>
+</div>
+<div class="explanation"><p><strong>很高興認識你 (Hěn gāo xìng rèn shí nǐ)</strong><br>Say this when you meet someone for the first time. It means "Nice to meet you."</p><p><strong>我也 (Wǒ yě)</strong><br>Means "Me too" or "I also..."</p></div>
 </div>
 
+<div style="text-align:center;margin-top:14px">
+<button class="explain-btn" id="explainBtn" onclick="toggleExplanation()">📖 Explanation (說明)</button>
 </div>
-
-
+<div class="carousel-nav">
+<button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)" disabled>← Previous</button>
+<button class="nav-btn primary" id="nextBtn" onclick="changeSlide(1)">Next →</button>
 </div>
+</section>
 
-
-<!-- PLAY FULL CONVERSATION -->
-
-<div class="play-all-container">
-
-    <button class="play-all-btn"
-            onclick="playConversation()">
-
-        <i class="fas fa-play"></i>
-        Play Conversation
-
-    </button>
-
+<section class="writing-card">
+<h2>✍️ Writing Practice</h2>
+<p>Practice writing each Chinese character with the correct stroke order.</p>
+<div class="mode-buttons">
+<button class="mode-btn active" onclick="setWritingMode('quiz',this)">✍️ Quiz (Stroke Order)</button>
+<button class="mode-btn" onclick="setWritingMode('animate',this)">👀 Animate</button>
 </div>
-
-
-<!-- CAROUSEL NAVIGATION -->
-
-<div class="slider-nav">
-
-    <button class="slider-btn"
-            onclick="changeSlide(-1)">
-
-        <i class="fas fa-arrow-left"></i>
-        Previous
-
-    </button>
-
-
-    <div class="slider-indicators">
-
-        <span class="indicator active"
-              onclick="showSlide(0)"></span>
-
-        <span class="indicator"
-              onclick="showSlide(1)"></span>
-
-        <span class="indicator"
-              onclick="showSlide(2)"></span>
-
-        <span class="indicator"
-              onclick="showSlide(3)"></span>
-
-        <span class="indicator"
-              onclick="showSlide(4)"></span>
-
-    </div>
-
-
-    <button class="slider-btn"
-            onclick="changeSlide(1)">
-
-        Next
-        <i class="fas fa-arrow-right"></i>
-
-    </button>
-
-</div>
-
-<div class="slide-counter" id="slideCounter">
-    Conversation 1 of 5
-</div>
-
-</div>
-
-
-<!-- =====================================================
-     USEFUL NOTE
-===================================================== -->
-
-<div class="lesson-card">
-
-<h2>📚 Useful Expressions</h2>
-
-<div class="note-box">
-
-    <p>
-        <strong>您好 (Nín hǎo)</strong><br>
-        A polite way to say hello. Use it when speaking to someone you don't know well or someone older.
-    </p>
-
-    <p>
-        <strong>你好 (Nǐ hǎo)</strong><br>
-        A common and friendly way to say hello.
-    </p>
-
-    <p>
-        <strong>掰掰 (Bāi bāi)</strong><br>
-        A casual way to say goodbye. It is very common in Taiwan.
-    </p>
-
-    <p>
-        <strong>沒關係 (Méi guān xì)</strong><br>
-        Use this expression when someone says sorry. It means "It's okay."
-    </p>
-
-    <p>
-        <strong>我也 (Wǒ yě)</strong><br>
-        Means "Me too" or "I also..."
-    </p>
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
-     WRITING PRACTICE
-===================================================== -->
-
-<div class="writing-card">
-
-<h2>✍️ Hanzi Writing Practice</h2>
-
-<p>
-    Learn how to write Chinese characters
-    with the correct stroke order.
-</p>
-
-
-<!-- MODE BUTTONS -->
-
-<div class="writing-mode-buttons">
-
-    <button class="mode-btn active"
-            onclick="setWritingMode('quiz',this)">
-
-        ✍️ Quiz (Stroke Order)
-
-    </button>
-
-    <button class="mode-btn"
-            onclick="setWritingMode('animate',this)">
-
-        👀 Animate
-
-    </button>
-
-</div>
-
-
-<!-- CHARACTER INFORMATION -->
-
-<div class="writing-info" id="writingInfo">
-    Follow the correct stroke order!
-</div>
-
-<div class="writing-character" id="writingCharacter">
-    您
-</div>
-
-<div class="writing-pinyin" id="writingPinyin">
-    nín
-</div>
-
-<div class="writing-meaning" id="writingMeaning">
-    you (polite)
-</div>
-
-<div class="writing-progress" id="writingProgress">
-    Character 1 / 24
-</div>
-
-
-<!-- HANZI WRITER -->
-
-<div class="canvas-wrapper">
-
-    <div id="target-div"></div>
-
-</div>
-
-
-<!-- FEEDBACK -->
-
-<div class="writing-feedback"
-     id="writingFeedback">
-</div>
-
-
-<!-- WRITING BUTTONS -->
-
+<div class="writing-info" id="writingInfo">Write the character following the correct stroke order!</div>
+<div class="recall-answer" id="recallAnswer"></div>
+<div class="canvas-wrapper"><div id="target-div"></div></div>
+<div class="feedback" id="writingFeedback"></div>
 <div class="writing-buttons">
-
-    <button class="write-btn clear-btn"
-            onclick="resetWritingQuiz()">
-
-        <i class="fas fa-redo"></i>
-        Retry
-
-    </button>
-
-
-    <button class="write-btn listen-btn"
-            onclick="playCurrentWriting()">
-
-        <i class="fas fa-volume-up"></i>
-        Listen
-
-    </button>
-
-
-    <button class="write-btn next-write-btn"
-            onclick="nextWritingCharacter()">
-
-        Next
-        <i class="fas fa-arrow-right"></i>
-
-    </button>
-
+<button class="write-btn" onclick="resetWritingQuiz()">↻ Retry</button>
+<button class="write-btn" onclick="playCurrentWriting()">🔊 Listen</button>
+<button class="write-btn primary" onclick="nextWritingCharacter()">Next →</button>
 </div>
-
-</div>
-
-
+<div class="character-list" id="characterList"></div>
+</section>
 </main>
 </div>
-
-
-<!-- =====================================================
-     JAVASCRIPT
-===================================================== -->
-
 <script>
-
-/* =====================================================
-   AUDIO - TAIWAN MANDARIN
-===================================================== */
-
-function playAudio(text) {
-
-    if (!('speechSynthesis' in window)) {
-        return;
-    }
-
-    window.speechSynthesis.cancel();
-
-    const utterance =
-        new SpeechSynthesisUtterance(text);
-
-    utterance.lang = "zh-TW";
-    utterance.rate = 0.82;
-    utterance.pitch = 1;
-
-    window.speechSynthesis.speak(utterance);
-
+function playAudio(text){
+ if(!('speechSynthesis' in window)) return;
+ window.speechSynthesis.cancel();
+ const utterance=new SpeechSynthesisUtterance(text);
+ utterance.lang='zh-TW'; utterance.rate=0.82; utterance.pitch=1;
+ window.speechSynthesis.speak(utterance);
 }
 
+let currentSlide=0;
+const slides=[...document.querySelectorAll('.slide')];
+function showSlide(index){
+ currentSlide=Math.max(0,Math.min(index,slides.length-1));
+ slides.forEach((slide,i)=>slide.classList.toggle('active',i===currentSlide));
+ document.getElementById('slideCount').textContent=`Conversation ${currentSlide+1} / ${slides.length}`;
+ document.getElementById('prevBtn').disabled=currentSlide===0;
+ document.getElementById('nextBtn').disabled=currentSlide===slides.length-1;
+ document.getElementById('explainBtn').textContent='📖 Explanation (說明)';
+ document.querySelectorAll('.explanation').forEach(el=>el.classList.remove('show'));
+}
+function changeSlide(step){showSlide(currentSlide+step)}
+function toggleExplanation(){
+ const panel=slides[currentSlide].querySelector('.explanation');
+ const isOpen=panel.classList.toggle('show');
+ document.getElementById('explainBtn').textContent=isOpen?'✖ Hide Explanation (說明)':'📖 Explanation (說明)';
+}
 
-/* =====================================================
-   CONVERSATION DATA
-===================================================== */
-
-const conversations = [
-
-    [
-        "您好",
-        "你好"
-    ],
-
-    [
-        "謝謝",
-        "不客氣"
-    ],
-
-    [
-        "再見",
-        "掰掰"
-    ],
-
-    [
-        "對不起",
-        "沒關係"
-    ],
-
-    [
-        "很高興認識你",
-        "我也很高興認識你"
-    ]
-
+const writingCharacters=[
+ {hanzi:'您',pinyin:'nín',meaning:'polite you'},
+ {hanzi:'好',pinyin:'hǎo',meaning:'good'},
+ {hanzi:'你',pinyin:'nǐ',meaning:'you'},
+ {hanzi:'謝',pinyin:'xiè',meaning:'thank'},
+ {hanzi:'不',pinyin:'bù',meaning:'not'},
+ {hanzi:'客',pinyin:'kè',meaning:'guest'},
+ {hanzi:'氣',pinyin:'qì',meaning:'politeness / air'},
+ {hanzi:'再',pinyin:'zài',meaning:'again'},
+ {hanzi:'見',pinyin:'jiàn',meaning:'see / meet'},
+ {hanzi:'掰',pinyin:'bāi',meaning:'bye (phonetic character)'},
+ {hanzi:'對',pinyin:'duì',meaning:'correct / toward'},
+ {hanzi:'起',pinyin:'qǐ',meaning:'rise'},
+ {hanzi:'沒',pinyin:'méi',meaning:'not have'},
+ {hanzi:'關',pinyin:'guān',meaning:'relation / close'},
+ {hanzi:'係',pinyin:'xì',meaning:'connection'},
+ {hanzi:'很',pinyin:'hěn',meaning:'very'},
+ {hanzi:'高',pinyin:'gāo',meaning:'high'},
+ {hanzi:'興',pinyin:'xìng',meaning:'happy / interested'},
+ {hanzi:'認',pinyin:'rèn',meaning:'recognize'},
+ {hanzi:'識',pinyin:'shí',meaning:'know'},
+ {hanzi:'我',pinyin:'wǒ',meaning:'I / me'},
+ {hanzi:'也',pinyin:'yě',meaning:'also / too'},
+ {hanzi:'問',pinyin:'wèn',meaning:'ask'},
+ {hanzi:'題',pinyin:'tí',meaning:'question / topic'}
 ];
-
-
-/* =====================================================
-   CONVERSATION SLIDER
-===================================================== */
-
-let currentSlideIndex = 0;
-
-const slides =
-    document.querySelectorAll(
-        ".conversation-slide"
-    );
-
-const indicators =
-    document.querySelectorAll(
-        ".indicator"
-    );
-
-
-function showSlide(index) {
-
-    window.speechSynthesis.cancel();
-
-    if (index < 0) {
-        index = slides.length - 1;
-    }
-
-    if (index >= slides.length) {
-        index = 0;
-    }
-
-    currentSlideIndex = index;
-
-    slides.forEach((slide, i) => {
-
-        slide.classList.toggle(
-            "active",
-            i === currentSlideIndex
-        );
-
-    });
-
-    indicators.forEach((indicator, i) => {
-
-        indicator.classList.toggle(
-            "active",
-            i === currentSlideIndex
-        );
-
-    });
-
-    document.getElementById(
-        "slideCounter"
-    ).textContent =
-        `Conversation ${index + 1} of ${slides.length}`;
-
+let writingIndex=0,writingMode='quiz',writer=null;
+function initWriter(){
+ const item=writingCharacters[writingIndex];
+ const container=document.getElementById('target-div');
+ container.innerHTML='';
+ document.getElementById('writingInfo').innerHTML=
+ writingMode==='quiz'
+ ? `Write <strong>${item.hanzi}</strong> (${item.pinyin} – ${item.meaning}) in the correct stroke order. (${writingIndex+1}/${writingCharacters.length})`
+ : `Watch the stroke order for <strong>${item.hanzi}</strong> (${item.pinyin} – ${item.meaning}). (${writingIndex+1}/${writingCharacters.length})`;
+ document.getElementById('recallAnswer').textContent='';
+ document.getElementById('writingFeedback').textContent='';
+ writer=HanziWriter.create('target-div',item.hanzi,{
+  width:260,height:260,padding:10,showOutline:true,strokeAnimationSpeed:1,
+  drawingColor:'#5c4033',strokeHighlightColor:'#b8865c',
+  showCharacter:writingMode==='animate'
+ });
+ if(writingMode==='quiz'){
+  writer.quiz({
+   onMistake:()=>setFeedback('❌ Incorrect stroke order. Try again.','incorrect'),
+   onCorrectStroke:()=>setFeedback('✨ Great! Continue with the next stroke.','correct'),
+   onComplete:()=>setFeedback('🎉 Perfect! Correct stroke order.','correct')
+  });
+ }else{writer.animateCharacter()}
+ updateCharacterList();
 }
-
-
-function changeSlide(direction) {
-
-    showSlide(
-        currentSlideIndex + direction
-    );
-
+function setFeedback(message,type){
+ const el=document.getElementById('writingFeedback');
+ el.textContent=message;el.className='feedback '+type;
 }
-
-
-/* =====================================================
-   PLAY FULL CONVERSATION
-===================================================== */
-
-function playConversation() {
-
-    if (!('speechSynthesis' in window)) {
-        return;
-    }
-
-    window.speechSynthesis.cancel();
-
-    const dialogue =
-        conversations[currentSlideIndex];
-
-    dialogue.forEach((sentence, index) => {
-
-        const utterance =
-            new SpeechSynthesisUtterance(sentence);
-
-        utterance.lang = "zh-TW";
-        utterance.rate = 0.82;
-        utterance.pitch = 1;
-
-        // Small pause between speakers
-        utterance.text = sentence;
-
-        window.speechSynthesis.speak(utterance);
-
-    });
-
+function setWritingMode(mode,button){
+ writingMode=mode;
+ document.querySelectorAll('.mode-btn').forEach(btn=>btn.classList.remove('active'));
+ button.classList.add('active');initWriter();
 }
-
-
-/* =====================================================
-   WRITING CHARACTER DATA
-   UNIQUE CHARACTERS ONLY
-===================================================== */
-
-const writingCharacters = [
-
-    {
-        hanzi: "您",
-        pinyin: "nín",
-        meaning: "you (polite)"
-    },
-
-    {
-        hanzi: "好",
-        pinyin: "hǎo",
-        meaning: "good / well"
-    },
-
-    {
-        hanzi: "你",
-        pinyin: "nǐ",
-        meaning: "you"
-    },
-
-    {
-        hanzi: "謝",
-        pinyin: "xiè",
-        meaning: "thank (part of 謝謝)"
-    },
-
-    {
-        hanzi: "不",
-        pinyin: "bù",
-        meaning: "not"
-    },
-
-    {
-        hanzi: "客",
-        pinyin: "kè",
-        meaning: "guest"
-    },
-
-    {
-        hanzi: "氣",
-        pinyin: "qì",
-        meaning: "air / manner (part of 客氣)"
-    },
-
-    {
-        hanzi: "再",
-        pinyin: "zài",
-        meaning: "again"
-    },
-
-    {
-        hanzi: "見",
-        pinyin: "jiàn",
-        meaning: "see / meet"
-    },
-
-    {
-        hanzi: "掰",
-        pinyin: "bāi",
-        meaning: "bye (part of 掰掰)"
-    },
-
-    {
-        hanzi: "對",
-        pinyin: "duì",
-        meaning: "correct / toward"
-    },
-
-    {
-        hanzi: "起",
-        pinyin: "qǐ",
-        meaning: "rise / start"
-    },
-
-    {
-        hanzi: "沒",
-        pinyin: "méi",
-        meaning: "not / have not"
-    },
-
-    {
-        hanzi: "關",
-        pinyin: "guān",
-        meaning: "close / relation"
-    },
-
-    {
-        hanzi: "係",
-        pinyin: "xì",
-        meaning: "connection / relation"
-    },
-
-    {
-        hanzi: "很",
-        pinyin: "hěn",
-        meaning: "very"
-    },
-
-    {
-        hanzi: "高",
-        pinyin: "gāo",
-        meaning: "high / tall"
-    },
-
-    {
-        hanzi: "興",
-        pinyin: "xìng",
-        meaning: "happy / interested"
-    },
-
-    {
-        hanzi: "認",
-        pinyin: "rèn",
-        meaning: "recognize"
-    },
-
-    {
-        hanzi: "識",
-        pinyin: "shí",
-        meaning: "know"
-    },
-
-    {
-        hanzi: "我",
-        pinyin: "wǒ",
-        meaning: "I / me"
-    },
-
-    {
-        hanzi: "也",
-        pinyin: "yě",
-        meaning: "also / too"
-    },
-
-    {
-        hanzi: "問",
-        pinyin: "wèn",
-        meaning: "ask / question"
-    },
-
-    {
-        hanzi: "題",
-        pinyin: "tí",
-        meaning: "topic / question"
-    }
-
-];
-
-
-/* =====================================================
-   WRITING STATE
-===================================================== */
-
-let writingIndex = 0;
-
-let writingMode = "quiz";
-
-let writer = null;
-
-
-/* =====================================================
-   INITIALIZE HANZI WRITER
-===================================================== */
-
-function initWriter() {
-
-    if (typeof HanziWriter === "undefined") {
-
-        document.getElementById(
-            "writingFeedback"
-        ).textContent =
-            "Hanzi Writer could not be loaded. Please check your internet connection.";
-
-        return;
-
-    }
-
-    const item =
-        writingCharacters[writingIndex];
-
-    const container =
-        document.getElementById(
-            "target-div"
-        );
-
-    container.innerHTML = "";
-
-
-    // Character information
-
-    document.getElementById(
-        "writingCharacter"
-    ).textContent = item.hanzi;
-
-    document.getElementById(
-        "writingPinyin"
-    ).textContent = item.pinyin;
-
-    document.getElementById(
-        "writingMeaning"
-    ).textContent = item.meaning;
-
-    document.getElementById(
-        "writingProgress"
-    ).textContent =
-        `Character ${writingIndex + 1} / ${writingCharacters.length}`;
-
-
-    // Instruction
-
-    const info =
-        document.getElementById(
-            "writingInfo"
-        );
-
-    if (writingMode === "quiz") {
-
-        info.textContent =
-            "Write the character following the correct stroke order!";
-
-    } else {
-
-        info.textContent =
-            "Watch how to write this character step by step.";
-
-    }
-
-
-    // Create Hanzi Writer
-
-    writer = HanziWriter.create(
-        "target-div",
-        item.hanzi,
-        {
-            width: 260,
-            height: 260,
-            padding: 10,
-
-            showOutline: true,
-
-            strokeAnimationSpeed: 1,
-
-            drawingColor: "#5c4033",
-
-            strokeHighlightColor: "#b8865c",
-
-            showCharacter:
-                writingMode === "animate"
-        }
-    );
-
-
-    // Start quiz or animation
-
-    document.getElementById(
-        "writingFeedback"
-    ).textContent = "";
-
-    document.getElementById(
-        "writingFeedback"
-    ).className = "writing-feedback";
-
-    if (writingMode === "quiz") {
-
-        startQuiz();
-
-    } else {
-
-        writer.animateCharacter();
-
-    }
-
+function resetWritingQuiz(){initWriter()}
+function nextWritingCharacter(){writingIndex=(writingIndex+1)%writingCharacters.length;initWriter()}
+function playCurrentWriting(){playAudio(writingCharacters[writingIndex].hanzi)}
+function updateCharacterList(){
+ const list=document.getElementById('characterList');list.innerHTML='';
+ writingCharacters.forEach((item,index)=>{
+  const chip=document.createElement('button');
+  chip.className='character-chip';chip.textContent=item.hanzi;
+  chip.title=item.pinyin+' — '+item.meaning;
+  chip.onclick=()=>{writingIndex=index;initWriter()};
+  list.appendChild(chip);
+ });
 }
-
-
-/* =====================================================
-   STROKE ORDER QUIZ
-===================================================== */
-
-function startQuiz() {
-
-    const feedback =
-        document.getElementById(
-            "writingFeedback"
-        );
-
-    writer.quiz({
-
-        onMistake: function(strokeData) {
-
-            feedback.textContent =
-                "❌ Incorrect stroke! Try again.";
-
-            feedback.className =
-                "writing-feedback incorrect";
-
-        },
-
-        onCorrectStroke: function(strokeData) {
-
-            feedback.textContent =
-                "✨ Great! Keep going.";
-
-            feedback.className =
-                "writing-feedback correct";
-
-        },
-
-        onComplete: function(summaryData) {
-
-            feedback.textContent =
-                "🎉 Perfect! You completed this character!";
-
-            feedback.className =
-                "writing-feedback correct";
-
-        }
-
-    });
-
-}
-
-
-/* =====================================================
-   CHANGE WRITING MODE
-===================================================== */
-
-function setWritingMode(mode, button) {
-
-    writingMode = mode;
-
-    document.querySelectorAll(
-        ".writing-card .mode-btn"
-    ).forEach(btn => {
-
-        btn.classList.remove("active");
-
-    });
-
-    button.classList.add("active");
-
-    initWriter();
-
-}
-
-
-/* =====================================================
-   RETRY
-===================================================== */
-
-function resetWritingQuiz() {
-
-    window.speechSynthesis.cancel();
-
-    initWriter();
-
-}
-
-
-/* =====================================================
-   NEXT CHARACTER
-===================================================== */
-
-function nextWritingCharacter() {
-
-    window.speechSynthesis.cancel();
-
-    writingIndex++;
-
-    if (
-        writingIndex >=
-        writingCharacters.length
-    ) {
-
-        writingIndex = 0;
-
-    }
-
-    initWriter();
-
-}
-
-
-/* =====================================================
-   LISTEN TO CURRENT CHARACTER
-===================================================== */
-
-function playCurrentWriting() {
-
-    playAudio(
-        writingCharacters[writingIndex].hanzi
-    );
-
-}
-
-
-/* =====================================================
-   INITIALIZE PAGE
-===================================================== */
-
 showSlide(0);
-
 initWriter();
-
 </script>
-
-
-<!-- SIDEBAR SCRIPT -->
-
 <script src="../script.js"></script>
-
 </body>
 </html>
