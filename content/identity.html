@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Introductions &amp; Identity | Boba Break Study</title>
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/hanzi-writer@3.5.0/dist/hanzi-writer.min.js"></script>
+<style>
+:root{--cream:#fff8ef;--beige:#f8eee2;--brown:#5c4033;--tan:#b8865c;--pink:#e9a0ad;--green:#8fae78;--line:#eadfd3}
+*{box-sizing:border-box}
+body{background:#fffaf5}
+
+/* ---------- Title ---------- */
+.lesson-title{text-align:center;margin:24px auto 18px;padding:0 15px}
+.lesson-title .badge{display:inline-block;background:#fff0f2;color:#b36e7b;border:1px solid #efc5cc;padding:6px 13px;border-radius:20px;font-size:12px;font-weight:bold}
+.lesson-title h1{color:var(--brown);font-size:28px;margin:12px 0 5px}
+.lesson-title p{color:#777;font-size:14px}
+
+/* ---------- Cards ---------- */
+.lesson-card,.grammar-card,.game-card,.writing-card{background:white;padding:25px;border-radius:22px;box-shadow:0 6px 15px rgba(0,0,0,.06);margin:24px auto;max-width:780px}
+h2{color:var(--tan);font-size:23px;margin:0 0 12px}
+h3{color:var(--brown);margin:8px 0}
+p{color:#666;font-size:14px;line-height:1.65}
+
+/* ---------- Intro ---------- */
+.intro-card{background:white;padding:25px;border-radius:22px;box-shadow:0 6px 15px rgba(0,0,0,.06);margin:24px auto;max-width:780px}
+.intro-card ul{margin:8px 0 0;padding-left:20px;color:#666;font-size:14px;line-height:1.9}
+
+/* ---------- Grammar carousel ---------- */
+.grammar-slide{display:none}
+.grammar-slide.active-slide{display:block}
+.explain{background:#fff8ef;border:1.5px solid #ead7c4;padding:15px;border-radius:16px;margin-top:12px}
+.explain p{margin:6px 0}
+.explain ul{margin:8px 0 0;padding-left:20px;color:#666;font-size:14px;line-height:1.8}
+
+.pattern-display{display:flex;justify-content:center;align-items:center;gap:8px;flex-wrap:wrap;margin:18px 0}
+.pattern-box{background:var(--cream);border:1.5px solid #d7b89c;color:var(--tan);padding:10px 14px;border-radius:15px;font-weight:bold;font-size:18px;text-align:center;min-width:80px}
+.pattern-box small{display:block;font-size:11px;color:#8c7355;margin-top:2px;font-weight:normal}
+.pattern-box.pink{background:#fff0f2;color:#b36e7b;border-color:#efc5cc}
+.pattern-symbol{color:#c7a98c;font-size:20px}
+
+/* Q & A bubbles */
+.dialog{margin-top:14px;display:flex;flex-direction:column;gap:10px}
+.bubble{border-radius:16px;padding:12px 14px;max-width:92%;position:relative}
+.bubble.q{background:#fff4f6;border:1.5px solid #f0d0d6;align-self:flex-start}
+.bubble.a{background:#f5f8f0;border:1.5px solid #d8e3ce;align-self:flex-end}
+.bubble .who{font-size:11px;font-weight:bold;letter-spacing:.5px;color:#aa927e;margin-bottom:2px}
+.bubble .hanzi{font-size:24px;font-weight:bold;color:var(--brown);letter-spacing:1px}
+.bubble .pinyin{font-style:italic;color:#927f70;font-size:13px;margin-top:2px}
+.bubble .translation{color:#8c7355;font-size:13px;margin-top:2px}
+.bubble .sound-btn{position:absolute;right:10px;top:10px;margin:0;width:30px;height:30px;font-size:13px}
+.bubble{padding-right:50px}
+.sound-btn{border:0;background:#b8865c;color:white;border-radius:50%;width:34px;height:34px;cursor:pointer}
+
+/* Word breakdown */
+.breakdown{list-style:none;margin:8px 0 0;padding:0}
+.breakdown li{padding:7px 0;border-bottom:1px dashed #ead7c4;font-size:14px;color:#666;line-height:1.5}
+.breakdown li:last-child{border-bottom:0}
+.breakdown .h{font-size:18px;font-weight:bold;color:var(--brown)}
+.breakdown .p{font-style:italic;color:#927f70}
+.tip{background:#fffbe9;border:1.5px dashed #e6d28c;border-radius:14px;padding:12px 14px;margin-top:12px;font-size:14px;color:#7a6a3a;line-height:1.6}
+
+.slider-nav{display:flex;align-items:center;justify-content:space-between;margin-top:18px}
+.slider-btn{background:var(--cream);border:1px solid #d7b89c;color:#8c7355;padding:8px 15px;border-radius:12px;font-weight:bold;cursor:pointer}
+.slider-btn:disabled{opacity:.4;cursor:default}
+.slider-indicators{display:flex;gap:7px}
+.indicator{height:10px;width:10px;border-radius:50%;background:#f0e4d5;cursor:pointer}
+.indicator.active{background:var(--pink)}
+
+/* ---------- Vocabulary ---------- */
+.vocab-intro{text-align:center;margin-bottom:14px}
+.lesson-card .vocab-grid{display:grid !important;grid-template-columns:repeat(auto-fill,minmax(120px,1fr)) !important;gap:12px;width:100%;flex-direction:row !important}
+.vocab-card{position:relative;overflow:hidden;width:auto !important;margin:0 !important;font-family:inherit;background:#fff9f1;border:1.5px solid #ead7c4;border-radius:18px;padding:14px 8px;text-align:center;cursor:pointer;transition:.2s;min-height:116px;display:block}
+.vocab-card:nth-child(4n+2){background:#fff4f6;border-color:#f0d0d6}
+.vocab-card:nth-child(4n+3){background:#f5f8f0;border-color:#d8e3ce}
+.vocab-card:nth-child(4n+4){background:#f7f4ff;border-color:#e0d8f0}
+.vocab-card:hover{transform:translateY(-3px) rotate(-1deg);box-shadow:0 5px 12px #0000000d}
+.vocab-card:after{content:"✿";position:absolute;right:7px;top:3px;font-size:13px;color:#e9a0ad;opacity:.75}
+.vocab-card .hanzi{font-size:24px;font-weight:bold;color:var(--brown)}
+.vocab-card .pinyin{font-size:12px;font-style:italic;color:#927f70;margin-top:3px}
+.vocab-card .meaning{font-size:12px;color:#78685d;margin-top:4px}
+.vocab-card .tap{font-size:10px;color:#b8865c;margin-top:6px}
+
+/* ---------- Games (shared) ---------- */
+.game-number{display:inline-block;background:#fff0f2;color:#b36e7b;border:1px solid #efc5cc;padding:5px 12px;border-radius:20px;font-size:12px;font-weight:bold}
+.game-description{margin:8px 0 16px}
+.game-progress{text-align:right;color:#927f70;font-size:12px;margin-bottom:8px}
+.question-box{background:#fff8ef;border:1.5px dashed #d7b89c;border-radius:16px;text-align:center;padding:16px;margin-bottom:14px}
+.question-label{font-size:11px;color:#aa927e;text-transform:uppercase;letter-spacing:.5px}
+.question-meaning{font-size:18px;color:var(--brown);font-weight:bold;margin-top:5px}
+.answer-area{min-height:66px;border:2px dashed #d7b89c;border-radius:16px;background:#fdfbf7;padding:12px;display:flex;align-items:center;justify-content:center;gap:7px;flex-wrap:wrap;margin-bottom:13px}
+.answer-placeholder{font-size:13px;color:#b4a69a}
+.word-bank{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;margin-bottom:15px}
+.word-btn{background:white;border:1.5px solid #d7b89c;color:var(--brown);padding:9px 14px;border-radius:13px;font-size:19px;cursor:pointer;transition:.2s}
+.word-btn:hover{background:#fff0f2;transform:translateY(-2px)}
+.word-btn:disabled{opacity:.35;cursor:default;transform:none}
+.selected-word{background:#b8865c;color:white;padding:8px 13px;border-radius:11px;font-size:19px;cursor:pointer}
+.selected-word.wrong{background:#c9626a;animation:shake .35s}
+.selected-word.right{background:#6b9a58}
+.game-buttons{display:flex;gap:8px}
+.check-btn,.reset-btn,.next-btn{flex:1;border:0;border-radius:12px;padding:11px;cursor:pointer;font-weight:bold}
+.reset-btn{background:#fff8ef;color:#8c7355;border:1px solid #d7b89c}
+.next-btn{display:none;background:var(--brown);color:white;margin-top:12px;width:100%}
+.feedback{text-align:center;min-height:27px;margin-top:12px;font-weight:bold;font-size:14px}
+.correct{color:#2d6a4f}
+.incorrect{color:#9b2226}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+
+/* ---------- Game 1: paragraph ---------- */
+.paragraph-box{background:#fff8ef;border:1.5px dashed #d7b89c;border-radius:16px;padding:18px 16px;margin-bottom:14px;font-size:22px;line-height:2.4;color:var(--brown);text-align:center}
+.blank{display:inline-block;min-width:64px;height:40px;line-height:36px;border:2px dashed #d7b89c;border-radius:11px;background:white;margin:0 3px;padding:0 10px;vertical-align:middle;font-size:20px;cursor:pointer;color:var(--brown);font-family:inherit}
+.blank.active{border-color:var(--pink);background:#fff0f2}
+.blank.filled{border-style:solid;background:#b8865c;color:white;border-color:#b8865c}
+.blank.right{background:#6b9a58;border-color:#6b9a58;color:white}
+.blank.wrong{background:#c9626a;border-color:#c9626a;color:white;animation:shake .35s}
+.reveal{display:none;margin-top:12px}
+.reveal .pinyin{font-style:italic;color:#927f70;font-size:14px;line-height:1.6}
+.reveal .translation{color:#8c7355;font-size:14px;margin-top:6px;line-height:1.6}
+
+/* ---------- Game 2: conversation ---------- */
+.chat-given{margin-bottom:12px}
+.chat-given .bubble{align-self:flex-end;margin-left:auto}
+.chat-label{font-size:11px;color:#aa927e;text-transform:uppercase;letter-spacing:.5px;margin:10px 0 6px}
+
+/* ---------- Writing practice ---------- */
+.writing-card{text-align:center}
+.canvas-wrapper{width:280px;height:280px;max-width:100%;margin:15px auto;background:linear-gradient(#eadac7 1px,transparent 1px),linear-gradient(90deg,#eadac7 1px,transparent 1px);background-size:70px 70px;border:2px solid #d7b89c;border-radius:16px;display:flex;align-items:center;justify-content:center;overflow:hidden;touch-action:none}
+#target-div{width:260px;height:260px}
+.mode-buttons{display:flex;gap:8px;justify-content:center;margin:14px 0;flex-wrap:wrap}
+.mode-btn,.write-btn{border:1.5px solid #d7b89c;background:#fff8ef;color:#8c7355;padding:10px 14px;border-radius:12px;cursor:pointer;font-weight:bold}
+.mode-btn.active{background:#b8865c;color:white;border-color:#b8865c}
+.character-counter{font-size:12px;color:#927f70}
+.recall-answer{font-size:28px;color:#b8865c;font-weight:bold;margin:10px}
+
+/* ---------- Mobile ---------- */
+@media(max-width:700px){
+  .lesson-card,.grammar-card,.game-card,.writing-card,.intro-card{padding:16px;margin:15px}
+  .lesson-title h1{font-size:23px}
+  .lesson-card .vocab-grid{grid-template-columns:repeat(3,minmax(0,1fr)) !important;gap:10px}
+  .vocab-card{padding:12px 4px;min-height:108px}
+  .word-btn{font-size:17px;padding:8px 11px}
+  .game-buttons{flex-wrap:wrap}
+  .paragraph-box{font-size:19px;line-height:2.3;padding:14px 10px}
+  .blank{min-width:52px;font-size:17px}
+  .bubble{max-width:100%}
+  .bubble .hanzi{font-size:21px}
+}
+</style>
+</head>
+<body>
+<div class="app-container">
+<div id="sidebar-container"></div>
+<main class="main-content">
+
+<div class="lesson-title">
+  <span class="badge">CONVERSATION • BEGINNER</span>
+  <h1>Introductions &amp; Identity</h1>
+  <p>The questions Taiwanese people will most likely ask you when they meet you. 🧋</p>
+</div>
+
+<!-- ========== INTRO (English) ========== -->
+<section class="intro-card">
+  <h2>👋 Before We Start</h2>
+  <p>When you live in Taiwan, people are friendly and curious. Sooner or later, almost everyone you meet will ask you the same few questions: <strong>what is your name, where are you from, how old are you, how long have you been here, and why did you come to Taiwan</strong>.</p>
+  <p>In this lesson you will learn how to understand each question and how to answer it naturally. Every Chinese word comes with <strong>pinyin</strong> (how to read it) and its <strong>English meaning</strong>, so you can follow along even as a beginner.</p>
+  <div class="explain">
+    <p><strong>What you will learn:</strong></p>
+    <ul>
+      <li>Asking and giving your family name and full name</li>
+      <li>Saying where you are from</li>
+      <li>Saying your age</li>
+      <li>Saying how long you have been in Taiwan</li>
+      <li>Saying why you came to Taiwan</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ========== GRAMMAR CAROUSEL ========== -->
+<section class="grammar-card">
+  <h2>🧠 Let's Learn: Q &amp; A</h2>
+
+  <!-- 1: Family name -->
+  <div class="grammar-slide active-slide" id="slide-1">
+    <h3>1. Asking for your family name</h3>
+    <p>This is the polite, formal way to ask someone's <strong>family name (surname)</strong>. Usually, the person only wants your surname, not your full name.</p>
+    <div class="dialog">
+      <div class="bubble q">
+        <div class="who">QUESTION</div>
+        <div class="hanzi">您貴姓？</div>
+        <div class="pinyin">nín guìxìng?</div>
+        <div class="translation">May I ask your family name? (polite)</div>
+        <button class="sound-btn" onclick="playAudio('您貴姓')" aria-label="Listen">🔊</button>
+      </div>
+      <div class="bubble a">
+        <div class="who">ANSWER</div>
+        <div class="hanzi">我姓王。</div>
+        <div class="pinyin">wǒ xìng Wáng.</div>
+        <div class="translation">My family name is Wang.</div>
+        <button class="sound-btn" onclick="playAudio('我姓王')" aria-label="Listen">🔊</button>
+      </div>
+      <div class="bubble a">
+        <div class="who">ANSWER (WITH FULL NAME)</div>
+        <div class="hanzi">我姓王，叫王小明。</div>
+        <div class="pinyin">wǒ xìng Wáng, jiào Wáng Xiǎomíng.</div>
+        <div class="translation">My family name is Wang, and I am called Wang Xiaoming.</div>
+        <button class="sound-btn" onclick="playAudio('我姓王，叫王小明')" aria-label="Listen">🔊</button>
+      </div>
+    </div>
+    <div class="pattern-display">
+      <div class="pattern-box">我姓<small>wǒ xìng</small></div>
+      <div class="pattern-symbol">+</div>
+      <div class="pattern-box pink">Family name<small>e.g. 王</small></div>
+    </div>
+    <div class="explain">
+      <ul class="breakdown">
+        <li><span class="h">貴姓</span> <span class="p">(guìxìng)</span> = honorable surname (a polite way to ask)</li>
+        <li><span class="h">姓</span> <span class="p">(xìng)</span> = family name / to be surnamed</li>
+        <li><span class="h">叫</span> <span class="p">(jiào)</span> = to be called</li>
+      </ul>
+    </div>
+    <div class="tip">💡 If you only want to give your surname, say <strong>我姓 + family name</strong>. If you also want to give your full name, add <strong>叫 + full name</strong>.</div>
+  </div>
+
+  <!-- 2: Full name -->
+  <div class="grammar-slide" id="slide-2">
+    <h3>2. Asking for your full name</h3>
+    <p>This question asks for your <strong>full name</strong>. It is more casual than 您貴姓.</p>
+    <div class="dialog">
+      <div class="bubble q">
+        <div class="who">QUESTION</div>
+        <div class="hanzi">你叫什麼名字？</div>
+        <div class="pinyin">nǐ jiào shénme míngzi?</div>
+        <div class="translation">What is your name?</div>
+        <button class="sound-btn" onclick="playAudio('你叫什麼名字')" aria-label="Listen">🔊</button>
+      </div>
+      <div class="bubble a">
+        <div class="who">ANSWER 1</div>
+        <div class="hanzi">我叫王小明。</div>
+        <div class="pinyin">wǒ jiào Wáng Xiǎomíng.</div>
+        <div class="translation">I am called Wang Xiaoming.</div>
+        <button class="sound-btn" onclick="playAudio('我叫王小明')" aria-label="Listen">🔊</button>
+      </div>
+      <div class="bubble a">
+        <div class="who">ANSWER 2</div>
+        <div class="hanzi">我的名字叫王小明。</div>
+        <div class="pinyin">wǒ de míngzi jiào Wáng Xiǎomíng.</div>
+        <div class="translation">My name is called Wang Xiaoming.</div>
+        <button class="sound-btn" onclick="playAudio('我的名字叫王小明')" aria-label="Listen">🔊</button>
+      </div>
+    </div>
+    <div class="pattern-display">
+      <div class="pattern-box">我叫<small>wǒ jiào</small></div>
+      <div class="pattern-symbol">+</div>
+      <div class="pattern-box pink">Full name<small>e.g. 王小明</small></div>
+    </div>
+    <div class="explain">
+      <ul class="breakdown">
+        <li><span class="h">叫</span> <span class="p">(jiào)</span> = to be called</li>
+        <li><span class="h">什麼</span> <span class="p">(shénme)</span> = what</li>
+        <li><span class="h">名字</span> <span class="p">(míngzi)</span> = name</li>
+      </ul>
+    </div>
+    <div class="tip">💡 <strong>叫什麼名字</strong> means they are asking for your <strong>full name</strong>. Answer with <strong>我叫 + full name</strong> or <strong>我的名字叫 + full name</strong>.</div>
+  </div>
+
+  <!-- 3: Where are you from -->
+  <div class="grammar-slide" id="slide-3">
+    <h3>3. Where are you from?</h3>
+    <p>People in Taiwan will often ask which country you come from. There are two common questions, and they mean almost the same thing.</p>
+    <div class="dialog">
+      <div class="bubble q">
+        <div class="who">QUESTION 1</div>
+        <div class="hanzi">你是哪裡人？</div>
+        <div class="pinyin">nǐ shì nǎlǐ rén?</div>
+        <div class="translation">Where are you from? (literally: which place's person)</div>
+        <button class="sound-btn" onclick="playAudio('你是哪裡人')" aria-label="Listen">🔊</button>
+      </div>
+      <div class="bubble q">
+        <div class="who">QUESTION 2</div>
+        <div class="hanzi">你是哪國人？</div>
+        <div class="pinyin">nǐ shì nǎ guó rén?</div>
+        <div class="translation">Which country are you from?</div>
+        <button class="sound-btn" onclick="playAudio('你是哪國人')" aria-label="Listen">🔊</button>
+      </div>
+      <div class="bubble a">
+        <div class="who">ANSWER 1</div>
+        <div class="hanzi">我是美國人。</div>
+        <div class="pinyin">wǒ shì Měiguó rén.</div>
+        <div class="translation">I am American.</div>
+        <button class="sound-btn" onclick="playAudio('我是美國人')" aria-label="Listen">🔊</button>
+      </div>
+      <div class="bubble a">
+        <div class="who">ANSWER 2</div>
+        <div class="hanzi">我來自美國。</div>
+        <div class="pinyin">wǒ láizì Měiguó.</div>
+        <div class="translation">I come from America.</div>
+        <button class="sound-btn" onclick="playAudio('我來自美國')" aria-label="Listen">🔊</button>
+      </div>
+    </div>
+    <div class="pattern-display">
+      <div class="pattern-box">我是<small>wǒ shì</small></div>
+      <div class="pattern-symbol">+</div>
+      <div class="pattern-box pink">Country<small>e.g. 美國</small></div>
+      <div class="pattern-symbol">+</div>
+      <div class="pattern-box">人<small>rén</small></div>
+    </div>
+    <div class="explain">
+      <ul class="breakdown">
+        <li><span class="h">哪國</span> <span class="p">(nǎ guó)</span> = which country</li>
+        <li><span class="h">哪裡</span> <span class="p">(nǎlǐ)</span> = where / which place</li>
+        <li><span class="h">人</span> <span class="p">(rén)</span> = person</li>
+        <li><span class="h">來自</span> <span class="p">(láizì)</span> = to come from</li>
+        <li><span class="h">美國</span> <span class="p">(Měiguó)</span> = United States</li>
+      </ul>
+    </div>
+    <div class="tip">💡 Replace 美國 with your own country, for example 日本 (Rìběn, Japan) or 印尼 (Yìnní, Indonesia). Then answer with <strong>我是 (country) 人</strong> or <strong>我來自 (country)</strong>.</div>
+  </div>
+
+  <!-- 4: Age -->
+  <div class="grammar-slide" id="slide-4">
+    <h3>4. How old are you?</h3>
+    <p>Both questions simply ask your age. You will hear 你幾歲 more often with younger people, and 你多大了 is a very common, natural way to ask adults.</p>
+    <div class="dialog">
+      <div class="bubble q">
+        <div class="who">QUESTION 1</div>
+        <div class="hanzi">你幾歲？</div>
+        <div class="pinyin">nǐ jǐ suì?</div>
+        <div class="translation">How old are you?</div>
+        <button class="sound-btn" onclick="playAudio('你幾歲')" aria-label="Listen">🔊</button>
+      </div>
+      <div class="bubble q">
+        <div class="who">QUESTION 2</div>
+        <div class="hanzi">你多大了？</div>
+        <div class="pinyin">nǐ duō dà le?</div>
+        <div class="translation">How old are you? (literally: how big have you become)</div>
+        <button class="sound-btn" onclick="playAudio('你多大了')" aria-label="Listen">🔊</button>
+      </div>
+      <div class="bubble a">
+        <div class="who">ANSWER</div>
+        <div class="hanzi">我三十歲。</div>
+        <div class="pinyin">wǒ sānshí suì.</div>
+        <div class="translation">I am thirty years old.</div>
+        <button class="sound-btn" onclick="playAudio('我三十歲')" aria-label="Listen">🔊</button>
+      </div>
+    </div>
+    <div class="pattern-display">
+      <div class="pattern-box">我<small>wǒ</small></div>
+      <div class="pattern-symbol">+</div>
+      <div class="pattern-box pink">Your age<small>e.g. 三十</small></div>
+      <div class="pattern-symbol">+</div>
+      <div class="pattern-box">歲<small>suì</small></div>
+    </div>
+    <div class="explain">
+      <ul class="breakdown">
+        <li><span class="h">幾</span> <span class="p">(jǐ)</span> = how many</li>
+        <li><span class="h">歲</span> <span class="p">(suì)</span> = years old</li>
+        <li><span class="h">多</span> <span class="p">(duō)</span> = how (much)</li>
+        <li><span class="h">大</span> <span class="p">(dà)</span> = big</li>
+        <li><span class="h">了</span> <span class="p">(le)</span> = particle that shows a change or "already"</li>
+      </ul>
+    </div>
+    <div class="tip">💡 <strong>多大了</strong> literally means "how big have you become", but people use it to ask your age. Answer with <strong>我 + (your age) + 歲</strong>.</div>
+  </div>
+
+  <!-- 5: How long in Taiwan -->
+  <div class="grammar-slide" id="slide-5">
+    <h3>5. How long have you been in Taiwan?</h3>
+    <p>This is one of the most common questions foreigners hear in Taiwan.</p>
+    <div class="dialog">
+      <div class="bubble q">
+        <div class="who">QUESTION</div>
+        <div class="hanzi">你來台灣多久了？</div>
+        <div class="pinyin">nǐ lái Táiwān duōjiǔ le?</div>
+        <div class="translation">How long have you been in Taiwan?</div>
+        <button class="sound-btn" onclick="playAudio('你來台灣多久了')" aria-label="Listen">🔊</button>
+      </div>
+      <div class="bubble a">
+        <div class="who">ANSWER (YEARS)</div>
+        <div class="hanzi">我來台灣三年了。</div>
+        <div class="pinyin">wǒ lái Táiwān sān nián le.</div>
+        <div class="translation">I have been in Taiwan for three years.</div>
+        <button class="sound-btn" onclick="playAudio('我來台灣三年了')" aria-label="Listen">🔊</button>
+      </div>
+      <div class="bubble a">
+        <div class="who">ANSWER (MONTHS)</div>
+        <div class="hanzi">我來台灣三個月了。</div>
+        <div class="pinyin">wǒ lái Táiwān sān ge yuè le.</div>
+        <div class="translation">I have been in Taiwan for three months.</div>
+        <button class="sound-btn" onclick="playAudio('我來台灣三個月了')" aria-label="Listen">🔊</button>
+      </div>
+    </div>
+    <div class="pattern-display">
+      <div class="pattern-box">我來台灣<small>wǒ lái Táiwān</small></div>
+      <div class="pattern-symbol">+</div>
+      <div class="pattern-box pink">Number + 年 / 個月<small>nián / ge yuè</small></div>
+      <div class="pattern-symbol">+</div>
+      <div class="pattern-box">了<small>le</small></div>
+    </div>
+    <div class="explain">
+      <ul class="breakdown">
+        <li><span class="h">多久</span> <span class="p">(duōjiǔ)</span> = how long</li>
+        <li><span class="h">久</span> <span class="p">(jiǔ)</span> = a long time</li>
+        <li><span class="h">年</span> <span class="p">(nián)</span> = year</li>
+        <li><span class="h">月</span> <span class="p">(yuè)</span> = month</li>
+        <li><span class="h">個</span> <span class="p">(ge)</span> = measure word for "months"</li>
+      </ul>
+    </div>
+    <div class="tip">💡 For months you <strong>must add 個</strong>. Without 個, it becomes the name of a month:<br>
+      <strong>一個月</strong> (yí ge yuè) = one month<br>
+      <strong>一月</strong> (yīyuè) = January (you will learn this in the Time lesson)</div>
+  </div>
+
+  <!-- 6: Why Taiwan -->
+  <div class="grammar-slide" id="slide-6">
+    <h3>6. Why did you come to Taiwan?</h3>
+    <p>These questions ask about your <strong>purpose</strong> for coming to Taiwan.</p>
+    <div class="dialog">
+      <div class="bubble q">
+        <div class="who">QUESTION 1</div>
+        <div class="hanzi">你來台灣做什麼？</div>
+        <div class="pinyin">nǐ lái Táiwān zuò shénme?</div>
+        <div class="translation">What do you do in Taiwan? / What did you come to Taiwan to do?</div>
+        <button class="sound-btn" onclick="playAudio('你來台灣做什麼')" aria-label="Listen">🔊</button>
+      </div>
+      <div class="bubble q">
+        <div class="who">QUESTION 2</div>
+        <div class="hanzi">你為什麼來台灣？</div>
+        <div class="pinyin">nǐ wèishénme lái Táiwān?</div>
+        <div class="translation">Why did you come to Taiwan?</div>
+        <button class="sound-btn" onclick="playAudio('你為什麼來台灣')" aria-label="Listen">🔊</button>
+      </div>
+      <div class="bubble a">
+        <div class="who">ANSWER</div>
+        <div class="hanzi">我來台灣工作。</div>
+        <div class="pinyin">wǒ lái Táiwān gōngzuò.</div>
+        <div class="translation">I came to Taiwan to work.</div>
+        <button class="sound-btn" onclick="playAudio('我來台灣工作')" aria-label="Listen">🔊</button>
+      </div>
+    </div>
+    <div class="pattern-display">
+      <div class="pattern-box">我來台灣<small>wǒ lái Táiwān</small></div>
+      <div class="pattern-symbol">+</div>
+      <div class="pattern-box pink">Reason<small>e.g. 工作</small></div>
+    </div>
+    <div class="explain">
+      <ul class="breakdown">
+        <li><span class="h">做</span> <span class="p">(zuò)</span> = to do</li>
+        <li><span class="h">什麼</span> <span class="p">(shénme)</span> = what</li>
+        <li><span class="h">為什麼</span> <span class="p">(wèishénme)</span> = why</li>
+        <li><span class="h">工作</span> <span class="p">(gōngzuò)</span> = to work</li>
+        <li><span class="h">讀書 / 唸書</span> <span class="p">(dúshū / niànshū)</span> = to study / go to school</li>
+        <li><span class="h">結婚</span> <span class="p">(jiéhūn)</span> = to get married</li>
+      </ul>
+    </div>
+    <div class="tip">💡 Answer with <strong>我來台灣 + reason</strong>. For example: 我來台灣讀書 (I came to Taiwan to study) or 我來台灣結婚 (I came to Taiwan to get married).</div>
+  </div>
+
+  <div class="slider-nav">
+    <button class="slider-btn" id="prevSlide" onclick="changeSlide(-1)">← Prev</button>
+    <div class="slider-indicators" id="indicators"></div>
+    <button class="slider-btn" id="nextSlide" onclick="changeSlide(1)">Next →</button>
+  </div>
+</section>
+
+<!-- ========== VOCABULARY ========== -->
+<section class="lesson-card">
+  <h2>🌼 Vocabulary 生詞</h2>
+  <p class="vocab-intro">Tap a card to hear how the word sounds. ✨</p>
+  <div class="vocab-grid" id="vocabContainer"></div>
+</section>
+
+<!-- ========== GAME 1: PARAGRAPH ========== -->
+<section class="game-card">
+  <span class="game-number">GAME 1</span>
+  <h2>📝 Complete the Introduction</h2>
+  <p class="game-description">Tap a word below to fill the next empty blank. Tap a filled blank to take the word back. When everything is correct, you will hear the whole introduction.</p>
+  <div class="paragraph-box" id="pBox"></div>
+  <div class="word-bank" id="pBank"></div>
+  <div class="game-buttons">
+    <button class="reset-btn" onclick="loadParagraph()">↻ Reset</button>
+  </div>
+  <div class="feedback" id="pFeedback"></div>
+  <div class="explain reveal" id="pReveal">
+    <div class="pinyin">Nín hǎo! Wǒ de míngzi jiào Chén Xiǎoměi, wǒ láizì Rìběn, wǒ sānshíwǔ suì, wǒ lái Táiwān qī nián le, wǒ lái Táiwān dúshū. Hěn gāoxìng rènshi nín.</div>
+    <div class="translation">Hello! My name is Chen Xiaomei. I am from Japan. I am 35 years old. I have been in Taiwan for 7 years. I came to Taiwan to study. Nice to meet you.</div>
+    <button class="sound-btn" style="margin-top:10px" onclick="playAudio(PARA_FULL)" aria-label="Listen again">🔊</button>
+  </div>
+</section>
+
+<!-- ========== GAME 2: CONVERSATION ========== -->
+<section class="game-card">
+  <span class="game-number">GAME 2</span>
+  <h2>💬 Rebuild the Question</h2>
+  <p class="game-description">Read the answer, then tap the words in the right order to build the question that was asked.</p>
+  <div class="game-progress">Conversation <span id="cNum">1</span> / 5</div>
+
+  <div class="chat-label">The answer (given)</div>
+  <div class="dialog chat-given" id="cGiven"></div>
+
+  <div class="chat-label">Build the question</div>
+  <div class="answer-area" id="cAnswer"><span class="answer-placeholder">Your question will appear here</span></div>
+  <div class="word-bank" id="cBank"></div>
+  <div class="game-buttons">
+    <button class="reset-btn" onclick="resetConvo()">↻ Reset</button>
+  </div>
+  <div class="feedback" id="cFeedback"></div>
+  <button class="next-btn" id="cNext" onclick="nextConvo()">Next conversation →</button>
+</section>
+
+<!-- ========== WRITING PRACTICE ========== -->
+<section class="writing-card">
+  <h2>✍️ Hanzi Stroke Practice</h2>
+  <p>Practice writing each character, one stroke at a time.</p>
+  <div class="mode-buttons">
+    <button class="mode-btn active" id="quizMode" onclick="setMode('quiz')">✍️ Practice</button>
+    <button class="mode-btn" id="animateMode" onclick="setMode('animate')">👀 Watch</button>
+  </div>
+  <div id="writingInfo" class="tiny-note"></div>
+  <div class="character-counter" id="charCounter"></div>
+  <div class="recall-answer" id="recallAnswer"></div>
+  <div class="canvas-wrapper"><div id="target-div"></div></div>
+  <div class="feedback" id="writingFeedback"></div>
+  <div class="mode-buttons">
+    <button class="write-btn" onclick="resetWriting()">↻ Try again</button>
+    <button class="write-btn" onclick="playCurrent()">🔊 Listen</button>
+    <button class="write-btn" onclick="nextCharacter()">Next character →</button>
+  </div>
+</section>
+
+</main>
+</div>
+
+<script>
+/* ---------- Audio ---------- */
+function playAudio(text){
+  if(!('speechSynthesis' in window)) return;
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = 'zh-TW'; u.rate = .82; u.pitch = 1;
+  speechSynthesis.speak(u);
+}
+
+/* Click sound effect (no audio file needed) */
+let audioCtx = null;
+function playClick(freq){
+  try{
+    audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+    const o = audioCtx.createOscillator(), g = audioCtx.createGain();
+    o.type = 'sine'; o.frequency.value = freq || 660;
+    g.gain.setValueAtTime(.001, audioCtx.currentTime);
+    g.gain.exponentialRampToValueAtTime(.18, audioCtx.currentTime + .01);
+    g.gain.exponentialRampToValueAtTime(.001, audioCtx.currentTime + .12);
+    o.connect(g); g.connect(audioCtx.destination);
+    o.start(); o.stop(audioCtx.currentTime + .13);
+  }catch(e){}
+}
+
+/* ---------- Grammar carousel ---------- */
+const slides = document.querySelectorAll('.grammar-slide');
+const indWrap = document.getElementById('indicators');
+let slideIndex = 0;
+slides.forEach((_, i)=>{
+  const d = document.createElement('div');
+  d.className = 'indicator' + (i === 0 ? ' active' : '');
+  d.onclick = ()=>showSlide(i);
+  indWrap.appendChild(d);
+});
+function showSlide(n){
+  slideIndex = n;
+  slides.forEach((s, i)=>s.classList.toggle('active-slide', i === n));
+  document.querySelectorAll('.indicator').forEach((d, i)=>d.classList.toggle('active', i === n));
+  document.getElementById('prevSlide').disabled = n === 0;
+  document.getElementById('nextSlide').disabled = n === slides.length - 1;
+}
+function changeSlide(step){
+  const n = slideIndex + step;
+  if(n >= 0 && n < slides.length) showSlide(n);
+}
+showSlide(0);
+
+/* ---------- Vocabulary ---------- */
+const vocab = [
+  ['貴姓','guìxìng','honorable surname'],
+  ['姓','xìng','family name'],
+  ['叫','jiào','to be called'],
+  ['名字','míngzi','name'],
+  ['歲','suì','years old'],
+  ['了','le','already (particle)'],
+  ['年','nián','year'],
+  ['月','yuè','month'],
+  ['個','ge','measure word'],
+  ['做','zuò','to do'],
+  ['什麼','shénme','what'],
+  ['為什麼','wèishénme','why'],
+  ['哪裡','nǎlǐ','where'],
+  ['哪國','nǎ guó','which country'],
+  ['幾','jǐ','how many'],
+  ['多大','duō dà','how old'],
+  ['多久','duōjiǔ','how long'],
+  ['人','rén','person'],
+  ['來','lái','to come'],
+  ['來自','láizì','to come from'],
+  ['台灣','Táiwān','Taiwan'],
+  ['美國','Měiguó','United States'],
+  ['工作','gōngzuò','to work'],
+  ['讀書','dúshū','to study'],
+  ['唸書','niànshū','to study'],
+  ['結婚','jiéhūn','to get married']
+];
+const vocabEl = document.getElementById('vocabContainer');
+vocab.forEach(([hanzi, pinyin, meaning])=>{
+  const card = document.createElement('button');
+  card.type = 'button';
+  card.className = 'vocab-card';
+  card.innerHTML =
+    `<div class="hanzi">${hanzi}</div>` +
+    `<div class="pinyin">${pinyin}</div>` +
+    `<div class="meaning">${meaning}</div>` +
+    `<div class="tap">♫ tap to listen</div>`;
+  card.onclick = ()=>playAudio(hanzi);
+  vocabEl.appendChild(card);
+});
+
+/* ---------- Shared ---------- */
+function shuffle(arr){
+  const a = [...arr];
+  for(let i = a.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+/* ---------- Game 1: complete the paragraph ---------- */
+const paraParts = [
+  '您好！我的', {b:'名字'}, {b:'叫'}, '陳小美，我', {b:'來自'},
+  '日本，我三十五', {b:'歲'}, '，我來台灣七', {b:'年了'},
+  '，我來台灣', {b:'讀書'}, '。很高興認識您'
+];
+const PARA_FULL = paraParts.map(p => typeof p === 'string' ? p : p.b).join('');
+const blanks = paraParts.filter(p => typeof p !== 'string').map(p => p.b);
+let pFilled = [], pActive = 0, pDone = false;
+
+function loadParagraph(){
+  pFilled = blanks.map(()=>null);
+  pActive = 0; pDone = false;
+  document.getElementById('pFeedback').textContent = '';
+  document.getElementById('pFeedback').className = 'feedback';
+  document.getElementById('pReveal').style.display = 'none';
+
+  const bank = document.getElementById('pBank');
+  bank.innerHTML = '';
+  shuffle(blanks).forEach(word=>{
+    const b = document.createElement('button');
+    b.className = 'word-btn';
+    b.textContent = word;
+    b.onclick = ()=>pickWord(word, b);
+    bank.appendChild(b);
+  });
+  renderParagraph();
+}
+
+function renderParagraph(states){
+  const box = document.getElementById('pBox');
+  box.innerHTML = '';
+  let bi = 0;
+  paraParts.forEach(p=>{
+    if(typeof p === 'string'){
+      box.appendChild(document.createTextNode(p));
+    }else{
+      const idx = bi++;
+      const s = document.createElement('button');
+      s.type = 'button';
+      s.className = 'blank';
+      const w = pFilled[idx];
+      if(w){
+        s.textContent = w.word;
+        s.classList.add('filled');
+        if(states && states[idx]) s.classList.add(states[idx]);
+      }else{
+        s.textContent = '＿＿';
+        if(idx === pActive) s.classList.add('active');
+      }
+      s.onclick = ()=>tapBlank(idx);
+      box.appendChild(s);
+    }
+  });
+}
+
+function firstEmpty(){ return pFilled.findIndex(x => x === null); }
+
+function pickWord(word, btn){
+  if(pDone || btn.disabled) return;
+  let idx = pFilled[pActive] === null ? pActive : firstEmpty();
+  if(idx < 0) return;
+  pFilled[idx] = {word, btn};
+  btn.disabled = true;
+  playClick(660);
+  playAudio(word);
+  const next = firstEmpty();
+  pActive = next < 0 ? idx : next;
+  renderParagraph();
+  if(next < 0) checkParagraph();
+}
+
+function tapBlank(idx){
+  if(pDone) return;
+  const item = pFilled[idx];
+  if(item){
+    item.btn.disabled = false;
+    pFilled[idx] = null;
+    playClick(440);
+  }
+  pActive = idx;
+  const fb = document.getElementById('pFeedback');
+  fb.textContent = ''; fb.className = 'feedback';
+  renderParagraph();
+}
+
+function checkParagraph(){
+  const states = pFilled.map((x, i)=> x.word === blanks[i] ? 'right' : 'wrong');
+  const fb = document.getElementById('pFeedback');
+  renderParagraph(states);
+  if(states.every(s => s === 'right')){
+    pDone = true;
+    fb.textContent = '🎉 Perfect! Listen to the whole introduction.';
+    fb.className = 'feedback correct';
+    document.getElementById('pReveal').style.display = 'block';
+    setTimeout(()=>{ playClick(880); playAudio(PARA_FULL); }, 250);
+  }else{
+    fb.textContent = '💭 Almost! Tap the red words to take them back and try again.';
+    fb.className = 'feedback incorrect';
+    playClick(220);
+  }
+}
+
+/* ---------- Game 2: rebuild the question ---------- */
+const convos = [
+  {q:['你','幾','歲'],                 a:'我二十歲',       py:'wǒ èrshí suì',                    en:'I am twenty years old.'},
+  {q:['您','貴','姓'],                 a:'我姓王',         py:'wǒ xìng Wáng',                    en:'My family name is Wang.'},
+  {q:['你','來','台灣','多久','了'],   a:'我來台灣七年了', py:'wǒ lái Táiwān qī nián le',        en:'I have been in Taiwan for seven years.'},
+  {q:['你','叫','什麼','名字'],        a:'我的名字叫王小明', py:'wǒ de míngzi jiào Wáng Xiǎomíng', en:'My name is Wang Xiaoming.'},
+  {q:['你','來','台灣','做','什麼'],   a:'我來台灣工作',   py:'wǒ lái Táiwān gōngzuò',           en:'I came to Taiwan to work.'}
+];
+let cIndex = 0, cSel = [], cDone = false;
+
+function loadConvo(){
+  cSel = []; cDone = false;
+  const c = convos[cIndex];
+  document.getElementById('cNum').textContent = cIndex + 1;
+  document.getElementById('cGiven').innerHTML =
+    `<div class="bubble a">
+       <div class="who">ANSWER</div>
+       <div class="hanzi">${c.a}。</div>
+       <div class="pinyin">${c.py}.</div>
+       <div class="translation">${c.en}</div>
+       <button class="sound-btn" onclick="playAudio('${c.a}')" aria-label="Listen">🔊</button>
+     </div>`;
+  document.getElementById('cAnswer').innerHTML = '<span class="answer-placeholder">Your question will appear here</span>';
+  const fb = document.getElementById('cFeedback');
+  fb.textContent = ''; fb.className = 'feedback';
+  const next = document.getElementById('cNext');
+  next.style.display = 'none';
+  next.textContent = cIndex === convos.length - 1 ? 'Play again →' : 'Next conversation →';
+
+  const bank = document.getElementById('cBank');
+  bank.innerHTML = '';
+  let order = shuffle(c.q);
+  if(order.join('') === c.q.join('')) order = shuffle(c.q);
+  order.forEach(word=>{
+    const b = document.createElement('button');
+    b.className = 'word-btn';
+    b.textContent = word;
+    b.onclick = ()=>{
+      if(cDone || b.disabled) return;
+      cSel.push({word, btn:b});
+      b.disabled = true;
+      playClick(660);
+      playAudio(word);
+      renderConvo();
+      if(cSel.length === c.q.length) checkConvo();
+    };
+    bank.appendChild(b);
+  });
+}
+
+function renderConvo(states){
+  const area = document.getElementById('cAnswer');
+  area.innerHTML = '';
+  if(!cSel.length){
+    area.innerHTML = '<span class="answer-placeholder">Your question will appear here</span>';
+    return;
+  }
+  cSel.forEach((item, i)=>{
+    const s = document.createElement('span');
+    s.className = 'selected-word' + (states ? ' ' + states[i] : '');
+    s.textContent = item.word;
+    s.title = 'Tap to remove';
+    s.onclick = ()=>{
+      if(cDone) return;
+      cSel.splice(i, 1);
+      item.btn.disabled = false;
+      playClick(440);
+      const fb = document.getElementById('cFeedback');
+      fb.textContent = ''; fb.className = 'feedback';
+      renderConvo();
+    };
+    area.appendChild(s);
+  });
+}
+
+function checkConvo(){
+  const c = convos[cIndex], fb = document.getElementById('cFeedback');
+  const states = cSel.map((x, i)=> x.word === c.q[i] ? 'right' : 'wrong');
+  renderConvo(states);
+  if(states.every(s => s === 'right')){
+    cDone = true;
+    fb.textContent = '🎉 Correct! Listen to the conversation.';
+    fb.className = 'feedback correct';
+    document.getElementById('cNext').style.display = 'block';
+    setTimeout(()=>{ playClick(880); playAudio(c.q.join('') + '。' + c.a); }, 250);
+  }else{
+    fb.textContent = '💭 Almost! Tap the red words to remove them and try again.';
+    fb.className = 'feedback incorrect';
+    playClick(220);
+  }
+}
+function resetConvo(){ loadConvo(); }
+function nextConvo(){ cIndex = (cIndex + 1) % convos.length; loadConvo(); }
+
+/* ---------- Stroke practice ---------- */
+const chars = ['貴','姓','叫','名','字','歲','幾','年','月','做','什','麼','為','哪','國','裡','久','來','工','作','讀','書'];
+let charIndex = 0, mode = 'quiz', writer = null;
+
+function setFeedback(text, cls){
+  const f = document.getElementById('writingFeedback');
+  f.textContent = text; f.className = 'feedback ' + (cls || '');
+}
+
+function initWriter(){
+  const ch = chars[charIndex];
+  const target = document.getElementById('target-div');
+  target.innerHTML = '';
+  document.getElementById('charCounter').textContent = `Character ${charIndex + 1} of ${chars.length}`;
+  document.getElementById('writingInfo').textContent =
+    mode === 'quiz' ? 'Draw the character with your finger or mouse.' : 'Watch how the character is written.';
+  document.getElementById('recallAnswer').textContent = mode === 'quiz' ? 'Write: ' + ch : '';
+  setFeedback('');
+
+  if(!window.HanziWriter){
+    setFeedback('Could not load the writing tool. Please check your internet.', 'incorrect');
+    return;
+  }
+  writer = HanziWriter.create('target-div', ch, {
+    width:260, height:260, padding:10,
+    showOutline:true, showCharacter: mode === 'animate',
+    strokeAnimationSpeed:1,
+    drawingColor:'#5c4033', strokeColor:'#5c4033', strokeHighlightColor:'#b8865c'
+  });
+  if(mode === 'quiz'){
+    writer.quiz({
+      onMistake:       ()=>setFeedback('Not quite. Try that stroke again!', 'incorrect'),
+      onCorrectStroke: ()=>setFeedback('✨ Nice stroke! Keep going.', 'correct'),
+      onComplete:      ()=>setFeedback('🎉 Perfect!', 'correct')
+    });
+  }else{
+    writer.animateCharacter();
+  }
+}
+function setMode(m){
+  mode = m;
+  document.getElementById('quizMode').classList.toggle('active', m === 'quiz');
+  document.getElementById('animateMode').classList.toggle('active', m === 'animate');
+  initWriter();
+}
+function resetWriting(){ initWriter(); }
+function nextCharacter(){ charIndex = (charIndex + 1) % chars.length; initWriter(); }
+function playCurrent(){ playAudio(chars[charIndex]); }
+
+/* ---------- Start ---------- */
+loadParagraph();
+loadConvo();
+initWriter();
+</script>
+<script src="../script.js"></script>
+</body>
+</html>
