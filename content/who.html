@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>誰 (Who) | Boba Break Study</title>
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/hanzi-writer@3.5.0/dist/hanzi-writer.min.js"></script>
+<style>
+:root{--cream:#fff8ef;--beige:#f8eee2;--brown:#5c4033;--tan:#b8865c;--pink:#e9a0ad;--green:#8fae78;--line:#eadfd3}
+*{box-sizing:border-box}
+body{background:#fffaf5}
+
+/* ---------- Title ---------- */
+.lesson-title{text-align:center;margin:24px auto 18px;padding:0 15px}
+.lesson-title .badge{display:inline-block;background:#fff0f2;color:#b36e7b;border:1px solid #efc5cc;padding:6px 13px;border-radius:20px;font-size:12px;font-weight:bold}
+.lesson-title h1{color:var(--brown);font-size:28px;margin:12px 0 5px}
+.lesson-title p{color:#777;font-size:14px}
+
+/* ---------- Cards ---------- */
+.lesson-card,.grammar-card,.game-card,.writing-card{background:white;padding:25px;border-radius:22px;box-shadow:0 6px 15px rgba(0,0,0,.06);margin:24px auto;max-width:780px}
+h2{color:var(--tan);font-size:23px;margin:0 0 12px}
+h3{color:var(--brown);margin:8px 0}
+p{color:#666;font-size:14px;line-height:1.65}
+
+/* ---------- Intro ---------- */
+.intro-card{background:white;padding:25px;border-radius:22px;box-shadow:0 6px 15px rgba(0,0,0,.06);margin:24px auto;max-width:780px}
+.intro-card ul{margin:8px 0 0;padding-left:20px;color:#666;font-size:14px;line-height:1.9}
+
+/* ---------- Grammar carousel ---------- */
+.grammar-slide{display:none}
+.grammar-slide.active-slide{display:block}
+.explain{background:#fff8ef;border:1.5px solid #ead7c4;padding:15px;border-radius:16px;margin-top:12px}
+.explain p{margin:6px 0}
+.explain ul{margin:8px 0 0;padding-left:20px;color:#666;font-size:14px;line-height:1.8}
+
+.pattern-display{display:flex;justify-content:center;align-items:center;gap:8px;flex-wrap:wrap;margin:18px 0}
+.pattern-box{background:var(--cream);border:1.5px solid #d7b89c;color:var(--tan);padding:10px 14px;border-radius:15px;font-weight:bold;font-size:18px;text-align:center;min-width:80px}
+.pattern-box small{display:block;font-size:11px;color:#8c7355;margin-top:2px;font-weight:normal}
+.pattern-box.pink{background:#fff0f2;color:#b36e7b;border-color:#efc5cc}
+.pattern-box.green{background:#f5f8f0;color:#5f8a4c;border-color:#d8e3ce}
+.pattern-symbol{color:#c7a98c;font-size:20px}
+
+/* Q & A bubbles */
+.dialog{margin-top:14px;display:flex;flex-direction:column;gap:10px}
+.bubble{border-radius:16px;padding:12px 14px;max-width:92%;position:relative}
+.bubble.q{background:#fff4f6;border:1.5px solid #f0d0d6;align-self:flex-start}
+.bubble.a{background:#f5f8f0;border:1.5px solid #d8e3ce;align-self:flex-end}
+.bubble .who{font-size:11px;font-weight:bold;letter-spacing:.5px;color:#aa927e;margin-bottom:2px}
+.bubble .hanzi{font-size:24px;font-weight:bold;color:var(--brown);letter-spacing:1px}
+.bubble .hanzi .hl{color:#c9626a}
+.bubble.a .hanzi .hl{color:#4f8a3c}
+.bubble .pinyin{font-style:italic;color:#927f70;font-size:13px;margin-top:2px}
+.bubble .translation{color:#8c7355;font-size:13px;margin-top:2px}
+.bubble .sound-btn{position:absolute;right:10px;top:10px;margin:0;width:30px;height:30px;font-size:13px}
+.bubble{padding-right:50px}
+.sound-btn{border:0;background:#b8865c;color:white;border-radius:50%;width:34px;height:34px;cursor:pointer}
+
+/* Compare English vs Chinese */
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.compare .col{border-radius:16px;padding:12px 14px;text-align:center}
+.compare .en{background:#f4f1ff;border:1.5px solid #ddd5f3}
+.compare .zh{background:#fff9f1;border:1.5px solid #ead7c4}
+.compare .lbl{font-size:11px;font-weight:bold;letter-spacing:.5px;color:#aa927e;margin-bottom:6px}
+.compare .sent{font-size:20px;font-weight:bold;color:var(--brown)}
+.compare .sent .hl{color:#c9626a}
+.compare small{display:block;color:#8c7355;font-size:12px;margin-top:4px;font-weight:normal}
+
+/* Word breakdown */
+.breakdown{list-style:none;margin:8px 0 0;padding:0}
+.breakdown li{padding:7px 0;border-bottom:1px dashed #ead7c4;font-size:14px;color:#666;line-height:1.5}
+.breakdown li:last-child{border-bottom:0}
+.breakdown .h{font-size:18px;font-weight:bold;color:var(--brown)}
+.breakdown .p{font-style:italic;color:#927f70}
+.tip{background:#fffbe9;border:1.5px dashed #e6d28c;border-radius:14px;padding:12px 14px;margin-top:12px;font-size:14px;color:#7a6a3a;line-height:1.6}
+
+.slider-nav{display:flex;align-items:center;justify-content:space-between;margin-top:18px}
+.slider-btn{background:var(--cream);border:1px solid #d7b89c;color:#8c7355;padding:8px 15px;border-radius:12px;font-weight:bold;cursor:pointer}
+.slider-btn:disabled{opacity:.4;cursor:default}
+.slider-indicators{display:flex;gap:7px}
+.indicator{height:10px;width:10px;border-radius:50%;background:#f0e4d5;cursor:pointer}
+.indicator.active{background:var(--pink)}
+
+/* ---------- Vocabulary ---------- */
+.vocab-intro{text-align:center;margin-bottom:14px}
+.lesson-card .vocab-grid{display:grid !important;grid-template-columns:repeat(auto-fill,minmax(120px,1fr)) !important;gap:12px;width:100%;flex-direction:row !important}
+.vocab-card{position:relative;overflow:hidden;width:auto !important;margin:0 !important;font-family:inherit;background:#fff9f1;border:1.5px solid #ead7c4;border-radius:18px;padding:14px 8px;text-align:center;cursor:pointer;transition:.2s;min-height:116px;display:block}
+.vocab-card:nth-child(4n+2){background:#fff4f6;border-color:#f0d0d6}
+.vocab-card:nth-child(4n+3){background:#f5f8f0;border-color:#d8e3ce}
+.vocab-card:nth-child(4n+4){background:#f7f4ff;border-color:#e0d8f0}
+.vocab-card:hover{transform:translateY(-3px) rotate(-1deg);box-shadow:0 5px 12px #0000000d}
+.vocab-card:after{content:"✿";position:absolute;right:7px;top:3px;font-size:13px;color:#e9a0ad;opacity:.75}
+.vocab-card .hanzi{font-size:24px;font-weight:bold;color:var(--brown)}
+.vocab-card .pinyin{font-size:12px;font-style:italic;color:#927f70;margin-top:3px}
+.vocab-card .meaning{font-size:12px;color:#78685d;margin-top:4px}
+.vocab-card .tap{font-size:10px;color:#b8865c;margin-top:6px}
+
+/* ---------- Games ---------- */
+.game-number{display:inline-block;background:#fff0f2;color:#b36e7b;border:1px solid #efc5cc;padding:5px 12px;border-radius:20px;font-size:12px;font-weight:bold}
+.game-description{margin:8px 0 16px}
+.game-progress{text-align:right;color:#927f70;font-size:12px;margin-bottom:8px}
+.answer-area{min-height:66px;border:2px dashed #d7b89c;border-radius:16px;background:#fdfbf7;padding:12px;display:flex;align-items:center;justify-content:center;gap:7px;flex-wrap:wrap;margin-bottom:13px}
+.answer-placeholder{font-size:13px;color:#b4a69a}
+.word-bank{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;margin-bottom:15px}
+.word-btn{background:white;border:1.5px solid #d7b89c;color:var(--brown);padding:9px 14px;border-radius:13px;font-size:19px;cursor:pointer;transition:.2s}
+.word-btn:hover{background:#fff0f2;transform:translateY(-2px)}
+.word-btn:disabled{opacity:.35;cursor:default;transform:none}
+.selected-word{background:#b8865c;color:white;padding:8px 13px;border-radius:11px;font-size:19px;cursor:pointer}
+.selected-word.wrong{background:#c9626a;animation:shake .35s}
+.selected-word.right{background:#6b9a58}
+.game-buttons{display:flex;gap:8px}
+.reset-btn,.next-btn{flex:1;border:0;border-radius:12px;padding:11px;cursor:pointer;font-weight:bold}
+.reset-btn{background:#fff8ef;color:#8c7355;border:1px solid #d7b89c}
+.next-btn{display:none;background:var(--brown);color:white;margin-top:12px;width:100%}
+.feedback{text-align:center;min-height:27px;margin-top:12px;font-weight:bold;font-size:14px}
+.correct{color:#2d6a4f}
+.incorrect{color:#9b2226}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+.chat-given{margin-bottom:12px}
+.chat-given .bubble{align-self:flex-end;margin-left:auto}
+.chat-label{font-size:11px;color:#aa927e;text-transform:uppercase;letter-spacing:.5px;margin:10px 0 6px}
+
+/* ---------- Writing practice ---------- */
+.writing-card{text-align:center}
+.canvas-wrapper{width:280px;height:280px;max-width:100%;margin:15px auto;background:linear-gradient(#eadac7 1px,transparent 1px),linear-gradient(90deg,#eadac7 1px,transparent 1px);background-size:70px 70px;border:2px solid #d7b89c;border-radius:16px;display:flex;align-items:center;justify-content:center;overflow:hidden;touch-action:none}
+#target-div{width:260px;height:260px}
+.mode-buttons{display:flex;gap:8px;justify-content:center;margin:14px 0;flex-wrap:wrap}
+.mode-btn,.write-btn{border:1.5px solid #d7b89c;background:#fff8ef;color:#8c7355;padding:10px 14px;border-radius:12px;cursor:pointer;font-weight:bold}
+.mode-btn.active{background:#b8865c;color:white;border-color:#b8865c}
+.character-counter{font-size:12px;color:#927f70}
+.recall-answer{font-size:28px;color:#b8865c;font-weight:bold;margin:10px}
+
+/* ---------- Mobile ---------- */
+@media(max-width:700px){
+  .lesson-card,.grammar-card,.game-card,.writing-card,.intro-card{padding:16px;margin:15px}
+  .lesson-title h1{font-size:23px}
+  .lesson-card .vocab-grid{grid-template-columns:repeat(3,minmax(0,1fr)) !important;gap:10px}
+  .vocab-card{padding:12px 4px;min-height:108px}
+  .word-btn{font-size:17px;padding:8px 11px}
+  .game-buttons{flex-wrap:wrap}
+  .bubble{max-width:100%}
+  .bubble .hanzi{font-size:21px}
+  .compare{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="app-container">
+<div id="sidebar-container"></div>
+<main class="main-content">
+
+<div class="lesson-title">
+  <span class="badge">QUESTION WORDS • BEGINNER</span>
+  <h1>誰 (shéi) = Who</h1>
+  <p>Learn how to ask "who" in Chinese, and why it works differently from English. 🧋</p>
+</div>
+
+<!-- ========== INTRO ========== -->
+<section class="intro-card">
+  <h2>👋 Before We Start</h2>
+  <p><strong>誰 (shéi)</strong> means <strong>"who"</strong>. You will use it to ask about people: who is he, who is your friend, who is going to Taiwan.</p>
+  <p>The big surprise: in Chinese, the question word does <strong>not</strong> move to the front of the sentence like in English. It stays <strong>exactly where the answer will go</strong>.</p>
+  <div class="explain">
+    <p><strong>What you will learn:</strong></p>
+    <ul>
+      <li>What 誰 means and how to say it</li>
+      <li>Why 誰 sits in the same place as the answer</li>
+      <li>Using 誰 as the subject of a sentence</li>
+      <li>Using 誰 with verbs (sleep, travel, study)</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ========== GRAMMAR CAROUSEL ========== -->
+<section class="grammar-card">
+  <h2>🧠 Let's Learn: 誰</h2>
+
+  <!-- 1: Meaning -->
+  <div class="grammar-slide active-slide" id="slide-1">
+    <h3>1. What does 誰 mean?</h3>
+    <p><strong>誰</strong> means <strong>"who"</strong>. It is a question word used to ask about a person (or people).</p>
+    <div class="dialog">
+      <div class="bubble q">
+        <div class="who">QUESTION</div>
+        <div class="hanzi">他是<span class="hl">誰</span>？</div>
+        <div class="pinyin">tā shì shéi?</div>
+        <div class="translation">Who is he?</div>
+        <button class="sound-btn" onclick="playAudio('他是誰')" aria-label="Listen">🔊</button>
+      </div>
+      <div class="bubble a">
+        <div class="who">ANSWER</div>
+        <div class="hanzi">他是<span class="hl">我的男朋友</span>。</div>
+        <div class="pinyin">tā shì wǒ de nánpéngyǒu.</div>
+        <div class="translation">He is my boyfriend.</div>
+        <button class="sound-btn" onclick="playAudio('他是我的男朋友')" aria-label="Listen">🔊</button>
+      </div>
+    </div>
+    <div class="explain">
+      <ul class="breakdown">
+        <li><span class="h">誰</span> <span class="p">(shéi)</span> = who</li>
+        <li><span class="h">他</span> <span class="p">(tā)</span> = he</li>
+        <li><span class="h">是</span> <span class="p">(shì)</span> = to be (is / am / are)</li>
+        <li><span class="h">男朋友</span> <span class="p">(nánpéngyǒu)</span> = boyfriend</li>
+      </ul>
+    </div>
+    <div class="tip">💡 You may also hear 誰 pronounced <strong>shuí</strong>. Both are correct. In Taiwan, <strong>shéi</strong> is very common.</div>
+  </div>
+
+  <!-- 2: Position -->
+  <div class="grammar-slide" id="slide-2">
+    <h3>2. 誰 stays where the answer goes</h3>
+    <p>In English, the question word jumps to the front: <em>"<strong>Who</strong> is he?"</em>. In Chinese, the question word <strong>does not move</strong>. It sits in the exact spot where the answer will appear.</p>
+    <div class="compare">
+      <div class="col en">
+        <div class="lbl">ENGLISH</div>
+        <div class="sent"><span class="hl">Who</span> is he?</div>
+        <small>"Who" moves to the front</small>
+      </div>
+      <div class="col zh">
+        <div class="lbl">CHINESE</div>
+        <div class="sent">他是<span class="hl">誰</span>？</div>
+        <small>誰 stays in the answer's place</small>
+      </div>
+    </div>
+    <div class="dialog">
+      <div class="bubble q">
+        <div class="who">QUESTION</div>
+        <div class="hanzi">他是<span class="hl">誰</span>？</div>
+        <div class="pinyin">tā shì shéi?</div>
+        <div class="translation">Who is he?</div>
+        <button class="sound-btn" onclick="playAudio('他是誰')" aria-label="Listen">🔊</button>
+      </div>
+      <div class="bubble a">
+        <div class="who">ANSWER</div>
+        <div class="hanzi">他是<span class="hl">我的男朋友</span>。</div>
+        <div class="pinyin">tā shì wǒ de nánpéngyǒu.</div>
+        <div class="translation">He is my boyfriend.</div>
+        <button class="sound-btn" onclick="playAudio('他是我的男朋友')" aria-label="Listen">🔊</button>
+      </div>
+    </div>
+    <div class="pattern-display">
+      <div class="pattern-box">他是<small>tā shì</small></div>
+      <div class="pattern-symbol">+</div>
+      <div class="pattern-box pink">誰<small>shéi (question)</small></div>
+      <div class="pattern-symbol">→</div>
+      <div class="pattern-box">他是<small>tā shì</small></div>
+      <div class="pattern-symbol">+</div>
+      <div class="pattern-box green">Answer<small>我的男朋友</small></div>
+    </div>
+    <div class="tip">💡 <strong>The trick:</strong> To answer a Chinese question with 誰, just <strong>replace 誰 with the answer</strong>. Everything else in the sentence stays the same.</div>
+  </div>
+
+  <!-- 3: Subject -->
+  <div class="grammar-slide" id="slide-3">
+    <h3>3. 誰 at the beginning of a sentence</h3>
+    <p>What if the person you want to know about is the <strong>subject</strong> of the sentence? Then 誰 goes at the beginning, because the answer would also go at the beginning. This is not "moving to the front like English". It is simply the place where the answer goes.</p>
+    <div class="dialog">
+      <div class="bubble q">
+        <div class="who">QUESTION</div>
+        <div class="hanzi"><span class="hl">誰</span>是你的女朋友？</div>
+        <div class="pinyin">shéi shì nǐ de nǚpéngyǒu?</div>
+        <div class="translation">Who is your girlfriend?</div>
+        <button class="sound-btn" onclick="playAudio('誰是你的女朋友')" aria-label="Listen">🔊</button>
+      </div>
+      <div class="bubble a">
+        <div class="who">ANSWER</div>
+        <div class="hanzi"><span class="hl">她</span>是我的女朋友。</div>
+        <div class="pinyin">tā shì wǒ de nǚpéngyǒu.</div>
+        <div class="translation">She is my girlfriend.</div>
+        <button class="sound-btn" onclick="playAudio('她是我的女朋友')" aria-label="Listen">🔊</button>
+      </div>
+    </div>
+    <div class="pattern-display">
+      <div class="pattern-box pink">誰<small>shéi</small></div>
+      <div class="pattern-symbol">+</div>
+      <div class="pattern-box">是你的女朋友<small>shì nǐ de nǚpéngyǒu</small></div>
+      <div class="pattern-symbol">→</div>
+      <div class="pattern-box green">她<small>tā</small></div>
+      <div class="pattern-symbol">+</div>
+      <div class="pattern-box">是我的女朋友<small>shì wǒ de nǚpéngyǒu</small></div>
+    </div>
+    <div class="explain">
+      <ul class="breakdown">
+        <li><span class="h">你的</span> <span class="p">(nǐ de)</span> = your</li>
+        <li><span class="h">我的</span> <span class="p">(wǒ de)</span> = my</li>
+        <li><span class="h">女朋友</span> <span class="p">(nǚpéngyǒu)</span> = girlfriend</li>
+        <li><span class="h">她</span> <span class="p">(tā)</span> = she</li>
+      </ul>
+    </div>
+    <div class="tip">💡 Notice how the answer 她 sits in exactly the same spot as 誰. Same position, different word.</div>
+  </div>
+
+  <!-- 4: Verbs -->
+  <div class="grammar-slide" id="slide-4">
+    <h3>4. 誰 with verbs</h3>
+    <p>When you want to know <strong>who does an action</strong>, put 誰 in front of the verb. The answer replaces 誰 in the same spot.</p>
+    <div class="dialog">
+      <div class="bubble q">
+        <div class="who">QUESTION</div>
+        <div class="hanzi"><span class="hl">誰</span>學習中文？</div>
+        <div class="pinyin">shéi xuéxí Zhōngwén?</div>
+        <div class="translation">Who studies Chinese?</div>
+        <button class="sound-btn" onclick="playAudio('誰學習中文')" aria-label="Listen">🔊</button>
+      </div>
+      <div class="bubble a">
+        <div class="who">ANSWER</div>
+        <div class="hanzi"><span class="hl">我</span>學習中文。</div>
+        <div class="pinyin">wǒ xuéxí Zhōngwén.</div>
+        <div class="translation">I study Chinese.</div>
+        <button class="sound-btn" onclick="playAudio('我學習中文')" aria-label="Listen">🔊</button>
+      </div>
+      <div class="bubble q">
+        <div class="who">QUESTION</div>
+        <div class="hanzi"><span class="hl">誰</span>去台灣旅遊？</div>
+        <div class="pinyin">shéi qù Táiwān lǚyóu?</div>
+        <div class="translation">Who is going to Taiwan to travel?</div>
+        <button class="sound-btn" onclick="playAudio('誰去台灣旅遊')" aria-label="Listen">🔊</button>
+      </div>
+      <div class="bubble a">
+        <div class="who">ANSWER</div>
+        <div class="hanzi"><span class="hl">我們</span>去台灣旅遊。</div>
+        <div class="pinyin">wǒmen qù Táiwān lǚyóu.</div>
+        <div class="translation">We are going to Taiwan to travel.</div>
+        <button class="sound-btn" onclick="playAudio('我們去台灣旅遊')" aria-label="Listen">🔊</button>
+      </div>
+    </div>
+    <div class="pattern-display">
+      <div class="pattern-box pink">誰<small>shéi</small></div>
+      <div class="pattern-symbol">+</div>
+      <div class="pattern-box">Verb<small>e.g. 學習, 睡覺, 去</small></div>
+    </div>
+    <div class="explain">
+      <ul class="breakdown">
+        <li><span class="h">學習</span> <span class="p">(xuéxí)</span> = to study / to learn</li>
+        <li><span class="h">中文</span> <span class="p">(Zhōngwén)</span> = Chinese language</li>
+        <li><span class="h">去</span> <span class="p">(qù)</span> = to go</li>
+        <li><span class="h">旅遊 / 旅行</span> <span class="p">(lǚyóu / lǚxíng)</span> = to travel</li>
+        <li><span class="h">睡覺</span> <span class="p">(shuìjiào)</span> = to sleep</li>
+      </ul>
+    </div>
+    <div class="tip">💡 <strong>旅遊</strong> and <strong>旅行</strong> both mean "to travel". 旅遊 is more about a trip for fun and sightseeing, while 旅行 is the general word for traveling. In daily life, many people use them almost the same way.</div>
+  </div>
+
+  <!-- 5: Summary -->
+  <div class="grammar-slide" id="slide-5">
+    <h3>5. Quick summary</h3>
+    <p>Remember this one rule and you can handle every 誰 question.</p>
+    <div class="explain">
+      <ul class="breakdown">
+        <li><span class="h">他是誰？</span> → <span class="h">他是我的朋友。</span><br>誰 is at the end, because the answer is at the end.</li>
+        <li><span class="h">誰是女生？</span> → <span class="h">她是女生。</span><br>誰 is at the start, because the answer is at the start.</li>
+        <li><span class="h">誰睡覺？</span> → <span class="h">我睡覺。</span><br>誰 is before the verb, because the answer is before the verb.</li>
+      </ul>
+    </div>
+    <div class="tip">💡 <strong>Golden rule:</strong> Chinese does not move the question word. Find where the answer would go, and put 誰 there. To answer, swap 誰 for the real answer.</div>
+  </div>
+
+  <div class="slider-nav">
+    <button class="slider-btn" id="prevSlide" onclick="changeSlide(-1)">← Prev</button>
+    <div class="slider-indicators" id="indicators"></div>
+    <button class="slider-btn" id="nextSlide" onclick="changeSlide(1)">Next →</button>
+  </div>
+</section>
+
+<!-- ========== VOCABULARY ========== -->
+<section class="lesson-card">
+  <h2>🌼 Vocabulary 生詞</h2>
+  <p class="vocab-intro">Tap a card to hear how the word sounds. ✨</p>
+  <div class="vocab-grid" id="vocabContainer"></div>
+</section>
+
+<!-- ========== GAME: REBUILD THE QUESTION ========== -->
+<section class="game-card">
+  <span class="game-number">GAME 1</span>
+  <h2>💬 Rebuild the Question</h2>
+  <p class="game-description">Read the answer, then tap the words in the right order to build the question that was asked. Remember: 誰 sits where the answer goes!</p>
+  <div class="game-progress">Conversation <span id="cNum">1</span> / 8</div>
+
+  <div class="chat-label">The answer (given)</div>
+  <div class="dialog chat-given" id="cGiven"></div>
+
+  <div class="chat-label">Build the question</div>
+  <div class="answer-area" id="cAnswer"><span class="answer-placeholder">Your question will appear here</span></div>
+  <div class="word-bank" id="cBank"></div>
+  <div class="game-buttons">
+    <button class="reset-btn" onclick="resetConvo()">↻ Reset</button>
+  </div>
+  <div class="feedback" id="cFeedback"></div>
+  <button class="next-btn" id="cNext" onclick="nextConvo()">Next conversation →</button>
+</section>
+
+<!-- ========== WRITING PRACTICE ========== -->
+<section class="writing-card">
+  <h2>✍️ Hanzi Stroke Practice</h2>
+  <p>Practice writing each character, one stroke at a time.</p>
+  <div class="mode-buttons">
+    <button class="mode-btn active" id="quizMode" onclick="setMode('quiz')">✍️ Practice</button>
+    <button class="mode-btn" id="animateMode" onclick="setMode('animate')">👀 Watch</button>
+  </div>
+  <div id="writingInfo" class="tiny-note"></div>
+  <div class="character-counter" id="charCounter"></div>
+  <div class="recall-answer" id="recallAnswer"></div>
+  <div class="canvas-wrapper"><div id="target-div"></div></div>
+  <div class="feedback" id="writingFeedback"></div>
+  <div class="mode-buttons">
+    <button class="write-btn" onclick="resetWriting()">↻ Try again</button>
+    <button class="write-btn" onclick="playCurrent()">🔊 Listen</button>
+    <button class="write-btn" onclick="nextCharacter()">Next character →</button>
+  </div>
+</section>
+
+</main>
+</div>
+
+<script>
+/* ---------- Audio ---------- */
+function playAudio(text){
+  if(!('speechSynthesis' in window)) return;
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = 'zh-TW'; u.rate = .82; u.pitch = 1;
+  speechSynthesis.speak(u);
+}
+
+/* Click sound effect (no audio file needed) */
+let audioCtx = null;
+function playClick(freq){
+  try{
+    audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+    const o = audioCtx.createOscillator(), g = audioCtx.createGain();
+    o.type = 'sine'; o.frequency.value = freq || 660;
+    g.gain.setValueAtTime(.001, audioCtx.currentTime);
+    g.gain.exponentialRampToValueAtTime(.18, audioCtx.currentTime + .01);
+    g.gain.exponentialRampToValueAtTime(.001, audioCtx.currentTime + .12);
+    o.connect(g); g.connect(audioCtx.destination);
+    o.start(); o.stop(audioCtx.currentTime + .13);
+  }catch(e){}
+}
+
+/* ---------- Grammar carousel ---------- */
+const slides = document.querySelectorAll('.grammar-slide');
+const indWrap = document.getElementById('indicators');
+let slideIndex = 0;
+slides.forEach((_, i)=>{
+  const d = document.createElement('div');
+  d.className = 'indicator' + (i === 0 ? ' active' : '');
+  d.onclick = ()=>showSlide(i);
+  indWrap.appendChild(d);
+});
+function showSlide(n){
+  slideIndex = n;
+  slides.forEach((s, i)=>s.classList.toggle('active-slide', i === n));
+  document.querySelectorAll('.indicator').forEach((d, i)=>d.classList.toggle('active', i === n));
+  document.getElementById('prevSlide').disabled = n === 0;
+  document.getElementById('nextSlide').disabled = n === slides.length - 1;
+}
+function changeSlide(step){
+  const n = slideIndex + step;
+  if(n >= 0 && n < slides.length) showSlide(n);
+}
+showSlide(0);
+
+/* ---------- Vocabulary ---------- */
+const vocab = [
+  ['誰','shéi','who'],
+  ['男生','nánshēng','boy / guy'],
+  ['女生','nǚshēng','girl'],
+  ['朋友','péngyǒu','friend'],
+  ['同學','tóngxué','classmate'],
+  ['睡覺','shuìjiào','to sleep'],
+  ['去','qù','to go'],
+  ['旅遊','lǚyóu','to travel (trip)'],
+  ['旅行','lǚxíng','to travel'],
+  ['他','tā','he'],
+  ['她','tā','she'],
+  ['他們','tāmen','they'],
+  ['我們','wǒmen','we'],
+  ['男朋友','nánpéngyǒu','boyfriend'],
+  ['女朋友','nǚpéngyǒu','girlfriend'],
+  ['洗澡','xǐzǎo','to take a bath / shower'],
+  ['學習','xuéxí','to study / learn'],
+  ['中文','Zhōngwén','Chinese language']
+];
+const vocabEl = document.getElementById('vocabContainer');
+vocab.forEach(([hanzi, pinyin, meaning])=>{
+  const card = document.createElement('button');
+  card.type = 'button';
+  card.className = 'vocab-card';
+  card.innerHTML =
+    `<div class="hanzi">${hanzi}</div>` +
+    `<div class="pinyin">${pinyin}</div>` +
+    `<div class="meaning">${meaning}</div>` +
+    `<div class="tap">♫ tap to listen</div>`;
+  card.onclick = ()=>playAudio(hanzi);
+  vocabEl.appendChild(card);
+});
+
+/* ---------- Shared ---------- */
+function shuffle(arr){
+  const a = [...arr];
+  for(let i = a.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+/* ---------- Game: rebuild the question ---------- */
+const convos = [
+  {q:['誰','是','女生'],              a:'她是女生',       py:'tā shì nǚshēng',            en:'She is a girl.'},
+  {q:['誰','是','男生'],              a:'他是男生',       py:'tā shì nánshēng',           en:'He is a boy.'},
+  {q:['他們','是','誰'],              a:'他們是我的同學', py:'tāmen shì wǒ de tóngxué',   en:'They are my classmates.'},
+  {q:['他','是','誰'],                a:'他是我的朋友',   py:'tā shì wǒ de péngyǒu',      en:'He is my friend.'},
+  {q:['誰','睡覺'],                  a:'我睡覺',         py:'wǒ shuìjiào',               en:'I sleep.'},
+  {q:['誰','洗澡'],                  a:'我洗澡',         py:'wǒ xǐzǎo',                  en:'I take a bath.'},
+  {q:['誰','去','台灣','旅遊'],      a:'我們去台灣旅遊', py:'wǒmen qù Táiwān lǚyóu',     en:'We are going to Taiwan to travel.'},
+  {q:['誰','去','美國','旅行'],      a:'我們去美國旅行', py:'wǒmen qù Měiguó lǚxíng',    en:'We are going to America to travel.'}
+];
+let cIndex = 0, cSel = [], cDone = false;
+
+function loadConvo(){
+  cSel = []; cDone = false;
+  const c = convos[cIndex];
+  document.getElementById('cNum').textContent = cIndex + 1;
+  document.getElementById('cGiven').innerHTML =
+    `<div class="bubble a">
+       <div class="who">ANSWER</div>
+       <div class="hanzi">${c.a}。</div>
+       <div class="pinyin">${c.py}.</div>
+       <div class="translation">${c.en}</div>
+       <button class="sound-btn" onclick="playAudio('${c.a}')" aria-label="Listen">🔊</button>
+     </div>`;
+  document.getElementById('cAnswer').innerHTML = '<span class="answer-placeholder">Your question will appear here</span>';
+  const fb = document.getElementById('cFeedback');
+  fb.textContent = ''; fb.className = 'feedback';
+  const next = document.getElementById('cNext');
+  next.style.display = 'none';
+  next.textContent = cIndex === convos.length - 1 ? 'Play again →' : 'Next conversation →';
+
+  const bank = document.getElementById('cBank');
+  bank.innerHTML = '';
+  let order = shuffle(c.q);
+  if(order.join('') === c.q.join('')) order = shuffle(c.q);
+  order.forEach(word=>{
+    const b = document.createElement('button');
+    b.className = 'word-btn';
+    b.textContent = word;
+    b.onclick = ()=>{
+      if(cDone || b.disabled) return;
+      cSel.push({word, btn:b});
+      b.disabled = true;
+      playClick(660);
+      playAudio(word);
+      renderConvo();
+      if(cSel.length === c.q.length) checkConvo();
+    };
+    bank.appendChild(b);
+  });
+}
+
+function renderConvo(states){
+  const area = document.getElementById('cAnswer');
+  area.innerHTML = '';
+  if(!cSel.length){
+    area.innerHTML = '<span class="answer-placeholder">Your question will appear here</span>';
+    return;
+  }
+  cSel.forEach((item, i)=>{
+    const s = document.createElement('span');
+    s.className = 'selected-word' + (states ? ' ' + states[i] : '');
+    s.textContent = item.word;
+    s.title = 'Tap to remove';
+    s.onclick = ()=>{
+      if(cDone) return;
+      cSel.splice(i, 1);
+      item.btn.disabled = false;
+      playClick(440);
+      const fb = document.getElementById('cFeedback');
+      fb.textContent = ''; fb.className = 'feedback';
+      renderConvo();
+    };
+    area.appendChild(s);
+  });
+}
+
+function checkConvo(){
+  const c = convos[cIndex], fb = document.getElementById('cFeedback');
+  const states = cSel.map((x, i)=> x.word === c.q[i] ? 'right' : 'wrong');
+  renderConvo(states);
+  if(states.every(s => s === 'right')){
+    cDone = true;
+    fb.textContent = '🎉 Correct! Listen to the conversation.';
+    fb.className = 'feedback correct';
+    document.getElementById('cNext').style.display = 'block';
+    setTimeout(()=>{ playClick(880); playAudio(c.q.join('') + '。' + c.a); }, 250);
+  }else{
+    fb.textContent = '💭 Almost! Tap the red words to remove them and try again.';
+    fb.className = 'feedback incorrect';
+    playClick(220);
+  }
+}
+function resetConvo(){ loadConvo(); }
+function nextConvo(){ cIndex = (cIndex + 1) % convos.length; loadConvo(); }
+
+/* ---------- Stroke practice ---------- */
+const chars = ['誰','男','生','女','朋','友','同','學','睡','覺','去','旅','遊','行','洗','澡'];
+let charIndex = 0, mode = 'quiz', writer = null;
+
+function setFeedback(text, cls){
+  const f = document.getElementById('writingFeedback');
+  f.textContent = text; f.className = 'feedback ' + (cls || '');
+}
+
+function initWriter(){
+  const ch = chars[charIndex];
+  const target = document.getElementById('target-div');
+  target.innerHTML = '';
+  document.getElementById('charCounter').textContent = `Character ${charIndex + 1} of ${chars.length}`;
+  document.getElementById('writingInfo').textContent =
+    mode === 'quiz' ? 'Draw the character with your finger or mouse.' : 'Watch how the character is written.';
+  document.getElementById('recallAnswer').textContent = mode === 'quiz' ? 'Write: ' + ch : '';
+  setFeedback('');
+
+  if(!window.HanziWriter){
+    setFeedback('Could not load the writing tool. Please check your internet.', 'incorrect');
+    return;
+  }
+  writer = HanziWriter.create('target-div', ch, {
+    width:260, height:260, padding:10,
+    showOutline:true, showCharacter: mode === 'animate',
+    strokeAnimationSpeed:1,
+    drawingColor:'#5c4033', strokeColor:'#5c4033', strokeHighlightColor:'#b8865c'
+  });
+  if(mode === 'quiz'){
+    writer.quiz({
+      onMistake:       ()=>setFeedback('Not quite. Try that stroke again!', 'incorrect'),
+      onCorrectStroke: ()=>setFeedback('✨ Nice stroke! Keep going.', 'correct'),
+      onComplete:      ()=>setFeedback('🎉 Perfect!', 'correct')
+    });
+  }else{
+    writer.animateCharacter();
+  }
+}
+function setMode(m){
+  mode = m;
+  document.getElementById('quizMode').classList.toggle('active', m === 'quiz');
+  document.getElementById('animateMode').classList.toggle('active', m === 'animate');
+  initWriter();
+}
+function resetWriting(){ initWriter(); }
+function nextCharacter(){ charIndex = (charIndex + 1) % chars.length; initWriter(); }
+function playCurrent(){ playAudio(chars[charIndex]); }
+
+/* ---------- Start ---------- */
+loadConvo();
+initWriter();
+</script>
+<script src="../script.js"></script>
+</body>
+</html>
